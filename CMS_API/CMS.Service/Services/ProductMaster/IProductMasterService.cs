@@ -1,0 +1,20 @@
+﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CMS.Service.Services.ProductMaster
+{
+    public interface IProductMasterService
+    {
+        ServiceResponse<IEnumerable<Data.Models.TblProductMaster>> GetList();
+
+        ServiceResponse<TblProductMaster> GetById(int id);
+        Task<ServiceResponse<TblProductMaster>> Save(ProductMasterViewModel model);
+        Task<ServiceResponse<TblProductMaster>> Edit(int id, ProductMasterViewModel model);
+        Task<ServiceResponse<TblProductMaster>> Delete(int id);
+    }
+}
