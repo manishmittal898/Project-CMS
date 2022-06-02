@@ -1,0 +1,19 @@
+﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CMS.Service.Services.LookupTypeMaster
+{
+   public interface ILookupTypeMasterService
+    {
+        ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>> GetList();
+        ServiceResponse<TblLookupTypeMaster> GetById(int id);
+        Task<ServiceResponse<TblLookupTypeMaster>> Save(LookupTypeMasterViewModel model);
+        Task<ServiceResponse<TblLookupTypeMaster>> Edit(int id, LookupTypeMasterViewModel model);
+        Task<ServiceResponse<TblLookupTypeMaster>> Delete(int id);
+    }
+}
