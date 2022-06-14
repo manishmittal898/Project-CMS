@@ -243,7 +243,7 @@ body {
 }
 
 .form-image .l-image {
-    background-image: url(../../img/login.png);
+    background-image: url(../../img/login1.png);
     position: absolute;
     top: 0;
     left: 0;
@@ -252,7 +252,7 @@ body {
     background-color: #002767;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 75%;
+    background-size: 60%;
     background-position-x: center;
     background-position-y: center;
 }
