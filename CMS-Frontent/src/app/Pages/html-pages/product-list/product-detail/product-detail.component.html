@@ -1,1 +1,75 @@
-<p>product-detail works!</p>
+<!-- Breadcrum Start -->
+<nav aria-label="breadcrumb" class="inner-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void()">Product name</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Breadcrum End -->
+
+<!-- Product Details Start -->
+<Section class="product-details py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="Pro-Detail-1">
+            <div class="d-flex align-items-center justify-content-center product-details-big-img">
+              <img src="assets/images/no-img.svg" alt="" />
+            </div>
+          </div>
+          <div class="tab-pane fade" id="Pro-Detail-2">
+            <div class="d-flex align-items-center justify-content-center product-details-big-img">
+              <img src="assets/images/no-img.svg" alt="" />
+            </div>
+          </div>
+          <div class="tab-pane fade" id="Pro-Detail-3">
+            <div class="d-flex align-items-center justify-content-center product-details-big-img">
+              <img src="assets/images/no-img.svg" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <ul class=" product-details-sm-img nav">
+          <li>
+            <a href="javascript:void()" class="active" id="ProDetail1" data-bs-toggle="tab"
+              data-bs-target="#Pro-Detail-1"> <img src="assets/images/no-img.svg" alt="" /> </a>
+          </li>
+          <li>
+            <a href="javascript:void()" id="Pro-Detail-2" data-bs-toggle="tab" data-bs-target="#Pro-Detail-2"> <img
+                src="assets/images/no-img.svg" alt="" /> </a>
+          </li>
+          <li>
+            <a href="javascript:void()" id="Pro-Detail-3" data-bs-toggle="tab" data-bs-target="#Pro-Detail-3"> <img
+                src="assets/images/no-img.svg" alt="" /> </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-7 mt-4 mt-md-0">
+        <div class="product-details-info">
+          <h2>Product name</h2>
+          <h4>₹ 975</h4>
+          <p class="product-discription">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.
+          </p>
+
+          <div class="col-lg-12 my-4 btn-share-whatsapp text-center">
+            <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i
+                class="bi bi-whatsapp"></i> Share via Whatsapp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+<!-- Product Details End -->

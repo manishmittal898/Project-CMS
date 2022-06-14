@@ -2548,15 +2548,15 @@ table .badge-dark {
 }
 
 
-/*  
+/*
     ==========================
-        Background Colors  
+        Background Colors
     ==========================
 */
 
 
-/*  
-    Default  
+/*
+    Default
 */
 
 .bg-primary {
@@ -2602,8 +2602,8 @@ table .badge-dark {
 }
 
 
-/*  
-    Light Background  
+/*
+    Light Background
 */
 
 .bg-light-primary {
@@ -2649,7 +2649,7 @@ table .badge-dark {
 }
 
 
-/*  
+/*
     Progress Bar
 */
 
@@ -3041,8 +3041,8 @@ td.table-action-btn button {
 
 td.table-action-btn a,
 td.table-action-btn button {
-    margin-right: 10px;
-    font-size: 15px;
+    margin: 0px 4px;
+    font-size: 16px;
 }
 
 .table-action-btn .table-action-btn-edit {
@@ -3058,7 +3058,7 @@ td.table-action-btn button {
 }
 
 .table-action-btn .table-action-btn-view {
-    color: #607d8b;
+    color: #000;
 }
 
 .table>thead>tr>th {
@@ -4143,39 +4143,14 @@ table {
     display: none !important;
 }
 
-
-/* .custom-modal .modal-content .modal-body {
-    background: url(https://blog.2checkout.com/wp-content/uploads/2018/11/how-does-the-payment-processing-industry-work-1.png);
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    position: relative;
+form .icon-login-form {
+  position: absolute;
+  top: 53px;
+  left: 14px;
+  margin: 0px !important;
+  font-size: 20px;
 }
 
-.custom-modal .modal-content .modal-body:before {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    height: 100%;
-    width: 100%;
-    content: "";
-    top: 0;
-    left: 0;
-} */
-
-
-/* .bank-master-add-branch-btn::before {
-    content: "-";
-    font-size: 29px;
-    font-weight: 900;
-}
-
-.bank-master-add-branch-btn.collapsed:before {
-    content: "+";
-} */
-
-
-/* .bank-master-add-branch-btn.collapsed {
-    font-size: 20px;
-} */
 
 
 /* Theme Dark Start */
