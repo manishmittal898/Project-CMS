@@ -139,5 +139,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\tblSubLookupTypeMaster.sql" />
   </ItemGroup>
 </Project>
