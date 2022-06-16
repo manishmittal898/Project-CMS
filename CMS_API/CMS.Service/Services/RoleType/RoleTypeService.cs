@@ -12,20 +12,20 @@ namespace CMS.Service.Services.RoleType
 {
     public class RoleTypeService : BaseService, IRoleTypeService
     {
-        PracticesContext _db;
-        public RoleTypeService(PracticesContext db)
+        DB_CMSContext _db;
+        public RoleTypeService(DB_CMSContext db)
         {
             _db = db;
         }
 
 
-        public ServiceResponse<IEnumerable<Data.Models.IRoleType>> GetList()
+        public ServiceResponse<IEnumerable<Data.Models.TblRoleType>> GetList()
         {
-            ServiceResponse<IEnumerable<Data.Models.IRoleType>> objResult = new ServiceResponse<IEnumerable<Data.Models.IRoleType>>();
+            ServiceResponse<IEnumerable<Data.Models.TblRoleType>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblRoleType>>();
             try
             {
                 var objData = _db.TblRoleTypes.ToList();
-                objResult = CreateResponse(objData as IEnumerable<Data.Models.IRoleType>, "Success", true);
+                objResult = CreateResponse(objData as IEnumerable<Data.Models.TblRoleType>, "Success", true);
             }
             catch (Exception)
             {
@@ -36,29 +36,29 @@ namespace CMS.Service.Services.RoleType
             }
             return objResult;
         }
-        public ServiceResponse<IRoleType> GetById(int id)
+        public ServiceResponse<TblRoleType> GetById(int id)
         {
-            ServiceResponse<IRoleType> ObjResponse = new ServiceResponse<IRoleType>();
+            ServiceResponse<TblRoleType> ObjResponse = new ServiceResponse<TblRoleType>();
             try
             {
 
-                var detail = _db.TblRoleTypes.FirstOrDefault(x => x.RoleId == id && !x.IsDeleted && x.IsActive.Value);
+                var detail = _db.TblRoleTypes.FirstOrDefault(x => x.RoleId == id && !x.IsDeleted && x.IsActive);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<IRoleType>(null, "Fail", false, ex.Message.ToString());
+                ObjResponse = CreateResponse<TblRoleType>(null, "Fail", false, ex.Message.ToString());
 
             }
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<IRoleType>> Save(RoleTypePostModel model)
+        public async Task<ServiceResponse<TblRoleType>> Save(RoleTypePostModel model)
         {
             try
             {
-                IRoleType objRole = new IRoleType();
+                TblRoleType objRole = new TblRoleType();
                 // objRole.RoleId = model.RoleId;
                 objRole.ParentRoleId = model.ParentRoleId ?? null;
                 objRole.RoleName = model.RoleName;
@@ -75,16 +75,16 @@ namespace CMS.Service.Services.RoleType
             catch (Exception ex)
             {
 
-                return CreateResponse<IRoleType>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblRoleType>(null, "Fail", false, ex.Message.ToString());
 
             }
         }
 
-        public async Task<ServiceResponse<IRoleType>> Edit(int id, RoleTypePostModel model)
+        public async Task<ServiceResponse<TblRoleType>> Edit(int id, RoleTypePostModel model)
         {
             try
             {
-                IRoleType objRole = new IRoleType();
+                TblRoleType objRole = new TblRoleType();
 
                 objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id);
 
@@ -102,18 +102,18 @@ namespace CMS.Service.Services.RoleType
             catch (Exception ex)
             {
 
-                return CreateResponse<IRoleType>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblRoleType>(null, "Fail", false, ex.Message.ToString());
 
             }
 
         }
 
 
-        public async Task<ServiceResponse<IRoleType>> Delete(int id)
+        public async Task<ServiceResponse<TblRoleType>> Delete(int id)
         {
             try
             {
-                IRoleType objRole = new IRoleType();
+                TblRoleType objRole = new TblRoleType();
                 objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id);
             
                             var roletype =  _db.TblRoleTypes.Remove(objRole);

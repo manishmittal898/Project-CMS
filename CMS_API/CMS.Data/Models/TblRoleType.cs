@@ -5,13 +5,8 @@ using System.Collections.Generic;
 
 namespace CMS.Data.Models
 {
-    public partial class IRoleType
+    public partial class TblRoleType
     {
-        public IRoleType()
-        {
-            TblUserMasters = new HashSet<TblUserMaster>();
-        }
-
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public int? RoleLevel { get; set; }
@@ -20,9 +15,7 @@ namespace CMS.Data.Models
         public long? CreatedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public long? ModifiedBy { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
-
-        public virtual ICollection<TblUserMaster> TblUserMasters { get; set; }
     }
 }
