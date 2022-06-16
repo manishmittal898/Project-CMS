@@ -1,11 +1,8 @@
-﻿using CMS.Core.ServiceHelper.Model;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Model;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMS.Core.ServiceHelper.Method
 {
@@ -15,36 +12,65 @@ namespace CMS.Core.ServiceHelper.Method
         public BaseService()
         {
             _loginUserDetail = new LoginUserViewModel();
+            SetLoginUserDetail();
         }
 
-        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, string exception = "", string validationMessage = "") where T : class
+        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode= (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "") where T : class
         {
             ServiceResponse<T> objReturn = new ServiceResponse<T>();
             objReturn.Message = Message;
             objReturn.IsSuccess = IsSuccess;
             objReturn.Data = objData;
             objReturn.Exception = exception;
-
+            objReturn.StatusCode = statusCode;
             return objReturn;
         }
 
         public class LoginUserViewModel
         {
-            public int UserId { get; set; }
-            public int RoleTypeId { get; set; }
-            public string RoleType { get; set; }
-            public int BaseRoleTypeId { get; set; }
+            public long? UserId { get; set; }
+            public int? RoleId { get; set; }
+            public string RoleName { get; set; }
+            
+            public string UserName { get; set; }
 
-            public string BaseRoleType { get; set; }
-            public string Name { get; set; }
-
-
+            public DateTime? LoginTime { get; set; }
             public LoginUserViewModel()
             {
 
               
 
             }
+        }
+
+        private void SetLoginUserDetail()
+        {
+            try
+            {
+                var user = new HttpContextAccessor()?.HttpContext?.User;
+
+                if (user != null && user.Claims.Count() > 0)
+                {
+
+                    _loginUserDetail.UserId = user.HasClaim(x => x.Type == TokenClaimsConstant.UserId) ? (long?)Convert.ToInt64(user.FindFirst(TokenClaimsConstant.UserId).Value) : null;
+
+                    _loginUserDetail.UserName = user.HasClaim(x => x.Type == TokenClaimsConstant.UserName) ? user.FindFirst(TokenClaimsConstant.UserName).Value : null;
+
+                    _loginUserDetail.RoleId = user.HasClaim(x => x.Type == TokenClaimsConstant.RoleId) ? (int?)Convert.ToInt32(user.FindFirst(TokenClaimsConstant.RoleId).Value) : 0;
+
+                    _loginUserDetail.RoleName = user.HasClaim(x => x.Type == TokenClaimsConstant.RoleName) ? user.FindFirst(TokenClaimsConstant.RoleName).Value : null;
+
+                    _loginUserDetail.LoginTime = user.HasClaim(x => x.Type == TokenClaimsConstant.GenerateTime) ? (DateTime?)DateTime.ParseExact(user.FindFirst(TokenClaimsConstant.GenerateTime).Value, "dd-mm-yyyy HH:mm:ss", null) : null;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

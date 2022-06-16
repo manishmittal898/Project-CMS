@@ -1,4 +1,5 @@
-﻿using CMS.Core.ServiceHelper.Method;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using System;
@@ -47,7 +48,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblUserMaster>(null, "Fail", false, ex.Message.ToString());
+                ObjResponse = CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -81,7 +82,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
         }
@@ -116,7 +117,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
 
