@@ -41,7 +41,7 @@ namespace CMS.Service.Services.ProductReview
             try
             {
 
-                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == id && x.IsActive);
+                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

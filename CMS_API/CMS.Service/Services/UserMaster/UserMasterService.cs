@@ -41,7 +41,7 @@ namespace CMS.Service.Services.User
             try
             {
 
-                var detail = _db.TblUserMasters.FirstOrDefault(x => x.UserId == id && !x.IsDeleted && x.IsActive);
+                var detail = _db.TblUserMasters.FirstOrDefault(x => x.UserId == id && !x.IsDeleted && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

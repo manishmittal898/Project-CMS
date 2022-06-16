@@ -1,6 +1,8 @@
 ﻿using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using CMS.Service.Utility;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,14 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.ProductMaster
 {
-   public class ProductMasterService : BaseService, IProductMasterService
+    public class ProductMasterService : BaseService, IProductMasterService
     {
         DB_CMSContext _db;
-        public ProductMasterService(DB_CMSContext db)
+        private readonly FileHelper _fileHelper;
+        public ProductMasterService(DB_CMSContext db, IHostingEnvironment environment)
         {
             _db = db;
+            _fileHelper = new FileHelper(environment);
         }
 
 
@@ -23,7 +27,7 @@ namespace CMS.Service.Services.ProductMaster
             ServiceResponse<IEnumerable<Data.Models.TblProductMaster>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblProductMaster>>();
             try
             {
-                var objData = _db.TblLookupTypeMasters.ToList();
+                var objData = _db.TblProductMasters.ToList();
                 objResult = CreateResponse(objData as IEnumerable<Data.Models.TblProductMaster>, "Success", true);
             }
             catch (Exception)
@@ -41,7 +45,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive);
+                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
@@ -57,18 +61,21 @@ namespace CMS.Service.Services.ProductMaster
         {
             try
             {
-                TblProductMaster objRole = new TblProductMaster();
-                // objRole.RoleId = model.RoleId;
-                objRole.Name = model.Name;
-                objRole.Desc = model.Desc;
-                objRole.Price = model.Price;
-                objRole.Summary = model.Summary;
-                objRole.Caption = model.Caption;
-                objRole.IsActive = true;
-                objRole.CreatedBy = model.CreatedBy;
-                var roletype = await _db.TblProductMasters.AddAsync(objRole);
+                TblProductMaster objProduct = new TblProductMaster();
+                // objProduct.RoleId = model.RoleId;
+                objProduct.Name = model.Name;
+                objProduct.CategoryId = model.CategoryId;
+                objProduct.SubCategoryId = model.SubCategoryId;
+                objProduct.ImagePath = _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                objProduct.Desc = model.Desc;
+                objProduct.Price = model.Price;
+                objProduct.Summary = model.Summary;
+                objProduct.Caption = model.Caption;
+                objProduct.IsActive = true;
+                objProduct.CreatedBy = model.CreatedBy;
+                var roletype = await _db.TblProductMasters.AddAsync(objProduct);
                 _db.SaveChanges();
-                return CreateResponse(objRole, "Added", true);
+                return CreateResponse(objProduct, "Added", true);
 
 
             }
@@ -84,22 +91,25 @@ namespace CMS.Service.Services.ProductMaster
         {
             try
             {
-                TblProductMaster objRole = new TblProductMaster();
+                TblProductMaster objProduct = new TblProductMaster();
 
-                objRole = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
+                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
 
-                objRole.Name = model.Name;
-                objRole.Desc = model.Desc;
-                objRole.Price = model.Price;
-                objRole.Summary = model.Summary;
-                objRole.Caption = model.Caption;
+                objProduct.Name = model.Name;
+                objProduct.CategoryId = model.CategoryId;
+                objProduct.SubCategoryId = model.SubCategoryId;
+                objProduct.ImagePath = _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                objProduct.Desc = model.Desc;
+                objProduct.Price = model.Price;
+                objProduct.Summary = model.Summary;
+                objProduct.Caption = model.Caption;
 
-                objRole.ModifiedBy = model.ModifiedBy;
-                var roletype = _db.TblProductMasters.Update(objRole);
+                objProduct.ModifiedBy = model.ModifiedBy;
+                var roletype = _db.TblProductMasters.Update(objProduct);
                 _db.SaveChanges();
 
 
-                return CreateResponse(objRole, "Updated", true);
+                return CreateResponse(objProduct, "Updated", true);
 
             }
             catch (Exception ex)
@@ -125,7 +135,6 @@ namespace CMS.Service.Services.ProductMaster
             }
             catch (Exception ex)
             {
-
                 return null;
 
             }

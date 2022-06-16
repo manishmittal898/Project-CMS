@@ -30,7 +30,7 @@ var App = function() {
             search: '.search-overlay'
         }
     };
-    
+
     var toggleFunction = {
         sidebar: function($recentSubmenu) {
             $('.sidebarCollapse').on('click', function (sidebar) {
@@ -150,6 +150,7 @@ var App = function() {
     }
 
     function sidebarFunctionality() {
+      
         function sidebarCloser() {
 
             if (window.innerWidth <= 991 ) {
@@ -208,6 +209,7 @@ var App = function() {
 
     return {
         init: function() {
+
             toggleFunction.overlay();
             toggleFunction.search();
             /*
@@ -225,7 +227,7 @@ var App = function() {
             _mobileResolution.onRefresh();
 
             // Note : -  _mobileResolution -> onResize | Uncomment it if need for onresize functions for DESKTOP RESOLUTION i.e. below or equal to 991px |
-            
+
             // _mobileResolution.onResize();
 
             sidebarFunctionality();

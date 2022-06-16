@@ -1,5 +1,5 @@
 {
-    "name": "First Store-app",
+    "name": "CMS_App",
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",

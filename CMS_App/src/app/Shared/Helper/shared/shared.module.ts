@@ -12,14 +12,23 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
-const CommonModules = [
+import { FileSelectorComponent } from './file-selector/file-selector.component';
+import { FooterComponent } from 'src/app/Content/Common/footer/footer.component';
+import { HeaderComponent } from 'src/app/Content/Common/header/header.component';
+import { LoaderComponent } from 'src/app/Content/Common/loader/loader.component';
+import { NavigationComponent } from 'src/app/Content/Common/navigation/navigation.component';
+import { PageNotFoundComponent } from 'src/app/Content/Common/page-not-found/page-not-found.component';
+import { HtmlComponent } from 'src/app/Content/html/html.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
   FormsModule,
-
+  RouterModule
 ]
 
-const InstalledModule = [
+const installedModule = [
 
   BsDatepickerModule.forRoot(),
   MatDialogModule,
@@ -37,25 +46,33 @@ const InstalledModule = [
     maxOpened: 5
   }),
   MatStepperModule
-]
+];
 
-//const SharedComponent = []
+const sharedComponent = [FileSelectorComponent,
+  HeaderComponent,
+  FooterComponent,
+  PageNotFoundComponent,
+  NavigationComponent,
+  LoaderComponent,
 
-
+];
 
 @NgModule({
   declarations: [
-  //  SharedComponent,
+    sharedComponent,
+    HtmlComponent,
   ],
   imports: [
     CommonModule,
-    CommonModules,
-    InstalledModule
+
+    commonModules,
+    installedModule,
   ],
   exports: [
-    CommonModules,
-    InstalledModule,
-    // SharedComponent
-  ]
+    commonModules,
+    installedModule,
+    sharedComponent,
+  ],
+  entryComponents:[NavigationComponent]
 })
 export class SharedModule { }

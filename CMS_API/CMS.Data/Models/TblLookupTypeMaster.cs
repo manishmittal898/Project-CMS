@@ -7,6 +7,11 @@ namespace CMS.Data.Models
 {
     public partial class TblLookupTypeMaster
     {
+        public TblLookupTypeMaster()
+        {
+            TblLookupMasters = new HashSet<TblLookupMaster>();
+        }
+
         public long Id { get; set; }
         public string Name { get; set; }
         public long CreatedBy { get; set; }
@@ -15,5 +20,9 @@ namespace CMS.Data.Models
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
+
+        public virtual TblUserMaster CreatedByNavigation { get; set; }
+        public virtual TblUserMaster ModifiedByNavigation { get; set; }
+        public virtual ICollection<TblLookupMaster> TblLookupMasters { get; set; }
     }
 }
