@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.ProductMaster
 {
-  public  class ProductMasterViewModel
+    public class ProductMasterViewModel
     {
         public long Id { get; set; }
         [Required]
@@ -15,13 +15,14 @@ namespace CMS.Service.Services.ProductMaster
         public string ImagePath { get; set; }
 
         [Required]
-        [StringLength(1000)]
         public string Desc { get; set; }
         [Range(0, 999.99)]
         public decimal? Price { get; set; }
+        public long CategoryId { get; set; }
+        public long SubCategoryId { get; set; }
         public string Caption { get; set; }
         public string Summary { get; set; }
-        public long CreatedBy { get; set; }     
+        public long CreatedBy { get; set; }
 
         public long ModifiedBy { get; set; }
     }
