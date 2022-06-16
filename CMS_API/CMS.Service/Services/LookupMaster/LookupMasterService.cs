@@ -11,8 +11,8 @@ namespace CMS.Service.Services.LookupMaster
 {
     public class LookupMasterService : BaseService, ILookupMasterService
     {
-        PracticesContext _db;
-        public LookupMasterService(PracticesContext db)
+        DB_CMSContext _db;
+        public LookupMasterService(DB_CMSContext db)
         {
             _db = db;
         }

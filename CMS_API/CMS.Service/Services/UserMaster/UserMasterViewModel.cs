@@ -32,7 +32,7 @@ namespace CMS.Service.Services.User
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-        public virtual IRoleType Role { get; set; }
+        public virtual TblRoleType Role { get; set; }
         public virtual ICollection<TblProductImage> TblProductImages { get; set; }
         public virtual ICollection<TblProductReview> TblProductReviews { get; set; }
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }

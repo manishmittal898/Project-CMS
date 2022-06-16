@@ -10,10 +10,10 @@ namespace CMS.Service.Services.RoleType
 {
   public  interface IRoleTypeService
     {
-        ServiceResponse<IEnumerable<Data.Models.IRoleType>> GetList();
-        ServiceResponse<Data.Models.IRoleType> GetById(int id);
-        Task<ServiceResponse<IRoleType>> Save(RoleTypePostModel model);
-        Task<ServiceResponse<IRoleType>> Edit(int id, RoleTypePostModel model);
-        Task<ServiceResponse<IRoleType>> Delete(int id);
+        ServiceResponse<IEnumerable<Data.Models.TblRoleType>> GetList();
+        ServiceResponse<Data.Models.TblRoleType> GetById(int id);
+        Task<ServiceResponse<TblRoleType>> Save(RoleTypePostModel model);
+        Task<ServiceResponse<TblRoleType>> Edit(int id, RoleTypePostModel model);
+        Task<ServiceResponse<TblRoleType>> Delete(int id);
     }
 }

@@ -11,8 +11,8 @@ namespace CMS.Service.Services.User
 {
     public class UserMasterService : BaseService, IUserMasterService
     {
-        PracticesContext _db;
-        public UserMasterService(PracticesContext db)
+        DB_CMSContext _db;
+        public UserMasterService(DB_CMSContext db)
         {
             _db = db;
         }
@@ -41,7 +41,7 @@ namespace CMS.Service.Services.User
             try
             {
 
-                var detail = _db.TblUserMasters.FirstOrDefault(x => x.UserId == id && !x.IsDeleted && x.IsActive.Value);
+                var detail = _db.TblUserMasters.FirstOrDefault(x => x.UserId == id && !x.IsDeleted && x.IsActive);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

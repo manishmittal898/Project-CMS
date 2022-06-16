@@ -67,7 +67,7 @@ namespace CMS.API
         });
 
             });
-            services.AddDbContext<PracticesContext>(options =>
+            services.AddDbContext<DB_CMSContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -3489,7 +3489,7 @@ li.menu span.shape2 {
 }
 
 .table-header thead {
-    background: #607d8b !important;
+  background: #3f51b5 !important;
 }
 
 .switch-custom-d {
@@ -4333,5 +4333,18 @@ form .icon-login-form {
 
 /* Responsive end */
 
-
+.table-responsive {
+  box-shadow: 0 0 20px #e3e3e3;
+  padding: 10px;
+}
+.lsit-category-img {
+  height: 100px;
+  width: 100px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.table>tbody tr:last-child {
+  border: none;
+}
 /* Manish CSS End */

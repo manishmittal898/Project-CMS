@@ -11,8 +11,8 @@ namespace CMS.Service.Services.ProductReview
 {
   public  class ProductReviewService : BaseService, IProductReviewService
     {
-        PracticesContext _db;
-        public ProductReviewService(PracticesContext db)
+        DB_CMSContext _db;
+        public ProductReviewService(DB_CMSContext db)
         {
             _db = db;
         }
@@ -41,7 +41,7 @@ namespace CMS.Service.Services.ProductReview
             try
             {
 
-                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == id && x.IsActive);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
