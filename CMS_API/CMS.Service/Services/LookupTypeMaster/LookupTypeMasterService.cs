@@ -11,8 +11,8 @@ namespace CMS.Service.Services.LookupTypeMaster
 {
    public class LookupTypeMasterService : BaseService, ILookupTypeMasterService
     {
-        PracticesContext _db;
-        public LookupTypeMasterService(PracticesContext db)
+        DB_CMSContext _db;
+        public LookupTypeMasterService(DB_CMSContext db)
         {
             _db = db;
         }
@@ -86,9 +86,7 @@ namespace CMS.Service.Services.LookupTypeMaster
 
                 objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == id);
 
-                objRole.Name = model.Name;
-            
-
+                objRole.Name = model.Name;          
                 objRole.ModifiedBy = model.ModifiedBy;
                 var roletype = _db.TblLookupTypeMasters.Update(objRole);
                 _db.SaveChanges();

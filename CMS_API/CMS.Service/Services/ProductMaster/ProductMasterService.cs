@@ -11,8 +11,8 @@ namespace CMS.Service.Services.ProductMaster
 {
    public class ProductMasterService : BaseService, IProductMasterService
     {
-        PracticesContext _db;
-        public ProductMasterService(PracticesContext db)
+        DB_CMSContext _db;
+        public ProductMasterService(DB_CMSContext db)
         {
             _db = db;
         }
@@ -41,7 +41,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

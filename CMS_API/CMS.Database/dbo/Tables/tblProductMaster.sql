@@ -1,6 +1,8 @@
 ﻿CREATE TABLE [dbo].[tblProductMaster] (
     [Id]         BIGINT            IDENTITY (1, 1) NOT NULL,
     [Name]       NVARCHAR (2000) NOT NULL,
+    [CategoryId]       BIGINT NOT NULL,
+    [SubCategoryId]       BIGINT NOT NULL,
     [Desc]       NTEXT NULL,
     [Price]      DECIMAL (18)   NULL,
     [Caption]    NVARCHAR (4000) NULL,
@@ -12,6 +14,8 @@
     [IsActive]   BIT            NOT NULL DEFAULT 1,
     [IsDelete] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_tblProductMaster_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [tblLookupMaster]([Id]),
+    CONSTRAINT [FK_tblProductMaster_SubCategoryId] FOREIGN KEY ([SubCategoryId]) REFERENCES [tblSubLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [FK_tblProductMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId])
 

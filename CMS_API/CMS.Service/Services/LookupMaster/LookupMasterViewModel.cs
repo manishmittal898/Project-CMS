@@ -9,15 +9,15 @@ namespace CMS.Service.Services.LookupMaster
 {
   public  class LookupMasterViewModel
     {
-        public int Id { get; set; }
+        public long  Id { get; set; }
         [Required]
         public string Name { get; set; }
         public int? SortedOrder { get; set; }
         [Required]
-        public int? LookUpType { get; set; }
-        public string CreatedBy { get; set; }
+        public long? LookUpType { get; set; }
+        public long CreatedBy { get; set; }
      
-        public string ModifiedBy { get; set; }
+        public long ModifiedBy { get; set; }
        
       
     }

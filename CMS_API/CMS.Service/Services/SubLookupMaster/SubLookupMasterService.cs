@@ -11,8 +11,8 @@ namespace CMS.Service.Services.SubLookupMaster
 {
     public class SubLookupMasterService : BaseService, ISubLookupMasterService
     {
-        PracticesContext _db;
-        public SubLookupMasterService(PracticesContext db)
+        DB_CMSContext _db;
+        public SubLookupMasterService(DB_CMSContext db)
         {
             _db = db;
         }
@@ -41,7 +41,7 @@ namespace CMS.Service.Services.SubLookupMaster
             try
             {
 
-                var detail = _db.TblSubLookupMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var detail = _db.TblSubLookupMasters.FirstOrDefault(x => x.Id == id && x.IsActive);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@ namespace CMS.Service.Services.ProductMaster
 {
   public  class ProductMasterViewModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -19,9 +19,8 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? Price { get; set; }
         public string Caption { get; set; }
         public string Summary { get; set; }
-        public string CreatedBy { get; set; }
-       
+        public long CreatedBy { get; set; }     
 
-        public string ModifiedBy { get; set; }
+        public long ModifiedBy { get; set; }
     }
 }
