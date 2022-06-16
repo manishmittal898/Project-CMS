@@ -44,7 +44,7 @@ namespace CMS.Core.ServiceHelper.Method
                     {
                         Directory.CreateDirectory(filePath);
                     }
-                    fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + filePath.GetFileExtension() : fileName;
+                    fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + base64str.GetFileExtension() : fileName;
                     File.WriteAllBytes(filePath + fileName, byteArr);
                     saveFile = string.Concat(saveFile, "/", fileName);
                 }

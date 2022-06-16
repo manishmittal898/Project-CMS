@@ -8,11 +8,11 @@ import { Routing_Url } from './Shared/Helper/constants';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  { path: "dashboard", loadChildren: () => import('./Content/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: '', redirectTo: 'admin', pathMatch: 'full'},
+  { path: "admin", loadChildren: () => import('./Content/main/main.module').then(m => m.MainModule) },
 
-  { path: 'manish', component: HtmlComponent },
-  { path: Routing_Url.LoginUrl , component: LoginComponent },
+
+  { path: 'login' , component: LoginComponent },
   { path: '**', component: PageNotFoundComponent, canActivate: [AuthenticationGuard]},
 
 ];

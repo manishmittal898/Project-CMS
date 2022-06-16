@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[tblProductMaster] (
     [Id]         BIGINT            IDENTITY (1, 1) NOT NULL,
     [Name]       NVARCHAR (2000) NOT NULL,
+    [ImagePath]        NVARCHAR (1000) NULL,
     [CategoryId]       BIGINT NOT NULL,
     [SubCategoryId]       BIGINT NOT NULL,
     [Desc]       NTEXT NULL,

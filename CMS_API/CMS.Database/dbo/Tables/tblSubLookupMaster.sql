@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[tblSubLookupMaster] (
     [Id]          BIGINT            IDENTITY (1, 1) NOT NULL,
     [Name]        NVARCHAR (500) NULL,
+    [ImagePath]        NVARCHAR (1000) NULL,
     [SortedOrder] INT            NULL,
     [LookUpId]    BIGINT            NOT NULL,
     [CreatedOn]   DATETIME       DEFAULT (getdate()) NOT NULL,
@@ -12,7 +13,7 @@
     PRIMARY KEY CLUSTERED ([Id] ASC),
    CONSTRAINT [tblSubLookupMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [tblSubLookupMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId]),
-    CONSTRAINT [tblSubLookupMaster_LookUpId] FOREIGN KEY ([LookUpId]) REFERENCES [dbo].[tblLookupMaster] ([Id]),
+    CONSTRAINT [tblSubLookupMaster_LookUpId] FOREIGN KEY ([LookUpId]) REFERENCES [dbo].[tblSubLookupTypeMaster] ([Id]),
 
 );
 

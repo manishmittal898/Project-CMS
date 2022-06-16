@@ -12,7 +12,9 @@ namespace CMS.Service.Services.LookupTypeMaster
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
-      
+        public string ImagePath { get; set; }
+
+
         public long CreatedBy { get; set; }
      
         public long ModifiedBy { get; set; }

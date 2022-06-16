@@ -1,35 +1,4 @@
 <app-loader></app-loader>
-<div #pageBody>
-    <div class="main-container" id="container" *ngIf="isAuth; else NotValidUser">
-
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
-        <app-header (SetTheme)="setTheme($event)"></app-header>
-        <div id="content" class="main-content">
-            <!--  START CONTENT AREA  -->
-
-            <div class="layout-px-spacing">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12">
-                        <div class="statbox widget box box-shadow bg-white">
-
-                            <router-outlet></router-outlet>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <!--  END CONTENT AREA  -->
-            <app-footer></app-footer>
-        </div>
-    </div>
-</div>
-
-<ng-template #NotValidUser>
 
     <router-outlet></router-outlet>
 
-
-</ng-template>
