@@ -41,7 +41,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive);
+                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)

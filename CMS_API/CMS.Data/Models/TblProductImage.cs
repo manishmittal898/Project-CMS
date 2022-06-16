@@ -15,7 +15,10 @@ namespace CMS.Data.Models
         public long? CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
         public long ModifiedBy { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
+
+        public virtual TblUserMaster CreatedByNavigation { get; set; }
+        public virtual TblUserMaster ModifiedByNavigation { get; set; }
     }
 }

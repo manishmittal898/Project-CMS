@@ -59,6 +59,23 @@ namespace CMS.Data.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name).HasMaxLength(500);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblLookupMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblLookupMaster_CreatedBy");
+
+                entity.HasOne(d => d.LookUpTypeNavigation)
+                    .WithMany(p => p.TblLookupMasters)
+                    .HasForeignKey(d => d.LookUpType)
+                    .HasConstraintName("FK_tblLookupMaster_LookUp_Type");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblLookupMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblLookupMaster_ModifiedBy");
             });
 
             modelBuilder.Entity<TblLookupTypeMaster>(entity =>
@@ -78,6 +95,18 @@ namespace CMS.Data.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name).HasMaxLength(250);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblLookupTypeMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblLookupTypeMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblLookupTypeMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblLookupTypeMaster_ModifiedBy");
             });
 
             modelBuilder.Entity<TblProductImage>(entity =>
@@ -90,9 +119,26 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.FileName).HasMaxLength(250);
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ProductId).HasColumnName("Product_Id");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblProductImageCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("FK_tblProductImage_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblProductImageModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductImage_ModifiedBy");
             });
 
             modelBuilder.Entity<TblProductMaster>(entity =>
@@ -101,11 +147,19 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Caption).HasMaxLength(4000);
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Desc).HasColumnType("ntext");
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -114,21 +168,64 @@ namespace CMS.Data.Models
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Summary).HasColumnType("ntext");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.TblProductMasters)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductMaster_CategoryId");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblProductMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblProductMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductMaster_ModifiedBy");
+
+                entity.HasOne(d => d.SubCategory)
+                    .WithMany(p => p.TblProductMasters)
+                    .HasForeignKey(d => d.SubCategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductMaster_SubCategoryId");
             });
 
             modelBuilder.Entity<TblProductReview>(entity =>
             {
                 entity.ToTable("tblProductReview");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description).HasMaxLength(4000);
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ShortDescription).HasMaxLength(2000);
 
                 entity.Property(e => e.Title).HasMaxLength(500);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblProductReviews)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("tblProductReview_CreatedBy");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.TblProductReviews)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("tblProductReview_ProductId");
             });
 
             modelBuilder.Entity<TblRoleType>(entity =>
@@ -138,35 +235,97 @@ namespace CMS.Data.Models
 
                 entity.ToTable("tblRoleType");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.RoleName)
                     .IsRequired()
                     .HasMaxLength(250);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblRoleTypeCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("FK_tblRoleType_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblRoleTypeModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .HasConstraintName("FK_tblRoleType_ModifiedBy");
             });
 
             modelBuilder.Entity<TblSubLookupMaster>(entity =>
             {
                 entity.ToTable("tblSubLookupMaster");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name).HasMaxLength(500);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblSubLookupMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("tblSubLookupMaster_CreatedBy");
+
+                entity.HasOne(d => d.LookUp)
+                    .WithMany(p => p.TblSubLookupMasters)
+                    .HasForeignKey(d => d.LookUpId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("tblSubLookupMaster_LookUpId");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblSubLookupMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .HasConstraintName("tblSubLookupMaster_ModifiedBy");
             });
 
             modelBuilder.Entity<TblSubLookupTypeMaster>(entity =>
             {
                 entity.ToTable("tblSubLookupTypeMaster");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name).HasMaxLength(250);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblSubLookupTypeMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblSubLookupTypeMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblSubLookupTypeMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblSubLookupTypeMaster_ModifiedBy");
             });
 
             modelBuilder.Entity<TblUserMaster>(entity =>
@@ -176,7 +335,9 @@ namespace CMS.Data.Models
 
                 entity.ToTable("tblUserMaster");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Dob)
                     .HasColumnType("datetime")
@@ -188,15 +349,27 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.FirstName).HasMaxLength(256);
 
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.LastName).HasMaxLength(256);
 
                 entity.Property(e => e.Mobile).HasMaxLength(15);
 
-                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Password).HasMaxLength(250);
 
                 entity.Property(e => e.ProfilePhoto).HasMaxLength(1000);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.TblUserMasters)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__tblUserMa__RoleI__6B24EA82");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -7,6 +7,12 @@ namespace CMS.Data.Models
 {
     public partial class TblLookupMaster
     {
+        public TblLookupMaster()
+        {
+            TblProductMasters = new HashSet<TblProductMaster>();
+            TblSubLookupMasters = new HashSet<TblSubLookupMaster>();
+        }
+
         public long Id { get; set; }
         public string Name { get; set; }
         public int? SortedOrder { get; set; }
@@ -17,5 +23,11 @@ namespace CMS.Data.Models
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
+
+        public virtual TblUserMaster CreatedByNavigation { get; set; }
+        public virtual TblLookupTypeMaster LookUpTypeNavigation { get; set; }
+        public virtual TblUserMaster ModifiedByNavigation { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasters { get; set; }
+        public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }
     }
 }

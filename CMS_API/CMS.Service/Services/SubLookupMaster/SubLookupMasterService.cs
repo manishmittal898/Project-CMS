@@ -41,7 +41,7 @@ namespace CMS.Service.Services.SubLookupMaster
             try
             {
 
-                var detail = _db.TblSubLookupMasters.FirstOrDefault(x => x.Id == id && x.IsActive);
+                var detail = _db.TblSubLookupMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
