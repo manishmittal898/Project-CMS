@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HtmlComponent } from './Content/html/html.component';
 import { LoginComponent } from './Content/Common/login/login.component';
 import { MainModule } from "./Content/main/main.module";
+import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     AppComponent,

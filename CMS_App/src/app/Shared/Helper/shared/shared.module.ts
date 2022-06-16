@@ -20,11 +20,12 @@ import { NavigationComponent } from 'src/app/Content/Common/navigation/navigatio
 import { PageNotFoundComponent } from 'src/app/Content/Common/page-not-found/page-not-found.component';
 import { HtmlComponent } from 'src/app/Content/html/html.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
   FormsModule,
-
+  RouterModule
 ]
 
 const installedModule = [
