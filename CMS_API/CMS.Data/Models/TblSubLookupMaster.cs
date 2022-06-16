@@ -14,6 +14,7 @@ namespace CMS.Data.Models
 
         public long Id { get; set; }
         public string Name { get; set; }
+        public string ImagePath { get; set; }
         public int? SortedOrder { get; set; }
         public long LookUpId { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -24,7 +25,7 @@ namespace CMS.Data.Models
         public bool IsDeleted { get; set; }
 
         public virtual TblUserMaster CreatedByNavigation { get; set; }
-        public virtual TblLookupMaster LookUp { get; set; }
+        public virtual TblSubLookupTypeMaster LookUp { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasters { get; set; }
     }

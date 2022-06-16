@@ -14,6 +14,7 @@ namespace CMS.Data.Models
 
         public long Id { get; set; }
         public string Name { get; set; }
+        public string ImagePath { get; set; }
         public long CategoryId { get; set; }
         public long SubCategoryId { get; set; }
         public string Desc { get; set; }

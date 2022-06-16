@@ -48,6 +48,8 @@ namespace CMS.Data.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.ImagePath).HasMaxLength(1000);
+
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -152,6 +154,8 @@ namespace CMS.Data.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Desc).HasColumnType("ntext");
+
+                entity.Property(e => e.ImagePath).HasMaxLength(1000);
 
                 entity.Property(e => e.IsActive)
                     .IsRequired()
@@ -270,6 +274,8 @@ namespace CMS.Data.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.ImagePath).HasMaxLength(1000);
+
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -320,6 +326,12 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblSubLookupTypeMaster_CreatedBy");
+
+                entity.HasOne(d => d.LookUp)
+                    .WithMany(p => p.TblSubLookupTypeMasters)
+                    .HasForeignKey(d => d.LookUpId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("tblLookupMaster_LookUpId");
 
                 entity.HasOne(d => d.ModifiedByNavigation)
                     .WithMany(p => p.TblSubLookupTypeMasterModifiedByNavigations)

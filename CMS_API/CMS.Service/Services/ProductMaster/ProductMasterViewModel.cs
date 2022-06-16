@@ -12,6 +12,8 @@ namespace CMS.Service.Services.ProductMaster
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public string ImagePath { get; set; }
+
         [Required]
         [StringLength(1000)]
         public string Desc { get; set; }

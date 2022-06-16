@@ -12,6 +12,8 @@ namespace CMS.Service.Services.LookupMaster
         public long  Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public string ImagePath { get; set; }
+
         public int? SortedOrder { get; set; }
         [Required]
         public long? LookUpType { get; set; }
