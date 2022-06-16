@@ -1,4 +1,5 @@
-﻿using CMS.Core.ServiceHelper.Method;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using System;
@@ -47,7 +48,7 @@ namespace CMS.Service.Services.LookupTypeMaster
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblLookupTypeMaster>(null, "Fail", false, ex.Message.ToString());
+                ObjResponse = CreateResponse<TblLookupTypeMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -73,7 +74,7 @@ namespace CMS.Service.Services.LookupTypeMaster
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupTypeMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblLookupTypeMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
         }
@@ -98,7 +99,7 @@ namespace CMS.Service.Services.LookupTypeMaster
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupTypeMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblLookupTypeMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
 

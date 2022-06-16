@@ -1,5 +1,7 @@
 
+using CMS.Core.FixedValue;
 using CMS.Data.Models;
+using CMS.Service.Services.Account;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
 using CMS.Service.Services.ProductMaster;
@@ -10,6 +12,7 @@ using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +29,9 @@ namespace CMS.API
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
+        const string JWT_Key = Constants.JWT_Key;
+        const string JWT_ISSUER = Constants.JWT_ISSUER;
+        const string CONNECTION_STRING = Constants.CONNECTION_STRING;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,57 +43,85 @@ namespace CMS.API
         {
 
             services.AddControllers();
+
+            services.AddDirectoryBrowser();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CMS.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CMS", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below. \r\n\r\nExample: 'Bearer {Token}'",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                 c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-      {
-        {
-          new OpenApiSecurityScheme
-          {
-            Reference = new OpenApiReference
-              {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
-              },
-              Scheme = "oauth2",
-              Name = "Bearer",
-              In = ParameterLocation.Header, },
-            new List<string>()
-          }
-        });
-
-            });
-            services.AddDbContext<DB_CMSContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                    };
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
                 });
 
-            services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration[JWT_ISSUER],
+                    ValidAudience = Configuration[JWT_ISSUER],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
+                };
+            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CMS.API", Version = "v1" });
+            //    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            //    {
+            //        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+            //          Enter 'Bearer' [space] and then your token in the text input below.
+            //          \r\n\r\nExample: 'Bearer 12345abcdef'",
+            //        Name = "Authorization",
+            //        In = ParameterLocation.Header,
+            //        Type = SecuritySchemeType.ApiKey,
+            //        Scheme = "Bearer"
+            //    });
+            //    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            //    {{
+            //            new OpenApiSecurityScheme{
+            //            Reference = new OpenApiReference
+            //            {
+            //                Type = ReferenceType.SecurityScheme,
+            //                Id = "Bearer"
+            //            },
+            //            Scheme = "oauth2",
+            //            Name = "Bearer",
+            //            In = ParameterLocation.Header, },new List<string>()
+            //        }
+            //    });
+
+            //});
+            services.AddDbContext<DB_CMSContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING)));
+             services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddTransient<IRoleTypeService, RoleTypeService>();
             services.AddTransient<ILookupMasterService, LookupMasterService>();
             services.AddTransient<ILookupTypeMasterService, LookupTypeMasterService>();
@@ -96,6 +129,7 @@ namespace CMS.API
             services.AddTransient<IProductReviewService, ProductReviewService>();
             services.AddTransient<ISubLookupMasterService, SubLookupMasterService>();
             services.AddTransient<IUserMasterService, UserMasterService>();
+            services.AddTransient<IAccountService, AccountService>();
 
 
         }
@@ -107,7 +141,11 @@ namespace CMS.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS.API v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS (v1)");
+                    c.RoutePrefix = "swagger";
+                });
             }
 
             app.UseRouting();
@@ -128,7 +166,7 @@ namespace CMS.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-        //    app.UseMvc();
+            //    app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {

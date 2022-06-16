@@ -1,4 +1,5 @@
-﻿using CMS.Core.ServiceHelper.Method;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using System;
@@ -47,7 +48,7 @@ namespace CMS.Service.Services.ProductReview
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblProductReview>(null, "Fail", false, ex.Message.ToString());
+                ObjResponse = CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -75,7 +76,7 @@ namespace CMS.Service.Services.ProductReview
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductReview>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
         }
@@ -105,7 +106,7 @@ namespace CMS.Service.Services.ProductReview
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductReview>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
 

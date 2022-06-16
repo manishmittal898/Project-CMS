@@ -1,4 +1,7 @@
-﻿using CMS.Service.Services.User;
+﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Service.Services.Account;
+using CMS.Service.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -6,61 +9,78 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using static CMS.Service.Services.Account.AccountViewModel;
 
 namespace CMS.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
         private IConfiguration _config;
-        private IUserMasterService _userMaster;
+        private IAccountService _accountService;
 
-        public AccountController(IConfiguration config, IUserMasterService userMaster)
+        public AccountController(IConfiguration config, IAccountService
+        accountService)
         {
-            _userMaster = userMaster;
+            _accountService = accountService;
             _config = config;
         }
+        //[HttpGet]
+        //public string getToken()
+        //{
+        //    var obj = new
+        //    {
+        //        Username = "kuldeep",
+        //        UserType = "Admin",
+        //        EmailAddress = "kuldeep@nisha.com"
+        //    };
+
+
+        //    return GenerateJSONWebToken(obj);
+        //}
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
+        {
+
+            return await _accountService.Login(model);
+        }
+
+
+        //Post api/Account/WebChangePassword
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ServiceResponse<string>> ChangePassword(ChangePasswordModel model)
+        {
+            return await _accountService.WebChangePassword(model);
+        }
+
+
         [HttpGet]
-        public string getToken()
+        [AllowAnonymous]
+        //Get api/Account/ValidateUserWithMobileNumber
+        public async Task<ServiceResponse<string>> ValidateUserWithMobileNUmber(string mobileNumber)
         {
-            var obj = new
-            {
-                Username = "kuldeep",
-                UserType = "Admin",
-                EmailAddress = "kuldeep@nisha.com"
-            };
-
-
-            return GenerateJSONWebToken(obj);
+            return await _accountService.CheckUserExist(mobileNumber);
         }
 
-
-        /// <summary>
-        /// this method is use for create token when user is authentcate using db value
-        /// </summary>
-        /// <param name="userInfo"></param>
-        /// <returns></returns>
-        private string GenerateJSONWebToken(dynamic userInfo)
+        [HttpGet]
+        [AllowAnonymous]
+        public ServiceResponse<string> GenerateEncrptPassword(string value)
         {
-          
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[] {
-        new Claim(JwtRegisteredClaimNames.Name, userInfo.Username),
-        new Claim(JwtRegisteredClaimNames.Typ, userInfo.UserType),
-        new Claim(JwtRegisteredClaimNames.Email, userInfo.EmailAddress),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-    };
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
-                  claims,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return _accountService.GetEncrptedPassword(value);
         }
+        //Get api/Account/Logout
+        [HttpGet]
+        public async Task<ServiceResponse<object>> Logout(long id)
+        {
+            return await _accountService.LogoutUser(id);
+
+        }
+         
     }
 }

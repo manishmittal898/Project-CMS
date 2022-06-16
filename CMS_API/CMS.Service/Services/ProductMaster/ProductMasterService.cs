@@ -1,4 +1,5 @@
-﻿using CMS.Core.ServiceHelper.Method;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Utility;
@@ -51,7 +52,7 @@ namespace CMS.Service.Services.ProductMaster
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblProductMaster>(null, "Fail", false, ex.Message.ToString());
+                ObjResponse = CreateResponse<TblProductMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -82,7 +83,7 @@ namespace CMS.Service.Services.ProductMaster
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblProductMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
         }
@@ -115,7 +116,7 @@ namespace CMS.Service.Services.ProductMaster
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductMaster>(null, "Fail", false, ex.Message.ToString());
+                return CreateResponse<TblProductMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
 
             }
 
