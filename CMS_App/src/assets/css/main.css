@@ -4377,4 +4377,7 @@ li.menu.menu-active>a i {
 #sidebar ul.menu-categories li.menu>.dropdown-toggle i.bi.bi-chevron-down {
   font-size: 15px;
 }
+.dataTable.table-striped.table>thead>tr>th:last-child {
+  min-width: 100px;
+}
 /* Manish CSS End */
