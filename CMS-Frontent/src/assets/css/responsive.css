@@ -187,9 +187,6 @@
     .product-list-search input, .product-list-search input:focus {
         min-width: 100%;
     }
-    footer {
-        margin-top: 0px;
-    }
 }
 
 @media screen and (max-width:575px) {
