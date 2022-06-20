@@ -7,6 +7,7 @@
     .navbar .nav-item:hover .dropdown-menu {
         display: block;
     }
+
 }
 
 @media screen and (min-width:1120px) {}
@@ -120,9 +121,24 @@
     {
         display: none;
     }
-    
+    .aside-category {
+      display: block !important;
+      transform: none;
+      position: static;
+      width: auto;
+      visibility: visible;
+  }
+
 }
 @media screen and (max-width:767px) {
+  .aside-category {
+    box-shadow: none;
+    background: #fff;
+    border-radius: 0px;
+    width: 80%;
+    display: inline-block;
+    overflow: auto;
+}
     .open-advance-filter {
         max-width: 88%;
     }
@@ -168,7 +184,7 @@
     .product-list-info p {
         font-size: 14px;
     }
-    .product-list-search input {
+    .product-list-search input, .product-list-search input:focus {
         min-width: 100%;
     }
     footer {

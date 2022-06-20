@@ -47,7 +47,7 @@ body {
     font-weight: 400;
     font-size: 14px;
     overflow-x: hidden;
-    background: url(../images/body_bg.png);
+    background: url(../images/pattern1.png);
 }
 
 * {
@@ -76,7 +76,9 @@ a:hover {
 button:focus {
     outline: none;
 }
-
+button:focus, a:focus {
+  box-shadow: none !important;
+}
 a {
     transition: 0.3s;
     text-decoration: none;
@@ -598,10 +600,11 @@ section.home-category-d-1{
 }
 
 .aside-category {
-    background: #e9e8e4;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #d7d7d7;
+  background: #e9e8e4;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #d7d7d7;
+  border: none;
 }
 
 .aside-category a {
@@ -747,5 +750,9 @@ input:focus-visible {
     right: 12px;
     top: 3px;
     padding: 0px;
+}
+.product-category-btn {
+  font-size: 20px;
+  color: #000;
 }
 /* CUSTOM CSS END */
