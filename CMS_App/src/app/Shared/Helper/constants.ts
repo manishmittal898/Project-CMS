@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 export class API_Url {
 
   //#region <<Login>>
-  public static Login_Api = `${environment.apiEndPoint}account/WebLogin`;
+  public static Login_Api = `${environment.apiEndPoint}account/Login`;
   //#endregion
 
   //#region <<Common >>
@@ -178,9 +178,9 @@ export class API_Url {
 export class Routing_Url {
 
   //#region <<Module URL>>
-  
+
   public static MasterModule = 'master';
-  
+
   //#endregion
 
   //#region <<Login URL>>
@@ -202,7 +202,7 @@ export class Message {
 }
 
 export class DropDown_key {
-  
+
   static ddlState = "ddlState";
   static ddlDistrict = "ddlDistrict";
 }

@@ -25,7 +25,7 @@ namespace CMS.Data.Models
         public bool IsDeleted { get; set; }
 
         public virtual TblUserMaster CreatedByNavigation { get; set; }
-        public virtual TblSubLookupTypeMaster LookUp { get; set; }
+        public virtual TblLookupMaster LookUp { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasters { get; set; }
     }

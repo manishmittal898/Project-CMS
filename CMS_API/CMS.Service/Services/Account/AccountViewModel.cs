@@ -22,6 +22,8 @@ namespace CMS.Service.Services.Account
             public string Token { get; set; }
             public string UserName { get; set; }
             public string RoleName { get; set; }
+            public string ProfilePhoto { get; set; }
+
         }
 
         public class ChangePasswordModel

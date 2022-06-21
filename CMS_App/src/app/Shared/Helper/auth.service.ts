@@ -35,15 +35,14 @@ export class AuthService {
 
   SaveUserDetail(model: any) {
     let data = JSON.stringify(model);
-
     this._securityService.setStorage('userDetail', data);
 
   }
 
-  GetUserDetail() : any|null {
+  GetUserDetail(): LoginUserDetailModel | null {
     let data = this._securityService.getStorage('userDetail');
     if (data) {
-      return JSON.parse(data!) as any;
+      return JSON.parse(data!) as LoginUserDetailModel;
     }
     else {
       return null;
@@ -77,4 +76,13 @@ export class AuthService {
       }
     }, 10);
   }
+}
+export interface LoginUserDetailModel {
+  UserId: number;
+  RoleId: number;
+  RoleLeve: number;
+  Token: string;
+  UserName: string;
+  RoleName: string;
+  ProfilePhoto:string;
 }

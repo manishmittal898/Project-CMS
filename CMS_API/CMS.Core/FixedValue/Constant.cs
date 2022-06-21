@@ -33,9 +33,9 @@ namespace CMS.Core.FixedValue
         public const string ALLOWED_HOSTS_KEY = "AllowedHost:Production";
 #endif
 #if DEBUG
-        public const string CONNECTION_STRING = "ConnectionStrings:Development";
+        public const string CONNECTION_STRING = "DefaultConnection";
 #else
-        public const string CONNECTION_STRING = "ConnectionStrings:Production";        
+        public const string CONNECTION_STRING = "DefaultConnection";        
 #endif
 
 
