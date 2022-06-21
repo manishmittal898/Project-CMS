@@ -33,7 +33,7 @@
         max-width: 100%;
     }
     .navbar-nav li a {
-        padding: 10px 15px !important;
+        padding: 10px 20px !important;
         color: #fff !important;
         border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     }
@@ -50,7 +50,7 @@
     }
     .navbar-collapse {
         position: fixed;
-        top: 90px;
+        top: 0px;
         right: 0;
         padding: 15px;
         width: 35%;
@@ -153,17 +153,14 @@
     footer h4 {
         margin-top: 30px;
     }
-    footer {
-        text-align: center;
-    }
-    .footer-social {
-        justify-content: center;
-    }
+
+
     footer .container {
         padding: 25px 20px;
     }
     footer h4, footer .accordion-button {
         font-size: 17px;
+        margin: 0px;
     }
     .home-category-d-1 .home-category-items-img {
         height: auto;

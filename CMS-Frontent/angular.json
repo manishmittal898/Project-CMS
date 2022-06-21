@@ -39,7 +39,8 @@
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/custom.js",
-              "src/assets/js/slider_custom.js"
+              "src/assets/js/slider_custom.js",
+              "src/assets/js/index.bundle.min.js"
             ]
           },
           "configurations": {
@@ -117,7 +118,8 @@
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/custom.js",
-              "src/assets/js/slider_custom.js"
+              "src/assets/js/slider_custom.js",
+              "src/assets/js/index.bundle.min.js"
             ]
           }
         },
