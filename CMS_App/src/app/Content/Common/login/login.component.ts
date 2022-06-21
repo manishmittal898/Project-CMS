@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.model.Plateform = "Web";
-    if (this.model.MobileNumber == undefined || this.model.Password == undefined) {
+    if (this.model.Email == undefined || this.model.Password == undefined) {
       this.toast.warning('Please enter username and password', 'Required');
       return;
     }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           let data = res.Data as any;
           this._authService.SaveUserToken(data.Token);
           this._authService.SaveUserDetail(data);
-       
+
 
           this.toast.success(res.Message?.toString(), 'Login Response');
         } else {
