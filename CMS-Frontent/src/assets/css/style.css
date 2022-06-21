@@ -47,7 +47,7 @@ body {
     font-weight: 400;
     font-size: 14px;
     overflow-x: hidden;
-    background: url(../images/body_bg.png);
+    background: url(../images/pattern1.png);
 }
 
 * {
@@ -76,7 +76,9 @@ a:hover {
 button:focus {
     outline: none;
 }
-
+button:focus, a:focus {
+  box-shadow: none !important;
+}
 a {
     transition: 0.3s;
     text-decoration: none;
@@ -598,10 +600,11 @@ section.home-category-d-1{
 }
 
 .aside-category {
-    background: #e9e8e4;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #d7d7d7;
+  background: #fffdf4;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #d7d7d7;
+  border: none;
 }
 
 .aside-category a {
@@ -610,20 +613,19 @@ section.home-category-d-1{
     color: var(--secondary-color);
     font-size: 15px;
     text-transform: capitalize;
+    border-left: solid 2px transparent;
+    line-height: normal;
 }
 
 .aside-category a.active {
-    background: var(--secondary-color);
-    border-radius: 10px;
-    font-weight: 500;
-    color: #fff;
+  border-color: var(--primary-color);
+  font-weight: 600;
 }
 
 .aside-category a:hover {
-    background: #fff;
-    border-radius: 10px;
-    color: var(--black);
     padding-left: 15px;
+    border-color: var(--primary-color);
+    font-weight: 600;
 }
 
 .product-list-items {
@@ -747,5 +749,39 @@ input:focus-visible {
     right: 12px;
     top: 3px;
     padding: 0px;
+}
+.product-category-btn {
+  font-size: 20px;
+  color: #000;
+}
+.page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.page-link
+{
+  color: var(--secondary-color);
+}
+.mobile-nav-close {
+  color: #fff;
+  font-size: 25px;
+  text-align: right;
+  padding: 5px 20px 0px 20px;
+}
+.mobile-nav-close:hover {
+  color: var(--primary-color);
+}
+.pagination .page-link {
+  border: none;
+}
+.pagination .page-link:hover {
+  background: #fffdf4;
+  color: #000;
+}
+.ratio {
+  background: transparent !important;
+}
+.modal-backdrop.show {
+  opacity: .7;
 }
 /* CUSTOM CSS END */

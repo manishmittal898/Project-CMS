@@ -1,1 +1,78 @@
-<p>product-add-edit works!</p>
+<!-- Page Header Title start -->
+<div class="widget-header">
+  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
+    <div>
+      <h1>Add New Product</h1>
+      <!-- Breadcrumb Start -->
+      <nav class="custom-breadcrum">
+        <ol class="breadcrumb justify-content-center justify-content-sm-start">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void()">Product List</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add New Product</li>
+        </ol>
+      </nav>
+      <!-- Breadcrumb End -->
+    </div>
+    <button class="btn btn-dark btn-sm mt-2 mt-sm-0"> <i class="bi bi-chevron-left"></i> Back to list</button>
+
+  </div>
+</div>
+<!-- Page Header Title end -->
+
+<div class="custom-form p-4">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Product name</label>
+      <input type="text" class="form-control" id="input1" placeholder="Enter Name">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Price</label>
+      <input type="text" class="form-control" id="input1" placeholder="Enter Price">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Upload images</label>
+      <div class="dropzone dropzone-light upload-btn-wrapper w-100">
+        <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
+          Upload</button>
+        <input type="file" multiple="true" style="display: block;" />
+        <div class="dz-default dz-message m-1">
+          <span><i class="ti-cloud-up"></i></span>
+        </div>
+      </div>
+      <div class="d-flex align-items-center mt-1 upload-content-list">
+        <a href="javascript:void()" class="small-media-items position-relative">
+          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+          <div class="small-media-items-action">
+            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+          </div>
+        </a>
+        <a href="javascript:void()" class="small-media-items position-relative">
+          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+          <div class="small-media-items-action">
+            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+          </div>
+        </a>
+        <a href="javascript:void()" class="small-media-items position-relative">
+          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+          <div class="small-media-items-action">
+            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label>Discription</label>
+      <textarea class="form-control" placeholder="Product Discription" rows="5"></textarea>
+    </div>
+    <div class="form-group col-md-12">
+      <label>Additional Information</label>
+      <textarea class="form-control" placeholder="Additional Information" rows="5"></textarea>
+    </div>
+  </div>
+
+  <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">
+    <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Add Product</button>
+    <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+  </div>
+</div>

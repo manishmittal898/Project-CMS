@@ -250,7 +250,7 @@ code {
 }
 
 
-/* 
+/*
 =====================
     Navigation Bar
 =====================
@@ -886,7 +886,7 @@ code {
 }
 
 
-/* 
+/*
 ===============
     Sidebar
 ===============
@@ -1060,7 +1060,7 @@ code {
 }
 
 
-/* 
+/*
 ===============
     Sidebar
 ===============
@@ -1182,7 +1182,7 @@ code {
     cursor: pointer;
     font-size: 13px;
     color: #fff;
-    padding: 11px 14px;
+    padding: 10px 14px;
     transition: .600s;
     margin-bottom: 4px;
     font-weight: 600;
@@ -1299,7 +1299,7 @@ li.menu.menu-active>a svg {
     position: absolute;
     height: 3px;
     width: 3px;
-    top: 17.5px;
+    top: 16px;
     left: 13px;
     border-radius: 50%;
 }
@@ -1433,7 +1433,7 @@ li.menu.menu-active>a svg {
 }
 
 
-/*  
+/*
     ======================
         Footer-wrapper
     ======================
@@ -1475,7 +1475,7 @@ li.menu.menu-active>a svg {
 }
 
 
-/*  
+/*
     ======================
         MEDIA QUERIES
     ======================
