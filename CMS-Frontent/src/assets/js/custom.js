@@ -52,12 +52,12 @@ AOS.init();
 
 
 
-$(function() {
-    $("#ChangeToggle").click(function() {
-        $("#navbar-hamburger").toggleClass("hidden");
-        $("#navbar-close").toggleClass("hidden");
-    });
-});
+// $(function() {
+//     $("#ChangeToggle").click(function() {
+//         $("#navbar-hamburger").toggleClass("hidden");
+//         $("#navbar-close").toggleClass("hidden");
+//     });
+// });
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
