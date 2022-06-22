@@ -8,7 +8,6 @@ import{Tooltip} from "node_modules/bootstrap/dist/js/bootstrap.esm.min.js";
 export class ProductListComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit(): void {
     Array.from(document.querySelectorAll('button[data-bs-toggle="tooltip"]'))
     .forEach(tooltipNode => new Tooltip(tooltipNode))
