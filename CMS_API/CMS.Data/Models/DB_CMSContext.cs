@@ -24,7 +24,6 @@ namespace CMS.Data.Models
         public virtual DbSet<TblProductReview> TblProductReviews { get; set; }
         public virtual DbSet<TblRoleType> TblRoleTypes { get; set; }
         public virtual DbSet<TblSubLookupMaster> TblSubLookupMasters { get; set; }
-        public virtual DbSet<TblSubLookupTypeMaster> TblSubLookupTypeMasters { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -235,7 +234,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1AA250C376");
+                    .HasName("PK__tblRoleT__8AFACE1A271060DC");
 
                 entity.ToTable("tblRoleType");
 
@@ -303,47 +302,10 @@ namespace CMS.Data.Models
                     .HasConstraintName("tblSubLookupMaster_ModifiedBy");
             });
 
-            modelBuilder.Entity<TblSubLookupTypeMaster>(entity =>
-            {
-                entity.ToTable("tblSubLookupTypeMaster");
-
-                entity.Property(e => e.CreatedOn)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.IsActive)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.ModifiedOn)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Name).HasMaxLength(250);
-
-                entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany(p => p.TblSubLookupTypeMasterCreatedByNavigations)
-                    .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblSubLookupTypeMaster_CreatedBy");
-
-                entity.HasOne(d => d.LookUp)
-                    .WithMany(p => p.TblSubLookupTypeMasters)
-                    .HasForeignKey(d => d.LookUpId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("tblLookupMaster_LookUpId");
-
-                entity.HasOne(d => d.ModifiedByNavigation)
-                    .WithMany(p => p.TblSubLookupTypeMasterModifiedByNavigations)
-                    .HasForeignKey(d => d.ModifiedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tblSubLookupTypeMaster_ModifiedBy");
-            });
-
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4CD92850BA");
+                    .HasName("PK__tblUserM__1788CC4C81198E9F");
 
                 entity.ToTable("tblUserMaster");
 
@@ -381,7 +343,7 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__6B24EA82");
+                    .HasConstraintName("FK__tblUserMa__RoleI__619B8048");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -22,8 +22,6 @@ namespace CMS.Data.Models
             TblRoleTypeModifiedByNavigations = new HashSet<TblRoleType>();
             TblSubLookupMasterCreatedByNavigations = new HashSet<TblSubLookupMaster>();
             TblSubLookupMasterModifiedByNavigations = new HashSet<TblSubLookupMaster>();
-            TblSubLookupTypeMasterCreatedByNavigations = new HashSet<TblSubLookupTypeMaster>();
-            TblSubLookupTypeMasterModifiedByNavigations = new HashSet<TblSubLookupTypeMaster>();
         }
 
         public long UserId { get; set; }
@@ -57,7 +55,5 @@ namespace CMS.Data.Models
         public virtual ICollection<TblRoleType> TblRoleTypeModifiedByNavigations { get; set; }
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasterModifiedByNavigations { get; set; }
-        public virtual ICollection<TblSubLookupTypeMaster> TblSubLookupTypeMasterCreatedByNavigations { get; set; }
-        public virtual ICollection<TblSubLookupTypeMaster> TblSubLookupTypeMasterModifiedByNavigations { get; set; }
     }
 }

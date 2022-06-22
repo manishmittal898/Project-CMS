@@ -34,26 +34,25 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-                if (model.Plateform == "mobile") // For mobile Permission
+                var user = await _db.TblUserMasters.Where(x => x.Email == model.Email && x.Password == model.Password && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                if (user != null)
                 {
-                    var user = await _db.TblUserMasters.Where(x => x.Email == model.Email && x.Password == model.Password && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
-                    if (user != null)
-                    {
 
-                        var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
+                    var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
 
-                        response.UserId = user.UserId;
-                        response.Token = fresh_token.Data;
-                        response.RoleId = user.RoleId;
-                        response.UserName = user.Email;
-                        response.RoleName = user.Role.RoleName;
-                        response.RoleLevel = user.Role.RoleLevel;
-                    }
-                    else
-                    {
-                        return CreateResponse<LoginResponseModel>(null, "You have not register with us,Please Signup", false, ((int)ApiStatusCode.RecordNotFound));
-                    }
+                    response.UserId = user.UserId;
+                    response.Token = fresh_token.Data;
+                    response.RoleId = user.RoleId;
+                    response.UserName = user.Email;
+                    response.RoleName = user.Role.RoleName;
+                    response.RoleLevel = user.Role.RoleLevel;
+                    response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
                 }
+                else
+                {
+                    return CreateResponse<LoginResponseModel>(null, "You have not register with us,Please Signup", false, ((int)ApiStatusCode.RecordNotFound));
+                }
+
                 return CreateResponse<LoginResponseModel>(response, "Login Successful", true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)

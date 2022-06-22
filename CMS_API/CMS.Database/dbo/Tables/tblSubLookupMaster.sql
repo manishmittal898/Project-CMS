@@ -13,7 +13,7 @@
     PRIMARY KEY CLUSTERED ([Id] ASC),
    CONSTRAINT [tblSubLookupMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [tblSubLookupMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId]),
-    CONSTRAINT [tblSubLookupMaster_LookUpId] FOREIGN KEY ([LookUpId]) REFERENCES [dbo].[tblSubLookupTypeMaster] ([Id]),
+    CONSTRAINT [tblSubLookupMaster_LookUpId] FOREIGN KEY ([LookUpId]) REFERENCES [dbo].[tblLookupMaster] ([Id]),
 
 );
 

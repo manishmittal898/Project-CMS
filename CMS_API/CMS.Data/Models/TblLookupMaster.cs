@@ -10,7 +10,7 @@ namespace CMS.Data.Models
         public TblLookupMaster()
         {
             TblProductMasters = new HashSet<TblProductMaster>();
-            TblSubLookupTypeMasters = new HashSet<TblSubLookupTypeMaster>();
+            TblSubLookupMasters = new HashSet<TblSubLookupMaster>();
         }
 
         public long Id { get; set; }
@@ -29,6 +29,6 @@ namespace CMS.Data.Models
         public virtual TblLookupTypeMaster LookUpTypeNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasters { get; set; }
-        public virtual ICollection<TblSubLookupTypeMaster> TblSubLookupTypeMasters { get; set; }
+        public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }
     }
 }
