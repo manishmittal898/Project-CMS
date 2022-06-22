@@ -38,6 +38,12 @@ Text Domain:  First Store
   --line-spacing-28: 28px;
   --line-spacing-35: 35px;
   --line-spacing-100: 100px;
+  --bs-body-bg-rgb: 255,255,255;
+  --bs-body-bg-rgb: 255,255,255;
+  --bs-primary-rgb: 13,110,253;
+  --bd-accent-rgb: 255,228,132;
+  --bd-violet-rgb: 112.520718,44.062154,249.437846;
+  --bd-pink-rgb: 214,51,132;
 }
 
 body {
@@ -853,5 +859,7 @@ opacity: .7;
 {
   padding: 10px 0px;
 }
-
+.bd-gradient-s-1 {
+  background-image: linear-gradient(180deg, rgba(var(--bs-body-bg-rgb), 0.01), rgba(var(--bs-body-bg-rgb), 1) 85%),radial-gradient(ellipse at top left, rgba(var(--bs-primary-rgb), 0.5), transparent 50%),radial-gradient(ellipse at top right, rgba(var(--bd-accent-rgb), 0.5), transparent 50%),radial-gradient(ellipse at center right, rgba(var(--bd-violet-rgb), 0.5), transparent 50%),radial-gradient(ellipse at center left, rgba(var(--bd-pink-rgb), 0.5), transparent 50%) !important;
+}
 /* CUSTOM CSS END */
