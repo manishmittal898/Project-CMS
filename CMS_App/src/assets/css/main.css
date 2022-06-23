@@ -3489,7 +3489,7 @@ li.menu span.shape2 {
 }
 
 .table-header thead {
-  background: #3f51b5 !important;
+    background: #3f51b5 !important;
 }
 
 .switch-custom-d {
@@ -3575,19 +3575,20 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .small-media-items-img img {
-  max-width: 95px;
+    max-width: 95px;
 }
 
 .small-media-items-action {
-  position: absolute;
-  bottom: 10px;
-  background: rgba(0,0,0,0.5);
-  padding: 2px 10px;
-  border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 10px;
+    border-radius: 10px;
 }
+
 .small-media-items-action a {
-  color: #fff;
-  margin: 0px 2px;
+    color: #fff;
+    margin: 0px 2px;
 }
 
 .modal-btn-with-no-header {
@@ -4152,13 +4153,12 @@ table {
 }
 
 form .icon-login-form {
-  position: absolute;
-  top: 53px;
-  left: 14px;
-  margin: 0px !important;
-  font-size: 20px;
+    position: absolute;
+    top: 53px;
+    left: 14px;
+    margin: 0px !important;
+    font-size: 20px;
 }
-
 
 
 /* Theme Dark Start */
@@ -4342,42 +4342,72 @@ form .icon-login-form {
 /* Responsive end */
 
 .table-responsive {
-  box-shadow: 0 0 20px #e3e3e3;
-  padding: 10px;
+    box-shadow: 0 0 20px #e3e3e3;
+    padding: 10px;
 }
+
 .lsit-category-img {
-  height: 100px;
-  width: 100px;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
+    height: 100px;
+    width: 100px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 .table>tbody tr:last-child {
-  border: none;
+    border: none;
 }
+
 .paginate_button.page-item i {
-  font-size: 20px;
+    font-size: 20px;
 }
+
 div.dataTables_wrapper div.dataTables_filter i {
-  position: absolute;
-  right: 9px;
-  top: 8px;
-  font-size: 20px;
-  color: #000;
+    position: absolute;
+    right: 9px;
+    top: 8px;
+    font-size: 20px;
+    color: #000;
 }
-#sidebar ul.menu-categories li.menu>.dropdown-toggle i{
-  color: #fff;
-  margin-right: 8px;
-  vertical-align: middle;
-  font-size: 20px;
+
+#sidebar ul.menu-categories li.menu>.dropdown-toggle i {
+    color: #fff;
+    margin-right: 8px;
+    vertical-align: middle;
+    font-size: 20px;
 }
+
 li.menu.menu-active>a i {
-  color: #000 !important;
+    color: #000 !important;
 }
+
 #sidebar ul.menu-categories li.menu>.dropdown-toggle i.bi.bi-chevron-down {
-  font-size: 15px;
+    font-size: 15px;
 }
+
 .dataTable.table-striped.table>thead>tr>th:last-child {
-  min-width: 100px;
+    min-width: 100px;
 }
+
+table.table .switch.s-icons .slider {
+    width: 40px;
+    height: 20px;
+}
+
+table.table .switch.s-icons input:checked+.slider:before {
+    transform: translateX(19px);
+    bottom: 0px;
+}
+
+table.table .switch.s-icons .slider:before {
+    height: 17px;
+    width: 17px;
+}
+
+table.table .switch.s-outline[class*="s-outline-"] .slider:before {
+    bottom: 0px;
+    left: -1px;
+}
+
+
 /* Manish CSS End */
