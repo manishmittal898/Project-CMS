@@ -25,13 +25,59 @@
       <label>Product name</label>
       <input type="text" class="form-control" id="input1" placeholder="Enter Name">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-3">
       <label>Price</label>
       <input type="text" class="form-control" id="input1" placeholder="Enter Price">
     </div>
+    <div class="form-group col-md-3">
+      <label>Tag/Label/Discount</label>
+      <select class="form-control">
+        <option>New</option>
+        <option>Limited Stock</option>
+        <option>Bestseller</option>
+        <option>Lowest Price</option>
+        <option>10% Off</option>
+        <option>20% Off</option>
+        <option>30% Off</option>
+        <option>40% Off</option>
+        <option>50% Off</option>
+        <option>60% Off</option>
+        <option>70% Off</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Select Category</label>
+      <select class="form-control">
+        <option>Category 1</option>
+        <option>Category 2</option>
+        <option>Category 3</option>
+        <option>Category 4</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Select Sub Category</label>
+      <select class="form-control">
+        <option>Sub Category 1</option>
+        <option>Sub Category 2</option>
+        <option>Sub Category 3</option>
+        <option>Sub Category 4</option>
+      </select>
+    </div>
 
     <div class="form-group col-md-6">
-      <label>Upload images</label>
+      <label>First image</label>
+      <div class="dropzone dropzone-light upload-btn-wrapper w-100">
+        <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
+          Upload</button>
+        <input type="file" multiple="true" style="display: block;" />
+        <div class="dz-default dz-message m-1">
+          <span><i class="ti-cloud-up"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Other images</label>
       <div class="dropzone dropzone-light upload-btn-wrapper w-100">
         <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
           Upload</button>
