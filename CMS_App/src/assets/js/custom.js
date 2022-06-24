@@ -163,3 +163,7 @@ $(document).ready(function () {
     $("body").toggleClass("filter-overlay");
   });
 });
+
+// $(document).ready(function() {
+//   App.init();
+// });
