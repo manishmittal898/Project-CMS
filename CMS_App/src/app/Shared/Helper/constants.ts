@@ -39,7 +39,6 @@ export class API_Url {
   public static District_Delete_Api = `${environment.apiEndPoint}StateAndDistrict/DeleteDistrict/`;
   public static AreaByPincode_Api = `${environment.apiEndPoint}StateAndDistrict/AreaByPincode/`;
 
-
   //#endregion
 
   //#region <<Qualification>>
@@ -73,14 +72,9 @@ export class API_Url {
   public static DoorstepAgentDeleteApi = `${environment.apiEndPoint}DoorStepAgent/Delete/`;
   public static DoorstepAgentActiveStatusApi = `${environment.apiEndPoint}DoorStepAgent/UpdatActiveStatus/`;
   public static DoorstepAgentDetailApi = `${environment.apiEndPoint}DoorStepAgent/GetById/`;
-
   public static DoorstepAgentDeleteDocumentFileApi = `${environment.apiEndPoint}DoorStepAgent/DeleteDocumentFile/`;
 
-
-
   //#endregion
-
-
 
   //#region << Agent>>
   public static AgentListApi = `${environment.apiEndPoint}Agent/Get`;
@@ -105,21 +99,8 @@ export class API_Url {
 
   //#endregion
 
-  //#region  << Manager's  Above Agent >>
-  public static Manager_List_Api = `${environment.apiEndPoint}UserManager/ManagerList`;
-  public static Manager_AddUpdate_Api = `${environment.apiEndPoint}UserManager/AddUpdate`;
-  public static Manager_Delete_Api = `${environment.apiEndPoint}UserManager/DeleteManager/`;
-  public static Manager_ActiveStatus_Api = `${environment.apiEndPoint}UserManager/UpdateActiveStatus/`;
-  public static Manager_Detail_Api = `${environment.apiEndPoint}UserManager/GetById/`;
-  //#endregion
-  //#region  << Jewellery >>
-  public static Jewellery_List_Api = `${environment.apiEndPoint}JewellaryType/GetList`;
-  public static Jewellery_Dropdown_List_Api = `${environment.apiEndPoint}JewellaryType/JewellaryTypes`;
-  public static Jewellery_AddUpdate_Api = `${environment.apiEndPoint}JewellaryType/AddUpdate`;
-  public static Jewellery_Delete_Api = `${environment.apiEndPoint}JewellaryType/DeleteJewellaryType/`;
-  public static Jewellery_ActiveStatus_Api = `${environment.apiEndPoint}JewellaryType/ChangeActiveStatus/`;
-  public static Jewellery_Detail_Api = `${environment.apiEndPoint}JewellaryType/GetById/`;
-  //#endregion
+
+
   //#region  << Product Category >>
   public static Product_Category_List_Api = `${environment.apiEndPoint}ProductCategory/GetList`;
   public static Product_Category_Dropdown_List_Api = `${environment.apiEndPoint}ProductCategory/ProductCategories`;
@@ -138,41 +119,13 @@ export class API_Url {
   public static Product_Dropdown_By_Category_Api = `${environment.apiEndPoint}Product/ProductbyCategory/`;
   //#endregion
 
-  //#region  << Bank & Branch  >>
-  public static Bank_List_Api = `${environment.apiEndPoint}Bank/GetList`;
-  public static Bank_Dropdown_List_Api = `${environment.apiEndPoint}Bank/Banks`;
-  public static Bank_AddUpdate_Api = `${environment.apiEndPoint}Bank/AddUpdate`;
-  public static Bank_Delete_Api = `${environment.apiEndPoint}Bank/DeleteProduct/`;
-  public static Bank_ActiveStatus_Api = `${environment.apiEndPoint}Bank/UpdateActiveStatus/`;
-  public static Bank_Detail_Api = `${environment.apiEndPoint}Bank/GetById/`;
 
-  public static Branch_List_Api = `${environment.apiEndPoint}BankBranch/GetList`;
-  public static Branch_Dropdown_List_Api = `${environment.apiEndPoint}BankBranch/Branches`;
-  public static Branch_AddUpdate_Api = `${environment.apiEndPoint}BankBranch/AddUpdate`;
-  public static Branch_Delete_Api = `${environment.apiEndPoint}BankBranch/DeleteBranch/`;
-  public static Branch_ActiveStatus_Api = `${environment.apiEndPoint}BankBranch/UpdateActiveStatus/`;
-  public static Branch_Detail_Api = `${environment.apiEndPoint}BankBranch/GetById/`;
-  public static Branches_by_PinCode_Api = `${environment.apiEndPoint}BankBranch/BranchesbyPinCode/`;
-
-
-
-
-  //#endregion
 
   //#region <<Customer Registration>>
   public static Customer_Registration_Api = `${environment.apiEndPoint}Customer/RegisterCustomer/`;
   // #endregion
 
 
-  //#region  <<Gold Loan Fresh Lead >>
-  public static Gold_Loan_Fresh_Lead_List_Api = `${environment.apiEndPoint}GoldLoanFreshLead/ListGoldLoanFreshLeadAsync`;
-  public static Gold_Loan_Fresh_Lead__AddUpdate_Api = `${environment.apiEndPoint}GoldLoanFreshLead/AddUpdateGoldLoanFreshLead`;
-  public static Gold_Loan_Fresh_Lead__Detail_Api = `${environment.apiEndPoint}GoldLoanFreshLead/Detail/`;
-  public static Gold_Loan_Fresh_Lead__Delete_Api = `${environment.apiEndPoint}GoldLoanFreshLead/DeleteProduct/`;
-  public static Gold_Loan_Fresh_Lead__ActiveStatus_Api = `${environment.apiEndPoint}GoldLoanFreshLead/UpdateActiveStatus/`;
-
-
-  //#endregion
 }
 
 export class Routing_Url {
