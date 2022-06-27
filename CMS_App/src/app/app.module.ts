@@ -17,7 +17,6 @@ import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     AppComponent,
-
     LoginComponent,
   ],
   imports: [
@@ -27,8 +26,6 @@ import { RouterModule } from "@angular/router";
     AppRoutingModule,
     SharedModule,
     MainModule,
-
-
   ],
   providers: [BaseAPIService,
 

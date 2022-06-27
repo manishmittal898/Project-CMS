@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LookupMasterController : ControllerBase
     {
@@ -21,22 +21,22 @@ namespace CMS.API.Areas.Admin.Controllers
             _lookupmstr = lookupmstr;
         }
         // GET: api/<LookupMaster>
-        [HttpGet]
-        public object Get()
+        [HttpPost]
+        public async Task<object> GetAsync(IndexModel model)
         {
-            return _lookupmstr.GetList();
+            return await _lookupmstr.GetList(model);
         }
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(int id)
+        public object Get(long id)
         {
             return _lookupmstr.GetById(id);
         }
 
         // POST api/<LookupMaster>
         [HttpPost]
-        public async Task<object> Post([FromBody] LookupMasterViewModel model)
+        public async Task<object> Save(LookupMasterPostModel model)
         {
             if (ModelState.IsValid)
             {
@@ -53,28 +53,10 @@ namespace CMS.API.Areas.Admin.Controllers
                 return objReturn;
             }
         }
-
-        // PUT api/<LookupMaster>/5
-        [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] LookupMasterViewModel model)
+        [HttpGet("{id}")]
+        public async Task<object> ChangeActiveStatus(long id)
         {
-            if (ModelState.IsValid)
-            {
-
-
-                return await _lookupmstr.Edit(id, model);
-
-            }
-            else
-            {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
-
-                return objReturn;
-            }
-
+            return await _lookupmstr.ActiveStatusUpdate(id);
         }
 
         // DELETE api/<LookupMaster>/5

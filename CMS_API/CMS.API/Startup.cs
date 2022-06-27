@@ -2,6 +2,7 @@
 using CMS.Core.FixedValue;
 using CMS.Data.Models;
 using CMS.Service.Services.Account;
+using CMS.Service.Services.Common;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
 using CMS.Service.Services.ProductMaster;
@@ -22,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace CMS.API
@@ -130,6 +132,7 @@ namespace CMS.API
             services.AddTransient<ISubLookupMasterService, SubLookupMasterService>();
             services.AddTransient<IUserMasterService, UserMasterService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ICommonService, CommonService>();
 
 
         }

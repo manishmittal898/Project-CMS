@@ -6,7 +6,7 @@
     [SubCategoryId]       BIGINT NOT NULL,
     [Desc]       NTEXT NULL,
     [Price]      DECIMAL (18)   NULL,
-    [Caption]    NVARCHAR (4000) NULL,
+    [CaptionTagId]    BIGINT NULL,
     [Summary]    NTEXT NULL,
     [CreatedBy]  BIGINT NOT NULL,
     [CreatedOn]  DATETIME       NOT NULL DEFAULT getdate(),
@@ -17,6 +17,7 @@
     CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_tblProductMaster_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [tblLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_SubCategoryId] FOREIGN KEY ([SubCategoryId]) REFERENCES [tblSubLookupMaster]([Id]),
+    CONSTRAINT [FK_tblProductMaster_CaptionTagId] FOREIGN KEY ([CaptionTagId]) REFERENCES [tblLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [FK_tblProductMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId])
 

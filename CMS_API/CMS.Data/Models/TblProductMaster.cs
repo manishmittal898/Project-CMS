@@ -19,7 +19,7 @@ namespace CMS.Data.Models
         public long SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
-        public string Caption { get; set; }
+        public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -28,6 +28,7 @@ namespace CMS.Data.Models
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
 
+        public virtual TblLookupMaster CaptionTag { get; set; }
         public virtual TblLookupMaster Category { get; set; }
         public virtual TblUserMaster CreatedByNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }

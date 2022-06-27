@@ -105,6 +105,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="DataScript" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tblLookupTypeMaster.sql">
@@ -142,5 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CMS.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="DataScript\MainData.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="CMS.Database.refactorlog" />
   </ItemGroup>
 </Project>

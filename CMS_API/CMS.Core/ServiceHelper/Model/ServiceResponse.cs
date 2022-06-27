@@ -15,6 +15,8 @@ namespace CMS.Core.ServiceHelper.Model
         public string Message { get; set; }
         public T Data { get; set; }
         public string Exception { get; set; }
+
+        public long? TotalRecord { get; set; }
     }
 
     public static class ResponseMessage
@@ -29,5 +31,14 @@ namespace CMS.Core.ServiceHelper.Model
         public const string Fail = "Faild";
         public const string RecordAlreadyExist = "Record already exist, Please try with other !";
         public const string FileUpdated = "File sucessfully updated...!";
+    }
+
+    public class FilterDropDownPostModel
+    {
+        public string Key { get; set; }
+        public string FileterFromKey { get; set; }
+        public int[] Values { get; set; }
+
+
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LookupTypeMasterController : ControllerBase
     {
@@ -21,10 +21,10 @@ namespace CMS.API.Areas.Admin.Controllers
             _lookuptypemstr = lookuptypemstr;
         }
         // GET: api/<LookupTypeMasterController>
-        [HttpGet]
-        public object Get()
+        [HttpPost]
+        public async Task<object> Get(IndexModel model)
         {
-            return _lookuptypemstr.GetList();
+            return await _lookuptypemstr.GetListAsync(model);
         }
 
         // GET api/<LookupTypeMasterController>/5

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductMasterController : ControllerBase
     {
@@ -23,11 +23,12 @@ namespace CMS.API.Areas.Admin.Controllers
             _productmstr = productmstr;
         }
         // GET: api/<ProductMasterController>
-        [HttpGet]
-        public object Get()
+        // GET: api/<LookupMaster>
+        [HttpPost]
+        public async Task<object> GetList(IndexModel model)
         {
-            return _productmstr.GetList();
-        }
+            return await _productmstr.GetList(model);
+        } 
 
         // GET api/<ProductMasterController>/5
         [HttpGet("{id}")]
@@ -38,7 +39,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // POST api/<ProductMasterController>
         [HttpPost]
-        public async Task<object> Post([FromBody] ProductMasterViewModel model)
+        public async Task<object> Post( ProductMasterPostModel model)
         {
             if (ModelState.IsValid)
             {
@@ -57,46 +58,17 @@ namespace CMS.API.Areas.Admin.Controllers
             //return _roleTyp
         }
 
-        // PUT api/<ProductMasterController>/5
-        [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] ProductMasterViewModel model)
+        [HttpGet("{id}")]
+        public async Task<object> ChangeActiveStatus(long id)
         {
-
-
-            if (ModelState.IsValid)
-            {
-
-
-                return await _productmstr.Edit(id, model);
-
-            }
-            else
-            {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
-
-                return objReturn;
-            }
-
-
-
-
-
-
-
+            return await _productmstr.ActiveStatusUpdate(id);
         }
 
         // DELETE api/<ProductMasterController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
-        {
-
-            _productmstr.Delete(id);
-
-
-
+        { 
+            _productmstr.Delete(id); 
         }
     }
 }

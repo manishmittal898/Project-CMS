@@ -10,11 +10,12 @@ namespace CMS.Service.Services.ProductMaster
 {
     public interface IProductMasterService
     {
-        ServiceResponse<IEnumerable<Data.Models.TblProductMaster>> GetList();
+        Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model);
 
         ServiceResponse<TblProductMaster> GetById(int id);
-        Task<ServiceResponse<TblProductMaster>> Save(ProductMasterViewModel model);
-        Task<ServiceResponse<TblProductMaster>> Edit(int id, ProductMasterViewModel model);
+        Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model);
         Task<ServiceResponse<TblProductMaster>> Delete(int id);
+        Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(long id);
     }
 }
+

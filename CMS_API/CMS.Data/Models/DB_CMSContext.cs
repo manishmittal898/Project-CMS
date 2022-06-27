@@ -87,6 +87,11 @@ namespace CMS.Data.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.EnumValue)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -146,8 +151,6 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblProductMaster");
 
-                entity.Property(e => e.Caption).HasMaxLength(4000);
-
                 entity.Property(e => e.CreatedOn)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -172,8 +175,13 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Summary).HasColumnType("ntext");
 
+                entity.HasOne(d => d.CaptionTag)
+                    .WithMany(p => p.TblProductMasterCaptionTags)
+                    .HasForeignKey(d => d.CaptionTagId)
+                    .HasConstraintName("FK_tblProductMaster_CaptionTagId");
+
                 entity.HasOne(d => d.Category)
-                    .WithMany(p => p.TblProductMasters)
+                    .WithMany(p => p.TblProductMasterCategories)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_CategoryId");
@@ -234,7 +242,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1A271060DC");
+                    .HasName("PK__tblRoleT__8AFACE1AC03C9F18");
 
                 entity.ToTable("tblRoleType");
 
@@ -305,7 +313,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C81198E9F");
+                    .HasName("PK__tblUserM__1788CC4C91BF192C");
 
                 entity.ToTable("tblUserMaster");
 
@@ -343,7 +351,7 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__619B8048");
+                    .HasConstraintName("FK__tblUserMa__RoleI__628FA481");
             });
 
             OnModelCreatingPartial(modelBuilder);
