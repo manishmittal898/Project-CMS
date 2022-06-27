@@ -25,10 +25,17 @@ namespace CMS.Service.Services.LookupMaster
             ServiceResponse<IEnumerable<LookupMasterViewModel>> objResult = new ServiceResponse<IEnumerable<LookupMasterViewModel>>();
             try
             {
-                model.AdvanceSearchModel.TryGetValue("typeId", out object TypeId);
+                long TypeId=0;
+                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("typeId"))
+                {
+                    model.AdvanceSearchModel.TryGetValue("typeId", out object typeId);
+                    TypeId = Convert.ToInt64(typeId.ToString());
+
+                }
+
 
                 var result = (from lkType in _db.TblLookupMasters
-                              where lkType.LookUpType.Value.Equals(Convert.ToInt64(TypeId.ToString())) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                              where lkType.LookUpType.Value.Equals(TypeId) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
                               select lkType);
                 switch (model.OrderBy)
                 {
@@ -102,7 +109,7 @@ namespace CMS.Service.Services.LookupMaster
                     IsActive = X.IsActive,
                     IsDelete = X.IsDelete,
 
-                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value && x.IsDelete==false);
+                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value && x.IsDelete == false);
 
                 if (detail != null)
                 {
@@ -180,7 +187,7 @@ namespace CMS.Service.Services.LookupMaster
                 objRole.IsDelete = true;
                 var roletype = _db.TblLookupMasters.Update(objRole);
                 await _db.SaveChangesAsync();
-                return CreateResponse(objRole, ResponseMessage.Update, true,(int) ApiStatusCode.Ok);
+                return CreateResponse(objRole, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {

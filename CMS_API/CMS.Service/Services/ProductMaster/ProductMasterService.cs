@@ -29,7 +29,7 @@ namespace CMS.Service.Services.ProductMaster
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
             {
-                model.AdvanceSearchModel.TryGetValue("typeId", out object TypeId);
+            
 
                 var result = (from lkType in _db.TblProductMasters
                               where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
