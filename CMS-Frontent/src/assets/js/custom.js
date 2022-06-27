@@ -1,13 +1,23 @@
-// Tooltip start
-// $(function() {
-//     $('[data-toggle="tooltip"]').tooltip()
+// Tooltip Start
+
+//  $(function() {
+//      $('[data-toggle="tooltip"]').tooltip()
+//  })
+//  $(document).ready(function() {
+//      $('[data-toggle="popover"]').popover({
+//          trigger: 'hover'
+//      });
+//   });
+
+
+// Initialize tooltips
+// var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+// var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+//     return new bootstrap.Tooltip(tooltipTriggerEl)
 // })
-// $(document).ready(function() {
-//     $('[data-toggle="popover"]').popover({
-//         trigger: 'hover'
-//     });
-// });
-// Tooltip end
+
+// Tooltip End
+
 
 
 // Back to top start
@@ -42,12 +52,12 @@ AOS.init();
 
 
 
-$(function() {
-    $("#ChangeToggle").click(function() {
-        $("#navbar-hamburger").toggleClass("hidden");
-        $("#navbar-close").toggleClass("hidden");
-    });
-});
+// $(function() {
+//     $("#ChangeToggle").click(function() {
+//         $("#navbar-hamburger").toggleClass("hidden");
+//         $("#navbar-close").toggleClass("hidden");
+//     });
+// });
 
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
