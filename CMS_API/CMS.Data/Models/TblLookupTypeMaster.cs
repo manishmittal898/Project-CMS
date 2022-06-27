@@ -14,6 +14,7 @@ namespace CMS.Data.Models
 
         public long Id { get; set; }
         public string Name { get; set; }
+        public string EnumValue { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }

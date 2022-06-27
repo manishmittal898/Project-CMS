@@ -15,7 +15,7 @@ namespace CMS.Core.ServiceHelper.Method
             SetLoginUserDetail();
         }
 
-        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode= (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "") where T : class
+        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode= (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "", long? TotalRecord = null) where T : class
         {
             ServiceResponse<T> objReturn = new ServiceResponse<T>();
             objReturn.Message = Message;
@@ -23,6 +23,7 @@ namespace CMS.Core.ServiceHelper.Method
             objReturn.Data = objData;
             objReturn.Exception = exception;
             objReturn.StatusCode = statusCode;
+            objReturn.TotalRecord = TotalRecord > 0 ? TotalRecord : null;
             return objReturn;
         }
 

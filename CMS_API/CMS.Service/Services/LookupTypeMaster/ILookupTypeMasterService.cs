@@ -10,7 +10,7 @@ namespace CMS.Service.Services.LookupTypeMaster
 {
    public interface ILookupTypeMasterService
     {
-        ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>> GetList();
+        Task<ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>>> GetListAsync(IndexModel model);
         ServiceResponse<TblLookupTypeMaster> GetById(int id);
         Task<ServiceResponse<TblLookupTypeMaster>> Save(LookupTypeMasterViewModel model);
         Task<ServiceResponse<TblLookupTypeMaster>> Edit(int id, LookupTypeMasterViewModel model);

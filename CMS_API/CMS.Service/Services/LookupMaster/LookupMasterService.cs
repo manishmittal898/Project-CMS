@@ -1,11 +1,12 @@
 ﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.LookupMaster
@@ -19,15 +20,60 @@ namespace CMS.Service.Services.LookupMaster
         }
 
 
-        public ServiceResponse<IEnumerable<Data.Models.TblLookupMaster>> GetList()
+        public async Task<ServiceResponse<IEnumerable<LookupMasterViewModel>>> GetList(IndexModel model)
         {
-            ServiceResponse<IEnumerable<Data.Models.TblLookupMaster>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblLookupMaster>>();
+            ServiceResponse<IEnumerable<LookupMasterViewModel>> objResult = new ServiceResponse<IEnumerable<LookupMasterViewModel>>();
             try
             {
-                var objData = _db.TblLookupMasters.ToList();
-                objResult = CreateResponse(objData as IEnumerable<Data.Models.TblLookupMaster>, "Success", true);
+                model.AdvanceSearchModel.TryGetValue("typeId", out object TypeId);
+
+                var result = (from lkType in _db.TblLookupMasters
+                              where lkType.LookUpType.Value.Equals(Convert.ToInt64(TypeId.ToString())) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                              select lkType);
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
+                        break;
+                }
+
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+
+                objResult.Data = await (from x in result
+                                        select new LookupMasterViewModel
+                                        {
+                                            Id = x.Id,
+                                            Name = x.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            SortedOrder = x.SortedOrder.Value,
+                                            LookUpType = x.LookUpType.Value,
+                                            LookUpTypeName = "",
+                                            CreatedBy = x.CreatedBy,
+                                            CreatedOn = x.CreatedOn,
+                                            ModifiedBy = x.ModifiedBy,
+                                            ModifiedOn = x.ModifiedOn,
+                                            IsActive = x.IsActive.Value,
+                                            IsDelete = x.IsDelete
+
+                                        }).ToListAsync();
+
+                if (result != null)
+                {
+
+                    return CreateResponse(objResult.Data as IEnumerable<LookupMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                }
+                else
+                {
+                    return CreateResponse<IEnumerable<LookupMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 objResult.Data = null;
@@ -36,90 +82,125 @@ namespace CMS.Service.Services.LookupMaster
             }
             return objResult;
         }
-        public ServiceResponse<TblLookupMaster> GetById(int id)
+        public ServiceResponse<LookupMasterViewModel> GetById(long id)
         {
-            ServiceResponse<TblLookupMaster> ObjResponse = new ServiceResponse<TblLookupMaster>();
+            ServiceResponse<LookupMasterViewModel> ObjResponse = new ServiceResponse<LookupMasterViewModel>();
             try
             {
+                var detail = _db.TblLookupMasters.Select(X => new LookupMasterViewModel
+                {
+                    Id = X.Id,
+                    Name = X.Name,
+                    ImagePath = !string.IsNullOrEmpty(X.ImagePath) ? X.ImagePath.ToAbsolutePath() : null,
+                    SortedOrder = X.SortedOrder,
+                    LookUpType = X.LookUpType,
+                    LookUpTypeName = X.LookUpTypeNavigation.Name,
+                    CreatedBy = X.CreatedBy,
+                    CreatedOn = X.CreatedOn,
+                    ModifiedBy = X.ModifiedBy,
+                    ModifiedOn = X.ModifiedOn,
+                    IsActive = X.IsActive,
+                    IsDelete = X.IsDelete,
 
-                var detail = _db.TblLookupMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
-                ObjResponse = CreateResponse(detail, "Success", true);
+                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value && x.IsDelete==false);
+
+                if (detail != null)
+                {
+                    ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+
+                }
+                else
+                {
+                    ObjResponse = CreateResponse<LookupMasterViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
+
+                }
+
             }
             catch (Exception ex)
             {
-
-                ObjResponse = CreateResponse<TblLookupMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
+                ObjResponse = CreateResponse<LookupMasterViewModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
             }
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<TblLookupMaster>> Save(LookupMasterViewModel model)
+        public async Task<ServiceResponse<TblLookupMaster>> Save(LookupMasterPostModel model)
         {
             try
             {
-                TblLookupMaster objRole = new TblLookupMaster();
-                // objRole.RoleId = model.RoleId;
-                objRole.Name = model.Name;
-                objRole.SortedOrder = model.SortedOrder;
-                objRole.LookUpType = model.LookUpType;
 
-                objRole.IsActive = true;
-                objRole.CreatedBy = model.CreatedBy;
-                var roletype = await _db.TblLookupMasters.AddAsync(objRole);
-                _db.SaveChanges();
-                return CreateResponse(objRole, "Added", true);
+                if (model.Id > 0)
+                {
+
+                    TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == model.Id);
+
+                    objData.Name = model.Name;
+                    objData.SortedOrder = model.SortedOrder;
+                    objData.LookUpType = model.LookUpType;
+
+                    objData.ModifiedBy = model.ModifiedBy;
+                    var roletype = _db.TblLookupMasters.Update(objData);
+                    _db.SaveChanges();
+                    return CreateResponse<TblLookupMaster>(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+
+                }
+                else
+                {
+
+                    TblLookupMaster objData = new TblLookupMaster();
+
+                    objData.Name = model.Name;
+                    objData.SortedOrder = model.SortedOrder;
+                    objData.LookUpType = model.LookUpType;
+
+                    objData.IsActive = true;
+                    objData.CreatedBy = model.CreatedBy;
+                    var roletype = await _db.TblLookupMasters.AddAsync(objData);
+                    _db.SaveChanges();
+                    return CreateResponse<TblLookupMaster>(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+
+                }
 
 
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
 
-        public async Task<ServiceResponse<TblLookupMaster>> Edit(int id, LookupMasterViewModel model)
+
+        public async Task<ServiceResponse<TblLookupMaster>> Delete(long id)
         {
             try
             {
                 TblLookupMaster objRole = new TblLookupMaster();
-
                 objRole = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
-
-                objRole.Name = model.Name;
-                objRole.SortedOrder = model.SortedOrder;
-                objRole.LookUpType = model.LookUpType;
-
-                objRole.ModifiedBy = model.ModifiedBy;
+                objRole.IsDelete = true;
                 var roletype = _db.TblLookupMasters.Update(objRole);
-                _db.SaveChanges();
-
-
-                return CreateResponse(objRole, "Updated", true);
-
+                await _db.SaveChangesAsync();
+                return CreateResponse(objRole, ResponseMessage.Update, true,(int) ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
+                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError));
             }
+
 
         }
 
-
-        public async Task<ServiceResponse<TblLookupMaster>> Delete(int id)
+        public async Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(long id)
         {
             try
             {
                 TblLookupMaster objRole = new TblLookupMaster();
                 objRole = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
 
-                var roletype = _db.TblLookupMasters.Remove(objRole);
-                _db.SaveChangesAsync();
-                return CreateResponse(objRole, "Deleted", true);
+                objRole.IsActive = !objRole.IsActive;
+                await _db.SaveChangesAsync();
+                return CreateResponse(objRole as TblLookupMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)
             {
@@ -127,9 +208,6 @@ namespace CMS.Service.Services.LookupMaster
                 return null;
 
             }
-
-
         }
-
     }
 }

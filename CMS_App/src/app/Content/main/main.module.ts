@@ -18,9 +18,9 @@ import { MasterModule } from './master/master.module';
   imports: [
     CommonModule,
     MainRoutingModule,
-    SharedModule,
     ProductModule,
-    MasterModule
+    MasterModule,
+    SharedModule
   ],
   bootstrap: [MainComponent]
 })

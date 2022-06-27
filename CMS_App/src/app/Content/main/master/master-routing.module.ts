@@ -16,8 +16,10 @@ const routes: Routes = [
   { path: 'lookup-type/add', component: LookupTypeAddEditComponent },
   { path: 'lookup-type/edit/:id', component: LookupTypeAddEditComponent },
 
-  // {path:'Lookups',component: LookupsComponent},
-  // {path:'LookupsAddEdit',component: LookupsAddEditComponent},
+   {path:'lookup/:name/:typeId',component: LookupsComponent},
+   {path:'lookup/add',component: LookupsAddEditComponent},
+   {path:'lookup/:name/update/:id',component: LookupsAddEditComponent},
+   
   // {path:'SubLookupType',component: SubLookupTypeComponent},
   // {path:'SubLookupTypeAddEdit',component: SubLookupTypeAddEditComponent},
   // {path:'SubLookup',component: SubLookupComponent},

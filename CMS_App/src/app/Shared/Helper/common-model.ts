@@ -95,11 +95,9 @@ export class DropDownModel {
   ddlUserRole!: DropDownItem[];
   ddlState!: DropDownItem[];
   ddlDistrict!: DropDownItem[];
-  ddlQualification!: DropDownItem[];
-  ddlDocumentType!: DropDownItem[];
-  ddlRelationship!: DropDownItem[];
   ddlGender!: DropDownItem[];
   ddlPaymentMode!: DropDownItem[];
+  ddlLookupTypeMaster!: DropDownItem[];
 }
 
 export class DropDownItem {

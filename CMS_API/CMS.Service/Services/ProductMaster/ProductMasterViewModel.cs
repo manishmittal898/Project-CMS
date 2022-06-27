@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.ProductMaster
 {
-    public class ProductMasterViewModel
+    public class ProductMasterPostModel
     {
         public long Id { get; set; }
         [Required]
@@ -20,10 +20,36 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? Price { get; set; }
         public long CategoryId { get; set; }
         public long SubCategoryId { get; set; }
-        public string Caption { get; set; }
+        public long CaptionTagId { get; set; }
         public string Summary { get; set; }
         public long CreatedBy { get; set; }
 
         public long ModifiedBy { get; set; }
+    }
+
+    public class ProductMasterViewModel
+    {
+
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
+        public long CategoryId { get; set; }
+        public long SubCategoryId { get; set; }
+        public string Desc { get; set; }
+        public decimal? Price { get; set; }
+        public long? CaptionTagId { get; set; }
+        public string Summary { get; set; }
+        public long CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public long ModifiedBy { get; set; }
+        public DateTime ModifiedOn { get; set; }
+        public bool? IsActive { get; set; }
+        public bool IsDelete { get; set; }
+
+        public string CaptionTag { get; set; }
+        public string Category { get; set; }
+ 
+        public string SubCategory { get; set; }
+
     }
 }
