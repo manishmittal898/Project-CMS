@@ -3,6 +3,8 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using CMS.Service.Utility;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,11 @@ namespace CMS.Service.Services.LookupMaster
     public class LookupMasterService : BaseService, ILookupMasterService
     {
         DB_CMSContext _db;
-        public LookupMasterService(DB_CMSContext db)
+        private readonly FileHelper _fileHelper;
+        public LookupMasterService(DB_CMSContext db, IHostingEnvironment environment)
         {
             _db = db;
+            _fileHelper = new FileHelper(environment);
         }
 
 
@@ -25,7 +29,7 @@ namespace CMS.Service.Services.LookupMaster
             ServiceResponse<IEnumerable<LookupMasterViewModel>> objResult = new ServiceResponse<IEnumerable<LookupMasterViewModel>>();
             try
             {
-                long TypeId=0;
+                long TypeId = 0;
                 if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("typeId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("typeId", out object typeId);
@@ -143,6 +147,7 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.ModifiedBy = model.ModifiedBy;
                     var roletype = _db.TblLookupMasters.Update(objData);
@@ -158,7 +163,7 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
                     objData.IsActive = true;
                     objData.CreatedBy = model.CreatedBy;
                     var roletype = await _db.TblLookupMasters.AddAsync(objData);

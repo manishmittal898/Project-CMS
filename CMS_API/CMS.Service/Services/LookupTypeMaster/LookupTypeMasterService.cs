@@ -129,7 +129,7 @@ namespace CMS.Service.Services.LookupTypeMaster
 
         }
 
-        public async Task<ServiceResponse<TblLookupTypeMaster>> Delete(int id)
+        public async Task<ServiceResponse<TblLookupTypeMaster>> Delete(long id)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace CMS.Service.Services.LookupTypeMaster
                 objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == id);
 
                 var roletype = _db.TblLookupTypeMasters.Remove(objRole);
-                _db.SaveChangesAsync();
+              await  _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch (Exception ex)

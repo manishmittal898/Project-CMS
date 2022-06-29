@@ -4408,5 +4408,14 @@ table.table .switch.s-outline[class*="s-outline-"] .slider:before {
     left: -1px;
 }
 
+element.style {
+  transform: none;
+  /* padding: 0px; */
+}
+.mat-custom-modal .mat-dialog-container {
+  padding: 0px !important;
+  overflow: hidden !important;
+  border-radius: 24px !important;
+}
 
 /* Manish CSS End */

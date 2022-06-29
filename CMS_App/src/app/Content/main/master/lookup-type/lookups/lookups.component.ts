@@ -1,5 +1,6 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,8 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { IndexModel } from 'src/app/Shared/Helper/common-model';
 import { Message } from 'src/app/Shared/Helper/constants';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { LookupTypeMasterModel } from '../../../../../Shared/Services/Master/lookup-type.service';
 import { LookupMasterModel, LookupService } from '../../../../../Shared/Services/Master/lookup.service';
+import { LookupsAddEditComponent } from './lookups-add-edit/lookups-add-edit.component';
 
 @Component({
   selector: 'app-lookups',
@@ -23,14 +24,17 @@ export class LookupsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   id!: number;
-  displayedColumns: string[] = ['index', 'Name','ImagePath','SortedOrder','IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
-    { Value: 'SortedOrder', Text: 'Sorted Order' }];
+  { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
 
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _lookupService: LookupService) {
+    private readonly toast: ToastrService, private _lookupService: LookupService,
+    public dialog: MatDialog
+
+    ) {
     _activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.typeId;
       this.pageName = this._activatedRoute.snapshot.params.name;
@@ -44,7 +48,7 @@ export class LookupsComponent implements OnInit {
   }
 
   getList(): void {
-    this.indexModel.AdvanceSearchModel={};
+    this.indexModel.AdvanceSearchModel = {};
     this.indexModel.AdvanceSearchModel["typeId"] = this.id;
     this._lookupService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
@@ -126,4 +130,12 @@ export class LookupsComponent implements OnInit {
     });
   }
 
+  onAddUpdateLookup(Id: number) {
+    const dialogRef = this.dialog.open(LookupsAddEditComponent, {
+      data: { Id: Id as number, Type: this.id, Heading:`${Id>0 ?'Update ':'Add '} ${this.pageName}` },
+      width: '500px',
+      panelClass:'mat-custom-modal'
+    });
+    dialogRef.afterClosed().subscribe(res=>{});
+  }
 }

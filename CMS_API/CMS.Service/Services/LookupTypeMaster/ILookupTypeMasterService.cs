@@ -14,6 +14,6 @@ namespace CMS.Service.Services.LookupTypeMaster
         ServiceResponse<TblLookupTypeMaster> GetById(int id);
         Task<ServiceResponse<TblLookupTypeMaster>> Save(LookupTypeMasterViewModel model);
         Task<ServiceResponse<TblLookupTypeMaster>> Edit(int id, LookupTypeMasterViewModel model);
-        Task<ServiceResponse<TblLookupTypeMaster>> Delete(int id);
+        Task<ServiceResponse<TblLookupTypeMaster>> Delete(long id);
     }
 }
