@@ -64,7 +64,8 @@ namespace CMS.Service.Services.LookupMaster
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
                                             SortedOrder = x.SortedOrder.Value,
                                             LookUpType = x.LookUpType.Value,
-                                            LookUpTypeName = "",
+                                            LookUpTypeName = x.LookUpTypeNavigation.Name,
+                                            IsSubLookup = x.LookUpTypeNavigation.IsSubLookup,
                                             CreatedBy = x.CreatedBy,
                                             CreatedOn = x.CreatedOn,
                                             ModifiedBy = x.ModifiedBy,
@@ -106,6 +107,8 @@ namespace CMS.Service.Services.LookupMaster
                     SortedOrder = X.SortedOrder,
                     LookUpType = X.LookUpType,
                     LookUpTypeName = X.LookUpTypeNavigation.Name,
+                    IsSubLookup = X.LookUpTypeNavigation.IsSubLookup,
+
                     CreatedBy = X.CreatedBy,
                     CreatedOn = X.CreatedOn,
                     ModifiedBy = X.ModifiedBy,
@@ -147,9 +150,18 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    if (!string.IsNullOrEmpty(model.ImagePath))
+                    {
 
-                    objData.ModifiedBy = model.ModifiedBy;
+                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    }
+                    else
+                    {
+                        objData.ImagePath = null;
+                    }
+
+
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblLookupMasters.Update(objData);
                     _db.SaveChanges();
                     return CreateResponse<TblLookupMaster>(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
@@ -163,9 +175,11 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : model.ImagePath.Contains(objData.ImagePath) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+
                     objData.IsActive = true;
-                    objData.CreatedBy = model.CreatedBy;
+                    objData.CreatedBy = _loginUserDetail.UserId.Value;
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = await _db.TblLookupMasters.AddAsync(objData);
                     _db.SaveChanges();
                     return CreateResponse<TblLookupMaster>(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
@@ -188,11 +202,13 @@ namespace CMS.Service.Services.LookupMaster
             try
             {
                 TblLookupMaster objRole = new TblLookupMaster();
-                objRole = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                objRole =  _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
                 objRole.IsDelete = true;
-                var roletype = _db.TblLookupMasters.Update(objRole);
-                await _db.SaveChangesAsync();
-                return CreateResponse(objRole, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                objRole.ModifiedBy = _loginUserDetail.UserId.Value;
+                objRole.ModifiedOn = DateTime.Now;
+                 _db.TblLookupMasters.Update(objRole);
+                 _db.SaveChanges();
+                return CreateResponse(objRole, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {

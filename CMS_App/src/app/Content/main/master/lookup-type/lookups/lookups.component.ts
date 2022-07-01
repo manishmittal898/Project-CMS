@@ -34,7 +34,7 @@ export class LookupsComponent implements OnInit {
     private readonly toast: ToastrService, private _lookupService: LookupService,
     public dialog: MatDialog
 
-    ) {
+  ) {
     _activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.typeId;
       this.pageName = this._activatedRoute.snapshot.params.name;
@@ -132,10 +132,14 @@ export class LookupsComponent implements OnInit {
 
   onAddUpdateLookup(Id: number) {
     const dialogRef = this.dialog.open(LookupsAddEditComponent, {
-      data: { Id: Id as number, Type: this.id, Heading:`${Id>0 ?'Update ':'Add '} ${this.pageName}` },
+      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
       width: '500px',
-      panelClass:'mat-custom-modal'
+      panelClass: 'mat-custom-modal'
     });
-    dialogRef.afterClosed().subscribe(res=>{});
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.getList();
+      }
+    });
   }
 }

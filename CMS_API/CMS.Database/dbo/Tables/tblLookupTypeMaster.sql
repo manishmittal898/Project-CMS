@@ -2,6 +2,7 @@
     [Id]         BIGINT            IDENTITY (1, 1) NOT NULL,
     [Name]       NVARCHAR (250) NULL,
     [EnumValue]  VARCHAR(20) NOT NULL,
+    [IsSubLookup] BIT NOT NULL DEFAULT 0, 
     [CreatedBy]  BIGINT NOT NULL,
     [CreatedOn]  DATETIME       NOT NULL DEFAULT getdate(),
     [ModifiedBy] BIGINT NOT NULL,

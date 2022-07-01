@@ -1,5 +1,6 @@
 
 using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Method;
 using CMS.Data.Models;
 using CMS.Service.Services.Account;
 using CMS.Service.Services.Common;
@@ -124,6 +125,7 @@ namespace CMS.API
             services.AddDbContext<DB_CMSContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING)));
              services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddSingleton<BaseService>();
             services.AddTransient<IRoleTypeService, RoleTypeService>();
             services.AddTransient<ILookupMasterService, LookupMasterService>();
             services.AddTransient<ILookupTypeMasterService, LookupTypeMasterService>();
@@ -141,6 +143,16 @@ namespace CMS.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS (v1)");
+                    c.RoutePrefix = "swagger";
+                });
+            }
+            else
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();

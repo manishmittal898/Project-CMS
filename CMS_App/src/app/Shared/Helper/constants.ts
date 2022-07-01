@@ -34,7 +34,7 @@ export class API_Url {
   //#region <<LookupMaster>>
   public static LookupMasterList_Api = `${environment.apiEndPoint}LookupMaster/get`;
   public static LookupMasterDetail_Api = `${environment.apiEndPoint}LookupMaster/get/`;
-  public static LookupMasterAddUpdate_Api = `${environment.apiEndPoint}LookupMaster/post`;
+  public static LookupMasterAddUpdate_Api = `${environment.apiEndPoint}LookupMaster/Save`;
   public static LookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}LookupMaster/ChangeActiveStatus/`;
   public static LookupMasterDelete_Api = `${environment.apiEndPoint}LookupMaster/delete/`;
   //#endregion

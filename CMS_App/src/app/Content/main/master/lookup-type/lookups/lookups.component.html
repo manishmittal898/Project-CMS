@@ -13,7 +13,8 @@
       </nav>
       <!-- Breadcrumb End -->
     </div>
-    <button (click)="onAddUpdateLookup(0)" class="btn btn-dark btn-sm mt-2 mt-sm-0"> <i class="bi bi-plus-lg"></i> Add </button>
+    <button (click)="onAddUpdateLookup(0)" class="btn btn-dark btn-sm mt-2 mt-sm-0"> <i class="bi bi-plus-lg"></i> Add
+    </button>
 
   </div>
 </div>
@@ -165,9 +166,15 @@
         <ng-container matColumnDef="Action">
           <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let row" class="table-action-btn">
-            <a class="table-action-btn-edit" (click)="onAddUpdateLookup(row.Id)"  title="Edit"> <i class="fas fa-edit"></i>
+
+            <a class="table-action-btn-edit" *ngIf="row.IsSubLookup" title="View Sub list">
+              <i class="fas fa-list"></i>
             </a>
-           
+
+            <a class="table-action-btn-edit" (click)="onAddUpdateLookup(row.Id)" title="Edit"> <i
+                class="fas fa-edit"></i>
+            </a>
+
             <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" title="Delete"> <i
                 class="fas fa-trash-alt"></i> </a>
           </td>
