@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  id!: number;
+
   displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'Category', 'SubCategory', 'CaptionTag', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'Category', Text: 'Category' },
@@ -33,8 +33,7 @@ export class ProductsComponent implements OnInit {
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _productService: ProductService) {
     _activatedRoute.params.subscribe(x => {
-      this.id = this._activatedRoute.snapshot.params.id;
-      this.getList();
+    this.getList();
     })
   }
 
