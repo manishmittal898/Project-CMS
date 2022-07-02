@@ -175,7 +175,7 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : model.ImagePath.Contains(objData.ImagePath) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null :  _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
@@ -201,14 +201,14 @@ namespace CMS.Service.Services.LookupMaster
         {
             try
             {
-                TblLookupMaster objRole = new TblLookupMaster();
-                objRole =  _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
-                objRole.IsDelete = true;
-                objRole.ModifiedBy = _loginUserDetail.UserId.Value;
-                objRole.ModifiedOn = DateTime.Now;
-                 _db.TblLookupMasters.Update(objRole);
-                 _db.SaveChanges();
-                return CreateResponse(objRole, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
+                TblLookupMaster objData = new TblLookupMaster();
+                objData =  _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                objData.IsDelete = true;
+                objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                objData.ModifiedOn = DateTime.Now;
+                // _db.TblLookupMasters.Update(objData);
+               await  _db.SaveChangesAsync();
+                return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
@@ -223,12 +223,12 @@ namespace CMS.Service.Services.LookupMaster
         {
             try
             {
-                TblLookupMaster objRole = new TblLookupMaster();
-                objRole = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                TblLookupMaster objData = new TblLookupMaster();
+                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
 
-                objRole.IsActive = !objRole.IsActive;
+                objData.IsActive = !objData.IsActive;
                 await _db.SaveChangesAsync();
-                return CreateResponse(objRole as TblLookupMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objData as TblLookupMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)
             {

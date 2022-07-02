@@ -39,6 +39,14 @@ export class API_Url {
   public static LookupMasterDelete_Api = `${environment.apiEndPoint}LookupMaster/delete/`;
   //#endregion
 
+    //#region <<SubLookupMaster>>
+    public static SubLookupMasterList_Api = `${environment.apiEndPoint}SubLookupMaster/get`;
+    public static SubLookupMasterDetail_Api = `${environment.apiEndPoint}SubLookupMaster/get/`;
+    public static SubLookupMasterAddUpdate_Api = `${environment.apiEndPoint}SubLookupMaster/Save`;
+    public static SubLookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}SubLookupMaster/ChangeActiveStatus/`;
+    public static SubLookupMasterDelete_Api = `${environment.apiEndPoint}SubLookupMaster/delete/`;
+    //#endregion
+
 
 
 

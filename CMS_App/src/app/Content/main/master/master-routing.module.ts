@@ -1,13 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LookupTypeAddEditComponent } from './lookup-type/lookup-type-add-edit/lookup-type-add-edit.component';
-import { LookupTypeComponent } from './lookup-type/lookup-type.component';
-import { LookupsAddEditComponent } from './lookup-type/lookups/lookups-add-edit/lookups-add-edit.component';
-import { LookupsComponent } from './lookup-type/lookups/lookups.component';
-import { SubLookupTypeAddEditComponent } from './sub-lookup-type/sub-lookup-type-add-edit/sub-lookup-type-add-edit.component';
-import { SubLookupTypeComponent } from './sub-lookup-type/sub-lookup-type.component';
-import { SubLookupAddEditComponent } from './sub-lookup-type/sub-lookup/sub-lookup-add-edit/sub-lookup-add-edit.component';
-import { SubLookupComponent } from './sub-lookup-type/sub-lookup/sub-lookup.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { LookupTypeAddEditComponent } from "./lookup-type/lookup-type-add-edit/lookup-type-add-edit.component";
+import { LookupTypeComponent } from "./lookup-type/lookup-type.component";
+import { LookupsAddEditComponent } from "./lookup-type/lookups/lookups-add-edit/lookups-add-edit.component";
+import { LookupsComponent } from "./lookup-type/lookups/lookups.component";
+import { SubLookupComponent } from './lookup-type/lookups/sub-lookup/sub-lookup.component';
 
 const routes: Routes = [
   { path: '', component: LookupTypeComponent },
@@ -16,10 +13,15 @@ const routes: Routes = [
   { path: 'lookup-type/add', component: LookupTypeAddEditComponent },
   { path: 'lookup-type/edit/:id', component: LookupTypeAddEditComponent },
 
-   {path:'lookup/:name/:typeId',component: LookupsComponent},
+   {path:':name/:typeId',component: LookupsComponent},
    {path:'lookup/add',component: LookupsAddEditComponent},
    {path:'lookup/:name/update/:id',component: LookupsAddEditComponent},
-   
+
+   {path:':name/:subname/:lookupId',component: SubLookupComponent},
+   {path:'lookup/add',component: LookupsAddEditComponent},
+   {path:'lookup/:name/update/:id',component: LookupsAddEditComponent},
+
+
   // {path:'SubLookupType',component: SubLookupTypeComponent},
   // {path:'SubLookupTypeAddEdit',component: SubLookupTypeAddEditComponent},
   // {path:'SubLookup',component: SubLookupComponent},

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.SubLookupMaster
 {
-   public interface ISubLookupMasterService
+    public interface ISubLookupMasterService
     {
-        ServiceResponse<IEnumerable<Data.Models.TblSubLookupMaster>> GetList();
-        ServiceResponse<TblSubLookupMaster> GetById(int id);
-        Task<ServiceResponse<TblSubLookupMaster>> Save(SubLookupMasterViewModel model);
-        Task<ServiceResponse<TblSubLookupMaster>> Edit(int id, SubLookupMasterViewModel model);
-        Task<ServiceResponse<TblSubLookupMaster>> Delete(int id);
+        Task<ServiceResponse<IEnumerable<SubLookupMasterViewModel>>> GetList(IndexModel model);
+        ServiceResponse<SubLookupMasterViewModel> GetById(long id);
+        Task<ServiceResponse<TblSubLookupMaster>> Save(SubLookupMasterPostModel model);
+        Task<ServiceResponse<TblSubLookupMaster>> ActiveStatusUpdate(long id);
+        Task<ServiceResponse<TblSubLookupMaster>> Delete(long id);
     }
 }

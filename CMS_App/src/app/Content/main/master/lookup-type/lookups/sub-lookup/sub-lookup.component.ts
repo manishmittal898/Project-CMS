@@ -1,25 +1,24 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IndexModel } from 'src/app/Shared/Helper/common-model';
 import { Message } from 'src/app/Shared/Helper/constants';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { LookupMasterModel, LookupService } from '../../../../../Shared/Services/Master/lookup.service';
-import { LookupsAddEditComponent } from './lookups-add-edit/lookups-add-edit.component';
+import { SubLookupMasterViewModel, SubLookupService } from '../../../../../../Shared/Services/Master/sub-lookup.service';
+import { SubLookupAddEditComponent } from './sub-lookup-add-edit/sub-lookup-add-edit.component';
 
 @Component({
-  selector: 'app-lookups',
-  templateUrl: './lookups.component.html',
-  styleUrls: ['./lookups.component.scss']
+  selector: 'app-sub-lookup',
+  templateUrl: './sub-lookup.component.html',
+  styleUrls: ['./sub-lookup.component.scss']
 })
-export class LookupsComponent implements OnInit {
-  pageName = ''
-  model!: LookupMasterModel[];
+export class SubLookupComponent implements OnInit {
+  pageName = {Name:"",SubName:""};
+  model!: SubLookupMasterViewModel[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -31,13 +30,14 @@ export class LookupsComponent implements OnInit {
   totalRecords: number = 0;
 
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _lookupService: LookupService,
+    private readonly toast: ToastrService, private _sublookupService: SubLookupService,
     public dialog: MatDialog
 
   ) {
     _activatedRoute.params.subscribe(x => {
-      this.id = this._activatedRoute.snapshot.params.typeId;
-      this.pageName = this._activatedRoute.snapshot.params.name;
+      this.id = this._activatedRoute.snapshot.params.lookupId;
+      this.pageName.Name = this._activatedRoute.snapshot.params.name;
+      this.pageName.SubName = this._activatedRoute.snapshot.params.subname;
 
       this.getList();
     })
@@ -50,11 +50,11 @@ export class LookupsComponent implements OnInit {
 
   getList(): void {
     this.indexModel.AdvanceSearchModel = {};
-    this.indexModel.AdvanceSearchModel["typeId"] = this.id;
-    this._lookupService.GetList(this.indexModel).subscribe(response => {
+    this.indexModel.AdvanceSearchModel["lookupId"] = this.id;
+    this._sublookupService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        this.model = response.Data as LookupMasterModel[];
-        this.dataSource = new MatTableDataSource<LookupMasterModel>(this.model);
+        this.model = response.Data as SubLookupMasterViewModel[];
+        this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
         this.totalRecords = response.TotalRecord as number;
         if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
@@ -91,7 +91,7 @@ export class LookupsComponent implements OnInit {
   OnActiveStatus(Id: number) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
-        let subscription = this._lookupService.ChangeLookupMasterActiveStatus(Id).subscribe(
+        let subscription = this._sublookupService.ChangeLookupMasterActiveStatus(Id).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
@@ -114,7 +114,7 @@ export class LookupsComponent implements OnInit {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
-        let subscription = this._lookupService.DeleteLookupMaster(id).subscribe(
+        let subscription = this._sublookupService.DeleteLookupMaster(id).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
@@ -132,8 +132,8 @@ export class LookupsComponent implements OnInit {
   }
 
   onAddUpdateLookup(Id: number) {
-    const dialogRef = this.dialog.open(LookupsAddEditComponent, {
-      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
+    const dialogRef = this.dialog.open(SubLookupAddEditComponent, {
+      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName.SubName} category` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });
@@ -143,4 +143,8 @@ export class LookupsComponent implements OnInit {
       }
     });
   }
+  onBack(){
+    window.history.back();
+  }
 }
+

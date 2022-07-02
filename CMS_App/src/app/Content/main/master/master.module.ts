@@ -6,11 +6,9 @@ import { LookupTypeComponent } from './lookup-type/lookup-type.component';
 import { LookupTypeAddEditComponent } from './lookup-type/lookup-type-add-edit/lookup-type-add-edit.component';
 import { LookupsComponent } from './lookup-type/lookups/lookups.component';
 import { LookupsAddEditComponent } from './lookup-type/lookups/lookups-add-edit/lookups-add-edit.component';
-import { SubLookupTypeComponent } from './sub-lookup-type/sub-lookup-type.component';
-import { SubLookupTypeAddEditComponent } from './sub-lookup-type/sub-lookup-type-add-edit/sub-lookup-type-add-edit.component';
-import { SubLookupComponent } from './sub-lookup-type/sub-lookup/sub-lookup.component';
-import { SubLookupAddEditComponent } from './sub-lookup-type/sub-lookup/sub-lookup-add-edit/sub-lookup-add-edit.component';
 import { SharedModule } from '../../../Shared/Helper/shared/shared.module';
+import { SubLookupAddEditComponent } from './lookup-type/lookups/sub-lookup/sub-lookup-add-edit/sub-lookup-add-edit.component';
+import { SubLookupComponent } from './lookup-type/lookups/sub-lookup/sub-lookup.component';
 
 
 @NgModule({
@@ -19,8 +17,6 @@ import { SharedModule } from '../../../Shared/Helper/shared/shared.module';
     LookupTypeAddEditComponent,
     LookupsComponent,
     LookupsAddEditComponent,
-    SubLookupTypeComponent,
-    SubLookupTypeAddEditComponent,
     SubLookupComponent,
     SubLookupAddEditComponent
   ],

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubLookupMasterController : ControllerBase
     {
@@ -21,22 +21,22 @@ namespace CMS.API.Areas.Admin.Controllers
             _sublookmstr = sublookmstr;
         }
         // GET: api/<SubLookupMasterController>
-        [HttpGet]
-        public object Get()
+        [HttpPost]
+        public async Task<object> GetAsync(IndexModel model)
         {
-            return _sublookmstr.GetList();
+            return await _sublookmstr.GetList(model);
         }
 
-        // GET api/<SubLookupMasterController>/5
+        // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(int id)
+        public object Get(long id)
         {
             return _sublookmstr.GetById(id);
         }
 
-        // POST api/<SubLookupMasterController>
+        // POST api/<LookupMaster>
         [HttpPost]
-        public async Task<object> Post([FromBody] SubLookupMasterViewModel model)
+        public async Task<object> Save(SubLookupMasterPostModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,49 +52,18 @@ namespace CMS.API.Areas.Admin.Controllers
 
                 return objReturn;
             }
-            //return _roleTyp
         }
-
-        // PUT api/<SubLookupMasterController>/5
-        [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] SubLookupMasterViewModel model)
+        [HttpGet("{id}")]
+        public async Task<object> ChangeActiveStatus(long id)
         {
-
-
-            if (ModelState.IsValid)
-            {
-
-
-                return await _sublookmstr.Edit(id, model);
-
-            }
-            else
-            {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
-
-                return objReturn;
-            }
-
-
-
-
-
-
-
+            return await _sublookmstr.ActiveStatusUpdate(id);
         }
 
-        // DELETE api/<SubLookupMasterController>/5
+        // DELETE api/<LookupMaster>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<object> Delete(long id)
         {
-
-            _sublookmstr.Delete(id);
-
-
-
+            return await _sublookmstr.Delete(id);
         }
     }
 }
