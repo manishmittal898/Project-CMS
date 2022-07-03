@@ -66,7 +66,7 @@ export class FileSelectorComponent {
   @Input() IsShowFiles: boolean = true;
   @Input() MaxFileLength: number = 1;//for all
   @Input() CurrentFileLength: number = 0;//for all
-
+  @Input() CurrentFiles?: FileInfo[];
   constructor(readonly _alertService: AlertService, private readonly toast: ToastrService, public domSanitizer: DomSanitizer) {
     this.FileSelected = new EventEmitter();
     this.FilesChanged = new EventEmitter();
@@ -86,6 +86,7 @@ export class FileSelectorComponent {
     let index = this._files.indexOf(file);
     if (index > -1) {
       this._files.splice(index, 1);
+      this.CurrentFileLength = this.CurrentFileLength - 1;
       this.FilesChanged.emit(this.Files);
     }
 
@@ -115,7 +116,7 @@ export class FileSelectorComponent {
 
   HandleFileInput(event: any) {
     debugger
-    let TotalFilesCount = (this.CurrentFileLength ? this.CurrentFileLength : this.Files?.length) + 1
+    const TotalFilesCount = (this.CurrentFileLength ? this.CurrentFileLength : this.Files?.length) + 1
     if (TotalFilesCount <= this.MaxFileLength) {
       let files = event.target.files;
       if (files.length == 0) {

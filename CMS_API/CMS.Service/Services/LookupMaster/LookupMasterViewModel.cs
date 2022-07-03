@@ -17,9 +17,7 @@ namespace CMS.Service.Services.LookupMaster
         public int? SortedOrder { get; set; }
         [Required]
         public long? LookUpType { get; set; }
-        public long CreatedBy { get; set; }
-
-        public long ModifiedBy { get; set; }
+      
 
 
     }
@@ -39,5 +37,6 @@ namespace CMS.Service.Services.LookupMaster
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
+        public bool IsSubLookup { get;  set; }
     }
 }

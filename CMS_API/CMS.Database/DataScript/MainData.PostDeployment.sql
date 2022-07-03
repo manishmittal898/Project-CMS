@@ -27,11 +27,11 @@ GO
 
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
 GO
-INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (1, N'Gender', N'GENDER', 1,GETDATE(), 1, GETDATE(), 1, 0)
-GO
-INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (2, N'Product Category', N'Product_Category', 1,GETDATE(), 1, GETDATE(), 1, 0)
-GO
-INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (3, N'Caption Tag', N'Caption_Tag', 1, GETDATE(), 1,GETDATE(), 1, 0)
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (1, N'Gender', N'GENDER',0, 1,GETDATE(), 1, GETDATE(), 1, 0)
+GO                                                             
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (2, N'Product Category', N'Product_Category',1, 1,GETDATE(), 1, GETDATE(), 1, 0)
+GO                                                             
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (3, N'Caption Tag', N'Caption_Tag',0, 1, GETDATE(), 1,GETDATE(), 1, 0)
 GO
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF
 GO

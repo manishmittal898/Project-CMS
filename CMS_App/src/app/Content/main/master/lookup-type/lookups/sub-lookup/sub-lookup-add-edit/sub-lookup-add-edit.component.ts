@@ -1,21 +1,22 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DropDownModel } from 'src/app/Shared/Helper/common-model';
-import { DropDown_key } from 'src/app/Shared/Helper/constants';
-import { LookupMasterPostModel, LookupService } from '../../../../../../Shared/Services/Master/lookup.service';
-import { CommonService } from '../../../../../../Shared/Services/common.service';
-import { ToastrService } from 'ngx-toastr';
-import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
+import { Component, OnInit, Inject } from "@angular/core";
+import { Validators, FormBuilder } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ToastrService } from "ngx-toastr";
+import { DropDown_key } from "src/app/Shared/Helper/constants";
+import { FileInfo } from "src/app/Shared/Helper/shared/file-selector/file-selector.component";
+import { CommonService } from "src/app/Shared/Services/common.service";
+import { SubLookupMasterPostModel, SubLookupService } from "src/app/Shared/Services/Master/sub-lookup.service";
+
 
 @Component({
-  selector: 'app-lookups-add-edit',
-  templateUrl: './lookups-add-edit.component.html',
-  styleUrls: ['./lookups-add-edit.component.scss']
+  selector: 'app-sub-lookup-add-edit',
+  templateUrl: './sub-lookup-add-edit.component.html',
+  styleUrls: ['./sub-lookup-add-edit.component.scss']
 })
-export class LookupsAddEditComponent implements OnInit {
-  dropDown = new DropDownModel();
-  model = {} as LookupMasterPostModel;
+export class SubLookupAddEditComponent implements OnInit {
+
+
+  model = {} as SubLookupMasterPostModel;
   isFileAttached=false;
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
@@ -25,7 +26,7 @@ export class LookupsAddEditComponent implements OnInit {
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
-  constructor(public dialogRef: MatDialogRef<LookupsAddEditComponent>, private readonly _lookupService: LookupService,
+  constructor(public dialogRef: MatDialogRef<SubLookupAddEditComponent>, private readonly _lookupService: SubLookupService,
     private readonly fb: FormBuilder, public _commonService: CommonService, private readonly toast: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: { Id: number, Type: number, Heading: string }) { }
 
@@ -41,7 +42,7 @@ export class LookupsAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.LookUpType = this.data.Type;
+      this.model.LookUpId = this.data.Type;
       this.model.Id = this.data.Id;
 
       this._lookupService.AddUpdateLookupMaster(this.model).subscribe(x => {
@@ -70,8 +71,8 @@ export class LookupsAddEditComponent implements OnInit {
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
           SortedOrder: x.Data?.SortedOrder,
-          LookUpType: x.Data?.LookUpType,
-        } as LookupMasterPostModel;
+          LookUpId: x.Data?.LookUpId,
+        } as SubLookupMasterPostModel;
 
         this.isFileAttached=this.model.ImagePath?false:this.isFileAttached;
       }
@@ -81,4 +82,5 @@ export class LookupsAddEditComponent implements OnInit {
     this.model.ImagePath = file[0].FileBase64;
     this.isFileAttached=true;
   }
+
 }

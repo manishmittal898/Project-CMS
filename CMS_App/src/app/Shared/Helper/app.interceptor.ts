@@ -15,18 +15,18 @@ export class AppInterceptor implements HttpInterceptor {
 
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private _loaderService: LoaderService, private _commonService: SecurityService) { 
+  constructor(private _loaderService: LoaderService, private _commonService: SecurityService) {
 
   }
 
-  
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
     this._loaderService.show();
-
+debugger
     let Token = this._commonService.getStorage("authToken") != null ? this._commonService.getStorage("authToken") : null;
- 
+
     if (Token != null) {
       req = req.clone({
         setHeaders: {

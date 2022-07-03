@@ -19,7 +19,7 @@ export class LookupService {
     return this._baseService.get(url);
   }
 
-  AddUpdateLookupMaster(model: LookupMasterModel): Observable<ApiResponse<string>> {
+  AddUpdateLookupMaster(model: LookupMasterPostModel): Observable<ApiResponse<string>> {
     let url = `${this._baseService.API_Url.LookupMasterAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
@@ -33,6 +33,15 @@ export class LookupService {
   }
 }
 
+export interface LookupMasterPostModel {
+  Id: number;
+  Name: string;
+  ImagePath: string;
+  SortedOrder: number | null;
+  LookUpType: number | null;
+
+}
+
 export interface LookupMasterModel {
 
   Id: number;
@@ -41,6 +50,7 @@ export interface LookupMasterModel {
   SortedOrder: number | null;
   LookUpType: number | null;
   LookUpTypeName: string;
+  IsSubLookup: boolean;
   CreatedBy: number;
   CreatedOn: string;
   ModifiedBy: number;

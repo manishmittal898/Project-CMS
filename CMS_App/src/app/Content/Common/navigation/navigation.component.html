@@ -54,7 +54,7 @@
         </a>
         <ul class="collapse submenu list-unstyled" id="Dropdown-menu-3" data-parent="#accordionExample">
           <li *ngFor="let itm of dropDown.ddlLookupTypeMaster">
-            <a routerLink="./master/lookup/{{itm.Text}}/{{itm.Value}}"> <i class="bi bi-bookmarks"></i> {{itm.Text}} </a>
+            <a routerLink="./master/{{itm.Text}}/{{itm.Value}}"> <i class="bi bi-bookmarks"></i> {{itm.Text| titlecase}} </a>
           </li>
 
         </ul>

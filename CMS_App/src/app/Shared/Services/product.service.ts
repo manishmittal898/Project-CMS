@@ -65,6 +65,5 @@ export interface ProductMasterPostModel {
   SubCategoryId: number;
   CaptionTagId: number;
   Summary: string;
-  CreatedBy: number;
-  ModifiedBy: number;
+
 }

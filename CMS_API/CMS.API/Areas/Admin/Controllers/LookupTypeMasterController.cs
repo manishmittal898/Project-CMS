@@ -88,7 +88,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<LookupTypeMasterController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(long id)
         {
 
             _lookuptypemstr.Delete(id);

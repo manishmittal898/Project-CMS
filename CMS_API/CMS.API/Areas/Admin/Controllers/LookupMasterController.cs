@@ -1,5 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.LookupMaster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace CMS.API.Areas.Admin.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class LookupMasterController : ControllerBase
     {
 
@@ -61,9 +63,9 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<LookupMaster>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<object> Delete(long id)
         {
-            _lookupmstr.Delete(id);
+        return  await  _lookupmstr.Delete(id);
         }
     }
 }
