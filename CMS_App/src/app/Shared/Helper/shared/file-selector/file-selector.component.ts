@@ -97,7 +97,7 @@ export class FileSelectorComponent {
     if (file) {
 
       let fileUrl = file.FileBase64;
-      debugger
+
       let isDoc = ['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === file.Name.split('.')[1].toLowerCase())
 
       var newWin = open("'url'", "_blank");
@@ -115,7 +115,7 @@ export class FileSelectorComponent {
   }
 
   HandleFileInput(event: any) {
-    debugger
+
     const TotalFilesCount = (this.CurrentFileLength ? this.CurrentFileLength : this.Files?.length) + 1
     if (TotalFilesCount <= this.MaxFileLength) {
       let files = event.target.files;

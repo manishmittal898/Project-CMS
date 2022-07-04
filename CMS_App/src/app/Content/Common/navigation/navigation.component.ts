@@ -30,7 +30,7 @@ export class NavigationComponent implements OnInit {
   getLookupTypes() {
     this._commonService.GetDropDown([DropDown_key.ddlLookupTypeMasters]).subscribe(res => {
       if (res.IsSuccess) {
-        debugger
+        
         let ddls = res.Data as DropDownModel;
         this.dropDown.ddlLookupTypeMaster = ddls.ddlLookupTypeMaster;
 

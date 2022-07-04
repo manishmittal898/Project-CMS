@@ -24,9 +24,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-
 namespace CMS.API
 {
     public class Startup
@@ -91,8 +89,10 @@ namespace CMS.API
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
     };
 });
+
             services.AddDbContext<DB_CMSContext>(options =>
-options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING)));
+options.UseSqlServer(Configuration[CONNECTION_STRING]));
+
             services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             Registerservice(services);
         }
@@ -144,7 +144,7 @@ options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING)));
             {
                 endpoints.MapControllers();
             });
-
+            app.UseDeveloperExceptionPage();
         }
 
         private void Registerservice(IServiceCollection services)

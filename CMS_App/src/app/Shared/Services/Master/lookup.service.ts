@@ -37,8 +37,8 @@ export interface LookupMasterPostModel {
   Id: number;
   Name: string;
   ImagePath: string;
-  SortedOrder: number | null;
-  LookUpType: number | null;
+  SortedOrder: number ;
+  LookUpType: number ;
 
 }
 

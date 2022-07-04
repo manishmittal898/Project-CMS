@@ -37,7 +37,7 @@ export class LookupTypeComponent implements OnInit {
   getList(): void {
         this._lookupTypeService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        debugger
+        
         this.model = response.Data as LookupTypeMasterModel[];
         this.dataSource = new MatTableDataSource<LookupTypeMasterModel>(this.model);
         this.totalRecords = response.TotalRecord as number;

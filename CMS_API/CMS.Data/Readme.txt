@@ -1,2 +1,2 @@
 //dotnet ef dbcontext scaffold "Server=LAPTOP-VC0IBCS1;Database=DB_CMS;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --project CMS.Data -o Models -f
-  
+  "Development": "Server=StoreoneDBCMS.mssql.somee.com;Initial Catalog=StoreoneDBCMS;MultipleActiveResultSets=true;User ID=iamthesandeep_SQLLogin_1;Password=ks1zip9r5d;"

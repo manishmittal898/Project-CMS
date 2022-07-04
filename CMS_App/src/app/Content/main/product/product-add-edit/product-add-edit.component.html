@@ -13,112 +13,165 @@
       </nav>
       <!-- Breadcrumb End -->
     </div>
-    <button class="btn btn-dark btn-sm mt-2 mt-sm-0"> <i class="bi bi-chevron-left"></i> Back to list</button>
+    <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
+      Back to
+      list</button>
 
   </div>
 </div>
 <!-- Page Header Title end -->
 
 <div class="custom-form p-4">
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label>Product name</label>
-      <input type="text" class="form-control" id="input1" placeholder="Enter Name">
-    </div>
-    <div class="form-group col-md-3">
-      <label>Price</label>
-      <input type="text" class="form-control" id="input1" placeholder="Enter Price">
-    </div>
-    <div class="form-group col-md-3">
-      <label>Tag/Label/Discount</label>
-      <select class="form-control">
-        <option>New</option>
-        <option>Limited Stock</option>
-        <option>Bestseller</option>
-        <option>Lowest Price</option>
-        <option>10% Off</option>
-        <option>20% Off</option>
-        <option>30% Off</option>
-        <option>40% Off</option>
-        <option>50% Off</option>
-        <option>60% Off</option>
-        <option>70% Off</option>
-      </select>
-    </div>
-    <div class="form-group col-md-6">
-      <label>Select Category</label>
-      <select class="form-control">
-        <option>Category 1</option>
-        <option>Category 2</option>
-        <option>Category 3</option>
-        <option>Category 4</option>
-      </select>
-    </div>
-    <div class="form-group col-md-6">
-      <label>Select Sub Category</label>
-      <select class="form-control">
-        <option>Sub Category 1</option>
-        <option>Sub Category 2</option>
-        <option>Sub Category 3</option>
-        <option>Sub Category 4</option>
-      </select>
-    </div>
+  <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <!-- Done -->
+      <div class="form-group col-md-4">
+        <label>Name</label>
+        <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
+          [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
+          Please enter <strong>Name</strong>...!</div>
+      </div>
 
-    <div class="form-group col-md-6">
-      <label>First image</label>
-      <div class="dropzone dropzone-light upload-btn-wrapper w-100">
-        <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
-          Upload</button>
-        <input type="file" multiple="true" style="display: block;" />
-        <div class="dz-default dz-message m-1">
-          <span><i class="ti-cloud-up"></i></span>
+      <div class="form-group col-md-4">
+        <label>Price</label>
+
+        <input type="text" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
+          [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
+          class="form-control" id="input4" placeholder="Price">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
+          Please enter Price...! </div>
+        <div class="invalid-feedback"
+          *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength')) && formgrp.get('SortedOrder')?.touched) || (formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength'))">
+          Sort Order length must be 1-10 digit. </div>
+
+
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Tag/Label</label>
+
+        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Tag" [ngClass]="{ 'is-invalid': f.Caption.errors && f.Caption.touched}"
+          [(ngModel)]="model.CaptionTagId">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
+          Please select <strong>Caption</strong>...!</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Select Category</label>
+        <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
+          [ngClass]="{ 'is-invalid': f.Category.errors && f.Category.touched}" [(ngModel)]="model.CategoryId">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
+          Please select <strong>Category</strong>...!</div>
+      </div>
+      <div class=" form-group col-md-6">
+        <label>Select Sub Category</label>
+        <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Sub-category"
+          [ngClass]="{ 'is-invalid': f.SubCategory.errors && f.SubCategory.touched}" [(ngModel)]="model.SubCategoryId">
+        </ng-select>
+
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
+          Please select <strong>Sub Category</strong>...!</div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Product main image</label>
+        <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
+        <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
+          [CurrentFileLength]="model?.ImagePath ? 1: 0"
+          [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
+        </app-file-selector>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
+          Please Product main image...!</div>
+
+        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+
+          <div class="dropzone dropzone-light file-upload-details">
+            <div class="dz-details">
+              <div class="dz-filename"><span data-dz-name="">{{getFileName}}</span>
+              </div>
+            </div>
+            <a [href]="model.ImagePath" target="_blank">
+              <i data-toggle="tooltip" data-placement="bottom" title="View"
+                class="fas fa-eye file-upload-details-remove"></i>
+            </a>
+
+            <i (click)="RemoveDocument(model.ImagePath)" data-toggle="tooltip" data-placement="bottom" title="Remove"
+              class="fas fa-trash-alt text-danger file-upload-details-remove"></i>
+          </div>
+        </ng-container>
+
+
+      </div>
+
+      <!-- Pending -->
+      <!-- <div class="form-group col-md-6">
+        <label>Other images</label>
+        <div class="dropzone dropzone-light upload-btn-wrapper w-100">
+          <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
+            Upload</button>
+          <input type="file" multiple="true" style="display: block;" />
+          <div class="dz-default dz-message m-1">
+            <span><i class="ti-cloud-up"></i></span>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="form-group col-md-6">
-      <label>Other images</label>
-      <div class="dropzone dropzone-light upload-btn-wrapper w-100">
-        <button type="button" class="btn-upload-border d-block w-100 text-left"><i class="bi bi-plus-lg"></i>
-          Upload</button>
-        <input type="file" multiple="true" style="display: block;" />
-        <div class="dz-default dz-message m-1">
-          <span><i class="ti-cloud-up"></i></span>
+        <div class="d-flex align-items-center mt-1 upload-content-list">
+          <a href="javascript:void()" class="small-media-items position-relative">
+            <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+            </div>
+          </a>
+          <a href="javascript:void()" class="small-media-items position-relative">
+            <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+            </div>
+          </a>
+          <a href="javascript:void()" class="small-media-items position-relative">
+            <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="d-flex align-items-center mt-1 upload-content-list">
-        <a href="javascript:void()" class="small-media-items position-relative">
-          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-          <div class="small-media-items-action">
-            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-          </div>
-        </a>
-        <a href="javascript:void()" class="small-media-items position-relative">
-          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-          <div class="small-media-items-action">
-            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-          </div>
-        </a>
-        <a href="javascript:void()" class="small-media-items position-relative">
-          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-          <div class="small-media-items-action">
-            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="form-group col-md-12">
-      <label>Discription</label>
-      <textarea class="form-control" placeholder="Product Discription" rows="5"></textarea>
-    </div>
-    <div class="form-group col-md-12">
-      <label>Additional Information</label>
-      <textarea class="form-control" placeholder="Additional Information" rows="5"></textarea>
-    </div>
-  </div>
+      </div> -->
 
-  <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">
-    <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Add Product</button>
-    <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
-  </div>
+      <div class="form-group col-md-12">
+        <label>Description</label>
+        <textarea class="form-control" [(ngModel)]="model.Desc" formControlName="Description"
+          [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}" id="Description" rows="5"
+          placeholder="Description"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Description')?.hasError('required') && formgrp.get('Description')?.touched)">
+          Please enter Discription</div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label>Additional Information</label>
+        <textarea class="form-control" [(ngModel)]="model.Summary" formControlName="Summary"
+          [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"
+          placeholder="Additional Information"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Summary')?.hasError('required') && formgrp.get('Summary')?.touched)">
+          Please enter Summary...!</div>
+      </div>
+
+    </div>
+
+    <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">
+      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Add Product</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+    </div>
+  </form>
 </div>

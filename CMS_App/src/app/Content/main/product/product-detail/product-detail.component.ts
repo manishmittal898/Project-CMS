@@ -9,7 +9,7 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  model={} as  ProductMasterViewModel;
+  model = {} as ProductMasterViewModel;
   id: number = 0;
   constructor(private _activatedRoute: ActivatedRoute, private _productService: ProductService, private readonly toast: ToastrService,) {
     this._activatedRoute.params.subscribe(x => {
@@ -20,9 +20,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.getDetail();
   }
-  getList(): void {
+  getDetail(): void {
     this._productService.GetProductMaster(this.id).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data as ProductMasterViewModel;
@@ -34,5 +34,5 @@ export class ProductDetailComponent implements OnInit {
     },
       error => {
       });
-   }
+  }
 }

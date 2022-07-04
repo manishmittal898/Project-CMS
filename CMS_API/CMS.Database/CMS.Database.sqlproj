@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CMS.Database.publish.xml" />
+    <None Include="Storeone_DB_CMS.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="DataScript\MainData.PostDeployment.sql" />

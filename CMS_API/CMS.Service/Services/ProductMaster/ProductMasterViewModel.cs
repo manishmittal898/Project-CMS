@@ -22,9 +22,7 @@ namespace CMS.Service.Services.ProductMaster
         public long SubCategoryId { get; set; }
         public long CaptionTagId { get; set; }
         public string Summary { get; set; }
-        public long CreatedBy { get; set; }
-
-        public long ModifiedBy { get; set; }
+      
     }
 
     public class ProductMasterViewModel

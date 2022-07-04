@@ -16,7 +16,7 @@ import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-select
 export class LookupsAddEditComponent implements OnInit {
   dropDown = new DropDownModel();
   model = {} as LookupMasterPostModel;
-  isFileAttached=false;
+  isFileAttached = false;
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
     SortedOrder: [undefined, Validators.required],
@@ -41,8 +41,9 @@ export class LookupsAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.LookUpType = this.data.Type;
+      this.model.LookUpType = Number(this.data.Type);
       this.model.Id = this.data.Id;
+      this.model.SortedOrder = Number(this.model.SortedOrder);
 
       this._lookupService.AddUpdateLookupMaster(this.model).subscribe(x => {
         if (x.IsSuccess) {
@@ -69,16 +70,16 @@ export class LookupsAddEditComponent implements OnInit {
           Id: this.data.Id,
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
-          SortedOrder: x.Data?.SortedOrder,
-          LookUpType: x.Data?.LookUpType,
+          SortedOrder: Number(x.Data?.SortedOrder),
+          LookUpType: Number(x.Data?.LookUpType),
         } as LookupMasterPostModel;
 
-        this.isFileAttached=this.model.ImagePath?false:this.isFileAttached;
+        this.isFileAttached = this.model.ImagePath ? false : this.isFileAttached;
       }
     })
   }
   onDocumentAttach(file: FileInfo[]) {
     this.model.ImagePath = file[0].FileBase64;
-    this.isFileAttached=true;
+    this.isFileAttached = true;
   }
 }

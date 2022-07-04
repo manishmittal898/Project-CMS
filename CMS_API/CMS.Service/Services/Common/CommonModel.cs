@@ -16,10 +16,14 @@ namespace CMS.Service.Services.Common
             public const string ddlLookupTypeMasters = "ddllookuptypemaster";
             public const string ddlState = "ddlstate";
             public const string ddlDistrict = "ddldistrict";
-            public const string ddlQualification = "ddlqualification";
-            public const string ddlDocumentType = "ddldocumenttype";
+            public const string ddlCaptionTag = "ddlcaptiontag";
+            public const string ddlCategory = "ddlcategory";
+            public const string ddlLookup = "ddllookup";
+            public const string ddlSubLookup = "ddlsublookup";
+            public const string ddlSubCategory = "ddlsubcategory";
+
             public const string ddlGender = "ddlgender";
-            public const string ddlPaymentMode = "ddlpaymentmode";
+      
 
         }
     }

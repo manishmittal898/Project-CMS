@@ -98,6 +98,10 @@ export class DropDownModel {
   ddlGender!: DropDownItem[];
   ddlPaymentMode!: DropDownItem[];
   ddlLookupTypeMaster!: DropDownItem[];
+  ddlCategory !: DropDownItem[];
+  ddlCaptionTag!: DropDownItem[];
+  ddlSubCategory!: DropDownItem[];
+  ddlSublookup!: DropDownItem[];
 }
 
 export class DropDownItem {

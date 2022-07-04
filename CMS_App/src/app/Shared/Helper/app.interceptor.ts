@@ -24,7 +24,7 @@ export class AppInterceptor implements HttpInterceptor {
 
 
     this._loaderService.show();
-debugger
+
     let Token = this._commonService.getStorage("authToken") != null ? this._commonService.getStorage("authToken") : null;
 
     if (Token != null) {

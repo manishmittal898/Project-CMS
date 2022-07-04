@@ -39,7 +39,7 @@ namespace CMS.Core.ServiceHelper.Model
     {
         public string Key { get; set; }
         public string FileterFromKey { get; set; }
-        public int[] Values { get; set; }
+        public long[] Values { get; set; }
 
 
     }

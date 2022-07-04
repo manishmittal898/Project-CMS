@@ -29,7 +29,7 @@ namespace CMS.Service.Services.ProductMaster
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
             {
-            
+
 
                 var result = (from lkType in _db.TblProductMasters
                               where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
@@ -59,6 +59,8 @@ namespace CMS.Service.Services.ProductMaster
                                             Category = x.Category.Name,
                                             SubCategoryId = x.SubCategoryId,
                                             SubCategory = x.SubCategory.Name,
+                                            CaptionTagId = x.CaptionTagId,
+                                            CaptionTag = x.CaptionTag.Name,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
@@ -90,19 +92,40 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
-        public ServiceResponse<TblProductMaster> GetById(int id)
+        public ServiceResponse<ProductMasterViewModel> GetById(int id)
         {
-            ServiceResponse<TblProductMaster> ObjResponse = new ServiceResponse<TblProductMaster>();
+            ServiceResponse<ProductMasterViewModel> ObjResponse = new ServiceResponse<ProductMasterViewModel>();
             try
             {
 
-                var detail = _db.TblProductMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var detail = _db.TblProductMasters.Select(x => new ProductMasterViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                    CategoryId = x.CategoryId,
+                    Category = x.Category.Name,
+                    SubCategoryId = x.SubCategoryId,
+                    SubCategory = x.SubCategory.Name,
+                    CaptionTagId = x.CaptionTagId,
+                    CaptionTag = x.CaptionTag.Name,
+                    Desc = x.Desc,
+                    Summary = x.Desc,
+                    Price = x.Price,
+                    CreatedBy = x.CreatedBy,
+                    CreatedOn = x.CreatedOn,
+                    ModifiedBy = x.ModifiedBy,
+                    ModifiedOn = x.ModifiedOn,
+                    IsActive = x.IsActive.Value,
+                    IsDelete = x.IsDelete
+                }
+                    ).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                ObjResponse = CreateResponse<ProductMasterViewModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -120,13 +143,22 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
                     objProduct.SubCategoryId = model.SubCategoryId;
-                    objProduct.ImagePath = _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                    if (!string.IsNullOrEmpty(model.ImagePath))
+                    {
+
+                        objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                    }
+                    else
+                    {
+                        objProduct.ImagePath = null;
+                    }
+
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
 
-                    objProduct.ModifiedBy = model.ModifiedBy;
+                    objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblProductMasters.Update(objProduct);
                     _db.SaveChanges();
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
@@ -144,7 +176,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
                     objProduct.IsActive = true;
-                    objProduct.CreatedBy = model.CreatedBy;
+                    objProduct.CreatedBy = _loginUserDetail.UserId.Value;
+                    objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = await _db.TblProductMasters.AddAsync(objProduct);
                     _db.SaveChanges();
 
