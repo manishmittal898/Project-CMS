@@ -26,7 +26,7 @@
   color: #fff;
   font-size: 3em;
   border-bottom: 2px solid #fff;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .loader-text::before {
@@ -35,8 +35,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  color: #f77b00;
-  border-bottom: 2px solid #f77b00;
+  color: #e9ab00;
+  border-bottom: 2px solid #e9ab00;
   animation: lod 2s linear infinite;
   overflow: hidden;
 }

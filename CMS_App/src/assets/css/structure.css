@@ -1306,7 +1306,7 @@ li.menu.menu-active>a svg {
 
 #sidebar ul.menu-categories ul.submenu>li.active a,
 #sidebar ul.menu-categories ul.submenu>li a.active {
-    color: #ff8400;
+    color: #e9ab00;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     font-weight: 600;
@@ -1318,7 +1318,7 @@ li.menu.menu-active>a svg {
 
 #sidebar ul.menu-categories li.menu ul.submenu>li.active a:before,
 #sidebar ul.menu-categories ul.submenu>li a.active:before {
-    background-color: #ff8400;
+    background-color: #e9ab00;
 }
 
 #sidebar ul.menu-categories ul.submenu>li.active {
@@ -1326,11 +1326,11 @@ li.menu.menu-active>a svg {
 }
 
 #sidebar ul.menu-categories ul.submenu>li a:hover {
-    color: #ff8400;
+    color: #e9ab00;
 }
 
 #sidebar ul.menu-categories ul.submenu>li a:hover:before {
-    background-color: #ff8400 !important;
+    background-color: #e9ab00 !important;
 }
 
 #sidebar ul.menu-categories ul.submenu>li a i {
