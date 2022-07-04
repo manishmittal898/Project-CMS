@@ -1203,8 +1203,8 @@ select.form-control.form-custom {
 
 .btn-warning {
     color: #fff !important;
-    background-color: #ff8400;
-    border-color: #ff8400;
+    background-color: #e9ab00;
+    border-color: #e9ab00;
     box-shadow: 0 10px 20px -10px #e2a03f;
 }
 
@@ -3105,7 +3105,7 @@ td.table-action-btn button {
     line-height: normal;
     display: flex;
     align-items: center;
-    border: solid 2px #ff8400;
+    border: solid 2px #e9ab00;
     font-weight: 600 !important;
 }
 
@@ -3185,21 +3185,29 @@ img {
 }
 
 .page-not-found-img {
-    max-width: 500px;
+    max-width: 600px;
     margin: auto auto 40px auto;
 }
 
 .page-not-found h1 {
-    font-size: 60px;
-    font-weight: 700;
-    color: #ff9800;
+  font-size: 55px !important;
+  font-weight: 800 !important;
+  color: #e9ab00;
+  margin-bottom: 40px !important;
 }
 
 .page-not-found p {
-    font-size: 20px;
-    color: #000;
+  font-size: 20px;
+  color: #000;
+  line-height: 30px;
 }
 
+@media screen and (max-width:767px) {
+  .page-not-found h1 {
+    font-size: 32px !important;
+}
+
+}
 tr.mat-header-row {
     height: auto !important;
 }
@@ -4064,17 +4072,17 @@ table.table.table-striped.dataTable.table-header.table-blue tbody tr:nth-of-type
 }
 
 .reg-steper .mat-step:nth-child(1) mat-step-header .mat-step-icon {
-    background: #f3f3f3 url(../img/personal_detail.png) no-repeat center center;
+    background: #f3f3f3 url(../img/no-img.svg) no-repeat center center;
     background-size: 48px;
 }
 
 .reg-steper .mat-step:nth-child(2) mat-step-header .mat-step-icon {
-    background: #f3f3f3 url(../img/document_details.png) no-repeat center center;
+    background: #f3f3f3 url(../img/no-img.svg) no-repeat center center;
     background-size: 48px;
 }
 
 .reg-steper .mat-step:nth-child(3) mat-step-header .mat-step-icon {
-    background: #f3f3f3 url(../img/address.png) no-repeat center center;
+    background: #f3f3f3 url(../img/no-img.svg) no-repeat center center;
     background-size: 48px;
 }
 
@@ -4083,7 +4091,7 @@ table.table.table-striped.dataTable.table-header.table-blue tbody tr:nth-of-type
 }
 
 .gold-loan-steper .mat-step:nth-child(4) mat-step-header .mat-step-icon {
-    background: #f3f3f3 url(../img/appointment.png) no-repeat center center;
+    background: #f3f3f3 url(../img/no-img.svg) no-repeat center center;
     background-size: 40px;
 }
 
@@ -4344,6 +4352,13 @@ form .icon-login-form {
     box-shadow: 0 0 20px #e3e3e3;
     padding: 10px;
 }
+.form-grp-w-border .table-responsive {
+  box-shadow: none;
+  padding: 0px;
+}
+.rounded-tab-icon .table-responsive {
+  box-shadow: none;
+}
 
 .lsit-category-img {
     height: 100px;
@@ -4417,7 +4432,32 @@ element.style {
   overflow: hidden !important;
   border-radius: 24px !important;
 }
+.default-section-img {
+  max-width: 400px;
+  margin: auto auto 20px auto;
+}
 
-
-
+.default-section-info h1 {
+  text-transform: capitalize;
+  font-size: 38px !important;
+  color: #001068;
+}
+.default-section-info p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 20px auto !important;
+}
+.default-section-info .btn {
+  font-size: 20px;
+}
 /* Manish CSS End */
+
+
+/* Responsive Start */
+@media (max-width: 767px) {
+  .default-section-info h1 {
+    font-size: 30px !important;
+    line-height: 40px !important;
+}
+}
+/* Responsive End */
