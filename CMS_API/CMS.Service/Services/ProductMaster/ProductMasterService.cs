@@ -110,7 +110,7 @@ namespace CMS.Service.Services.ProductMaster
                     CaptionTagId = x.CaptionTagId,
                     CaptionTag = x.CaptionTag.Name,
                     Desc = x.Desc,
-                    Summary = x.Desc,
+                    Summary = x.Summary,
                     Price = x.Price,
                     CreatedBy = x.CreatedBy,
                     CreatedOn = x.CreatedOn,

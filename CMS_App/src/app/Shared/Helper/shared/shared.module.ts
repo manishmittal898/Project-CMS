@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from 'src/app/Content/Common/page-not-found/pag
 import { HtmlComponent } from 'src/app/Content/html/html.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { NgxTextEditorModule } from 'ngx-text-editor';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -45,7 +46,8 @@ const installedModule = [
     autoDismiss: true,
     maxOpened: 5
   }),
-  MatStepperModule
+  MatStepperModule,
+  NgxTextEditorModule
 ];
 
 const sharedComponent = [FileSelectorComponent,
