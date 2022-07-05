@@ -32,7 +32,7 @@
 .loader-text::before {
   content: attr(data-text);
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   width: 100%;
   color: #1f2e41;
