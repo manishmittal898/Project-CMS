@@ -35,8 +35,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  color: #e9ab00;
-  border-bottom: 2px solid #e9ab00;
+  color: #1f2e41;
+  border-bottom: 2px solid #882f11;
   animation: lod 2s linear infinite;
   overflow: hidden;
 }

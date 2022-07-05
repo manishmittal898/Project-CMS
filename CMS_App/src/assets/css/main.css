@@ -1203,8 +1203,8 @@ select.form-control.form-custom {
 
 .btn-warning {
     color: #fff !important;
-    background-color: #e9ab00;
-    border-color: #e9ab00;
+    background-color: #882f11;
+    border-color: #882f11;
     box-shadow: 0 10px 20px -10px #e2a03f;
 }
 
@@ -3105,7 +3105,7 @@ td.table-action-btn button {
     line-height: normal;
     display: flex;
     align-items: center;
-    border: solid 2px #e9ab00;
+    border: solid 2px #882f11;
     font-weight: 600 !important;
 }
 
@@ -3192,7 +3192,7 @@ img {
 .page-not-found h1 {
   font-size: 55px !important;
   font-weight: 800 !important;
-  color: #e9ab00;
+  color: #882f11;
   margin-bottom: 40px !important;
 }
 

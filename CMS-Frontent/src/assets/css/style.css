@@ -1,13 +1,13 @@
 /*
-Theme Name:  First Store
-Theme URI: https://www.First store.com/
-Author: First store
-Author URI: https://www.First store.com/
-Description:First Store
+Theme Name:  StoreOne
+Theme URI: https://www.StoreOne.com/
+Author: StoreOne
+Author URI: https://www.StoreOne.com/
+Description:StoreOne
 Version: 1.0
-License:  First Store
-License URI: https://www.First store.com/
-Text Domain:  First Store
+License:  StoreOne
+License URI: https://www.StoreOne.com/
+Text Domain:  StoreOne
 */
 
 :root {
@@ -19,8 +19,8 @@ Text Domain:  First Store
   --yellow-color: #fa930c;
   --gray-color: #394640;
   --bg-color: #efede6;
-  --primary-color: #9b8013;
-  --secondary-color: #000;
+  --primary-color: #7d2b0e;
+  --secondary-color: #1f2e41;
   /* Font/text values */
   --font-style-normal: normal;
   --font-style-italic: italic;
@@ -161,7 +161,8 @@ img {
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px 18px;
   color: rgba(0, 0, 0, .7);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .navbar-light .navbar-nav .nav-link.active,
@@ -273,7 +274,7 @@ footer {
 /* Footer Dark Start */
 
 .footer-dark {
-  background: #0e0e0e;
+  background: var(--secondary-color);
 }
 
 .footer-dark ul.footer-link li a {
@@ -298,13 +299,13 @@ footer {
 
 section.footer-copyright-dark {
   color: #fff;
-  background: #202020;
+  background: #001228;
 }
 
 section.footer-copyright-dark p a {
-  color: #2b8fff;
+  color: #fff;
+  font-weight: 600;
 }
-
 
 /* Footer Dark End */
 
@@ -479,7 +480,7 @@ footer ul.footer-social li a:hover {
 /* Footer End */
 
 .topbar {
-  background: var(--primary-color);
+  background: var(--secondary-color);
   padding: 2px;
 }
 
@@ -668,6 +669,7 @@ background: #ffffff;
   height: 280px;
   overflow: hidden;
   box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+  border-radius: 8px;
 }
 
 .product-details-info h4 {
@@ -691,7 +693,7 @@ background: #ffffff;
 
 .breadcrumb-item.active,
 .breadcrumb-item+.breadcrumb-item::before {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.6);
 }
 
 .product-details-big-img img {
@@ -728,9 +730,12 @@ ul.product-details-sm-img {
   margin-top: 15px;
 }
 .navbar-brand span {
-  margin-left: 6px;
+  margin-left: 8px;
   font-size: 24px;
+  font-weight: 600;
+  color: var(--secondary-color);
 }
+
 input:focus-visible {
   outline: none;
 }
@@ -861,5 +866,8 @@ opacity: .7;
 }
 .bd-gradient-s-1 {
   background-image: linear-gradient(180deg, rgba(var(--bs-body-bg-rgb), 0.01), rgba(var(--bs-body-bg-rgb), 1) 85%),radial-gradient(ellipse at top left, rgba(var(--bs-primary-rgb), 0.5), transparent 50%),radial-gradient(ellipse at top right, rgba(var(--bd-accent-rgb), 0.5), transparent 50%),radial-gradient(ellipse at center right, rgba(var(--bd-violet-rgb), 0.5), transparent 50%),radial-gradient(ellipse at center left, rgba(var(--bd-pink-rgb), 0.5), transparent 50%) !important;
+}
+.breadcrumb {
+  justify-content: center;
 }
 /* CUSTOM CSS END */
