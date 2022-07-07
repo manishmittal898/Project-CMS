@@ -68,7 +68,7 @@
         transition: right 300ms ease-in-out;
     }
     .navbar-collapse {
-        background: var(--secondary-color);
+        background: rgba(0,0,0,0.9);
     }
     .navbar-toggler.collapsed~.navbar-collapse {
         transition: right 500ms ease-in-out;
@@ -184,11 +184,17 @@
     .product-list-search input, .product-list-search input:focus {
         min-width: 100%;
     }
+    .navbar-brand img {
+      max-width: 32px;
+  }
 }
 
 @media screen and (max-width:575px) {
     .navbar-collapse {
         width: 75%;
+    }
+    .navbar-user-icons a {
+      margin: 0px 0px 0px 15px;
     }
 }
 
