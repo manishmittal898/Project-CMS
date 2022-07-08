@@ -46,9 +46,8 @@ const installedModule = [
     autoDismiss: true,
     maxOpened: 5
   }),
-  MatStepperModule,
-  NgxTextEditorModule
-];
+  MatStepperModule
+  ];
 
 const sharedComponent = [FileSelectorComponent,
   HeaderComponent,

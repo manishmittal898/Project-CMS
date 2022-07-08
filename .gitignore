@@ -470,3 +470,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /CMS_API/CMS.API/Content/
+/Build/bk20220708

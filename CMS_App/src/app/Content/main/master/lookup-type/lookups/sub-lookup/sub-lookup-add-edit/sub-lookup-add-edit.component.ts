@@ -42,9 +42,9 @@ export class SubLookupAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.LookUpId = this.data.Type;
+      this.model.LookUpId = Number(this.data.Type);
       this.model.Id = this.data.Id;
-
+      this.model.SortedOrder= Number(this.model.SortedOrder),
       this._lookupService.AddUpdateLookupMaster(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success(x.Message as string);
@@ -70,8 +70,8 @@ export class SubLookupAddEditComponent implements OnInit {
           Id: this.data.Id,
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
-          SortedOrder: x.Data?.SortedOrder,
-          LookUpId: x.Data?.LookUpId,
+          SortedOrder: Number(x.Data?.SortedOrder),
+          LookUpId: Number(x.Data?.LookUpId),
         } as SubLookupMasterPostModel;
 
         this.isFileAttached=this.model.ImagePath?false:this.isFileAttached;
