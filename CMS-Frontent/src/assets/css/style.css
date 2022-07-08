@@ -798,8 +798,9 @@ font-size: 25px;
 text-align: right;
 padding: 5px 20px 0px 20px;
 }
+
 .mobile-nav-close:hover {
-color: var(--primary-color);
+  color: #ffff;
 }
 .pagination .page-link {
 border: none;
@@ -899,11 +900,14 @@ opacity: .7;
 }
 ul.dropdown-menu a {
   font-size: 14px;
+  white-space: normal;
+  word-break: normal;
 }
 ul.dropdown-menu {
   border: solid 1px #898989;
   box-shadow: none;
   border-radius: 0px;
+  max-width: 200px;
 }
 .dropdown-item.active, .dropdown-item:active {
   background-color: var(--primary-color);

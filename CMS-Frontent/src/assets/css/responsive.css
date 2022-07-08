@@ -7,6 +7,13 @@
     .navbar .nav-item:hover .dropdown-menu {
         display: block;
     }
+    header.header-fix section.nav-menus {
+      position: fixed;
+      top: 0;
+      background: #dddddd;
+      width: 100%;
+      z-index: 99999;
+  }
 
 }
 
