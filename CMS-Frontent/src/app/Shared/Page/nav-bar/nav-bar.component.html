@@ -1,22 +1,63 @@
-<nav class="navbar navbar-expand-lg navbar-light p-2">
-  <div class="container">
-    <a class="navbar-brand m-0 p-0" href="javascript:void()"> <img src="assets/images/logo-icon.png"
-        alt="First Store" /> <span>First Store</span> </a>
-    <button id="ChangeToggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#MenuNavbar">
-      <span class="navbar-toggler-icon" id="navbar-hamburger">
-        <i class="bi bi-list"></i>
-      </span>
-      <!-- <span class="navbar-toggler-icon hidden" id="navbar-close">
-        <i class="bi bi-x-lg"></i>
-      </span> -->
-    </button>
-    <div class="collapse navbar-collapse" id="MenuNavbar">
-      <ul class="navbar-nav ms-auto">
-        <a class="d-block d-lg-none mobile-nav-close" href="javascript:void()" data-bs-toggle="collapse" data-bs-target="#MenuNavbar"> <i class="bi bi-x-lg"></i></a>
-        <li class="nav-item"> <a class="nav-link active" aria-current="page" href="javascript:void()"><i
-              class="bi bi-house-door"></i> Home</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="javascript:void()"><i class="bi bi-shop"></i> Shop</a> </li>
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-light flex-wrap p-2 d-block">
+  <section class="nav-logo-and-icons">
+  <div class="container p-0">
+    <div class="row w-100 m-0">
+    <div class="col-lg-12 d-flex align-items-center justify-content-between p-0">
+    <a class="navbar-brand m-0 p-0 d-inline-flex align-items-center" href="javascript:void()">
+      <img src="assets/images/logo-icon.png"alt="StoreOne" />
+      <span>StoreOne</span>
+     </a>
+     <div class="navbar-user-icons">
+      <a href="javascript:void()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"><i class="bi bi-search"></i></a>
+      <a href="javascript:void()"><i class="bi bi-person-circle"  data-bs-placement="bottom" title="Account"></i></a>
+      <a href="javascript:void()"><i class="bi bi-bag"  data-bs-placement="bottom" title="Bag"></i></a>
+     </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<section class="nav-menus p-0 p-lg-2">
+<div class="container p-0">
+  <div class="row w-100 m-0">
+    <div class="col-lg-12 p-0">
+      <button id="ChangeToggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#MenuNavbar">
+        <span class="navbar-toggler-icon" id="navbar-hamburger">
+          <i class="bi bi-list"></i>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse" id="MenuNavbar">
+        <ul class="navbar-nav justify-content-center w-100">
+          <a class="d-block d-lg-none mobile-nav-close" href="javascript:void()" data-bs-toggle="collapse" data-bs-target="#MenuNavbar"> <i class="bi bi-x-lg"></i></a>
+          <li class="nav-item"> <a class="nav-link active" aria-current="page" href="javascript:void()"> Home</a> </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void()" id="DropDown1" data-bs-toggle="dropdown">
+              Category 1
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu 1</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 2</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 3</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 4</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 5</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 6</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 7</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 8</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 9</a></li>
+              <li><a class="dropdown-item" href="#">Submenu 10</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 2</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 3</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 4</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 5</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 6</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="javascript:void()"> Category 7</a> </li>
+        </ul>
+      </div>
     </div>
   </div>
+</div>
+</section>
 </nav>

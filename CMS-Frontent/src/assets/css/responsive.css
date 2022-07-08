@@ -7,6 +7,13 @@
     .navbar .nav-item:hover .dropdown-menu {
         display: block;
     }
+    header.header-fix section.nav-menus {
+      position: fixed;
+      top: 0;
+      background: #dddddd;
+      width: 100%;
+      z-index: 99999;
+  }
 
 }
 
@@ -32,6 +39,14 @@
     .container-sm {
         max-width: 100%;
     }
+    section.nav-logo-and-icons {
+      padding-right: 45px;
+  }
+  .nav-menus .navbar-toggler {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
     .navbar-nav li a {
         padding: 10px 20px !important;
         color: #fff !important;
@@ -68,7 +83,7 @@
         transition: right 300ms ease-in-out;
     }
     .navbar-collapse {
-        background: var(--secondary-color);
+        background: rgba(0,0,0,0.9);
     }
     .navbar-toggler.collapsed~.navbar-collapse {
         transition: right 500ms ease-in-out;
@@ -184,12 +199,30 @@
     .product-list-search input, .product-list-search input:focus {
         min-width: 100%;
     }
+    .navbar-brand img {
+      max-width: 32px;
+  }
+  .nav-menus .navbar-toggler {
+    top: 15px;
+}
 }
 
 @media screen and (max-width:575px) {
     .navbar-collapse {
         width: 75%;
     }
+    .navbar-user-icons a {
+      margin: 0px 0px 0px 15px;
+    }
+    .navbar-brand span {
+      font-size: 25px;
+  }
+  .navbar-brand img {
+    max-width: 26px;
+}
+.nav-menus .navbar-toggler {
+  top: 12px;
+}
 }
 
 

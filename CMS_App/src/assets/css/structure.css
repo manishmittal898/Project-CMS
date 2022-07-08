@@ -281,8 +281,8 @@ code {
 }
 
 .navbar .theme-brand li.theme-logo img {
-    width: 40px;
-    height: 40px;
+  max-width: 30px;
+  max-height: 30px;
 }
 
 .navbar .theme-brand li.theme-text {
@@ -1306,7 +1306,7 @@ li.menu.menu-active>a svg {
 
 #sidebar ul.menu-categories ul.submenu>li.active a,
 #sidebar ul.menu-categories ul.submenu>li a.active {
-    color: #e9ab00;
+    color: #f8c300;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     font-weight: 600;
@@ -1318,7 +1318,7 @@ li.menu.menu-active>a svg {
 
 #sidebar ul.menu-categories li.menu ul.submenu>li.active a:before,
 #sidebar ul.menu-categories ul.submenu>li a.active:before {
-    background-color: #e9ab00;
+    background-color: #f8c300;
 }
 
 #sidebar ul.menu-categories ul.submenu>li.active {
@@ -1326,11 +1326,11 @@ li.menu.menu-active>a svg {
 }
 
 #sidebar ul.menu-categories ul.submenu>li a:hover {
-    color: #e9ab00;
+  color: rgba(255,255,255,0.5);
 }
 
 #sidebar ul.menu-categories ul.submenu>li a:hover:before {
-    background-color: #e9ab00 !important;
+    background-color: rgba(255,255,255,0.5) !important;
 }
 
 #sidebar ul.menu-categories ul.submenu>li a i {

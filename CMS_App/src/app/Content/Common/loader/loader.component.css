@@ -32,11 +32,11 @@
 .loader-text::before {
   content: attr(data-text);
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
   width: 100%;
-  color: #e9ab00;
-  border-bottom: 2px solid #e9ab00;
+  color: #f8c300;
+  border-bottom: 2px solid #f8c300;
   animation: lod 2s linear infinite;
   overflow: hidden;
 }
