@@ -39,6 +39,14 @@
     .container-sm {
         max-width: 100%;
     }
+    section.nav-logo-and-icons {
+      padding-right: 45px;
+  }
+  .nav-menus .navbar-toggler {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
     .navbar-nav li a {
         padding: 10px 20px !important;
         color: #fff !important;
@@ -194,6 +202,9 @@
     .navbar-brand img {
       max-width: 32px;
   }
+  .nav-menus .navbar-toggler {
+    top: 15px;
+}
 }
 
 @media screen and (max-width:575px) {
@@ -203,6 +214,15 @@
     .navbar-user-icons a {
       margin: 0px 0px 0px 15px;
     }
+    .navbar-brand span {
+      font-size: 25px;
+  }
+  .navbar-brand img {
+    max-width: 26px;
+}
+.nav-menus .navbar-toggler {
+  top: 12px;
+}
 }
 
 
