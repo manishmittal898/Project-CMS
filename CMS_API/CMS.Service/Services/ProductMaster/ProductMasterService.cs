@@ -150,7 +150,8 @@ namespace CMS.Service.Services.ProductMaster
                     }
                     else
                     {
-                        objProduct.ImagePath = null;
+                        _fileHelper.Delete(objProduct.ImagePath);
+                                                objProduct.ImagePath = null;
                     }
 
                     objProduct.Desc = model.Desc;

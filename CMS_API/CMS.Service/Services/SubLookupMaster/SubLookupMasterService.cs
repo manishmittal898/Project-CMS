@@ -147,13 +147,14 @@ namespace CMS.Service.Services.SubLookupMaster
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                     if (!string.IsNullOrEmpty(model.ImagePath))
+                    if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
                         objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.SubLookup);
                     }
                     else
                     {
+                        _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
                     }
 
@@ -172,7 +173,7 @@ namespace CMS.Service.Services.SubLookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpId = model.LookUpId;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null :  _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
@@ -203,14 +204,14 @@ namespace CMS.Service.Services.SubLookupMaster
                 objData.IsDeleted = !objData.IsDeleted;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
                 objData.ModifiedOn = DateTime.Now;
-              //  _db.TblSubLookupMasters.Update(objData);
-               await _db.SaveChangesAsync();
+                //  _db.TblSubLookupMasters.Update(objData);
+                await _db.SaveChangesAsync();
                 return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblSubLookupMaster>(null, ResponseMessage.Fail, false, ((int)ApiStatusCode.InternalServerError),ex.Message);
+                return CreateResponse<TblSubLookupMaster>(null, ResponseMessage.Fail, false, ((int)ApiStatusCode.InternalServerError), ex.Message);
             }
 
 

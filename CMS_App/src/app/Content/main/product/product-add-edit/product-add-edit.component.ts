@@ -35,8 +35,10 @@ export class ProductAddEditComponent implements OnInit {
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
     this._activatedRoute.params.subscribe(x => {
-      this.model.Id = Number(this._activatedRoute.snapshot.params.id);
-      this.onGetDetail()
+      this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
+      if (this.model.Id > 0) {
+        this.onGetDetail();
+      }
     });
 
   }

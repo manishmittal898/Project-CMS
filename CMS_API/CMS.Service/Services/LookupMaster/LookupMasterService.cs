@@ -157,7 +157,9 @@ namespace CMS.Service.Services.LookupMaster
                     }
                     else
                     {
+                        _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
+
                     }
 
 

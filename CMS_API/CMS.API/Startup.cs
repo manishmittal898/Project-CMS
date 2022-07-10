@@ -151,7 +151,6 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
         {
             services.AddSingleton<BaseService>();
             services.AddTransient<ICommonService, CommonService>();
-
             services.AddTransient<IRoleTypeService, RoleTypeService>();
             services.AddTransient<ILookupMasterService, LookupMasterService>();
             services.AddTransient<ILookupTypeMasterService, LookupTypeMasterService>();
