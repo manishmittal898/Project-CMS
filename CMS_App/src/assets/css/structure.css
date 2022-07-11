@@ -257,7 +257,7 @@ code {
 */
 
 .header-container {
-    z-index: 1030;
+    z-index: 999;
     /* border-bottom: 1px solid #0e1726; */
 }
 
@@ -896,7 +896,7 @@ code {
     position: fixed;
     top: 53px;
     width: 100%;
-    z-index: 1029;
+    z-index: 999;
     display: flex;
 }
 
@@ -1069,7 +1069,7 @@ code {
 .sidebar-wrapper {
     width: 240px;
     position: fixed;
-    z-index: 1028;
+    z-index: 999;
     border-radius: 0px;
     transition: .600s;
     height: 100vh;

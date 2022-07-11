@@ -4450,6 +4450,10 @@ element.style {
 .default-section-info .btn {
   font-size: 20px;
 }
+.cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,0.7) !important;
+  z-index: 999 !important;
+}
 /* Manish CSS End */
 
 
