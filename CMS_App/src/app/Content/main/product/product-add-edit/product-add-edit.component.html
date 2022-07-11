@@ -152,9 +152,14 @@
         <!-- <ngx-text-editor  placeholder="Enter text here..." [spellcheck]="true" [(ngModel)]="model.Desc" formControlName="Description"
         [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"></ngx-text-editor> -->
 
-       <textarea class="form-control" [(ngModel)]="model.Desc" formControlName="Description"
+        <angular-editor  [(ngModel)]="model.Desc" formControlName="Description" [config]="editorConfig"
+          placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"
+          id="Description"></angular-editor>
+
+        <!--
+        <textarea class="form-control" [(ngModel)]="model.Desc" formControlName="Description"
           [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}" id="Description" rows="5"
-          placeholder="Description"></textarea>
+          placeholder="Description"></textarea> -->
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Description')?.hasError('required') && formgrp.get('Description')?.touched)">
           Please enter Discription</div>
@@ -162,12 +167,14 @@
 
       <div class="form-group col-md-12">
         <label>Additional Information</label>
-        <!-- <ngx-text-editor  placeholder="Enter text here..." [spellcheck]="true" [(ngModel)]="model.Summary" formControlName="Summary"
-        [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}"></ngx-text-editor> -->
-
-        <textarea class="form-control" [(ngModel)]="model.Summary" formControlName="Summary"
+        <angular-editor [(ngModel)]="model.Summary" formControlName="Summary" [config]="editorConfig"
           [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"
-          placeholder="Additional Information"></textarea>
+          placeholder="Additional Information">
+        </angular-editor>
+
+        <!-- <textarea class="form-control" [(ngModel)]="model.Summary" formControlName="Summary"
+            [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"
+            placeholder="Additional Information"></textarea> -->
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Summary')?.hasError('required') && formgrp.get('Summary')?.touched)">
           Please enter Summary...!</div>

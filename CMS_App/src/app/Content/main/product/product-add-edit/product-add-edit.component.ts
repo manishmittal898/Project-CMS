@@ -1,3 +1,4 @@
+import {  EditorConfig } from './../../../../Shared/Helper/constants';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -30,7 +31,9 @@ export class ProductAddEditComponent implements OnInit {
   });
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
-  get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
+  get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' };
+  editorConfig = EditorConfig.Config;
+
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {

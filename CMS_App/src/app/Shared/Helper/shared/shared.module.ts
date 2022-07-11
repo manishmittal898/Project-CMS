@@ -19,9 +19,8 @@ import { LoaderComponent } from 'src/app/Content/Common/loader/loader.component'
 import { NavigationComponent } from 'src/app/Content/Common/navigation/navigation.component';
 import { PageNotFoundComponent } from 'src/app/Content/Common/page-not-found/page-not-found.component';
 import { HtmlComponent } from 'src/app/Content/html/html.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgxTextEditorModule } from 'ngx-text-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -46,7 +45,8 @@ const installedModule = [
     autoDismiss: true,
     maxOpened: 5
   }),
-  MatStepperModule
+  MatStepperModule,
+  AngularEditorModule
   ];
 
 const sharedComponent = [FileSelectorComponent,
