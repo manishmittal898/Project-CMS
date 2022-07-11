@@ -896,7 +896,7 @@ code {
     position: fixed;
     top: 53px;
     width: 100%;
-    z-index: 999;
+    z-index: 99;
     display: flex;
 }
 
