@@ -21,28 +21,40 @@
 
 <div class="p-4">
 
-    <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
-        <tbody>
-            <tr>
-                <td style="width: 18%;"> <strong>Name: </strong> </td>
-                <td style="width: 32%;">{{this.model.Name | titlecase}}</td>
-                <td style="width: 18%;"><strong> Price: </strong> </td>
-                <td style="width: 32%;">₹ {{model.Price}}</td>
-            </tr>
+  <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
+    <tbody>
+      <tr>
+        <td colspan="2"><strong> Images </strong> </td>
+        <td colspan="2">
+          <div class="d-flex align-items-center mt-1 upload-content-list">
+            <a href="javascript:void()" class="small-media-items position-relative">
+              <div class="small-media-items-img"> <img onerror="this.src='assets/img/300x300.jpg'" [src]="this.model.ImagePath" /> </div>
+            </a>
 
-            <tr>
-                <td><strong> Category: </strong> </td>
-                <td>{{model.Category | titlecase}}</td>
-                <td><strong> Enter Sub Category: </strong> </td>
-                <td>{{model.SubCategory | titlecase}}</td>
-            </tr>
-
-            <tr>
-                <td><strong> Tag/Label: </strong> </td>
-                <td colspan="3">{{model.CaptionTag | titlecase}}</td>
-            </tr>
+          </div>
+        </td>
+      </tr>
 
       <tr>
+        <td style="width: 18%;"> <strong>Name: </strong> </td>
+        <td style="width: 32%;">{{this.model.Name | titlecase}}</td>
+        <td style="width: 18%;"><strong> Price: </strong> </td>
+        <td style="width: 32%;">₹ {{model.Price}}</td>
+      </tr>
+
+      <tr>
+        <td><strong> Category: </strong> </td>
+        <td>{{model.Category | titlecase}}</td>
+        <td><strong> Enter Sub Category: </strong> </td>
+        <td>{{model.SubCategory | titlecase}}</td>
+      </tr>
+
+      <tr>
+        <td><strong> Tag/Label: </strong> </td>
+        <td colspan="3">{{model.CaptionTag | titlecase}}</td>
+      </tr>
+
+      <!-- <tr>
         <td><strong> Images </strong> </td>
         <td colspan="3">
           <div class="d-flex align-items-center mt-1 upload-content-list">
@@ -58,19 +70,17 @@
           </div>
         </td>
       </tr>
-            <tr>
-                <td><strong> Discription: </strong> </td>
-                <td colspan="3" [innerHTML]="model.Desc">
+       -->
+      <tr>
+        <td><strong> Discription: </strong> </td>
+        <td colspan="3" [innerHTML]="model.Desc">
 
-                </td>
-            </tr>
+        </td>
+      </tr>
 
-            <tr>
-                <td><strong> Additional Information: </strong> </td>
-                <td colspan="3" [innerHTML]="model.Summary">
-
-
-
+      <tr>
+        <td><strong> Additional Information: </strong> </td>
+        <td colspan="3" [innerHTML]="model.Summary">
         </td>
       </tr>
 

@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _productService: ProductService) {
     _activatedRoute.params.subscribe(x => {
-    this.getList();
+      this.getList();
     })
   }
 
@@ -89,7 +89,9 @@ export class ProductsComponent implements OnInit {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this.toast.success(data.Message as string, 'Remove');
-              this.getList();
+              const idx = this.model.findIndex(x => x.Id == Id);
+              this.model[idx].IsActive = !this.model[idx].IsActive;
+              this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
             } else {
               this.toast.warning(data.Message as string, 'Server Error');
             }
@@ -109,10 +111,15 @@ export class ProductsComponent implements OnInit {
       if (result) {
         let subscription = this._productService.DeleteProductMaster(id).subscribe(
           data => {
+            debugger
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              this.getList();
+              debugger
+              const idx = this.model.findIndex(x => x.Id == id);
+              this.model.splice(idx, 1);
+              this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
+
             }
           },
           error => {

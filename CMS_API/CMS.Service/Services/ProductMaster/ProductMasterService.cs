@@ -32,7 +32,7 @@ namespace CMS.Service.Services.ProductMaster
 
 
                 var result = (from lkType in _db.TblProductMasters
-                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
                               select lkType);
                 switch (model.OrderBy)
                 {
@@ -151,7 +151,7 @@ namespace CMS.Service.Services.ProductMaster
                     else
                     {
                         _fileHelper.Delete(objProduct.ImagePath);
-                                                objProduct.ImagePath = null;
+                        objProduct.ImagePath = null;
                     }
 
                     objProduct.Desc = model.Desc;
@@ -199,12 +199,14 @@ namespace CMS.Service.Services.ProductMaster
         {
             try
             {
-                TblProductMaster objRole = new TblProductMaster();
-                objRole = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
+                TblProductMaster objProduct = new TblProductMaster();
+                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
 
-                objRole.IsActive = !objRole.IsActive;
+                objProduct.IsActive = !objProduct.IsActive;
+                objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
+                objProduct.ModifiedOn = DateTime.Now;
                 await _db.SaveChangesAsync();
-                return CreateResponse(objRole as TblProductMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)
             {
@@ -213,25 +215,25 @@ namespace CMS.Service.Services.ProductMaster
 
             }
         }
-        public async Task<ServiceResponse<TblProductMaster>> Delete(int id)
+        public async Task<ServiceResponse<TblProductMaster>> Delete(long id)
         {
             try
             {
-                TblProductMaster objRole = new TblProductMaster();
-                objRole = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
-                objRole.IsDelete = true;
+                TblProductMaster objProduct = new TblProductMaster();
+                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
 
-                var roletype = _db.TblProductMasters.Update(objRole);
-                await _db.SaveChangesAsync();
-                return CreateResponse(objRole, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                objProduct.IsDelete = (bool)true;
+                objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
+                objProduct.ModifiedOn = DateTime.Now;
+                 _db.SaveChanges();
+                return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+           
             }
             catch (Exception ex)
             {
                 return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
 
             }
-
-
         }
 
     }
