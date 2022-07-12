@@ -21,13 +21,16 @@ GO
 SET IDENTITY_INSERT [dbo].[tblUserMaster] ON 
 GO
 INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (1, N'sandeep.suthar08@gmail.com', N'Sandeep', N'Suthar', NULL, NULL, N'123', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
+INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (2, N'manish1994@gmail.com', N'Manish', N'Kumar', NULL, NULL, N'123', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
+INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (3, N'storeone@gmail.com', N'Store one', N'User', NULL, NULL, N'123', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
+
 GO
 SET IDENTITY_INSERT [dbo].[tblUserMaster] OFF
 GO
 
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
 GO
-INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (1, N'Gender', N'GENDER',0, 1,GETDATE(), 1, GETDATE(), 1, 0)
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (1, N'Gender', N'GENDER',0, 1,GETDATE(), 1, GETDATE(), 0, 0)
 GO                                                             
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (2, N'Product Category', N'Product_Category',1, 1,GETDATE(), 1, GETDATE(), 1, 0)
 GO                                                             

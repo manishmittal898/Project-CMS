@@ -66,9 +66,9 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<ProductMasterController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
-        { 
-            _productmstr.Delete(id); 
+        public async Task<object> Delete(long id)
+        {
+            return await _productmstr.Delete(id); 
         }
     }
 }

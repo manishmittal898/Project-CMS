@@ -16,7 +16,7 @@ namespace CMS.Service.Services.ProductMaster
 
         [Required]
         public string Desc { get; set; }
-        [Range(0, 999.99)]
+        [Range(0, 9999999999999)]
         public decimal? Price { get; set; }
         public long CategoryId { get; set; }
         public long SubCategoryId { get; set; }

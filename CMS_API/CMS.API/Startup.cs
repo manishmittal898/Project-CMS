@@ -150,15 +150,15 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
         private void Registerservice(IServiceCollection services)
         {
             services.AddSingleton<BaseService>();
-            services.AddTransient<ICommonService, CommonService>();
-            services.AddTransient<IRoleTypeService, RoleTypeService>();
-            services.AddTransient<ILookupMasterService, LookupMasterService>();
-            services.AddTransient<ILookupTypeMasterService, LookupTypeMasterService>();
-            services.AddTransient<IProductMasterService, ProductMasterService>();
-            services.AddTransient<IProductReviewService, ProductReviewService>();
-            services.AddTransient<ISubLookupMasterService, SubLookupMasterService>();
-            services.AddTransient<IUserMasterService, UserMasterService>();
-            services.AddTransient<IAccountService, AccountService>();
+            services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IRoleTypeService, RoleTypeService>();
+            services.AddScoped<ILookupMasterService, LookupMasterService>();
+            services.AddScoped<ILookupTypeMasterService, LookupTypeMasterService>();
+            services.AddScoped<IProductMasterService, ProductMasterService>();
+            services.AddScoped<IProductReviewService, ProductReviewService>();
+            services.AddScoped<ISubLookupMasterService, SubLookupMasterService>();
+            services.AddScoped<IUserMasterService, UserMasterService>();
+            services.AddScoped<IAccountService, AccountService>();
         }
     }
 }

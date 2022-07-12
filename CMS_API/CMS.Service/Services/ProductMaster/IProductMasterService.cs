@@ -14,7 +14,7 @@ namespace CMS.Service.Services.ProductMaster
 
         ServiceResponse<ProductMasterViewModel> GetById(int id);
         Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model);
-        Task<ServiceResponse<TblProductMaster>> Delete(int id);
+        Task<ServiceResponse<TblProductMaster>> Delete(long id);
         Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(long id);
     }
 }
