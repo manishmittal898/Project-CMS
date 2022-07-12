@@ -4,5 +4,5 @@ export const environment = {
   apiEndPoint: "http://localhost:31958/api/",
  // apiEndPoint :"http://api.storeone.co.in/api/",
 
-  IsAutoLogin: false
+  IsAutoLogin: true
 };
