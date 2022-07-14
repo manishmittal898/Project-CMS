@@ -47,11 +47,8 @@ export class LookupsComponent implements OnInit {
     })
   }
   checkColumn() {
-    debugger
     this._lookupTypeService.GetLookupTypeMaster(this.id).subscribe(x => {
-      debugger
       if (x.IsSuccess) {
-        debugger
         if (!x.Data?.IsImage) {
           this.displayedColumns = ['index', 'Name', 'SortedOrder', 'IsActive', 'Action'];
 
