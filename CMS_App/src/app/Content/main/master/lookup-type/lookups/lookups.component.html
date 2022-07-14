@@ -59,7 +59,7 @@
           aria-describedby="zero-config_info" (matSortChange)="sortData($event)">
 
           <ng-container matColumnDef="index">
-            <th mat-header-cell *matHeaderCellDef>#</th>
+            <th style="width: 30px" mat-header-cell *matHeaderCellDef>#</th>
             <td mat-cell *matCellDef="let element; let i = index;">
               {{(indexModel.Page-1)*indexModel.PageSize +(i+1)}}</td>
           </ng-container>
