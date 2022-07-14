@@ -3190,24 +3190,24 @@ img {
 }
 
 .page-not-found h1 {
-  font-size: 55px !important;
-  font-weight: 800 !important;
-  color: #f8c300;
-  margin-bottom: 40px !important;
+    font-size: 55px !important;
+    font-weight: 800 !important;
+    color: #f8c300;
+    margin-bottom: 40px !important;
 }
 
 .page-not-found p {
-  font-size: 20px;
-  color: #000;
-  line-height: 30px;
+    font-size: 20px;
+    color: #000;
+    line-height: 30px;
 }
 
 @media screen and (max-width:767px) {
-  .page-not-found h1 {
-    font-size: 32px !important;
+    .page-not-found h1 {
+        font-size: 32px !important;
+    }
 }
 
-}
 tr.mat-header-row {
     height: auto !important;
 }
@@ -3917,7 +3917,7 @@ table.table.table-striped.dataTable.table-header.table-blue tbody tr:nth-of-type
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 20px #ededed;
-    margin-top: 15px;
+    margin-top: 5px;
     display: flex;
     justify-content: space-between;
 }
@@ -4352,12 +4352,14 @@ form .icon-login-form {
     box-shadow: 0 0 20px #e3e3e3;
     padding: 10px;
 }
+
 .form-grp-w-border .table-responsive {
-  box-shadow: none;
-  padding: 0px;
+    box-shadow: none;
+    padding: 0px;
 }
+
 .rounded-tab-icon .table-responsive {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .lsit-category-img {
@@ -4424,44 +4426,116 @@ table.table .switch.s-outline[class*="s-outline-"] .slider:before {
 }
 
 element.style {
-  transform: none;
-  /* padding: 0px; */
+    transform: none;
+    /* padding: 0px; */
 }
+
 .mat-custom-modal .mat-dialog-container {
-  padding: 0px !important;
-  overflow: hidden !important;
-  border-radius: 24px !important;
+    padding: 0px !important;
+    overflow: hidden !important;
+    border-radius: 24px !important;
 }
+
 .default-section-img {
-  max-width: 400px;
-  margin: auto auto 20px auto;
+    max-width: 400px;
+    margin: auto auto 20px auto;
 }
 
 .default-section-info h1 {
-  text-transform: capitalize;
-  font-size: 38px !important;
-  color: #f8c300;
+    text-transform: capitalize;
+    font-size: 38px !important;
+    color: #f8c300;
 }
+
+
 .default-section-info p {
-  font-size: 16px;
-  line-height: 24px;
-  margin: 20px auto !important;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 20px auto !important;
 }
+
 .default-section-info .btn {
-  font-size: 20px;
+    font-size: 20px;
 }
+
 .cdk-overlay-dark-backdrop {
-  background: rgba(0,0,0,0.7) !important;
-  z-index: 999 !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    z-index: 999 !important;
 }
+
+.swal2-container.swal2-center>.swal2-popup {
+    border-radius: 30px;
+}
+
+.swal2-styled.swal2-confirm {
+    background: #009688 !important;
+}
+
+.swal2-html-container {
+    margin-top: 0px !important;
+}
+
+.swal2-title {
+    font-size: 30px !important;
+    margin-bottom: 12px !important;
+}
+
+.swal2-icon {
+    margin-top: 25px !important;
+}
+
+.swal2-popup {
+    width: 100% !important;
+    max-width: 430px !important;
+}
+
+.ng-select {
+    z-index: 1;
+}
+
+
+/*You can use [title] selector as well*/
+
+[data-title] {
+    position: relative;
+}
+
+[data-title]:hover::before {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -26px;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 2px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+[data-title]:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
+    display: inline-block;
+    color: #fff;
+    border: 8px solid transparent;
+    border-bottom: 8px solid #000;
+}
+
+
 /* Manish CSS End */
 
 
 /* Responsive Start */
+
 @media (max-width: 767px) {
-  .default-section-info h1 {
-    font-size: 30px !important;
-    line-height: 40px !important;
+    .default-section-info h1 {
+        font-size: 30px !important;
+        line-height: 40px !important;
+    }
 }
-}
+
+
 /* Responsive End */

@@ -69,7 +69,7 @@
                             "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
                         ],
                         "scripts": [
-                            "src/assets/js/libs/jquery-3.1.1.min.js",
+                            "src/assets/js/custom/jquery3.5.min.js",
                             "src/assets/bootstrap/js/popper.min.js",
                             "src/assets/bootstrap/js/bootstrap.min.js",
                             "src/assets/js/app.js",
@@ -79,7 +79,8 @@
                             "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
                             "src/assets/plugins/lightbox/photoswipe.min.js",
                             "src/assets/plugins/lightbox/photoswipe-ui-default.min.js",
-                            "src/assets/plugins/lightbox/custom-photswipe.js"
+                            "src/assets/plugins/lightbox/custom-photswipe.js",
+                            "src/assets/js/custom/index.bundle.min.js"
                         ]
                     },
                     "configurations": {
@@ -189,7 +190,7 @@
                             "src/assets/plugins/lightbox/custom-photswipe.css"
                         ],
                         "scripts": [
-                            "src/assets/js/libs/jquery-3.1.1.min.js",
+                          "src/assets/js/custom/jquery3.5.min.js",
                             "src/assets/bootstrap/js/popper.min.js",
                             "src/assets/bootstrap/js/bootstrap.min.js",
                             "src/assets/js/app.js",
@@ -199,7 +200,8 @@
                             "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
                             "src/assets/plugins/lightbox/photoswipe.min.js",
                             "src/assets/plugins/lightbox/photoswipe-ui-default.min.js",
-                            "src/assets/plugins/lightbox/custom-photswipe.js"
+                            "src/assets/plugins/lightbox/custom-photswipe.js",
+                            "src/assets/js/custom/index.bundle.min.js"
 
                         ]
                     }

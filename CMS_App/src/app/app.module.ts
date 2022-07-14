@@ -14,10 +14,12 @@ import { HtmlComponent } from './Content/html/html.component';
 import { LoginComponent } from './Content/Common/login/login.component';
 import { MainModule } from "./Content/main/main.module";
 import { RouterModule } from "@angular/router";
+import { AppNoRecordsComponent } from './Content/Common/app-no-records/app-no-records.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    AppNoRecordsComponent,
   ],
   imports: [
     CommonModule,
