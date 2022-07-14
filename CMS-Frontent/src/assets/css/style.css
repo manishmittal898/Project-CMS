@@ -914,6 +914,7 @@ ul.dropdown-menu {
   box-shadow: none;
   border-radius: 0px;
   max-width: 200px;
+  transition: all 0.3ms ease-in-out;
 }
 .dropdown-item.active, .dropdown-item:active {
   background-color: var(--primary-color);
@@ -946,6 +947,7 @@ ul.dropdown-menu {
   border: 8px solid transparent;
   border-bottom: 8px solid #000;
 }
+
 
 
 /* CUSTOM CSS END */
