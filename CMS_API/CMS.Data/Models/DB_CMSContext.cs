@@ -242,7 +242,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1AE5885B08");
+                    .HasName("PK__tblRoleT__8AFACE1AB19038E0");
 
                 entity.ToTable("tblRoleType");
 
@@ -313,7 +313,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C3C26F0B5");
+                    .HasName("PK__tblUserM__1788CC4CDF9836FC");
 
                 entity.ToTable("tblUserMaster");
 
@@ -351,7 +351,7 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__6383C8BA");
+                    .HasConstraintName("FK__tblUserMa__RoleI__6477ECF3");
             });
 
             OnModelCreatingPartial(modelBuilder);

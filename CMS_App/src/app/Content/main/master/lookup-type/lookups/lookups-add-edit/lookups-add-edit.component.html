@@ -21,7 +21,7 @@
               Please Enter <strong>Name</strong>...!</div>
           </div>
 
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-12" *ngIf="this.iSImageVisible">
             <label>Image</label>
 
             <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">

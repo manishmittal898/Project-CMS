@@ -7,6 +7,7 @@ import { LookupMasterPostModel, LookupService } from '../../../../../../Shared/S
 import { CommonService } from '../../../../../../Shared/Services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
+import { LookupTypeService } from 'src/app/Shared/Services/Master/lookup-type.service';
 
 @Component({
   selector: 'app-lookups-add-edit',
@@ -22,12 +23,30 @@ export class LookupsAddEditComponent implements OnInit {
     SortedOrder: [undefined, Validators.required],
     ImagePath: [undefined, Validators.required],
   });
+  iSImageVisible = false;
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
-  constructor(public dialogRef: MatDialogRef<LookupsAddEditComponent>, private readonly _lookupService: LookupService,
+  constructor(public dialogRef: MatDialogRef<LookupsAddEditComponent>, private readonly _lookupService: LookupService, private readonly _lookupTypeService: LookupTypeService,
     private readonly fb: FormBuilder, public _commonService: CommonService, private readonly toast: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: { Id: number, Type: number, Heading: string }) { }
+    @Inject(MAT_DIALOG_DATA) public data: { Id: number, Type: number, Heading: string }) {
+
+    this._lookupTypeService.GetLookupTypeMaster(this.data.Type).subscribe(x => {
+      debugger
+      if (x.IsSuccess) {
+        if (!x.Data?.IsImage) {
+
+          this.formgrp.get('ImagePath')?.clearValidators();
+          this.formgrp.get('ImagePath')?.updateValueAndValidity();
+          this.iSImageVisible = false;
+        } else {
+          this.iSImageVisible = true;
+          this.formgrp.get('ImagePath')?.setValidators([Validators.required]);
+          this.formgrp.get('ImagePath')?.updateValueAndValidity();
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
     if (this.data.Id > 0) {

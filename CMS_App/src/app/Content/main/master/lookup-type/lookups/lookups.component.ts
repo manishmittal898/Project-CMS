@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IndexModel } from 'src/app/Shared/Helper/common-model';
 import { Message } from 'src/app/Shared/Helper/constants';
 import { CommonService } from 'src/app/Shared/Services/common.service';
+import { LookupTypeService } from 'src/app/Shared/Services/Master/lookup-type.service';
 import { LookupMasterModel, LookupService } from '../../../../../Shared/Services/Master/lookup.service';
 import { LookupsAddEditComponent } from './lookups-add-edit/lookups-add-edit.component';
 
@@ -29,20 +30,41 @@ export class LookupsComponent implements OnInit {
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
+  iSImageVisible = true;
 
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _lookupService: LookupService,
+    private readonly toast: ToastrService, private _lookupService: LookupService, private readonly _lookupTypeService: LookupTypeService,
     public dialog: MatDialog
 
   ) {
+
+
     _activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.typeId;
       this.pageName = this._activatedRoute.snapshot.params.name;
-
+      this.checkColumn()
       this.getList();
     })
   }
+  checkColumn() {
+    debugger
+    this._lookupTypeService.GetLookupTypeMaster(this.id).subscribe(x => {
+      debugger
+      if (x.IsSuccess) {
+        debugger
+        if (!x.Data?.IsImage) {
+          this.displayedColumns = ['index', 'Name', 'SortedOrder', 'IsActive', 'Action'];
 
+          this.iSImageVisible = false;
+
+        } else {
+          this.displayedColumns = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
+
+          this.iSImageVisible = true;
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.getList();
