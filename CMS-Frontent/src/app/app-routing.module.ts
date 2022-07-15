@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { HtmlComponent } from './Shared/Page/html/html.component';
 
 const routes: Routes = [
   {
-    path: "html",
+    path: "index",
     loadChildren: () => import("./Pages/html-pages/html-pages.module").then(m => m.HtmlPagesModule)
   },
-  { path: '', redirectTo: 'html', pathMatch: 'full' },
-  { path: '**', redirectTo: 'html' },
+  { path: 'html-page', component: HtmlComponent },
+  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: '**', redirectTo: 'index' },
 
 ];
 

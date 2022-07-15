@@ -976,7 +976,7 @@ label.form-check-label {
   color: #707070;
 }
 select.select-sm {
-  border: solid 1px #ebebeb;
+  border: none;
 }
 select:focus-visible {
   outline: none;
