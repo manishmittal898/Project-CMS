@@ -4447,7 +4447,6 @@ element.style {
     color: #f8c300;
 }
 
-
 .default-section-info p {
     font-size: 16px;
     line-height: 24px;
@@ -4522,6 +4521,10 @@ element.style {
     color: #fff;
     border: 8px solid transparent;
     border-bottom: 8px solid #000;
+}
+
+.ng-select .ng-select-container {
+    border-color: #e2e2e2;
 }
 
 
