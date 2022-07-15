@@ -12,15 +12,18 @@ namespace CMS.Service.Services.ProductMaster
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public string ImagePath { get; set; }
 
         [Required]
+        public string ImagePath { get; set; }
+
         public string Desc { get; set; }
         [Range(0, 9999999999999)]
         public decimal? Price { get; set; }
+
+        [Required]
         public long CategoryId { get; set; }
-        public long SubCategoryId { get; set; }
-        public long CaptionTagId { get; set; }
+        public long? SubCategoryId { get; set; }
+        public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
       
     }
@@ -32,7 +35,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public long CategoryId { get; set; }
-        public long SubCategoryId { get; set; }
+        public long? SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }

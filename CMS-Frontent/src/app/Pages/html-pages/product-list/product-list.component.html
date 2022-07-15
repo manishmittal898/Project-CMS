@@ -5,7 +5,7 @@
       <div class="col-lg-12">
         <ol class="breadcrumb m-0">
           <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Product name</li>
+          <li class="breadcrumb-item active" aria-current="page">Categorie name</li>
         </ol>
       </div>
     </div>
@@ -17,58 +17,172 @@
 
 
 <!-- Product List Start -->
-<Section class="product-page mt-4">
+<Section class="product-page mt-4 mt-md-5">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 d-md-flex justify-content-between align-items-center mb-4">
-        <div class="section-title text-center text-md-start m-0">StoreOne Category</div>
-        <div class="product-list-search position-relative">
-          <input type="search" placeholder="Search..">
-          <button type="submit"><i class="bi bi-search"></i></button>
-        </div>
-      </div>
-
       <div class="col-lg-3 col-md-4">
-        <div class="product-category-sidebar">
-          <a class="d-inline-flex align-items-center d-md-none product-category-btn text-center" data-bs-toggle="offcanvas" href="#Btn-Toogle1">
-            <i class="bi bi-list-nested me-2"></i>
-            <span>Category</span>
+        <div class="product-filter-sidebar">
+          <a class="d-inline-flex align-items-center d-md-none product-filter-btn text-center"
+            data-bs-toggle="offcanvas" href="#Btn-Toogle1">
+            <i class="bi bi-funnel me-1"></i>
+            <span>Show Filter</span>
           </a>
-          <div class="aside-category bd-gradient-s-1 offcanvas offcanvas-start" tabindex="-1" id="Btn-Toogle1">
+          <div class="product-filter  offcanvas offcanvas-start" tabindex="-1" id="Btn-Toogle1">
             <div class="offcanvas-header d-flex d-md-none pt-0 px-0">
-              <h5 class="offcanvas-title">Current Category Name</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <h6 class="offcanvas-title text-muted">Filter</h6>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
             </div>
-            <a href="javascript:void(0)" class="active">Category name 1</a>
-            <a href="javascript:void(0)">Category name 2</a>
-            <a href="javascript:void(0)">Category name 3</a>
-            <a href="javascript:void(0)">Category name 4</a>
-            <a href="javascript:void(0)">Category name 5</a>
-            <a href="javascript:void(0)">Category name 6</a>
-            <a href="javascript:void(0)">Category name 7</a>
-            <a href="javascript:void(0)">Category name 8</a>
-            <a href="javascript:void(0)">Category name 9</a>
+
+            <div class="product-filterItems product-filterItems-w-checkbox mb-4">
+              <div class="product-filterItems-header mb-3">
+                <h6 class="m-0 text-uppercase">Categories</h6>
+              </div>
+              <div class="product-filterItems-body">
+                <div class="d-flex align-items-center mb-1">
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" id="Check1">
+                    <label class="form-check-label ms-2" for="Check1">
+                      Bedsheets
+                    </label>
+                  </div>
+                  <span class="ms-auto">241</span>
+                </div>
+                <div class="d-flex align-items-center mb-1">
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" checked id="Check2">
+                    <label class="form-check-label ms-2" for="Check2">
+                      Fitted Sheets
+                    </label>
+                  </div>
+                  <span class="ms-auto">268</span>
+                </div>
+                <div class="d-flex align-items-center mb-1">
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" id="Check3">
+                    <label class="form-check-label ms-2" for="Check3">
+                      Comforter & Quilts
+                    </label>
+                  </div>
+                  <span class="ms-auto">98</span>
+                </div>
+                <div class="d-flex align-items-center mb-1">
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" value="" id="Check4">
+                    <label class="form-check-label ms-2" for="Check4">
+                      Solids & Whites
+                    </label>
+                  </div>
+                  <span class="ms-auto">598</span>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>
 
       <div class="col-lg-9 col-md-8 mt-4 mt-md-0">
+
         <div class="row ms-0 ms-lg-3">
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="product-details.html" class="product-list-items">
-                <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
-                    <img src="assets/images/no-img.svg" alt="" />
-                    <div class="product-list-hover">
-                        <button type="button" class="product-list-hover-items" data-bs-toggle="tooltip" data-bs-placement="top" title="Enquiry"><i class="bi bi-whatsapp"></i></button>
-                     </div>
+          <div class="col-lg-12">
+            <div
+              class="product-collection-header-filter d-flex align-items-center justify-content-between mb-4 font-13">
+              <div class="d-none d-md-block">Showing 1–12 of <strong> 20 </strong> results</div>
+              <div>
+                <h4 class="m-0 font-w-400 product-collection-header-title">Fitted Sheets</h4>
+              </div>
+              <div class="d-flex">
+                <div class="product-sortby-filter me-3">
+                  <select class="select-sm">
+                    <option>Sort by:</option>
+                    <option>Price (L to H)</option>
+                    <option>Price (H to L)</option>
+                  </select>
                 </div>
-                <div class="product-list-info">
-                    <h3>Product name</h3>
-                    <p>₹ 975</p>
+                <!-- <div class="product-show-count d-none d-md-block">
+                <label class="me-1">Show:</label>
+                <select class="select-sm">
+                  <option>6</option>
+                  <option>12</option>
+                  <option>18</option>
+                  <option>24</option>
+                </select>
+              </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- Product Start -->
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+            <a href="product-details.html" class="product-list-items">
+              <div
+                class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
+                <img src="assets/images/no-img.svg" alt="" />
+                <div class="product-list-hover">
+                  <button type="button" class="product-list-hover-items" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Enquiry"><i class="bi bi-whatsapp"></i></button>
                 </div>
+              </div>
+              <div class="product-list-info">
+                <h3>Product name</h3>
+                <p>₹ 975</p>
+              </div>
             </a>
-        </div>
+          </div>
+          <!-- Product End -->
+
+          <!-- Product Start -->
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <!-- Product End -->
+          <!-- Product Start -->
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <!-- Product End -->
+          <!-- Product Start -->
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <!-- Product End -->
+          <!-- Product Start -->
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
           <!-- Product End -->
 
           <!-- Product Start -->
@@ -123,7 +237,6 @@
             </a>
           </div>
           <!-- Product End -->
-
           <!-- Product Start -->
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
             <a href="product-details.html" class="product-list-items">
@@ -163,7 +276,6 @@
             </a>
           </div>
           <!-- Product End -->
-
           <div class="col-lg-12 mt-4">
             <nav>
               <ul class="pagination justify-content-center">

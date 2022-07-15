@@ -142,7 +142,7 @@ namespace CMS.Service.Services.ProductMaster
 
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
-                    objProduct.SubCategoryId = model.SubCategoryId;
+                    objProduct.SubCategoryId = model.SubCategoryId.HasValue ? model.SubCategoryId :null;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
@@ -225,9 +225,9 @@ namespace CMS.Service.Services.ProductMaster
                 objProduct.IsDelete = (bool)true;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                 _db.SaveChanges();
+                _db.SaveChanges();
                 return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
-           
+
             }
             catch (Exception ex)
             {

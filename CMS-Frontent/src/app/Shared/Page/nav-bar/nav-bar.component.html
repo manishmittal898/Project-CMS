@@ -8,9 +8,9 @@
       <span>StoreOne</span>
      </a>
      <div class="navbar-user-icons">
-      <a href="javascript:void()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"><i class="bi bi-search"></i></a>
-      <a href="javascript:void()"><i class="bi bi-person-circle"  data-bs-placement="bottom" title="Account"></i></a>
-      <a href="javascript:void()"><i class="bi bi-bag"  data-bs-placement="bottom" title="Bag"></i></a>
+      <a href="javascript:void()" data-title="Search" data-bs-toggle="offcanvas" data-bs-target="#GlobalSearch"><i class="bi bi-search"></i></a>
+      <a href="javascript:void()" data-title="Account"><i class="bi bi-person-circle"></i></a>
+      <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i class="bi bi-bag"></i></a>
      </div>
     </div>
 
@@ -61,3 +61,42 @@
 </div>
 </section>
 </nav>
+
+
+<!-- Global Search Start -->
+<div class="offcanvas offcanvas-top global-search p-2 p-md-3" tabindex="-1" id="GlobalSearch">
+  <div class="text-end mb-3 mb-md-1">
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="global-search-bar position-relative d-flex mb-2">
+          <input type="text" class="form-control global-search-control" placeholder="WHAT ARE YOU LOOKING FOR?"/>
+          <button type="submit"><i class="bi bi-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Global Search End -->
+
+<!-- Cart SideBar Start -->
+<div class="offcanvas offcanvas-end p-3 cart-sidebar" tabindex="-1" id="CartSideBar">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="font-w-400 m-0">MY Cart</h5>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="cart-sidebar-body">
+  <div class="cart-sidebar-empty text-center">
+    <div class="cart-sidebar-empty-icon">
+    <i class="bi bi-bag-x"></i>
+  </div>
+    <p class="my-3">Your basket is currently empty.</p>
+    <a _ngcontent-mkt-c20="" href="javascript:void()" class="btn btn-default px-4 text-uppercase btn-border">Continue Shopping <i class="bi bi-arrow-right ms-1"></i></a>
+  </div>
+</div>
+
+</div>
+<!-- Cart SideBar End -->
+
