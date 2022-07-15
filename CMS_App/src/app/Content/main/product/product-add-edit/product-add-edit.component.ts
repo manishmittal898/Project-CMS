@@ -22,9 +22,9 @@ export class ProductAddEditComponent implements OnInit {
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
     Price: [undefined, Validators.required],
-    Caption: [undefined, Validators.required],
+    Caption: [undefined,],
     Category: [undefined, Validators.required],
-    SubCategory: [undefined, Validators.required],
+    SubCategory: [undefined],
     Summary: [undefined],
     Description: [undefined],
     ImagePath: [undefined, Validators.required],

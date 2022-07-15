@@ -3,7 +3,7 @@
     [Name]       NVARCHAR (2000) NOT NULL,
     [ImagePath]        NVARCHAR (1000) NULL,
     [CategoryId]       BIGINT NOT NULL,
-    [SubCategoryId]       BIGINT NOT NULL,
+    [SubCategoryId]       BIGINT NULL,
     [Desc]       NTEXT NULL,
     [Price]      DECIMAL (18)   NULL,
     [CaptionTagId]    BIGINT NULL,

@@ -201,7 +201,6 @@ namespace CMS.Data.Models
                 entity.HasOne(d => d.SubCategory)
                     .WithMany(p => p.TblProductMasters)
                     .HasForeignKey(d => d.SubCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_SubCategoryId");
             });
 
@@ -242,7 +241,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1AB19038E0");
+                    .HasName("PK__tblRoleT__8AFACE1AEE28A689");
 
                 entity.ToTable("tblRoleType");
 
@@ -313,7 +312,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4CDF9836FC");
+                    .HasName("PK__tblUserM__1788CC4C0C10F0CE");
 
                 entity.ToTable("tblUserMaster");
 

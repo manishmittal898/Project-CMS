@@ -16,7 +16,7 @@ namespace CMS.Data.Models
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public long CategoryId { get; set; }
-        public long SubCategoryId { get; set; }
+        public long? SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }
