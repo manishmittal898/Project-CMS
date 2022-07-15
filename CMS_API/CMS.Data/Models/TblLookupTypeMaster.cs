@@ -22,6 +22,7 @@ namespace CMS.Data.Models
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
+        public bool IsImage { get; set; }
 
         public virtual TblUserMaster CreatedByNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }

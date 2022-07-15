@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lookup-type-add-edit.component.scss']
 })
 export class LookupTypeAddEditComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+ constructor() { }
+ ngOnInit(): void {
   }
-
 }
