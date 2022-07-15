@@ -4447,7 +4447,6 @@ element.style {
     color: #f8c300;
 }
 
-
 .default-section-info p {
     font-size: 16px;
     line-height: 24px;
@@ -4524,9 +4523,10 @@ element.style {
     border-bottom: 8px solid #000;
 }
 
-li.sub-menu-active a {
-  color: red !important;
+.ng-select .ng-select-container {
+    border-color: #e2e2e2;
 }
+
 
 /* Manish CSS End */
 
