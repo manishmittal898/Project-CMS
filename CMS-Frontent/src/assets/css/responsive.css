@@ -19,6 +19,10 @@
     z-index: 99999;
     left: 0;
   }
+  .product-filter-sidebar {
+    position: sticky;
+    top: 55px;
+}
 
 }
 
@@ -179,7 +183,7 @@ ul.dropdown-menu {
     display: none;
   }
 
-  .aside-category {
+  .product-filter {
     display: block !important;
     transform: none;
     position: static;
@@ -190,7 +194,7 @@ ul.dropdown-menu {
 }
 
 @media screen and (max-width:767px) {
-  .aside-category {
+  .product-filter {
     box-shadow: none;
     background: #fff;
     border-radius: 0px;
@@ -292,6 +296,12 @@ ul.dropdown-menu {
   .home-category-d-1 .home-category-items-caption {
     font-size: 13px;
   }
+  .product-collection-header-title {
+    max-width: 230px;
+}
+.global-search-control {
+  font-size: 14px;
+}
 }
 
 
