@@ -4524,6 +4524,9 @@ element.style {
     border-bottom: 8px solid #000;
 }
 
+li.sub-menu-active a {
+  color: red !important;
+}
 
 /* Manish CSS End */
 

@@ -29,9 +29,14 @@ export class LookupsComponent implements OnInit {
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
-  totalRecords: number = 0;
+  totalRecords = 0;
   iSImageVisible = true;
-
+  noRecordData = {
+    subject: 'Can you please add your first record.',
+    Description: undefined,
+    url: undefined,
+    urlLable: 'Create'
+  };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _lookupService: LookupService, private readonly _lookupTypeService: LookupTypeService,
     public dialog: MatDialog
@@ -74,7 +79,7 @@ export class LookupsComponent implements OnInit {
       if (response.IsSuccess) {
         this.model = response.Data as LookupMasterModel[];
         this.dataSource = new MatTableDataSource<LookupMasterModel>(this.model);
-        this.totalRecords = response.TotalRecord as number;
+        this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
         if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -97,7 +102,7 @@ export class LookupsComponent implements OnInit {
 
   onSearch() {
     this.indexModel.Page = 1;
-    this.getList();
+        this.getList();
   }
 
   onPaginateChange(event: any) {

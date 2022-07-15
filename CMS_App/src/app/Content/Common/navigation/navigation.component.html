@@ -4,7 +4,7 @@
   <nav id="sidebar">
     <div class="shadow-bottom"></div>
     <ul class="list-unstyled menu-categories" id="accordionExample">
-      <li class="menu" routerLinkActive="menu-active">
+      <li class="menu" routerLinkActive="menu-active"  [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/admin" aria-expanded="false" class="dropdown-toggle">
           <div class="">
             <i class="bi bi-house-door"></i>
@@ -16,7 +16,7 @@
       </li>
 
 
-      <li class="menu">
+      <li class="menu" routerLinkActive="menu-active"  >
         <a href="#Dropdown-menu-2" data-toggle="collapse" data-active="true" aria-expanded="true"
           class="dropdown-toggle">
           <div class="">
@@ -30,16 +30,16 @@
           <span class="shape2"></span>
         </a>
         <ul class="collapse submenu list-unstyled" id="Dropdown-menu-2" data-parent="#accordionExample">
-          <li>
-            <a routerLink="./product"> <i class="bi bi-list-check"></i> List </a>
+          <li routerLinkActive="sub-menu-active" >
+            <a routerLink="./product/list"> <i class="bi bi-list-check"></i> List </a>
           </li>
-          <li>
+          <li routerLinkActive="sub-menu-active" >
             <a routerLink="./product/add"> <i class="bi bi-plus-circle"></i> Add New </a>
           </li>
         </ul>
       </li>
 
-      <li class="menu">
+      <li class="menu" routerLinkActive="menu-active">
         <a href="#Dropdown-menu-3" data-toggle="collapse" data-active="true" aria-expanded="true"
           class="dropdown-toggle">
           <div class="">
@@ -53,7 +53,7 @@
           <span class="shape2"></span>
         </a>
         <ul class="collapse submenu list-unstyled" id="Dropdown-menu-3" data-parent="#accordionExample">
-          <li *ngFor="let itm of dropDown.ddlLookupTypeMaster">
+          <li  *ngFor="let itm of dropDown.ddlLookupTypeMaster" routerLinkActive="sub-menu-active" >
             <a routerLink="./master/{{itm.Text}}/{{itm.Value}}"> <i class="bi bi-bookmarks"></i> {{itm.Text| titlecase}} </a>
           </li>
 

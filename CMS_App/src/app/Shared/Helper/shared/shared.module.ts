@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from 'src/app/Content/Common/page-not-found/pag
 import { HtmlComponent } from 'src/app/Content/html/html.component';
 import { RouterModule } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AppNoRecordsComponent } from 'src/app/Content/Common/app-no-records/app-no-records.component';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -47,14 +48,16 @@ const installedModule = [
   }),
   MatStepperModule,
   AngularEditorModule
-  ];
+];
 
-const sharedComponent = [FileSelectorComponent,
+const sharedComponent = [
+  FileSelectorComponent,
   HeaderComponent,
   FooterComponent,
   PageNotFoundComponent,
   NavigationComponent,
   LoaderComponent,
+  AppNoRecordsComponent
 
 ];
 
@@ -74,6 +77,6 @@ const sharedComponent = [FileSelectorComponent,
     installedModule,
     sharedComponent,
   ],
-  entryComponents:[NavigationComponent]
+  entryComponents: [NavigationComponent]
 })
 export class SharedModule { }

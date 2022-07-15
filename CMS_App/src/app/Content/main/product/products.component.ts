@@ -30,7 +30,12 @@ export class ProductsComponent implements OnInit {
   { Value: 'CaptionTag', Text: 'Caption Tag' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
-
+  noRecordData = {
+    subject: 'Can you please add your first product.',
+    Description: "You haven't added product yet. please add your new products",
+    url: '../add',
+    urlLable: 'Add New Product'
+  };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _productService: ProductService) {
     _activatedRoute.params.subscribe(x => {
@@ -47,6 +52,7 @@ export class ProductsComponent implements OnInit {
 
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
+        debugger
         this.model = response.Data as ProductMasterViewModel[];
         this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
         this.totalRecords = response.TotalRecord as number;
