@@ -8,7 +8,6 @@ namespace CMS.Data.Models
     public partial class TblProductImage
     {
         public long Id { get; set; }
-        public string FileName { get; set; }
         public string FilePath { get; set; }
         public long? ProductId { get; set; }
         public DateTime CreatedOn { get; set; }

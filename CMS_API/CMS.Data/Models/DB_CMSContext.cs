@@ -123,8 +123,6 @@ namespace CMS.Data.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.FileName).HasMaxLength(250);
-
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -241,7 +239,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1AEE28A689");
+                    .HasName("PK__tblRoleT__8AFACE1A750C2A0B");
 
                 entity.ToTable("tblRoleType");
 
@@ -312,7 +310,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C0C10F0CE");
+                    .HasName("PK__tblUserM__1788CC4C1AEC9452");
 
                 entity.ToTable("tblUserMaster");
 

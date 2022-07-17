@@ -28,18 +28,18 @@ namespace CMS.API.Areas.Admin.Controllers
         public async Task<object> GetList(IndexModel model)
         {
             return await _productmstr.GetList(model);
-        } 
+        }
 
         // GET api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public object Get(int id)
+        public object Get(long id)
         {
             return _productmstr.GetById(id);
         }
 
         // POST api/<ProductMasterController>
         [HttpPost]
-        public async Task<object> Post( ProductMasterPostModel model)
+        public async Task<object> Post(ProductMasterPostModel model)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,15 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpDelete("{id}")]
         public async Task<object> Delete(long id)
         {
-            return await _productmstr.Delete(id); 
+            return await _productmstr.Delete(id);
         }
+
+        // DELETE api/<ProductMasterController>/5
+        [HttpDelete("{id}")]
+        public async Task<object> DeleteProductFile(long id)
+        {
+            return await _productmstr.DeleteProductFile(id);
+        }
+
     }
 }

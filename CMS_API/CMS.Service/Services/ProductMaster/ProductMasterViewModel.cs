@@ -25,12 +25,12 @@ namespace CMS.Service.Services.ProductMaster
         public long? SubCategoryId { get; set; }
         public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
-      
+
+        public List<string>? Files { get; set; }
     }
 
     public class ProductMasterViewModel
     {
-
         public long Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
@@ -49,8 +49,16 @@ namespace CMS.Service.Services.ProductMaster
 
         public string CaptionTag { get; set; }
         public string Category { get; set; }
- 
         public string SubCategory { get; set; }
+        public List<ProductImageViewModel>? Files { get; set; }
 
     }
+    public class ProductImageViewModel
+    {
+        public long Id { get; set; }
+        public string FilePath { get; set; }
+        public long? ProductId { get; set; }
+    }
+
+
 }

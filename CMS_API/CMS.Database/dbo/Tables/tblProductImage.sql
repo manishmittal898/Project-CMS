@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[tblProductImage] (
     [Id]         BIGINT         IDENTITY (1, 1) NOT NULL,
-    [FileName]   NVARCHAR (250) NULL,
     [FilePath]   NVARCHAR(MAX)         NULL,
     [Product_Id] BIGINT            NULL,
     [CreatedOn]  DATETIME       DEFAULT (getdate()) NOT NULL,

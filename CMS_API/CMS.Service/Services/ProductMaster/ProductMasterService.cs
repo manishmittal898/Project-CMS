@@ -92,7 +92,7 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
-        public ServiceResponse<ProductMasterViewModel> GetById(int id)
+        public ServiceResponse<ProductMasterViewModel> GetById(long id)
         {
             ServiceResponse<ProductMasterViewModel> ObjResponse = new ServiceResponse<ProductMasterViewModel>();
             try
@@ -118,8 +118,13 @@ namespace CMS.Service.Services.ProductMaster
                     ModifiedOn = x.ModifiedOn,
                     IsActive = x.IsActive.Value,
                     IsDelete = x.IsDelete
+                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var productFiles = GetProductFile(id).Result;
+                if (productFiles.IsSuccess)
+                {
+                    detail.Files = productFiles.Data;
                 }
-                    ).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+
                 ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
@@ -136,13 +141,14 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
                 TblProductMaster objProduct = new TblProductMaster();
+                List<TblProductImage> productImages = new List<TblProductImage>();
                 if (model.Id > 0)
                 {
                     objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == model.Id);
 
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
-                    objProduct.SubCategoryId = model.SubCategoryId.HasValue ? model.SubCategoryId :null;
+                    objProduct.SubCategoryId = model.SubCategoryId.HasValue ? model.SubCategoryId : null;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
@@ -160,7 +166,27 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.CaptionTagId = model.CaptionTagId;
 
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var roletype = _db.TblProductMasters.Update(objProduct);
+                    var product = _db.TblProductMasters.Update(objProduct);
+
+                    if (model.Files.Count > 0)
+                    {
+                        string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == model.Id).Select(x => x.FilePath).ToArray();
+
+                        model.Files = model.Files.FindAll(x => !existingfilePaths.Contains(x.Replace("\\", "/")));
+
+                        productImages = model.Files.Select(x => new TblProductImage
+                        {
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery),
+                            ProductId = product.Entity.Id,
+                            CreatedBy = _loginUserDetail.UserId.Value,
+                            ModifiedBy = _loginUserDetail.UserId.Value,
+                            IsActive = true,
+                            IsDeleted = false
+                        }).ToList();
+                        await _db.TblProductImages.AddRangeAsync(productImages);
+                    }
+
+
                     _db.SaveChanges();
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
@@ -179,9 +205,21 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.IsActive = true;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var roletype = await _db.TblProductMasters.AddAsync(objProduct);
+                    var product = await _db.TblProductMasters.AddAsync(objProduct);
+                    if (model.Files.Count > 0)
+                    {
+                        productImages = model.Files.Select(x => new TblProductImage
+                        {
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery),
+                            ProductId = product.Entity.Id,
+                            CreatedBy = _loginUserDetail.UserId.Value,
+                            ModifiedBy = _loginUserDetail.UserId.Value,
+                            IsActive = true,
+                            IsDeleted = false
+                        }).ToList();
+                        await _db.TblProductImages.AddRangeAsync(productImages);
+                    }
                     _db.SaveChanges();
-
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
@@ -235,6 +273,63 @@ namespace CMS.Service.Services.ProductMaster
 
             }
         }
+
+        public async Task<ServiceResponse<TblProductImage>> DeleteProductFile(long id)
+        {
+            try
+            {
+                TblProductImage objProductFile = _db.TblProductImages.FirstOrDefault(r => r.Id == id);
+
+                if (objProductFile != null)
+                {
+                    objProductFile.IsDeleted = (bool)true;
+                    objProductFile.ModifiedBy = _loginUserDetail.UserId ?? objProductFile.ModifiedBy;
+                    objProductFile.ModifiedOn = DateTime.Now;
+                    _db.TblProductImages.Remove(objProductFile);
+                    _fileHelper.Delete(objProductFile.FilePath);
+                    await _db.SaveChangesAsync();
+                    return CreateResponse(objProductFile, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                }
+                else
+                {
+                    return CreateResponse<TblProductImage>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse<TblProductImage>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+
+            }
+        }
+
+        public async Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(long productId)
+        {
+            ServiceResponse<List<ProductImageViewModel>> objResponse = new ServiceResponse<List<ProductImageViewModel>>();
+            try
+            {
+
+                objResponse.Data = await _db.TblProductImages.Where(x => x.ProductId == productId).Select(x => new ProductImageViewModel
+                {
+                    Id = x.Id,
+                    ProductId = x.ProductId,
+                    FilePath = !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath() : null,
+
+                }).ToListAsync();
+                objResponse = CreateResponse(objResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+            }
+            catch (Exception ex)
+            {
+
+                objResponse = CreateResponse<List<ProductImageViewModel>>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+
+            }
+            return objResponse;
+        }
+
+
 
     }
 }
