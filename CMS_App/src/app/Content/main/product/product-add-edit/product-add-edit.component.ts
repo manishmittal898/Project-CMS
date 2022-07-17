@@ -1,4 +1,4 @@
-import {  EditorConfig } from './../../../../Shared/Helper/constants';
+import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { DropDownModel, FilterDropDownPostModel } from 'src/app/Shared/Helper/co
 import { DropDown_key } from 'src/app/Shared/Helper/constants';
 import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { ProductMasterPostModel, ProductMasterViewModel } from 'src/app/Shared/Services/product.service';
+import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
 
 @Component({
@@ -28,11 +28,14 @@ export class ProductAddEditComponent implements OnInit {
     Summary: [undefined],
     Description: [undefined],
     ImagePath: [undefined, Validators.required],
+    productFile: [undefined, undefined]
   });
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' };
   editorConfig = EditorConfig.Config;
+  productFile: any;
+  ProductFiles: ProductImageViewModel[] = [];
 
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
@@ -72,11 +75,12 @@ export class ProductAddEditComponent implements OnInit {
         this.model.Name = data.Name;
         this.model.ImagePath = data.ImagePath;
         this.model.Desc = data.Desc;
-        this.model.Price = Number(data.Price);
-        this.model.CategoryId = Number(data.CategoryId);
-        this.model.SubCategoryId = Number(data.SubCategoryId);
-        this.model.CaptionTagId = Number(data.CaptionTagId);
+        this.model.Price = data.Price ? Number(data.Price) : undefined;
+        this.model.CategoryId = data.CategoryId ? Number(data.CategoryId) : undefined;
+        this.model.SubCategoryId = data.SubCategoryId ? Number(data.SubCategoryId) : undefined;
+        this.model.CaptionTagId = data.CaptionTagId ? Number(data.CaptionTagId) : undefined;
         this.model.Summary = data.Summary;
+        this.ProductFiles = data.Files;
 
       } else {
 
@@ -90,7 +94,6 @@ export class ProductAddEditComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
@@ -122,5 +125,38 @@ export class ProductAddEditComponent implements OnInit {
   }
   RemoveDocument(file: string) {
     this.model.ImagePath = '';
+  }
+  onProductFileAttach(file: FileInfo[]) {
+    debugger
+    if (file.length > 0) {
+      if (!this.model.Files) {
+        this.model.Files = [];
+      }
+      this.model.Files = file.map(x => { return x.FileBase64 });
+      this.productFile = undefined
+    } else {
+      this.model.Files = [];
+    }
+  }
+
+  deleteProdcutFile(id: number) {
+    this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
+      if (result) {
+        let subscription = this._productService.DeleteProductFile(id).subscribe(
+          data => {
+            subscription.unsubscribe();
+            if (data.IsSuccess) {
+              this._commonService.Success(data.Message as string)
+              const idx = this.ProductFiles.findIndex(x => x.Id == id);
+              this.ProductFiles.splice(idx, 1);
+            }
+          },
+          error => {
+            this._commonService.Error(error.message as string)
+
+          }
+        );
+      }
+    });
   }
 }

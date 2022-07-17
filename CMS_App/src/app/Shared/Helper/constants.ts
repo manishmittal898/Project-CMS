@@ -71,6 +71,8 @@ export class API_Url {
   public static Product_Delete_Api = `${environment.apiEndPoint}ProductMaster/Delete/`;
   public static Product_ActiveStatus_Api = `${environment.apiEndPoint}ProductMaster/ChangeActiveStatus/`;
   public static Product_Detail_Api = `${environment.apiEndPoint}ProductMaster/Get/`;
+  public static ProductFile_Delete_Api = `${environment.apiEndPoint}ProductMaster/DeleteProductFile/`;
+
   //#endregion
 
 

@@ -57,23 +57,19 @@
                 <td colspan="3">{{model.CaptionTag | titlecase}}</td>
             </tr>
 
-            <!-- <tr>
+           <tr>
         <td><strong> Images </strong> </td>
         <td colspan="3">
           <div class="d-flex align-items-center mt-1 upload-content-list">
-            <a href="javascript:void()" class="small-media-items position-relative">
-              <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
+
+            <a href="javascript:void()" class="small-media-items position-relative" *ngFor="let itm of model.Files">
+              <div class="small-media-items-img"> <img onerror="this.src='assets/img/300x300.jpg'" [src]="itm.FilePath" /> </div>
             </a>
-            <a href="javascript:void()" class="small-media-items position-relative">
-              <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-            </a>
-            <a href="javascript:void()" class="small-media-items position-relative">
-              <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-            </a>
+
           </div>
         </td>
       </tr>
-       -->
+
 
             <tr>
                 <td><strong> Discription: </strong> </td>

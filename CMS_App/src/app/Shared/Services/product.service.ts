@@ -32,6 +32,10 @@ export class ProductService {
     let url = `${this._baseService.API_Url.Product_Delete_Api}${id}`;
     return this._baseService.Delete(url);
   }
+  DeleteProductFile(id: number): Observable<ApiResponse<ProductImageViewModel>> {
+    let url = `${this._baseService.API_Url.ProductFile_Delete_Api}${id}`;
+    return this._baseService.Delete(url);
+  }
 }
 
 export interface ProductMasterViewModel {
@@ -53,6 +57,7 @@ export interface ProductMasterViewModel {
   CaptionTag: string;
   Category: string;
   SubCategory: string;
+  Files: ProductImageViewModel[];
 }
 
 export interface ProductMasterPostModel {
@@ -60,10 +65,17 @@ export interface ProductMasterPostModel {
   Name: string;
   ImagePath: string;
   Desc: string;
-  Price: number | null;
-  CategoryId: number;
-  SubCategoryId: number;
-  CaptionTagId: number;
+  Price: number | undefined;
+  CategoryId: number | undefined;
+  SubCategoryId: number| undefined;
+  CaptionTagId: number | undefined;
   Summary: string;
+  Files?: string[];
 
+}
+
+export interface ProductImageViewModel {
+  Id: number;
+  FilePath: string;
+  ProductId: number | null;
 }

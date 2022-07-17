@@ -167,8 +167,8 @@ namespace CMS.Service.Services.ProductMaster
 
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var product = _db.TblProductMasters.Update(objProduct);
-
-                    if (model.Files.Count > 0)
+                    _db.SaveChanges();
+                    if (model.Files != null && model.Files.Count > 0)
                     {
                         string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == model.Id).Select(x => x.FilePath).ToArray();
 
@@ -184,10 +184,11 @@ namespace CMS.Service.Services.ProductMaster
                             IsDeleted = false
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
+                        _db.SaveChanges();
                     }
 
 
-                    _db.SaveChanges();
+                    
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -206,7 +207,9 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var product = await _db.TblProductMasters.AddAsync(objProduct);
-                    if (model.Files.Count > 0)
+                    _db.SaveChanges();
+
+                    if (model.Files != null && model.Files.Count > 0)
                     {
                         productImages = model.Files.Select(x => new TblProductImage
                         {
@@ -218,8 +221,9 @@ namespace CMS.Service.Services.ProductMaster
                             IsDeleted = false
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
+                        _db.SaveChanges();
+                        
                     }
-                    _db.SaveChanges();
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
