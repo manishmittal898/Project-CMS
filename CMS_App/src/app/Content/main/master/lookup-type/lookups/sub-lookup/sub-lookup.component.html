@@ -1,4 +1,3 @@
-
 <!-- Page Header Title start -->
 <div class="widget-header">
     <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
@@ -41,8 +40,10 @@
                 <div class="col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3">
                     <div id="zero-config_filter" class="dataTables_filter"><label>
                       <i class="bi bi-search"></i>
-              <input type="search" (blur)="onSearch()" class="form-control" placeholder="Search..."
-                [(ngModel)]="indexModel.Search" aria-controls="zero-config"></label></div>
+              <input type="text" (click)="onSearch()" class="form-control" placeholder="Search..."
+                [(ngModel)]="indexModel.Search" aria-controls="zero-config"/>
+                <a href="javascript:void()" (click)="onClear()" class="btn-search-text-remove"><i class="bi bi-x"></i></a>
+            </label></div>
 
 
                 </div>

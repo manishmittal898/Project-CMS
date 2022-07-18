@@ -146,5 +146,10 @@ export class SubLookupComponent implements OnInit {
   onBack(){
     window.history.back();
   }
+  onClear() {
+    this.indexModel.Search = '';
+    this.indexModel.Page = 1;
+    this.getList();
+  }
 }
 

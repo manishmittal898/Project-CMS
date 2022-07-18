@@ -167,4 +167,13 @@ export class LookupsComponent implements OnInit {
       }
     });
   }
+  onClear() {
+    this.indexModel.Search = '';
+    this.indexModel.Page = 1;
+    this.getList();
+  }
+
+  
 }
+
+

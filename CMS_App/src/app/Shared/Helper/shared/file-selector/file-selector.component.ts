@@ -106,7 +106,7 @@ export class FileSelectorComponent {
         newWin!.document.write(`<iframe title="PDF" src="${fileUrl}"  height="99%" width="100%"></iframe>`);
       }
       else {
-        newWin!.document.write(`<img  src="${fileUrl}"  height="100%" width="100%" />`);
+        newWin!.document.write(`<img  src="${fileUrl}" style="margin:auto; display:flex;"/>`);
       }
 
     }

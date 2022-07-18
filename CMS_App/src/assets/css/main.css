@@ -3583,10 +3583,9 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .small-media-items-img img {
-  max-width: 98px;
-  max-height: 98px;
+    max-width: 98px;
+    max-height: 98px;
 }
-
 
 .small-media-items-action {
     position: absolute;
@@ -3915,14 +3914,14 @@ table.table.table-striped.dataTable.table-header.table-blue tbody tr:nth-of-type
 }
 
 .file-upload-details {
-  background: #ffffff;
-  padding: 10px;
-  border-radius: 10px;
-  border: solid 1px #dbe0ff;
-  margin-top: 5px;
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px #dbe0ff;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
 }
 
 .file-upload-details .dz-details {
@@ -4372,10 +4371,12 @@ form .icon-login-form {
     border-radius: 10px;
     overflow: hidden;
 }
+
 .lsit-category-img img {
-  max-width: 100px;
-  max-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
 }
+
 .table>tbody tr:last-child {
     border: none;
 }
@@ -4390,6 +4391,7 @@ div.dataTables_wrapper div.dataTables_filter i {
     top: 8px;
     font-size: 20px;
     color: #000;
+    cursor: pointer;
 }
 
 #sidebar ul.menu-categories li.menu>.dropdown-toggle i {
@@ -4532,27 +4534,42 @@ element.style {
 .ng-select .ng-select-container {
     border-color: #e2e2e2;
 }
+
 .big-size-media-items {
-  height: 200px;
-  width: 200px;
-  flex-basis: 200px;
+    height: 200px;
+    width: 200px;
+    flex-basis: 200px;
 }
+
 .big-size-media-items img {
-  max-width: 200px;
-  max-height: 200px;
+    max-width: 200px;
+    max-height: 200px;
 }
-i.fas.fa-times
-{
-  -webkit-transition: -webkit-transform .5s ease-in-out;
-transition: transform .5s ease-in-out;
+
+i.fas.fa-times {
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
 }
+
 .no-record-found {
-  padding: 50px 10px;
+    padding: 50px 10px;
 }
+
 .no-record-found p {
-  font-size: 30px;
-  margin-top: 40px !important;
-  color: black;
+    font-size: 30px;
+    margin-top: 40px !important;
+    color: black;
+}
+
+.btn-search-text-remove {
+    position: absolute;
+    right: 26px;
+    top: 1px;
+    font-size: 24px;
+}
+
+.btn-search-text-remove i {
+    color: #df0303 !important;
 }
 
 
@@ -4561,6 +4578,8 @@ transition: transform .5s ease-in-out;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 } */
+
+
 /* Manish CSS End */
 
 
@@ -4572,12 +4591,11 @@ transition: transform .5s ease-in-out;
         line-height: 40px !important;
     }
     .no-record-found p {
-      font-size: 18px;
-  }
-  .cdk-overlay-pane {
-    max-width: 95% !important;
-}
-
+        font-size: 18px;
+    }
+    .cdk-overlay-pane {
+        max-width: 95% !important;
+    }
 }
 
 

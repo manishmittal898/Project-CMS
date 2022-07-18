@@ -118,7 +118,6 @@ export class ProductsComponent implements OnInit {
       if (result) {
         let subscription = this._productService.DeleteProductMaster(id).subscribe(
           data => {
-            debugger
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
@@ -126,7 +125,7 @@ export class ProductsComponent implements OnInit {
               const idx = this.model.findIndex(x => x.Id == id);
               this.model.splice(idx, 1);
               this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
-
+              this.totalRecords = this.totalRecords - 1;
             }
           },
           error => {
@@ -137,5 +136,9 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
+  onClear() {
+    this.indexModel.Search = '';
+    this.indexModel.Page = 1;
+    this.getList();
+  }
 }
