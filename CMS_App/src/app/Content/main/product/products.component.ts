@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'Category', 'SubCategory', 'CaptionTag', 'IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'Category', 'Sub Category', 'CaptionTag', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'Category', Text: 'Category' },
   { Value: 'SubCategory', Text: 'SubCategory' },
