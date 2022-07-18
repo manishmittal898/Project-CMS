@@ -4385,13 +4385,13 @@ form .icon-login-form {
     font-size: 20px;
 }
 
-div.dataTables_wrapper div.dataTables_filter i {
+.btn-filter-search {
     position: absolute;
-    right: 9px;
+    background: transparent;
+    border: none;
     top: 8px;
-    font-size: 20px;
-    color: #000;
-    cursor: pointer;
+    right: 5px;
+    font-size: 17px;
 }
 
 #sidebar ul.menu-categories li.menu>.dropdown-toggle i {
@@ -4563,8 +4563,8 @@ i.fas.fa-times {
 
 .btn-search-text-remove {
     position: absolute;
-    right: 26px;
-    top: 1px;
+    right: 35px;
+    top: 6px;
     font-size: 24px;
 }
 
