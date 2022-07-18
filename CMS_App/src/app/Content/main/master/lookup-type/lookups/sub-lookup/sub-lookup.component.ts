@@ -119,7 +119,10 @@ export class SubLookupComponent implements OnInit {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              this.getList();
+              const idx = this.model.findIndex(x => x.Id == id);
+              this.model.splice(idx, 1);
+              this.totalRecords--;
+              this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
             }
           },
           error => {

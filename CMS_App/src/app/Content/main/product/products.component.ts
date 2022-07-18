@@ -49,13 +49,12 @@ export class ProductsComponent implements OnInit {
   }
 
   getList(): void {
-
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         debugger
         this.model = response.Data as ProductMasterViewModel[];
         this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
-        this.totalRecords = response.TotalRecord as number;
+        this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
         if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -124,8 +123,8 @@ export class ProductsComponent implements OnInit {
               debugger
               const idx = this.model.findIndex(x => x.Id == id);
               this.model.splice(idx, 1);
+              this.totalRecords--;
               this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
-              this.totalRecords = this.totalRecords - 1;
             }
           },
           error => {

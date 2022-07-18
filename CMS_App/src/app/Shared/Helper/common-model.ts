@@ -77,7 +77,7 @@ export class ApiResponse<T> {
 export class IndexModel {
   Page: number;
   PageSize: number;
-  Search!: string;
+  Search: string | undefined;
   OrderBy!: string;
   OrderByAsc: boolean;
   IsPostBack: boolean;
@@ -87,6 +87,7 @@ export class IndexModel {
     this.IsPostBack = false;
     this.OrderByAsc = true;
     this.Page = 1;
+    this.Search = undefined;
   }
 }
 

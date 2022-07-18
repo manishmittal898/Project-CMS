@@ -37,7 +37,7 @@ export class LookupTypeComponent implements OnInit {
   getList(): void {
         this._lookupTypeService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        
+
         this.model = response.Data as LookupTypeMasterModel[];
         this.dataSource = new MatTableDataSource<LookupTypeMasterModel>(this.model);
         this.totalRecords = response.TotalRecord as number;
@@ -103,8 +103,12 @@ export class LookupTypeComponent implements OnInit {
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
+
               this._commonService.Success(data.Message as string)
-              this.getList();
+              const idx = this.model.findIndex(x => x.Id == id);
+              this.model.splice(idx, 1);
+              this.totalRecords--;
+              this.dataSource = new MatTableDataSource<LookupTypeMasterModel>(this.model);
             }
           },
           error => {
