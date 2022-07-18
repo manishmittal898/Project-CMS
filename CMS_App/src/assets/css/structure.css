@@ -1333,6 +1333,14 @@ li.menu.menu-active>a svg {
     background-color: rgba(255,255,255,0.5) !important;
 }
 
+li.sub-menu-active a {
+  color: rgba(255,255,255,0.5) !important;
+}
+
+li.sub-menu-active a:before {
+    background-color: rgba(255,255,255,0.5) !important;
+}
+
 #sidebar ul.menu-categories ul.submenu>li a i {
     align-self: center;
     font-size: 9px;
@@ -1575,6 +1583,7 @@ li.menu.menu-active>a svg {
 }
 
 @media (max-width: 767px) {
+
     .navbar .theme-brand li.theme-text {
         display: none;
         margin-right: 0;
@@ -1650,6 +1659,10 @@ li.menu.menu-active>a svg {
     .header-container .navbar .language-dropdown {
         margin-left: 16px;
     }
+    /* .sidebar-closed .layout-px-spacing, .layout-px-spacing {
+      padding: 0px !important;
+      margin: 0px !important;
+  } */
 }
 
 @media (max-width: 575px) {

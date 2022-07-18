@@ -3361,7 +3361,7 @@ li.menu span.shape2 {
 .menu-active a::after {
     content: "";
     position: absolute;
-    top: 42px;
+    top: 41px;
     z-index: 0;
     right: 0px;
     bottom: 0;
@@ -3583,8 +3583,10 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .small-media-items-img img {
-    max-width: 95px;
+  max-width: 98px;
+  max-height: 98px;
 }
+
 
 .small-media-items-action {
     position: absolute;
@@ -3913,13 +3915,14 @@ table.table.table-striped.dataTable.table-header.table-blue tbody tr:nth-of-type
 }
 
 .file-upload-details {
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #ededed;
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px #dbe0ff;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
 }
 
 .file-upload-details .dz-details {
@@ -4365,11 +4368,14 @@ form .icon-login-form {
 .lsit-category-img {
     height: 100px;
     width: 100px;
-    background: white;
+    background: transparent;
     border-radius: 10px;
     overflow: hidden;
 }
-
+.lsit-category-img img {
+  max-width: 100px;
+  max-height: 100px;
+}
 .table>tbody tr:last-child {
     border: none;
 }
@@ -4526,8 +4532,35 @@ element.style {
 .ng-select .ng-select-container {
     border-color: #e2e2e2;
 }
+.big-size-media-items {
+  height: 200px;
+  width: 200px;
+  flex-basis: 200px;
+}
+.big-size-media-items img {
+  max-width: 200px;
+  max-height: 200px;
+}
+i.fas.fa-times
+{
+  -webkit-transition: -webkit-transform .5s ease-in-out;
+transition: transform .5s ease-in-out;
+}
+.no-record-found {
+  padding: 50px 10px;
+}
+.no-record-found p {
+  font-size: 30px;
+  margin-top: 40px !important;
+  color: black;
+}
 
 
+/* i.fas.fa-times:hover
+{
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+} */
 /* Manish CSS End */
 
 
@@ -4538,6 +4571,13 @@ element.style {
         font-size: 30px !important;
         line-height: 40px !important;
     }
+    .no-record-found p {
+      font-size: 18px;
+  }
+  .cdk-overlay-pane {
+    max-width: 95% !important;
+}
+
 }
 
 
