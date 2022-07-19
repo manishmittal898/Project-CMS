@@ -632,7 +632,7 @@ transition: all .3s ease-in-out;
   bottom: 15%;
 }
 .btn-share-whatsapp a {
-  font-size: 20px;
+  font-size: 15px;
   color: #4caf50;
   text-transform: uppercase;
   font-weight: 600;
@@ -641,10 +641,9 @@ transition: all .3s ease-in-out;
 }
 
 .btn-share-whatsapp a i {
-  font-size: 30px;
-  margin-right: 10px;
+  font-size: 18px;
+  margin-right: 5px;
 }
-
 .product-filter {
 background: #fff;
 padding: 15px;
