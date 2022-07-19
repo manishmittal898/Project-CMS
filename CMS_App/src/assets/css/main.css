@@ -3560,7 +3560,7 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .table-data-info tr td {
-    padding: 9px 0px !important;
+    padding: 6px 0px !important;
 }
 
 .small-media-items {
@@ -3693,7 +3693,7 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
     top: 0;
     opacity: 0;
     width: 100%;
-    z-index: 999999999;
+    z-index: 9;
     cursor: pointer;
 }
 
@@ -4495,10 +4495,12 @@ element.style {
     width: 100% !important;
     max-width: 430px !important;
 }
-
-.ng-select {
-    z-index: 1;
+app-header {
+  z-index: 999999;
 }
+/* .ng-select {
+    z-index: 1;
+} */
 
 
 /*You can use [title] selector as well*/
@@ -4572,7 +4574,55 @@ i.fas.fa-times {
     color: #df0303 !important;
 }
 
+.product-details-right-info h2 {
+  font-size: 24px !important;
+  margin-bottom: 8px !important;
+  color: #000;
+  line-height: 28px !important;
+}
 
+.product-details-right-info h3 {
+  color: #002767 !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+.product-details-right-info {
+  font-size: 15px;
+}
+.product-details-right-info strong {
+  color: #000;
+}
+.font-16{ font-size: 16px;}
+.table-font-15 td {
+  font-size: 15px !important;
+}
+
+.product-detail-img-tab .nav-tabs .nav-link {
+  padding: 0px;
+  border: solid 1px #f3f3f3 !important;
+}
+.product-detail-img-tab .nav-tabs .nav-link.active {
+  border-color: #3f51b5 !important;
+}
+.product-detail-img-tab .nav-item {
+  flex: 0 0 80px;
+  max-width: 80px;
+  margin: 5px;
+  text-align: center;
+}
+.product-detail-img-tab .nav-item img {
+  max-height: 78px;
+}
+.product-detail-img-tab .tab-content .tab-pane {
+  background: #f7f7f7;
+}
+.product-detail-img-tab .tab-content .tab-pane img {
+  max-height: 450px;
+}
+.product-details-right-info .table-responsive {
+  box-shadow: none;
+  padding: 0px;
+}
 /* i.fas.fa-times:hover
 {
   -webkit-transform: rotate(180deg);
@@ -4585,6 +4635,15 @@ i.fas.fa-times {
 
 /* Responsive Start */
 
+@media (max-width: 1192px) {
+.product-detail-img-tab .nav-item {
+  flex: 0 0 70px;
+  max-width: 70px;
+}
+.product-detail-img-tab .nav-item img {
+  max-height: 70px;
+}
+}
 @media (max-width: 767px) {
     .default-section-info h1 {
         font-size: 30px !important;
@@ -4596,6 +4655,17 @@ i.fas.fa-times {
     .cdk-overlay-pane {
         max-width: 95% !important;
     }
+    .product-details-right-info h2 {
+      font-size: 20px !important;
+      margin-bottom: 2px !important;
+  }
+  .product-detail-img-tab .nav-item {
+    flex: 0 0 50px;
+    max-width: 50px;
+  }
+  .product-detail-img-tab .nav-item img {
+    max-height: 50px;
+  }
 }
 
 
