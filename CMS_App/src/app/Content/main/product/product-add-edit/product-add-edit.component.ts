@@ -138,7 +138,20 @@ export class ProductAddEditComponent implements OnInit {
       this.model.Files = [];
     }
   }
+  getFileType(fileName: string) {
+    const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
+    if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
+      return 'doc';
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+      return 'image';
+    }
+    else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
+      return 'video';
+    } else {
+      return ext;
+    }
 
+  }
   deleteProdcutFile(id: number) {
     this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
       if (result) {

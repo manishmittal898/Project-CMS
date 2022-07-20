@@ -21,7 +21,7 @@ export class SubLookupAddEditComponent implements OnInit {
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
     SortedOrder: [undefined, Validators.required],
-    ImagePath: [undefined, Validators.required],
+    ImagePath: [undefined],
   });
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }

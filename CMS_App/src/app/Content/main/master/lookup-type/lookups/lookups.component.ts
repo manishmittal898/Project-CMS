@@ -29,7 +29,7 @@ export class LookupsComponent implements OnInit {
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords = 0;
-  iSImageVisible = true;
+  iSImageVisible = false;
   noRecordData = {
     subject: 'Can you please add your first record.',
     Description: undefined,
@@ -96,7 +96,7 @@ export class LookupsComponent implements OnInit {
 
   onSearch() {
     this.indexModel.Page = 1;
-        this.getList();
+    this.getList();
   }
 
   onPaginateChange(event: any) {

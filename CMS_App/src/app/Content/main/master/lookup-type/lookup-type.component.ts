@@ -17,7 +17,7 @@ import { LookupTypeMasterModel, LookupTypeService } from '../../../../Shared/Ser
 export class LookupTypeComponent implements OnInit {
 
 
-  model!: LookupTypeMasterModel[];
+  model: LookupTypeMasterModel[]=[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

@@ -67,21 +67,17 @@ export class FileSelectorComponent {
   @Input() MaxFileLength: number = 1;//for all
   @Input() CurrentFileLength: number = 0;//for all
   @Input() CurrentFiles?: FileInfo[];
+  @Input() FileFilter: string;
+  get Files(): FileInfo[] {
+    return this._files;
+  }
   constructor(readonly _alertService: AlertService, private readonly toast: ToastrService, public domSanitizer: DomSanitizer) {
     this.FileSelected = new EventEmitter();
     this.FilesChanged = new EventEmitter();
     this._files = [];
     this.FileFilter = "image/*,.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt";
-    this._allowFiles = ['.jpeg', '.gif', '.png', '.jpg', '.TIFF', '.PSD', '.EPS', '.RAW', '.INDD', '.AI', '.doc', '.docx', '.ppt', '.pptx', '.pdf', '.txt', '.xlx', '.xlsx', '.BMP', '.SVG'];
+    this._allowFiles = ['.jpeg', '.gif', '.png', '.jpg', '.TIFF', '.PSD', '.EPS', '.RAW', '.INDD', '.AI', '.doc', '.docx', '.ppt', '.pptx', '.pdf', '.txt', '.xlx', '.xlsx', '.BMP', '.SVG', '.mkv'];
   }
-
-  @Input() FileFilter: string;
-
-  get Files(): FileInfo[] {
-    return this._files;
-  }
-
-
   RemoveFile(file: FileInfo) {
     let index = this._files.indexOf(file);
     if (index > -1) {
@@ -115,7 +111,6 @@ export class FileSelectorComponent {
   }
 
   HandleFileInput(event: any) {
-debugger
     const TotalFilesCount = (this.CurrentFileLength ? this.CurrentFileLength : this.Files?.length) + 1
     if (TotalFilesCount <= this.MaxFileLength) {
       let files = event.target.files;
@@ -157,4 +152,20 @@ debugger
       return;
     }
   }
+  getFileType(fileName: string) {
+    const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
+
+    if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
+      return 'doc';
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+      return 'image';
+    }
+    else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
+      return 'video';
+    } else {
+      return ext;
+    }
+
+  }
+
 }

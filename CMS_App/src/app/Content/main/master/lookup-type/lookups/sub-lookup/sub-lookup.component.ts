@@ -17,7 +17,7 @@ import { SubLookupAddEditComponent } from './sub-lookup-add-edit/sub-lookup-add-
   styleUrls: ['./sub-lookup.component.scss']
 })
 export class SubLookupComponent implements OnInit {
-  pageName = {Name:"",SubName:""};
+  pageName = { Name: "", SubName: "" };
   model!: SubLookupMasterViewModel[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -28,7 +28,12 @@ export class SubLookupComponent implements OnInit {
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
-
+  noRecordData = {
+    subject: 'Can you please add your first record.',
+    Description: undefined,
+    url: undefined,
+    urlLable: 'Create'
+  };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _sublookupService: SubLookupService,
     public dialog: MatDialog
@@ -55,8 +60,8 @@ export class SubLookupComponent implements OnInit {
       if (response.IsSuccess) {
         this.model = response.Data as SubLookupMasterViewModel[];
         this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
-        this.totalRecords = response.TotalRecord as number;
-        if (!this.indexModel.IsPostBack) {
+        this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
+          if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
@@ -146,7 +151,7 @@ export class SubLookupComponent implements OnInit {
       }
     });
   }
-  onBack(){
+  onBack() {
     window.history.back();
   }
   onClear() {

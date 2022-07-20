@@ -131,41 +131,42 @@
 
         <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="ProductFiles">
           <ng-container *ngFor="let itm of ProductFiles">
-            <a href="javascript:void()" class="small-media-items position-relative">
-              <div class="small-media-items-img"> <img [src]="itm.FilePath"
-                  onerror="this.src='assets/img/300x300.jpg'" /> </div>
-              <div class="small-media-items-action">
-                <a href="javascript:void()" (click)="deleteProdcutFile(itm.Id)" title="Delete"><i
-                    class="bi bi-trash"></i></a>
-                <a [href]="itm.FilePath" target="_blank">
-                  <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
-                </a>
-              </div>
-            </a>
+            <span [ngSwitch]="getFileType(itm.FilePath)">
+
+              <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative">
+                <div class="small-media-items-img"> <img [src]="itm.FilePath"
+                    onerror="this.src='assets/img/300x300.jpg'" /> </div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" (click)="deleteProdcutFile(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.FilePath" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </a>
+              <a *ngSwitchCase="'doc'" href="javascript:void()" class="small-media-items small-media-items-pdf text-danger position-relative">
+                <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+                  <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+                </div>
+              </a>
+
+              <a *ngSwitchCase="'video'" href="javascript:void()" class="small-media-items small-media-items-video position-relative">
+                <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+                  <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+                </div>
+              </a>
+              <p *ngSwitchDefault>
+
+              </p>
+            </span>
+
           </ng-container>
 
-          <!-- <a href="javascript:void()" class="small-media-items small-media-items-pdf text-danger position-relative">
-            <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
-            <div class="small-media-items-action">
-              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-              <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
-            </div>
-          </a>
-
-          <a href="javascript:void()" class="small-media-items small-media-items-video position-relative">
-            <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
-            <div class="small-media-items-action">
-              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-              <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
-            </div>
-          </a> -->
-
-
         </div>
-
-
-
-
       </div>
 
       <div class="form-group col-md-12">
