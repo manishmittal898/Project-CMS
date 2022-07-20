@@ -4466,7 +4466,6 @@ element.style {
 }
 
 .cdk-overlay-dark-backdrop {
-    /* background: rgba(0, 0, 0, 0.7) !important; */
     -webkit-backdrop-filter: saturate(180%) blur(5px);
     backdrop-filter: saturate(180%) blur(5px);
     background-color: rgba(0, 0, 0, 0.6) !important;
