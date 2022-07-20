@@ -103,7 +103,7 @@ body.gu-unselectable .media.el-drag-ex-1 {
   align-self: center; }
 
 .parent.ex-1 .dragula .media .media-body h6, body.gu-unselectable .media.el-drag-ex-1 .media-body h6 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-weight: 600;
   font-size: 15px;
   margin-top: 0;
@@ -143,7 +143,7 @@ body.gu-unselectable .media.el-drag-ex-2 {
   align-self: center; }
 
 .parent.ex-2 .dragula .media .media-body h6, body.gu-unselectable .media.el-drag-ex-2 .media-body h6 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-weight: 600;
   font-size: 15px;
   margin-top: 0;
@@ -215,7 +215,7 @@ body.gu-unselectable .media.el-drag-ex-3.gu-mirror img {
   align-self: center; }
 
 .parent.ex-3 .dragula .media .media-body h5, body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-weight: 600;
   font-size: 15px;
   margin-top: 0;
@@ -223,7 +223,7 @@ body.gu-unselectable .media.el-drag-ex-3.gu-mirror img {
 
 .parent.ex-3 .dragula .media .media-body h5 span.usr-commented, body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 span.usr-commented {
   font-weight: 600;
-  color: #3b3f5c;
+  color: #053e9c;
   font-size: 14px; }
 
 .parent.ex-3 .dragula .media .media-body h5 span.comment-topic, body.gu-unselectable .media.el-drag-ex-3.gu-mirror .media-body h5 span.comment-topic {
@@ -257,7 +257,7 @@ body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta {
   align-self: center; }
 
 .parent.ex-4 .card.post .media.user-meta .media-body h5, body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta .media-body h5 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-weight: 600;
   font-size: 15px;
   margin-top: 0;
@@ -322,7 +322,7 @@ body.gu-unselectable .card.post.el-drag-ex-4.gu-mirror .media.user-meta {
   margin-right: 5px;
   background-color: #ebedf2;
   border-radius: 2px;
-  color: #3b3f5c;
+  color: #053e9c;
   cursor: move; }
 
 body.gu-unselectable .handle {
@@ -330,7 +330,7 @@ body.gu-unselectable .handle {
   margin-right: 5px;
   background-color: #ebedf2;
   border-radius: 2px;
-  color: #3b3f5c;
+  color: #053e9c;
   cursor: move; }
 
 .parent.ex-5 .media ul, body.gu-unselectable .media.el-drag-ex-5.gu-mirror ul {
@@ -363,7 +363,7 @@ body.gu-unselectable .handle {
 .parent.ex-5 .dragula .media .media-body h5, .parent.ex-5 .dragula .gu-transit .media .media-body h5 {
   /*color: #141471;*/
   font-weight: 600;
-  color: #3b3f5c;
+  color: #053e9c;
   /*font-weight: 600;*/
   font-size: 15px;
   margin-top: 0;

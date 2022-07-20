@@ -101,7 +101,7 @@
 }
 
 .switch.s-dark .slider:before {
-    background-color: #3b3f5c;
+    background-color: #053e9c;
 }
 
 .switch input:checked+.slider:before {
@@ -165,11 +165,11 @@
 }
 
 .switch.s-dark input:checked+.slider {
-    background-color: #3b3f5c;
+    background-color: #053e9c;
 }
 
 .switch.s-dark input:focus+.slider {
-    box-shadow: 0 0 1px #3b3f5c;
+    box-shadow: 0 0 1px #053e9c;
 }
 
 .switch.s-outline .slider {
@@ -230,7 +230,7 @@
 }
 
 .switch.s-icons.s-outline-dark {
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .switch.s-outline-default input:checked+.slider {
@@ -332,17 +332,17 @@
 }
 
 .switch.s-outline-dark input:checked+.slider {
-    border: 2px solid #3b3f5c;
+    border: 2px solid #053e9c;
 }
 
 .switch.s-outline-dark input:checked+.slider:before {
-    border: 2px solid #3b3f5c;
-    background-color: #3b3f5c;
+    border: 2px solid #053e9c;
+    background-color: #053e9c;
     box-shadow: 0 1px 15px 1px rgba(52, 40, 104, 0.34);
 }
 
 .switch.s-outline-dark input:focus+.slider {
-    box-shadow: 0 0 1px #3b3f5c;
+    box-shadow: 0 0 1px #053e9c;
 }
 
 .switch.s-icons {
@@ -357,7 +357,7 @@
 
 .switch.s-icons .slider:before {
     vertical-align: sub;
-    color: #3b3f5c;
+    color: #053e9c;
     height: 19px;
     width: 19px;
     line-height: 1.7;

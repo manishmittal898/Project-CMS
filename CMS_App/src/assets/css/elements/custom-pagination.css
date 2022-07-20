@@ -26,12 +26,12 @@
   .paginating-container li {
     padding: 10px 0;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     border-radius: 4px; }
     .paginating-container li a {
       padding: 10px 15px;
       font-weight: 600;
-      color: #3b3f5c; }
+      color: #053e9c; }
     .paginating-container li:not(:last-child) {
       margin-right: 4px; }
 
@@ -64,7 +64,7 @@
     .pagination-default .next:hover a, .pagination-default .next:hover svg {
       color: #4361ee; }
 
-/* 
+/*
     Solid Style
 */
 .pagination-solid li {
@@ -91,7 +91,7 @@
     .pagination-solid .next:hover a, .pagination-solid .next:hover svg {
       color: #fff; }
 
-/*    
+/*
     ===================
         No Spacing
     ===================
@@ -128,7 +128,7 @@
     background-color: #e0e6ed;
     padding: 10px 0;
     font-weight: 600;
-    color: #3b3f5c; }
+    color: #053e9c; }
     .pagination-no_spacing li:first-child {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px; }
@@ -138,7 +138,7 @@
     .pagination-no_spacing li a {
       padding: 10px 15px;
       font-weight: 600;
-      color: #3b3f5c; }
+      color: #053e9c; }
       .pagination-no_spacing li a.active {
         background-color: #4361ee !important;
         border-radius: 6px;
@@ -188,7 +188,7 @@
     background-color: #e0e6ed;
     padding: 10px 0;
     font-weight: 600;
-    color: #3b3f5c; }
+    color: #053e9c; }
     .pagination-custom_solid li:first-child {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px; }
@@ -198,7 +198,7 @@
     .pagination-custom_solid li a {
       padding: 10px 15px;
       font-weight: 600;
-      color: #3b3f5c; }
+      color: #053e9c; }
       .pagination-custom_solid li a.active {
         background-color: #4361ee !important;
         border-radius: 6px;
@@ -242,7 +242,7 @@
   .pagination-custom_outline li {
     padding: 10px 0;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     border: 1px solid #e0e6ed; }
     .pagination-custom_outline li.active {
       background-color: #e0e6ed; }
@@ -255,7 +255,7 @@
     .pagination-custom_outline li a {
       padding: 10px 15px;
       font-weight: 600;
-      color: #3b3f5c; }
+      color: #053e9c; }
       .pagination-custom_outline li a:hover {
         color: #4361ee; }
     .pagination-custom_outline li.active a {

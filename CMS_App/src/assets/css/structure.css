@@ -33,7 +33,7 @@ h4,
 h5,
 h6,
 label {
-    color: #3b3f5c;
+    color: #053e9c;
     font-family: 'Nunito', sans-serif !important;
 }
 
@@ -86,7 +86,7 @@ code {
     margin: 0;
     margin-bottom: 0;
     font-size: 15px;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 700;
 }
 
@@ -437,7 +437,7 @@ code {
 }
 
 .header-container .navbar .language-dropdown .dropdown-menu a span {
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 600;
 }
 
@@ -566,7 +566,7 @@ code {
 .navbar .navbar-item .nav-item.dropdown.message-dropdown .dropdown-menu .media .media-body h5.usr-name {
     font-size: 15px;
     margin-bottom: 0px;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 600;
 }
 
@@ -710,7 +710,7 @@ code {
     font-weight: 600;
     font-size: 14px;
     margin-right: 8px;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu .dropdown-item:hover .data-info h6 {
@@ -782,7 +782,7 @@ code {
 }
 
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus {
-    border: 1px solid #3b3f5c;
+    border: 1px solid #053e9c;
     box-shadow: none;
 }
 
@@ -803,7 +803,7 @@ code {
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-webkit-input-placeholder,
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-ms-input-placeholder,
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-moz-placeholder {
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 
@@ -860,7 +860,7 @@ code {
 
 .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item a {
     display: block;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 13px;
     font-weight: 600;
     padding: 9px 14px;
@@ -928,7 +928,7 @@ code {
 .sub-header-container .navbar .sidebarCollapse svg {
     width: 20px;
     height: 20px;
-    color: #3b3f5c;
+    color: #053e9c;
     vertical-align: text-top;
 }
 
@@ -1045,7 +1045,7 @@ code {
     padding: 8px 15px;
     font-size: 13px;
     font-weight: 500;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .sub-header-container .more-dropdown .custom-dropdown-icon .dropdown-menu a:hover {
@@ -1700,4 +1700,5 @@ li.sub-menu-active a:before {
     .footer-wrapper .footer-section.f-section-2 {
         display: none;
     }
+
 }

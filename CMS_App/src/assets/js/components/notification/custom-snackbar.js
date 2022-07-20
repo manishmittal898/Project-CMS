@@ -79,7 +79,7 @@ $('.click-callback').click(function() {
         text: 'Custom callback when action button is clicked.',
         width: 'auto',
         onActionClick: function(element) {
-            //Set opacity of element to 0 to close Snackbar 
+            //Set opacity of element to 0 to close Snackbar
             $(element).css('opacity', 0);
             Snackbar.show({
                 text: 'Thanks for clicking the  <strong>Dismiss</strong>  button!',
@@ -144,6 +144,6 @@ $('.snackbar-bg-dark').click(function() {
     Snackbar.show({
         text: 'Dark',
         actionTextColor: '#fff',
-        backgroundColor: '#3b3f5c'
+        backgroundColor: '#053e9c'
     });
 });

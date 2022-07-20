@@ -50,7 +50,7 @@
   font-weight: 400; }
 
 .popover-primary .popover-body {
-  color: #3b3f5c;
+  color: #053e9c;
   min-height: 90px;
   font-size: 13px;
   letter-spacing: 1px;
@@ -71,7 +71,7 @@
   position: relative;
   padding: 0 17px;
   font-size: 14px;
-  color: #3b3f5c;
+  color: #053e9c;
   cursor: pointer; }
   .labels .label:before {
     content: '';
@@ -177,7 +177,7 @@ a.bg-primary:hover, a.bg-success:hover, a.bg-warning:hover, a.bg-danger:hover {
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0px;
-    color: #3b3f5c; }
+    color: #053e9c; }
   #addEventsModal form {
     margin-top: 30px; }
     #addEventsModal form label {
@@ -199,12 +199,12 @@ a.bg-primary:hover, a.bg-success:hover, a.bg-warning:hover, a.bg-danger:hover {
 
 #calendar .form-control {
   margin-bottom: 20px;
-  color: #3b3f5c;
+  color: #053e9c;
   letter-spacing: 2px;
   font-weight: 600; }
 
 input[readonly] {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .modal-footer {
   border-top: none;

@@ -93,7 +93,7 @@
     position: absolute;
     width: 100vw;
     height: 100%;
-    background: #3b3f5c!important;
+    background: #053e9c!important;
     z-index: 4!important;
     opacity: 0;
     transition: all 0.5s ease-in-out;
@@ -292,10 +292,10 @@
     top: -11px!important;
 }
 .actions-btn-tooltip .arrow:before {
-    border-top-color: #3b3f5c;
+    border-top-color: #053e9c;
 }
 .actions-btn-tooltip .tooltip-inner {
-    background: #3b3f5c;
+    background: #053e9c;
     color: #fff;
     font-weight: 700;
     border-radius: 30px;
@@ -348,7 +348,7 @@
 }
 .mailbox-inbox .action-center .new-control {
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 .mailbox-inbox .action-center .nav-link {
     padding: 0;
@@ -371,7 +371,7 @@
     font-size: 14px;
     font-weight: 600;
     padding: 10px 23px 10px 43px;
-    color: #3b3f5c;
+    color: #053e9c;
     letter-spacing: 1px;
 }
 .mailbox-inbox .action-center .dropdown-menu.d-icon-menu a[class*="g-dot-"]:before {
@@ -517,13 +517,13 @@
     display: inline-block;
 }
 .mailbox-inbox .mail-item div.mail-item-heading.work .mail-item-inner .f-body .tags span.g-dot-warning {
-    display: inline-block;   
+    display: inline-block;
 }
 .mailbox-inbox .mail-item div.mail-item-heading.social .mail-item-inner .f-body .tags span.g-dot-success {
     display: inline-block;
 }
 .mailbox-inbox .mail-item div.mail-item-heading.private .mail-item-inner .f-body .tags span.g-dot-danger {
-    display: inline-block;    
+    display: inline-block;
 }
 .mailbox-inbox .mail-item div.mail-item-heading .mail-item-inner .f-body .tags span[class*="g-dot-"]:before {
     top: -11px;
@@ -564,7 +564,7 @@
     border: 1px solid #bfc9d4;
     padding: 1px 11px;
     border-radius: 30px;
-    color: #3b3f5c;
+    color: #053e9c;
     background: #ebedf2;
     font-size: 12px;
     margin-right: 3px;
@@ -604,7 +604,7 @@
 }
 .content-box svg.close-message {
     font-size: 15px;
-    color: #3b3f5c;
+    color: #053e9c;
     padding: 3px;
     align-self: center;
     cursor: pointer;
@@ -657,7 +657,7 @@
     margin-bottom: 0;
     font-weight: 600;
     margin-left: 8px;
-    display: inline-block;   
+    display: inline-block;
 }
 .mailbox-inbox .mail-content-container .user-info .user-cc-mail span {
     font-size: 16px;
@@ -670,7 +670,7 @@
 .mailbox-inbox .mail-content-container .mail-content-meta-date {
     font-size: 13px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     display: inline-block;
     font-weight: 700;
 }
@@ -703,7 +703,7 @@
 }
 .mailbox-inbox .mail-content-container p {
     font-size: 14px;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 .mailbox-inbox .mail-content-container p.mail-content {
     padding-top: 45px;
@@ -738,14 +738,14 @@
     align-self: center;
 }
 .mailbox-inbox .mail-content-container .attachment .file-name {
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 12px;
     font-weight: 700;
     margin-bottom: 0;
     word-break: break-word;
 }
 .mailbox-inbox .mail-content-container .attachment .file-size {
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 11px;
     text-align: left;
     font-weight: 700;
@@ -796,7 +796,7 @@
 }
 .compose-box .compose-content form .mail-form p {
     font-weight: 700;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 16px;
     margin-bottom: 0;
     align-self: center;
@@ -830,8 +830,8 @@
     color: #4361ee;
     font-weight: 600;
 }
-.compose-box .compose-content form #editor-container h1 { color: #3b3f5c; }
-.compose-box .compose-content form #editor-container p { color: #3b3f5c; }
+.compose-box .compose-content form #editor-container h1 { color: #053e9c; }
+.compose-box .compose-content form #editor-container p { color: #053e9c; }
 #composeMailModal .modal-content .modal-footer {
     border-top: none;
     padding-top: 0;
@@ -1000,7 +1000,7 @@
         padding: 0 0 0 10px;
     }
     .mailbox-inbox .mail-item div.mail-item-heading .mail-item-inner .f-body .meta-time {
-        min-width: auto;   
+        min-width: auto;
     }
     .mailbox-inbox .mail-item div.mail-item-heading .mail-item-inner .mail-content-excerpt {
         width: calc(100vw - 192px);

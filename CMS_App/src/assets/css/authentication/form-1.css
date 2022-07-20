@@ -76,7 +76,7 @@ body {
 
 .form-form .form-form-wrap .user-meta p {
     font-size: 31px;
-    color: #3b3f5c;
+    color: #053e9c;
     margin-bottom: 0;
 }
 
@@ -87,7 +87,7 @@ body {
 
 .form-form .form-form-wrap p.signup-link {
     font-size: 14px;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 700;
     margin-bottom: 50px;
 }
@@ -109,13 +109,13 @@ body {
 
 .form-form .form-form-wrap form .field-wrapper.toggle-pass p {
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin-bottom: 0;
 }
 
 .form-form .form-form-wrap form .field-wrapper .logged-in-user-name {
     font-size: 37px;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .form-form .form-form-wrap form .field-wrapper svg {
@@ -149,7 +149,7 @@ body {
     width: 100%;
     -ms-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 500;
     font-size: 16px;
     padding: 13px 35px 13px 46px;

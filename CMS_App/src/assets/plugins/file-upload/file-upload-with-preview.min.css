@@ -15,7 +15,7 @@
   .custom-file-container label {
     color: #4361ee; }
     .custom-file-container label .custom-file-container__image-clear {
-      color: #3b3f5c; }
+      color: #053e9c; }
 
 .custom-file-container__custom-file {
   box-sizing: border-box;
@@ -54,7 +54,7 @@
   border-radius: .25rem;
   height: auto;
   border: 1px solid #f1f2f3;
-  color: #3b3f5c;
+  color: #053e9c;
   font-size: 15px;
   padding: 8px 10px;
   letter-spacing: 1px;

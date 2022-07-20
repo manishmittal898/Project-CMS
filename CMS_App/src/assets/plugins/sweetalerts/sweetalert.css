@@ -54,7 +54,7 @@ body.swal2-iosfix {
   .swal2-modal.swal2-loading {
     overflow-y: hidden; }
   .swal2-modal .swal2-title {
-    color: #3b3f5c !important;
+    color: #053e9c !important;
     font-size: 24px !important;
     text-align: center;
     font-weight: normal;
@@ -190,7 +190,7 @@ body.swal2-iosfix {
 
 .swal2-modal .swal2-input:focus, .swal2-modal .swal2-textarea:focus {
   outline: none;
-  border: 1px solid #3b3f5c;
+  border: 1px solid #053e9c;
   -webkit-box-shadow: 0 0 3px #c4e6f5;
   box-shadow: 0 0 3px #c4e6f5; }
 

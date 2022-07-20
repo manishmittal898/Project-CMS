@@ -39,7 +39,7 @@
   margin-right: 5px; }
 
 .nav-pills .nav-link {
-  color: #3b3f5c; }
+  color: #053e9c; }
   .nav-pills .nav-link.active:after {
     color: #fff; }
 
@@ -56,7 +56,7 @@ h4 {
     Simple Tab
 */
 .simple-tab .nav-tabs li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .simple-tab .nav-tabs .nav-item.show .nav-link, .simple-tab .nav-tabs .nav-link.active {
   color: #4361ee;
@@ -73,7 +73,7 @@ h4 {
     Simple Pills
 */
 .simple-pills .nav-pills li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .simple-pills .nav-pills .nav-link.active, .simple-pills .nav-pills .show > .nav-link {
   background-color: #4361ee;
@@ -86,7 +86,7 @@ h4 {
     Icon Tab
 */
 .icon-tab .nav-tabs li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .icon-tab .nav-tabs svg {
   width: 20px;
@@ -104,7 +104,7 @@ h4 {
     Icon Pill
 */
 .icon-pill .nav-pills li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .icon-pill .nav-pills svg {
   width: 20px;
@@ -181,7 +181,7 @@ h4 {
     Justify Tab
 */
 .justify-tab .nav-tabs li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .justify-tab .nav-tabs .nav-item.show .nav-link, .justify-tab .nav-tabs .nav-link.active {
   color: #4361ee;
@@ -195,7 +195,7 @@ h4 {
     Justify Pill
 */
 .justify-pill .nav-pills li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .justify-pill .nav-pills .nav-link.active, .justify-pill .nav-pills .show > .nav-link {
   background-color: #2196f3;
@@ -208,7 +208,7 @@ h4 {
     Justify Centered Tab
 */
 .tab-justify-centered .nav-tabs li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .tab-justify-centered .nav-tabs .nav-item.show .nav-link, .tab-justify-centered .nav-tabs .nav-link.active {
   color: #e95f2b;
@@ -222,7 +222,7 @@ h4 {
     Justify Centered Pill
 */
 .pill-justify-centered .nav-pills li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .pill-justify-centered .nav-pills .nav-link.active, .pill-justify-centered .nav-pills .show > .nav-link {
   background-color: #e2a03f; }
@@ -234,7 +234,7 @@ h4 {
     Justify Right Tab
 */
 .tab-justify-right .nav-tabs li a {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 .tab-justify-right .nav-tabs .nav-item.show .nav-link, .tab-justify-right .nav-tabs .nav-link.active {
   color: #4361ee;
@@ -254,7 +254,7 @@ h4 {
   padding: 20px 0 0 0; }
 
 /*
-    With Icons   
+    With Icons
 */
 .rounded-pills-icon .nav-pills li a {
   -webkit-border-radius: 0.625rem !important;
@@ -309,7 +309,7 @@ h4 {
   border-color: transparent; }
 
 /*
-    Rouned Circle With Icons   
+    Rouned Circle With Icons
 */
 .rounded-circle-pills-icon .nav-pills li a {
   background-color: #f1f2f3;

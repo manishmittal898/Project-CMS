@@ -22,7 +22,7 @@
 </div>
 <!-- Page Header Title end -->
 
-<div class="custom-form p-4">
+<div class="custom-form p-3 p-md-3">
     <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
         <div class="form-row">
             <!-- Done -->
@@ -70,7 +70,7 @@
                     Please select <strong>Sub Category</strong>...!</div>
             </div>
 
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6">
                 <label>Product main image</label>
                 <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
                 <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)" [CurrentFileLength]="model?.ImagePath ? 1: 0" [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         <a [href]="model.ImagePath" target="_blank">
-                            <i data-toggle="tooltip" data-placement="bottom" title="View" class="fas fa-eye file-upload-details-remove"></i>
+                            <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye file-upload-details-remove"></i>
                         </a>
 
                         <i (click)="RemoveDocument(model.ImagePath)" data-toggle="tooltip" data-placement="bottom" title="Remove" class="fas fa-trash-alt text-danger file-upload-details-remove"></i>
@@ -97,7 +97,7 @@
             </div>
 
             <!-- Pending -->
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6">
                 <label>Other images</label>
                 <div class="dropzone dropzone-light upload-btn-wrapper w-100">
                     <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
@@ -114,25 +114,35 @@
                             <div class="small-media-items-action">
                                 <a href="javascript:void()" (click)="deleteProdcutFile(itm.Id)" title="Delete"><i
                     class="bi bi-trash"></i></a>
+                                <a [href]="itm.FilePath" target="_blank">
+                                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                                </a>
                             </div>
                         </a>
                     </ng-container>
+
+                    <!-- <a href="javascript:void()" class="small-media-items small-media-items-pdf text-danger position-relative">
+            <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+              <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+            </div>
+          </a>
+
+          <a href="javascript:void()" class="small-media-items small-media-items-video position-relative">
+            <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
+              <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+            </div>
+          </a> -->
+
+
                 </div>
 
-                <!--
-        <a href="javascript:void()" class="small-media-items position-relative">
-          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-          <div class="small-media-items-action">
-            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-          </div>
-        </a>
-        <a href="javascript:void()" class="small-media-items position-relative">
-          <div class="small-media-items-img"> <img src="assets/img/300x300.jpg" /> </div>
-          <div class="small-media-items-action">
-            <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-          </div>
-        </a>
-   </div> -->
+
+
+
             </div>
 
             <div class="form-group col-md-12">

@@ -54,4 +54,14 @@
     <Folder Include="StaticFiles\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Content\**" CopyToOutputDirectory="PreserveNewest" >
+		</Content>
+		<Content Include="StaticFiles\**" CopyToOutputDirectory="PreserveNewest" >
+		</Content>
+		<!-- CopyToPublishDirectory = { Always, PreserveNewest, Never } -->
+	</ItemGroup>
+
+	 
+
 </Project>

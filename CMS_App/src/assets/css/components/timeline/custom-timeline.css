@@ -217,7 +217,7 @@
         margin-bottom: 20px;
         font-size: 1.125rem; }
       .modern-timeline > li > .modern-timeline-panel .modern-timeline-body p {
-        color: #3b3f5c;
+        color: #053e9c;
         margin-bottom: 0; }
         .modern-timeline > li > .modern-timeline-panel .modern-timeline-body p a {
           display: block; }
@@ -264,7 +264,7 @@
       max-width: 100px;
       font-size: 16px;
       font-weight: 600;
-      color: #3b3f5c;
+      color: #053e9c;
       align-self: center; }
   .timeline-alter .item-timeline .t-img {
     position: relative;
@@ -378,7 +378,7 @@
     .timeline-alter .item-timeline .t-text p {
       font-size: 13px;
       margin: 0;
-      color: #3b3f5c;
+      color: #053e9c;
       font-weight: 600; }
       .timeline-alter .item-timeline .t-text p a {
         color: #1b55e2;
@@ -438,7 +438,7 @@
     .timeline-line .item-timeline .t-dot.t-dot-danger:before {
       border-color: #e7515a; }
     .timeline-line .item-timeline .t-dot.t-dot-dark:before {
-      border-color: #3b3f5c; }
+      border-color: #053e9c; }
     .timeline-line .item-timeline .t-dot.t-dot-primary:after {
       border-color: #1b55e2; }
     .timeline-line .item-timeline .t-dot.t-dot-success:after {
@@ -450,7 +450,7 @@
     .timeline-line .item-timeline .t-dot.t-dot-danger:after {
       border-color: #e7515a; }
     .timeline-line .item-timeline .t-dot.t-dot-dark:after {
-      border-color: #3b3f5c; }
+      border-color: #053e9c; }
   .timeline-line .item-timeline:last-child .t-dot:after {
     display: none; }
   .timeline-line .item-timeline .t-meta-time {
@@ -468,7 +468,7 @@
     .timeline-line .item-timeline .t-text p {
       font-size: 13px;
       margin: 0;
-      color: #3b3f5c;
+      color: #053e9c;
       font-weight: 600; }
       .timeline-line .item-timeline .t-text p a {
         color: #1b55e2;
@@ -479,7 +479,7 @@
     max-width: 100px;
     font-size: 16px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     padding: 10px 0; }
   .timeline-line .item-timeline .t-text .t-meta-time {
     margin: 0;

@@ -331,8 +331,8 @@
         .widget-activity-five .timeline-line .item-timeline .t-dot div.t-warning svg {
           color: #fff; }
       .widget-activity-five .timeline-line .item-timeline .t-dot div.t-dark {
-        background-color: #3b3f5c;
-        box-shadow: 0 10px 20px -8px #3b3f5c; }
+        background-color: #053e9c;
+        box-shadow: 0 10px 20px -8px #053e9c; }
         .widget-activity-five .timeline-line .item-timeline .t-dot div.t-dark svg {
           color: #fff; }
     .widget-activity-five .timeline-line .item-timeline .t-dot svg {
@@ -1386,7 +1386,7 @@
       background-color: #e7515a;
       /* border: 2px solid rgb(241, 172, 176); */ }
     .widget-activity-four .timeline-line .item-timeline.timeline-dark .t-dot:before {
-      background-color: #3b3f5c;
+      background-color: #053e9c;
       /* border: 2px solid rgb(159, 163, 187); */ }
     .widget-activity-four .timeline-line .item-timeline.timeline-secondary .t-dot:before {
       background: #805dca;
@@ -1453,8 +1453,8 @@
       border: 1px solid #009688;
       background-color: #ddf5f0; }
     .widget-activity-four .timeline-line .item-timeline.timeline-dark .t-text span.badge {
-      color: #3b3f5c;
-      border: 1px solid #3b3f5c;
+      color: #053e9c;
+      border: 1px solid #053e9c;
       background-color: #e3e4eb; }
     .widget-activity-four .timeline-line .item-timeline:hover .t-text span.badge {
       opacity: 1; }
@@ -1890,7 +1890,7 @@
           letter-spacing: 1px;
           color: #515365; }
       .widget-table-three .table > tbody > tr:hover > td .td-content {
-        color: #3b3f5c; }
+        color: #053e9c; }
       .widget-table-three .table > tbody > tr > td:first-child {
         border-top-left-radius: 6px;
         padding: 12px 0px 12px 15px;
@@ -2073,7 +2073,7 @@
       .widget-activity-three .timeline-line .item-timeline .t-dot div.t-dark {
         background-color: rgba(172, 176, 195, 0.51); }
         .widget-activity-three .timeline-line .item-timeline .t-dot div.t-dark svg {
-          color: #3b3f5c; }
+          color: #053e9c; }
     .widget-activity-three .timeline-line .item-timeline .t-dot svg {
       color: #fff;
       height: 15px;
@@ -2252,7 +2252,7 @@
     height: auto; }
   /*
       ===========================
-              Wallet 
+              Wallet
       ===========================
   */
   .widget-account-invoice-three .widget-heading {
