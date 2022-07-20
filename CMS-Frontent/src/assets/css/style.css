@@ -677,6 +677,7 @@ font-weight: 600;
 }
 .product-list-items {
   color: var(--primary-color);
+  position: relative;
 }
 
 .product-list-items:hover {
@@ -1014,5 +1015,26 @@ select:focus-visible {
 }
 .cart-sidebar-empty .cart-sidebar-empty-icon i {
   font-size: 3rem;
+}
+.product-list-items-tag {
+  position: absolute;
+  background: #c50d00;
+  top: 12px;
+  left: -8px;
+  z-index: 9999;
+  padding: 1px 6px;
+  color: #fff;
+  font-size: 13px;
+}
+.product-list-items-tag:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 19px;
+  left: 0px;
+  transform: rotate(27deg);
+  z-index: 1;
+  border-top: solid 5px #c50d00;
 }
 /* CUSTOM CSS END */
