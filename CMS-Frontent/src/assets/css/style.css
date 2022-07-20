@@ -927,7 +927,7 @@ ul.dropdown-menu a {
   word-break: normal;
 }
 ul.dropdown-menu {
-  border: solid 1px #898989;
+  border-top: solid 2px #b9b9b9;
   box-shadow: none;
   border-radius: 0px;
   max-width: 200px;
@@ -1037,4 +1037,5 @@ select:focus-visible {
   z-index: 1;
   border-top: solid 5px #c50d00;
 }
+
 /* CUSTOM CSS END */

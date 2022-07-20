@@ -1,6 +1,13 @@
 /* RESPONSIVE START */
 
 @media all and (min-width: 992px) {
+  ul.dropdown-menu.megamenu {
+    width: 100%;
+    max-width: 1250px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .navbar .nav-item .dropdown-menu {
     display: none;
   }
