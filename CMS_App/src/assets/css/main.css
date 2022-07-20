@@ -33,7 +33,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 :focus {
@@ -278,7 +278,7 @@ label {
 .form-control {
     height: auto;
     border: 1px solid #e2e2e2;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
@@ -290,7 +290,7 @@ label {
 .form-control:focus {
     box-shadow: 0 0 5px 2px rgba(194, 213, 255, 0.619608);
     border-color: #4361ee;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .form-control::-webkit-input-placeholder,
@@ -323,7 +323,7 @@ label {
 .custom-select {
     height: auto;
     border: 1px solid #f1f2f3;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
@@ -343,7 +343,7 @@ label {
 .custom-select:focus {
     box-shadow: none;
     border-color: #4361ee;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 
@@ -432,7 +432,7 @@ select.form-control.form-custom {
 .custom-file-label {
     height: auto;
     border: 1px solid #f1f2f3;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
@@ -599,7 +599,7 @@ select.form-control.form-custom {
     padding: 0.4375rem 1.25rem;
     text-shadow: none;
     font-size: 14px;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: normal;
     white-space: normal;
     word-wrap: break-word;
@@ -627,7 +627,7 @@ select.form-control.form-custom {
 
 .btn:hover,
 .btn:focus {
-    color: #3b3f5c;
+    color: #053e9c;
     background-color: #f1f2f3;
     border-color: #d3d3d3;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -818,7 +818,7 @@ select.form-control.form-custom {
 .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu a.dropdown-item.active,
 .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu a.dropdown-item:active {
     background-color: transparent;
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 700;
 }
 
@@ -1367,41 +1367,41 @@ select.form-control.form-custom {
     color: #fff !important;
     background-color: #002767;
     border-color: #002767;
-    box-shadow: 0 10px 20px -10px #3b3f5c;
+    box-shadow: 0 10px 20px -10px #053e9c;
 }
 
 .btn-dark:hover,
 .btn-dark:focus {
     color: #fff !important;
-    background-color: #3b3f5c;
+    background-color: #053e9c;
     box-shadow: none;
-    border-color: #3b3f5c;
+    border-color: #053e9c;
 }
 
 .btn-dark:active,
 .btn-dark.active {
-    background-color: #3b3f5c;
-    border-top: 1px solid #3b3f5c;
+    background-color: #053e9c;
+    border-top: 1px solid #053e9c;
 }
 
 .btn-dark:not(:disabled):not(.disabled).active,
 .btn-dark:not(:disabled):not(.disabled):active {
     color: #fff !important;
-    background-color: #3b3f5c;
-    border-color: #3b3f5c;
+    background-color: #053e9c;
+    border-color: #053e9c;
 }
 
 .show>.btn-dark.dropdown-toggle {
     color: #fff !important;
-    background-color: #3b3f5c;
-    border-color: #3b3f5c;
+    background-color: #053e9c;
+    border-color: #053e9c;
 }
 
 .btn-dark.disabled,
 .btn-dark.btn[disabled],
 .btn-dark:disabled {
-    background-color: #3b3f5c;
-    border-color: #3b3f5c;
+    background-color: #053e9c;
+    border-color: #053e9c;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -1716,12 +1716,12 @@ select.form-control.form-custom {
 
 .btn-outline-dark:not(:disabled):not(.disabled).active,
 .btn-outline-dark:not(:disabled):not(.disabled):active {
-    background-color: #3b3f5c;
+    background-color: #053e9c;
     color: #fff !important;
 }
 
 .show>.btn-outline-dark.dropdown-toggle {
-    background-color: #3b3f5c;
+    background-color: #053e9c;
     color: #fff !important;
 }
 
@@ -1785,8 +1785,8 @@ select.form-control.form-custom {
 }
 
 .btn-outline-dark {
-    border: 1px solid #3b3f5c !important;
-    color: #3b3f5c !important;
+    border: 1px solid #053e9c !important;
+    color: #053e9c !important;
     background-color: transparent;
     box-shadow: none;
 }
@@ -1839,8 +1839,8 @@ select.form-control.form-custom {
 
 .btn-outline-dark:hover {
     color: #fff !important;
-    background-color: #3b3f5c;
-    box-shadow: 0 10px 20px -10px #3b3f5c;
+    background-color: #053e9c;
+    box-shadow: 0 10px 20px -10px #053e9c;
 }
 
 
@@ -1999,7 +1999,7 @@ select.form-control.form-custom {
 
 .badge-dark {
     color: #fff;
-    background-color: #3b3f5c;
+    background-color: #053e9c;
 }
 
 .badge-secondary {
@@ -2037,9 +2037,9 @@ select.form-control.form-custom {
 }
 
 .outline-badge-dark {
-    color: #3b3f5c;
+    color: #053e9c;
     background-color: transparent;
-    border: 1px solid #3b3f5c;
+    border: 1px solid #053e9c;
 }
 
 .outline-badge-secondary {
@@ -2086,7 +2086,7 @@ select.form-control.form-custom {
 
 .outline-badge-dark:focus,
 .outline-badge-dark:hover {
-    color: #3b3f5c;
+    color: #053e9c;
     background-color: #e3e4eb;
 }
 
@@ -2128,7 +2128,7 @@ select.form-control.form-custom {
 }
 
 .link-badge-dark {
-    color: #3b3f5c;
+    color: #053e9c;
     background-color: transparent;
     border: 1px solid transparent;
 }
@@ -2460,7 +2460,7 @@ table .badge-dark {
 }
 
 .table>tfoot>tr>th {
-    color: #3b3f5c;
+    color: #053e9c;
 }
 
 .table-vertical-align tr,
@@ -2597,7 +2597,7 @@ table .badge-dark {
 
 .bg-dark {
     background-color: #fff;
-    border-color: #3b3f5c;
+    border-color: #053e9c;
     color: #fff;
 }
 
@@ -2862,7 +2862,7 @@ table .badge-dark {
 }
 
 .text-dark {
-    color: #3b3f5c !important;
+    color: #053e9c !important;
 }
 
 .text-muted {
@@ -2925,7 +2925,7 @@ table .badge-dark {
 }
 
 .border-dark {
-    border-color: #3b3f5c !important;
+    border-color: #053e9c !important;
 }
 
 
@@ -4466,7 +4466,10 @@ element.style {
 }
 
 .cdk-overlay-dark-backdrop {
-    background: rgba(0, 0, 0, 0.7) !important;
+    /* background: rgba(0, 0, 0, 0.7) !important; */
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    backdrop-filter: saturate(180%) blur(5px);
+    background-color: rgba(0, 0, 0, 0.6) !important;
     z-index: 999 !important;
 }
 
@@ -4497,6 +4500,9 @@ element.style {
 }
 app-header {
   z-index: 999999;
+}
+.cdk-overlay-container {
+  z-index: 9999999999999 !important;
 }
 /* .ng-select {
     z-index: 1;

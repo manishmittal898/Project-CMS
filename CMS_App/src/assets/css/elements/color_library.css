@@ -1,6 +1,6 @@
 .widget {
-    border: none; 
-    box-shadow: none; 
+    border: none;
+    box-shadow: none;
 }
 /*---------Palette Box--------*/
 .color-box {
@@ -36,7 +36,7 @@
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 0;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 .color-box .cl-info span {
     font-size: 14px;

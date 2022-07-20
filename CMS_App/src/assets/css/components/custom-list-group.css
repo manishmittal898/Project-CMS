@@ -74,7 +74,7 @@
 
 .new-control.new-checkbox {
   cursor: pointer;
-  color: #3b3f5c;
+  color: #053e9c;
   margin-bottom: 0; }
   .new-control.new-checkbox .new-control-indicator {
     position: absolute;
@@ -140,7 +140,7 @@ code {
   color: #e7515a; }
 
 .list-group-item-action:hover {
-  color: #3b3f5c;
+  color: #053e9c;
   background-color: #f1f2f3;
   box-shadow: 0px 0px 12px 1px rgba(113, 106, 202, 0.08); }
 
@@ -163,14 +163,14 @@ code {
   height: 20px; }
 
 .list-group.list-group-icons-meta .list-group-item .media .media-body h6 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-weight: 700;
   margin-bottom: 0;
   font-size: 15px;
   letter-spacing: 1px; }
 
 .list-group.list-group-icons-meta .list-group-item .media .media-body p {
-  color: #3b3f5c;
+  color: #053e9c;
   margin-bottom: 0;
   font-size: 12px;
   font-weight: 600; }
@@ -189,13 +189,13 @@ code {
 .list-group.list-group-media .list-group-item .media .media-body {
   align-self: center; }
   .list-group.list-group-media .list-group-item .media .media-body h6 {
-    color: #3b3f5c;
+    color: #053e9c;
     font-weight: 700;
     margin-bottom: 0;
     font-size: 16px;
     letter-spacing: 1px; }
   .list-group.list-group-media .list-group-item .media .media-body p {
-    color: #3b3f5c;
+    color: #053e9c;
     margin-bottom: 0;
     font-size: 12px;
     font-weight: 600; }

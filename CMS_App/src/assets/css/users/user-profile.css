@@ -15,7 +15,7 @@
 .layout-spacing {
   padding-bottom: 25px; }
 
-/* 
+/*
 ===================
     User Profile
 ===================
@@ -43,7 +43,7 @@
     position: relative;
     font-size: 21px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin: 6px 0px 0 0; }
     .user-profile .widget-content-area h3:after {
       position: absolute;
@@ -101,7 +101,7 @@
         width: 19px;
         align-self: center; }
 
-/* 
+/*
 ==============
     Skills
 ==============
@@ -112,7 +112,7 @@
     position: relative;
     font-size: 21px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin: 6px 0px 40px 0; }
     .skills .widget-content-area h3:after {
       position: absolute;
@@ -147,7 +147,7 @@
       .skills .widget-content-area .progress .progress-title span {
         align-self: center; }
 
-/* 
+/*
 ==============
     Bio
 ==============
@@ -159,7 +159,7 @@
     position: relative;
     font-size: 21px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin: 6px 0px 40px 0; }
     .bio .widget-content-area h3:after {
       position: absolute;
@@ -173,7 +173,7 @@
   .bio .widget-content-area h5 {
     font-size: 16px;
     font-weight: 700;
-    color: #3b3f5c; }
+    color: #053e9c; }
   .bio .widget-content-area p {
     color: #888ea8;
     font-size: 15px; }
@@ -197,7 +197,7 @@
     .bio .widget-content-area .b-skills p {
       font-size: 13px; }
 
-/* 
+/*
 ================
     Education
 ================
@@ -208,7 +208,7 @@
     position: relative;
     font-size: 21px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin: 6px 0px 40px 0; }
     .education .widget-content-area h3:after {
       position: absolute;
@@ -292,7 +292,7 @@
     .education .widget-content-area .timeline-alter .item-timeline .t-meta-date p, .education .widget-content-area .timeline-alter .item-timeline .t-usr-txt p {
       margin: 0 auto; } }
 
-/* 
+/*
 =======================
     Work Experience
 =======================
@@ -303,7 +303,7 @@
     position: relative;
     font-size: 21px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin: 6px 0px 40px 0; }
     .work-experience .widget-content-area h3:after {
       position: absolute;

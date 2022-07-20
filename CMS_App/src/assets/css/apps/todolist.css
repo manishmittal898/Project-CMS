@@ -26,7 +26,7 @@
     position: absolute;
     width: 100vw;
     height: 100%;
-    background: #3b3f5c!important;
+    background: #053e9c!important;
     z-index: 4!important;
     opacity: 0;
     transition: all 0.5s ease-in-out;
@@ -57,7 +57,7 @@
     position: absolute;
     font-size: 14px;
     padding: 9px 20px;
-    border: none; 
+    border: none;
     color: #fff;
     bottom: 32px;
     left: 17%;
@@ -134,7 +134,7 @@
     height: 21px;
     fill: rgba(0, 23, 55, 0.08);
 }
-.tab-title .nav-pills .nav-link#all-list .badge { color: #3b3f5c; }
+.tab-title .nav-pills .nav-link#all-list .badge { color: #053e9c; }
 .tab-title .nav-pills .nav-link#todo-task-done .badge { color: #2196f3; }
 .tab-title .nav-pills .nav-link#todo-task-important .badge { color: #e95f2b; }
 
@@ -345,7 +345,7 @@
 .compose-box .compose-content h5 {
     font-weight: 700;
     font-size: 18px;
-    color: #3b3f5c;
+    color: #053e9c;
     text-align: center;
     margin-bottom: 35px;
 }
@@ -406,8 +406,8 @@
     padding: 10px 25px;
 }
 .modal-backdrop { background-color: #515365; }
-.compose-box .compose-content form #editor-container h1 { color: #3b3f5c; }
-.compose-box .compose-content form #editor-container p { color: #3b3f5c; }
+.compose-box .compose-content form #editor-container h1 { color: #053e9c; }
+.compose-box .compose-content form #editor-container p { color: #053e9c; }
 @media (max-width: 767px) {
     .todo-inbox { display: block; }
     .todo-inbox .message-box {
@@ -464,7 +464,7 @@
 
 /*
 =====================
-    Mozilla Support 
+    Mozilla Support
 =====================
 */
 

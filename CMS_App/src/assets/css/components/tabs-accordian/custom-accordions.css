@@ -9,7 +9,7 @@
 	===============================
 */
 h1, h2, h3, h4, h5, h6 {
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 /*
     Basic
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
     .card .card-body ul li:not(:last-child) {
       margin-bottom: 5px; }
     .card .card-body ul li a {
-      color: #3b3f5c;
+      color: #053e9c;
       font-size: 13px;
       font-weight: 600; }
       .card .card-body ul li a:hover {

@@ -16,7 +16,7 @@ select.bs-select-hidden, select.selectpicker {
   .bootstrap-select.btn-group > .dropdown-toggle {
     height: auto;
     border: 1px solid #bfc9d4;
-    color: #3b3f5c !important;
+    color: #053e9c !important;
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
@@ -62,7 +62,7 @@ select.bs-select-hidden, select.selectpicker {
 .bootstrap-select.show .dropdown-toggle {
   border: 1px solid #4361ee !important;
   box-shadow: 0 0 5px 2px rgba(194, 213, 255, 0.619608);
-  color: #3b3f5c; }
+  color: #053e9c; }
   .bootstrap-select.show .dropdown-toggle.btn-outline-primary {
     border: 1px solid #4361ee !important; }
   .bootstrap-select.show .dropdown-toggle.btn-outline-info {

@@ -78,7 +78,7 @@
   flex: 1;
   padding: 35px 35px;
   position: relative;
-  color: #3b3f5c;
+  color: #053e9c;
   border: 1px solid #e0e6ed;
   background-color: #fff; }
   .pricing-plan:hover {
@@ -122,7 +122,7 @@
   .pricing-plan-label strong {
     font-size: 32px;
     font-weight: 600;
-    color: #3b3f5c;
+    color: #053e9c;
     margin-right: 5px;
     line-height: 30px; }
 
@@ -218,7 +218,7 @@
     border-left: 1px solid #e0e6ed;
     border-radius: 6px; } }
 
-/* 
+/*
     Pricing
 */
 #pricingWrapper {
@@ -237,7 +237,7 @@
       padding: 30px;
       background: #fff;
       border-bottom: 1px solid #bfc9d4;
-      color: #3b3f5c; }
+      color: #053e9c; }
     #pricingWrapper .stacked .card-header .card-price {
       -webkit-transition: all 0.2s;
       -moz-transition: all 0.2s;
@@ -245,7 +245,7 @@
       -webkit-transition-delay: 0s;
       -moz-transition-delay: 0s;
       transition-delay: 0s;
-      color: #3b3f5c;
+      color: #053e9c;
       display: block;
       width: 6.25rem;
       height: 6.25rem;
@@ -268,7 +268,7 @@
     #pricingWrapper .stacked .card-header p {
       font-weight: 600;
       font-size: 15px;
-      color: #3b3f5c; }
+      color: #053e9c; }
     #pricingWrapper .stacked .card-body .list-group-minimal .list-group-item {
       margin-bottom: 12px;
       padding: 0;
@@ -276,18 +276,18 @@
       border: 0;
       font-weight: 600;
       font-size: 14px;
-      color: #3b3f5c; }
+      color: #053e9c; }
     #pricingWrapper .stacked .card-body a {
       padding: 15px 10px; }
 
 /* norbu */
 .pricing--norbu .pricing__item {
   margin: 1em;
-  color: #3b3f5c;
+  color: #053e9c;
   cursor: default;
   background: #fff;
   border-radius: 10px;
-  border: 1px solid #3b3f5c;
+  border: 1px solid #053e9c;
   -webkit-transition: border-color 0.3s, background 0.3s;
   transition: border-color 0.3s, background 0.3s; }
   .pricing--norbu .pricing__item:hover {
@@ -305,7 +305,7 @@
     position: absolute;
     width: 20%;
     height: 1px;
-    background: #3b3f5c;
+    background: #053e9c;
     left: 40%;
     bottom: 0; }
 
@@ -353,8 +353,8 @@
   text-transform: uppercase;
   flex: none;
   padding: 12px 45px;
-  color: #3b3f5c;
-  border: solid 1px #3b3f5c;
+  color: #053e9c;
+  border: solid 1px #053e9c;
   font-weight: 600;
   border-radius: 6px;
   -webkit-transition: background 0.3s;
@@ -381,11 +381,11 @@
 /* norbu */
 .pricing--norbu .pricing__item {
   margin: 1em;
-  color: #3b3f5c;
+  color: #053e9c;
   cursor: default;
   background: #fff;
   border-radius: 10px;
-  border: 1px solid #3b3f5c;
+  border: 1px solid #053e9c;
   -webkit-transition: border-color 0.3s, background 0.3s;
   transition: border-color 0.3s, background 0.3s; }
   .pricing--norbu .pricing__item:hover {
@@ -403,7 +403,7 @@
     position: absolute;
     width: 20%;
     height: 1px;
-    background: #3b3f5c;
+    background: #053e9c;
     left: 40%;
     bottom: 0; }
 
@@ -451,8 +451,8 @@
   text-transform: uppercase;
   flex: none;
   padding: 12px 45px;
-  color: #3b3f5c;
-  border: solid 1px #3b3f5c;
+  color: #053e9c;
+  border: solid 1px #053e9c;
   font-weight: 600;
   border-radius: 6px;
   -webkit-transition: background 0.3s;

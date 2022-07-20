@@ -113,7 +113,7 @@ nav .navbar-brand {
     width: 17px;
     vertical-align: middle;
     margin-right: 11px;
-    color: #3b3f5c;
+    color: #053e9c;
 }
 .faq .faq-layouting .fq-tab-section .accordion .card:hover .card-header div svg.feather-code {
     color: #4361ee;
@@ -130,7 +130,7 @@ nav .navbar-brand {
     vertical-align: bottom;
     margin-right: 10px;
     width: 18px;
-    color: #3b3f5c;
+    color: #053e9c;
     fill: rgba(0, 23, 55, 0.08);
 }
 .faq .faq-layouting .fq-tab-section .accordion .card:hover .card-header div svg.feather-thumbs-up,
@@ -141,7 +141,7 @@ nav .navbar-brand {
 .faq .faq-layouting .fq-tab-section .accordion .card .card-header div span.faq-like-count {
     font-size: 13px;
     font-weight: 700;
-    color: #3b3f5c;
+    color: #053e9c;
     fill: rgba(0, 23, 55, 0.08);
 }
 .faq .faq-layouting .fq-tab-section .accordion .card:hover .card-header div span.faq-like-count,

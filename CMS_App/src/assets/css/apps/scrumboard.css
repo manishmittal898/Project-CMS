@@ -8,7 +8,7 @@
 #addListModal .compose-box h5 {
     font-weight: 700;
     font-size: 18px;
-    color: #3b3f5c;
+    color: #053e9c;
     text-align: center;
     margin-bottom: 38px;
 }
@@ -139,7 +139,7 @@
 
 
 /* Delete Modal*/
-    
+
 #deleteConformation { }
 #deleteConformation .modal-content {
     border: 0;
@@ -164,7 +164,7 @@
     fill: rgba(231, 81, 90, 0.37);
 }
 #deleteConformation .modal-content .modal-header .modal-title {
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 18px;
     font-weight: 700;
     align-self: center;
@@ -208,7 +208,7 @@
     padding-right: 0;
 }
 
-/*  
+/*
     Connect Sorting Div
 */
 .connect-sorting {
@@ -247,13 +247,13 @@
 }
 .connect-sorting .add-s-task .addTask {
     display: block;
-    color: #3b3f5c;
+    color: #053e9c;
     font-size: 13px;
     font-weight: 700;
     text-align: center;
     display: inline-block;
     cursor: pointer;
-}   
+}
 .connect-sorting .add-s-task .addTask:hover { color: #4361ee; }
 .connect-sorting .add-s-task .addTask svg {
     width: 16px;
@@ -386,7 +386,7 @@
 */
 .scrumboard .card.task-text-progress .card-body .task-content { margin-top : 20px; }
 .scrumboard .card.task-text-progress .card-body .task-content p { padding: 5px 20px 5px 20px; }
-.scrumboard .card.task-text-progress .card-body .task-content > div { display: flex; padding: 5px 20px 5px 20px; }    
+.scrumboard .card.task-text-progress .card-body .task-content > div { display: flex; padding: 5px 20px 5px 20px; }
 .scrumboard .card.task-text-progress .card-body .task-content .progress {
     height: 9px;
     width: 100%;

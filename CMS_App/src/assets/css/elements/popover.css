@@ -9,7 +9,7 @@
 	===============================
 */
 .popovers-section h6 {
-  color: #3b3f5c;
+  color: #053e9c;
   font-size: 0.875rem;
   margin-top: 25px;
   margin-bottom: 20px; }
@@ -98,7 +98,7 @@
 .popover-dark .popover-header {
   background-color: #e3e4eb;
   border: none;
-  color: #3b3f5c; }
+  color: #053e9c; }
 
 /*  	Popover Body 	*/
 .popover-primary .popover-body {
@@ -127,4 +127,4 @@
 
 .popover-dark .popover-body {
   background-color: #e3e4eb;
-  color: #3b3f5c; }
+  color: #053e9c; }
