@@ -70,7 +70,7 @@
                     Please select <strong>Sub Category</strong>...!</div>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 mb-0">
                 <label>Product main image</label>
                 <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
                 <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)" [CurrentFileLength]="model?.ImagePath ? 1: 0" [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
@@ -97,7 +97,7 @@
             </div>
 
             <!-- Pending -->
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 mb-0">
                 <label>Other images</label>
                 <div class="dropzone dropzone-light upload-btn-wrapper w-100">
                     <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
