@@ -4467,7 +4467,13 @@ element.style {
 .default-section-info .btn {
     font-size: 20px;
 }
-
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation
+{
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  z-index: 99999999;
+}
 .cdk-overlay-dark-backdrop {
     -webkit-backdrop-filter: saturate(180%) blur(5px);
     backdrop-filter: saturate(180%) blur(5px);
@@ -4631,6 +4637,7 @@ i.fas.fa-times {
   box-shadow: none;
   padding: 0px;
 }
+
 /* i.fas.fa-times:hover
 {
   -webkit-transform: rotate(180deg);
