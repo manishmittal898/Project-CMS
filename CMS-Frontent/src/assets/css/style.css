@@ -702,12 +702,12 @@ font-weight: 600;
 }
 
 .product-list-items-img img {
-  max-height: 270px;
+  max-height: 245px;
 }
 
 .product-list-items-img {
 background: #ffffff;
-  height: 280px;
+  height: 250px;
   overflow: hidden;
   box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
   border-radius: 0px;
@@ -1021,7 +1021,7 @@ select:focus-visible {
   background: #c50d00;
   top: 12px;
   left: -8px;
-  z-index: 9999;
+  z-index: 9;
   padding: 1px 6px;
   color: #fff;
   font-size: 13px;
