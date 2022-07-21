@@ -1059,10 +1059,12 @@ select:focus-visible {
   position: relative;
   z-index: 15;
 }
-ul.dropdown-menu.megamenu h3 {
+ul.dropdown-menu.megamenu .accordion-button, ul.dropdown-menu.megamenu h3 {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 10px;
+  padding: 0px;
+  background: transparent;
 }
 ul.megamenu-sub-list li {
   list-style: none;

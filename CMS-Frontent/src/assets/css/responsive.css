@@ -1,6 +1,9 @@
 /* RESPONSIVE START */
 
 @media all and (min-width: 992px) {
+  ul.megamenu-sub-list {
+    display: block !important;
+}
   .navbar-expand-lg .navbar-nav .nav-link {
     line-height: 40px;
 }
@@ -16,7 +19,7 @@
   }
 
 
-  .navbar .nav-item .dropdown-menu {
+  .navbar .nav-item .dropdown-menu, ul.dropdown-menu.megamenu .accordion-button::after {
     display: none;
   }
 
