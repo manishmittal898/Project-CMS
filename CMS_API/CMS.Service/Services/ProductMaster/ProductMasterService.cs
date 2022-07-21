@@ -188,7 +188,7 @@ namespace CMS.Service.Services.ProductMaster
                     }
 
 
-                    
+
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -222,7 +222,7 @@ namespace CMS.Service.Services.ProductMaster
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
                         _db.SaveChanges();
-                        
+
                     }
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
@@ -333,6 +333,60 @@ namespace CMS.Service.Services.ProductMaster
             return objResponse;
         }
 
+        public async Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model)
+        {
+            ServiceResponse<IEnumerable<ProductCategoryViewModel>> objResult = new ServiceResponse<IEnumerable<ProductCategoryViewModel>>();
+            try
+            {
+
+
+                var result = (from lkType in _db.TblProductMasters
+                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
+                              select lkType.Category).Distinct();
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        break;
+                }
+
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+
+                objResult.Data = await (from x in result
+                                        select new ProductCategoryViewModel
+                                        {
+                                            Id = x.Id,
+                                            Name = x.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                           
+
+                                        }).ToListAsync();
+
+                if (objResult.Data != null)
+                {
+
+                    return CreateResponse(objResult.Data as IEnumerable<ProductCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                }
+                else
+                {
+                    return CreateResponse<IEnumerable<ProductCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                objResult.Data = null;
+                objResult.IsSuccess = false;
+                objResult.Message = string.Empty;
+            }
+            return objResult;
+        }
 
 
     }

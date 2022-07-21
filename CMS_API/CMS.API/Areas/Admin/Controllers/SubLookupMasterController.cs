@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Area("Admin")]
+    [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     public class SubLookupMasterController : ControllerBase
     {

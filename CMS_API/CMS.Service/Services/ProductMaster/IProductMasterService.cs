@@ -18,6 +18,9 @@ namespace CMS.Service.Services.ProductMaster
         Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(long id);
         Task<ServiceResponse<TblProductImage>> DeleteProductFile(long id);
         Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(long productId);
+
+        Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model);
+
     }
 }
 
