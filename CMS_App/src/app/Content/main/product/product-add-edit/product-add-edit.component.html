@@ -96,7 +96,7 @@
         <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
           <span [ngSwitch]="getFileType(model.ImagePath)">
 
-            <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative">
+            <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
               <div class="small-media-items-img"> <img [src]="model.ImagePath"
                   onerror="this.src='assets/img/300x300.jpg'" /> </div>
               <div class="small-media-items-action">
@@ -108,7 +108,7 @@
               </div>
             </a>
             <a *ngSwitchCase="'doc'" href="javascript:void()"
-              class="small-media-items small-media-items-pdf text-danger position-relative">
+              class="small-media-items small-media-items-pdf text-danger position-relative mb-3">
               <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
               <div class="small-media-items-action">
                 <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
@@ -118,7 +118,7 @@
             </a>
 
             <a *ngSwitchCase="'video'" href="javascript:void()"
-              class="small-media-items small-media-items-video position-relative">
+              class="small-media-items small-media-items-video position-relative mb-3">
               <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
               <div class="small-media-items-action">
                 <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
@@ -169,7 +169,7 @@
           <ng-container *ngFor="let itm of ProductFiles">
             <span [ngSwitch]="getFileType(itm.FilePath)">
 
-              <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative">
+              <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
                 <div class="small-media-items-img"> <img [src]="itm.FilePath"
                     onerror="this.src='assets/img/300x300.jpg'" /> </div>
                 <div class="small-media-items-action">
@@ -181,7 +181,7 @@
                 </div>
               </a>
               <a *ngSwitchCase="'doc'" href="javascript:void()"
-                class="small-media-items small-media-items-pdf text-danger position-relative">
+                class="small-media-items small-media-items-pdf text-danger position-relative mb-3">
                 <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
                 <div class="small-media-items-action">
                   <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
@@ -190,7 +190,7 @@
               </a>
 
               <a *ngSwitchCase="'video'" href="javascript:void()"
-                class="small-media-items small-media-items-video position-relative">
+                class="small-media-items small-media-items-video position-relative mb-3">
                 <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
                 <div class="small-media-items-action">
                   <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
