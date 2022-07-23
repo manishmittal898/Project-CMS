@@ -276,6 +276,9 @@
     }
     .home-category-d-1 .home-category-items-caption {
         font-size: 13px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     .product-collection-header-title {
         max-width: 230px;

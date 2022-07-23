@@ -1,42 +1,41 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true"
-      aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item text-center active">
-      <img src="assets/images/slider1.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h1>Welcome to StoreOne</h1>
-        <p>Some representative placeholder content for the first slide.</p>
-        <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
-      </div>
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-item text-center">
-      <img src="assets/images/slider1.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h1>Welcome to StoreOne</h1>
-        <p>Some representative placeholder content for the first slide.</p>
-        <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
-      </div>
+    <div class="carousel-inner">
+        <div class="carousel-item text-center active">
+            <img src="assets/images/slider1.jpg" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Welcome to StoreOne</h1>
+                <p>Some representative placeholder content for the first slide.</p>
+                <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
+            </div>
+        </div>
+        <div class="carousel-item text-center">
+            <img src="assets/images/slider1.jpg" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Welcome to StoreOne</h1>
+                <p>Some representative placeholder content for the first slide.</p>
+                <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
+            </div>
+        </div>
+        <div class="carousel-item text-center">
+            <img src="assets/images/slider1.jpg" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>Welcome to StoreOne</h1>
+                <p>Some representative placeholder content for the first slide.</p>
+                <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
+            </div>
+        </div>
     </div>
-    <div class="carousel-item text-center">
-      <img src="assets/images/slider1.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h1>Welcome to StoreOne</h1>
-        <p>Some representative placeholder content for the first slide.</p>
-        <a href="javascript:void()" class="btn btn-default px-4 text-uppercase">View detail</a>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -46,25 +45,25 @@
 
 <!-- Home Category Start -->
 <Section class="home-category-d-1">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center section-title"> StoreOne Category</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center section-title">Category</div>
 
-      <ng-container *ngFor="let itm of model">
-           <!-- Home Category Start -->
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4 ">
-        <a href="javascript:void()" class="home-category-items text-center">
-          <div class="home-category-items-img d-flex align-items-center">
-            <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.svg"' alt="" />
-          </div>
-          <div class="home-category-items-caption">{{itm.Name}}</div>
-        </a>
-      </div>
-      <!-- Home Category End -->
-      </ng-container>
+            <ng-container *ngFor="let itm of model">
+                <!-- Home Category Start -->
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 ">
+                    <a href="javascript:void()" class="home-category-items text-center">
+                        <div class="home-category-items-img d-flex align-items-center">
+                            <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.svg"' alt="" />
+                        </div>
+                        <div class="home-category-items-caption">{{itm.Name}}</div>
+                    </a>
+                </div>
+                <!-- Home Category End -->
+            </ng-container>
 
 
+        </div>
     </div>
-  </div>
 </Section>
 <!-- Home Category End -->

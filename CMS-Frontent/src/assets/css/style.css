@@ -608,6 +608,10 @@ section.home-category-d-1 {
     overflow: hidden;
     border: solid 2px transparent;
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home-category-d-1-caption-color .row>[class*="col-"]:nth-child(2) .home-category-items-caption {
