@@ -27,6 +27,8 @@ namespace CMS.Data.Models
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
+        public decimal? ShippingCharge { get; set; }
+        public string Keyword { get; set; }
 
         public virtual TblLookupMaster CaptionTag { get; set; }
         public virtual TblLookupMaster Category { get; set; }

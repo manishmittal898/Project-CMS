@@ -27,6 +27,8 @@ export class ProductAddEditComponent implements OnInit {
     SubCategory: [undefined],
     Summary: [undefined],
     Description: [undefined],
+    ShippingCharge: [undefined],
+    Keyword: [undefined],
     ImagePath: [undefined, Validators.required],
     productFile: [undefined, undefined]
   });
@@ -56,7 +58,9 @@ export class ProductAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0
+      this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
+      this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
+
       this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success("Product added sucessfully...", "Saved");
@@ -80,10 +84,10 @@ export class ProductAddEditComponent implements OnInit {
         this.model.SubCategoryId = data.SubCategoryId ? Number(data.SubCategoryId) : undefined;
         this.model.CaptionTagId = data.CaptionTagId ? Number(data.CaptionTagId) : undefined;
         this.model.Summary = data.Summary;
+        this.model.ShippingCharge =  data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
+        this.model.Keyword = data.Keyword;
         this.ProductFiles = data.Files;
-
       } else {
-
         this.toast.error(response.Message?.toString(), 'Error');
       }
     },

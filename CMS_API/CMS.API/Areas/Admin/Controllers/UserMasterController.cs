@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Area("Admin")]
+    [Route("api/[area]/[controller]")]
     [ApiController]
     public class UserMasterController : ControllerBase
     {
