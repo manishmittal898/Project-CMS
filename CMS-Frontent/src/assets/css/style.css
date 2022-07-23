@@ -1068,6 +1068,7 @@ select:focus-visible {
 .form-control {
     border-radius: 0px;
     font-size: 14px;
+    padding: 10px 15px;
 }
 
 .form-control:focus {
@@ -1168,6 +1169,22 @@ ul.megamenu-sub-list {
 
 .accordion-button:not(.collapsed) {
     box-shadow: none;
+}
+
+.mx-400 {
+    max-width: 400px;
+}
+
+.text-theme-primary {
+    color: var(--primary-color);
+}
+
+.text-theme-secondary {
+    color: var(--secondary-color);
+}
+
+.font-w-500 {
+    font-weight: 500;
 }
 
 
