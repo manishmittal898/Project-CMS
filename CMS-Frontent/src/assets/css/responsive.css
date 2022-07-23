@@ -1,6 +1,16 @@
 /* RESPONSIVE START */
 
 @media all and (min-width: 992px) {
+  ul.megamenu-sub-list {
+    display: block !important;
+}
+  .navbar-expand-lg .navbar-nav .nav-link {
+    line-height: 40px;
+}
+  li.nav-item.dropdown {
+    position: static;
+}
+
   ul.dropdown-menu.megamenu {
     width: 100%;
     max-width: 1250px;
@@ -8,7 +18,8 @@
     transform: translateX(-50%);
   }
 
-  .navbar .nav-item .dropdown-menu {
+
+  .navbar .nav-item .dropdown-menu, ul.dropdown-menu.megamenu .accordion-button::after {
     display: none;
   }
 
@@ -153,6 +164,7 @@ ul.dropdown-menu {
   border: none;
   padding: 0px;
   background: rgba(255,255,255,0.3);
+  box-shadow: none;
 }
 
 }
