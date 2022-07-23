@@ -69,7 +69,9 @@ namespace CMS.Service.Services.ProductMaster
                                             ModifiedBy = x.ModifiedBy,
                                             ModifiedOn = x.ModifiedOn,
                                             IsActive = x.IsActive.Value,
-                                            IsDelete = x.IsDelete
+                                            IsDelete = x.IsDelete,
+                                            Keyword=x.Keyword,
+                                            ShippingCharge=x.ShippingCharge?? null
 
                                         }).ToListAsync();
 
@@ -117,7 +119,10 @@ namespace CMS.Service.Services.ProductMaster
                     ModifiedBy = x.ModifiedBy,
                     ModifiedOn = x.ModifiedOn,
                     IsActive = x.IsActive.Value,
-                    IsDelete = x.IsDelete
+                    IsDelete = x.IsDelete,
+                    Keyword = x.Keyword,
+                    ShippingCharge = x.ShippingCharge ?? null
+
                 }).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 var productFiles = GetProductFile(id).Result;
                 if (productFiles.IsSuccess)
@@ -164,8 +169,9 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
-
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objProduct.ShippingCharge = model.ShippingCharge?? null;
+                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword)? model.Keyword : model.Name;
                     var product = _db.TblProductMasters.Update(objProduct);
                     _db.SaveChanges();
                     if (model.Files != null && model.Files.Count > 0)
@@ -186,9 +192,7 @@ namespace CMS.Service.Services.ProductMaster
                         await _db.TblProductImages.AddRangeAsync(productImages);
                         _db.SaveChanges();
                     }
-
-
-
+                     
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -204,6 +208,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
                     objProduct.IsActive = true;
+                    objProduct.ShippingCharge = model.ShippingCharge ?? null;
+                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var product = await _db.TblProductMasters.AddAsync(objProduct);

@@ -37,17 +37,30 @@
       <div class="form-group col-md-4">
         <label>Price</label>
 
-        <input type="text" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
+        <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
           [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
           class="form-control" id="input4" placeholder="Price">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
           Please enter Price...! </div>
         <div class="invalid-feedback"
-          *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength')) && formgrp.get('SortedOrder')?.touched) || (formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength'))">
-          Sort Order length must be 1-10 digit. </div>
+          *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
+          Price length must be 1-10 digit. </div>
+      </div>
 
+      <div class="form-group col-md-4">
+        <label>Shipping Charge</label>
 
+        <input type="number" [(ngModel)]="model.ShippingCharge" (keypress)="_commonService.NumberOnly($event)"
+          [minlength]="1" [maxLength]="10" formControlName="ShippingCharge"
+          [ngClass]="{ 'is-invalid': f.ShippingCharge.errors && f.ShippingCharge.touched}" class="form-control"
+          id="input4" placeholder="ShippingCharge">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('ShippingCharge')?.hasError('required') && formgrp.get('ShippingCharge')?.touched)">
+          Please enter Shipping Charge...! </div>
+        <div class="invalid-feedback"
+          *ngIf="!formgrp.get('ShippingCharge')?.hasError('required') && ((formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength')) && formgrp.get('ShippingCharge')?.touched) || (formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength'))">
+          Shipping Charge length must be 1-10 digit. </div>
       </div>
 
       <div class="form-group col-md-4">
@@ -61,7 +74,7 @@
           *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
           Please select <strong>Caption</strong>...!</div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label>Select Category</label>
         <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
@@ -71,7 +84,7 @@
           *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
           Please select <strong>Category</strong>...!</div>
       </div>
-      <div class=" form-group col-md-6">
+      <div class=" form-group col-md-4">
         <label>Select Sub Category</label>
         <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Sub-category"
@@ -132,20 +145,6 @@
           </span>
 
 
-          <!-- <div class="dropzone dropzone-light file-upload-details">
-            <div class="dz-details">
-              <div class="dz-filename"><span data-dz-name="">{{getFileName}}</span>
-              </div>
-            </div>
-            <a [href]="model.ImagePath" target="_blank">
-              <i data-toggle="tooltip" data-placement="bottom" title="View"
-                class="bi bi-eye file-upload-details-remove"></i>
-            </a>
-
-            <i (click)="RemoveDocument(model.ImagePath)" data-toggle="tooltip" data-placement="bottom" title="Remove"
-              class="fas fa-trash-alt text-danger file-upload-details-remove"></i>
-          </div>
-           -->
         </ng-container>
 
 
@@ -184,8 +183,11 @@
                 class="small-media-items small-media-items-pdf text-danger position-relative">
                 <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
                 <div class="small-media-items-action">
-                  <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-                  <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+                  <a href="javascript:void()" (click)="deleteProdcutFile(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.FilePath" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
                 </div>
               </a>
 
@@ -193,8 +195,11 @@
                 class="small-media-items small-media-items-video position-relative">
                 <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
                 <div class="small-media-items-action">
-                  <a href="javascript:void()" title="Delete"><i class="bi bi-trash"></i></a>
-                  <a href="javascript:void()" title="View"><i class="bi bi-eye"></i></a>
+                  <a href="javascript:void()" (click)="deleteProdcutFile(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.FilePath" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
                 </div>
               </a>
               <p *ngSwitchDefault>
@@ -230,6 +235,14 @@
           Please enter Summary...!</div>
       </div>
 
+      <div class="form-group col-md-12">
+        <label>Keyword</label>
+        <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
+          [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
+         <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
+          Please enter Discription</div>
+      </div>
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">

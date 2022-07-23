@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   getCategoryList() {
     this._productService.GetCategoryProduct(this.indexModel).subscribe(response => {
-      debugger
+      
       if (response.IsSuccess) {
 
         this.model = response.Data;

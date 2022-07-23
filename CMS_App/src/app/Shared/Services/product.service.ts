@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseAPIService } from '../Helper/base-api.service';
-import { IndexModel, ApiResponse } from '../Helper/common-model'; 
+import { IndexModel, ApiResponse } from '../Helper/common-model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,8 @@ export interface ProductMasterViewModel {
   CaptionTag: string;
   Category: string;
   SubCategory: string;
+  ShippingCharge: number | undefined;
+  Keyword: string;
   Files: ProductImageViewModel[];
 }
 
@@ -66,9 +68,11 @@ export interface ProductMasterPostModel {
   Desc: string;
   Price: number | undefined;
   CategoryId: number | undefined;
-  SubCategoryId: number| undefined;
+  SubCategoryId: number | undefined;
   CaptionTagId: number | undefined;
   Summary: string;
+  ShippingCharge: number | undefined;
+  Keyword: string;
   Files?: string[];
 
 }

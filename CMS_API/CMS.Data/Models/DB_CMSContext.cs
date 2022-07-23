@@ -161,6 +161,8 @@ namespace CMS.Data.Models
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.Keyword).HasMaxLength(4000);
+
                 entity.Property(e => e.ModifiedOn)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -170,6 +172,8 @@ namespace CMS.Data.Models
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ShippingCharge).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Summary).HasColumnType("ntext");
 
