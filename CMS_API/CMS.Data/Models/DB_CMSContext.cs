@@ -22,6 +22,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblProductImage> TblProductImages { get; set; }
         public virtual DbSet<TblProductMaster> TblProductMasters { get; set; }
         public virtual DbSet<TblProductReview> TblProductReviews { get; set; }
+        public virtual DbSet<TblProductStock> TblProductStocks { get; set; }
         public virtual DbSet<TblRoleType> TblRoleTypes { get; set; }
         public virtual DbSet<TblSubLookupMaster> TblSubLookupMasters { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
@@ -238,6 +239,25 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tblProductReview_ProductId");
+            });
+
+            modelBuilder.Entity<TblProductStock>(entity =>
+            {
+                entity.ToTable("tblProductStocks");
+
+                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.TblProductStocks)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductStocks_ProductId");
+
+                entity.HasOne(d => d.Size)
+                    .WithMany(p => p.TblProductStocks)
+                    .HasForeignKey(d => d.SizeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblProductStocks_SizeId");
             });
 
             modelBuilder.Entity<TblRoleType>(entity =>

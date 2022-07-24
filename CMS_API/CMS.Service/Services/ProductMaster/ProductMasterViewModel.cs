@@ -72,5 +72,17 @@ namespace CMS.Service.Services.ProductMaster
 
     }
 
+    public class ProductStockModel
+    {
+        public long Id { get; set; }
+        public long ProductId { get; set; }
+        public long SizeId { get; set; }
+        public string Size { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public int? Quantity { get; set; }
+
+    }
+  
+
 
 }

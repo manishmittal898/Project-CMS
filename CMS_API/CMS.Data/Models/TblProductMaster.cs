@@ -10,6 +10,7 @@ namespace CMS.Data.Models
         public TblProductMaster()
         {
             TblProductReviews = new HashSet<TblProductReview>();
+            TblProductStocks = new HashSet<TblProductStock>();
         }
 
         public long Id { get; set; }
@@ -36,5 +37,6 @@ namespace CMS.Data.Models
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
         public virtual TblSubLookupMaster SubCategory { get; set; }
         public virtual ICollection<TblProductReview> TblProductReviews { get; set; }
+        public virtual ICollection<TblProductStock> TblProductStocks { get; set; }
     }
 }
