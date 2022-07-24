@@ -1000,6 +1000,23 @@ ul.dropdown-menu {
     backdrop-filter: saturate(180%) blur(40px);
     background-color: rgba(255, 255, 255, .9);
     box-shadow: 0 0 10px #dbdbdb;
+    transition: all 0.3s;
+}
+
+.dropdown-toggle::after {
+    content: "\f282";
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    border: none;
+    line-height: 1;
+    position: relative;
+    top: 7px;
+    transition: all 0.3s;
+}
+
+.dropdown-toggle:hover::after {
+    transform: rotate(180deg);
+    transition: all 0.3s;
 }
 
 .dropdown-item.active,
@@ -1143,8 +1160,8 @@ select:focus-visible {
 
 ul.dropdown-menu.megamenu .accordion-button,
 ul.dropdown-menu.megamenu h3 {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     margin-bottom: 10px;
     padding: 0px;
     background: transparent;

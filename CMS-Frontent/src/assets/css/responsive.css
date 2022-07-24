@@ -12,9 +12,11 @@
     }
     ul.dropdown-menu.megamenu {
         width: 100%;
-        max-width: 1250px;
+        max-width: 100%;
+        left: 0;
+        /* max-width: 1250px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%); */
     }
     .navbar .nav-item .dropdown-menu,
     ul.dropdown-menu.megamenu .accordion-button::after {
