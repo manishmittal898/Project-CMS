@@ -10,9 +10,14 @@ export class ProductService {
 
   constructor(private readonly _baseService: BaseAPIService) { }
 
-  GetList(model: IndexModel): Observable<ApiResponse<ProductCategoryViewModel[]>> {
+  GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.Product_List_Api}`;
     return this._baseService.post(url, model);
+  }
+
+  GetDetail(Id: Number): Observable<ApiResponse<ProductMasterViewModel>> {
+    let url = `${this._baseService.API_Url.Product_Detail_Api}`;
+    return this._baseService.get(url);
   }
 
 
@@ -35,12 +40,6 @@ export interface ProductMasterViewModel {
   Price: number | null;
   CaptionTagId: number | null;
   Summary: string;
-  CreatedBy: number;
-  CreatedOn: string;
-  ModifiedBy: number;
-  ModifiedOn: string;
-  IsActive: boolean | null;
-  IsDelete: boolean;
   CaptionTag: string;
   Category: string;
   SubCategory: string;

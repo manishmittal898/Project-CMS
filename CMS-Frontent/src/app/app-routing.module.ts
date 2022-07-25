@@ -4,11 +4,11 @@ import { HtmlComponent } from './Shared/Page/html/html.component';
 
 const routes: Routes = [
   {
-    path: "index",
+    path: "",
     loadChildren: () => import("./Pages/html-pages/html-pages.module").then(m => m.HtmlPagesModule)
   },
   { path: 'html-page', component: HtmlComponent },
-  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: 'index' },
 
 ];

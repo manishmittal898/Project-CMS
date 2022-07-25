@@ -19,16 +19,20 @@ const component = [
   FooterComponent,
   NavBarComponent];
 
+  const installedModule=[
+    
+  ]
 
 @NgModule({
   declarations: [
     component
   ],
   imports: [
-    CommonModule,
+    CommonModule,installedModule,
     commonModules,
   ],
   exports: [component,
-    commonModules,]
+    commonModules,
+    installedModule]
 })
 export class FeatureModule { }

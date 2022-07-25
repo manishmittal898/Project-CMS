@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import{Tooltip} from "node_modules/bootstrap/dist/js/bootstrap.esm.min.js";
+import { IndexModel } from 'src/app/Shared/Helper/Common';
+import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -7,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  indexModel = new IndexModel();
+  model: ProductMasterViewModel[] = [];
+  totalRecords: number = 0;
+  constructor(private readonly _productService: ProductService) { }
+
   ngOnInit(): void {
-    // Array.from(document.querySelectorAll('button[data-bs-toggle="tooltip"]'))
-    // .forEach(tooltipNode => new Tooltip(tooltipNode))
+    this.getList()
+  }
+
+  getList() {
+    this._productService.GetList(this.indexModel).subscribe(response => {
+      if (response.IsSuccess) {
+        this.model = response.Data;
+        this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
+      }
+    })
   }
 
 }
