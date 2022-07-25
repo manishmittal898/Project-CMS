@@ -25,7 +25,6 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     //remove Slider after bind data
-    this.AddSlider();
 
     //call dynamic data function
 
@@ -39,6 +38,8 @@ export class ProductDetailComponent implements OnInit {
     this._productService.GetDetail(this.recordId).subscribe(res => {
       if (res.IsSuccess) {
         this.model = res.Data;
+        this.AddSlider();
+
       }
     })
 
