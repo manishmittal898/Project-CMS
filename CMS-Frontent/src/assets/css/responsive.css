@@ -166,6 +166,10 @@ ul.dropdown-menu {
   background: rgba(255,255,255,0.3);
   box-shadow: none;
 }
+ul.dropdown-menu.megamenu .accordion-button, ul.dropdown-menu.megamenu h3 {
+  color: #fff;
+  font-size: 15px;
+}
 
 }
 
