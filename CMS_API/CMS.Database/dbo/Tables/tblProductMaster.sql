@@ -14,6 +14,8 @@
     [ModifiedOn] DATETIME       NOT NULL DEFAULT getdate(),
     [IsActive]   BIT            NOT NULL DEFAULT 1,
     [IsDelete] BIT NOT NULL DEFAULT 0, 
+    [ShippingCharge] DECIMAL NULL, 
+    [Keyword] NVARCHAR(4000) NULL, 
     CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_tblProductMaster_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [tblLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_SubCategoryId] FOREIGN KEY ([SubCategoryId]) REFERENCES [tblSubLookupMaster]([Id]),

@@ -67,14 +67,21 @@
                 <td><strong> Tag/Label: </strong></td>
                 <td>{{model.CaptionTag | titlecase}}</td>
               </tr>
+
+              <tr *ngIf="model.ShippingCharge">
+                <td><strong> Shipping Charge: </strong></td>
+                <td>₹ {{model.ShippingCharge }}</td>
+              </tr>
+
+
             </tbody>
           </table>
         </div>
-        <div class="mt-4">
+        <div class="mt-4" *ngIf="model.Desc">
           <strong class="mb-2 d-block font-16"> Discription: </strong>
           <p class="m-0" [innerHTML]="model.Desc"></p>
         </div>
-        <div class="mt-4">
+        <div class="mt-4" *ngIf="model.Summary">
           <strong class="mb-2 d-block font-16"> Additional Information: </strong>
           <p class="m-0" [innerHTML]="model.Summary"></p>
         </div>

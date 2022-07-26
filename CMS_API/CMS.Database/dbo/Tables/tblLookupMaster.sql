@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[tblLookupMaster] (
-    [Id]          BIGINT            IDENTITY (1, 1) NOT NULL,
+    [Id]          BIGINT  IDENTITY (1, 1) NOT NULL,
     [Name]        NVARCHAR (500) NULL,
     [ImagePath]        NVARCHAR (1000) NULL,
     [SortedOrder] INT            NULL,

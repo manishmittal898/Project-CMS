@@ -50,7 +50,7 @@
                 </div>
                 <div class="d-flex align-items-center mb-1">
                   <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" value="" checked id="Check2">
+                    <input class="form-check-input" type="checkbox" value="" id="Check2">
                     <label class="form-check-label ms-2" for="Check2">
                       Fitted Sheets
                     </label>
@@ -91,7 +91,7 @@
               class="product-collection-header-filter d-flex align-items-center justify-content-between mb-4 font-13">
               <div class="d-none d-md-block">Showing 1–12 of <strong> 20 </strong> results</div>
               <div>
-                <h4 class="m-0 font-w-400 product-collection-header-title">Fitted Sheets</h4>
+                <h4 class="m-0 font-w-400 product-collection-header-title">Products</h4>
               </div>
               <div class="d-flex">
                 <div class="product-sortby-filter me-3">
@@ -114,175 +114,34 @@
             </div>
           </div>
           <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-tag">Bestseller</div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4" *ngFor="let item of model">
+            <a href="javascript:void(0)" routerLink="/product/{{item.Id}}" class="product-list-items">
+              <div class="product-list-items-tag" *ngIf="item.CaptionTag">{{item.CaptionTag}}</div>
               <div
                 class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
-                <img src="assets/images/no-img.svg" alt="" />
+                <img [src]="item.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" />
                 <div class="product-list-hover">
                   <button type="button" class="product-list-hover-items" data-bs-toggle="tooltip"
                     data-bs-placement="top" title="Enquiry"><i class="bi bi-whatsapp"></i></button>
                 </div>
               </div>
               <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
+                <h3>{{item.Name}}</h3>
+                <p>₹ {{item.Price}}</p>
               </div>
             </a>
           </div>
           <!-- Product End -->
 
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
-          <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
-            <a href="javascript:void(0)" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <!-- Product End -->
           <div class="col-lg-12 mt-4">
             <nav>
+              <!-- <pagination-controls (pageChange)="indexModel.Page= $event"></pagination-controls> -->
+
               <ul class="pagination justify-content-center">
                 <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                 <li class="page-item"><a class="page-link" href="#">5</a></li>

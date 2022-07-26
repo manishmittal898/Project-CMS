@@ -69,7 +69,9 @@ namespace CMS.Service.Services.ProductMaster
                                             ModifiedBy = x.ModifiedBy,
                                             ModifiedOn = x.ModifiedOn,
                                             IsActive = x.IsActive.Value,
-                                            IsDelete = x.IsDelete
+                                            IsDelete = x.IsDelete,
+                                            Keyword=x.Keyword,
+                                            ShippingCharge=x.ShippingCharge?? null
 
                                         }).ToListAsync();
 
@@ -117,7 +119,10 @@ namespace CMS.Service.Services.ProductMaster
                     ModifiedBy = x.ModifiedBy,
                     ModifiedOn = x.ModifiedOn,
                     IsActive = x.IsActive.Value,
-                    IsDelete = x.IsDelete
+                    IsDelete = x.IsDelete,
+                    Keyword = x.Keyword,
+                    ShippingCharge = x.ShippingCharge ?? null
+
                 }).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 var productFiles = GetProductFile(id).Result;
                 if (productFiles.IsSuccess)
@@ -164,8 +169,9 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
-
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objProduct.ShippingCharge = model.ShippingCharge?? null;
+                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword)? model.Keyword : model.Name;
                     var product = _db.TblProductMasters.Update(objProduct);
                     _db.SaveChanges();
                     if (model.Files != null && model.Files.Count > 0)
@@ -186,9 +192,7 @@ namespace CMS.Service.Services.ProductMaster
                         await _db.TblProductImages.AddRangeAsync(productImages);
                         _db.SaveChanges();
                     }
-
-
-                    
+                     
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -204,6 +208,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
                     objProduct.IsActive = true;
+                    objProduct.ShippingCharge = model.ShippingCharge ?? null;
+                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     var product = await _db.TblProductMasters.AddAsync(objProduct);
@@ -222,7 +228,7 @@ namespace CMS.Service.Services.ProductMaster
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
                         _db.SaveChanges();
-                        
+
                     }
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
@@ -333,6 +339,60 @@ namespace CMS.Service.Services.ProductMaster
             return objResponse;
         }
 
+        public async Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model)
+        {
+            ServiceResponse<IEnumerable<ProductCategoryViewModel>> objResult = new ServiceResponse<IEnumerable<ProductCategoryViewModel>>();
+            try
+            {
+
+
+                var result = (from lkType in _db.TblProductMasters
+                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
+                              select lkType.Category).Distinct();
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        break;
+                }
+
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+
+                objResult.Data = await (from x in result
+                                        select new ProductCategoryViewModel
+                                        {
+                                            Id = x.Id,
+                                            Name = x.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                           
+
+                                        }).ToListAsync();
+
+                if (objResult.Data != null)
+                {
+
+                    return CreateResponse(objResult.Data as IEnumerable<ProductCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                }
+                else
+                {
+                    return CreateResponse<IEnumerable<ProductCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                objResult.Data = null;
+                objResult.IsSuccess = false;
+                objResult.Message = string.Empty;
+            }
+            return objResult;
+        }
 
 
     }

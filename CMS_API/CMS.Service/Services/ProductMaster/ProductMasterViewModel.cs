@@ -25,7 +25,8 @@ namespace CMS.Service.Services.ProductMaster
         public long? SubCategoryId { get; set; }
         public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
-
+        public decimal? ShippingCharge { get; set; }
+        public string Keyword { get; set; }
         public List<string>? Files { get; set; }
     }
 
@@ -46,7 +47,8 @@ namespace CMS.Service.Services.ProductMaster
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
-
+        public decimal? ShippingCharge { get; set; }
+        public string Keyword { get; set; }
         public string CaptionTag { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
@@ -59,6 +61,28 @@ namespace CMS.Service.Services.ProductMaster
         public string FilePath { get; set; }
         public long? ProductId { get; set; }
     }
+
+    public class ProductCategoryViewModel
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
+  
+
+
+    }
+
+    public class ProductStockModel
+    {
+        public long Id { get; set; }
+        public long ProductId { get; set; }
+        public long SizeId { get; set; }
+        public string Size { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public int? Quantity { get; set; }
+
+    }
+  
 
 
 }

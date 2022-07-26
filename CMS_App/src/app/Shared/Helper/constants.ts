@@ -16,37 +16,37 @@ export class API_Url {
   //#endregion
 
   //#region <<User Role>>
-  public static UserRole_Dropdown_Api = `${environment.apiEndPoint}UserRole/Roles`;
-  public static UserRoleList_Api = `${environment.apiEndPoint}UserRole/Get`;
-  public static UserRoleDetail_Api = `${environment.apiEndPoint}UserRole/get/`;
-  public static UserRoleAddUpdate_Api = `${environment.apiEndPoint}UserRole/post`;
-  public static UserRoleCheckRoleExist_Api = `${environment.apiEndPoint}UserRole/CheckRoleExist/`;
-  public static UserRoleChangeActiveStatus_Api = `${environment.apiEndPoint}UserRole/ChangeActiveStatus/`;
-  public static UserRoleDelete_Api = `${environment.apiEndPoint}UserRole/delete/`;
+  public static UserRole_Dropdown_Api = `${environment.apiEndPoint}admin/UserRole/Roles`;
+  public static UserRoleList_Api = `${environment.apiEndPoint}admin/UserRole/Get`;
+  public static UserRoleDetail_Api = `${environment.apiEndPoint}admin/UserRole/get/`;
+  public static UserRoleAddUpdate_Api = `${environment.apiEndPoint}admin/UserRole/post`;
+  public static UserRoleCheckRoleExist_Api = `${environment.apiEndPoint}admin/UserRole/CheckRoleExist/`;
+  public static UserRoleChangeActiveStatus_Api = `${environment.apiEndPoint}admin/UserRole/ChangeActiveStatus/`;
+  public static UserRoleDelete_Api = `${environment.apiEndPoint}admin/UserRole/delete/`;
   //#endregion
 
   //#region <<LookupTypeMaster>>
-  public static LookupTypeMasterList_Api = `${environment.apiEndPoint}LookupTypeMaster/get`;
-  public static LookupTypeMasterDetail_Api = `${environment.apiEndPoint}LookupTypeMaster/get/`;
-  public static LookupTypeMasterAddUpdate_Api = `${environment.apiEndPoint}LookupTypeMaster/post`;
-  public static LookupTypeMasterChangeActiveStatus_Api = `${environment.apiEndPoint}LookupTypeMaster/ChangeActiveStatus/`;
-  public static LookupTypeMasterDelete_Api = `${environment.apiEndPoint}LookupTypeMaster/delete/`;
+  public static LookupTypeMasterList_Api = `${environment.apiEndPoint}admin/LookupTypeMaster/get`;
+  public static LookupTypeMasterDetail_Api = `${environment.apiEndPoint}admin/LookupTypeMaster/get/`;
+  public static LookupTypeMasterAddUpdate_Api = `${environment.apiEndPoint}admin/LookupTypeMaster/post`;
+  public static LookupTypeMasterChangeActiveStatus_Api = `${environment.apiEndPoint}admin/LookupTypeMaster/ChangeActiveStatus/`;
+  public static LookupTypeMasterDelete_Api = `${environment.apiEndPoint}admin/LookupTypeMaster/delete/`;
   //#endregion
 
   //#region <<LookupMaster>>
-  public static LookupMasterList_Api = `${environment.apiEndPoint}LookupMaster/get`;
-  public static LookupMasterDetail_Api = `${environment.apiEndPoint}LookupMaster/get/`;
-  public static LookupMasterAddUpdate_Api = `${environment.apiEndPoint}LookupMaster/Save`;
-  public static LookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}LookupMaster/ChangeActiveStatus/`;
-  public static LookupMasterDelete_Api = `${environment.apiEndPoint}LookupMaster/delete/`;
+  public static LookupMasterList_Api = `${environment.apiEndPoint}admin/LookupMaster/get`;
+  public static LookupMasterDetail_Api = `${environment.apiEndPoint}admin/LookupMaster/get/`;
+  public static LookupMasterAddUpdate_Api = `${environment.apiEndPoint}admin/LookupMaster/Save`;
+  public static LookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}admin/LookupMaster/ChangeActiveStatus/`;
+  public static LookupMasterDelete_Api = `${environment.apiEndPoint}admin/LookupMaster/delete/`;
   //#endregion
 
   //#region <<SubLookupMaster>>
-  public static SubLookupMasterList_Api = `${environment.apiEndPoint}SubLookupMaster/get`;
-  public static SubLookupMasterDetail_Api = `${environment.apiEndPoint}SubLookupMaster/get/`;
-  public static SubLookupMasterAddUpdate_Api = `${environment.apiEndPoint}SubLookupMaster/Save`;
-  public static SubLookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}SubLookupMaster/ChangeActiveStatus/`;
-  public static SubLookupMasterDelete_Api = `${environment.apiEndPoint}SubLookupMaster/delete/`;
+  public static SubLookupMasterList_Api = `${environment.apiEndPoint}admin/SubLookupMaster/get`;
+  public static SubLookupMasterDetail_Api = `${environment.apiEndPoint}admin/SubLookupMaster/get/`;
+  public static SubLookupMasterAddUpdate_Api = `${environment.apiEndPoint}admin/SubLookupMaster/Save`;
+  public static SubLookupMasterChangeActiveStatus_Api = `${environment.apiEndPoint}admin/SubLookupMaster/ChangeActiveStatus/`;
+  public static SubLookupMasterDelete_Api = `${environment.apiEndPoint}admin/SubLookupMaster/delete/`;
   //#endregion
 
 
@@ -54,24 +54,24 @@ export class API_Url {
 
   //#region <<User Setting>>
 
-  public static GetUserProfileApi = `${environment.apiEndPoint}UserSetting/GetUserProfile/`;
-  public static UserUpdateProfileApi = `${environment.apiEndPoint}UserSetting/UpdateProfile`;
-  public static UserApproveStatusApi = `${environment.apiEndPoint}UserSetting/UpdateApproveStatus/`;
-  public static GetUserAvailableAreaApi = `${environment.apiEndPoint}UserSetting/GetUserAvailableAreaForRolebyPinCode/`;
-  public static SetUserAvailabilityApi = `${environment.apiEndPoint}UserSetting/SetUserAvailibilty`;
-  public static GetUserAvailibiltyListApi = `${environment.apiEndPoint}UserSetting/GetUserAvailibiltyList/`;
-  public static DeleteDocumentFileApi = `${environment.apiEndPoint}UserSetting/DeleteDocumentFile/`;
+  public static GetUserProfileApi = `${environment.apiEndPoint}admin/UserSetting/GetUserProfile/`;
+  public static UserUpdateProfileApi = `${environment.apiEndPoint}admin/UserSetting/UpdateProfile`;
+  public static UserApproveStatusApi = `${environment.apiEndPoint}admin/UserSetting/UpdateApproveStatus/`;
+  public static GetUserAvailableAreaApi = `${environment.apiEndPoint}admin/UserSetting/GetUserAvailableAreaForRolebyPinCode/`;
+  public static SetUserAvailabilityApi = `${environment.apiEndPoint}admin/UserSetting/SetUserAvailibilty`;
+  public static GetUserAvailibiltyListApi = `${environment.apiEndPoint}admin/UserSetting/GetUserAvailibiltyList/`;
+  public static DeleteDocumentFileApi = `${environment.apiEndPoint}admin/UserSetting/DeleteDocumentFile/`;
 
 
   //#endregion
 
   //#region  << Product  >>
-  public static Product_List_Api = `${environment.apiEndPoint}ProductMaster/GetList`;
-  public static Product_AddUpdate_Api = `${environment.apiEndPoint}ProductMaster/Post`;
-  public static Product_Delete_Api = `${environment.apiEndPoint}ProductMaster/Delete/`;
-  public static Product_ActiveStatus_Api = `${environment.apiEndPoint}ProductMaster/ChangeActiveStatus/`;
-  public static Product_Detail_Api = `${environment.apiEndPoint}ProductMaster/Get/`;
-  public static ProductFile_Delete_Api = `${environment.apiEndPoint}ProductMaster/DeleteProductFile/`;
+  public static Product_List_Api = `${environment.apiEndPoint}admin/ProductMaster/GetList`;
+  public static Product_AddUpdate_Api = `${environment.apiEndPoint}admin/ProductMaster/Post`;
+  public static Product_Delete_Api = `${environment.apiEndPoint}admin/ProductMaster/Delete/`;
+  public static Product_ActiveStatus_Api = `${environment.apiEndPoint}admin/ProductMaster/ChangeActiveStatus/`;
+  public static Product_Detail_Api = `${environment.apiEndPoint}admin/ProductMaster/Get/`;
+  public static ProductFile_Delete_Api = `${environment.apiEndPoint}admin/ProductMaster/DeleteProductFile/`;
 
   //#endregion
 
