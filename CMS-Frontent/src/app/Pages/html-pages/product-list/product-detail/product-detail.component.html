@@ -55,11 +55,49 @@
             <div class="col-md-7 mt-4 mt-md-0">
                 <div class="product-details-info">
                     <h2>{{model.Name}}</h2>
-                    <h4>₹ {{model.Price}}</h4>
-                    <p class="product-discription">
-                        {{model.Summary}}
-                    </p>
+                    <h4 class="d-flex align-items-center justify-content-between ">₹ {{model.Price}}
+                        <div class="ship-charges"> <span>Shipping Charge: </span> <strong class="text-danger">₹ 150</strong> </div>
+                    </h4>
+                    <div class="product-add-info mb-3">
+                        <strong class="d-block mb-1">Additional Information:</strong>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Top Fabric:</td>
+                                    <td>Silk Blend</td>
+                                </tr>
+                                <tr>
+                                    <td>Bottom Fabric:</td>
+                                    <td>Silk Blend</td>
+                                </tr>
+                                <tr>
+                                    <td>Dupatta Fabric:</td>
+                                    <td>Georgette</td>
+                                </tr>
+                                <tr>
+                                    <td>Sleeve Length:</td>
+                                    <td>Three-Quarter Sleeves</td>
+                                </tr>
+                                <tr>
+                                    <td>Sleeve Styling:</td>
+                                    <td>Regular Sleeves</td>
+                                </tr>
+                                <tr>
+                                    <td>Neck:</td>
+                                    <td>Round Neck</td>
+                                </tr>
+                                <tr>
+                                    <td>Length:</td>
+                                    <td>Crop</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <div class="product-discription mb-3">
+                        <strong class="d-block mb-1">Description:</strong>
+                        <p> {{model.Summary}}</p>
+                    </div>
                     <div class="col-lg-12 my-4 btn-share-whatsapp text-center">
                         <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i
                 class="bi bi-whatsapp"></i> Share via Whatsapp</a>

@@ -752,12 +752,14 @@ font-weight: 600;
 
 .product-details-info h4 {
     color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 15px;
+    font-size: 1.3rem;
 }
 
-.product-discription {
-    font-size: 16px;
+.product-details-info h2 {
+    color: #000;
+    font-size: 1.6rem;
 }
 
 .inner-breadcrumb {
@@ -787,7 +789,7 @@ ul.product-details-sm-img li a {
     margin: 0px 5px;
     align-items: center;
     justify-content: center;
-    border: solid 2px #f1f1f1;
+    border: solid 1px #f1f1f1;
     border-radius: 0px;
 }
 
@@ -1246,6 +1248,11 @@ ul.megamenu-sub-list {
 
 .login-reister-page {
     padding: 80px 0px 50px 0px;
+}
+
+.ship-charges {
+    font-size: 15px;
+    font-weight: 400;
 }
 
 
