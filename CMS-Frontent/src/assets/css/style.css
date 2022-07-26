@@ -1251,8 +1251,12 @@ ul.megamenu-sub-list {
 }
 
 .ship-charges {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
+}
+
+.product-details-big-img {
+    background: #f9f9f9;
 }
 
 
