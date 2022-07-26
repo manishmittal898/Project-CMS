@@ -32,5 +32,13 @@ namespace CMS.API.Areas.Public.Controllers
         {
             return await _productmstr.GetProductCategory(model);
         }
+
+        // GET api/<ProductMasterController>/5
+        [HttpGet("{id}")]
+        public object Get(long id)
+        {
+            return _productmstr.GetById(id);
+        }
+
     }
 }

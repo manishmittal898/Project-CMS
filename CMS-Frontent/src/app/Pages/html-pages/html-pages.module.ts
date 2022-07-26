@@ -14,7 +14,8 @@ import { FeatureModule } from '../../Shared/Module/feature/feature.module';
   declarations: [HomeComponent, ProductListComponent, ProductDetailComponent, MainPageComponent],
   imports: [
     CommonModule,
-    HtmlPagesRoutingModule, FeatureModule
+    HtmlPagesRoutingModule,
+    FeatureModule
   ],
   exports: []
 })

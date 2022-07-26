@@ -2,6 +2,7 @@
 using CMS.Service.Services.ProductMaster;
 
 using CMS.Service.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace CMS.API.Areas.Admin.Controllers
     [Area("Admin")]
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class ProductMasterController : ControllerBase
     {
         // GET: api/<ProductMasterController>

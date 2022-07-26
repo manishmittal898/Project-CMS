@@ -775,8 +775,8 @@ font-weight: 600;
 }
 
 .product-details-big-img img {
-    max-height: 600px;
-    border-radius: 10px;
+    max-height: 500px;
+    /* border-radius: 10px; */
 }
 
 ul.product-details-sm-img li a {
