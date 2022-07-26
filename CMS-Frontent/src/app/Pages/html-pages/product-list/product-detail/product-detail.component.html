@@ -23,7 +23,7 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="Pro-Detail-0">
             <div class="d-flex align-items-center justify-content-center product-details-big-img">
-              <a class="d-block w-100 text-center" href="assets/images/no-img.svg" data-toggle="lightbox"
+              <a class="d-block w-100 text-center" [href]="model?.ImagePath" data-toggle="lightbox"
                 data-gallery="example-gallery">
                 <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
               </a>
@@ -32,7 +32,7 @@
           <ng-container *ngFor="let item of model.Files; let i=index">
             <div class="tab-pane fade" id="Pro-Detail-{{i+1}}">
               <div class="d-flex align-items-center justify-content-center product-details-big-img">
-                <a class="d-block w-100 text-center" href="assets/images/no-img.svg" data-toggle="lightbox"
+                <a class="d-block w-100 text-center" [href]="item?.FilePath" data-toggle="lightbox"
                   data-gallery="example-gallery">
                   <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
                 </a>
@@ -50,8 +50,7 @@
                 onerror="this.src='assets/images/no-img.svg'" alt="" /> </a>
           </li>
           <li *ngFor="let item of model.Files; let i=index">
-            <a href="javascript:void()" id="Pro-Detail{{i+1}}" data-bs-toggle="tab"
-              data-bs-target="#Pro-Detail-{{i+1}}">
+            <a href="javascript:void()" id="Pro-Detail{{i+1}}" data-bs-toggle="tab" data-bs-target="#Pro-Detail-{{i+1}}">
               <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'" alt="" /> </a>
           </li>
 

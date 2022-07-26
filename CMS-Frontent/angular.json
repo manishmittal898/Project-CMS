@@ -41,7 +41,7 @@
               "node_modules/aos/dist/aos.js",
               "src/assets/js/custom.js",
               "src/assets/js/slider_custom.js",
-              "src/assets/js/index.bundle.min.js"
+              "node_modules/bs5-lightbox/dist/index.bundle.min.js"
             ]
           },
           "configurations": {
@@ -121,7 +121,7 @@
               "node_modules/aos/dist/aos.js",
               "src/assets/js/custom.js",
               "src/assets/js/slider_custom.js",
-              "src/assets/js/index.bundle.min.js"
+              "node_modules/bs5-lightbox/dist/index.bundle.min.js"
             ]
           }
         },
