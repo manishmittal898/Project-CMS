@@ -1001,6 +1001,42 @@ ul.dropdown-menu {
     background-color: rgba(255, 255, 255, .9);
     box-shadow: 0 0 10px #dbdbdb;
     transition: all 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-name: slideIn;
+    animation-name: dropdown-menu;
+}
+
+@keyframes dropdown-menu {
+    0% {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+    0% {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes dropdown-menu {
+    0% {
+        -webkit-transform: transform;
+        -webkit-opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        -webkit-opacity: 1;
+    }
+    0% {
+        -webkit-transform: translateY(1rem);
+        -webkit-opacity: 0;
+    }
 }
 
 .dropdown-toggle::after {
