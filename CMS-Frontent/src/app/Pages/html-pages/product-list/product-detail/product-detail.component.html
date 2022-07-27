@@ -20,6 +20,41 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
+                <div id="ProDetail" class="carousel carousel-product-details slide d-none" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#ProDetail" data-bs-slide-to="Pro-Detail-0" class="active" aria-current="true" aria-label="Slide-0">11</button>
+                        <button type="button" class="active" data-bs-target="#ProDetail" attr.data-bs-slide-to="Pro-Detail-{{i+1}}" attr.aria-label="Slide-{{i+1}}" *ngFor="let item of model.Files; let i=index">
+                        22
+                      </button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-flex align-items-center justify-content-center product-details-big-img">
+                                <a class="d-block w-100 text-center" [href]="model?.ImagePath" data-toggle="lightbox" data-gallery="example-gallery">
+                                    <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
+                                </a>
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let item of model.Files; let i=index">
+                            <div class="carousel-item" [class.active]="i==0">
+                                <div class="d-flex align-items-center justify-content-center product-details-big-img">
+                                    <a class="d-block w-100 text-center" [href]="item?.FilePath" data-toggle="lightbox" data-gallery="example-gallery">
+                                        <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
+                                    </a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#ProDetail" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#ProDetail" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
                 <div class="tab-content position-relative" id="myTabContent">
                     <div class="product-list-items-tag">New Product</div>
                     <div class="tab-pane fade show active" id="Pro-Detail-0">
