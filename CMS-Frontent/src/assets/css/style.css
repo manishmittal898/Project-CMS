@@ -1264,5 +1264,20 @@ ul.megamenu-sub-list {
     background: #f9f9f9;
 }
 
+.Cart-count {
+    position: absolute;
+    background: #5e5e5e;
+    right: -10px;
+    top: -3px;
+    font-size: 12px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    color: #fff;
+}
+
 
 /* CUSTOM CSS END */
