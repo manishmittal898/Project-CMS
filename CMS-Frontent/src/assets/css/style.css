@@ -584,13 +584,17 @@ section.home-category-d-1 {
     padding: 30px 0px 30px 0px;
 }
 
+.font-fam-newsreader {
+    font-family: 'Newsreader', serif;
+}
+
 .home-category-d-1 .home-category-items-img {
-    height: 300px;
+    height: 100%;
     overflow: hidden;
 }
 
 .home-category-d-1 .home-category-items-img img {
-    max-height: 295px;
+    max-height: 380px;
     margin: auto;
     transition: all .3s ease-in-out;
 }
@@ -655,7 +659,7 @@ section.home-category-d-1 {
 .home-category-d-1 .home-category-items-caption {
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     padding: 5px;
     position: absolute;
     top: auto;

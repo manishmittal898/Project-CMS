@@ -44,14 +44,14 @@
 
 
 <!-- Home Category Start -->
-<Section class="home-category-d-1">
+<Section class="home-category-d-1 py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 text-center section-title">Category</div>
 
             <ng-container *ngFor="let itm of model">
                 <!-- Home Category Start -->
-                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 ">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 font-fam-newsreader">
                     <a href="javascript:void()" class="home-category-items text-center">
                         <div class="home-category-items-img d-flex align-items-center">
                             <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.svg"' alt="" />
