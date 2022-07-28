@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'html-page', component: HtmlComponent },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: 'index' },
-
 ];
 
 @NgModule({

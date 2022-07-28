@@ -15,7 +15,6 @@ export class ProductDetailComponent implements OnInit {
 
 
     this._route.params.subscribe(x => {
-      debugger
       this.recordId = x.id;
       this.getDetailData();
 
