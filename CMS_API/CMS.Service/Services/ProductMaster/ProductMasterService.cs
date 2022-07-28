@@ -70,8 +70,8 @@ namespace CMS.Service.Services.ProductMaster
                                             ModifiedOn = x.ModifiedOn,
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
-                                            Keyword=x.Keyword,
-                                            ShippingCharge=x.ShippingCharge?? null
+                                            Keyword = x.Keyword,
+                                            ShippingCharge = x.ShippingCharge ?? null
 
                                         }).ToListAsync();
 
@@ -147,6 +147,8 @@ namespace CMS.Service.Services.ProductMaster
             {
                 TblProductMaster objProduct = new TblProductMaster();
                 List<TblProductImage> productImages = new List<TblProductImage>();
+                List<TblProductStock> productStock = new List<TblProductStock>();
+
                 if (model.Id > 0)
                 {
                     objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == model.Id);
@@ -170,9 +172,45 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
-                    objProduct.ShippingCharge = model.ShippingCharge?? null;
-                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword)? model.Keyword : model.Name;
+                    objProduct.ShippingCharge = model.ShippingCharge ?? null;
+                    objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     var product = _db.TblProductMasters.Update(objProduct);
+
+                    if (model.Stocks != null && model.Stocks.Count > 0)
+                    {
+                        var exIds = model.Stocks.Select(x => x.Id).ToArray();
+
+                        var deleteStock = objProduct.TblProductStocks.Where(x => !exIds.Contains(x.Id)).ToList();
+                        _db.TblProductStocks.RemoveRange(deleteStock);
+                        _db.SaveChanges();
+
+                        List<TblProductStock> prStocks = new List<TblProductStock> ();
+                        model.Stocks.Where(X => X.Id > 0).ToList().ForEach(x =>
+                        {
+                            TblProductStock prStock = objProduct.TblProductStocks.Where(p => p.Id == x.Id).FirstOrDefault();
+                            prStock.SizeId = x.SizeId;
+                            prStock.UnitPrice = x.UnitPrice;
+                            prStock.Quantity = x.Quantity;
+                            prStocks.Add(prStock);
+
+                        });
+                         _db.TblProductStocks.UpdateRange(prStocks);
+                        _db.SaveChanges();
+
+                        productStock = model.Stocks.Where(x => x.Id == default || x.Id == 0).Select(x => new TblProductStock
+                        {
+
+                            ProductId = model.Id,
+                            SizeId = x.SizeId,
+                            UnitPrice = x.UnitPrice,
+                            Quantity = x.Quantity
+
+                        }).ToList();
+                        await _db.TblProductStocks.AddRangeAsync(productStock);
+                        _db.SaveChanges();
+
+                    }
+
                     _db.SaveChanges();
                     if (model.Files != null && model.Files.Count > 0)
                     {
@@ -192,7 +230,7 @@ namespace CMS.Service.Services.ProductMaster
                         await _db.TblProductImages.AddRangeAsync(productImages);
                         _db.SaveChanges();
                     }
-                     
+
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -230,6 +268,23 @@ namespace CMS.Service.Services.ProductMaster
                         _db.SaveChanges();
 
                     }
+
+                    if (model.Stocks != null && model.Stocks.Count > 0)
+                    {
+                        productStock = model.Stocks.Select(x => new TblProductStock
+                        {
+
+                            ProductId = product.Entity.Id,
+                            SizeId = x.SizeId,
+                            UnitPrice = x.UnitPrice,
+                            Quantity = x.Quantity
+
+                        }).ToList();
+                        await _db.TblProductStocks.AddRangeAsync(productStock);
+                        _db.SaveChanges();
+
+                    }
+
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
@@ -370,7 +425,7 @@ namespace CMS.Service.Services.ProductMaster
                                             Id = x.Id,
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
-                                           
+
 
                                         }).ToListAsync();
 
