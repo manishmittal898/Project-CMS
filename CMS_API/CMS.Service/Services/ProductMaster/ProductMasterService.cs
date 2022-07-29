@@ -143,7 +143,7 @@ namespace CMS.Service.Services.ProductMaster
                     detail.Files = productFiles.Data;
                 }
 
-                ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+                 ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
