@@ -13,11 +13,11 @@ namespace CMS.Core.FixedValue
             [StringValue("GENDER")]
             GENDER,
             [StringValue("Product_Category")]
-
             Product_Category,
             [StringValue("Caption_Tag")]
-
-            Caption_Tag
+            Caption_Tag,
+            [StringValue("Product_Size")]
+            Product_Size
         }
     }
 }

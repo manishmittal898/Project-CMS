@@ -1,5 +1,5 @@
 import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +7,7 @@ import { DropDownModel, FilterDropDownPostModel } from 'src/app/Shared/Helper/co
 import { DropDown_key } from 'src/app/Shared/Helper/constants';
 import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel } from 'src/app/Shared/Services/product.service';
+import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
 
 @Component({
@@ -16,6 +16,7 @@ import { ProductService } from '../../../../Shared/Services/product.service';
   styleUrls: ['./product-add-edit.component.scss']
 })
 export class ProductAddEditComponent implements OnInit {
+  @ViewChild('stockModelPopupClose') stockModelPopup!: ElementRef;
   dropDown = new DropDownModel();
   model = {} as ProductMasterPostModel;
   isFileAttached = false;
@@ -38,6 +39,13 @@ export class ProductAddEditComponent implements OnInit {
   editorConfig = EditorConfig.Config;
   productFile: any;
   ProductFiles: ProductImageViewModel[] = [];
+  stockModel = {} as ProductStockModel;
+  stockFormGroup = this.fb.group({
+    SizeId: [undefined, Validators.required],
+    UnitPrice: [undefined, Validators.required],
+    Quantity: [undefined, Validators.required],
+  });
+  get sf() { return this.stockFormGroup.controls; }
 
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
@@ -84,9 +92,10 @@ export class ProductAddEditComponent implements OnInit {
         this.model.SubCategoryId = data.SubCategoryId ? Number(data.SubCategoryId) : undefined;
         this.model.CaptionTagId = data.CaptionTagId ? Number(data.CaptionTagId) : undefined;
         this.model.Summary = data.Summary;
-        this.model.ShippingCharge =  data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
+        this.model.ShippingCharge = data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
         this.model.Keyword = data.Keyword;
         this.ProductFiles = data.Files;
+        this.model.Stocks = data.Stocks;
       } else {
         this.toast.error(response.Message?.toString(), 'Error');
       }
@@ -95,12 +104,13 @@ export class ProductAddEditComponent implements OnInit {
       });
   }
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag]).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
+        this.dropDown.ddlProductSize = ddls?.ddlProductSize;
 
       }
     });
@@ -175,5 +185,36 @@ export class ProductAddEditComponent implements OnInit {
         );
       }
     });
+  }
+
+  onAddStock() {
+    debugger
+    if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {
+      this.stockModel.SizeId = undefined;
+      this.toast.warning("Size Already exist, Please Select diffrent size...", "Oops");
+      return
+    }
+    this.stockFormGroup.markAllAsTouched();
+
+    if (this.stockFormGroup.valid) {
+      if (!this.model.Stocks) {
+        this.model.Stocks = [];
+      }
+      this.model.Stocks.push(this.stockModel);
+      this.stockModel = {} as ProductStockModel;
+      this.stockModelPopup.nativeElement.click();
+    }
+  }
+  onEditStock(stockItem: ProductStockModel, idx: number) {
+    if (stockItem && stockItem.Id > 0) {
+      idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
+      this.stockModel = this.model.Stocks[idx];
+    } else {
+      this.stockModel = this.model.Stocks[idx];
+    }
+    this.model.Stocks.splice(idx, 1);
+  }
+  onGetProductSizeLabel(sizeId: any) {
+    return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;
   }
 }

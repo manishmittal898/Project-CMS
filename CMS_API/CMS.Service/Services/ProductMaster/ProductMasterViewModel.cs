@@ -54,6 +54,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public List<ProductImageViewModel>? Files { get; set; }
+        public List<ProductStockModel>? Stocks { get; set; }
 
     }
     public class ProductImageViewModel
