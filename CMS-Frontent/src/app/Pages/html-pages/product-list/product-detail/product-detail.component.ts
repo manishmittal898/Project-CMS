@@ -38,6 +38,9 @@ export class ProductDetailComponent implements OnInit {
       if (res.IsSuccess) {
         this.model = res.Data;
         this.AddSlider();
+        setTimeout(() => {
+          this.ProductDetailSlider()
+        }, 50);
 
       }
     })
@@ -45,7 +48,32 @@ export class ProductDetailComponent implements OnInit {
   }
 
 
-
+ProductDetailSlider()
+{
+  $('.product-d-main-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    asNavFor: '.product-d-main-slider-nav'
+  });
+  $('.product-d-main-slider-nav').slick({
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    asNavFor: '.product-d-main-slider',
+    focusOnSelect: true
+  });
+}
   AddSlider() {
     $('.slider-items-4').slick({
       dots: true,
