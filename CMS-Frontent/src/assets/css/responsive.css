@@ -400,6 +400,10 @@
         max-width: 50px;
         max-height: 50px;
     }
+    .product-d-main-slider .slick-prev, .product-d-main-slider .slick-next
+    {
+      display: none !important;
+    }
 }
 
 

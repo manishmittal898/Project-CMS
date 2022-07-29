@@ -1,238 +1,197 @@
 <!-- Breadcrum Start -->
 <nav aria-label="breadcrumb" class="inner-breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void()">Product name</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Product Details</li>
-                </ol>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void()">Product name</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+        </ol>
+      </div>
     </div>
+  </div>
 </nav>
 
 <!-- Breadcrum End -->
 
 <!-- Product Details Start -->
 <Section class="product-details py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div id="ProDetail" class="carousel carousel-product-details slide d-none" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#ProDetail" data-bs-slide-to="Pro-Detail-0" class="active" aria-current="true" aria-label="Slide-0">11</button>
-                        <button type="button" class="active" data-bs-target="#ProDetail" attr.data-bs-slide-to="Pro-Detail-{{i+1}}" attr.aria-label="Slide-{{i+1}}" *ngFor="let item of model.Files; let i=index">
-                        22
-                      </button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="d-flex align-items-center justify-content-center product-details-big-img">
-                                <a class="d-block w-100 text-center" [href]="model?.ImagePath" data-toggle="lightbox" data-gallery="example-gallery">
-                                    <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
-                                </a>
-                            </div>
-                        </div>
-                        <ng-container *ngFor="let item of model.Files; let i=index">
-                            <div class="carousel-item" [class.active]="i==0">
-                                <div class="d-flex align-items-center justify-content-center product-details-big-img">
-                                    <a class="d-block w-100 text-center" [href]="item?.FilePath" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
-                                    </a>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#ProDetail" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#ProDetail" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-
-                <div class="tab-content position-relative" id="myTabContent">
-                    <div class="product-list-items-tag">New Product</div>
-                    <div class="tab-pane fade show active" id="Pro-Detail-0">
-                        <div class="d-flex align-items-center justify-content-center product-details-big-img">
-                            <a class="d-block w-100 text-center" [href]="model?.ImagePath" data-toggle="lightbox" data-gallery="example-gallery">
-                                <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
-                            </a>
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let item of model.Files; let i=index">
-                        <div class="tab-pane fade" id="Pro-Detail-{{i+1}}">
-                            <div class="d-flex align-items-center justify-content-center product-details-big-img">
-                                <a class="d-block w-100 text-center" [href]="item?.FilePath" data-toggle="lightbox" data-gallery="example-gallery">
-                                    <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
-                                </a>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
-                <ul class=" product-details-sm-img nav">
-                    <li>
-                        <a href="javascript:void()" class="active" id="ProDetail0" data-bs-toggle="tab" data-bs-target="#Pro-Detail-0"> <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" /> </a>
-                    </li>
-                    <li *ngFor="let item of model.Files; let i=index">
-                        <a href="javascript:void()" id="Pro-Detail{{i+1}}" data-bs-toggle="tab" attr.data-bs-target="#Pro-Detail-{{i+1}}">
-                            <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'" alt="" /> </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-7 mt-4 mt-md-0">
-                <div class="product-details-info">
-                    <h2>{{model.Name}}</h2>
-                    <h4 class="d-flex align-items-center justify-content-between ">₹ {{model.Price}}
-                        <div class="ship-charges"> <span>Shipping Charge: </span> <strong class="text-danger">₹ 150</strong> </div>
-                    </h4>
-                    <div class="product-add-info mb-3">
-                        <strong class="d-block mb-1">Additional Information:</strong>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>Top Fabric:</td>
-                                    <td>Silk Blend</td>
-                                </tr>
-                                <tr>
-                                    <td>Bottom Fabric:</td>
-                                    <td>Silk Blend</td>
-                                </tr>
-                                <tr>
-                                    <td>Dupatta Fabric:</td>
-                                    <td>Georgette</td>
-                                </tr>
-                                <tr>
-                                    <td>Sleeve Length:</td>
-                                    <td>Three-Quarter Sleeves</td>
-                                </tr>
-                                <tr>
-                                    <td>Sleeve Styling:</td>
-                                    <td>Regular Sleeves</td>
-                                </tr>
-                                <tr>
-                                    <td>Neck:</td>
-                                    <td>Round Neck</td>
-                                </tr>
-                                <tr>
-                                    <td>Length:</td>
-                                    <td>Crop</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="product-discription mb-3">
-                        <strong class="d-block mb-1">Description:</strong>
-                        <p> {{model.Summary}}</p>
-                    </div>
-                    <div class="col-lg-12 my-4 btn-share-whatsapp text-center">
-                        <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i
-                class="bi bi-whatsapp"></i> Share via Whatsapp</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Related Product Start -->
-            <div class="col-lg-12 mt-5 section-related">
-                <div class="col-lg-12 text-center section-title"> Related Products </div>
-                <section class="slider-items-4 product-lsit-slider">
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 1</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 2</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 3</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 4</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 5</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 6</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 7</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="product-details.html" class="product-list-items">
-                            <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                                <img src="assets/images/no-img.svg" alt="" />
-                            </div>
-                            <div class="product-list-info">
-                                <h3>Product name 8</h3>
-                                <p>₹ 975</p>
-                            </div>
-                        </a>
-                    </div>
-                </section>
-            </div>
-            <!-- Related Product End -->
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <!-- Product Detail Slider Start -->
+        <div class="position-relative">
+        <div class="product-list-items-tag">New Product</div>
+        <div class="product-d-main-slider">
+          <div class="product-d-main-slider-items">
+            <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
+          </div>
+          <div class="product-d-main-slider-items" *ngFor="let item of model.Files; let i=index">
+            <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
+          </div>
         </div>
+      </div>
+
+        <div class="product-d-main-slider-nav mt-2">
+          <div class="product-d-main-slider-nav-items">
+            <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
+          </div>
+          <div  class="product-d-main-slider-nav-items" *ngFor="let item of model.Files; let i=index">
+            <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.svg'">
+          </div>
+        </div>
+        <!-- Product Detail Slider End -->
+      </div>
+      <div class="col-md-7 mt-4 mt-md-0">
+        <div class="product-details-info">
+          <h2>{{model.Name}}</h2>
+          <h4 class="d-flex align-items-center justify-content-between ">₹ {{model.Price}}
+            <div class="ship-charges"> <span>Shipping Charge: </span> <strong class="text-danger">₹ 150</strong> </div>
+          </h4>
+          <div class="product-add-info mb-3">
+            <strong class="d-block mb-1">Additional Information:</strong>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Top Fabric:</td>
+                  <td>Silk Blend</td>
+                </tr>
+                <tr>
+                  <td>Bottom Fabric:</td>
+                  <td>Silk Blend</td>
+                </tr>
+                <tr>
+                  <td>Dupatta Fabric:</td>
+                  <td>Georgette</td>
+                </tr>
+                <tr>
+                  <td>Sleeve Length:</td>
+                  <td>Three-Quarter Sleeves</td>
+                </tr>
+                <tr>
+                  <td>Sleeve Styling:</td>
+                  <td>Regular Sleeves</td>
+                </tr>
+                <tr>
+                  <td>Neck:</td>
+                  <td>Round Neck</td>
+                </tr>
+                <tr>
+                  <td>Length:</td>
+                  <td>Crop</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="product-discription mb-3">
+            <strong class="d-block mb-1">Description:</strong>
+            <p> {{model.Summary}}</p>
+          </div>
+          <div class="col-lg-12 my-4 btn-share-whatsapp text-center">
+            <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i
+                class="bi bi-whatsapp"></i> Share via Whatsapp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Product Start -->
+      <div class="col-lg-12 mt-5 section-related">
+        <div class="col-lg-12 text-center section-title"> Related Products </div>
+        <section class="slider-items-4 product-lsit-slider">
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 1</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 2</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 3</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 4</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 5</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 6</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 7</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="product-details.html" class="product-list-items">
+              <div class="product-list-items-img d-flex align-items-center justify-content-center">
+                <img src="assets/images/no-img.svg" alt="" />
+              </div>
+              <div class="product-list-info">
+                <h3>Product name 8</h3>
+                <p>₹ 975</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+      <!-- Related Product End -->
+
     </div>
+  </div>
 </Section>
 <!-- Product Details End -->
