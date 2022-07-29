@@ -28,7 +28,7 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? ShippingCharge { get; set; }
         public string Keyword { get; set; }
         public List<string>? Files { get; set; }
-        public List<ProductStockModel> Stocks { get; set; }
+        public List<ProductStockModel>? Stocks { get; set; }
     }
 
     public class ProductMasterViewModel
