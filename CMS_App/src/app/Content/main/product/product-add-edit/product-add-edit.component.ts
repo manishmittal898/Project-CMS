@@ -48,6 +48,7 @@ export class ProductAddEditComponent implements OnInit {
   });
   get sf() { return this.stockFormGroup.controls; }
   tempStock: ProductStockModel | undefined;
+  ddlAvailableProductSize:DropDownItem[]=[]
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -65,8 +66,9 @@ export class ProductAddEditComponent implements OnInit {
 
   }
   ddlProductSize(): DropDownItem[] {
-    let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
-    return filter ?? this.dropDown?.ddlProductSize;
+    this.ddlAvailableProductSize= this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
+    // let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
+    return this.ddlAvailableProductSize ?? this.dropDown?.ddlProductSize;
   }
   onSubmit() {
     this.formgrp.markAllAsTouched();
@@ -212,6 +214,7 @@ export class ProductAddEditComponent implements OnInit {
     }
   }
   onEditStock(stockItem: ProductStockModel, idx: number) {
+    this.ddlProductSize()
     if (stockItem && stockItem.Id > 0) {
       idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
       this.stockModel = this.model.Stocks[idx];
