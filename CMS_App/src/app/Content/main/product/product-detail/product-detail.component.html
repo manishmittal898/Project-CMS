@@ -87,10 +87,8 @@
         </div>
 
         <div class="mt-4">
-          <fieldset class="border p-2 w-100">
+          <fieldset class="border p-2 w-100" *ngIf="this.model.Stocks else NoStock">
             <legend class="w-auto">Stock</legend>
-
-     
 
             <div class="form-group col-md-12">
               <div class="table-responsive-md">
@@ -101,8 +99,6 @@
                       <th scope="col">Size</th>
                       <th scope="col">Unit Price</th>
                       <th scope="col">Quantity</th>
-
-
                     </tr>
                   </thead>
                   <tbody>
@@ -120,13 +116,15 @@
               </div>
             </div>
           </fieldset>
+          <ng-template #NoStock>
+            No Stock Data Available...
+          </ng-template>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
+    <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
     <tbody>
       <tr>
         <td><strong> Main Image </strong> </td>
@@ -191,4 +189,4 @@
     </tbody>
   </table> -->
 
-</div>
+  </div>

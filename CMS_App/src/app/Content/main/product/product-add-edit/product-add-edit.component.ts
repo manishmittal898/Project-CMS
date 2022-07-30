@@ -9,6 +9,7 @@ import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-select
 import { CommonService } from 'src/app/Shared/Services/common.service';
 import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
+import { DropDownItem } from '../../../../Shared/Helper/common-model';
 
 @Component({
   selector: 'app-product-add-edit',
@@ -46,7 +47,7 @@ export class ProductAddEditComponent implements OnInit {
     Quantity: [undefined, Validators.required],
   });
   get sf() { return this.stockFormGroup.controls; }
-
+  tempStock = {} as ProductStockModel;
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -62,6 +63,10 @@ export class ProductAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.GetDropDown();
 
+  }
+  ddlProductSize(): DropDownItem[] {
+    let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
+    return filter ?? this.dropDown?.ddlProductSize;
   }
   onSubmit() {
     this.formgrp.markAllAsTouched();
@@ -141,7 +146,7 @@ export class ProductAddEditComponent implements OnInit {
     this.model.ImagePath = '';
   }
   onProductFileAttach(file: FileInfo[]) {
-    debugger
+
     if (file.length > 0) {
       if (!this.model.Files) {
         this.model.Files = [];
@@ -188,7 +193,7 @@ export class ProductAddEditComponent implements OnInit {
   }
 
   onAddStock() {
-    debugger
+
     if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {
       this.stockModel.SizeId = undefined;
       this.toast.warning("Size Already exist, Please Select diffrent size...", "Oops");
@@ -209,10 +214,16 @@ export class ProductAddEditComponent implements OnInit {
     if (stockItem && stockItem.Id > 0) {
       idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
       this.stockModel = this.model.Stocks[idx];
+      this.tempStock = Object.assign({}, this.stockModel);;
     } else {
       this.stockModel = this.model.Stocks[idx];
     }
     this.model.Stocks.splice(idx, 1);
+  }
+  onCancelEdit() {
+    if (this.tempStock) {
+      this.model.Stocks.push(this.tempStock)
+    }
   }
   onGetProductSizeLabel(sizeId: any) {
     return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;
