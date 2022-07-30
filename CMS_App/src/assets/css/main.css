@@ -2882,6 +2882,11 @@ table .badge-dark {
 
 .border {
     border: 1px solid !important;
+    border-color: #e2e2e2 !important;
+}
+
+.border-radius {
+    border-radius: 10px;
 }
 
 .border-bottom {
@@ -3635,11 +3640,16 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .modal-backdrop.show {
-    opacity: 0.8;
+    z-index: 999999;
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    backdrop-filter: saturate(180%) blur(5px);
+    background-color: #000;
+    opacity: 0.7;
 }
 
 .modal-open .modal {
     padding: 0px !important;
+    z-index: 9999999;
 }
 
 .page-profile {
@@ -4674,6 +4684,18 @@ td.mat-footer-cell:last-of-type {
     font-weight: 500;
     color: #8d8d8d;
     font-size: 13px;
+}
+
+.mt--30 {
+    margin-top: -30px;
+}
+
+.model-stock-create .modal-content {
+    overflow: initial;
+}
+
+.model-stock-create .modal-header {
+    border-radius: 25px 25px 0px 0px;
 }
 
 

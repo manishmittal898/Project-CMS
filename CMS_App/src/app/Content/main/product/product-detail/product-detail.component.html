@@ -1,22 +1,22 @@
 <!-- Page Header Title start -->
 <div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>Product Detail</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/product">Product List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
+    <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
+        <div>
+            <h1>Product Detail</h1>
+            <!-- Breadcrumb Start -->
+            <nav class="custom-breadcrum">
+                <ol class="breadcrumb justify-content-center justify-content-sm-start">
+                    <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/product">Product List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
+                </ol>
+            </nav>
+            <!-- Breadcrumb End -->
+        </div>
+        <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
       Back to list</button>
 
-  </div>
+    </div>
 </div>
 <!-- Page Header Title end -->
 
@@ -24,109 +24,96 @@
 
 <div class="p-2 p-md-3 p-lg-4">
 
-  <div class="row product-details">
-    <div class="col-lg-5">
-      <div class="product-detail-img-tab">
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade text-center show active" id="PD-0"><img onerror="this.src='assets/img/no-img.svg'"
-              [src]="this.model.ImagePath" /></div>
-          <div class="tab-pane fade text-center" id="PD-{{i+1}}" *ngFor="let itm of model.Files; let i=index"><img
-              onerror="this.src='assets/img/no-img.svg'" [src]="itm.FilePath" alt="StoreOne" /></div>
-        </div>
+    <div class="row product-details">
+        <div class="col-lg-5">
+            <div class="product-detail-img-tab">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade text-center show active" id="PD-0"><img onerror="this.src='assets/img/no-img.svg'" [src]="this.model.ImagePath" /></div>
+                    <div class="tab-pane fade text-center" id="PD-{{i+1}}" *ngFor="let itm of model.Files; let i=index"><img onerror="this.src='assets/img/no-img.svg'" [src]="itm.FilePath" alt="StoreOne" /></div>
+                </div>
 
-        <ul class="nav nav-tabs border-0 mt-3 justify-content-center" id="myTab">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#PD-0">
-              <img onerror="this.src='assets/img/no-img.svg'" [src]="this.model.ImagePath" alt="StoreOne" />
-            </a>
-          </li>
-          <li class="nav-item" *ngFor="let itm of model.Files; let i=index">
-            <a class="nav-link" data-toggle="tab" href="#PD-{{i+1}}"><img onerror="this.src='assets/img/no-img.svg'"
-                [src]="itm.FilePath" alt="StoreOne" /></a>
-          </li>
-        </ul>
+                <ul class="nav nav-tabs border-0 mt-3 justify-content-center" id="myTab">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#PD-0">
+                            <img onerror="this.src='assets/img/no-img.svg'" [src]="this.model.ImagePath" alt="StoreOne" />
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngFor="let itm of model.Files; let i=index">
+                        <a class="nav-link" data-toggle="tab" href="#PD-{{i+1}}"><img onerror="this.src='assets/img/no-img.svg'" [src]="itm.FilePath" alt="StoreOne" /></a>
+                    </li>
+                </ul>
 
-      </div>
-    </div>
-    <div class="col-lg-7 mt-4 mt-lg-0">
-      <div class="product-details-right-info">
-        <h2>{{this.model.Name | titlecase}}</h2>
-        <h3 class="m-0">₹ {{model.Price}}</h3>
-        <div class="table-responsive">
-          <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
-            <tbody>
-              <tr *ngIf="model.Category">
-                <td width="110px"><strong> Category: </strong></td>
-                <td>{{model.Category | titlecase}}</td>
-              </tr>
-              <tr *ngIf="model.SubCategory">
-                <td><strong> Sub Category: </strong></td>
-                <td>{{model.SubCategory | titlecase}}</td>
-              </tr>
-              <tr *ngIf="model.CaptionTag">
-                <td><strong> Tag/Label: </strong></td>
-                <td>{{model.CaptionTag | titlecase}}</td>
-              </tr>
-
-              <tr *ngIf="model.ShippingCharge">
-                <td><strong> Shipping Charge: </strong></td>
-                <td>₹ {{model.ShippingCharge }}</td>
-              </tr>
-
-
-            </tbody>
-          </table>
-        </div>
-        <div class="mt-4" *ngIf="model.Desc">
-          <strong class="mb-2 d-block font-16"> Discription: </strong>
-          <p class="m-0" [innerHTML]="model.Desc"></p>
-        </div>
-        <div class="mt-4" *ngIf="model.Summary">
-          <strong class="mb-2 d-block font-16"> Additional Information: </strong>
-          <p class="m-0" [innerHTML]="model.Summary"></p>
-        </div>
-
-        <div class="mt-4">
-          <fieldset class="border p-2 w-100">
-            <legend class="w-auto">Stock</legend>
-
-     
-
-            <div class="form-group col-md-12">
-              <div class="table-responsive-md">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Size</th>
-                      <th scope="col">Unit Price</th>
-                      <th scope="col">Quantity</th>
-
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of this.model.Stocks;let index=index">
-                      <th scope="row">{{index+1}}</th>
-                      <td>{{item.Size}}</td>
-                      <td>{{item.UnitPrice}}</td>
-                      <td>{{item.Quantity}}</td>
-
-
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
             </div>
-          </fieldset>
         </div>
-      </div>
+        <div class="col-lg-7 mt-4 mt-lg-0">
+            <div class="product-details-right-info">
+                <h2>{{this.model.Name | titlecase}}</h2>
+                <h3 class="m-0">₹ {{model.Price}}</h3>
+                <div class="table-responsive">
+                    <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
+                        <tbody>
+                            <tr *ngIf="model.Category">
+                                <td width="110px"><strong> Category: </strong></td>
+                                <td>{{model.Category | titlecase}}</td>
+                            </tr>
+                            <tr *ngIf="model.SubCategory">
+                                <td><strong> Sub Category: </strong></td>
+                                <td>{{model.SubCategory | titlecase}}</td>
+                            </tr>
+                            <tr *ngIf="model.CaptionTag">
+                                <td><strong> Tag/Label: </strong></td>
+                                <td>{{model.CaptionTag | titlecase}}</td>
+                            </tr>
+
+                            <tr *ngIf="model.ShippingCharge">
+                                <td><strong> Shipping Charge: </strong></td>
+                                <td>₹ {{model.ShippingCharge }}</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4" *ngIf="model.Desc">
+                    <strong class="mb-2 d-block font-16"> Discription: </strong>
+                    <p class="m-0" [innerHTML]="model.Desc"></p>
+                </div>
+                <div class="mt-4" *ngIf="model.Summary">
+                    <strong class="mb-2 d-block font-16"> Additional Information: </strong>
+                    <p class="m-0" [innerHTML]="model.Summary"></p>
+                </div>
+
+                <div class="mt-4">
+                    <fieldset class="border border-radius p-2 w-100">
+                        <legend class="w-auto text-black">Stock</legend>
+                        <div class="table-responsive">
+                            <table class="table m-0 table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100px">#</th>
+                                        <th>Size</th>
+                                        <th>Unit Price</th>
+                                        <th width="200px">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of this.model.Stocks;let index=index">
+                                        <td>{{index+1}}</td>
+                                        <td>{{item.Size}}</td>
+                                        <td>{{item.UnitPrice}}</td>
+                                        <td>{{item.Quantity}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-  </div>
-
-  <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
+    <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
     <tbody>
       <tr>
         <td><strong> Main Image </strong> </td>
