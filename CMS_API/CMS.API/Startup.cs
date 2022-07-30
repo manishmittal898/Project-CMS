@@ -25,6 +25,8 @@ using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.Json.Serialization;
+
 namespace CMS.API
 {
     public class Startup
@@ -43,7 +45,8 @@ namespace CMS.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+           services.AddControllers();
+           
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
             {
