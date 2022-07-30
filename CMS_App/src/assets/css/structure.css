@@ -803,7 +803,7 @@ code {
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-webkit-input-placeholder,
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-ms-input-placeholder,
 .navbar .navbar-item .nav-item form.form-inline input.search-form-control:focus::-moz-placeholder {
-    color: #053e9c;
+    color: #000;
 }
 
 

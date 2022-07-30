@@ -4552,6 +4552,7 @@ app-header {
     color: #fff;
     font-size: 12px;
     white-space: nowrap;
+    z-index: 99999999999;
 }
 
 [data-title]:hover::after {
@@ -4690,12 +4691,48 @@ td.mat-footer-cell:last-of-type {
     margin-top: -30px;
 }
 
+.mt--25 {
+    margin-top: -25px;
+}
+
 .model-stock-create .modal-content {
     overflow: initial;
 }
 
 .model-stock-create .modal-header {
     border-radius: 25px 25px 0px 0px;
+}
+
+.unit-pro-price {
+    position: relative;
+}
+
+.unit-pro-price button {
+    position: absolute;
+    right: 15px;
+    top: 39px;
+    padding: 2px 7px;
+    background: #ededed;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.unit-pro-price button:hover {
+    background: #dbdbdb;
+}
+
+.fieldset-header-btn {
+    border: solid 1px #3f51b5;
+    background: #3f51b5;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 25px;
+}
+
+.fieldset-header-btn:hover {
+    background: #fff;
+    color: #000;
 }
 
 
