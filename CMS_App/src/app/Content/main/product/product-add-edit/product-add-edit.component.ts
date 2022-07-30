@@ -215,10 +215,11 @@ export class ProductAddEditComponent implements OnInit {
     if (stockItem && stockItem.Id > 0) {
       idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
       this.stockModel = this.model.Stocks[idx];
-      this.tempStock = Object.assign({}, this.stockModel);;
+
     } else {
       this.stockModel = this.model.Stocks[idx];
     }
+    this.tempStock = Object.assign({}, this.stockModel);;
     this.model.Stocks.splice(idx, 1);
   }
   onCancelEdit() {
