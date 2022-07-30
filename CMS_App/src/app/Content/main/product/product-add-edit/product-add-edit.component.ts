@@ -47,7 +47,7 @@ export class ProductAddEditComponent implements OnInit {
     Quantity: [undefined, Validators.required],
   });
   get sf() { return this.stockFormGroup.controls; }
-  tempStock = {} as ProductStockModel;
+  tempStock: ProductStockModel | undefined;
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -207,6 +207,7 @@ export class ProductAddEditComponent implements OnInit {
       }
       this.model.Stocks.push(this.stockModel);
       this.stockModel = {} as ProductStockModel;
+      this.tempStock = undefined;
       this.stockModelPopup.nativeElement.click();
     }
   }
@@ -224,6 +225,11 @@ export class ProductAddEditComponent implements OnInit {
     if (this.tempStock) {
       this.model.Stocks.push(this.tempStock)
     }
+  }
+
+  applyMainPrice() {
+
+    this.stockModel.UnitPrice = Number(this.model.Price);
   }
   onGetProductSizeLabel(sizeId: any) {
     return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;

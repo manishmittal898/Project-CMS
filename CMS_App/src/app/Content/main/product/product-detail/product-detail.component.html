@@ -86,45 +86,40 @@
           <p class="m-0" [innerHTML]="model.Summary"></p>
         </div>
 
-        <div class="mt-4">
-          <fieldset class="border p-2 w-100" *ngIf="this.model.Stocks else NoStock">
-            <legend class="w-auto">Stock</legend>
-
-            <div class="form-group col-md-12">
-              <div class="table-responsive-md">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Size</th>
-                      <th scope="col">Unit Price</th>
-                      <th scope="col">Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of this.model.Stocks;let index=index">
-                      <th scope="row">{{index+1}}</th>
-                      <td>{{item.Size}}</td>
-                      <td>{{item.UnitPrice}}</td>
-                      <td>{{item.Quantity}}</td>
-
-
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
+        <div class="mt-4" *ngIf="this.model.Stocks">
+          <fieldset class="border border-radius p-2 w-100" >
+            <legend class="w-auto text-black">Stock</legend>
+            <div class="table-responsive">
+              <table class="table m-0 table-hover">
+                <thead>
+                  <tr>
+                    <th width="100px">#</th>
+                    <th>Size</th>
+                    <th>Unit Price</th>
+                    <th width="200px">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of this.model.Stocks;let index=index">
+                    <td>{{index+1}}</td>
+                    <td>{{item.Size}}</td>
+                    <td>{{item.UnitPrice}}</td>
+                    <td>{{item.Quantity}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </fieldset>
-          <ng-template #NoStock>
-            No Stock Data Available...
-          </ng-template>
-        </div>
-      </div>
 
+        </div>
+
+
+      </div>
     </div>
 
-    <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
+  </div>
+
+  <!-- <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0 d-none">
     <tbody>
       <tr>
         <td><strong> Main Image </strong> </td>
@@ -189,4 +184,4 @@
     </tbody>
   </table> -->
 
-  </div>
+</div>
