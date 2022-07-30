@@ -53,7 +53,10 @@ namespace CMS.Service.Services.Common
 
                             objData.Add(item, await GetLookupMasters(LookupTypeEnum.Caption_Tag.GetStringValue()));
                             break;
+                        case DropDownKey.ddlProductSize:
 
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Size.GetStringValue()));
+                            break;
 
 
 

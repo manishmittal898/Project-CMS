@@ -100,7 +100,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductMasters.Select(x => new ProductMasterViewModel
+                var detail = _db.TblProductMasters.Include(x=>x.TblProductStocks).Select(x => new ProductMasterViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -121,7 +121,20 @@ namespace CMS.Service.Services.ProductMaster
                     IsActive = x.IsActive.Value,
                     IsDelete = x.IsDelete,
                     Keyword = x.Keyword,
-                    ShippingCharge = x.ShippingCharge ?? null
+                    ShippingCharge = x.ShippingCharge ?? null,
+
+                    Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.Select(st => new ProductStockModel
+                    {
+                        Id = st.Id,
+                        ProductId = st.ProductId,
+                        SizeId = st.SizeId,
+                        Size = st.Size.Name,
+                        UnitPrice = st.UnitPrice,
+                        Quantity = st.Quantity
+
+                    }).ToList() : null
+
+
 
                 }).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
                 var productFiles = GetProductFile(id).Result;
@@ -184,7 +197,7 @@ namespace CMS.Service.Services.ProductMaster
                         _db.TblProductStocks.RemoveRange(deleteStock);
                         _db.SaveChanges();
 
-                        List<TblProductStock> prStocks = new List<TblProductStock> ();
+                        List<TblProductStock> prStocks = new List<TblProductStock>();
                         model.Stocks.Where(X => X.Id > 0).ToList().ForEach(x =>
                         {
                             TblProductStock prStock = objProduct.TblProductStocks.Where(p => p.Id == x.Id).FirstOrDefault();
@@ -194,7 +207,7 @@ namespace CMS.Service.Services.ProductMaster
                             prStocks.Add(prStock);
 
                         });
-                         _db.TblProductStocks.UpdateRange(prStocks);
+                        _db.TblProductStocks.UpdateRange(prStocks);
                         _db.SaveChanges();
 
                         productStock = model.Stocks.Where(x => x.Id == default || x.Id == 0).Select(x => new TblProductStock

@@ -59,6 +59,8 @@ export interface ProductMasterViewModel {
   ShippingCharge: number | undefined;
   Keyword: string;
   Files: ProductImageViewModel[];
+  Stocks: ProductStockModel[];
+
 }
 
 export interface ProductMasterPostModel {
@@ -86,7 +88,7 @@ export interface ProductImageViewModel {
 export interface ProductStockModel {
   Id: number;
   ProductId: number;
-  SizeId: number;
+  SizeId: number | undefined;
   Size: string;
   UnitPrice: number | null;
   Quantity: number | null;
