@@ -245,7 +245,8 @@
         <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">
           <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
 
-          <button type="button" class="fieldset-header-btn" data-toggle="modal" data-target="#stockModelPopup">
+          <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-toggle="modal"
+            data-target="#stockModelPopup">
             <i class="bi bi-plus-lg"></i> Add New
           </button>
         </div>
@@ -296,7 +297,8 @@
   </form>
 </div>
 
-<div class="custom-modal model-stock-create modal fade" data-backdrop="static" data-keyboard="false" id="stockModelPopup" #stockModelPopup>
+<div class="custom-modal model-stock-create modal fade" data-backdrop="static" data-keyboard="false"
+  id="stockModelPopup" #stockModelPopup>
   <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header p-3 ">
@@ -306,13 +308,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form [formGroup]="stockFormGroup" (ngSubmit)="onAddStock()">
+      <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
         <div class="modal-body">
 
           <div class="form-row">
-            <div class="form-group col-lg-4 mb-3 mb-lg-0">
+            <div class="form-group col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
               <label>Select Size</label>
-              <ng-select [items]="dropDown.ddlProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
+              <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
                 bindValue="Value" placeholder="Select Size Id"
                 [ngClass]="{ 'is-invalid': sf.SizeId.errors && sf.SizeId.touched}" [(ngModel)]="stockModel.SizeId">
               </ng-select>
@@ -338,7 +340,7 @@
             </div>
 
             <div class="form-group col-lg-4 mb-3 mb-lg-0">
-              <label>Select Quantity</label>
+              <label>Quantity</label>
               <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)"
                 [minlength]="1" [maxLength]="10" formControlName="Quantity"
                 [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}" class="form-control" id="input4"
@@ -350,12 +352,11 @@
                 *ngIf="!stockFormGroup.get('Quantity')?.hasError('required') && ((stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength')) && stockFormGroup.get('Quantity')?.touched) || (stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength'))">
                 Quantity length must be 1-10 digit. </div>
             </div>
-
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="submitt" class="btn btn-success"><i class="fas fa-plus mr-1"></i> Add</button>
+          <button type="submitt" class="btn btn-success"><i class="fas fa-plus mr-1"></i> Save</button>
           <button type="button" (click)="onCancelEdit()" class="btn btn-outline-danger" data-dismiss="modal"><i
               class="fas fa-times mr-1"></i> Cancel</button>
         </div>
