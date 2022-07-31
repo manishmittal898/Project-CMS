@@ -6,7 +6,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "SOA": {
+        "CMS_App": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:application": {
@@ -36,14 +36,15 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/CMS",
+                        "outputPath": "dist/CMS_App",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            ".htaccess"
                         ],
                         "styles": [
 
@@ -141,13 +142,13 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "SOA:build:production"
+                            "browserTarget": "CMS_App:build:production"
                         },
                         "development": {
-                            "browserTarget": "SOA:build:development"
+                            "browserTarget": "CMS_App:build:development"
                         },
                         "stage": {
-                            "browserTarget": "SOA:build:stage"
+                            "browserTarget": "CMS_App:build:stage"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -155,7 +156,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "SOA:build"
+                        "browserTarget": "CMS_App:build"
                     }
                 },
                 "test": {
@@ -167,7 +168,8 @@
                         "karmaConfig": "karma.conf.js",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            ".htaccess"
                         ],
                         "styles": [
                             "src/assets/bootstrap/css/bootstrap.min.css",
@@ -209,5 +211,5 @@
             }
         }
     },
-    "defaultProject": "SOA"
+    "defaultProject": "CMS_App"
 }
