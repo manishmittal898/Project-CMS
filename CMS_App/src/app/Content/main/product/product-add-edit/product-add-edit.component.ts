@@ -48,7 +48,7 @@ export class ProductAddEditComponent implements OnInit {
   });
   get sf() { return this.stockFormGroup.controls; }
   tempStock: ProductStockModel | undefined;
-  ddlAvailableProductSize:DropDownItem[]=[]
+  ddlAvailableProductSize: DropDownItem[] = []
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -65,10 +65,14 @@ export class ProductAddEditComponent implements OnInit {
     this.GetDropDown();
 
   }
-  ddlProductSize(): DropDownItem[] {
-    this.ddlAvailableProductSize= this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
-    // let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
-    return this.ddlAvailableProductSize ?? this.dropDown?.ddlProductSize;
+  ddlProductSize(): any {
+
+    setTimeout(() => {
+      this.ddlAvailableProductSize = this.dropDown?.ddlProductSize?.filter(x => !(this.model?.Stocks?.map(y => { return y.SizeId }))?.includes(Number(x.Value)));
+      // let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
+      return this.model?.Stocks?.length > 0 ? this.ddlAvailableProductSize : this.dropDown?.ddlProductSize;
+    }, 100);
+
   }
   onSubmit() {
     this.formgrp.markAllAsTouched();
@@ -118,7 +122,7 @@ export class ProductAddEditComponent implements OnInit {
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
-
+        this.ddlProductSize();
       }
     });
   }
@@ -194,7 +198,28 @@ export class ProductAddEditComponent implements OnInit {
     });
   }
 
+
   onAddStock() {
+    this.stockModel = {} as ProductStockModel;
+    this.tempStock = undefined;
+    this.ddlProductSize();
+  }
+
+  onEditStock(stockItem: ProductStockModel, idx: number) {
+    this.ddlProductSize()
+    if (stockItem && stockItem.Id > 0) {
+      idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
+    }
+    this.stockModel = Object.assign({}, this.model.Stocks[idx]);
+    this.tempStock = Object.assign({}, this.stockModel);
+    this.model.Stocks.splice(idx, 1);
+  }
+  onCancelEdit() {
+    if (this.tempStock) {
+      this.model.Stocks.push(this.tempStock)
+    }
+  }
+  onSaveStock() {
 
     if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {
       this.stockModel.SizeId = undefined;
@@ -213,24 +238,6 @@ export class ProductAddEditComponent implements OnInit {
       this.stockModelPopup.nativeElement.click();
     }
   }
-  onEditStock(stockItem: ProductStockModel, idx: number) {
-    this.ddlProductSize()
-    if (stockItem && stockItem.Id > 0) {
-      idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
-      this.stockModel = this.model.Stocks[idx];
-
-    } else {
-      this.stockModel = this.model.Stocks[idx];
-    }
-    this.tempStock = Object.assign({}, this.stockModel);;
-    this.model.Stocks.splice(idx, 1);
-  }
-  onCancelEdit() {
-    if (this.tempStock) {
-      this.model.Stocks.push(this.tempStock)
-    }
-  }
-
   applyMainPrice() {
 
     this.stockModel.UnitPrice = Number(this.model.Price);

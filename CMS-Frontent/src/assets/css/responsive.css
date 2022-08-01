@@ -404,6 +404,14 @@
     {
       display: none !important;
     }
+    .product-detail-size ul li {
+      margin-right: 7px;
+    }
+    .product-detail-size-btn {
+      height: 35px;
+      width: 35px;
+      font-size: 13px;
+  }
 }
 
 
