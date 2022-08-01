@@ -1359,6 +1359,22 @@ ul.megamenu-sub-list {
     right: 20px;
     z-index: 9;
 }
-
+.product-detail-size-btn {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  margin-right: 10px;
+  border: solid 1px var(--primary-color);
+  color: #000;
+}
+.product-detail-size-btn.active, .product-detail-size-btn:hover
+{
+  background: var(--primary-color);
+  color: var(--white);
+}
 
 /* CUSTOM CSS END */

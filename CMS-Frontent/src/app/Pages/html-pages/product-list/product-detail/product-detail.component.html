@@ -49,6 +49,7 @@
           <h4 class="d-flex align-items-center justify-content-between ">₹ {{model.Price}}
             <div class="ship-charges"> <span>Shipping Charge: </span> <strong class="text-danger">₹ 150</strong> </div>
           </h4>
+
           <div class="product-add-info mb-3">
             <strong class="d-block mb-1">Additional Information:</strong>
             <table>
@@ -88,7 +89,18 @@
             <strong class="d-block mb-1">Description:</strong>
             <p> {{model.Summary}}</p>
           </div>
-          <div class="col-lg-12 my-4 btn-share-whatsapp text-center">
+
+          <div class="product-detail-size mb-3">
+            <p class="mb-2">Size:  <strong>XL</strong> </p>
+            <div class="d-flex flex-wrap">
+            <a class="product-detail-size-btn" href="javascript:void()">S</a>
+            <a class="product-detail-size-btn" href="javascript:void()">M</a>
+            <a class="product-detail-size-btn" href="javascript:void()">L</a>
+            <a class="product-detail-size-btn active" href="javascript:void()">XL</a>
+            <a class="product-detail-size-btn" href="javascript:void()">XXL</a>
+          </div>
+          </div>
+          <div class="btn-share-whatsapp">
             <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i
                 class="bi bi-whatsapp"></i> Share via Whatsapp</a>
           </div>

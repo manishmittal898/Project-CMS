@@ -404,6 +404,11 @@
     {
       display: none !important;
     }
+    .product-detail-size-btn {
+      height: 30px;
+      width: 30px;
+      font-size: 13px;
+  }
 }
 
 
