@@ -87,7 +87,6 @@ namespace CMS.Service.Services.Common
                     switch (item.Key.ToLower())
                     {
 
-
                         case DropDownKey.ddlSubLookup:
                             if (item.FileterFromKey.ToLower() == DropDownKey.ddlLookup.ToLower().ToString())
                             {
@@ -95,8 +94,6 @@ namespace CMS.Service.Services.Common
                             }
                        break;
                     }
-
-
 
                 }
 
@@ -130,7 +127,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type)
+                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type).OrderBy(x=>x.SortedOrder)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
 
@@ -146,7 +143,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (lookupId.Length< 0 ||  lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type)
+                return await (from type in _db.TblSubLookupMasters where (lookupId.Length< 0 ||  lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
 
@@ -162,7 +159,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type)
+                return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type).OrderBy(x => x.Name)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
             }
