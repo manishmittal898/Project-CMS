@@ -1,113 +1,92 @@
 <!-- Page Header Title start -->
 <div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>{{model.Id > 0 ? 'Update Product':'Add New Product'}}</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/product">Product List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{model.Id > 0 ? 'Update Product':'Add New Product'}}
-          </li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
+    <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
+        <div>
+            <h1>{{model.Id > 0 ? 'Update Product':'Add New Product'}}</h1>
+            <!-- Breadcrumb Start -->
+            <nav class="custom-breadcrum">
+                <ol class="breadcrumb justify-content-center justify-content-sm-start">
+                    <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/product">Product List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{model.Id > 0 ? 'Update Product':'Add New Product'}}
+                    </li>
+                </ol>
+            </nav>
+            <!-- Breadcrumb End -->
+        </div>
+        <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
       Back to list
     </button>
 
-  </div>
+    </div>
 </div>
 <!-- Page Header Title end -->
 
 <div class="custom-form p-3 p-md-3">
-  <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-      <!-- Done -->
-      <div class="form-group col-md-4">
-        <label>Name</label>
-        <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
-          [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
-          Please enter <strong>Name</strong>...!</div>
-      </div>
-      <div class="form-group col-md-4">
-        <label>Price</label>
+    <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <!-- Done -->
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name" [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
+                    Please enter <strong>Name</strong>...!</div>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Price</label>
 
-        <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
-          [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
-          class="form-control" id="input4" placeholder="Price">
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
-          Please enter Price...! </div>
-        <div class="invalid-feedback"
-          *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
-          Price length must be 1-10 digit. </div>
-      </div>
+                <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}" class="form-control" id="input4" placeholder="Price">
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
+                    Please enter Price...! </div>
+                <div class="invalid-feedback" *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
+                    Price length must be 1-10 digit. </div>
+            </div>
 
-      <div class="form-group col-md-4">
-        <label>Shipping Charge</label>
+            <div class="form-group col-md-4">
+                <label>Shipping Charge</label>
 
-        <input type="number" [(ngModel)]="model.ShippingCharge" (keypress)="_commonService.NumberOnly($event)"
-          [minlength]="1" [maxLength]="10" formControlName="ShippingCharge"
-          [ngClass]="{ 'is-invalid': f.ShippingCharge.errors && f.ShippingCharge.touched}" class="form-control"
-          id="input4" placeholder="Enter Charge">
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('ShippingCharge')?.hasError('required') && formgrp.get('ShippingCharge')?.touched)">
-          Please enter Shipping Charge...! </div>
-        <div class="invalid-feedback"
-          *ngIf="!formgrp.get('ShippingCharge')?.hasError('required') && ((formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength')) && formgrp.get('ShippingCharge')?.touched) || (formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength'))">
-          Shipping Charge length must be 1-10 digit. </div>
-      </div>
+                <input type="number" [(ngModel)]="model.ShippingCharge" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10" formControlName="ShippingCharge" [ngClass]="{ 'is-invalid': f.ShippingCharge.errors && f.ShippingCharge.touched}" class="form-control"
+                    id="input4" placeholder="Enter Charge">
+                <div class="invalid-feedback" *ngIf="(formgrp.get('ShippingCharge')?.hasError('required') && formgrp.get('ShippingCharge')?.touched)">
+                    Please enter Shipping Charge...! </div>
+                <div class="invalid-feedback" *ngIf="!formgrp.get('ShippingCharge')?.hasError('required') && ((formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength')) && formgrp.get('ShippingCharge')?.touched) || (formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength'))">
+                    Shipping Charge length must be 1-10 digit. </div>
+            </div>
 
-      <div class="form-group col-md-4">
-        <label>Tag/Label</label>
+            <div class="form-group col-md-4">
+                <label>Tag/Label</label>
 
-        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select Tag" [ngClass]="{ 'is-invalid': f.Caption.errors && f.Caption.touched}"
-          [(ngModel)]="model.CaptionTagId">
-        </ng-select>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
-          Please select <strong>Caption</strong>...!</div>
-      </div>
-      <div class="form-group col-md-4">
-        <label>Select Category</label>
-        <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
-          [ngClass]="{ 'is-invalid': f.Category.errors && f.Category.touched}" [(ngModel)]="model.CategoryId">
-        </ng-select>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
-          Please select <strong>Category</strong>...!</div>
-      </div>
-      <div class=" form-group col-md-4">
-        <label>Select Sub Category</label>
-        <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select Sub-category"
-          [ngClass]="{ 'is-invalid': f.SubCategory.errors && f.SubCategory.touched}" [(ngModel)]="model.SubCategoryId">
-        </ng-select>
+                <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text" bindValue="Value" placeholder="Select Tag" [ngClass]="{ 'is-invalid': f.Caption.errors && f.Caption.touched}" [(ngModel)]="model.CaptionTagId">
+                </ng-select>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
+                    Please select <strong>Caption</strong>...!</div>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Select Category</label>
+                <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text" bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)" [ngClass]="{ 'is-invalid': f.Category.errors && f.Category.touched}"
+                    [(ngModel)]="model.CategoryId">
+                </ng-select>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
+                    Please select <strong>Category</strong>...!</div>
+            </div>
+            <div class=" form-group col-md-4">
+                <label>Select Sub Category</label>
+                <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text" bindValue="Value" placeholder="Select Sub-category" [ngClass]="{ 'is-invalid': f.SubCategory.errors && f.SubCategory.touched}" [(ngModel)]="model.SubCategoryId">
+                </ng-select>
 
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
-          Please select <strong>Sub Category</strong>...!</div>
-      </div>
-      <div class="form-group col-md-6 mb-0">
-        <label>Product main image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
-        <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
-        <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
-          [CurrentFileLength]="model?.ImagePath ? 1: 0"
-          [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
-        </app-file-selector>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
-          Please Product main image...!</div>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
+                    Please select <strong>Sub Category</strong>...!</div>
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                <label>Product main image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+                <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
+                <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)" [CurrentFileLength]="model?.ImagePath ? 1: 0" [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
+                </app-file-selector>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
+                    Please Product main image...!</div>
 
-        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
-          <span [ngSwitch]="getFileType(model.ImagePath)">
+                <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+                    <span [ngSwitch]="getFileType(model.ImagePath)">
 
             <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
               <div class="small-media-items-img"> <img [src]="model.ImagePath"
@@ -145,27 +124,24 @@
           </span>
 
 
-        </ng-container>
+                </ng-container>
 
 
-      </div>
+            </div>
 
-      <div class="form-group col-md-6 mb-0">
-        <label>Other images <span class="label-info"> (Preferred size: 500*500 ) </span></label>
-        <div class="dropzone dropzone-light upload-btn-wrapper w-100">
-          <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
-          <app-file-selector [MaxFileLength]="5" (FilesChanged)="onProductFileAttach($event)"
-            [CurrentFileLength]="(this.ProductFiles.length +(this.model.Files?.length??0))"
-            [ngClass]="{ 'is-invalid': f.productFile.errors && f.productFile.touched}">
-          </app-file-selector>
-          <div class="invalid-feedback"
-            *ngIf="(formgrp.get('productFile')?.hasError('required') && formgrp.get('productFile')?.touched)">
-            Please Add image...!</div>
-        </div>
+            <div class="form-group col-md-6 mb-0">
+                <label>Other images <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+                <div class="dropzone dropzone-light upload-btn-wrapper w-100">
+                    <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
+                    <app-file-selector [MaxFileLength]="5" (FilesChanged)="onProductFileAttach($event)" [CurrentFileLength]="(this.ProductFiles.length +(this.model.Files?.length??0))" [ngClass]="{ 'is-invalid': f.productFile.errors && f.productFile.touched}">
+                    </app-file-selector>
+                    <div class="invalid-feedback" *ngIf="(formgrp.get('productFile')?.hasError('required') && formgrp.get('productFile')?.touched)">
+                        Please Add image...!</div>
+                </div>
 
-        <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="ProductFiles">
-          <ng-container *ngFor="let itm of ProductFiles">
-            <span [ngSwitch]="getFileType(itm.FilePath)">
+                <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="ProductFiles">
+                    <ng-container *ngFor="let itm of ProductFiles">
+                        <span [ngSwitch]="getFileType(itm.FilePath)">
 
               <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
                 <div class="small-media-items-img"> <img [src]="itm.FilePath"
@@ -203,164 +179,152 @@
               </a>
 
             </span>
-          </ng-container>
+                    </ng-container>
 
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <div class="form-group col-md-12">
-        <label>Description</label>
-        <angular-editor [(ngModel)]="model.Desc" formControlName="Description" [config]="editorConfig"
-          placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"
-          id="Description"></angular-editor>
+            <div class="form-group col-md-12">
+                <label>Description</label>
+                <angular-editor [(ngModel)]="model.Desc" formControlName="Description" [config]="editorConfig" placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}" id="Description"></angular-editor>
 
 
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Description')?.hasError('required') && formgrp.get('Description')?.touched)">
-          Please enter Discription</div>
-      </div>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Description')?.hasError('required') && formgrp.get('Description')?.touched)">
+                    Please enter Discription</div>
+            </div>
 
-      <div class="form-group col-md-12">
-        <label>Additional Information</label>
-        <angular-editor [(ngModel)]="model.Summary" formControlName="Summary" [config]="editorConfig"
-          [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"
-          placeholder="Additional Information">
-        </angular-editor>
+            <div class="form-group col-md-12">
+                <label>Additional Information</label>
+                <angular-editor [(ngModel)]="model.Summary" formControlName="Summary" [config]="editorConfig" [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5" placeholder="Additional Information">
+                </angular-editor>
 
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Summary')?.hasError('required') && formgrp.get('Summary')?.touched)">
-          Please enter Summary...!</div>
-      </div>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Summary')?.hasError('required') && formgrp.get('Summary')?.touched)">
+                    Please enter Summary...!</div>
+            </div>
 
-      <div class="form-group col-md-12">
-        <label>Keyword</label>
-        <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
-          [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
-          Please enter Discription</div>
-      </div>
-      <fieldset class="border border-radius p-2 w-100 mx-2 mt-4">
+            <div class="form-group col-md-12">
+                <label>Keyword</label>
+                <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control" [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
+                <div class="invalid-feedback" *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
+                    Please enter Discription</div>
+            </div>
+            <fieldset class="border border-radius p-2 w-100 mx-2 mt-4">
 
-        <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">
-          <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
+                <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">
+                    <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
 
-          <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-toggle="modal"
-            data-target="#stockModelPopup">
+                    <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-toggle="modal" data-target="#stockModelPopup">
             <i class="bi bi-plus-lg"></i> Add New
           </button>
-        </div>
+                </div>
 
-        <div class="form-group col-md-12 m-0">
-          <div class="table-responsive-md">
-            <table class="table table-hover m-0">
-              <thead>
-                <tr>
-                  <th width="50px">#</th>
-                  <th>Size</th>
-                  <th>Unit Price</th>
-                  <th>Quantity</th>
-                  <th width="100px">Action</th>
+                <div class="form-group col-md-12 m-0">
+                    <div class="table-responsive-md">
+                        <table class="table table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th width="50px">#</th>
+                                    <th>Size</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th width="100px">Action</th>
 
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of this.model.Stocks;let index=index" (click)="onEditStock(item,index)">
-                  <td scope="row">{{index+1}}</td>
-                  <td> <strong> {{onGetProductSizeLabel(item.SizeId)}} </strong></td>
-                  <td>{{item.UnitPrice}}</td>
-                  <td>{{item.Quantity}}</td>
-                  <td class="table-action-btn">
-                    <a href="javascript:void(0)" class="table-action-btn-edit" (click)="onEditStock(item,index)"
-                      data-title="Edit" data-toggle="modal" data-target="#stockModelPopup"><i
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of this.model.Stocks;let index=index" (click)="onEditStock(item,index)">
+                                    <td scope="row">{{index+1}}</td>
+                                    <td> <strong> {{onGetProductSizeLabel(item.SizeId)}} </strong></td>
+                                    <td>{{item.UnitPrice}}</td>
+                                    <td>{{item.Quantity}}</td>
+                                    <td class="table-action-btn">
+                                        <a href="javascript:void(0)" class="table-action-btn-edit" (click)="onEditStock(item,index)" data-title="Edit" data-toggle="modal" data-target="#stockModelPopup"><i
                         class="bi bi-pencil-square"></i>
                     </a>
-                    <a class="table-action-btn-delete" data-title="Delete">
-                      <i class="bi bi-trash"></i>
-                    </a>
-                  </td>
+                                        <a class="table-action-btn-delete" data-title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
 
-                </tr>
+                                </tr>
 
-              </tbody>
-            </table>
-          </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
         </div>
-      </fieldset>
-    </div>
 
-    <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">
-      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> {{model.Id > 0 ? 'Save
+        <div class="form-footer-btn-grp widget-content widget-content pt-3 text-center">
+            <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> {{model.Id > 0 ? 'Save
         Product' : 'Add Product'}}</button>
-      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
-    </div>
-  </form>
+            <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+        </div>
+    </form>
 </div>
 
-<div class="custom-modal model-stock-create modal fade" data-backdrop="static" data-keyboard="false"
-  id="stockModelPopup" #stockModelPopup>
-  <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header p-3 ">
-        <h5 class="modal-title m-0">Stock</h5>
-        <button type="button" #stockModelPopupClose class="close" (click)="onCancelEdit()" data-dismiss="modal"
-          aria-label="Close">
+<div class="custom-modal model-stock-create modal fade" data-backdrop="static" data-keyboard="false" id="stockModelPopup" #stockModelPopup>
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-3 ">
+                <h5 class="modal-title m-0">Stock</h5>
+                <button type="button" #stockModelPopupClose class="close" (click)="onCancelEdit()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
-        <div class="modal-body">
-
-          <div class="form-row">
-            <div class="form-group col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
-              <label>Select Size</label>
-              <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
-                bindValue="Value" placeholder="Select Size Id"
-                [ngClass]="{ 'is-invalid': sf.SizeId.errors && sf.SizeId.touched}" [(ngModel)]="stockModel.SizeId">
-              </ng-select>
-              <div class="invalid-feedback"
-                *ngIf="(stockFormGroup.get('SizeId')?.hasError('required') && stockFormGroup.get('SizeId')?.touched)">
-                Please select <strong>Size Id</strong>...!</div>
             </div>
-            <div class="form-group col-lg-4 mb-3 mb-lg-0 unit-pro-price">
-              <label>Unit Price</label>
-              <input type="number" [(ngModel)]="stockModel.UnitPrice" (keypress)="_commonService.NumberOnly($event)"
-                [minlength]="1" [maxLength]="10" formControlName="UnitPrice"
-                [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}" class="form-control"
-                id="input4" placeholder="Unit Price">
-              <button type="button" *ngIf="this.model?.Price" title="Add Product Price" (click)="applyMainPrice()">₹
+            <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
+                <div class="modal-body">
+
+                    <div class="form-row">
+                        <div class="form-group col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
+                            <label>Select Size</label>
+                            <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text" bindValue="Value" placeholder="Select Size Id" [ngClass]="{ 'is-invalid': sf.SizeId.errors && sf.SizeId.touched}" [(ngModel)]="stockModel.SizeId">
+                            </ng-select>
+                            <div class="invalid-feedback" *ngIf="(stockFormGroup.get('SizeId')?.hasError('required') && stockFormGroup.get('SizeId')?.touched)">
+                                Please select <strong>Size Id</strong>...!</div>
+                        </div>
+                        <form [formGroup]="stockFormGroup" (ngSubmit)="onAddStock()">
+                            <div class="modal-body">
+
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4 mb-3 mb-lg-0">
+                                        <label>Select Size</label>
+                                        <ng-select [items]="dropDown.ddlProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text" bindValue="Value" placeholder="Select Size Id" [ngClass]="{ 'is-invalid': sf.SizeId.errors && sf.SizeId.touched}" [(ngModel)]="stockModel.SizeId">
+                                        </ng-select>
+                                        <div class="invalid-feedback" *ngIf="(stockFormGroup.get('SizeId')?.hasError('required') && stockFormGroup.get('SizeId')?.touched)">
+                                            Please select <strong>Size Id</strong>...!</div>
+                                    </div>
+                                    <div class="form-group col-lg-4 mb-3 mb-lg-0 unit-pro-price">
+                                        <label>Unit Price</label>
+                                        <input type="number" [(ngModel)]="stockModel.UnitPrice" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10" formControlName="UnitPrice" [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}" class="form-control"
+                                            id="input4" placeholder="Unit Price">
+                                        <button type="button" *ngIf="this.model?.Price" title="Add Product Price" (click)="applyMainPrice()">₹
                 Product Price</button>
 
-              <div class="invalid-feedback"
-                *ngIf="(stockFormGroup.get('UnitPrice')?.hasError('required') && stockFormGroup.get('UnitPrice')?.touched)">
-                Please enter Unit Price...! </div>
-              <div class="invalid-feedback"
-                *ngIf="!stockFormGroup.get('UnitPrice')?.hasError('required') && ((stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength')) && stockFormGroup.get('UnitPrice')?.touched) || (stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength'))">
-                Unit Price length must be 1-10 digit. </div>
-            </div>
+                                        <div class="invalid-feedback" *ngIf="(stockFormGroup.get('UnitPrice')?.hasError('required') && stockFormGroup.get('UnitPrice')?.touched)">
+                                            Please enter Unit Price...! </div>
+                                        <div class="invalid-feedback" *ngIf="!stockFormGroup.get('UnitPrice')?.hasError('required') && ((stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength')) && stockFormGroup.get('UnitPrice')?.touched) || (stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength'))">
+                                            Unit Price length must be 1-10 digit. </div>
+                                    </div>
 
-            <div class="form-group col-lg-4 mb-3 mb-lg-0">
-              <label>Quantity</label>
-              <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)"
-                [minlength]="1" [maxLength]="10" formControlName="Quantity"
-                [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}" class="form-control" id="input4"
-                placeholder="Quantity">
-              <div class="invalid-feedback"
-                *ngIf="(stockFormGroup.get('Quantity')?.hasError('required') && stockFormGroup.get('Quantity')?.touched)">
-                Please enter Quantity...! </div>
-              <div class="invalid-feedback"
-                *ngIf="!stockFormGroup.get('Quantity')?.hasError('required') && ((stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength')) && stockFormGroup.get('Quantity')?.touched) || (stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength'))">
-                Quantity length must be 1-10 digit. </div>
-            </div>
-          </div>
+                                    <div class="form-group col-lg-4 mb-3 mb-lg-0">
+                                        <label>Quantity</label>
+                                        <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10" formControlName="Quantity" [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}" class="form-control"
+                                            id="input4" placeholder="Quantity">
+                                        <div class="invalid-feedback" *ngIf="(stockFormGroup.get('Quantity')?.hasError('required') && stockFormGroup.get('Quantity')?.touched)">
+                                            Please enter Quantity...! </div>
+                                        <div class="invalid-feedback" *ngIf="!stockFormGroup.get('Quantity')?.hasError('required') && ((stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength')) && stockFormGroup.get('Quantity')?.touched) || (stockFormGroup.get('Quantity')?.hasError('maxlength') || stockFormGroup.get('Quantity')?.hasError('minlength'))">
+                                            Quantity length must be 1-10 digit. </div>
+                                    </div>
+                                </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="submitt" class="btn btn-success"><i class="fas fa-plus mr-1"></i> Save</button>
-          <button type="button" (click)="onCancelEdit()" class="btn btn-outline-danger" data-dismiss="modal"><i
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submitt" class="btn btn-success"><i class="fas fa-plus mr-1"></i> Save</button>
+                                <button type="button" (click)="onCancelEdit()" class="btn btn-outline-danger" data-dismiss="modal"><i
               class="fas fa-times mr-1"></i> Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
         </div>
-      </form>
-    </div>
-  </div>
-</div>
