@@ -8,10 +8,15 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { MainPageComponent } from './main-page.component';
 import { FeatureModule } from '../../Shared/Module/feature/feature.module';
+import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, ProductListComponent, ProductDetailComponent, MainPageComponent],
+  declarations: [HomeComponent,
+    ProductListComponent,
+    ProductDetailComponent,
+    MainPageComponent,
+    CategoryProductListComponent],
   imports: [
     CommonModule,
     HtmlPagesRoutingModule,

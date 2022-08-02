@@ -43,7 +43,10 @@ export interface ProductMasterViewModel {
   CaptionTag: string;
   Category: string;
   SubCategory: string;
+  ShippingCharge: number | undefined;
   Files: ProductImageViewModel[];
+  Stocks: ProductStockModel[];
+
 }
 
 export interface ProductImageViewModel {
@@ -63,4 +66,12 @@ export interface ProductCategoryViewModel {
   ModifiedOn: string;
   IsActive: boolean | null;
   IsDelete: boolean;
+}
+export interface ProductStockModel {
+  Id: number;
+  ProductId: number;
+  SizeId: number | undefined;
+  Size: string;
+  UnitPrice: number | null;
+  Quantity: number | null;
 }
