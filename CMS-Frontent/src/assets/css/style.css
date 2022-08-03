@@ -1415,5 +1415,11 @@ ul.megamenu-sub-list {
   box-shadow: 0 0 20px #dfdfdf;
   background: #fff8f8;
 }
-
+pre {
+  font-family: 'Manrope', sans-serif;
+  font-size: 94%;
+  text-align: left;
+  word-break: break-all;
+  white-space: normal;
+}
 /* CUSTOM CSS END */
