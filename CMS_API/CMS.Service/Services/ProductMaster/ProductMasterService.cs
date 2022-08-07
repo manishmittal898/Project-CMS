@@ -491,6 +491,7 @@ namespace CMS.Service.Services.ProductMaster
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
                               && (model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
                               && (model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
+                              && (model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
                               select prd);
                 switch (model.OrderBy)
                 {
