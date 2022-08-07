@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMS.Core.ServiceHelper.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace CMS.Service.Services.ProductMaster
         public long Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
-  
+
 
 
     }
@@ -84,7 +85,18 @@ namespace CMS.Service.Services.ProductMaster
         public int? Quantity { get; set; }
 
     }
-  
+
+
+    public class ProductFileterModel : IndexModel
+    {
+        public List<long?> CategoryId { get; set; }
+        public List<long?> SubCategoryId { get; set; }
+        public string Name { get; set; }
+        public string Price { get; set; }
+        public bool IsAvailableStock { get; set; }
+        public List<long> SizeId { get; set; }
+        public string Keyword { get; set; }
+    }
 
 
 }
