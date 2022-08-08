@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
 import { ProductStockModel } from '../../../../Shared/Services/product.service';
+import { environment } from '../../../../../environments/environment.prod';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 declare var $: any;
 @Component({
   selector: 'app-product-detail',
@@ -20,7 +22,9 @@ export class ProductDetailComponent implements OnInit {
     return stockCount;
   }
   SelectedSizeModel: ProductStockModel;
-  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute) {
+
+  shareLink: SafeUrl;
+  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer) {
     this._route.params.subscribe(x => {
       this.recordId = x.id;
       this.getDetailData();
@@ -46,6 +50,9 @@ export class ProductDetailComponent implements OnInit {
         if (this.model?.Stocks?.length > 0) {
           this.SelectedSizeModel = this.model.Stocks[0];
         }
+
+        this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/product/${this.model.Name.split(' ').join('-')}/${this.recordId}
+         `)
         this.AddSlider();
         setTimeout(() => {
           this.ProductDetailSlider()

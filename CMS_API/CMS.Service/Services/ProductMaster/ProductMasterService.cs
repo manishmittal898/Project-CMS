@@ -164,7 +164,7 @@ namespace CMS.Service.Services.ProductMaster
 
                 if (model.Id > 0)
                 {
-                    objProduct = _db.TblProductMasters.Include(x=>x.TblProductStocks).FirstOrDefault(r => r.Id == model.Id);
+                    objProduct = _db.TblProductMasters.Include(x => x.TblProductStocks).FirstOrDefault(r => r.Id == model.Id);
 
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
@@ -260,7 +260,7 @@ namespace CMS.Service.Services.ProductMaster
                         _db.SaveChanges();
                     }
                     objProduct.TblProductStocks = null;
-                    
+
                     return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
@@ -478,6 +478,82 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
+
+
+        public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFileterModel model)
+        {
+            ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
+            try
+            {
+
+
+                var result = (from prd in _db.TblProductMasters
+                              where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
+                              && (model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
+                              && (model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
+                              && (model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+                              select prd);
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        break;
+                }
+
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+
+                objResult.Data = await (from x in result
+                                        select new ProductMasterViewModel
+                                        {
+                                            Id = x.Id,
+                                            Name = x.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            CategoryId = x.CategoryId,
+                                            Category = x.Category.Name,
+                                            SubCategoryId = x.SubCategoryId,
+                                            SubCategory = x.SubCategory.Name,
+                                            CaptionTagId = x.CaptionTagId,
+                                            CaptionTag = x.CaptionTag.Name,
+                                            Desc = x.Desc,
+                                            Summary = x.Desc,
+                                            Price = x.Price,
+                                            CreatedBy = x.CreatedBy,
+                                            CreatedOn = x.CreatedOn,
+                                            ModifiedBy = x.ModifiedBy,
+                                            ModifiedOn = x.ModifiedOn,
+                                            IsActive = x.IsActive.Value,
+                                            IsDelete = x.IsDelete,
+                                            Keyword = x.Keyword,
+                                            ShippingCharge = x.ShippingCharge ?? null
+
+                                        }).ToListAsync();
+
+                if (result != null)
+                {
+
+                    return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                }
+                else
+                {
+                    return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                objResult.Data = null;
+                objResult.IsSuccess = false;
+                objResult.Message = string.Empty;
+            }
+            return objResult;
+        }
+
 
 
     }

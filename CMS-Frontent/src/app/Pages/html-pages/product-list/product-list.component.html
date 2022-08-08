@@ -116,7 +116,7 @@
           <!-- Product Start -->
 
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4" *ngFor="let item of model">
-            <a href="javascript:void(0)" routerLink="/product/{{item.Name}}/{{item.Id}}" class="product-list-items">
+            <a href="javascript:void(0)" routerLink="/product/{{item.Name.spliy(' ').join('-')}}/{{item.Id}}" class="product-list-items">
               <div class="product-list-items-tag" *ngIf="item.CaptionTag">{{item.CaptionTag}}</div>
               <div
                 class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
