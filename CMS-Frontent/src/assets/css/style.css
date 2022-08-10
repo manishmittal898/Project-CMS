@@ -140,7 +140,10 @@ img {
 .font-13 {
     font-size: 13px;
 }
-
+.font-14
+{
+  font-size: 14px;
+}
 .back-to-top {
     position: fixed;
     bottom: 25px;
@@ -826,7 +829,6 @@ input:focus-visible {
 }
 
 .product-list-search input {
-    min-width: 300px;
     border: solid 1px #ccc;
     padding: 6px 15px;
     border-radius: 0px;
@@ -836,7 +838,7 @@ input:focus-visible {
 }
 
 .product-list-search input:focus {
-    min-width: 350px;
+    /* min-width: 350px; */
     border-color: var(--black);
 }
 
@@ -845,8 +847,8 @@ input:focus-visible {
     background: transparent;
     font-size: 18px;
     position: absolute;
-    right: 12px;
-    top: 3px;
+    right: 10px;
+    top: 4px;
     padding: 0px;
 }
 
@@ -1422,4 +1424,18 @@ pre {
   word-break: break-all;
   white-space: normal;
 }
+.product-list-accordion-filter .accordion-button::after {
+  width: 1rem;
+  height: 1rem;
+  background-size: 1rem;
+}
+.form-range::-webkit-slider-thumb {
+  background: var(--primary-color);
+  opacity: 0.4;
+}
+
+.product-filterItems-header h6 {
+  font-weight: 600;
+}
+
 /* CUSTOM CSS END */
