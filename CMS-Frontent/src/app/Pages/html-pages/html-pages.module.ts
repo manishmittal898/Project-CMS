@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
 import { MainPageComponent } from './main-page.component';
 import { FeatureModule } from '../../Shared/Module/feature/feature.module';
 import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
+import { ProductFilterComponent } from './product-list/product-filter/product-filter.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CategoryProductListComponent } from './product-list/product-detail/cate
     ProductListComponent,
     ProductDetailComponent,
     MainPageComponent,
-    CategoryProductListComponent],
+    CategoryProductListComponent,
+    ProductFilterComponent],
   imports: [
     CommonModule,
     HtmlPagesRoutingModule,

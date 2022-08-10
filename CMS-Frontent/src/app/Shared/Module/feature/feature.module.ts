@@ -6,7 +6,7 @@ import { NavBarComponent } from '../../Page/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -19,19 +19,21 @@ const component = [
   FooterComponent,
   NavBarComponent];
 
-  const installedModule=[
-    
-  ]
+const installedModule = [
+  NgxPaginationModule
+]
 
 @NgModule({
   declarations: [
     component
   ],
   imports: [
-    CommonModule,installedModule,
+    CommonModule,
+    installedModule,
     commonModules,
   ],
-  exports: [component,
+  exports: [
+    component,
     commonModules,
     installedModule]
 })
