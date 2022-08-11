@@ -30,6 +30,19 @@ export class ProductService {
 
 }
 
+export class ProductFilterModel extends IndexModel {
+  constructor(){
+    super();
+  }
+  CategoryId!: Number[];
+  SubCategoryId!: Number[];
+  Price!: string;
+  IsAvailableStock!: boolean;
+  SizeId!: Number[];
+  Keyword!: string;
+}
+
+
 export interface ProductMasterViewModel {
   Id: number;
   Name: string;

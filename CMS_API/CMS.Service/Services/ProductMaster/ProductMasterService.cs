@@ -446,6 +446,7 @@ namespace CMS.Service.Services.ProductMaster
                         result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
                         break;
                 }
+                objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
@@ -462,7 +463,7 @@ namespace CMS.Service.Services.ProductMaster
                 if (objResult.Data != null)
                 {
 
-                    return CreateResponse(objResult.Data as IEnumerable<ProductCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                    return CreateResponse(objResult.Data as IEnumerable<ProductCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
@@ -480,7 +481,7 @@ namespace CMS.Service.Services.ProductMaster
         }
 
 
-        public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFileterModel model)
+        public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFilterModel model)
         {
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
@@ -489,9 +490,10 @@ namespace CMS.Service.Services.ProductMaster
 
                 var result = (from prd in _db.TblProductMasters
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
-                              && (model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
-                              && (model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
-                              && (model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+                              && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword))
+                              && (model.CategoryId.Count == 0 || model.CategoryId == null || model.CategoryId.Contains(prd.CategoryId))
+                              && (model.SubCategoryId.Count == 0 || model.SubCategoryId == null || model.SubCategoryId.Contains(prd.SubCategoryId))
+                              && (model.SizeId.Count == 0 || model.SizeId == null || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
                               select prd);
                 switch (model.OrderBy)
                 {

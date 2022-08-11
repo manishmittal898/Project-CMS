@@ -22,9 +22,9 @@ namespace CMS.API.Areas.Public.Controllers
 
         // GET: api/<UserController>
         [HttpPost]
-        public async Task<object> GetList(IndexModel model)
+        public async Task<object> GetList(ProductFilterModel model)
         {
-            return await _productmstr.GetList(model);
+            return await _productmstr.GetFilterList(model);
         } 
 
         [HttpPost]

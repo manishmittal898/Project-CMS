@@ -87,7 +87,7 @@ namespace CMS.Service.Services.ProductMaster
     }
 
 
-    public class ProductFileterModel : IndexModel
+    public class ProductFilterModel : IndexModel
     {
         public List<long?> CategoryId { get; set; }
         public List<long?> SubCategoryId { get; set; }

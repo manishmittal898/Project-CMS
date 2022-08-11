@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IndexModel } from 'src/app/Shared/Helper/Common';
-import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
+import { ProductFilterModel, ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -8,11 +7,11 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
 })
 export class ProductListComponent implements OnInit {
 
-  indexModel = new IndexModel();
+  indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
   constructor(private readonly _productService: ProductService) {
-  
+
   }
 
   ngOnInit(): void {

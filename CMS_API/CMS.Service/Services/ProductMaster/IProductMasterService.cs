@@ -20,6 +20,7 @@ namespace CMS.Service.Services.ProductMaster
         Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(long productId);
 
         Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model);
+        Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFilterModel model);
 
     }
 }
