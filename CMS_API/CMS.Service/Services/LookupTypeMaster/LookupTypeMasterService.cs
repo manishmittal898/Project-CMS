@@ -30,12 +30,14 @@ namespace CMS.Service.Services.LookupTypeMaster
                               orderby (model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") ascending
                               orderby (!model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") descending
                               select lkType);
+                objResult.TotalRecord = result.Count();
+
                 objResult.Data = await result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue).ToListAsync();
 
                 if (result != null)
                 {
 
-                    return CreateResponse(objResult.Data as IEnumerable<Data.Models.TblLookupTypeMaster>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: result.Count());
+                    return CreateResponse(objResult.Data as IEnumerable<Data.Models.TblLookupTypeMaster>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
@@ -137,7 +139,7 @@ namespace CMS.Service.Services.LookupTypeMaster
                 objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == id);
 
                 var roletype = _db.TblLookupTypeMasters.Remove(objRole);
-              await  _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch (Exception ex)
