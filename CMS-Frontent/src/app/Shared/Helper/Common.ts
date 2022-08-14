@@ -97,6 +97,7 @@ export class DropDownModel {
   ddlLookupTypeMaster!: DropDownItem[];
   ddlCategory !: DropDownItem[];
   ddlCaptionTag!: DropDownItem[];
+  ddlProductSize!: DropDownItem[];
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
 }

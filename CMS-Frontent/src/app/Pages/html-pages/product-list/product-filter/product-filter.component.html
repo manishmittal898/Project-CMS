@@ -23,9 +23,10 @@
         <h6 class="m-0 text-uppercase">Categories</h6>
       </div>
       <div class="product-filterItems-body">
-        <div class="d-flex align-items-center mb-1" *ngFor="let ct of this.ddlModel.ddlCategory;let idx=index">
+        <div class="d-flex align-items-center mb-1" *ngFor="let ct of this.dropDown.ddlCategory;let idx=index">
           <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" type="checkbox" value="{{ct.Value}}" id="{{'Check'+idx}}">
+            <input class="form-check-input" [(ngModel)]="this.filterModel.CategoryId" name="category" type="checkbox"
+              value="{{ct.Value}}" id="{{'Check'+idx}}">
             <label class="form-check-label ms-2" for="Check1">
               {{ct.Text}}
             </label>
@@ -63,7 +64,7 @@
               </div>
             </div>
           </div>
-        
+
         </div>
 
 
