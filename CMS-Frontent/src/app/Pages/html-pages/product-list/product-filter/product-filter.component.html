@@ -19,9 +19,9 @@
 
     <!-- Filter Category os sub Category Start -->
     <div class="product-filterItems product-filterItems-w-checkbox mb-4">
-      <div class="product-filterItems-header mb-2">
+      <!-- <div class="product-filterItems-header mb-2">
         <h6 class="m-0 text-uppercase">Categories </h6>
-      </div>
+      </div> -->
       <div class="product-filterItems-body">
 
 
@@ -86,9 +86,16 @@
         <h6 class="m-0 text-uppercase">Size</h6>
       </div>
       <div class="product-filterItems-body">
-        <div class="d-flex align-items-center mb-1">
+        <ng-select [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Size">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
+          </ng-template>
+        </ng-select>
+        <!-- <div class="d-flex align-items-center mb-1">
           <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" type="checkbox" value="" id="SizeCheck1">
+
+              <input class="form-check-input" type="checkbox" value="" id="SizeCheck1">
             <label class="form-check-label ms-2" for="SizeCheck1">
               Small
             </label>
@@ -121,7 +128,7 @@
             </label>
           </div>
           <span class="ms-auto">598</span>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- Filter Size End -->
