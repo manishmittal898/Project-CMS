@@ -92,7 +92,16 @@ namespace CMS.Service.Services.Common
                             {
                                 objData.Add(item.Key, await GetSubLookupMasters(item.Values));
                             }
-                       break;
+                            break;
+
+                        case DropDownKey.ddlSubLookupGroup:
+                            if (item.FileterFromKey.ToLower() == DropDownKey.ddlLookup.ToLower().ToString())
+                            {
+                                objData.Add(item.Key, await GetGroupSubLookupMasters(item.Values));
+                            }
+                            break;
+
+                            
                     }
 
                 }
@@ -127,7 +136,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type).OrderBy(x=>x.SortedOrder)
+                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type).OrderBy(x => x.SortedOrder)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
 
@@ -139,12 +148,11 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private async Task<object> GetSubLookupMasters(long[] lookupId=null)
+        private async Task<object> GetSubLookupMasters(long[] lookupId = null)
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (lookupId.Length< 0 ||  lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder)
-                     .Select(r => new { Text = r.Name, Value = r.Id })
+                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
 
             }
@@ -154,7 +162,20 @@ namespace CMS.Service.Services.Common
                 return null;
             }
         }
+        private async Task<object> GetGroupSubLookupMasters(long[] lookupId = null)
+        {
+            try
+            {
+                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).GroupBy(SubLookup => new { SubLookup.LookUp, SubLookup })
+                     .Select(r => new { CategoryId = r.Key.LookUp.Id,Category = r.Key.LookUp.Name, Data = new { Text = r.Key.SubLookup.Name, Value = r.Key.SubLookup.Id } }).ToListAsync();
 
+            }
+            catch
+            {
+
+                return null;
+            }
+        }
         private async Task<object> GetLookupTypeMasters()
         {
             try
