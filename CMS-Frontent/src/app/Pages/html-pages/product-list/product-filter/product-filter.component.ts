@@ -24,32 +24,34 @@ export class ProductFilterComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
+        debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
-
+        this.getSubLookUpDropDown();
       }
     });
   }
 
-  getSubLookUpDropDown(value: number) {
+  getSubLookUpDropDown() {
 
-    if (value > 0) {
+  //  if (this.filterModel.CategoryId.length > 0) {
       const ddlModel = {} as FilterDropDownPostModel;
       ddlModel.FileterFromKey = DropDown_key.ddlLookup
-      ddlModel.Key = DropDown_key.ddlSublookup
-      ddlModel.Values = [value]
+      ddlModel.Key = DropDown_key.ddlSubLookupGroup
+      ddlModel.Values = [1]//this.filterModel.CategoryId;
       this._commonService.GetFilterDropDown(ddlModel).subscribe(x => {
         if (x.IsSuccess) {
+          debugger
           const ddls = x?.Data as DropDownModel;
-          this.dropDown.ddlSublookup = ddls.ddlSublookup
+          this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
         }
 
       });
-    } else {
-      this.dropDown.ddlSublookup = [];
-    }
+    // } else {
+    //   this.dropDown.ddlSubLookupGroup = [];
+    // }
   }
 
 }

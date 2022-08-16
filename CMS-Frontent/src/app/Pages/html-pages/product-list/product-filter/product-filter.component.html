@@ -20,19 +20,27 @@
     <!-- Filter Category os sub Category Start -->
     <div class="product-filterItems product-filterItems-w-checkbox mb-4">
       <div class="product-filterItems-header mb-2">
-        <h6 class="m-0 text-uppercase">Categories</h6>
+        <h6 class="m-0 text-uppercase">Categories </h6>
       </div>
       <div class="product-filterItems-body">
-        <div class="d-flex align-items-center mb-1" *ngFor="let ct of this.dropDown.ddlCategory;let idx=index">
+
+
+        <ng-select [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Categoory">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
+          </ng-template>
+        </ng-select>
+
+        <!-- <div class="d-flex align-items-center mb-1" *ngFor="let ct of this.dropDown.ddlCategory;let idx=index">
           <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" [(ngModel)]="this.filterModel.CategoryId" name="category" type="checkbox"
-              value="{{ct.Value}}" id="{{'Check'+idx}}">
+            <input class="form-check-input" [(ngModel)]="this.filterModel.CategoryId[idx]" name="{{'Check'+idx}}"
+              type="checkbox" value="{{ct.Value}}" id="{{'Check'+idx}}">
             <label class="form-check-label ms-2" for="Check1">
               {{ct.Text}}
             </label>
           </div>
-          <!-- <span class="ms-auto">241</span> -->
-        </div>
+        </div> -->
 
         <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
           <div class="accordion-item py-1 border-0">

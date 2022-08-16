@@ -100,6 +100,7 @@ export class DropDownModel {
   ddlProductSize!: DropDownItem[];
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
+  ddlSubLookupGroup!: DropDownItem[];
 }
 
 export class DropDownItem {

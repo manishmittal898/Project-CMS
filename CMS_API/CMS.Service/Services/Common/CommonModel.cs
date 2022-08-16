@@ -20,6 +20,8 @@ namespace CMS.Service.Services.Common
             public const string ddlCategory = "ddlcategory";
             public const string ddlLookup = "ddllookup";
             public const string ddlSubLookup = "ddlsublookup";
+            public const string ddlSubLookupGroup = "ddlsublookupgroup";
+
             public const string ddlSubCategory = "ddlsubcategory";
             public const string ddlProductSize = "ddlproductsize";
             public const string ddlGender = "ddlgender";

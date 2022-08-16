@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgSelectModule } from '@ng-select/ng-select';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -20,7 +21,8 @@ const component = [
   NavBarComponent];
 
 const installedModule = [
-  NgxPaginationModule
+  NgxPaginationModule,
+  NgSelectModule
 ]
 
 @NgModule({

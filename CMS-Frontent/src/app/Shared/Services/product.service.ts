@@ -17,7 +17,7 @@ export class ProductService {
 
   GetDetail(Id: Number): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_Detail_Api}`;
-    return this._baseService.get(`${url+Id}`);
+    return this._baseService.get(`${url + Id}`);
   }
 
 
@@ -31,14 +31,17 @@ export class ProductService {
 }
 
 export class ProductFilterModel extends IndexModel {
-  constructor(){
+  constructor() {
     super();
+    this.CategoryId = [];
+    this.SubCategoryId = [];
+    this.SizeId = [];
   }
-  CategoryId!: Number[];
-  SubCategoryId!: Number[];
+  CategoryId!: number[];
+  SubCategoryId!: number[];
   Price!: string;
   IsAvailableStock!: boolean;
-  SizeId!: Number[];
+  SizeId!: number[];
   Keyword!: string;
 }
 
