@@ -1438,5 +1438,27 @@ pre {
 .product-filterItems-header h6 {
   font-weight: 600;
 }
+.ng-select-open .ng-select-container {
+    border: solid 1px #f1f1f1 !important;
+    border-radius: 0px;
+    margin-bottom: 8px;
+}
+.ng-select-open .ng-dropdown-panel {
+    border: none;
+}
+.ng-select-open .ng-dropdown-panel {
+    position: static;
+    opacity: 1 !important;
+}
+.ng-select-open .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 4px 5px;
+    display: inline-flex;
+    align-items: center;
+    color: #707070;
+    width: 100%;
+}
 
+.ng-select-open .ng-dropdown-panel .ng-dropdown-panel-items .ng-option input {
+    margin-right: 5px;
+}
 /* CUSTOM CSS END */
