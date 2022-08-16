@@ -26,7 +26,7 @@
 
 
         <ng-select  [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Categoory">
+          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
           </ng-template>
@@ -87,7 +87,7 @@
       </div>
       <div class="product-filterItems-body">
         <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Size">
+          bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Find Size">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
           </ng-template>
