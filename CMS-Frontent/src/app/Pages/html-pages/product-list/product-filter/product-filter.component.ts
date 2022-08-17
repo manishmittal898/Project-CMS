@@ -35,23 +35,23 @@ export class ProductFilterComponent implements OnInit {
   }
 
   getSubLookUpDropDown() {
-debugger
-   if (this.filterModel.CategoryId.length > 0) {
-      const ddlModel = {} as FilterDropDownPostModel;
-      ddlModel.FileterFromKey = DropDown_key.ddlLookup
-      ddlModel.Key = DropDown_key.ddlSublookup
-      ddlModel.Values = this.filterModel.CategoryId;
-      this._commonService.GetFilterDropDown(ddlModel).subscribe(x => {
-        if (x.IsSuccess) {
-          debugger
-          const ddls = x?.Data as DropDownModel;
-          this.dropDown.ddlSublookup = ddls.ddlSublookup
-        }
+    debugger
+    //if (this.filterModel.CategoryId.length > 0) {
+    const ddlModel = {} as FilterDropDownPostModel;
+    ddlModel.FileterFromKey = DropDown_key.ddlLookup
+    ddlModel.Key = DropDown_key.ddlSublookup
+    ddlModel.Values = this.filterModel.CategoryId.length > 0 ? this.filterModel.CategoryId : [];
+    this._commonService.GetFilterDropDown(ddlModel).subscribe(x => {
+      if (x.IsSuccess) {
+        debugger
+        const ddls = x?.Data as DropDownModel;
+        this.dropDown.ddlSublookup = ddls.ddlSublookup
+      }
 
-      });
-    } else {
-      this.dropDown.ddlSubLookupGroup = [];
-    }
+    });
+    // } else {
+    //   this.dropDown.ddlSubLookupGroup = [];
+    // }
   }
 
 }

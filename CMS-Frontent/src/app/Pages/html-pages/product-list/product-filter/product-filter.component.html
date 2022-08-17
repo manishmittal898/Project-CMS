@@ -51,14 +51,18 @@
                 bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.SubCategoryId"
                 placeholder="Find Sub Categoory" groupBy="Category" [selectableGroup]="true"
                 [selectableGroupAsModel]="false">
+                <div class="data-div">
+                  <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Category |
+                    uppercase}}
+                  </ng-template>
 
-                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
-                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Category | uppercase}}
-                </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
+                  </ng-template>
+                </div>
 
-                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
-                </ng-template>
+
                 <ng-template ng-multi-label-tmp let-items="items">
                   <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
                     {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
@@ -66,12 +70,13 @@
                     <span class="ng-value-label">{{items.length - 2}} more...</span>
                   </div>
                 </ng-template>
+
               </ng-select>
             </div>
           </div>
 
 
-          <div class="accordion-item py-1 border-0">
+          <!-- <div class="accordion-item py-1 border-0">
             <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed" type="button"
               data-bs-toggle="collapse" data-bs-target="#collapseOne">
               Bedsheets
@@ -99,7 +104,7 @@
 
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
