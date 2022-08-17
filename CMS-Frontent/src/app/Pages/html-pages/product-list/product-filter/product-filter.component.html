@@ -19,30 +19,58 @@
 
     <!-- Filter Category os sub Category Start -->
     <div class="product-filterItems product-filterItems-w-checkbox mb-4">
-       <div class="product-filterItems-header mb-2">
+      <div class="product-filterItems-header mb-2">
         <h6 class="m-0 text-uppercase">Categories </h6>
-      </div> 
+      </div>
       <div class="product-filterItems-body">
 
 
-        <ng-select  [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
+        <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory" [multiple]="true"
+          bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.CategoryId"
+          placeholder="Find Categoory" (change)="getSubLookUpDropDown()">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
           </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
+              {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
         </ng-select>
 
-        <!-- <div class="d-flex align-items-center mb-1" *ngFor="let ct of this.dropDown.ddlCategory;let idx=index">
-          <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" [(ngModel)]="this.filterModel.CategoryId[idx]" name="{{'Check'+idx}}"
-              type="checkbox" value="{{ct.Value}}" id="{{'Check'+idx}}">
-            <label class="form-check-label ms-2" for="Check1">
-              {{ct.Text}}
-            </label>
-          </div>
-        </div> -->
-
         <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
+
+          <div class="product-filterItems product-filterItems-w-checkbox mb-4">
+            <div class="product-filterItems-header mb-2">
+              <h6 class="m-0 text-uppercase">Sub Category</h6>
+            </div>
+            <div class="product-filterItems-body">
+              <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlSublookup" [multiple]="true"
+                bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.SubCategoryId"
+                placeholder="Find Sub Categoory" groupBy="Category" [selectableGroup]="true"
+                [selectableGroupAsModel]="false">
+
+                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Category | uppercase}}
+                </ng-template>
+
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
+                </ng-template>
+                <ng-template ng-multi-label-tmp let-items="items">
+                  <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
+                    {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
+                  <div class="ng-value" *ngIf="items.length > 2">
+                    <span class="ng-value-label">{{items.length - 2}} more...</span>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+
+
           <div class="accordion-item py-1 border-0">
             <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed" type="button"
               data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -57,7 +85,7 @@
                       Bedsheets
                     </label>
                   </div>
-                  <span class="ms-auto">241</span>
+
                 </div>
                 <div class="d-flex align-items-center mb-1">
                   <div class="form-check d-flex align-items-center">
@@ -66,7 +94,7 @@
                       Fitted Sheets
                     </label>
                   </div>
-                  <span class="ms-auto">268</span>
+
                 </div>
 
               </div>
@@ -74,8 +102,6 @@
           </div>
 
         </div>
-
-
       </div>
     </div>
     <!-- Filter Category os sub Category End -->
@@ -86,49 +112,22 @@
         <h6 class="m-0 text-uppercase">Size</h6>
       </div>
       <div class="product-filterItems-body">
-        <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Find Size">
+        <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlProductSize" [multiple]="true"
+          bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.SizeId"
+          placeholder="Find Size">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
           </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
         </ng-select>
-        <!-- <div class="d-flex align-items-center mb-1">
-          <div class="form-check d-flex align-items-center">
 
-              <input class="form-check-input" type="checkbox" value="" id="SizeCheck1">
-            <label class="form-check-label ms-2" for="SizeCheck1">
-              Small
-            </label>
-          </div>
-          <span class="ms-auto">241</span>
-        </div>
-        <div class="d-flex align-items-center mb-1">
-          <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" type="checkbox" value="" id="SizeCheck2">
-            <label class="form-check-label ms-2" for="SizeCheck2">
-              Medium
-            </label>
-          </div>
-          <span class="ms-auto">268</span>
-        </div>
-        <div class="d-flex align-items-center mb-1">
-          <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" type="checkbox" value="" id="SizeCheck3">
-            <label class="form-check-label ms-2" for="SizeCheck3">
-              Large
-            </label>
-          </div>
-          <span class="ms-auto">98</span>
-        </div>
-        <div class="d-flex align-items-center mb-1">
-          <div class="form-check d-flex align-items-center">
-            <input class="form-check-input" type="checkbox" value="" id="SizeCheck4">
-            <label class="form-check-label ms-2" for="SizeCheck4">
-              Extra Large
-            </label>
-          </div>
-          <span class="ms-auto">598</span>
-        </div> -->
       </div>
     </div>
     <!-- Filter Size End -->

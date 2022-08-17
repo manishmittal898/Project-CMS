@@ -106,6 +106,8 @@ export class DropDownModel {
 export class DropDownItem {
   Text: string = "";
   Value: string = "";
+  CategoryId?: number;
+  Category:string;
 }
 export interface FilterDropDownPostModel {
   Key: string;
