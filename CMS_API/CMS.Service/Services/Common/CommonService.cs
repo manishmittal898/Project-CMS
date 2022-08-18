@@ -97,11 +97,11 @@ namespace CMS.Service.Services.Common
                         case DropDownKey.ddlSubLookupGroup:
                             if (item.FileterFromKey.ToLower() == DropDownKey.ddlLookup.ToLower().ToString())
                             {
-                                objData.Add(item.Key, await GetGroupSubLookupMasters(item.Values));
+                                objData.Add(item.Key, GetGroupSubLookupMasters(item.Values));
                             }
                             break;
 
-                            
+
                     }
 
                 }
@@ -152,7 +152,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id })
+                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id, CategoryId=r.LookUpId, Category= r.LookUp.Name })
                      .ToListAsync();
 
             }
@@ -162,15 +162,21 @@ namespace CMS.Service.Services.Common
                 return null;
             }
         }
-        private async Task<object> GetGroupSubLookupMasters(long[] lookupId = null)
+        private object GetGroupSubLookupMasters(long[] lookupId = null)
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).GroupBy(SubLookup => new { SubLookup.LookUp, SubLookup })
-                     .Select(r => new { CategoryId = r.Key.LookUp.Id,Category = r.Key.LookUp.Name, Data = new { Text = r.Key.SubLookup.Name, Value = r.Key.SubLookup.Id } }).ToListAsync();
 
+                return  _db.TblSubLookupMasters.Include(I => I.LookUp).Where(type => (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted)
+                    .ToList().GroupBy(x => x.LookUpId)
+                      .Select(y => new
+                      {
+                          CategoryId = y.Key,
+                          Category = y.FirstOrDefault().LookUp.Name,
+                          Data = y.Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                      }).ToList();
             }
-            catch
+            catch (Exception ex)
             {
 
                 return null;
