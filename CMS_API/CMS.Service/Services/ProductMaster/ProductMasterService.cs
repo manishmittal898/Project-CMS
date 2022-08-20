@@ -494,7 +494,9 @@ namespace CMS.Service.Services.ProductMaster
                               && (model.CategoryId.Count == 0 || model.CategoryId == null || model.CategoryId.Contains(prd.CategoryId))
                               && (model.SubCategoryId.Count == 0 || model.SubCategoryId == null || model.SubCategoryId.Contains(prd.SubCategoryId))
                               && (model.SizeId.Count == 0 || model.SizeId == null || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+                             && (model.Price.Count == 0 ||  (model.Price[0] <= prd.Price && prd.Price <= (model.Price[1])))
                               select prd);
+                // && ((model.Price[0] <= prd.Price || model.Price[1] <= prd.Price))
                 switch (model.OrderBy)
                 {
                     case "Name":
