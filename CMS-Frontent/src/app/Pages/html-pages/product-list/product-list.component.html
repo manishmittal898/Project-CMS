@@ -30,7 +30,9 @@
           <div class="col-lg-12">
             <div
               class="product-collection-header-filter d-flex align-items-center justify-content-between mb-4 font-13">
-              <div class="d-none d-md-block">Showing 1–12 of <strong> 20 </strong> results</div>
+              <!-- <div class="d-none d-md-block">Showing {{indexModel.Page==1?1 : indexModel.Page*indexModel.PageSize}}–{{
+                indexModel.Page==1 ?indexModel.PageSize*indexModel.Page:
+                totalRecords-(indexModel.PageSize*indexModel.Page)}} of <strong>{{ totalRecords}}</strong> results</div>-->
               <div>
                 <h4 class="m-0 font-w-400 product-collection-header-title">Products</h4>
               </div>
@@ -42,21 +44,14 @@
                     <option>Price (H to L)</option>
                   </select>
                 </div>
-                <!-- <div class="product-show-count d-none d-md-block">
-                <label class="me-1">Show:</label>
-                <select class="select-sm">
-                  <option>6</option>
-                  <option>12</option>
-                  <option>18</option>
-                  <option>24</option>
-                </select>
-              </div> -->
+
               </div>
             </div>
           </div>
           <!-- Product Start -->
 
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4" *ngFor="let item of model | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords }">
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
+            *ngFor="let item of model | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords }">
             <a href="javascript:void(0)" routerLink="/product/{{item.Name.split(' ').join('-')}}/{{item.Id}}"
               class="product-list-items">
               <div class="product-list-items-tag" *ngIf="item.CaptionTag">{{item.CaptionTag}}</div>
@@ -78,17 +73,9 @@
 
           <div class="col-lg-12 mt-4">
             <nav>
-              <pagination-controls class="pagination justify-content-center" (pageChange)="indexModel.Page= $event;getList()"></pagination-controls>
+              <pagination-controls class="pagination justify-content-center"
+                (pageChange)="indexModel.Page= $event;getList()"></pagination-controls>
 
-              <!-- <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
-              </ul> -->
             </nav>
           </div>
 

@@ -150,9 +150,8 @@
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[1]}}</label>
       </div>
 
-      <p-slider [minlength]="0" [maxlength]="8" [(ngModel)]="this.filterModel.Price" [range]="true"></p-slider>
-      <!-- <input type="range" class="form-range" min="0" max="5" id="customRange1"> -->
-    </div>
+      <p-slider (onChange)="applyFilter()" [min]="50" [max]="10000" [(ngModel)]="this.filterModel.Price" [step]="100" [range]="true"></p-slider>
+        </div>
     <!-- Filter Price End -->
 
 

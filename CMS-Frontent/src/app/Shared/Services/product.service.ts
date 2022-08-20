@@ -36,7 +36,7 @@ export class ProductFilterModel extends IndexModel {
     this.CategoryId = [];
     this.SubCategoryId = [];
     this.SizeId = [];
-    this.Price=[0,99999999];
+    this.Price=[50,10000];
   }
   CategoryId!: number[];
   SubCategoryId!: number[];
