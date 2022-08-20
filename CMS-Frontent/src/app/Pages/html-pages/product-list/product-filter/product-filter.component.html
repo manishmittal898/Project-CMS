@@ -12,8 +12,8 @@
 
     <!-- Filter Search Start -->
     <div class="product-filterItems product-list-search position-relative mb-4">
-      <input type="search" placeholder="Search.." class="w-100">
-      <button type="submit"><i class="bi bi-search"></i></button>
+      <input type="search" [(ngModel)]="this.filterModel.Keyword" placeholder="Search.." class="w-100">
+      <button type="submit"><i class="bi bi-search" (click)="applyFilter()"></i></button>
     </div>
     <!-- Filter Search End -->
 

@@ -91,7 +91,7 @@ namespace CMS.Service.Services.ProductMaster
     {
         public List<long?> CategoryId { get; set; }
         public List<long?> SubCategoryId { get; set; }
-        public string Price { get; set; }
+        public List<long?> Price { get; set; }
         public bool IsAvailableStock { get; set; }
         public List<long> SizeId { get; set; }
         public string Keyword { get; set; }
