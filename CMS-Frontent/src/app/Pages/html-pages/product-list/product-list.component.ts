@@ -18,6 +18,11 @@ export class ProductListComponent implements OnInit {
     this.getList();
   }
 
+  onSearch(data){
+    this.indexModel=data;
+    this.getList();
+  }
+
   getList() {
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {

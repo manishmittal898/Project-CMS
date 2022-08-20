@@ -25,7 +25,7 @@
       <div class="product-filterItems-body">
 
 
-        <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory" [multiple]="true"
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory" [multiple]="true"
           bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.CategoryId"
           placeholder="Find Categoory" (change)="getSubLookUpDropDown()">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
@@ -94,7 +94,7 @@
                   <div class="form-check d-flex align-items-center">
 
                     <div *ngFor="let item of category.Data" class="p-field-checkbox">
-                      <p-checkbox class="form-check-input" name="group2" value="item.Value" [value]="item.Value"
+                      <p-checkbox (change)="applyFilter()" class="form-check-input" name="group2" value="item.Value" [value]="item.Value"
                         [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
 
                       </p-checkbox>
@@ -120,7 +120,7 @@
         <h6 class="m-0 text-uppercase">Size</h6>
       </div>
       <div class="product-filterItems-body">
-        <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlProductSize" [multiple]="true"
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlProductSize" [multiple]="true"
           bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.SizeId"
           placeholder="Find Size">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">

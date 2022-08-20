@@ -11,7 +11,7 @@ import { CommonService } from '../../../../Shared/Services/common.service';
 })
 export class ProductFilterComponent implements OnInit {
   @Input() filterModel: ProductFilterModel = new ProductFilterModel();
-  @Output() onFilterChange = new EventEmitter<any>();
+  @Output() onFilterChange = new EventEmitter<ProductFilterModel>();
   dropDown = new DropDownModel();
   constructor(private _commonService: CommonService) { }
 
@@ -54,6 +54,10 @@ export class ProductFilterComponent implements OnInit {
     // } else {
     //   this.dropDown.ddlSubLookupGroup = [];
     // }
+  }
+
+  applyFilter() {
+    this.onFilterChange.emit(this.filterModel);
   }
 
 }

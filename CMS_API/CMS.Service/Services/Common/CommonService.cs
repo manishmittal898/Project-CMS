@@ -183,7 +183,7 @@ namespace CMS.Service.Services.Common
                       {
                           CategoryId = y.Key,
                           Category = y.FirstOrDefault().LookUp.Name,
-                          Data = y.Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                          Data = y.Where(x=>!x.IsDeleted && x.IsActive.Value).Select(x => new { Text = x.Name, Value = x.Id }).ToList()
                       }).ToList();
             }
             catch (Exception ex)
