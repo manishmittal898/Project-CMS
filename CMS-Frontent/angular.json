@@ -29,6 +29,7 @@
               "src/assets/css/bootstrap-icons.css",
               "src/assets/css/slick-theme.css",
               "src/assets/css/slick.css",
+              "node_modules/primeng-lts/resources/themes/nova-light/theme.css",
               "node_modules/primeng-lts/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
             ],

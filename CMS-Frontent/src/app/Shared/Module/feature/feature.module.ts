@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CheckboxModule} from 'primeng-lts/checkbox';
+import {SliderModule} from 'primeng/slider';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -24,7 +25,8 @@ const component = [
 const installedModule = [
   NgxPaginationModule,
   NgSelectModule,
-  CheckboxModule
+  CheckboxModule,
+  SliderModule
 ]
 
 @NgModule({
