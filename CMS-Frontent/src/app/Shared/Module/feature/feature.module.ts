@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {CheckboxModule} from 'primeng-lts/checkbox';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -22,7 +23,8 @@ const component = [
 
 const installedModule = [
   NgxPaginationModule,
-  NgSelectModule
+  NgSelectModule,
+  CheckboxModule
 ]
 
 @NgModule({

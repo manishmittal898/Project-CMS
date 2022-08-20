@@ -4,7 +4,10 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths": {
+      "primeng/*": ["node_modules/primeng-lts/*"]
+  }
   },
   "files": [
     "src/main.ts",

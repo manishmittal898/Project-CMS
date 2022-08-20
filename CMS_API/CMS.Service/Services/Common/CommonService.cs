@@ -58,6 +58,16 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Size.GetStringValue()));
                             break;
 
+                        case DropDownKey.ddlSubCategory:
+
+                            objData.Add(item, await GetSubLookupMasters(null, LookupTypeEnum.Product_Category.GetStringValue()));
+                            break;
+
+                        case DropDownKey.ddlSubLookupGroup:
+
+                            objData.Add(item, GetGroupSubLookupMasters(null, LookupTypeEnum.Product_Category.GetStringValue()));
+                            break;
+
 
 
                         default:
@@ -148,11 +158,11 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private async Task<object> GetSubLookupMasters(long[] lookupId = null)
+        private async Task<object> GetSubLookupMasters(long[] lookupId = null, string lktype = null)
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id, CategoryId=r.LookUpId, Category= r.LookUp.Name })
+                return await (from type in _db.TblSubLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && (lookupId.Length == 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id, CategoryId = r.LookUpId, Category = r.LookUp.Name })
                      .ToListAsync();
 
             }
@@ -162,12 +172,12 @@ namespace CMS.Service.Services.Common
                 return null;
             }
         }
-        private object GetGroupSubLookupMasters(long[] lookupId = null)
+        private object GetGroupSubLookupMasters(long[] lookupId = null, string lktype = null)
         {
             try
             {
 
-                return  _db.TblSubLookupMasters.Include(I => I.LookUp).Where(type => (lookupId.Length < 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted)
+                return _db.TblSubLookupMasters.Include(I => I.LookUp).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId.Length == 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted)
                     .ToList().GroupBy(x => x.LookUpId)
                       .Select(y => new
                       {

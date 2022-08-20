@@ -100,15 +100,24 @@ export class DropDownModel {
   ddlProductSize!: DropDownItem[];
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
-  ddlSubLookupGroup!: DropDownItem[];
+  ddlSubLookupGroup!: GroupDropDownItem[];
+
 }
 
 export class DropDownItem {
   Text: string = "";
   Value: string = "";
   CategoryId?: number;
-  Category:string;
+  Category: string;
 }
+
+export class GroupDropDownItem {
+  CategoryId: string = "";
+  Category: string = "";
+  Data: DropDownItem[];
+}
+
+
 export interface FilterDropDownPostModel {
   Key: string;
   FileterFromKey: string;

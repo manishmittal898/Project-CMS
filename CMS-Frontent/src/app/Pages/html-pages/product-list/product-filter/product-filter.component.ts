@@ -21,7 +21,7 @@ export class ProductFilterComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize]).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         debugger
@@ -29,7 +29,9 @@ export class ProductFilterComponent implements OnInit {
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
-        this.getSubLookUpDropDown();
+        this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
+
+        //  this.getSubLookUpDropDown();
       }
     });
   }
@@ -39,13 +41,13 @@ export class ProductFilterComponent implements OnInit {
     //if (this.filterModel.CategoryId.length > 0) {
     const ddlModel = {} as FilterDropDownPostModel;
     ddlModel.FileterFromKey = DropDown_key.ddlLookup
-    ddlModel.Key = DropDown_key.ddlSublookup
+    ddlModel.Key = DropDown_key.ddlSubLookupGroup
     ddlModel.Values = this.filterModel.CategoryId.length > 0 ? this.filterModel.CategoryId : [];
     this._commonService.GetFilterDropDown(ddlModel).subscribe(x => {
       if (x.IsSuccess) {
         debugger
         const ddls = x?.Data as DropDownModel;
-        this.dropDown.ddlSublookup = ddls.ddlSublookup
+        this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
       }
 
     });

@@ -40,8 +40,11 @@
           </ng-template>
         </ng-select>
 
+        <div class="product-filterItems-header mb-2" *ngIf="this.dropDown.ddlSubLookupGroup">
+          <h6 class="m-0 text-uppercase">Sub Category</h6>
+        </div>
         <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
-
+          <!--
           <div class="product-filterItems product-filterItems-w-checkbox mb-4">
             <div class="product-filterItems-header mb-2">
               <h6 class="m-0 text-uppercase">Sub Category</h6>
@@ -73,38 +76,38 @@
 
               </ng-select>
             </div>
-          </div>
+          </div> -->
 
 
-          <!-- <div class="accordion-item py-1 border-0">
+          <div class="accordion-item py-1 border-0"
+            *ngFor="let category Of  this.dropDown.ddlSubLookupGroup;let idx=index">
             <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#collapseOne">
-              Bedsheets
+              data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_'+idx">
+              {{category.Category}}
             </button>
-            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div id="collapse_{{idx}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body px-0 py-1">
-                <div class="d-flex align-items-center mb-1">
-                  <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" value="" id="Check5">
-                    <label class="form-check-label ms-2" for="Check5">
-                      Bedsheets
-                    </label>
-                  </div>
 
-                </div>
+
                 <div class="d-flex align-items-center mb-1">
+
                   <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" value="" id="Check6">
-                    <label class="form-check-label ms-2" for="Check6">
-                      Fitted Sheets
-                    </label>
+
+                    <div *ngFor="let item of category.Data" class="p-field-checkbox">
+                      <p-checkbox class="form-check-input" name="group2" value="item.Value" [value]="item.Value"
+                        [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
+
+                      </p-checkbox>
+                      <label class="form-check-label ms-2" [for]="item.Value">{{item.Text}}</label>
+
+                    </div>
                   </div>
 
                 </div>
 
               </div>
             </div>
-          </div> -->
+          </div>
 
         </div>
       </div>
