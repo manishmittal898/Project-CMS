@@ -598,11 +598,19 @@ input:focus-visible {
 }
 .home-hero-banner-content h1 {
     font-weight: 400;
-    font-size: 3.5rem;
+    font-size: 3.3rem;
+    max-width: 900px;
+    margin: auto;
+    text-transform: capitalize;
+    line-height: 65px;
 }
 .home-hero-banner-content p {
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.6;
+    font-weight: 100;
+    line-height: 25px;
+    max-width: 550px;
+    margin: auto;
 }
 .font-light
 {
