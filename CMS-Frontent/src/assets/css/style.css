@@ -1475,5 +1475,17 @@ pre {
 .ng-option.ng-option-disabled {
     color: red !important;
 }
+body .ui-chkbox {
+    position: relative;
+    top: -5px;
+}
 
+.p-field-checkbox .form-check-input {
+    border: none;
+}
+.p-field-checkbox .pi-check:before {
+    font-size: 10px;
+    position: relative;
+    top: -6px;
+}
 /* CUSTOM CSS END */

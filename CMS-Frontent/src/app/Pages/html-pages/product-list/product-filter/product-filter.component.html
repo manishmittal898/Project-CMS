@@ -29,7 +29,7 @@
           [multiple]="true" bindLabel="Text" [closeOnSelect]="false" bindValue="Value"
           [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory" (change)="getSubLookUpDropDown()">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" class="form-check-input" /> {{item.Text}}
           </ng-template>
           <ng-template ng-multi-label-tmp let-items="items">
             <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
@@ -40,7 +40,7 @@
           </ng-template>
         </ng-select>
 
-        <div class="product-filterItems-header mb-2" *ngIf="this.dropDown.ddlSubLookupGroup">
+        <div class="product-filterItems-header mb-2 mt-4" *ngIf="this.dropDown.ddlSubLookupGroup">
           <h6 class="m-0 text-uppercase">Sub Category</h6>
         </div>
         <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
@@ -98,7 +98,7 @@
                         [value]="item.Value" [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
 
                       </p-checkbox>
-                      <label class="form-check-label ms-2" [for]="item.Value">{{item.Text}}</label>
+                      <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
 
                     </div>
                   </div>
@@ -110,6 +110,8 @@
           </div>
 
         </div>
+
+
       </div>
     </div>
     <!-- Filter Category os sub Category End -->
@@ -145,7 +147,7 @@
       <div class="product-filterItems-header mb-2">
         <h6 class="m-0 text-uppercase">Price</h6>
       </div>
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between mb-2">
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[0]}}</label>
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[1]}}</label>
       </div>
