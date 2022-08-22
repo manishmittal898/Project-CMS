@@ -177,13 +177,13 @@ namespace CMS.Service.Services.Common
             try
             {
 
-                return _db.TblSubLookupMasters.Include(I => I.LookUp).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId.Length == 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted)
+                return _db.TblSubLookupMasters.Include(I => I.LookUp).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId == null || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted)
                     .ToList().GroupBy(x => x.LookUpId)
                       .Select(y => new
                       {
                           CategoryId = y.Key,
                           Category = y.FirstOrDefault().LookUp.Name,
-                          Data = y.Where(x=>!x.IsDeleted && x.IsActive.Value).Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                          Data = y.Select(x => new { Text = x.Name, Value = x.Id }).ToList()
                       }).ToList();
             }
             catch (Exception ex)

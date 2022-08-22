@@ -27,7 +27,7 @@
 
         <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory"
           [multiple]="true" bindLabel="Text" [closeOnSelect]="false" bindValue="Value"
-          [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory" (change)="getSubLookUpDropDown()">
+          [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
           </ng-template>
@@ -150,8 +150,9 @@
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[1]}}</label>
       </div>
 
-      <p-slider (onChange)="applyFilter()" [min]="50" [max]="10000" [(ngModel)]="this.filterModel.Price" [step]="100" [range]="true"></p-slider>
-        </div>
+      <p-slider (onChange)="applyFilter()" [min]="50" [max]="10000" [(ngModel)]="this.filterModel.Price" [step]="100"
+        [range]="true"></p-slider>
+    </div>
     <!-- Filter Price End -->
 
 

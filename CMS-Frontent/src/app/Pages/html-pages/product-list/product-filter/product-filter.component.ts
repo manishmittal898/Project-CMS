@@ -39,6 +39,7 @@ export class ProductFilterComponent implements OnInit {
   getSubLookUpDropDown() {
     debugger
     //if (this.filterModel.CategoryId.length > 0) {
+    this.dropDown.ddlSubLookupGroup = [];
     const ddlModel = {} as FilterDropDownPostModel;
     ddlModel.FileterFromKey = DropDown_key.ddlLookup
     ddlModel.Key = DropDown_key.ddlSubLookupGroup
