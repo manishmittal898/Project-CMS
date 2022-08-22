@@ -807,8 +807,8 @@ section.about-hero {
     padding: 50px 0px;
 }
 section.about-hero h1 {
-    font-size: 3rem;
-    font-weight: 400;
+    font-size: 3.4rem;
+    font-weight: 500;
     margin-bottom: 25px;
     line-height: 65px;
 }
@@ -853,7 +853,7 @@ section.about-hero p {
 }
 section.hero-design-1 h1 {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 500;
     max-width: 800px;
     line-height: 65px;
 }
