@@ -598,11 +598,19 @@ input:focus-visible {
 }
 .home-hero-banner-content h1 {
     font-weight: 400;
-    font-size: 3.5rem;
+    font-size: 3.3rem;
+    max-width: 900px;
+    margin: auto;
+    text-transform: capitalize;
+    line-height: 65px;
 }
 .home-hero-banner-content p {
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.6;
+    font-weight: 100;
+    line-height: 25px;
+    max-width: 550px;
+    margin: auto;
 }
 .font-light
 {
@@ -799,8 +807,8 @@ section.about-hero {
     padding: 50px 0px;
 }
 section.about-hero h1 {
-    font-size: 3rem;
-    font-weight: 400;
+    font-size: 3.4rem;
+    font-weight: 500;
     margin-bottom: 25px;
     line-height: 65px;
 }
@@ -845,7 +853,7 @@ section.about-hero p {
 }
 section.hero-design-1 h1 {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 500;
     max-width: 800px;
     line-height: 65px;
 }
