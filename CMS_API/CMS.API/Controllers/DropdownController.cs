@@ -25,10 +25,10 @@ namespace CMS.API.Controllers
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key)
+        [HttpPost("{isTransactionData}")]
+        public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key, bool isTransactionData = false)
         {
-            return await _common.GetDropDown(key);
+            return await _common.GetDropDown(key, isTransactionData);
         }
 
         [HttpPost]

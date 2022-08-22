@@ -11,9 +11,9 @@ export class CommonService {
 
   constructor(private readonly _baseService: BaseAPIService) { }
 
-  GetDropDown(key: string[]): Observable<ApiResponse<any>> {
+  GetDropDown(key: string[], isTransactionData = false): Observable<ApiResponse<any>> {
 
-    return this._baseService.post(this._baseService.API_Url.DropDown_Api, key);
+    return this._baseService.post(`${this._baseService.API_Url.DropDown_Api}/${isTransactionData}`, key);
   }
 
   GetFilterDropDown(model: FilterDropDownPostModel): Observable<ApiResponse<any>> {

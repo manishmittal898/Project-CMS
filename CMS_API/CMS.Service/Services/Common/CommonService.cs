@@ -23,7 +23,7 @@ namespace CMS.Service.Services.Common
             _db = db;
         }
 
-        public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key)
+        public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key, bool isTransactionData = false)
         {
             Dictionary<string, object> objData = new Dictionary<string, object>();
             try
@@ -47,7 +47,7 @@ namespace CMS.Service.Services.Common
                             break;
                         case DropDownKey.ddlCategory:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Category.GetStringValue()));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Category.GetStringValue(),isTransactionData));
                             break;
                         case DropDownKey.ddlCaptionTag:
 
@@ -142,11 +142,11 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private async Task<object> GetLookupMasters(string lktype = null)
+        private async Task<object> GetLookupMasters(string lktype = null, bool isTransactionData = false)
         {
             try
             {
-                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type).OrderBy(x => x.SortedOrder)
+                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete && (!isTransactionData || (isTransactionData && type.TblProductMasterCategories.Any(x => x.Category.Id == type.Id))) select type).OrderBy(x => x.SortedOrder)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
 

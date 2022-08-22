@@ -25,11 +25,12 @@
       <div class="product-filterItems-body">
 
 
-        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlCategory"
-          [multiple]="true" bindLabel="Text" [closeOnSelect]="false" bindValue="Value"
-          [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
+        <ng-select (change)="updateSubCategoryData();applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" class="form-check-input" /> {{item.Text}}
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" class="form-check-input" />
+            {{item.Text}}
           </ng-template>
           <ng-template ng-multi-label-tmp let-items="items">
             <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
@@ -39,62 +40,26 @@
             </div>
           </ng-template>
         </ng-select>
-
-        <div class="product-filterItems-header mb-2 mt-4" *ngIf="this.dropDown.ddlSubLookupGroup">
+        <div class="product-filterItems-header mb-2 mt-4" *ngIf="subCategory?.length>0">
           <h6 class="m-0 text-uppercase">Sub Category</h6>
         </div>
         <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
-          <!--
-          <div class="product-filterItems product-filterItems-w-checkbox mb-4">
-            <div class="product-filterItems-header mb-2">
-              <h6 class="m-0 text-uppercase">Sub Category</h6>
-            </div>
-            <div class="product-filterItems-body">
-              <ng-select [isOpen]="true" class="ng-select-open" [items]="this.dropDown.ddlSublookup" [multiple]="true"
-                bindLabel="Text" [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.SubCategoryId"
-                placeholder="Find Sub Categoory" groupBy="Category" [selectableGroup]="true"
-                [selectableGroupAsModel]="false">
-                <div class="data-div">
-                  <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
-                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Category |
-                    uppercase}}
-                  </ng-template>
 
-                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.Text}}
-                  </ng-template>
-                </div>
-
-
-                <ng-template ng-multi-label-tmp let-items="items">
-                  <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
-                    {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
-                  <div class="ng-value" *ngIf="items.length > 2">
-                    <span class="ng-value-label">{{items.length - 2}} more...</span>
-                  </div>
-                </ng-template>
-
-              </ng-select>
-            </div>
-          </div> -->
-
-
-          <div class="accordion-item border-0"
-            *ngFor="let category Of  this.dropDown.ddlSubLookupGroup;let idx=index">
+          <div class="accordion-item border-0" *ngFor="let category Of subCategory;let idx=index">
             <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed" type="button"
               data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_'+idx">
               {{category.Category}}
             </button>
             <div id="collapse_{{idx}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body pt-1 px-0 pb-0">
-                  <div class="form-check">
-                    <div *ngFor="let item of category.Data" class="p-field-checkbox mb-1">
-                      <p-checkbox (change)="applyFilter()" class="form-check-input" name="group2" value="item.Value"
-                        [value]="item.Value" [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
-                      </p-checkbox>
-                      <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
-                    </div>
+                <div class="form-check">
+                  <div *ngFor="let item of category.Data" class="p-field-checkbox mb-1">
+                    <p-checkbox (change)="applyFilter()" class="form-check-input" name="group2" value="item.Value"
+                      [value]="item.Value" [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
+                    </p-checkbox>
+                    <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
                   </div>
+                </div>
               </div>
             </div>
           </div>

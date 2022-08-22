@@ -13,6 +13,9 @@ export class ProductFilterComponent implements OnInit {
   @Input() filterModel: ProductFilterModel = new ProductFilterModel();
   @Output() onFilterChange = new EventEmitter<ProductFilterModel>();
   dropDown = new DropDownModel();
+  get subCategory() {
+    return this.dropDown?.ddlSubLookupGroup?.filter(x => this.filterModel.CategoryId.includes(Number(x.CategoryId))) ?? [];
+  }
   constructor(private _commonService: CommonService) { }
 
   ngOnInit(): void {
@@ -21,10 +24,9 @@ export class ProductFilterComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup]).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
@@ -37,7 +39,6 @@ export class ProductFilterComponent implements OnInit {
   }
 
   getSubLookUpDropDown() {
-    debugger
     //if (this.filterModel.CategoryId.length > 0) {
     this.dropDown.ddlSubLookupGroup = [];
     const ddlModel = {} as FilterDropDownPostModel;
@@ -46,7 +47,6 @@ export class ProductFilterComponent implements OnInit {
     ddlModel.Values = this.filterModel.CategoryId.length > 0 ? this.filterModel.CategoryId : [];
     this._commonService.GetFilterDropDown(ddlModel).subscribe(x => {
       if (x.IsSuccess) {
-        debugger
         const ddls = x?.Data as DropDownModel;
         this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
       }
@@ -55,6 +55,11 @@ export class ProductFilterComponent implements OnInit {
     // } else {
     //   this.dropDown.ddlSubLookupGroup = [];
     // }
+  }
+  updateSubCategoryData() {
+    let j = [];
+    this.subCategory?.forEach(x => x?.Data?.forEach(s => { j.push(s.Value) }));
+    this.filterModel.SubCategoryId = this.filterModel?.SubCategoryId?.filter(x => j.includes(x)) ?? [];
   }
 
   applyFilter() {
