@@ -1500,5 +1500,12 @@ body .ui-chkbox {
   width: 15px !important;
   height: 15px !important;
 }
+body .ui-slider .ui-slider-range {
+    background: #d5d5d5 !important;
+}
+.ngx-pagination .current
+{
+    background: var(--primary-color) !important;
+}
 /* CUSTOM CSS END */
 
