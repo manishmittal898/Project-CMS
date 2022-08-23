@@ -19,13 +19,16 @@ const routes: Routes = [
       component: ProductListComponent, path: 'product'
     },
     {
+      component: ProductListComponent, path: 'products/:name'
+    },
+    {
       component: ProductDetailComponent, path: 'product/:id'
     },
     {
       component: ProductDetailComponent, path: 'product/:name/:id'
     }
 
-  ]
+    ]
   }
 
 ];
