@@ -1507,5 +1507,8 @@ body .ui-slider .ui-slider-range {
 {
     background: var(--primary-color) !important;
 }
+.navbar-expand-lg .navbar-nav .nav-link i.bi.bi-house-door {
+    font-size: 20px;
+}
 /* CUSTOM CSS END */
 
