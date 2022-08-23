@@ -20,8 +20,8 @@ Text Domain:  StoreOne
     --yellow-color: #fa930c;
     --gray-color: #394640;
     --bg-color: #efede6;
-    --primary-color: #000;
-    --secondary-color: #dddddd;
+    --primary-color: #000 !important;
+    --secondary-color: #dddddd !important;
     /* Font/text values */
     --font-style-normal: normal;
     --font-style-italic: italic;
@@ -1487,6 +1487,18 @@ body .ui-chkbox {
     font-size: 10px;
     position: relative;
     top: -6px;
+}
+body .ui-chkbox .ui-chkbox-box {
+  height: 15px !important;
+  width: 15px !important;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active:not(.ui-state-disabled):hover, body .ui-chkbox .ui-chkbox-box.ui-state-active {
+  border-color: #000 !important;
+  background-color: #000000 !important;
+}
+body .ui-chkbox {
+  width: 15px !important;
+  height: 15px !important;
 }
 /* CUSTOM CSS END */
 
