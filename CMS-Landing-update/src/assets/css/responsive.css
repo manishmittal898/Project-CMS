@@ -1,0 +1,329 @@
+/* RESPONSIVE START */
+
+@media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: none;
+    }
+    .navbar .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+}
+
+
+
+@media screen and (max-width:1300px) {
+    .home-features-info h1 {
+        font-size: 2.5rem;
+        line-height: 50px;
+    }
+    .home-features-info h5 {
+        margin-bottom: 20px;
+        font-size: 1rem;
+        line-height: 25px;
+    }
+    .carousel-caption h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    .home-features-info li {
+        font-size: 2rem;
+        padding-bottom: 15px;
+    }
+    .page-about-benefits-img img {
+        max-height: 300px;
+    }
+    .page-about-big-info h1 {
+        font-size: 2.5rem;
+        line-height: 55px;
+        margin-bottom: 30px;
+    }
+    .page-about-big-info p {
+        font-size: 20px;
+        line-height: 35px;
+    }
+    section.about-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 500;
+        line-height: 52px;
+    }
+    section.about-hero p {
+        font-size: 16px;
+        line-height: 30px;
+    }
+}
+@media screen and (max-width:1120px) {
+    .home-hero-banner-content h1 {
+        font-size: 3rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+        line-height: 50px;
+        margin-bottom: 20px;
+    }
+    .home-about-1 p {
+        font-size: 1.2rem;
+        line-height: 35px;
+    }
+    .home-features-info {
+        max-width: 100%;
+        padding: 0px 20px;
+    }
+    .home-features-info h1 {
+        font-size: 2rem;
+        line-height: 40px;
+    }
+    section.call-to-action h1 {
+        font-size: 2.5rem;
+        line-height: 55px;
+    }
+    section.call-to-action h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 100%;
+    }
+    .navbar-nav li a {
+        padding: 10px 15px !important;
+        color: #fff !important;
+        border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+    }
+    .navbar-nav li:last-child a {
+        border: solid 1px var(--primary-color);
+        box-shadow: none;
+    }
+    .navbar-nav li.active a,
+    .navbar-nav li.active a {
+        color: #85afff !important;
+    }
+    .topbar a {
+        font-size: 12px;
+        margin-left: 4px;
+    }
+    .navbar-collapse {
+        position: fixed;
+        top: 0px;
+        right: 0;
+        padding: 15px;
+        width: 35%;
+        height: 100%;
+        overflow: auto;
+        z-index: 9999999;
+        padding: 0px;
+    }
+    .navbar-collapse.collapsing {
+        right: -75%;
+        transition: height 0s ease;
+    }
+    .navbar-collapse.show {
+        right: 0;
+        transition: right 300ms ease-in-out;
+    }
+    .navbar-collapse {
+        background: var(--secondary-color);
+    }
+    .navbar-toggler.collapsed~.navbar-collapse {
+        transition: right 500ms ease-in-out;
+    }
+    .navbar-toggler {
+        padding: 0px;
+        border: none;
+    }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+    .navbar-toggler-icon {
+        width: auto;
+        height: auto;
+        background-image: none !important;
+    }
+    .navbar-toggler-icon i {
+        font-size: 30px;
+        color: #000;
+    }
+
+    .navbar-nav li {
+        width: 100%;
+    }
+    /* section.call-to-action {
+        margin-top: 0px;
+    } */
+}
+
+@media screen and (min-width:767px) {}
+
+@media screen and (max-width:1500px) {}
+
+@media screen and (max-width:1200px) {}
+
+@media screen and (max-width:1078px) {}
+
+@media screen and (max-width:992px) {}
+
+@media (max-width: 1024px) {
+    .product-list-items-img {
+        height: 235px;
+    }
+    .product-list-info h3 {
+        font-size: 16px;
+    }
+    .product-list-info p {
+        font-size: 15px;
+    }
+}
+@media screen and (min-width:767px)
+{
+    footer .collapse:not(.show) {
+        display: block;
+    }
+    footer .accordion-button::after
+    {
+        display: none;
+    }
+    .aside-category {
+      display: block !important;
+      transform: none;
+      position: static;
+      width: auto;
+      visibility: visible;
+  }
+
+}
+@media screen and (max-width:767px) {
+  .aside-category {
+    box-shadow: none;
+    background: #fff;
+    border-radius: 0px;
+    width: 80%;
+    display: inline-block;
+    overflow: auto;
+}
+    .open-advance-filter {
+        max-width: 88%;
+    }
+    .navbar-collapse {
+        width: 50%;
+    }
+    .section-title {
+        font-size: 28px;
+        line-height: 35px;
+        margin-bottom: 35px !important;
+    }
+    footer h4 {
+        margin-top: 30px;
+    }
+
+
+    footer .container {
+        padding: 25px 20px;
+    }
+    footer h4, footer .accordion-button {
+        font-size: 17px;
+        margin: 0px;
+    }
+    .home-category-d-1 .home-category-items-img {
+        height: auto;
+    }
+    .home-category-d-1 .home-category-items-img img {
+        max-height: 200px;
+    }
+    .home-category-d-1 .home-category-items-caption {
+        font-size: 16px;
+    }
+    .product-list-items-img {
+        height: auto;
+        overflow: hidden;
+    }
+    .product-list-info h3 {
+        font-size: 16px;
+    }
+    .product-list-info p {
+        font-size: 14px;
+    }
+    .product-list-search input, .product-list-search input:focus {
+        min-width: 100%;
+    }
+    .home-hero-banner-content h1 {
+        font-size: 2rem;
+        line-height: 45px;
+    }
+    .home-hero-banner-content p {
+        font-size: 15px;
+        opacity: 0.6;
+    }
+    .home-about-1 {
+        padding: 50px 0px;
+    }
+    .home-about-1 p {
+        font-size: 1rem;
+        line-height: 30px;
+    }
+    .home-features-info li {
+        font-size: 1.5rem;
+    }
+    section.call-to-action h1 {
+        font-size: 2rem;
+        line-height: 50px;
+    }
+    section.call-to-action h1 br {
+        display: none;
+    }
+    section.why-choose {
+        padding: 50px 0px;
+    }
+    .page-about-big-info h1 {
+        font-size: 2rem;
+        line-height: 50px;
+        margin-bottom: 20px;
+    }
+    .page-about-big-info p {
+        font-size: 18px;
+        line-height: 32px;
+    }
+    .page-about-benefits-info h1 {
+        font-size: 2rem;
+    }
+    .page-about-benefits-info p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+    section.hero-design-1 h1 {
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 60px;
+    }
+    section.hero-design-1 {
+        padding: 35px 0px;
+    }
+    .page-website-info p {
+        line-height: 30px;
+        font-size: 16px;
+    }
+    .page-website-info h2 {
+        line-height: 42px;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .navbar-collapse {
+        width: 75%;
+    }
+    section.mini-footer-link a {
+        margin: 10px;
+        display: block;
+    }
+    .pricing-card-body h1 {
+        font-size: 3rem;
+    }
+    section.call-to-action {
+        margin-top: 50px;
+    }
+}
+
+
+/* RESPONSIVE END */
