@@ -964,4 +964,12 @@ span.font-fam-none {
     padding-bottom: 10px;
     color: #6E6E6E;
 }
+.contact-info-list p a {
+  font-weight: 500;
+  color: #192c99;
+}
+.contact-info-list p {
+  font-size: 16px;
+  font-weight: 300;
+}
 /* CUSTOM CSS END */
