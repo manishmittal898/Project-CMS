@@ -25,10 +25,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
   constructor(private readonly _productService: ProductService) {
     this.indexModel.CategoryId = [Number(this.CategoryId)];
   }
-  get ids() {
-    return this.productModel?.map(x => { return x.Id });
-
-  }
+ 
   ngOnChanges(changes: SimpleChanges): void {
 
     if (changes && changes?.CategoryId?.currentValue != changes?.CategoryId?.previousValue) {

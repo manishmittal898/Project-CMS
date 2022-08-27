@@ -465,7 +465,7 @@
 
             } else {
 
-                _.$prevArrow?.add( _.$nextArrow )
+                _.$prevArrow.add( _.$nextArrow )
 
                     .addClass('slick-hidden')
                     .attr({
@@ -1304,7 +1304,7 @@
                     return (val >= 0) && (val < _.slideCount);
                 });
 
-        _.$slides?.add(_.$slideTrack.find('.slick-cloned')).attr({
+        _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
             'aria-hidden': 'true',
             'tabindex': '-1'
         }).find('a, input, button, select').attr({
@@ -1597,8 +1597,8 @@
 
             for (var i = 0; i < _.options.slidesToScroll; i++) {
                 if (prevSlide < 0) prevSlide = _.slideCount - 1;
-                loadRange = loadRange?.add($slides.eq(prevSlide));
-                loadRange = loadRange?.add($slides.eq(nextSlide));
+                loadRange = loadRange.add($slides.eq(prevSlide));
+                loadRange = loadRange.add($slides.eq(nextSlide));
                 prevSlide--;
                 nextSlide++;
             }
@@ -2552,10 +2552,10 @@
         if ( _.options.asNavFor ) {
 
             navTarget = _.getNavTarget();
-            navTarget = navTarget?.slick('getSlick');
+            navTarget = navTarget.slick('getSlick');
 
-            if ( navTarget?.slideCount <= navTarget?.options?.slidesToShow ) {
-                navTarget?.setSlideClasses(_.currentSlide);
+            if ( navTarget.slideCount <= navTarget.options.slidesToShow ) {
+                navTarget.setSlideClasses(_.currentSlide);
             }
 
         }
