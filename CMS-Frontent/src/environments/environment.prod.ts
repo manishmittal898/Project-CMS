@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiEndPoint: "http://api.storeone.co.in/api/",
-  sitePath:'http://storeone.co.in/'
+  apiEndPoint: "https://api.storeone.co.in/api/",
+  sitePath: 'https://demo.storeone.co.in/'
 };
