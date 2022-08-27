@@ -7,7 +7,7 @@ import { ProductFilterModel, ProductMasterViewModel, ProductService } from 'src/
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
+  pageName = 'Store'
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
@@ -15,6 +15,11 @@ export class ProductListComponent implements OnInit {
     if (this._router.snapshot?.queryParams?.id) {
       this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
     }
+
+    if (this._router.snapshot.params?.name) {
+      this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
+    }
+
   }
 
   ngOnInit(): void {

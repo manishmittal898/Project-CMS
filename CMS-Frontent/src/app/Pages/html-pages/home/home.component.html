@@ -53,7 +53,7 @@
       <ng-container *ngFor="let itm of model">
         <!-- Home Category Start -->
         <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 font-fam-newsreader">
-          <a href="javascript:void()" [routerLink]="'/products/'+itm.Name.split(' ').join('')"
+          <a href="javascript:void()" [routerLink]="'/products/'+itm.Name.split(' ').join('_')"
             [queryParams]="{id: itm.Id}" class="home-category-items text-center">
             <div class="home-category-items-img d-flex align-items-center">
               <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.svg"' alt="" />

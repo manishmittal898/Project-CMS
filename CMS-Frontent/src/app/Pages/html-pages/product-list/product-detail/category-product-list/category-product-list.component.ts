@@ -13,13 +13,20 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
+  productModel: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
-  get productModel() {
-    return this.model.filter(x => x.Id != this.ExcludeId);
-  }
-  constructor(private readonly _productService: ProductService) {
+  isLoading = false;
+  // get productModel() {
+  //   this.isLoading = true;
+  //   this.AddSlider();
+  //   return this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
 
+  // }
+  constructor(private readonly _productService: ProductService) {
     this.indexModel.CategoryId = [Number(this.CategoryId)];
+  }
+  get ids() {
+    return this.productModel?.map(x => { return x.Id });
 
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -28,72 +35,86 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
       this.getList();
     }
 
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+    if (changes && changes?.ExcludeId?.currentValue != changes?.ExcludeId?.previousValue) {
+      this.isLoading = true;
+      setTimeout(() => {
+        this.bindRelatedList();
 
+      }, 10);
+    }
   }
 
   ngOnInit(): void {
     this.getList();
   }
   getList() {
+    this.isLoading = true;
+
     if (this.CategoryId > 0) {
       this.indexModel.CategoryId = [Number(this.CategoryId)];
       this._productService.GetList(this.indexModel).subscribe(response => {
-        debugger
         if (response.IsSuccess) {
           this.model = response.Data;
           this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId > 0 ? 1 : 0) : 0) as number;
-             setTimeout(() => {
-      this.AddSlider();
-    }, 50);
+          this.bindRelatedList();
+
         }
       });
     }
 
   }
+  bindRelatedList() {
+    this.productModel = this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
+    this.isLoading = false;
+     this.AddSlider();
 
+  }
   AddSlider() {
-    $('.slider-items-4').slick({
-      dots: true,
-      infinite: true,
-      speed: 1000,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      responsive: [{
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+    this.isLoading = false;
+
+    setTimeout(() => {
+      $('.slider-items-4')?.slick({
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [{
+          breakpoint: 1600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
         }
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-      ]
-    });
+        ]
+      });
+    }, 50);
+
   }
 
 }

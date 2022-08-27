@@ -962,7 +962,7 @@ input:focus-visible {
 }
 
 @media screen and (max-width:1024px) {
-    .product-lsit-slider {
+    .product-list-slider {
         margin: 0px 25px;
     }
 }
@@ -970,7 +970,7 @@ input:focus-visible {
 
 /* Slick Slider End */
 
-.product-lsit-slider .slick-slide {
+.product-list-slider .slick-slide {
     padding: 10px 0px;
 }
 

@@ -1,21 +1,24 @@
 <!-- Related Product Start -->
 <div class="col-lg-12 mt-5 section-related" *ngIf="this.totalRecords>0">
-  <div class="col-lg-12 text-center section-title"> Related Products</div>
-  <section class="slider-items-4 product-lsit-slider">
-    <ng-container *ngFor="let item of productModel">
-      <div>
-        <a href="javascript:void(0)" routerLink="/product/{{item.Name.split(' ').join('-')}}/{{item.Id}}"
-          class="product-list-items">
+  <div class="col-lg-12 text-center section-title"> Related Products {{ids}}</div>
+  <ng-container *ngIf="!isLoading">
+    <section class="slider-items-4 product-list-slider">
+      <ng-container *ngFor="let item of productModel">
+        <div [routerLink]="'/product/'+item?.Category?.split(' ').join('_')+'/'+item?.Id" class="product-list-items">
+
           <div class="product-list-items-img d-flex align-items-center justify-content-center">
-            <img [src]="item.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" />
+            <img [src]="item?.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" />
           </div>
           <div class="product-list-info">
-            <h3>{{item.Name}}</h3>
-            <p>₹ {{item.Price}}</p>
+            <h3>{{item?.Name}}</h3>
+            <p>₹ {{item?.Price}}</p>
           </div>
-        </a>
-      </div>
-    </ng-container>
-  </section>
+
+        </div>
+      </ng-container>
+    </section>
+  </ng-container>
+
+
 </div>
 <!-- Related Product End -->

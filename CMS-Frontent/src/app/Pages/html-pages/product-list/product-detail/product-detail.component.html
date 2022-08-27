@@ -5,8 +5,8 @@
       <div class="col-lg-12">
         <ol class="breadcrumb m-0">
           <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/product">{{model?.Name}}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/product">{{model?.Category}}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{model?.Name}}</li>
         </ol>
       </div>
     </div>
@@ -18,12 +18,12 @@
 <!-- Product Details Start -->
 <Section class="product-details py-5">
   <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="!isLoading">
       <div class="col-md-5">
         <!-- Product Detail Slider Start -->
         <div class="position-relative">
           <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div>
-          <div class="product-d-main-slider">
+          <div [ngClass]="'product-d-main-slider'">
             <div class="product-d-main-slider-items">
               <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
             </div>
@@ -33,7 +33,7 @@
           </div>
         </div>
 
-        <div class="product-d-main-slider-nav mt-2">
+        <div [ngClass]="'product-d-main-slider-nav'" class="mt-2">
           <div class="product-d-main-slider-nav-items">
             <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.svg'">
           </div>
@@ -91,6 +91,11 @@
         </div>
       </div>
       <app-category-product-list [CategoryId]="model.CategoryId" [ExcludeId]="recordId"></app-category-product-list>
+    </div>
+    <div class="row" *ngIf="isLoading">
+      <div class="col-sm-12">
+        Loading..
+      </div>
     </div>
   </div>
 </Section>
