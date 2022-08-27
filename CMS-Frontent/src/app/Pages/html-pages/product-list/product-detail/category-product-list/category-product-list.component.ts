@@ -44,7 +44,9 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         if (response.IsSuccess) {
           this.model = response.Data;
           this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId > 0 ? 1 : 0) : 0) as number;
-          this.AddSlider();
+             setTimeout(() => {
+      this.AddSlider();
+    }, 50);
         }
       });
     }
