@@ -47,7 +47,6 @@ body {
     font-weight: 400;
     font-size: 14px;
     overflow-x: hidden;
-    background: url(../images/pattern1.png);
 }
 
 * {
@@ -537,6 +536,7 @@ header {
     background: #fff;
     transition: all .5s ease-in-out;
     /* transform: translatey(-80px); */
+    box-shadow: 0 0 20px #e9e9e9;
 }
 
 header.header-fix {
@@ -963,5 +963,16 @@ span.font-fam-none {
     font-size: 16px;
     padding-bottom: 10px;
     color: #6E6E6E;
+}
+.contact-info-list p a {
+  font-weight: 500;
+  color: #192c99;
+}
+.contact-info-list p {
+  font-size: 16px;
+  font-weight: 300;
+}
+.why-choose-items img {
+  width: 70px;
 }
 /* CUSTOM CSS END */

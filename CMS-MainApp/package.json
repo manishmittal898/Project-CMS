@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "Build Prod": "ng b --configuration production --baseHref=/"
   },
   "private": true,
   "dependencies": {
@@ -18,17 +19,19 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
+    "aos": "^2.3.4",
     "crypto-js": "^4.1.1",
+    "ngx-toastr": "^14.1.3",
+    "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.7",
-    "ngx-toastr": "^14.1.3"
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.6",
     "@angular/cli": "~12.2.6",
     "@angular/compiler-cli": "~12.2.0",
+    "@types/crypto-js": "^4.0.2",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",
@@ -37,7 +40,6 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.3.5",
-    "@types/crypto-js": "^4.0.2"
+    "typescript": "~4.3.5"
   }
 }

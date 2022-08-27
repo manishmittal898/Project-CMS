@@ -30,9 +30,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/responsive.css",
+              "node_modules/aos/dist/aos.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/bootstrap-icons.css",
+              "src/assets/css/slick-theme.css",
+              "src/assets/css/slick.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/slick.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "node_modules/aos/dist/aos.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/slider_custom.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -97,9 +112,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/responsive.css",
+              "node_modules/aos/dist/aos.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/bootstrap-icons.css",
+              "src/assets/css/slick-theme.css",
+              "src/assets/css/slick.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/slick.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "node_modules/aos/dist/aos.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/slider_custom.js"
+            ]
           }
         }
       }
