@@ -431,8 +431,8 @@ namespace CMS.Service.Services.ProductMaster
             {
 
 
-                var result = (from lkType in _db.TblProductMasters
-                              where !lkType.IsDelete && lkType.IsActive.Value && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
+                var result = (from lkType in _db.TblProductMasters 
+                              where !lkType.IsDelete && lkType.IsActive.Value && !lkType.Category.IsDelete && !lkType.Category.IsActive==true && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
                               select lkType.Category).Distinct();
                 switch (model.OrderBy)
                 {

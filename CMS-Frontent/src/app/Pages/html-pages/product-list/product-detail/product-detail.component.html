@@ -85,12 +85,12 @@
             </ul>
           </div>
           <div class="btn-share-whatsapp">
-            <a [href]="shareLink" data-action="share/whatsapp/share"><i
-                class="bi bi-whatsapp"></i> Share via Whatsapp</a>
+            <a [href]="shareLink" data-action="share/whatsapp/share"><i class="bi bi-whatsapp"></i> Share via
+              Whatsapp</a>
           </div>
         </div>
       </div>
-      <app-category-product-list></app-category-product-list>
+      <app-category-product-list [CategoryId]="model.CategoryId" [ExcludeId]="recordId"></app-category-product-list>
     </div>
   </div>
 </Section>

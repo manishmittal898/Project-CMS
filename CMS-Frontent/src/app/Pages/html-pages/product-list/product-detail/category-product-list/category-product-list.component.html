@@ -1,95 +1,20 @@
-      <!-- Related Product Start -->
-      <div class="col-lg-12 mt-5 section-related">
-        <div class="col-lg-12 text-center section-title"> Related Products </div>
-        <section class="slider-items-4 product-lsit-slider">
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 1</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 2</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 3</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 4</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 5</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 6</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 7</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="product-details.html" class="product-list-items">
-              <div class="product-list-items-img d-flex align-items-center justify-content-center">
-                <img src="assets/images/no-img.svg" alt="" />
-              </div>
-              <div class="product-list-info">
-                <h3>Product name 8</h3>
-                <p>₹ 975</p>
-              </div>
-            </a>
-          </div>
-        </section>
-      </div>
-      <!-- Related Product End -->
+<!-- Related Product Start -->
+<div class="col-lg-12 mt-5 section-related" *ngIf="this.totalRecords>0">
+  <div class="col-lg-12 text-center section-title"> Related Products </div>
+  <section class="slider-items-4 product-lsit-slider">
+    <div *ngFor="let item of model">
+      <a href="javascript:void(0)" routerLink="/product/{{item.Name.split(' ').join('-')}}/{{item.Id}}"
+        class="product-list-items">
+        <div class="product-list-items-img d-flex align-items-center justify-content-center">
+          <img [src]="item.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" />
+        </div>
+        <div class="product-list-info">
+          <h3>{{item.Name}}</h3>
+          <p>₹ {{item.Price}}</p>
+        </div>
+      </a>
+    </div>
+
+  </section>
+</div>
+<!-- Related Product End -->
