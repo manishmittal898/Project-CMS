@@ -307,6 +307,9 @@
     .page-website-info h2 {
         line-height: 42px;
     }
+    .home-hero-banner-img img {
+      margin-bottom: -22px;
+  }
 }
 
 @media screen and (max-width:575px) {

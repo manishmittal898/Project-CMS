@@ -634,7 +634,8 @@ background-size: cover;
     line-height: 45px;
 }
 .home-hero-banner-img img {
-    max-width: 75%;
+  max-width: 75%;
+  margin-bottom: -43px;
 }
 section.why-choose {
     padding: 80px 0px;
