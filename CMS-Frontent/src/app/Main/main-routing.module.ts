@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
-import { MainPageComponent } from './main-page.component';
+import { MainComponent } from './main.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainPageComponent,
+    component: MainComponent,
     children: [{
       component: HomeComponent, path: ''
     },
@@ -16,16 +16,16 @@ const routes: Routes = [
       component: HomeComponent, path: 'home'
     },
     {
-      component: ProductListComponent, path: 'product'
+      component: ProductListComponent, path: 'store'
     },
     {
-      component: ProductListComponent, path: 'products/:name'
+      component: ProductListComponent, path: 'store/:name'
     },
     {
-      component: ProductDetailComponent, path: 'product/:id'
+      component: ProductDetailComponent, path: 'store/:id'
     },
     {
-      component: ProductDetailComponent, path: 'product/:name/:id'
+      component: ProductDetailComponent, path: 'store/:name/:id'
     }
 
     ]
@@ -37,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HtmlPagesRoutingModule { }
+export class MainRoutingModule { }

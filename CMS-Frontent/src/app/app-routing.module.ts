@@ -5,7 +5,7 @@ import { HtmlComponent } from './Shared/Page/html/html.component';
 const routes: Routes = [
   {
     path: "",
-    loadChildren: () => import("./Pages/html-pages/html-pages.module").then(m => m.HtmlPagesModule)
+    loadChildren: () => import("./Main/main.module").then(m => m.MainModule)
   },
   { path: 'html-page', component: HtmlComponent },
   { path: '', redirectTo: '', pathMatch: 'full' },
