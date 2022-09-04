@@ -54,7 +54,7 @@
               <div class="accordion-body pt-1 px-0 pb-0">
                 <div class="form-check">
                   <div *ngFor="let item of category.Data" class="p-field-checkbox mb-1">
-                    <p-checkbox (change)="applyFilter()" class="form-check-input" name="group2" value="item.Value"
+                    <p-checkbox (change)="applyFilter();" class="form-check-input" name="group2" value="item.Value"
                       [value]="item.Value" [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
                     </p-checkbox>
                     <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
