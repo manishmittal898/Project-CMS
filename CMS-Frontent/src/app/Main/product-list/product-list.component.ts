@@ -15,21 +15,29 @@ export class ProductListComponent implements OnInit {
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
   constructor(private readonly _productService: ProductService, private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer) {
-    if (this._router.snapshot?.queryParams?.id) {
-      this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
-    }
-    if (this._router.snapshot?.queryParams?.subid) {
-      this.indexModel.SubCategoryId = [Number(this._router.snapshot.queryParams.subid)];
-    }
 
-    if (this._router.snapshot.params?.name) {
-      this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
-    }
+
 
   }
 
   ngOnInit(): void {
-    this.getList();
+    this._router.queryParams.subscribe(p => {
+      if (p.id) {
+        this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
+        this.indexModel.SubCategoryId = null;
+      }
+      if (p.subid) {
+        this.indexModel.SubCategoryId = [Number(this._router.snapshot.queryParams.subid)];
+      }
+
+      if (this._router.snapshot.params?.name) {
+        this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
+      }
+      this.getList();
+
+    }); // you can also do this in ngOnInit
+
+
   }
 
   onSearch(data) {
@@ -46,8 +54,8 @@ export class ProductListComponent implements OnInit {
       }
     })
   }
-  safeURL(dataItem : ProductMasterViewModel){
-   return this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${dataItem.Name.split(' ').join('-')}/${dataItem.Id}`);
+  safeURL(dataItem: ProductMasterViewModel) {
+    return this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${dataItem.Name.split(' ').join('-')}/${dataItem.Id}`);
   }
 
 }
