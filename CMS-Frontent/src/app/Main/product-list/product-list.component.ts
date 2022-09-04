@@ -18,6 +18,9 @@ export class ProductListComponent implements OnInit {
     if (this._router.snapshot?.queryParams?.id) {
       this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
     }
+    if (this._router.snapshot?.queryParams?.subid) {
+      this.indexModel.SubCategoryId = [Number(this._router.snapshot.queryParams.subid)];
+    }
 
     if (this._router.snapshot.params?.name) {
       this.pageName = this._router.snapshot.params?.name.split('_').join(' ');

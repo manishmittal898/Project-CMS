@@ -28,6 +28,7 @@ const routes: Routes = [
       component: ProductDetailComponent, path: 'store/:name/:id'
     }
 
+
     ]
   }
 
