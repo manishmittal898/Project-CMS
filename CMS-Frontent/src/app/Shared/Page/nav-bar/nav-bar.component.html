@@ -66,7 +66,7 @@
                 </a>
                 <ul class="dropdown-menu megamenu">
                   <div class="container px-2">
-                    <div class="row m-0 py-2">
+                    <div class="row m-0 py-2" id="NavCollections">
 
                       <div class="col-lg-3" *ngFor="let item of this.menuModel;let ind=index">
                         <button class="accordion-button collapsed" type="button" attr.data-bs-toggle="collapse"
@@ -76,12 +76,13 @@
                           {{item.Category}}
                         </button>
                         <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'Footer1'+ind"
-                          data-bs-parent="#MainNavBar">
+                          data-bs-parent="#NavCollections">
                           <li><a class="dropdown-item" href="javascript:void()" [routerLink]="['store/'+item.Category.split(' ').join('_')]"
                               [queryParams]="{id:item.CategoryId, subid: sitem.Value}" href="#">{{sitem.Text}}</a></li>
 
                         </ul>
                       </div>
+
 
                     </div>
                   </div>
