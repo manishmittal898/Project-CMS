@@ -1168,7 +1168,8 @@ select:focus-visible {
     position: absolute;
     background: #c50d00;
     top: 12px;
-    left: -8px;
+    /* left: -8px; */
+    left: 0px;
     z-index: 9;
     padding: 1px 6px;
     color: #fff;
