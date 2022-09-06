@@ -901,17 +901,17 @@ input:focus-visible {
 
 .product-list-hover {
     position: absolute;
-    bottom: 0;
+    top: 0px;
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
     left: 0;
     text-align: center;
     padding: 4px;
-    transform: translateY(35px);
+    transform: translateY(-60px);
     transition: transform .3s ease-in-out;
 }
 
-.product-list-items:hover .product-list-hover {
+.product-list-hover-items-outside:hover .product-list-hover {
     display: block;
     transform: translateY(0px);
 }
