@@ -4742,6 +4742,9 @@ td.mat-footer-cell:last-of-type {
   transform: rotate(180deg);
 } */
 
+.breadcrum-action-btn {
+  font-size: 18px;
+}
 
 /* Manish CSS End */
 
