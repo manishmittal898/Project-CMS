@@ -20,7 +20,7 @@ Text Domain:  StoreOne
     --yellow-color: #fa930c;
     --gray-color: #394640;
     --bg-color: #efede6;
-    --primary-color: #161f4e !important;
+    --primary-color: #000 !important;
     --secondary-color: #dddddd !important;
     /* Font/text values */
     --font-style-normal: normal;
