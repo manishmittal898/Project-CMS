@@ -2,6 +2,7 @@ import { DropDown_key } from 'src/app/Shared/Constant';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../Services/common.service';
 import { DropDownModel, GroupDropDownItem } from '../../Helper/Common';
+import { SecurityService } from '../../Services/security.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,13 @@ import { DropDownModel, GroupDropDownItem } from '../../Helper/Common';
 })
 export class NavBarComponent implements OnInit {
   menuModel: GroupDropDownItem[];
-  constructor(private readonly _commonService: CommonService) { }
+  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService) {
+    if (this._securityService.getStorage('collections')) {
+      this.menuModel = JSON.parse(this._securityService.getStorage('collections'));
+    }
+
+
+  }
 
   ngOnInit(): void {
     this.GetDropDown();
@@ -23,7 +30,7 @@ export class NavBarComponent implements OnInit {
         const ddls = res?.Data as DropDownModel;
 
         this.menuModel = ddls.ddlLookupGroup
-
+        this._securityService.setStorage('collections', JSON.stringify(this.menuModel))
       }
     });
   }
