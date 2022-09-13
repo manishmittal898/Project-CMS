@@ -17,12 +17,12 @@ export class NavBarComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlSubLookupGroup], true).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
 
-        this.menuModel = ddls.ddlSubLookupGroup
+        this.menuModel = ddls.ddlLookupGroup
 
       }
     });

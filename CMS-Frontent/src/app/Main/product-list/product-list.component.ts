@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit {
     this._router.queryParams.subscribe(p => {
       if (p.id) {
         this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
-        this.indexModel.SubCategoryId = null;
+        this.indexModel.SubCategoryId = [];
       }
       if (p.subid) {
         this.indexModel.SubCategoryId = [Number(this._router.snapshot.queryParams.subid)];

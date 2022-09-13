@@ -69,6 +69,13 @@ namespace CMS.Service.Services.Common
                             break;
 
 
+                        case DropDownKey.ddlLookupGroup:
+
+                            objData.Add(item, GetGroupLookupMasters(null, LookupTypeEnum.Product_Category.GetStringValue(), isTransactionData));
+                            break;
+
+
+
 
                         default:
                             break;
@@ -172,6 +179,41 @@ namespace CMS.Service.Services.Common
                 return null;
             }
         }
+
+        private object GetGroupLookupMasters(long[] lookupId = null, string lktype = null, bool isTransactionData = false)
+        {
+            try
+            {
+                string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
+
+                var data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId == null || lookupId.Contains(type.Id)) &&
+                  (!isTransactionData || (type.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
+
+                ).ToList();
+
+                return data.GroupBy(x => x.Id)
+                      .Select(y => new
+                      {
+                          CategoryId = y.Key,
+                          Category = y.FirstOrDefault().Name,
+                          Data = y.FirstOrDefault().TblSubLookupMasters.Where(x => x.IsActive == true && !x.IsDeleted && (!isTransactionData || (x.TblProductMasters.Any(yz => !yz.IsDelete && yz.IsActive == true
+                          && x.Id == yz.SubCategoryId))))
+                          .Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                      }).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+
+
+
+
+
+        }
+
+
         private object GetGroupSubLookupMasters(long[] lookupId = null, string lktype = null, bool isTransactionData = false)
         {
             try
@@ -179,8 +221,8 @@ namespace CMS.Service.Services.Common
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
 
                 var data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId == null || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
-                 (!isTransactionData || ( type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() ==enumValue?(isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0):true))
-                
+                 (!isTransactionData || (type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
+
                 ).ToList();
 
 

@@ -96,6 +96,8 @@ export class DropDownModel {
   ddlPaymentMode!: DropDownItem[];
   ddlLookupTypeMaster!: DropDownItem[];
   ddlCategory !: DropDownItem[];
+  ddlLookupGroup!: GroupDropDownItem[];
+
   ddlCaptionTag!: DropDownItem[];
   ddlProductSize!: DropDownItem[];
   ddlSubCategory!: DropDownItem[];
