@@ -49,30 +49,30 @@
             </div>
           </div>
           <!-- Product Start -->
-
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
             *ngFor="let item of model | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords }">
+            <div class="position-relative product-list-hover-items-outside overflow-hidden">
             <a href="javascript:void(0)" routerLink="/store/{{item.Name.split(' ').join('-')}}/{{item.Id}}"
               class="product-list-items">
               <div class="product-list-items-tag" *ngIf="item.CaptionTag">{{item.CaptionTag}}</div>
               <div
                 class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
                 <img [src]="item.ImagePath" onerror="this.src='assets/images/no-img.svg'" alt="" />
-                <!-- #manish start-->
-                <div class="product-list-hover">
-                  <a [href]="safeURL(item)" target="_blank">
-                    <button type="button" class="product-list-hover-items" data-bs-toggle="tooltip"
-                      data-bs-placement="top" title="Enquiry"><i class="bi bi-whatsapp"></i></button>
-                  </a>
-                </div>
-                <!-- #manish End-->
               </div>
-
               <div class="product-list-info">
                 <h3>{{item.Name}}</h3>
                 <p>₹ {{item.Price}}</p>
               </div>
             </a>
+            <!-- #Hover items start-->
+            <div class="product-list-hover">
+              <a [href]="safeURL(item)" target="_blank">
+                <button type="button" class="product-list-hover-items" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Enquiry"><i class="bi bi-whatsapp"></i></button>
+              </a>
+            </div>
+            <!-- #Hover items End-->
+          </div>
           </div>
           <!-- Product End -->
 

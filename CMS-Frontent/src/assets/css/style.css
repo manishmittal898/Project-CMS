@@ -56,7 +56,9 @@ body {
     overflow-x: hidden;
     background: url(../images/pattern1.png);
 }
-
+body a:hover {
+    color: var(--black);
+}
 * {
     box-sizing: border-box;
 }
@@ -227,7 +229,7 @@ img {
 .btn-border {
     border: solid 1px var(--primary-color);
     background: #fff;
-    color: #000;
+    color: var(--black);
 }
 
 .btn-border:hover {
@@ -352,11 +354,11 @@ section.footer-copyright-dark p a {
 }
 
 .footer-light .accordion-button {
-    color: #000;
+    color: var(--black);
 }
 
 .footer-light .accordion-button {
-    color: #000;
+    color: var(--black);
 }
 
 .footer-light ul.footer-social li a {
@@ -370,23 +372,23 @@ section.footer-copyright-dark p a {
 } */
 
 .footer-light .accordion-button:focus {
-    color: #000;
+    color: var(--black);
 }
 
 .footer-light ul.footer-link li a:hover {
-    color: var(--primary-color);
+    color: #787878;
 }
 
 .footer-light .footer-contact ul li a {
-    color: var(--primary-color);
+    color: var(--black);
 }
 
 .footer-light .footer-contact ul li a svg {
-    fill: var(--primary-color);
+    fill: var(--black);
 }
 
 .footer-light h4 {
-    color: var(--primary-color);
+    color: var(--black);
 }
 
 section.footer-copyright-light {
@@ -419,7 +421,7 @@ footer .accordion-button {
 
 footer .accordion-button:not(.collapsed) {
     background: transparent;
-    color: #000;
+    color: var(--black);
     box-shadow: none;
 }
 
@@ -721,12 +723,12 @@ font-weight: 600;
 }
 
 .product-list-items {
-    color: var(--primary-color);
+    color: var(--black);
     position: relative;
 }
 
 .product-list-items:hover {
-    color: var(--primary-color);
+    color: var(--black);
 }
 
 .product-list-info {
@@ -736,7 +738,7 @@ font-weight: 600;
 .product-list-info h3 {
     font-size: 16px;
     margin-bottom: 3px;
-    color: var(--primary-color);
+    color: var(--black);
     font-weight: 500;
 }
 
@@ -759,14 +761,14 @@ font-weight: 600;
 }
 
 .product-details-info h4 {
-    color: var(--primary-color);
+    color: var(--black);
     font-weight: 400;
     margin-bottom: 15px;
     font-size: 1.3rem;
 }
 
 .product-details-info h2 {
-    color: #000;
+    color: var(--black);
     font-size: 1.6rem;
 }
 
@@ -825,7 +827,7 @@ ul.product-details-sm-img {
     margin-left: 8px;
     font-size: 30px;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--black);
 }
 
 input:focus-visible {
@@ -836,7 +838,7 @@ input:focus-visible {
     border: solid 1px #ccc;
     padding: 6px 15px;
     border-radius: 0px;
-    color: #000;
+    color: var(--black);
     padding-right: 35px;
     transition: 0.3s;
 }
@@ -858,7 +860,7 @@ input:focus-visible {
 
 .product-filter-btn {
     font-size: 16px;
-    color: #000;
+    color: var(--black);
 }
 
 .page-item.active .page-link {
@@ -888,7 +890,7 @@ input:focus-visible {
 
 .pagination .page-link:hover {
     background: #fffdf4;
-    color: #000;
+    color: var(--black);
 }
 
 .ratio {
@@ -901,17 +903,17 @@ input:focus-visible {
 
 .product-list-hover {
     position: absolute;
-    bottom: 0;
+    top: 0px;
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
     left: 0;
     text-align: center;
     padding: 4px;
-    transform: translateY(35px);
+    transform: translateY(-60px);
     transition: transform .3s ease-in-out;
 }
 
-.product-list-items:hover .product-list-hover {
+.product-list-hover-items-outside:hover .product-list-hover {
     display: block;
     transform: translateY(0px);
 }
@@ -988,7 +990,7 @@ input:focus-visible {
 
 .navbar-user-icons a {
     font-size: 20px;
-    color: #000;
+    color: var(--black);
     margin: 0px 0px 0px 20px;
 }
 
@@ -1083,7 +1085,7 @@ ul.dropdown-menu {
     display: inline-block;
     padding: 3px 6px;
     border-radius: 2px;
-    background: #000;
+    background: var(--black);
     color: #fff;
     font-size: 12px;
     white-space: nowrap;
@@ -1097,7 +1099,7 @@ ul.dropdown-menu {
     display: inline-block;
     color: #fff;
     border: 8px solid transparent;
-    border-bottom: 8px solid #000;
+    border-bottom: 8px solid var(--black);
 }
 
 .form-check-input {
@@ -1168,7 +1170,8 @@ select:focus-visible {
     position: absolute;
     background: #c50d00;
     top: 12px;
-    left: -8px;
+    /* left: -8px; */
+    left: 0px;
     z-index: 9;
     padding: 1px 6px;
     color: #fff;
@@ -1213,7 +1216,7 @@ ul.dropdown-menu.megamenu h3 {
     margin-bottom: 10px;
     padding: 0px;
     background: transparent;
-    color: #000;
+    color: var(--black);
 }
 
 .accordion-button::after {
@@ -1272,7 +1275,7 @@ ul.megamenu-sub-list {
 
 .Cart-count {
     position: absolute;
-    background: #5e5e5e;
+    background: var(--primary-color);
     right: -10px;
     top: -3px;
     font-size: 12px;
@@ -1311,7 +1314,7 @@ ul.megamenu-sub-list {
 
 .product-d-main-slider-nav .slick-slide.slick-current {
     opacity: 10 !important;
-    border-color: #000;
+    border-color: var(--black);
 }
 
 .product-d-main-slider-nav .slick-track {
@@ -1353,7 +1356,7 @@ ul.megamenu-sub-list {
 
 .product-d-main-slider .slick-prev:hover,
 .product-d-main-slider .slick-next:hover {
-    background: #000;
+    background: var(--black);
 }
 
 .product-d-main-slider .slick-prev:focus,
@@ -1384,7 +1387,7 @@ ul.megamenu-sub-list {
   justify-content: center;
   border-radius: 100%;
   border: solid 1px var(--primary-color);
-  color: #000;
+  color: var(--black);
   margin: auto;
 }
 .product-detail-size-btn.active, .product-detail-size-btn:hover
