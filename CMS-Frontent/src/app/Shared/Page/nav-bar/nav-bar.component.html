@@ -69,13 +69,13 @@
                     <div class="row m-0 py-2" id="NavCollections">
 
                       <div class="col-lg-3" *ngFor="let item of this.menuModel;let ind=index">
-                        <button class="accordion-button collapsed" type="button" attr.data-bs-toggle="collapse"
-                          [attr.data-bs-target]="'#Footer1'+ind"
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          [attr.data-bs-target]="'#collection_'+ind"
                           [routerLink]="['store/'+item.Category.split(' ').join('_')]"
                           [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
                           {{item.Category}}
                         </button>
-                        <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'Footer1'+ind"
+                        <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'collection_'+ind"
                           data-bs-parent="#NavCollections">
                           <li><a class="dropdown-item" href="javascript:void()" [routerLink]="['store/'+item.Category.split(' ').join('_')]"
                               [queryParams]="{id:item.CategoryId, subid: sitem.Value}" href="#">{{sitem.Text}}</a></li>
@@ -83,7 +83,7 @@
                         </ul>
                       </div>
 
-
+ 
                     </div>
                   </div>
                 </ul>
