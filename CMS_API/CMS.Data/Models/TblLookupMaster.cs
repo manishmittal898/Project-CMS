@@ -9,6 +9,7 @@ namespace CMS.Data.Models
     {
         public TblLookupMaster()
         {
+            TblCmspageContentMasters = new HashSet<TblCmspageContentMaster>();
             TblProductMasterCaptionTags = new HashSet<TblProductMaster>();
             TblProductMasterCategories = new HashSet<TblProductMaster>();
             TblProductStocks = new HashSet<TblProductStock>();
@@ -30,6 +31,7 @@ namespace CMS.Data.Models
         public virtual TblUserMaster CreatedByNavigation { get; set; }
         public virtual TblLookupTypeMaster LookUpTypeNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
+        public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCaptionTags { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCategories { get; set; }
         public virtual ICollection<TblProductStock> TblProductStocks { get; set; }

@@ -17,6 +17,7 @@ namespace CMS.Data.Models
         {
         }
 
+        public virtual DbSet<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
         public virtual DbSet<TblLookupMaster> TblLookupMasters { get; set; }
         public virtual DbSet<TblLookupTypeMaster> TblLookupTypeMasters { get; set; }
         public virtual DbSet<TblProductImage> TblProductImages { get; set; }
@@ -39,6 +40,43 @@ namespace CMS.Data.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AI");
+
+            modelBuilder.Entity<TblCmspageContentMaster>(entity =>
+            {
+                entity.ToTable("tblCMSPageContentMaster");
+
+                entity.Property(e => e.Content).HasColumnType("ntext");
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Heading).HasColumnType("ntext");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblCmspageContentMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("tblCMSPageContentMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblCmspageContentMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .HasConstraintName("tblCMSPageContentMaster_ModifiedBy");
+
+                entity.HasOne(d => d.Page)
+                    .WithMany(p => p.TblCmspageContentMasters)
+                    .HasForeignKey(d => d.PageId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("tblCMSPageContentMaster_PageId");
+            });
 
             modelBuilder.Entity<TblLookupMaster>(entity =>
             {

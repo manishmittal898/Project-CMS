@@ -141,6 +141,7 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\Tables\tblProductStocks.sql" />
+    <Build Include="dbo\Tables\tblCMSPageContentMaster.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CMS.Database.publish.xml" />
