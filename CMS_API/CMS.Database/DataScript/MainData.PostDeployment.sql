@@ -38,5 +38,7 @@ INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[Cr
 GO
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (4, N'Product Size', N'Product_Size',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
 GO
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (5, N'CMS Pages', N'CMS_Page',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
+GO
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF
 GO
