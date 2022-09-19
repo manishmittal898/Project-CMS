@@ -1532,12 +1532,12 @@ body .ui-slider .ui-slider-range {
   background: var(--primary-color);
   color: #fff;
 }
-.modal-custom-design .modal-content .modal-header {
+.modal-custom-design .modal-content .modal-header
+{
   padding: 10px 20px;
   border-radius: 0px;
 }
 .modal-custom-design .modal-content {
-  border-radius: 0px;
   border: none;
 }
 .modal-custom-design .modal-header .btn-close {
