@@ -1227,8 +1227,19 @@ ul.megamenu-sub-list li {
     list-style: none;
 }
 
+ul.megamenu-sub-list li a:before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #bbb;
+  top: 9px;
+  left: 0px;
+}
 ul.megamenu-sub-list li a {
-    padding: 3px 0px;
+  padding: 3px 0px 3px 20px;
+  position: relative;
 }
 
 ul.megamenu-sub-list li a:hover {
@@ -1236,10 +1247,11 @@ ul.megamenu-sub-list li a:hover {
     font-weight: 600;
 }
 
-ul.megamenu-sub-list {
-    padding-left: 2px;
-}
 
+ul.megamenu-sub-list {
+  padding-left: 2px;
+  padding-bottom: 15px;
+}
 .accordion-button:not(.collapsed) {
     box-shadow: none;
 }
@@ -1261,7 +1273,7 @@ ul.megamenu-sub-list {
 }
 
 .login-reister-page {
-    padding: 80px 0px 50px 0px;
+    padding: 50px 0px 50px 0px;
 }
 
 .ship-charges {
