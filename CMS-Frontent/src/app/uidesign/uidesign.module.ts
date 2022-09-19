@@ -4,9 +4,10 @@ import { UIDesignRoutingModule } from './uidesign-routing.module';
 import { LoginComponent } from './login/login.component';
 import { UIDesignComponent } from './uidesign.component';
 import { FeatureModule } from '../Shared/Module/feature/feature.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [UIDesignComponent, LoginComponent],
+  declarations: [UIDesignComponent, LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     UIDesignRoutingModule,

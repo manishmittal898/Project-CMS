@@ -227,13 +227,13 @@ img {
 }
 
 .btn-border {
-    border: solid 1px var(--primary-color);
+  border: none;
+    outline: solid 1px var(--primary-color);
     background: #fff;
     color: var(--black);
 }
 
 .btn-border:hover {
-    border: solid 1px var(--primary-color);
     background: var(--primary-color);
     color: #fff;
 }
@@ -1527,6 +1527,28 @@ body .ui-slider .ui-slider-range {
 }
 .navbar-expand-lg .navbar-nav .nav-link i.bi.bi-house-door {
     font-size: 20px;
+}
+.modal-custom-design .modal-header {
+  background: var(--primary-color);
+  color: #fff;
+}
+.modal-custom-design .modal-content .modal-header {
+  padding: 10px 20px;
+  border-radius: 0px;
+}
+.modal-custom-design .modal-content {
+  border-radius: 0px;
+  border: none;
+}
+.modal-custom-design .modal-header .btn-close {
+  color: #ffff;
+  background: transparent;
+  opacity: 9;
+  padding: 0px;
+  font-size: 20px;
+  display: block;
+  height: auto;
+  width: auto;
 }
 /* CUSTOM CSS END */
 
