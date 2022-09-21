@@ -3,6 +3,7 @@ using CMS.Core.FixedValue;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Data.Models;
 using CMS.Service.Services.Account;
+using CMS.Service.Services.CMSPage;
 using CMS.Service.Services.Common;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
@@ -162,6 +163,7 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
             services.AddScoped<IProductReviewService, ProductReviewService>();
             services.AddScoped<ISubLookupMasterService, SubLookupMasterService>();
             services.AddScoped<IUserMasterService, UserMasterService>();
+            services.AddScoped<ICMSPageService, CMSPageService>();
             services.AddScoped<IAccountService, AccountService>();
         }
     }
