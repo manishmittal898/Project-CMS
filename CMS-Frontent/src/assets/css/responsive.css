@@ -40,6 +40,12 @@
         top: 55px;
     }
 }
+@media all and (min-width: 575px)
+{
+  .modal-custom-design .modal-content {
+    border-radius: 20px;
+  }
+}
 
 @media screen and (min-width:1120px) {}
 
@@ -80,8 +86,9 @@
         padding: 5px 30px;
     }
     ul.megamenu-sub-list li a {
-        padding: 5px 6px !important;
-    }
+      padding: 3px 0px 3px 20px !important;
+      background: transparent !important;
+  }
     ul.dropdown-menu a.dropdown-item:hover {
         background: #000;
     }
@@ -236,7 +243,7 @@
     .dropdown-toggle::after {
         position: absolute;
         right: 15px;
-        top: 21px;
+        top: 8px;
     }
     ul.dropdown-menu {
         max-width: 100%;

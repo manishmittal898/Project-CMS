@@ -1,4 +1,20 @@
 
+<!-- Breadcrum Start -->
+<nav aria-label="breadcrumb" class="inner-breadcrumb">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Login</li>
+              </ol>
+          </div>
+      </div>
+  </div>
+</nav>
+<!-- Breadcrum End -->
+
+
 <Section class="login-reister-page">
   <div class="container">
       <div class="row">
@@ -9,22 +25,51 @@
                       <input type="email" class="form-control" placeholder="Email">
                   </div>
                   <div class="mb-3">
-                      <input type="password" class="form-control" placeholder="**********">
+                      <input type="password" class="form-control" placeholder="Password">
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
                       <div class="form-check d-flex align-items-center">
                           <input type="checkbox" class="form-check-input" id="check1">
                           <label class="form-check-label ms-2" for="check1">I agree</label>
                       </div>
-                      <a href="javascript:void(0)" class="font-13 text-dark">Forgot password ?</a>
+                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ForgotPas" class="font-13 text-dark">Forgot password ?</a>
                   </div>
 
                   <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign in</button>
 
-                  <div class="text-center mt-3">Not register yet? <a href="javascript:void(0)" class="text-theme-primary font-w-500">Create an Account</a> </div>
+                  <div class="text-center mt-3">Not register yet? <a href="javascript:void(0)" routerLink="/register" class="text-theme-primary font-w-500">Create an Account</a> </div>
 
               </form>
           </div>
       </div>
   </div>
 </Section>
+
+
+<!-- Modal Start -->
+<div class="modal fade modal-custom-design" id="ForgotPas" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reset your password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i> </button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <div class="mb-3">
+              <input type="password" class="form-control" placeholder="Enter new password">
+          </div>
+          <div class="mb-0">
+            <input type="password" class="form-control" placeholder="Confirm new password">
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default px-2 py-1">Save changes</button>
+        <button type="button" class="btn btn-default btn-border px-2 py-1" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal End -->
