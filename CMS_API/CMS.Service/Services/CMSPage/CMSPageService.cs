@@ -60,8 +60,8 @@ namespace CMS.Service.Services.CMSPage
                                             PageId = x.Id,
                                             Name = x.Name,
                                             SortedOrder = x.SortedOrder,
-                                            IsActive=x.IsActive,
-                                            IsDelete=x.IsDelete
+                                            IsActive = x.IsActive,
+                                            IsDelete = x.IsDelete
 
                                         }).ToListAsync();
 
@@ -125,9 +125,57 @@ namespace CMS.Service.Services.CMSPage
         }
 
 
-        public Task<ServiceResponse<TblCmspageContentMaster>> Save(CMSPagePostModel model)
+        public async Task<ServiceResponse<string>> Save(CMSPagePostModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                foreach (var item in model.Data)
+                {
+
+
+                    if (item.Id > 0)
+                    {
+
+                        TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == item.Id);
+
+                        objData.Content = item.Content;
+                        objData.SortedOrder = item.SortedOrder;
+                        objData.Heading = item.Heading;
+                        objData.ModifiedOn = DateTime.Now;
+                        objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                        var roletype = _db.TblCmspageContentMasters.Update(objData);
+                        _db.SaveChanges();
+
+                    }
+                    else
+                    {
+
+                        TblCmspageContentMaster objData = new TblCmspageContentMaster();
+
+
+                        objData.Content = item.Content;
+                        objData.SortedOrder = item.SortedOrder;
+                        objData.Heading = item.Heading;
+                        objData.IsDeleted = false;
+                        objData.IsActive = true;
+                        objData.CreatedBy = _loginUserDetail.UserId.Value;
+                        objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                        var roletype = await _db.TblCmspageContentMasters.AddAsync(objData);
+                        _db.SaveChanges();
+                       
+                    }
+                }
+
+                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+
+            }
+            catch (Exception ex)
+            {
+
+                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+
+            }
         }
 
         public Task<ServiceResponse<TblCmspageContentMaster>> ActiveStatusUpdate(long id)

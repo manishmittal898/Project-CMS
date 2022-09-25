@@ -2,13 +2,13 @@
 <div class="widget-header">
   <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
     <div>
-      <h1>Add Category</h1>
+      <h1>{{pageName}} Page</h1>
       <!-- Breadcrumb Start -->
       <nav class="custom-breadcrum">
         <ol class="breadcrumb justify-content-center justify-content-sm-start">
           <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()">Category List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+          <li class="breadcrumb-item"><a href="javascript:void()">CMS Page</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{pageName}} Page</li>
         </ol>
       </nav>
       <!-- Breadcrumb End -->
@@ -20,44 +20,58 @@
 
 
 <div class="custom-form p-4">
-  <div class="form-row">
+  <form [formGroup]="formgrp" (ngSubmit)="AddItem()">
 
-    <div class="form-group col-md-1">
-      <label>Sort order</label>
-      <input type="text" class="form-control" id="input1" placeholder="01">
+
+    <div class="form-row">
+
+      <div class="form-group col-md-3">
+        <label>Display order</label>
+        <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
+          [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
+          [ngClass]="{ 'is-invalid': f.SortedOrder.errors && f.SortedOrder.touched}" class="form-control" id="input4"
+          placeholder="Display Order">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('SortedOrder')?.hasError('required') && formgrp.get('SortedOrder')?.touched)">
+          Enter Display Order </div>
+        <div class="invalid-feedback"
+          *ngIf="!formgrp.get('SortedOrder')?.hasError('required') && ((formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength')) && formgrp.get('SortedOrder')?.touched) || (formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength'))">
+          Display Order length must be 1-6 digit. </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label>Heading</label>
+        <angular-editor [(ngModel)]="model.Heading" formControlName="Heading" [config]="editorConfig"
+          placeholder="Heading" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading">
+        </angular-editor>
+
+
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Heading')?.hasError('required') && formgrp.get('Heading')?.touched)">
+          Please enter Heading</div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label>Content</label>
+        <angular-editor [(ngModel)]="model.Content" formControlName="Content" [config]="editorConfig"
+          placeholder="Content" [ngClass]="{ 'is-invalid': f.Content.errors && f.Content.touched}" id="Content">
+        </angular-editor>
+
+
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Content')?.hasError('required') && formgrp.get('Content')?.touched)">
+          Please enter Content</div>
+      </div>
+
     </div>
 
-    <div class="form-group col-md-12">
-      <label>Heading</label>
-      <angular-editor [(ngModel)]="model.Heading" formControlName="Heading" [config]="editorConfig"
-        placeholder="Heading" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading">
-      </angular-editor>
 
 
-      <div class="invalid-feedback"
-        *ngIf="(formgrp.get('Heading')?.hasError('required') && formgrp.get('Heading')?.touched)">
-        Please enter Heading</div>
+
+    <div class="form-footer-btn-grp widget-content widget-content pt-0 text-center">
+      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Save</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
     </div>
-
-    <div class="form-group col-md-12">
-      <label>Content</label>
-      <angular-editor [(ngModel)]="model.Content" formControlName="Content" [config]="editorConfig"
-        placeholder="Content" [ngClass]="{ 'is-invalid': f.Content.errors && f.Content.touched}" id="Content">
-      </angular-editor>
-
-
-      <div class="invalid-feedback"
-        *ngIf="(formgrp.get('Content')?.hasError('required') && formgrp.get('Content')?.touched)">
-        Please enter Content</div>
-    </div>
-
-  </div>
-
-
-
-
-  <div class="form-footer-btn-grp widget-content widget-content pt-0 text-center">
-    <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Save</button>
-    <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
-  </div>
+  </form>
+  
 </div>

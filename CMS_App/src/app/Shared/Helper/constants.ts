@@ -115,6 +115,8 @@ export class Message {
   static UpdateFail = 'Record failed to update...!';
   static ConfirmUpdate = 'Are you Sure update this record?';
   static DeleteConfirmation = 'Are you want to delete record ?';
+  static VerifyInput = 'Please Verify input data?';
+
   //#endregion
 }
 
