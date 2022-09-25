@@ -47,7 +47,7 @@ export class LookupTypeComponent implements OnInit {
         }
       } else {
         // Toast message if  return false ;
-        this.toast.error(response.Message?.toString(), 'Error');
+        this.toast.error(response.Message?.toString(), 'Error data');
       }
     },
       error => {

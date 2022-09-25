@@ -1,51 +1,48 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { IndexModel } from 'src/app/Shared/Helper/common-model';
-import { Message } from 'src/app/Shared/Helper/constants';
-import { CommonService } from 'src/app/Shared/Services/common.service';
-import { SubLookupMasterViewModel, SubLookupService } from '../../../../../../Shared/Services/Master/sub-lookup.service';
-import { SubLookupAddEditComponent } from './sub-lookup-add-edit/sub-lookup-add-edit.component';
+
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { IndexModel } from "src/app/Shared/Helper/common-model";
+import { Message } from "src/app/Shared/Helper/constants";
+import { CMSPageListViewModel, CMSPageMasterService } from "src/app/Shared/Services/cmspage-master.service";
+import { CommonService } from "src/app/Shared/Services/common.service";
+import { LookupsAddEditComponent } from "../lookup-type/lookups/lookups-add-edit/lookups-add-edit.component";
+import { LookupTypeEnum } from '../../../../Shared/Enum/fixed-value';
+
 
 @Component({
-  selector: 'app-sub-lookup',
-  templateUrl: './sub-lookup.component.html',
-  styleUrls: ['./sub-lookup.component.scss']
+  selector: 'app-cmspage-master',
+  templateUrl: './cmspage-master.component.html',
+  styleUrls: ['./cmspage-master.component.scss']
 })
-export class SubLookupComponent implements OnInit {
-  pageName = { Name: "", SubName: "" };
-  model!: SubLookupMasterViewModel[];
+export class CMSPageMasterComponent implements OnInit {
+  pageName = 'CMS Page';
+  model!: CMSPageListViewModel[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   id!: number;
-  displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'SortedOrder', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
-  totalRecords: number = 0;
+  totalRecords = 0;
   noRecordData = {
     subject: 'Can you please add your first record.',
     Description: undefined,
-    url: undefined,
+    url: 'admin/master/CMS%20Pages/5',
     urlLable: 'Create'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _sublookupService: SubLookupService,
+    private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService,
     public dialog: MatDialog
-
   ) {
-    _activatedRoute.params.subscribe(x => {
-      this.id = this._activatedRoute.snapshot.params.lookupId;
-      this.pageName.Name = this._activatedRoute.snapshot.params.name;
-      this.pageName.SubName = this._activatedRoute.snapshot.params.subname;
+    debugger
 
-      this.getList();
-    })
   }
 
 
@@ -54,20 +51,20 @@ export class SubLookupComponent implements OnInit {
   }
 
   getList(): void {
+    debugger
     this.indexModel.AdvanceSearchModel = {};
-    this.indexModel.AdvanceSearchModel["lookupId"] = this.id;
-    this._sublookupService.GetList(this.indexModel).subscribe(response => {
+    this._cmsPageService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        this.model = response.Data as SubLookupMasterViewModel[];
-        this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
+        this.model = response.Data as CMSPageListViewModel[];
+        this.dataSource = new MatTableDataSource<CMSPageListViewModel>(this.model);
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
-          if (!this.indexModel.IsPostBack) {
+        if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
       } else {
         // Toast message if  return false ;
-        this.toast.error(response.Message?.toString(), 'Error data');
+        this.toast.error(response.Message?.toString(), 'Error');
       }
     },
       error => {
@@ -96,7 +93,7 @@ export class SubLookupComponent implements OnInit {
   OnActiveStatus(Id: number) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
-        let subscription = this._sublookupService.ChangeLookupMasterActiveStatus(Id).subscribe(
+        let subscription = this._cmsPageService.ChangeCMSPageActiveStatus(Id).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
@@ -119,15 +116,15 @@ export class SubLookupComponent implements OnInit {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
-        let subscription = this._sublookupService.DeleteLookupMaster(id).subscribe(
+        let subscription = this._cmsPageService.DeleteCMSPage(id).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              const idx = this.model.findIndex(x => x.Id == id);
+              const idx = this.model.findIndex(x => x.PageId == id);
               this.model.splice(idx, 1);
               this.totalRecords--;
-              this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
+              this.dataSource = new MatTableDataSource<CMSPageListViewModel>(this.model);
             }
           },
           error => {
@@ -140,8 +137,8 @@ export class SubLookupComponent implements OnInit {
   }
 
   onAddUpdateLookup(Id: number) {
-    const dialogRef = this.dialog.open(SubLookupAddEditComponent, {
-      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName.SubName} category` },
+    const dialogRef = this.dialog.open(LookupsAddEditComponent, {
+      data: { Id: Id as number, Type: LookupTypeEnum.CMS_Page, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });
@@ -151,13 +148,13 @@ export class SubLookupComponent implements OnInit {
       }
     });
   }
-  onBack() {
-    window.history.back();
-  }
+
   onClear() {
     this.indexModel.Search = '';
     this.indexModel.Page = 1;
     this.getList();
   }
-}
 
+
+
+}

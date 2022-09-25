@@ -9,6 +9,8 @@ import { LookupsAddEditComponent } from './lookup-type/lookups/lookups-add-edit/
 import { SharedModule } from '../../../Shared/Helper/shared/shared.module';
 import { SubLookupAddEditComponent } from './lookup-type/lookups/sub-lookup/sub-lookup-add-edit/sub-lookup-add-edit.component';
 import { SubLookupComponent } from './lookup-type/lookups/sub-lookup/sub-lookup.component';
+import { CMSPageMasterComponent } from './cmspage-master/cmspage-master.component';
+import { CMSPageAddUpdateComponent } from './cmspage-master/cmspage-add-update/cmspage-add-update.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { SubLookupComponent } from './lookup-type/lookups/sub-lookup/sub-lookup.
     LookupsComponent,
     LookupsAddEditComponent,
     SubLookupComponent,
-    SubLookupAddEditComponent
+    SubLookupAddEditComponent,
+    CMSPageMasterComponent,
+    CMSPageAddUpdateComponent
   ],
   imports: [
     CommonModule,

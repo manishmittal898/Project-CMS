@@ -17,7 +17,9 @@ namespace CMS.Core.FixedValue
             [StringValue("Caption_Tag")]
             Caption_Tag,
             [StringValue("Product_Size")]
-            Product_Size
+            Product_Size,
+            [StringValue("CMS_Page")]
+            CMS_Page
         }
     }
 }

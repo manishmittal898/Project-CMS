@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonService } from '../../../Shared/Services/common.service';
 import { DropDown_key } from '../../../Shared/Helper/constants';
 import { DropDownModel } from 'src/app/Shared/Helper/common-model';
+import { LookupTypeEnum } from '../../../Shared/Enum/fixed-value';
 
 @Component({
   selector: 'app-navigation',
@@ -30,9 +31,9 @@ export class NavigationComponent implements OnInit {
   getLookupTypes() {
     this._commonService.GetDropDown([DropDown_key.ddlLookupTypeMasters]).subscribe(res => {
       if (res.IsSuccess) {
-        
+
         let ddls = res.Data as DropDownModel;
-        this.dropDown.ddlLookupTypeMaster = ddls.ddlLookupTypeMaster;
+        this.dropDown.ddlLookupTypeMaster = ddls.ddlLookupTypeMaster.filter(x => Number(x.Value) != LookupTypeEnum.CMS_Page);
 
       }
     });

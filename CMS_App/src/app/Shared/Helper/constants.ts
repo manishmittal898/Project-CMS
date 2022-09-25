@@ -76,6 +76,15 @@ export class API_Url {
   //#endregion
 
 
+
+  //#region <<CMSPage>>
+  public static CMSPageList_Api = `${environment.apiEndPoint}admin/CMSPage/get`;
+  public static CMSPageDetail_Api = `${environment.apiEndPoint}admin/CMSPage/get/`;
+  public static CMSPageAddUpdate_Api = `${environment.apiEndPoint}admin/CMSPage/Save`;
+  public static CMSPageChangeActiveStatus_Api = `${environment.apiEndPoint}admin/CMSPage/ChangeActiveStatus/`;
+  public static CMSPageDelete_Api = `${environment.apiEndPoint}admin/CMSPage/delete/`;
+  //#endregion
+
   //#region <<Customer Registration>>
   public static Customer_Registration_Api = `${environment.apiEndPoint}Customer/RegisterCustomer/`;
   // #endregion

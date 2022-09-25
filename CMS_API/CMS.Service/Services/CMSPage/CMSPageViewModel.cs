@@ -17,6 +17,14 @@ namespace CMS.Service.Services.CMSPage
         public string Page { get; set; }
     }
 
+    public class CMSPageListViewModel
+    {
+        public long PageId { get; set; }
+        public string Name { get; set; }
+        public int? SortedOrder { get; set; }
+        public bool? IsActive { get; set; }
+        public bool IsDelete { get; set; }
+    }
     public class CMSPagePostModel
     {
         [Required]

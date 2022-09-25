@@ -9,8 +9,8 @@ namespace CMS.Service.Services.CMSPage
 {
   public  interface ICMSPageService
     {
-        Task<ServiceResponse<IEnumerable<CMSPageViewModel>>> GetList(IndexModel model);
-        ServiceResponse<CMSPageViewModel> GetById(long id);
+        Task<ServiceResponse<IEnumerable<CMSPageListViewModel>>> GetList(IndexModel model);
+        Task<ServiceResponse<List<CMSPageViewModel>>> GetById(long id);
         Task<ServiceResponse<TblCmspageContentMaster>> Save(CMSPagePostModel model);
         Task<ServiceResponse<TblCmspageContentMaster>> ActiveStatusUpdate(long id);
 
