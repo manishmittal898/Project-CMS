@@ -56,7 +56,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
           this.postModel.Data[idx] = this.model;
         }
       }
-    }else{
+    } else {
       this.toast.warning(Message.VerifyInput);
 
     }
@@ -66,10 +66,32 @@ export class CMSPageAddUpdateComponent implements OnInit {
   SaveData() {
     this.postModel.PageId == this.id;
     this._cmsPageService.AddUpdateCMSPage(this.postModel).subscribe(res => {
-      this.toast.success(res.Message as string);
+      if (res.IsSuccess) {
+        this.toast.success(res.Message as string);
+        this._router.navigate([`admin/master/cms-page`]);
+      }else{
+        this.toast.error(res.Message as string);
+
+      }
     })
   }
 
-  
+  getDetails() {
+    this._cmsPageService.GetDetails(this.id).subscribe(res => {
+      const data = res.Data;
+      this.postModel.Data = [];
+      data?.forEach(item => {
+        this.postModel.Data.push({
+          Content: item.Content,
+          Heading: item.Heading,
+          Id: item.Id,
+          SortedOrder: item.SortedOrder
+        });
+      }
+      )
+    })
+  }
+
+
 
 }

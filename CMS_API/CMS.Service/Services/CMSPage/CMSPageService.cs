@@ -163,17 +163,17 @@ namespace CMS.Service.Services.CMSPage
                         objData.ModifiedBy = _loginUserDetail.UserId.Value;
                         var roletype = await _db.TblCmspageContentMasters.AddAsync(objData);
                         _db.SaveChanges();
-                       
+
                     }
                 }
 
-                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<string>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
