@@ -20,7 +20,7 @@
 
 
 <div class="custom-form p-4">
-  <form [formGroup]="formgrp" (ngSubmit)="AddItem()">
+  <form [formGroup]="formgrp" (ngSubmit)="SaveData()">
 
 
     <div class="form-row">
@@ -63,15 +63,29 @@
           Please enter Content</div>
       </div>
 
-    </div>
-
-
-
-
+    </div> 
     <div class="form-footer-btn-grp widget-content widget-content pt-0 text-center">
       <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Save</button>
       <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
     </div>
   </form>
-  
+
+  <div class="row">
+    <div class="col-md-12">
+      Preview
+    </div>
+
+    <ng-container *ngFor="let item of postModel">
+      <div class="col-md-12" [innerHtml]="item.Heading">
+      </div>
+      <div class="col-md-12" [innerHtml]="item.Content"></div>
+      <div class="col-md-12">
+        <button (click)="editItem(item)"></button>
+      </div>
+
+
+    </ng-container>
+
+
+  </div>
 </div>

@@ -34,7 +34,7 @@ export class CMSPageMasterComponent implements OnInit {
   noRecordData = {
     subject: 'Can you please add your first record.',
     Description: undefined,
-    url: 'admin/master/CMS%20Pages/5',
+    url: undefined,
     urlLable: 'Create'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,

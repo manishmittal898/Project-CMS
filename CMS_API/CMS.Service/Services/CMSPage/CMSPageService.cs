@@ -105,7 +105,7 @@ namespace CMS.Service.Services.CMSPage
 
                 }).ToListAsync();
 
-                if (detail != null)
+                if (detail != null && detail.Count > 0)
                 {
                     ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
 
@@ -130,44 +130,41 @@ namespace CMS.Service.Services.CMSPage
             try
             {
 
-                foreach (var item in model.Data)
+
+
+
+                if (model.Id > 0)
                 {
 
+                    TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == model.Id);
+                    objData.Content = model.Content;
+                    objData.SortedOrder = model.SortedOrder;
+                    objData.Heading = model.Heading;
+                    objData.ModifiedOn = DateTime.Now;
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                    var dataResult = _db.TblCmspageContentMasters.Update(objData);
+                    _db.SaveChanges();
 
-                    if (item.Id > 0)
-                    {
+                }
+                else
+                {
+                    TblCmspageContentMaster objData = new TblCmspageContentMaster();
+                    objData.PageId = model.PageId;
+                    objData.Content = model.Content;
+                    objData.SortedOrder = model.SortedOrder;
+                    objData.Heading = model.Heading;
+                    objData.IsDeleted = false;
+                    objData.IsActive = true;
+                    objData.CreatedBy = _loginUserDetail.UserId.Value;
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                    var dataResult = await _db.TblCmspageContentMasters.AddAsync(objData);
+                    _db.SaveChanges();
 
-                        TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == item.Id);
+                    model.Id = dataResult.Entity.Id;
 
-                        objData.Content = item.Content;
-                        objData.SortedOrder = item.SortedOrder;
-                        objData.Heading = item.Heading;
-                        objData.ModifiedOn = DateTime.Now;
-                        objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                        var roletype = _db.TblCmspageContentMasters.Update(objData);
-                        _db.SaveChanges();
-
-                    }
-                    else
-                    {
-
-                        TblCmspageContentMaster objData = new TblCmspageContentMaster();
-
-
-                        objData.Content = item.Content;
-                        objData.SortedOrder = item.SortedOrder;
-                        objData.Heading = item.Heading;
-                        objData.IsDeleted = false;
-                        objData.IsActive = true;
-                        objData.CreatedBy = _loginUserDetail.UserId.Value;
-                        objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                        var roletype = await _db.TblCmspageContentMasters.AddAsync(objData);
-                        _db.SaveChanges();
-
-                    }
                 }
 
-                return CreateResponse<string>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                return CreateResponse<string>(model.Id.ToString(), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)

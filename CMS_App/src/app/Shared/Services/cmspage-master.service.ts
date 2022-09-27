@@ -53,12 +53,10 @@ export interface CMSPageListViewModel {
   IsDelete: boolean;
 }
 
+
+
 export interface CMSPagePostModel {
   PageId: number;
-  Data: CMSPageDataModel[];
-}
-
-export interface CMSPageDataModel {
   Id: number;
   Heading: string;
   Content: string;

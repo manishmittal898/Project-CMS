@@ -32,6 +32,7 @@ namespace CMS.API.Areas.Admin.Controllers
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
         public object Get(long id)
+        
         {
             return _service.GetById(id);
         }

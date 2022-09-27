@@ -26,7 +26,6 @@ using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace CMS.API
 {
@@ -46,8 +45,14 @@ namespace CMS.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-           services.AddControllers();
-           
+          services.AddControllers();
+ //           services.AddControllers().AddNewtonsoftJson(options =>
+ //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+ //);
+            //services.AddControllers()
+            //.AddJsonOptions(o => o.JsonSerializerOptions
+            //    .ReferenceHandler = ReferenceHandler.Preserve);
+
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
             {
