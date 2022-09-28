@@ -64,14 +64,15 @@ export class CMSPageAddUpdateComponent implements OnInit {
     debugger
     this.model.PageId = this.id;
     this.model.SortedOrder = Number(this.model.SortedOrder);
-
     this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
       debugger
       if (res.IsSuccess) {
         this.model.Id = Number(res.Data);
         this.postModel.push(this.model);
+      //  this.postModel.sort()
+        this.model = {} as CMSPagePostModel;
+        this.formgrp.reset();
         this.toast.success(res.Message as string);
-        // this._router.navigate([`admin/master/cms-page`]);
       } else {
         this.toast.error(res.Message as string);
 
@@ -80,7 +81,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   getDetails() {
-    
+
     this._cmsPageService.GetDetails(this.id).subscribe(res => {
       debugger
       if (res.IsSuccess) {
@@ -104,6 +105,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   editItem(item: CMSPagePostModel) {
+    this.postModel = this.postModel.filter(x => x.Id !== item.Id);
     this.model = item;
   }
 
