@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Text; 
 
 namespace CMS.API
 {
@@ -45,13 +46,7 @@ namespace CMS.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-          services.AddControllers();
- //           services.AddControllers().AddNewtonsoftJson(options =>
- //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
- //);
-            //services.AddControllers()
-            //.AddJsonOptions(o => o.JsonSerializerOptions
-            //    .ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddControllers();
 
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
@@ -102,7 +97,12 @@ namespace CMS.API
             services.AddDbContext<DB_CMSContext>(options =>
 options.UseSqlServer(Configuration[CONNECTION_STRING]));
 
-            services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddMvc()
+               
+                .AddJsonOptions(options => { 
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    
+                }) ;
             Registerservice(services);
         }
 
@@ -153,7 +153,7 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
                 endpoints.MapControllers();
             });
             app.UseDeveloperExceptionPage();
-          
+
 
         }
 

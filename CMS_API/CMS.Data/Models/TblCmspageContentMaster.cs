@@ -9,6 +9,7 @@ namespace CMS.Data.Models
     {
         public long Id { get; set; }
         public long PageId { get; set; }
+
         public string Heading { get; set; }
         public string Content { get; set; }
         public int? SortedOrder { get; set; }

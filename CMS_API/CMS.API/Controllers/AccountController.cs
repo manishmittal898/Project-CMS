@@ -27,21 +27,7 @@ namespace CMS.API.Controllers
             _accountService = accountService;
             _config = config;
         }
-        //[HttpGet]
-        //public string getToken()
-        //{
-        //    var obj = new
-        //    {
-        //        Username = "kuldeep",
-        //        UserType = "Admin",
-        //        EmailAddress = "kuldeep@nisha.com"
-        //    };
-
-
-        //    return GenerateJSONWebToken(obj);
-        //}
-
-
+       
         [HttpPost]
         [AllowAnonymous]
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)

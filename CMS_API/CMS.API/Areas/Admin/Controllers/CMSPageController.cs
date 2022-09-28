@@ -2,9 +2,7 @@
 using CMS.Service.Services.CMSPage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,10 +29,10 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(long id)
+        public async Task<object> Get(long id)
         
         {
-            return _service.GetById(id);
+            return await _service.GetById(id);
         }
 
         // POST api/<LookupMaster>

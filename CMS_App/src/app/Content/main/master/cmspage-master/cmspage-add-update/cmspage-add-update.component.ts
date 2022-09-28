@@ -80,7 +80,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   getDetails() {
-    debugger
+    
     this._cmsPageService.GetDetails(this.id).subscribe(res => {
       debugger
       if (res.IsSuccess) {
