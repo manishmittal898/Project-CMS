@@ -175,14 +175,5 @@ namespace CMS.Service.Services.CMSPage
             }
         }
 
-        public Task<ServiceResponse<TblCmspageContentMaster>> ActiveStatusUpdate(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ServiceResponse<TblCmspageContentMaster>> Delete(long id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

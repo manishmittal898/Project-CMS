@@ -29,7 +29,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   constructor(private readonly fb: FormBuilder, private _router: Router, private _activatedRoute: ActivatedRoute, readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService) {
     _activatedRoute.params.subscribe(x => {
-      this.pageName = this._activatedRoute.snapshot.params.name;
+      this.pageName = this._activatedRoute.snapshot.params.name.split('_').join(' ');
     })
 
     _activatedRoute.queryParamMap.subscribe(x => {
@@ -69,7 +69,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
       if (res.IsSuccess) {
         this.model.Id = Number(res.Data);
         this.postModel.push(this.model);
-      //  this.postModel.sort()
+        //  this.postModel.sort()
         this.model = {} as CMSPagePostModel;
         this.formgrp.reset();
         this.toast.success(res.Message as string);
