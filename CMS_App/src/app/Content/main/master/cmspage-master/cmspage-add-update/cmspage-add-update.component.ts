@@ -109,6 +109,12 @@ export class CMSPageAddUpdateComponent implements OnInit {
     this.model = item;
   }
 
+  deleteItem(item: CMSPagePostModel) {
+    const idx = this.postModel.findIndex(x => x.Id !== item.Id);
+    if (idx >= 0) {
+      this.postModel.splice(idx, 1);
+    }
+  }
 
 
 }
