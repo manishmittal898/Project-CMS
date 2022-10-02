@@ -81,8 +81,8 @@ export class API_Url {
   public static CMSPageList_Api = `${environment.apiEndPoint}admin/CMSPage/get`;
   public static CMSPageDetail_Api = `${environment.apiEndPoint}admin/CMSPage/Get/`;
   public static CMSPageAddUpdate_Api = `${environment.apiEndPoint}admin/CMSPage/Save`;
-  public static CMSPageChangeActiveStatus_Api = `${environment.apiEndPoint}admin/CMSPage/ChangeActiveStatus/`;
-  public static CMSPageDelete_Api = `${environment.apiEndPoint}admin/CMSPage/delete/`;
+  public static CMSContentChangeActiveStatus_Api = `${environment.apiEndPoint}admin/CMSPage/ChangeActiveStatus/`;
+  public static CMSContentDelete_Api = `${environment.apiEndPoint}admin/CMSPage/delete/`;
   //#endregion
 
   //#region <<Customer Registration>>

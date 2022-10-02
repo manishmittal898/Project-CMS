@@ -33,20 +33,20 @@ namespace CMS.Service.Services.CMSPage
     public class CMSPagePostModel
     {
         public long Id { get; set; }
+        [Required]
         public long PageId { get; set; }
-
-        
+                
         [Display(Name = "Heading*")]
-        [StringLength(2000, ErrorMessage = "The {0} char length smaller than {1}.")]
+        //[StringLength(2000, ErrorMessage = "The {0} char length smaller than {1}.")]
         public string Heading { get; set; }
        
         [Required]
         [Display(Name = "Content*")]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        //[StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
 
         public string Content { get; set; }
         [Required]
-        [Display(Name = "SortedOrder*")]
+        [Display(Name = "SortedOrder")]
         public int? SortedOrder { get; set; }
 
     }

@@ -33,6 +33,15 @@ export class CMSPageMasterService {
     let url = `${this._baseService.API_Url.LookupMasterDelete_Api}${id}/${status}`;
     return this._baseService.Delete(url);
   }
+
+  ChangeCMSContentActiveStatus(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+    let url = `${this._baseService.API_Url.CMSContentChangeActiveStatus_Api}${id}`;
+    return this._baseService.get(url);
+  }
+  DeleteCMSContent(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+    let url = `${this._baseService.API_Url.CMSContentDelete_Api}${id}`;
+    return this._baseService.Delete(url);
+  }
 }
 export interface CMSPageViewModel {
   Id: number;

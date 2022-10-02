@@ -62,6 +62,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
 
   SaveData() {
     debugger
+    this.model.Id = this.model.Id > 0 ? this.model.Id : 0;
     this.model.PageId = this.id;
     this.model.SortedOrder = Number(this.model.SortedOrder);
     this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
@@ -110,9 +111,21 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   deleteItem(item: CMSPagePostModel) {
-    const idx = this.postModel.findIndex(x => x.Id !== item.Id);
+    debugger
+    const idx = this.postModel.findIndex(x => x.Id === item.Id);
     if (idx >= 0) {
-      this.postModel.splice(idx, 1);
+      this._cmsPageService.DeleteCMSContent(item.Id).subscribe(res => {
+        debugger
+        if (res.IsSuccess) {
+          this.postModel.splice(idx, 1);
+        }
+      },
+        error => {
+          debugger
+          console.log(error);
+        })
+
+
     }
   }
 
