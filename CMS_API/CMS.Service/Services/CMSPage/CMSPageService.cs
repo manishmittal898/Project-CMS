@@ -130,9 +130,6 @@ namespace CMS.Service.Services.CMSPage
             try
             {
 
-
-
-
                 if (model.Id > 0)
                 {
 
@@ -175,5 +172,44 @@ namespace CMS.Service.Services.CMSPage
             }
         }
 
+        public async Task<ServiceResponse<string>> ActiveStatusUpdate(long id)
+        {
+            try
+            {
+
+                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == id);
+                objData.IsActive = !objData.IsActive;
+                objData.ModifiedOn = DateTime.Now;
+                objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                var dataResult = _db.TblCmspageContentMasters.Update(objData);
+                _db.SaveChanges();
+                return CreateResponse(id.ToString(), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+            }
+        }
+
+        public async Task<ServiceResponse<string>> Delete(long id)
+        {
+            try
+            {
+
+                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == id);
+                objData.IsDeleted = !objData.IsDeleted;
+                objData.ModifiedOn = DateTime.Now;
+                objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                var dataResult = _db.TblCmspageContentMasters.Update(objData);
+                _db.SaveChanges();
+                return CreateResponse(id.ToString(), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+            }
+        }
     }
 }

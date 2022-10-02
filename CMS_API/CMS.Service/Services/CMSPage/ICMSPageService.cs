@@ -12,8 +12,8 @@ namespace CMS.Service.Services.CMSPage
         Task<ServiceResponse<IEnumerable<CMSPageListViewModel>>> GetList(IndexModel model);
         Task<ServiceResponse<List<CMSPageViewModel>>> GetById(long id);
         Task<ServiceResponse<string>> Save(CMSPagePostModel model);
-        Task<ServiceResponse<TblCmspageContentMaster>> ActiveStatusUpdate(long id);
+        Task<ServiceResponse<string>> ActiveStatusUpdate(long id);
 
-        Task<ServiceResponse<TblCmspageContentMaster>> Delete(long id);
+        Task<ServiceResponse<string>> Delete(long id);
     }
 }
