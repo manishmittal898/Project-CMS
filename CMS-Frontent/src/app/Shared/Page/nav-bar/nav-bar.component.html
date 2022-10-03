@@ -41,25 +41,7 @@
               </li>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
                   routerLink="/store"> Store </a> </li>
-              <!--
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="javascript:void()" id="DropDown1"
-                                    data-bs-toggle="dropdown">
-                                    Category
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" routerLink="/store">All Product</a></li>
-                                    <li><a class="dropdown-item" href="#">Category wise</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 3</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 4</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 5</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 6</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 7</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 8</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 9</a></li>
-                                    <li><a class="dropdown-item" href="#">Submenu 10</a></li>
-                                </ul>
-                            </li> -->
+           
               <li class="nav-item dropdown" *ngIf="this.menuModel">
                 <a class="nav-link dropdown-toggle" href="javascript:void()" id="DropDown1" data-bs-toggle="dropdown">
                   Collections
@@ -77,17 +59,20 @@
                         </button>
                         <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'collection_'+ind"
                           data-bs-parent="#NavCollections">
-                          <li><a class="dropdown-item" href="javascript:void()" [routerLink]="['store/'+item.Category.split(' ').join('_')]"
+                          <li><a class="dropdown-item" href="javascript:void()"
+                              [routerLink]="['store/'+item.Category.split(' ').join('_')]"
                               [queryParams]="{id:item.CategoryId, subid: sitem.Value}" href="#">{{sitem.Text}}</a></li>
 
                         </ul>
                       </div>
 
- 
+
                     </div>
                   </div>
                 </ul>
               </li>
+              <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
+                  routerLink="/page/about_us?id=1"> About Us </a> </li>
             </ul>
           </div>
         </div>

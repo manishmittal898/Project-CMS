@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { MainComponent } from './main.component';
+import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
 
 const routes: Routes = [
   {
@@ -26,8 +27,10 @@ const routes: Routes = [
     },
     {
       component: ProductDetailComponent, path: 'store/:name/:id'
+    },
+    {
+      component: CMSPageContentComponent, path: 'page/:name'
     }
-
 
     ]
   }

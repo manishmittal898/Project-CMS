@@ -8,6 +8,7 @@ import { MainComponent } from './main.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { HomeComponent } from './home/home.component';
+import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
 
 @NgModule({
   declarations: [HomeComponent,
@@ -15,7 +16,8 @@ import { HomeComponent } from './home/home.component';
     ProductDetailComponent,
     MainComponent,
     CategoryProductListComponent,
-    ProductFilterComponent],
+    ProductFilterComponent,
+    CMSPageContentComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
