@@ -110,28 +110,37 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   editItem(item: CMSPagePostModel) {
-    this.postModel = this.postModel.filter(x => x.Id !== item.Id);
-    this.model = item;
+
+    this.model = Object.assign({}, item);
   }
 
   deleteItem(item: CMSPagePostModel) {
-    debugger
-    const idx = this.postModel.findIndex(x => x.Id === item.Id);
-    if (idx >= 0) {
-      this._cmsPageService.DeleteCMSContent(item.Id).subscribe(res => {
-        debugger
-        if (res.IsSuccess) {
-          this.postModel.splice(idx, 1);
+    this._commonService.Question(Message.DeleteConfirmation as string).then(isTrue => {
+      if (isTrue) {
+
+        const idx = this.postModel.findIndex(x => x.Id === item.Id);
+        if (idx >= 0) {
+          this._cmsPageService.DeleteCMSContent(item.Id).subscribe(res => {
+            if (res.IsSuccess) {
+              this.postModel.splice(idx, 1);
+              this.toast.success(Message.DeleteSuccess as string);
+
+            }
+          },
+            error => {
+              console.log(error);
+              this.toast.error(Message.DeleteFail as string);
+            })
+
+
         }
-      },
-        error => {
-          debugger
-          console.log(error);
-        })
-
-
-    }
+      }
+    });
   }
 
+  onCancel() {
+    this.model = {} as CMSPagePostModel;
+    this.formgrp.reset();
+  }
 
 }

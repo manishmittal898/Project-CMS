@@ -44,8 +44,8 @@
         <!-- <angular-editor [(ngModel)]="model.Heading" formControlName="Heading" [config]="editorConfig"
           placeholder="Heading" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading">
         </angular-editor> -->
-        <textarea [(ngModel)]="model.Heading" formControlName="Heading" placeholder="Heading"
-        class="form-control" rows="5" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading"></textarea>
+        <textarea [(ngModel)]="model.Heading" formControlName="Heading" placeholder="Heading" class="form-control"
+          rows="5" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading"></textarea>
 
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Heading')?.hasError('required') && formgrp.get('Heading')?.touched)">
@@ -67,7 +67,8 @@
     </div>
     <div class="form-footer-btn-grp widget-content widget-content pt-0 text-center">
       <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Save</button>
-      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+      <button type="button" class="btn btn-outline-danger" (click)="onCancel()"> <i class="fas fa-times mr-1"></i>
+        Cancel</button>
     </div>
   </form>
 
@@ -77,13 +78,16 @@
     </div>
 
     <ng-container *ngFor="let item of postModel">
-      <div class="col-md-12" [innerHtml]="item.Heading">
-      </div>
-      <div class="col-md-12" [innerHtml]="item.Content"></div>
-      <div class="col-md-12 mb-2 mt-1">
-        <button class="btn btn-primary" (click)="editItem(item)"><i class="bi bi-pencil-square"></i> Edit</button>
-        <button class="btn btn-danger" (click)="deleteItem(item)"><i class="bi bi-trash"></i> delete</button>
-      </div>
+      <ng-container *ngIf="item.Id!==model.Id">
+        <div class="col-md-12" [innerHtml]="item.Heading">
+        </div>
+        <div class="col-md-12" [innerHtml]="item.Content"></div>
+        <div class="col-md-12 mb-2 mt-1">
+          <button class="btn btn-primary" (click)="editItem(item)"><i class="bi bi-pencil-square"></i> Edit</button>
+          <button class="btn btn-danger" (click)="deleteItem(item)"><i class="bi bi-trash"></i> delete</button>
+        </div>
+      </ng-container>
+
 
 
     </ng-container>
