@@ -11,21 +11,23 @@ export class DropDown_key {
   static ddlCategory = "ddlCategory";
   static ddlProductSize = "ddlProductSize"
   static ddlLookup = "ddllookup"
-  static ddlLookupGroup ="ddlLookupGroup";
+  static ddlLookupGroup = "ddlLookupGroup";
   static ddlSublookup = "ddlSublookup";
-  static ddlSubLookupGroup ="ddlSubLookupGroup";
+  static ddlSubLookupGroup = "ddlSubLookupGroup";
+  static ddlCMSPage = "ddlCMSPage";
+
 
 
 }
 
 export class API_Url {
 
-   //#region <<Common >>
-   public static DropDown_Api = `${environment.apiEndPoint}Dropdown/GetDropDown`;
-   public static FilterDropDown_Api = `${environment.apiEndPoint}Dropdown/GetFilterDropDown`;
-   public static MultipleFilterDropDown_Api = `${environment.apiEndPoint}Dropdown/GetMultipleFilterDropDown`;
+  //#region <<Common >>
+  public static DropDown_Api = `${environment.apiEndPoint}Dropdown/GetDropDown`;
+  public static FilterDropDown_Api = `${environment.apiEndPoint}Dropdown/GetFilterDropDown`;
+  public static MultipleFilterDropDown_Api = `${environment.apiEndPoint}Dropdown/GetMultipleFilterDropDown`;
 
-   //#endregion
+  //#endregion
 
 
   //#region  << Product  >>

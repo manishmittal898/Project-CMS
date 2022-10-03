@@ -1,7 +1,7 @@
 import { DropDown_key } from 'src/app/Shared/Constant';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../Services/common.service';
-import { DropDownModel, GroupDropDownItem } from '../../Helper/Common';
+import { DropDownItem, DropDownModel, GroupDropDownItem } from '../../Helper/Common';
 import { SecurityService } from '../../Services/security.service';
 
 @Component({
@@ -11,11 +11,14 @@ import { SecurityService } from '../../Services/security.service';
 })
 export class NavBarComponent implements OnInit {
   menuModel: GroupDropDownItem[];
+  cmsPageMenu: DropDownItem[];
   constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService) {
-    if (this._securityService.getStorage('collections')) {
-      this.menuModel = JSON.parse(this._securityService.getStorage('collections'));
+    if (this._securityService.getStorage('nav-collections-menu')) {
+      this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
     }
-
+    if (this._securityService.getStorage('nav-cms-page-menu')) {
+      this.cmsPageMenu = JSON.parse(this._securityService.getStorage('nav-cms-page-menu'));
+    }
 
   }
 
@@ -24,13 +27,19 @@ export class NavBarComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup], true).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
+        debugger
         const ddls = res?.Data as DropDownModel;
 
-        this.menuModel = ddls.ddlLookupGroup
-        this._securityService.setStorage('collections', JSON.stringify(this.menuModel))
+        this.menuModel = ddls.ddlLookupGroup;
+        this.cmsPageMenu = ddls.ddlCMSPage;
+
+        this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel))
+        this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
+
+
       }
     });
   }

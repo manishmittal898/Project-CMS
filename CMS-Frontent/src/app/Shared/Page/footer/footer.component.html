@@ -14,18 +14,13 @@
           <li> <a href="javascript:void(0)">Category name 5</a></li>
         </ul>
       </div>
-      <div class="col-md-3 mb-3 mb-md-0">
+      <div class="col-md-3 mb-3 mb-md-0" *ngIf="cmsPageMenu?.length>0">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Footer2">
           Other Links
         </button>
         <ul class="footer-link collapse mt-2 mt-md-0" id="Footer2" data-bs-parent="#Footer">
-
-
-          <li> <a routerLink="/page/about_us?id=1" href="javascript:void(0)">About us</a></li>
-          <li> <a routerLink="/page/about_us?id=1" href="javascript:void(0)">Terms & Condition</a></li>
-          <li> <a routerLink="/page/about_us?id=1" href="javascript:void(0)">Privacy Policy</a></li>
-          <li> <a routerLink="/page/about_us?id=1" href="javascript:void(0)">Website Policy</a></li>
-          <li> <a routerLink="/page/about_us?id=1" href="javascript:void(0)">Contact us</a></li>
+          <li *ngFor="let itm of cmsPageMenu"> <a [routerLink]="['/page/'+itm.Text]" [queryParams]="{id : itm.Value}"
+              href="javascript:void(0)"> {{itm.Text | titlecase}}</a></li>
         </ul>
       </div>
       <div class="col-md-3 mb-3 mb-md-0">

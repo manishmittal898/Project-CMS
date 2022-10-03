@@ -74,6 +74,11 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, GetGroupLookupMasters(null, LookupTypeEnum.Product_Category.GetStringValue(), isTransactionData));
                             break;
 
+                        case DropDownKey.ddlCMSPage:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.CMS_Page.GetStringValue(), true));
+                            break;
+
 
 
 
@@ -153,9 +158,27 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete && (!isTransactionData || (isTransactionData && type.TblProductMasterCategories.Any(x => x.Category.Id == type.Id))) select type).OrderBy(x => x.SortedOrder)
-                     .Select(r => new { Text = r.Name, Value = r.Id })
-                     .ToListAsync();
+                var data = (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type);
+                if (isTransactionData)
+                {
+
+                    if (lktype == LookupTypeEnum.Product_Category.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterCategories.Any(y => y.Category.Id == x.Id));
+                    }
+                    else if (lktype == LookupTypeEnum.CMS_Page.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblCmspageContentMasters.Any(y => y.PageId == x.Id && y.IsDeleted == false && y.IsActive == true));
+
+                    }
+
+
+                }
+
+
+                return await data.OrderBy(x => x.SortedOrder)
+                    .Select(r => new { Text = r.Name, Value = r.Id })
+                    .ToListAsync();
 
             }
             catch

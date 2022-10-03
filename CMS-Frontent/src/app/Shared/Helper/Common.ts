@@ -103,6 +103,8 @@ export class DropDownModel {
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
   ddlSubLookupGroup!: GroupDropDownItem[];
+  ddlCMSPage!: DropDownItem[];
+
 
 }
 
