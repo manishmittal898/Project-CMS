@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { CMSPageService, CMSPageViewModel } from '../../Shared/Services/cmspage.service';
 
 @Component({
   selector: 'app-cmspage-content',
@@ -9,17 +10,31 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CMSPageContentComponent implements OnInit {
   recordId: number;
+  model = [] as CMSPageViewModel[];
 
-  constructor(private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer) {
+  constructor(private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private _cmsPageService: CMSPageService) {
 
   }
 
   ngOnInit(): void {
     this._route.queryParams.subscribe(x => {
-      debugger
-      this.recordId = x.id;
-
+      this.recordId = x?.id;
+      this.getDetails();
     });
   }
+
+  getDetails() {
+    this._cmsPageService.GetDetails(this.recordId).subscribe(res => {
+      if (res.IsSuccess) {
+        debugger
+        const data = res.Data;
+        this.model = data.sort(x => x.SortedOrder);
+      }
+    },
+      error => {
+        console.log(error);
+      })
+  }
+
 
 }

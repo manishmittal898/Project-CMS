@@ -1,1 +1,7 @@
-<p>cmspage-content works! {{this.recordId}}</p>
+<ng-container *ngIf="this.model.length>0">
+  <div *ngFor="let item of this.model">
+    {{item?.Heading}}
+    <br />
+    {{item?.Content}}
+  </div>
+</ng-container>

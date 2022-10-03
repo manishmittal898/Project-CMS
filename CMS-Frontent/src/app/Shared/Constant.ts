@@ -37,4 +37,13 @@ export class API_Url {
 
 
   //#endregion
+
+    //#region  << CMS Page  >>
+    public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;
+
+
+    //#endregion
+
+
+
 }
