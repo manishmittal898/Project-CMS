@@ -62,23 +62,27 @@ export class CMSPageAddUpdateComponent implements OnInit {
 
   SaveData() {
     debugger
-    this.model.Id = this.model.Id > 0 ? this.model.Id : 0;
-    this.model.PageId = this.id;
-    this.model.SortedOrder = Number(this.model.SortedOrder);
-    this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
-      debugger
-      if (res.IsSuccess) {
-        this.model.Id = Number(res.Data);
-        this.postModel.push(this.model);
-        //  this.postModel.sort()
-        this.model = {} as CMSPagePostModel;
-        this.formgrp.reset();
-        this.toast.success(res.Message as string);
-      } else {
-        this.toast.error(res.Message as string);
+    this.formgrp.markAllAsTouched();
+    if (this.formgrp.valid) {
+      this.model.Id = this.model.Id > 0 ? this.model.Id : 0;
+      this.model.PageId = this.id;
+      this.model.SortedOrder = Number(this.model.SortedOrder);
+      this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
+        debugger
+        if (res.IsSuccess) {
+          this.model.Id = Number(res.Data);
+          this.postModel.push(this.model);
+          //  this.postModel.sort()
+          this.model = {} as CMSPagePostModel;
+          this.formgrp.reset();
+          this.toast.success(res.Message as string);
+        } else {
+          this.toast.error(res.Message as string);
 
-      }
-    })
+        }
+      })
+    }
+
   }
 
   getDetails() {
