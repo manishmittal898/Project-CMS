@@ -4200,6 +4200,9 @@ form .icon-login-form {
 .theme-dark .widget.box .widget-header {
     background: #fff4d1;
 }
+.theme-dark .table-header thead {
+  background: #c19300 !important;
+}
 
 .theme-dark .btn-dark {
     background-color: #000000;
@@ -4238,7 +4241,9 @@ form .icon-login-form {
     border-right: 20px solid #132da7;
 }
 
-
+.theme-primary .table-header thead {
+  background: #021778 !important;
+}
 /* Theme Primary End */
 
 
@@ -4263,6 +4268,9 @@ form .icon-login-form {
     background: #def3ef;
 }
 
+.theme-green .table-header thead {
+  background: #ad7441 !important;
+}
 .theme-green .btn-dark {
     background-color: #ba895d;
     border-color: #ba895d;

@@ -92,7 +92,7 @@
                 </a>
 
                 <a class="table-action-btn-edit" routerLink="./{{row.Name.split(' ').join('_')}}"
-                  [queryParams]="{id: row.PageId}" title="Change Content">
+                  [queryParams]="{id: row.PageId}" data-title="Change Content">
                   <i class="bi bi-file-earmark-richtext"></i>
                 </a>
                 <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.PageId)" data-title="Delete"> <i
