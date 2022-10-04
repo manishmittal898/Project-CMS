@@ -4742,8 +4742,78 @@ td.mat-footer-cell:last-of-type {
     background: #fff;
     color: #000;
 }
+.angular-editor-textarea {
+  white-space: normal;
+  word-break: break-all;
+  border: 1px solid #e2e2e2 !important;
+}
+.angular-editor-toolbar {
+  background-color: #f0f5ff !important;
+  border: none !important;
+  padding: 7px 10px 3px 10px !important;
+}
+.angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button {
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  box-shadow: 0 0 20px #e3e3e3;
+  margin: 0px 2px;
+}
 
+.cmis-page-create-from {
+  flex: 1 1 62%;
+}
+.cmis-page-preview {
+  flex: 1 1 38%;
+  padding-left: 25px;
+}
 
+.cmis-page-preview-body {
+  max-height: 546px;
+  overflow: auto;
+  background: #fbfbfb;
+  padding: 10px;
+  border-radius: 5px;
+}
+.cmis-page-preview-header {
+  font-size: 20px;
+  color: #002767;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.angular-fix-min-height .angular-editor-textarea
+{
+  min-height: 200px !important;
+}
+.cmis-page-preview-items .cmis-page-preview-items-action-info h3 {
+  margin: 0px 0px 5px 0px;
+  color: #000;
+  font-weight: 600;
+  font-size: 22px;
+}
+.cmis-page-preview-items .cmis-page-preview-items-action-info p {
+  line-height: 22px;
+  font-size: 14px;
+}
+.cmis-page-preview-items-action .cmis-page-preview-items-action-btn {
+  font-size: 15px;
+  margin-right: 10px;
+}
+.cmis-page-preview .cmis-page-preview-body .cmis-page-preview-items {
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px #f1f1f1;
+  margin-bottom: 15px;
+}
+.cmis-page-preview .cmis-page-preview-body .cmis-page-preview-items:last-child {
+  margin: 0px;
+}
 /* i.fas.fa-times:hover
 {
   -webkit-transform: rotate(180deg);
@@ -4767,6 +4837,19 @@ td.mat-footer-cell:last-of-type {
     .product-detail-img-tab .nav-item img {
         max-height: 70px;
     }
+}
+@media (max-width: 1392px) {
+  .cmis-page-create-from {
+    flex: 1 1 100%;
+}
+  .cmis-page-preview {
+    flex: 1 1 100%;
+    padding-left: 0px;
+    margin-top: 25px;
+}
+.cmis-page-preview-body {
+  max-height: initial;
+}
 }
 
 @media (max-width: 767px) {

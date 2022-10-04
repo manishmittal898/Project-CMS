@@ -19,13 +19,15 @@
 <!-- Page Header Title end -->
 
 
-<div class="custom-form p-4">
-  <form [formGroup]="formgrp" (ngSubmit)="SaveData()">
+<div class="p-4 row m-0">
+
+  <div class="cmis-page-create-from">
+    <form [formGroup]="formgrp" (ngSubmit)="SaveData()">
 
 
     <div class="form-row">
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-12">
         <label>Display order</label>
         <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
           [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
@@ -54,7 +56,7 @@
 
       <div class="form-group col-md-12">
         <label>Content</label>
-        <angular-editor [(ngModel)]="model.Content" formControlName="Content" [config]="editorConfig"
+        <angular-editor class="angular-fix-min-height" [(ngModel)]="model.Content" formControlName="Content" [config]="editorConfig"
           placeholder="Content" [ngClass]="{ 'is-invalid': f.Content.errors && f.Content.touched}" id="Content">
         </angular-editor>
 
@@ -71,27 +73,32 @@
         Cancel</button>
     </div>
   </form>
+</div>
 
-  <div class="row">
-    <div class="col-md-12">
-      Preview
+
+  <div class="cmis-page-preview" *ngIf="postModel?.length">
+
+      <div class="cmis-page-preview-header"> <i class="bi bi-eye"></i> Preview </div>
+
+       <div class="cmis-page-preview-body">
+      <ng-container *ngFor="let item of postModel">
+        <div class="cmis-page-preview-items">
+        <ng-container *ngIf="item.Id!==model.Id">
+          <div class="cmis-page-preview-items-action-info">
+          <h3 [innerHtml]="item.Heading"></h3>
+          <p class="m-0" [innerHtml]="item.Content"></p>
+        </div>
+          <div class="cmis-page-preview-items-action mt-3 text-right pr-2">
+            <a href="javascript:void()" class="cmis-page-preview-items-action-btn text-dark" (click)="editItem(item)" data-title="Edit"><i class="bi bi-pencil-square"></i></a>
+            <a href="javascript:void()" class="cmis-page-preview-items-action-btn text-danger" (click)="deleteItem(item)" data-title="Delete"><i class="bi bi-trash"></i></a>
+          </div>
+        </ng-container>
+      </div>
+      </ng-container>
     </div>
 
-    <ng-container *ngFor="let item of postModel">
-      <ng-container *ngIf="item.Id!==model.Id">
-        <div class="col-md-12" [innerHtml]="item.Heading">
-        </div>
-        <div class="col-md-12" [innerHtml]="item.Content"></div>
-        <div class="col-md-12 mb-2 mt-1">
-          <button class="btn btn-primary" (click)="editItem(item)"><i class="bi bi-pencil-square"></i> Edit</button>
-          <button class="btn btn-danger" (click)="deleteItem(item)"><i class="bi bi-trash"></i> delete</button>
-        </div>
-      </ng-container>
-
-
-
-    </ng-container>
-
-
   </div>
+
+
+
 </div>

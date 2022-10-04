@@ -61,14 +61,14 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   SaveData() {
-    debugger
+
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
       this.model.Id = this.model.Id > 0 ? this.model.Id : 0;
       this.model.PageId = this.id;
       this.model.SortedOrder = Number(this.model.SortedOrder);
       this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
-        debugger
+
         if (res.IsSuccess) {
           this.model.Id = Number(res.Data);
           this.postModel.push(this.model);
@@ -88,7 +88,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   getDetails() {
 
     this._cmsPageService.GetDetails(this.id).subscribe(res => {
-      debugger
+
       if (res.IsSuccess) {
         const data = res.Data;
         this.postModel = [];
@@ -104,7 +104,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
       }
     },
       error => {
-        debugger
+
         console.log(error);
       })
   }
