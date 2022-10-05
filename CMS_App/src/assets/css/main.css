@@ -4800,6 +4800,10 @@ td.mat-footer-cell:last-of-type {
   line-height: 22px;
   font-size: 14px;
 }
+.cmis-page-preview-items .cmis-page-preview-items-action-info p p {
+  margin: 0px;
+}
+
 .cmis-page-preview-items-action .cmis-page-preview-items-action-btn {
   font-size: 15px;
   margin-right: 10px;
