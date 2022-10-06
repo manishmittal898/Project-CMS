@@ -30,8 +30,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
     private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService) {
     _activatedRoute.params.subscribe(x => {
       this.pageName = this._activatedRoute.snapshot.params.name.split('_').join(' ');
-    })
-
+    });
     _activatedRoute.queryParamMap.subscribe(x => {
       this.id = Number(x.get('id'))
     });
@@ -55,7 +54,6 @@ export class CMSPageAddUpdateComponent implements OnInit {
       }
     } else {
       this.toast.warning(Message.VerifyInput);
-
     }
 
   }
@@ -85,9 +83,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   getDetails() {
-
     this._cmsPageService.GetDetails(this.id).subscribe(res => {
-
       if (res.IsSuccess) {
         const data = res.Data;
         this.postModel = [];
@@ -103,7 +99,6 @@ export class CMSPageAddUpdateComponent implements OnInit {
       }
     },
       error => {
-
         console.log(error);
       })
   }
@@ -113,8 +108,6 @@ export class CMSPageAddUpdateComponent implements OnInit {
     if (idx >= 0) {
         this.postModel.splice(idx, 1);
     }
-
-
     this.model = Object.assign({}, item);
   }
 
