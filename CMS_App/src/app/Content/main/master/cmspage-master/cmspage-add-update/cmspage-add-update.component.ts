@@ -72,7 +72,6 @@ export class CMSPageAddUpdateComponent implements OnInit {
         if (res.IsSuccess) {
           this.model.Id = Number(res.Data);
           this.postModel.push(this.model);
-          //  this.postModel.sort()
           this.model = {} as CMSPagePostModel;
           this.formgrp.reset();
           this.toast.success(res.Message as string);
@@ -110,6 +109,11 @@ export class CMSPageAddUpdateComponent implements OnInit {
   }
 
   editItem(item: CMSPagePostModel) {
+    const idx = this.postModel.findIndex(x => x.Id === item.Id);
+    if (idx >= 0) {
+        this.postModel.splice(idx, 1);
+    }
+
 
     this.model = Object.assign({}, item);
   }
