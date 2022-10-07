@@ -231,6 +231,7 @@ img {
     outline: solid 1px var(--primary-color);
     background: #fff;
     color: var(--black);
+    outline-offset: -1px;
 }
 
 .btn-border:hover {
@@ -1569,6 +1570,63 @@ section.cmis-pages .cmis-pages-items-list h3 {
   margin-bottom: 10px;
   color: #000;
   font-weight: 600;
+}
+
+.cart-sidebar-body-cart .cart-sidebar-body-cart-items {
+  border-bottom: solid 1px #f1f1f1;
+}
+.cart-sidebar-body-cart .cart-sidebar-body-cart-items:last-of-type {
+  border: none;
+  padding-bottom: 0px !important;
+}
+.cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img {
+  height: 80px;
+  width: 80px;
+  flex: 0 0 80px;
+  min-width: 80px;
+  background: #f7f7f7;
+  border-radius: 4px;
+  margin-right: 15px;
+  overflow: hidden;
+}
+.cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img img
+{
+  max-width: 78px;
+  max-height: 78px;
+}
+.cart-sidebar-body-cart-items-info {
+  flex: auto;
+}
+.cart-sidebar-body-cart-items-info a {
+  color: #000;
+}
+.cart-sidebar-body-cart-items-info a:hover {
+  color: #303030;
+}
+.cart-sidebar-body-cart-items-info h1 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 20px;
+}
+.cart-sidebar-body-cart-items-info h2 {
+  font-size: 15px;
+  color: black;
+  margin: 5px 0px 0px 0px;
+}
+.cart-sidebar-body-cart-items-action {
+  font-size: 15px;
+}
+.cart-sidebar-body-cart-items-final-info-item h5 {
+  font-size: 17px;
+}
+.cart-sidebar-body-cart-items-final-info-item h5 strong {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.cart-sidebar-body-cart-items-final-action .btn {
+  flex: 1;
+  font-size: 15px;
 }
 /* CUSTOM CSS END */
 
