@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../Services/common.service';
 import { DropDownItem, DropDownModel, GroupDropDownItem } from '../../Helper/Common';
 import { SecurityService } from '../../Services/security.service';
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
+
 export class NavBarComponent implements OnInit {
   menuModel: GroupDropDownItem[];
   cmsPageMenu: DropDownItem[];
@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
     if (this._securityService.getStorage('nav-cms-page-menu')) {
       this.cmsPageMenu = JSON.parse(this._securityService.getStorage('nav-cms-page-menu'));
     }
-
   }
 
   ngOnInit(): void {
@@ -30,16 +29,11 @@ export class NavBarComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
-
         this.menuModel = ddls.ddlLookupGroup;
         this.cmsPageMenu = ddls.ddlCMSPage;
-
         this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel))
         this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
-
-
       }
     });
   }
