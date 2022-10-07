@@ -4200,6 +4200,9 @@ form .icon-login-form {
 .theme-dark .widget.box .widget-header {
     background: #fff4d1;
 }
+.theme-dark .angular-editor-toolbar {
+    background-color: #fffaea !important;
+}
 .theme-dark .table-header thead {
   background: #c19300 !important;
 }
@@ -4276,7 +4279,9 @@ form .icon-login-form {
     border-color: #ba895d;
 }
 
-
+.theme-green .angular-editor-toolbar {
+    background-color: #e8f3f2 !important;
+}
 /* Theme Green End */
 
 
