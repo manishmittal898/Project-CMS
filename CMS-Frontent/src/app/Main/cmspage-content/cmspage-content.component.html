@@ -20,8 +20,8 @@
       <div class="col-lg-12">
         <ng-container *ngIf="this.model.length>0">
           <div class="cmis-pages-items-list" *ngFor="let item of this.model">
-            <h3>{{item?.Heading}}</h3>
-            <p class="mb-0">{{item?.Content}}</p>
+            <h3 [innerHTML]="item?.Heading"></h3>
+            <p class="mb-0" [innerHTML]="item?.Content"></p>
           </div>
         </ng-container>
       </div>
