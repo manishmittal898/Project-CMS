@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../Services/common.service';
 import { DropDownItem, DropDownModel, GroupDropDownItem } from '../../Helper/Common';
 import { SecurityService } from '../../Services/security.service';
+import { x64 } from 'crypto-js';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -18,6 +19,7 @@ export class NavBarComponent implements OnInit {
     }
     if (this._securityService.getStorage('nav-cms-page-menu')) {
       this.cmsPageMenu = JSON.parse(this._securityService.getStorage('nav-cms-page-menu'));
+
     }
   }
 
@@ -30,13 +32,14 @@ export class NavBarComponent implements OnInit {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
+        debugger
         this.menuModel = ddls.ddlLookupGroup;
-        this.cmsPageMenu = ddls.ddlCMSPage;
+        this.cmsPageMenu = ddls.ddlCMSPage?.map(x => { return { Text: x.Text, Value: this._securityService.encrypt(String(x.Value)) } as DropDownItem });
+
         this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel))
         this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
       }
     });
   }
-
 
 }

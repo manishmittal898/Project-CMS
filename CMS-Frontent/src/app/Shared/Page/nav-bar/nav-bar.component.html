@@ -72,8 +72,8 @@
                 </ul>
               </li>
               <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
-                  href="javascript:void()" [routerLink]="['/page/'+itm.Text]" [queryParams]="{id : itm.Value}"
-                  routerLinkActive="router-link-active">
+                  href="javascript:void()" [routerLink]="['/page/'+itm.Text.split(' ').join('_')]"
+                  [queryParams]="{id :  itm.Value }" routerLinkActive="router-link-active">
                   {{itm.Text | titlecase}} </a> </li>
             </ul>
           </div>

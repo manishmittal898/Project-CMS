@@ -29,11 +29,11 @@ export class SecurityService {
   }
 
   encrypt(txt: string) {
-    return CryptoJS.DES.encrypt(txt, environment.AESKey?.trim()).toString();
+    return CryptoJS.AES?.encrypt(txt, environment.AESKey?.trim()).toString();
   }
 
   decrypt(txt: string) {
-    return CryptoJS.DES.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8);
   }
   private getKey(key) {
 
