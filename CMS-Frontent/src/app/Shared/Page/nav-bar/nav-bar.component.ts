@@ -32,7 +32,6 @@ export class NavBarComponent implements OnInit {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
-        debugger
         this.menuModel = ddls.ddlLookupGroup;
         this.cmsPageMenu = ddls.ddlCMSPage?.map(x => { return { Text: x.Text, Value: this._securityService.encrypt(String(x.Value)) } as DropDownItem });
 

@@ -203,9 +203,12 @@ img {
 }
 
 .carousel-caption h1 {
-    font-size: 4rem;
-    margin-bottom: 25px;
-    text-shadow: 5px 5px 20px #565656;
+  font-size: 3.2rem;
+  color: #000;
+  max-width: 700px;
+  margin: auto auto 30px auto;
+  line-height: 65px;
+    /* text-shadow: 5px 5px 20px #565656; */
 }
 
 .carousel-caption p {
@@ -1551,7 +1554,7 @@ body .ui-slider .ui-slider-range {
   height: auto;
   width: auto;
 }
-section.cmis-pages {
+section.inner-page-space {
   padding: 60px 0px 40px 0px;
 }
 section.cmis-pages .cmis-pages-items-list {
@@ -1627,6 +1630,71 @@ section.cmis-pages .cmis-pages-items-list h3 {
 .cart-sidebar-body-cart-items-final-action .btn {
   flex: 1;
   font-size: 15px;
+}
+.form-control-with-left-icon {
+  position: relative;
+}
+.form-control-with-left-icon input {
+  padding-left: 40px;
+}
+.form-control-with-left-icon i {
+  position: absolute;
+  font-size: 22px;
+  top: 6px;
+  left: 10px;
+}
+.form-check-input:focus {
+  box-shadow: 0 0 20px #b3b3b3;
+}
+
+/* Table CSS Start */
+table.table thead th {
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+}
+.table-v-align-middle th, .table-v-align-middle td {
+  vertical-align: middle;
+}
+table.table thead th, table.table thead td {
+  padding: 10px;
+}
+.table-shadow {
+  box-shadow: 0 0 20px #e7e7e7;
+  padding: 10px;
+  border-radius: 5px;
+  background: #fff;
+}
+table tr:last-child td {
+  border: none;
+}
+table tr td {
+  border-color: #f1f1f1;
+}
+/* Table CSS End */
+
+
+.cart-page-list-items-img {
+  height: 160px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  border-radius: 4px;
+  margin-right: 15px;
+  flex: 0 0 150px;
+  overflow: hidden;
+}
+
+.cart-page-list-items-img img {
+  max-height: 158px;
+  margin: auto;
+}
+
+.cart-page-list-items-description.d-flex {
+  flex: auto;
+  width: 100%;
 }
 /* CUSTOM CSS END */
 

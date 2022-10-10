@@ -27,7 +27,6 @@ export class FooterComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
 
         this.cmsPageMenu = ddls.ddlCMSPage;
