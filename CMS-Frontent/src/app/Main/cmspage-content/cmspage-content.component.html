@@ -1,15 +1,15 @@
-
 <!-- Breadcrum Start -->
 <nav aria-label="breadcrumb" class="inner-breadcrumb">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-12">
-              <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/home">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Page name</li>
-              </ol>
-          </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/home">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page" *ngIf="model.length>0">{{model[0]?.Page |titlecase}}
+          </li>
+        </ol>
       </div>
+    </div>
   </div>
 </nav>
 <!-- Breadcrum End -->
@@ -20,12 +20,11 @@
       <div class="col-lg-12">
         <ng-container *ngIf="this.model.length>0">
           <div class="cmis-pages-items-list" *ngFor="let item of this.model">
-            <h3>{{item?.Heading}}</h3>
-            <p class="mb-0">{{item?.Content}}</p>
+            <h3 [innerHTML]="item?.Heading"></h3>
+            <p class="mb-0" [innerHTML]="item?.Content"></p>
           </div>
         </ng-container>
       </div>
     </div>
   </div>
 </section>
-
