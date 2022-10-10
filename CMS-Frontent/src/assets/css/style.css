@@ -50,7 +50,7 @@ Text Domain:  StoreOne
 body {
     margin: 0px;
     padding: 0px;
-    font-family: 'Manrope', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 14px;
     overflow-x: hidden;
@@ -178,7 +178,7 @@ img {
 .navbar-expand-lg .navbar-nav .nav-link {
     padding: 0px 18px;
     color: rgba(0, 0, 0, .7);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     white-space: normal;
 }
@@ -1698,11 +1698,11 @@ table tr td {
   width: 100%;
 }
 .cart-page-list-items-description h3 {
-  font-size: 1.3rem;
-  line-height: 30px;
-  margin: 0px;
-  flex: 1 auto;
-  color: #444444;
+    font-size: 1.1rem;
+    line-height: 25px;
+    margin: 0px;
+    flex: 1 auto;
+    color: #444444;
 }
 .cart-page-list-items-action {
   margin-left: 15px;
