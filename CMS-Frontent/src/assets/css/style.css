@@ -1705,12 +1705,14 @@ table tr td {
     color: #444444;
 }
 .cart-page-list-items-action {
-  margin-left: 15px;
+  margin-left: 12px;
   color: #a1a1a1;
   display: block;
-  flex: auto;
+  min-width: 25px;
 }
-
+.cart-page-list-items-action:hover {
+  color: #000;
+}
 .cart-page-list-items-action i {
   font-size: 30px;
   line-height: 0;
@@ -1734,8 +1736,46 @@ table tr td {
   border: solid 1px #ccc;
 }
 .cart-page-list-items-price {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+}
+.cart-page-list .cart-page-list-items {
+  padding: 20px 0px;
+  border-bottom: solid 1px #f1f1f1;
+}
+
+
+.cart-page-list .cart-page-list-items:last-child {
+  border: none;
+  padding-bottom: 0px;
+}
+.btn-share-list a {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #565656;
+}
+.cart-discount-code .btn {
+  flex: 1 1 125px;
+}
+.cart-discount-code .btn {
+  flex: 1 1 125px;
+  margin-left: 8px;
+}
+.shopping-cart-summary-items p {
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.shopping-cart-summary-items strong {
+  font-size: 18px;
+}
+.shopping-cart-summary-action .btn {
+  font-size: 16px;
+  font-weight: 500;
+}
+.shopping-cart-pay-option img {
+  max-height: 24px;
+  margin: 0px 5px;
 }
 /* CUSTOM CSS END */
 
