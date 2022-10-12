@@ -53,7 +53,7 @@
           </h4>
 
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
-            Avail in stock: <strong>{{totalStock}}</strong>
+            Avail in stock : <strong> {{totalStock}} </strong>
           </div>
 
           <div class="product-add-info mb-3" *ngIf="model?.Summary">
@@ -84,10 +84,19 @@
               <li><a class="product-detail-size-btn" href="javascript:void()">XXL</a></li> -->
             </ul>
           </div>
-          <div class="btn-share-whatsapp">
-            <a [href]="shareLink" data-action="share/whatsapp/share"><i class="bi bi-whatsapp"></i> Share via
-              Whatsapp</a>
+
+          <div class="product-detail-share">
+          <strong>Share with</strong>
+          <div class="btn-share-list">
+            <a [href]="shareLink" data-action="share/whatsapp/share" class="text-success"><i class="bi bi-whatsapp"></i></a>
           </div>
+        </div>
+        <div class="product-detail-action-btn mt-3">
+          <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase "><i class="bi bi-bag me-1"></i>
+            Add to cart</button>
+          <button type="button" class="btn btn-default px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
+            checkout</button>
+        </div>
         </div>
       </div>
       <app-category-product-list [CategoryId]="model.CategoryId" [ExcludeId]="recordId"></app-category-product-list>
