@@ -1777,5 +1777,15 @@ table tr td {
   max-height: 24px;
   margin: 0px 5px;
 }
+
+.form-floating>.form-control, .form-floating>.form-select {
+  height: 48px;
+}
+
+.form-floating>label {
+  top: -5px;
+}
+
+
 /* CUSTOM CSS END */
 
