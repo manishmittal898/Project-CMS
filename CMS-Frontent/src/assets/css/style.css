@@ -915,6 +915,7 @@ input:focus-visible {
     padding: 4px;
     transform: translateY(-60px);
     transition: transform .3s ease-in-out;
+    z-index: 999999;
 }
 
 .product-list-hover-items-outside:hover .product-list-hover {
@@ -923,13 +924,19 @@ input:focus-visible {
 }
 
 .product-list-hover-items {
-    background: transparent;
-    border: none;
-    padding: 0px;
-    line-height: normal;
-    font-size: 18px;
-    color: #fff;
-    margin: 0px 12px;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 0px;
+  line-height: normal;
+  font-size: 16px;
+  color: #000;
+  margin: 0px 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
