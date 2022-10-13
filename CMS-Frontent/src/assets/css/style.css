@@ -1813,5 +1813,9 @@ table tr td {
   padding: 1px 5px;
 }
 
+.modal-alert h1 {
+  font-size: 1.4rem;
+  line-height: 35px;
+}
 /* CUSTOM CSS END */
 
