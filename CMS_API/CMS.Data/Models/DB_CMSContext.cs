@@ -18,6 +18,7 @@ namespace CMS.Data.Models
         }
 
         public virtual DbSet<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
+        public virtual DbSet<TblGecategoryMater> TblGecategoryMaters { get; set; }
         public virtual DbSet<TblLookupMaster> TblLookupMasters { get; set; }
         public virtual DbSet<TblLookupTypeMaster> TblLookupTypeMasters { get; set; }
         public virtual DbSet<TblProductImage> TblProductImages { get; set; }
@@ -76,6 +77,47 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.PageId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tblCMSPageContentMaster_PageId");
+            });
+
+            modelBuilder.Entity<TblGecategoryMater>(entity =>
+            {
+                entity.ToTable("tblGECategoryMater");
+
+                entity.HasIndex(e => e.EnumValue, "UQ__tblGECat__C06D7C17C041C8E7")
+                    .IsUnique();
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EnumValue)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagePath).HasMaxLength(4000);
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Name).HasMaxLength(500);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblGecategoryMaterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblGECategoryMater_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblGecategoryMaterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblGECategoryMater_ModifiedBy");
             });
 
             modelBuilder.Entity<TblLookupMaster>(entity =>

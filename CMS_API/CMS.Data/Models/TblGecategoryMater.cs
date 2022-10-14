@@ -5,22 +5,24 @@ using System.Collections.Generic;
 
 namespace CMS.Data.Models
 {
-    public partial class TblCmspageContentMaster
+    public partial class TblGecategoryMater
     {
         public long Id { get; set; }
-        public long PageId { get; set; }
-        public string Heading { get; set; }
-        public string Content { get; set; }
+        public string Name { get; set; }
+        public string EnumValue { get; set; }
+        public string ImagePath { get; set; }
+        public bool IsShowInMain { get; set; }
+        public bool IsShowDataInMain { get; set; }
+        public bool IsSingleEntry { get; set; }
         public int? SortedOrder { get; set; }
+        public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
-        public long? CreatedBy { get; set; }
+        public long ModifiedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
-        public long? ModifiedBy { get; set; }
         public bool? IsActive { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDelete { get; set; }
 
         public virtual TblUserMaster CreatedByNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
-        public virtual TblLookupMaster Page { get; set; }
     }
 }
