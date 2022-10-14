@@ -16,7 +16,7 @@
 <section class="inner-page-space cart-page">
   <div class="container">
     <div class="row">
-      <div class="col-lg-9 pe-2 pe-lg-5">
+      <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5">
         <div class="cart-page-list">
           <h5 class="mb-2"><i class="bi bi-bag me-1"></i> MY Cart Items : <strong> 5 </strong></h5>
           <div class="cart-page-list-items">
@@ -25,13 +25,13 @@
               <div class="cart-page-list-items-description">
                 <div class="d-flex align-items-start justify-content-between">
                   <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
-                  <a class="cart-page-list-items-action" href="javascript:void()"><i class="bi bi-x"></i></a>
+                  <a class="cart-page-list-items-action"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems" href="javascript:void()"><i  data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-x"></i></a>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-3">
-                  <div class="cart-page-list-qty d-flex">
-                    <button type="button" class="cart-page-list-qty-btn">-</button>
+                  <div class="cart-list-qty d-flex">
+                    <button type="button" class="cart-list-qty-btn">-</button>
                     <input type="text" placeholder="1">
-                    <button type="button" class="cart-page-list-qty-btn">+</button>
+                    <button type="button" class="cart-list-qty-btn">+</button>
                   </div>
                   <div class="cart-page-list-items-price"> ₹ 450 </div>
                 </div>
@@ -45,13 +45,13 @@
               <div class="cart-page-list-items-description">
                 <div class="d-flex align-items-start justify-content-between">
                   <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
-                  <a class="cart-page-list-items-action" href="javascript:void()"><i class="bi bi-x"></i></a>
+                  <a class="cart-page-list-items-action"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems" href="javascript:void()"><i  data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-x"></i></a>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-3">
-                  <div class="cart-page-list-qty d-flex">
-                    <button type="button" class="cart-page-list-qty-btn">-</button>
+                  <div class="cart-list-qty d-flex">
+                    <button type="button" class="cart-list-qty-btn">-</button>
                     <input type="text" placeholder="1">
-                    <button type="button" class="cart-page-list-qty-btn">+</button>
+                    <button type="button" class="cart-list-qty-btn">+</button>
                   </div>
                   <div class="cart-page-list-items-price"> ₹ 450 </div>
                 </div>
@@ -65,13 +65,13 @@
               <div class="cart-page-list-items-description">
                 <div class="d-flex align-items-start justify-content-between">
                   <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
-                  <a class="cart-page-list-items-action" href="javascript:void()"><i class="bi bi-x"></i></a>
+                  <a class="cart-page-list-items-action"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems" href="javascript:void()"><i  data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-x"></i></a>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-3">
-                  <div class="cart-page-list-qty d-flex">
-                    <button type="button" class="cart-page-list-qty-btn">-</button>
+                  <div class="cart-list-qty d-flex">
+                    <button type="button" class="cart-list-qty-btn">-</button>
                     <input type="text" placeholder="1">
-                    <button type="button" class="cart-page-list-qty-btn">+</button>
+                    <button type="button" class="cart-list-qty-btn">+</button>
                   </div>
                   <div class="cart-page-list-items-price"> ₹ 450 </div>
                 </div>
@@ -85,13 +85,13 @@
               <div class="cart-page-list-items-description">
                 <div class="d-flex align-items-start justify-content-between">
                   <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
-                  <a class="cart-page-list-items-action" href="javascript:void()"><i class="bi bi-x"></i></a>
+                  <a class="cart-page-list-items-action"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems" href="javascript:void()"><i  data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-x"></i></a>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-3">
-                  <div class="cart-page-list-qty d-flex">
-                    <button type="button" class="cart-page-list-qty-btn">-</button>
+                  <div class="cart-list-qty d-flex">
+                    <button type="button" class="cart-list-qty-btn">-</button>
                     <input type="text" placeholder="1">
-                    <button type="button" class="cart-page-list-qty-btn">+</button>
+                    <button type="button" class="cart-list-qty-btn">+</button>
                   </div>
                   <div class="cart-page-list-items-price"> ₹ 450 </div>
                 </div>
@@ -101,12 +101,15 @@
 
         </div>
       </div>
-      <div class="col-lg-3 mt-5 mt-lg-0">
+      <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0">
         <div class="shopping-cart-sidebar">
           <div class="cart-discount-code mb-4">
-            <h5 class="mb-2">Discount Code</h5>
+            <h5 class="mb-3">Discount Code</h5>
             <div class="d-flex">
-              <input type="text" placeholder="Enter promo code" class="form-control" />
+              <div class="form-floating">
+              <input type="text" id="PromoCode" placeholder="Enter promo code" class="form-control" />
+              <label for="ConfirmrNewPas">Promo Code</label>
+            </div>
               <button type="button" class="btn btn-default"> Apply </button>
             </div>
           </div>
@@ -129,7 +132,7 @@
             </div>
           </div>
           <div class="shopping-cart-summary-action mt-4">
-            <button type="button" class="btn btn-default px-3 text-uppercase w-100"><i class="bi bi-credit-card-2-front me-2"></i>Continue checkout</button>
+            <button type="button" class="btn btn-default px-3 text-uppercase w-100 py-2"><i class="bi bi-credit-card-2-front me-2"></i>Continue checkout</button>
           </div>
           <div class="shopping-cart-pay-option d-flex align-items-center justify-content-center mt-2">
             <img src="assets/images/paytm.png" style="max-width:50px;"/>
@@ -144,3 +147,25 @@
     </div>
   </div>
 </section>
+
+
+<!-- Delete cart items Modal Start -->
+<div class="modal fade modal-custom-design" id="DeleteCartItems" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i> </button>
+      </div>
+      <div class="modal-body p-4 modal-alert">
+        <h1 class="mb-0">
+          Are you sure want to delete this cart items from the shopping cart ?
+      </h1>
+      </div>
+      <div class="modal-footer pt-0">
+        <button type="button" class="btn btn-default px-3 py-2" data-bs-dismiss="modal"><i class="bi bi-trash me-1"></i> Delete</button>
+        <button type="button" class="btn btn-default btn-border px-3 py-2" data-bs-dismiss="modal" >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete cart items Modal End -->

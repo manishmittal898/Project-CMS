@@ -10,8 +10,8 @@
           <div class="navbar-user-icons">
             <a href="javascript:void()" data-title="Search" data-bs-toggle="offcanvas" data-bs-target="#GlobalSearch"><i
                 class="bi bi-search"></i></a>
-            <a [routerLink]="['/design/login']" routerLinkActive="router-link-active" href="javascript:void()"
-              data-title="Account"><i class="bi bi-person-circle"></i></a>
+            <a [routerLink]="['/design/login']" href="javascript:void()" data-title="Account"><i
+                class="bi bi-person-circle"></i></a>
             <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i
                 class="bi bi-bag"></i>
               <div class="Cart-count">5</div>
@@ -124,14 +124,28 @@
           <a href="javascript:void()">
             <h1>Rayon Long Flared Anarkali Kurti</h1>
             <div class="d-flex justify-content-between text-muted font-13">
-              <div> <strong>Size:</strong> L</div>
-              <div> <strong>Qty:</strong> 6</div>
+              <div> <strong>Size:</strong>
+                <select class="ms-2 select-mini text-uppercase">
+                  <option>s</option>
+                  <option>m</option>
+                  <option>l</option>
+                  <option>xl</option>
+                  <option>xxl</option>
+                </select>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong>Qty:</strong>
+                <div class="cart-list-qty d-flex ms-2">
+                  <button type="button" class="cart-list-qty-btn">-</button>
+                  <input type="text" placeholder="1">
+                  <button type="button" class="cart-list-qty-btn">+</button>
+                </div>
+              </div>
             </div>
             <h2>₹ 399</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-              title="Remove"> <i class="bi bi-trash"></i> </a>
+            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -142,14 +156,28 @@
           <a href="javascript:void()">
             <h1>Rayon Bandhani Printed Kurti with Pant</h1>
             <div class="d-flex justify-content-between text-muted font-13">
-              <div> <strong>Size:</strong> L</div>
-              <div> <strong>Qty:</strong> 6</div>
+              <div> <strong>Size:</strong>
+                <select class="ms-2 select-mini text-uppercase">
+                  <option>xxl</option>
+                  <option>m</option>
+                  <option>l</option>
+                  <option>xl</option>
+                  <option>xxl</option>
+                </select>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong>Qty:</strong>
+                <div class="cart-list-qty d-flex ms-2">
+                  <button type="button" class="cart-list-qty-btn">-</button>
+                  <input type="text" placeholder="05">
+                  <button type="button" class="cart-list-qty-btn">+</button>
+                </div>
+              </div>
             </div>
-            <h2>₹ 399</h2>
+            <h2>₹ 410</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-              title="Remove"> <i class="bi bi-trash"></i> </a>
+            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -160,14 +188,28 @@
           <a href="javascript:void()">
             <h1>Rayon Long Flared Anarkali Kurti</h1>
             <div class="d-flex justify-content-between text-muted font-13">
-              <div> <strong>Size:</strong> L</div>
-              <div> <strong>Qty:</strong> 6</div>
+              <div> <strong>Size:</strong>
+                <select class="ms-2 select-mini text-uppercase">
+                  <option>l</option>
+                  <option>m</option>
+                  <option>l</option>
+                  <option>xl</option>
+                  <option>xxl</option>
+                </select>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong>Qty:</strong>
+                <div class="cart-list-qty d-flex ms-2">
+                  <button type="button" class="cart-list-qty-btn">-</button>
+                  <input type="text" placeholder="2">
+                  <button type="button" class="cart-list-qty-btn">+</button>
+                </div>
+              </div>
             </div>
-            <h2>₹ 399</h2>
+            <h2>₹ 897</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-              title="Remove"> <i class="bi bi-trash"></i> </a>
+            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -177,31 +219,73 @@
         <div class="cart-sidebar-body-cart-items-info">
           <a href="javascript:void()">
             <h1>Rayon Bandhani Printed kurti pant set</h1>
-            <div class="d-flex justify-content-between text-muted font-13">
+            <!-- <div class="d-flex justify-content-between text-muted font-13">
               <div> <strong>Size:</strong> L</div>
               <div> <strong>Qty:</strong> 6</div>
+            </div> -->
+            <div class="d-flex justify-content-between text-muted font-13">
+              <div> <strong>Size:</strong>
+                <select class="ms-2 select-mini text-uppercase">
+                  <option>m</option>
+                  <option>m</option>
+                  <option>l</option>
+                  <option>xl</option>
+                  <option>xxl</option>
+                </select>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong>Qty:</strong>
+                <div class="cart-list-qty d-flex ms-2">
+                  <button type="button" class="cart-list-qty-btn">-</button>
+                  <input type="text" placeholder="20">
+                  <button type="button" class="cart-list-qty-btn">+</button>
+                </div>
+              </div>
             </div>
-            <h2>₹ 399</h2>
+            <h2>₹ 1140</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-              title="Remove"> <i class="bi bi-trash"></i> </a>
+            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
     </div>
     <div class="cart-sidebar-body-cart-items-final-info my-4 mt-4">
       <div class="cart-sidebar-body-cart-items-final-info-item">
-        <h5 class=" d-flex justify-content-between"> <strong>Subtotal : </strong> <span> ₹ 11,890 </span> </h5>
+        <h5 class=" d-flex justify-content-between"> <strong>Subtotal : </strong> <span> ₹ 2,846 </span> </h5>
       </div>
     </div>
     <div class="cart-sidebar-body-cart-items-final-action d-flex">
-      <button type="button" class="btn btn-default px-1 text-uppercase"><i class="bi bi-credit-card-2-front me-1"></i>
+      <button data-bs-dismiss="offcanvas" aria-label="Close" type="button"
+        class="btn btn-default px-1 text-uppercase"><i class="bi bi-credit-card-2-front me-1"></i>
         checkout</button>
-      <button type="button" class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="bi bi-eye me-1"></i>
+      <button data-bs-dismiss="offcanvas" aria-label="Close" type="button" [routerLink]="['/design/cart']"
+        class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="bi bi-eye me-1"></i>
         Shopping Bag</button>
     </div>
   </div>
 
 </div>
 <!-- Cart SideBar End -->
+
+
+<!-- Delete cart items Modal Start -->
+<div class="modal fade modal-custom-design" id="DeleteCartItems" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i> </button>
+      </div>
+      <div class="modal-body p-4 modal-alert">
+        <h1 class="mb-0">
+          Are you sure want to delete this cart items from the shopping cart ?
+      </h1>
+      </div>
+      <div class="modal-footer pt-0">
+        <button type="button" class="btn btn-default px-3 py-2" data-bs-dismiss="modal"><i class="bi bi-trash me-1"></i> Delete</button>
+        <button type="button" class="btn btn-default btn-border px-3 py-2" data-bs-dismiss="modal" >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete cart items Modal End -->

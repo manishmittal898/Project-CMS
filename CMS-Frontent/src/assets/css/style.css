@@ -220,7 +220,7 @@ img {
     background: var(--primary-color);
     color: var(--white);
     font-weight: var(--font-weight-400);
-    border-radius: 0px
+    border-radius: 10px
 }
 
 .btn-default:hover {
@@ -841,10 +841,10 @@ input:focus-visible {
 .product-list-search input {
     border: solid 1px #ccc;
     padding: 6px 15px;
-    border-radius: 0px;
     color: var(--black);
     padding-right: 35px;
     transition: 0.3s;
+    border-radius: 8px;
 }
 
 .product-list-search input:focus {
@@ -915,6 +915,7 @@ input:focus-visible {
     padding: 4px;
     transform: translateY(-60px);
     transition: transform .3s ease-in-out;
+    z-index: 999999;
 }
 
 .product-list-hover-items-outside:hover .product-list-hover {
@@ -923,13 +924,19 @@ input:focus-visible {
 }
 
 .product-list-hover-items {
-    background: transparent;
-    border: none;
-    padding: 0px;
-    line-height: normal;
-    font-size: 18px;
-    color: #fff;
-    margin: 0px 12px;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 0px;
+  line-height: normal;
+  font-size: 16px;
+  color: #000;
+  margin: 0px 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -1141,7 +1148,7 @@ select:focus-visible {
 }
 
 .form-control {
-    border-radius: 0px;
+    border-radius: 10px;
     font-size: 14px;
     padding: 10px 15px;
 }
@@ -1164,6 +1171,7 @@ select:focus-visible {
     border: none;
     border-bottom: 1px solid #ced4da;
     font-size: 16px;
+    border-radius: 0px;
 }
 
 .cart-sidebar-empty .cart-sidebar-empty-icon i {
@@ -1462,6 +1470,7 @@ pre {
 }
 .ng-select-open .ng-select-container {
     border: solid 1px #dcdcdc !important;
+    border-radius: 8px !important;
     border-radius: 0px;
     margin-bottom: 8px;
 }
@@ -1533,19 +1542,19 @@ body .ui-slider .ui-slider-range {
     font-size: 20px;
 }
 .modal-custom-design .modal-header {
-  background: var(--primary-color);
-  color: #fff;
+  background: transparent;
+  color: #000;
+  border: none;
 }
-.modal-custom-design .modal-content .modal-header
-{
-  padding: 10px 20px;
+.modal-custom-design .modal-content .modal-header {
+  padding: 15px 20px;
   border-radius: 0px;
 }
 .modal-custom-design .modal-content {
   border: none;
 }
 .modal-custom-design .modal-header .btn-close {
-  color: #ffff;
+  color: #000;
   background: transparent;
   opacity: 9;
   padding: 0px;
@@ -1553,6 +1562,9 @@ body .ui-slider .ui-slider-range {
   display: block;
   height: auto;
   width: auto;
+}
+.modal-footer {
+  border: none;
 }
 section.inner-page-space {
   padding: 60px 0px 40px 0px;
@@ -1588,14 +1600,14 @@ section.cmis-pages .cmis-pages-items-list h3 {
   flex: 0 0 80px;
   min-width: 80px;
   background: #f7f7f7;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-right: 15px;
   overflow: hidden;
 }
 .cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img img
 {
-  max-width: 78px;
-  max-height: 78px;
+  max-width: 79px;
+  max-height: 79px;
 }
 .cart-sidebar-body-cart-items-info {
   flex: auto;
@@ -1718,7 +1730,7 @@ table tr td {
   line-height: 0;
 }
 
-.cart-page-list-qty-btn {
+.cart-list-qty-btn {
   border: solid 1px #ccc;
   background: #fff;
   font-size: 25px;
@@ -1727,9 +1739,24 @@ table tr td {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
 }
-.cart-page-list-qty input {
-  border-radius: 0px;
+.cart-list-qty-btn:hover {
+  box-shadow: 0 0 15px #d7d7d7;
+  border-color: #d5d5d5;
+}
+.cart-sidebar-body-cart-items-info .cart-list-qty-btn {
+  height: 23px;
+  width: 23px;
+  border-radius: 5px;
+  border: none;
+}
+.cart-sidebar-body-cart-items-info .cart-list-qty input {
+  border-radius: 4px;
+  max-width: 35px;
+}
+.cart-list-qty input {
+  border-radius: 8px;
   margin: 0px 4px;
   max-width: 50px;
   text-align: center;
@@ -1754,11 +1781,12 @@ table tr td {
   margin-right: 10px;
   color: #565656;
 }
-.cart-discount-code .btn {
-  flex: 1 1 125px;
+
+.cart-discount-code .form-floating {
+  flex: auto;
 }
 .cart-discount-code .btn {
-  flex: 1 1 125px;
+  flex: 0 0 105px;
   margin-left: 8px;
 }
 .shopping-cart-summary-items p {
@@ -1776,6 +1804,25 @@ table tr td {
 .shopping-cart-pay-option img {
   max-height: 24px;
   margin: 0px 5px;
+}
+
+.form-floating>.form-control, .form-floating>.form-select {
+  height: 48px;
+}
+
+.form-floating>label {
+  top: -5px;
+}
+
+.select-mini {
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.modal-alert h1 {
+  font-size: 1.4rem;
+  line-height: 35px;
 }
 /* CUSTOM CSS END */
 

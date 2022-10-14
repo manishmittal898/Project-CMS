@@ -452,11 +452,11 @@
 .cart-page-list-items-img img {
   max-height: 78px;
 }
-.cart-page-list-qty-btn {
+.cart-list-qty-btn {
   height: 30px;
   width: 30px;
 }
-.cart-page-list-qty input {
+.cart-list-qty input {
   max-width: 35px;
 }
 }
