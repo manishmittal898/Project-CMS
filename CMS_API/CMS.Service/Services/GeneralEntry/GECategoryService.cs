@@ -166,7 +166,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblGecategoryMaters.Update(objData);
                     _db.SaveChanges();
-                    return CreateResponse<TblGecategoryMater>(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
                 }
                 else
@@ -187,7 +187,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = await _db.TblGecategoryMaters.AddAsync(objData);
                     _db.SaveChanges();
-                    return CreateResponse<TblGecategoryMater>(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -232,7 +232,46 @@ namespace CMS.Service.Services.GeneralEntry
 
                 objData.IsActive = !objData.IsActive;
                 await _db.SaveChangesAsync();
-                return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+
+            }
+        }
+
+        public async Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(long id, string columnName)
+        {
+            try
+            {
+                TblGecategoryMater objData = new TblGecategoryMater();
+                objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+
+                switch (columnName)
+                {
+                    case "IsShowDataInMain":
+                        objData.IsShowDataInMain = !objData.IsShowDataInMain;
+
+
+                        break;
+                    case "IsShowInMain":
+                        objData.IsShowInMain = !objData.IsShowInMain;
+
+
+                        break;
+                    case "IsSingleEntry":
+                        objData.IsSingleEntry = !objData.IsSingleEntry;
+
+
+                        break;
+                    default:
+                        break;
+                }
+              
+                await _db.SaveChangesAsync();
+                return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)
             {

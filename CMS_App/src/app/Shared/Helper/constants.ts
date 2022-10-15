@@ -85,6 +85,33 @@ export class API_Url {
   public static CMSContentDelete_Api = `${environment.apiEndPoint}admin/CMSPage/delete/`;
   //#endregion
 
+  //#region <<GeneralEntryCategory>>
+  public static GeneralEntryCategoryList_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/get`;
+  public static GeneralEntryCategoryDetail_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/get/`;
+  public static GeneralEntryCategoryAddUpdate_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/Save`;
+  public static GeneralEntryCategoryChangeActiveStatus_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/ChangeActiveStatus/`;
+  public static GeneralEntryCategoryChangeFlagStatus_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/ChangeFlagStatusUpdate/`;
+
+  public static GeneralEntryCategoryDelete_Api = `${environment.apiEndPoint}admin/GeneralEntryCategory/delete/`;
+  //#endregion
+
+  //#region <<GeneralEntrySubCategory>>
+  public static GeneralEntrySubCategoryList_Api = `${environment.apiEndPoint}admin/GeneralEntrySubCategory/get`;
+  public static GeneralEntrySubCategoryDetail_Api = `${environment.apiEndPoint}admin/GeneralEntrySubCategory/get/`;
+  public static GeneralEntrySubCategoryAddUpdate_Api = `${environment.apiEndPoint}admin/GeneralEntrySubCategory/Save`;
+  public static GeneralEntrySubCategoryChangeActiveStatus_Api = `${environment.apiEndPoint}admin/GeneralEntrySubCategory/ChangeActiveStatus/`;
+  public static GeneralEntrySubCategoryDelete_Api = `${environment.apiEndPoint}admin/GeneralEntrySubCategory/delete/`;
+  //#endregion
+
+
+  //#region <<GeneralEntry>>
+  public static GeneralEntryList_Api = `${environment.apiEndPoint}admin/GeneralEntry/get`;
+  public static GeneralEntryDetail_Api = `${environment.apiEndPoint}admin/GeneralEntry/get/`;
+  public static GeneralEntryAddUpdate_Api = `${environment.apiEndPoint}admin/GeneralEntry/Save`;
+  public static GeneralEntryChangeActiveStatus_Api = `${environment.apiEndPoint}admin/GeneralEntry/ChangeActiveStatus/`;
+  public static GeneralEntryDelete_Api = `${environment.apiEndPoint}admin/GeneralEntry/delete/`;
+  //#endregion
+
   //#region <<Customer Registration>>
   public static Customer_Registration_Api = `${environment.apiEndPoint}Customer/RegisterCustomer/`;
   // #endregion
@@ -133,12 +160,12 @@ export class DropDown_key {
   static ddlProductSize = "ddlProductSize"
   static ddlLookup = "ddllookup"
   static ddlSublookup = "ddlSublookup";
-  static ddlSubLookupGroup ="ddlSubLookupGroup";
+  static ddlSubLookupGroup = "ddlSubLookupGroup";
 
 }
 
 export class EditorConfig {
- static Config: AngularEditorConfig = {
+  static Config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: 'auto',

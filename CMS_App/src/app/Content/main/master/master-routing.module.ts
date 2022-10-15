@@ -20,6 +20,23 @@ import { GeneralEntrySubCategoryMasterComponent } from "./general-entry-master/g
 const routes: Routes = [
   { path: '', component: LookupTypeComponent },
 
+  { path: 'general-entry', component: GeneralEntryMasterComponent },
+  { path: 'general-entry/add', component: GeneralEntryMasterAddEditComponent },
+  { path: 'general-entry/edit', component: GeneralEntryMasterAddEditComponent },
+  { path: 'general-entry/detail', component: GeneralEntryMasterDetailComponent },
+
+  { path: 'general-entry-category', component: GeneralEntryCategoryMasterComponent },
+  { path: 'general-entry-category/add', component: GeneralEntryCategoryMasterAddEditComponent },
+  { path: 'general-entry-category/edit/:id', component: GeneralEntryCategoryMasterAddEditComponent },
+  { path: 'general-entry-category/detail/:id', component: GeneralEntryCategoryMasterDetailComponent },
+
+
+  { path: 'general-entry-sub-category', component: GeneralEntrySubCategoryMasterComponent },
+  { path: 'general-entry-sub-category/add', component: GeneralEntrySubCategoryMasterAddEditComponent },
+  { path: 'general-entry-sub-category/edit/:', component: GeneralEntrySubCategoryMasterAddEditComponent },
+  { path: 'general-entry-sub-category/detail/:', component: GeneralEntrySubCategoryMasterDetailComponent },
+
+  
   { path: 'cms-page', component: CMSPageMasterComponent },
   { path: 'cms-page/:name', component: CMSPageAddUpdateComponent },
 
@@ -38,21 +55,6 @@ const routes: Routes = [
   { path: 'lookup/:name/update/:id', component: LookupsAddEditComponent },
 
 
-  { path: 'general-entry', component: GeneralEntryMasterComponent },
-  { path: 'general-entry/add', component: GeneralEntryMasterAddEditComponent },
-  { path: 'general-entry/edit', component: GeneralEntryMasterAddEditComponent },
-  { path: 'general-entry/detail', component: GeneralEntryMasterDetailComponent },
-
-  { path: 'general-entry-category', component: GeneralEntryCategoryMasterComponent },
-  { path: 'general-entry-category/add', component: GeneralEntryCategoryMasterAddEditComponent },
-  { path: 'general-entry-category/edit', component: GeneralEntryCategoryMasterAddEditComponent },
-  { path: 'general-entry-category/detail', component: GeneralEntryCategoryMasterDetailComponent },
-
-
-  { path: 'general-entry-sub-category', component: GeneralEntrySubCategoryMasterComponent },
-  { path: 'general-entry-sub-category/add', component: GeneralEntrySubCategoryMasterAddEditComponent },
-  { path: 'general-entry-sub-category/edit', component: GeneralEntrySubCategoryMasterAddEditComponent },
-  { path: 'general-entry-sub-category/detail', component: GeneralEntrySubCategoryMasterDetailComponent },
 
   // {path:'SubLookupType',component: SubLookupTypeComponent},
   // {path:'SubLookupTypeAddEdit',component: SubLookupTypeAddEditComponent},

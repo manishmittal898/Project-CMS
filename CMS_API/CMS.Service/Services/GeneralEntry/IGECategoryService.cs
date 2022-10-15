@@ -13,7 +13,7 @@ namespace CMS.Service.Services.GeneralEntry
         Task<ServiceResponse<GeneralEntryCategoryViewModel>> GetById(long id);
         Task<ServiceResponse<TblGecategoryMater>> Save(GeneralEntryCategoryPostModel model);
         Task<ServiceResponse<TblGecategoryMater>> ActiveStatusUpdate(long id);
-
+        Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(long id, string columnName);
         Task<ServiceResponse<TblGecategoryMater>> Delete(long id);
     }
 }

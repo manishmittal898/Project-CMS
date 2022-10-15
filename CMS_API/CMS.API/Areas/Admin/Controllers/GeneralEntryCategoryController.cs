@@ -22,14 +22,14 @@ namespace CMS.API.Areas.Admin.Controllers
         {
             _service = Iservice;
         }
-        // GET: api/<LookupMaster>
+        // GET: api/<GeneralEntryCategory>
         [HttpPost]
         public async Task<object> GetAsync(IndexModel model)
         {
             return await _service.GetList(model);
         }
 
-        // GET api/<LookupMaster>/5
+        // GET api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
         public async Task<object> Get(long id)
 
@@ -37,7 +37,7 @@ namespace CMS.API.Areas.Admin.Controllers
             return await _service.GetById(id);
         }
 
-        // POST api/<LookupMaster>
+        // POST api/<GeneralEntryCategory>
         [HttpPost]
         public async Task<object> Save(GeneralEntryCategoryPostModel model)
         {
@@ -62,7 +62,15 @@ namespace CMS.API.Areas.Admin.Controllers
             return await _service.ActiveStatusUpdate(id);
         }
 
-        // DELETE api/<LookupMaster>/5
+        [HttpGet("{id}/{columnName}")]
+        public async Task<object> ChangeFlagStatusUpdate(long id, string columnName)
+        {
+            return await _service.FlagStatusUpdate(id,columnName);
+        }
+
+ 
+
+        // DELETE api/<GeneralEntryCategory>/5
         [HttpDelete("{id}")]
         public async Task<object> Delete(long id)
         {
