@@ -17,7 +17,7 @@ import { GeneralEntryCategoryViewModel, GeneralEntryServiceService } from '../..
 })
 export class GeneralEntryCategoryMasterComponent implements OnInit {
 
-  pageName = 'General Entry'
+  pageName = 'General Entry Category'
   model!: GeneralEntryCategoryViewModel[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;

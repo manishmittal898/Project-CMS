@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./general-entry-category-master-add-edit.component.scss']
 })
 export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
-
+  pageName = 'General Entry Category'
   constructor() { }
 
   ngOnInit(): void {
