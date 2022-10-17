@@ -6,9 +6,10 @@ import { UIDesignComponent } from './uidesign.component';
 import { FeatureModule } from '../Shared/Module/feature/feature.module';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
-  declarations: [UIDesignComponent, LoginComponent, RegisterComponent, CartComponent],
+  declarations: [UIDesignComponent, LoginComponent, RegisterComponent, CartComponent, CheckoutComponent],
   imports: [
     CommonModule,
     UIDesignRoutingModule,
