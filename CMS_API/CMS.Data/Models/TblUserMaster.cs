@@ -11,6 +11,8 @@ namespace CMS.Data.Models
         {
             TblCmspageContentMasterCreatedByNavigations = new HashSet<TblCmspageContentMaster>();
             TblCmspageContentMasterModifiedByNavigations = new HashSet<TblCmspageContentMaster>();
+            TblGecategoryMaterCreatedByNavigations = new HashSet<TblGecategoryMater>();
+            TblGecategoryMaterModifiedByNavigations = new HashSet<TblGecategoryMater>();
             TblLookupMasterCreatedByNavigations = new HashSet<TblLookupMaster>();
             TblLookupMasterModifiedByNavigations = new HashSet<TblLookupMaster>();
             TblLookupTypeMasterCreatedByNavigations = new HashSet<TblLookupTypeMaster>();
@@ -46,6 +48,8 @@ namespace CMS.Data.Models
         public virtual TblRoleType Role { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterModifiedByNavigations { get; set; }
+        public virtual ICollection<TblGecategoryMater> TblGecategoryMaterCreatedByNavigations { get; set; }
+        public virtual ICollection<TblGecategoryMater> TblGecategoryMaterModifiedByNavigations { get; set; }
         public virtual ICollection<TblLookupMaster> TblLookupMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblLookupMaster> TblLookupMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblLookupTypeMaster> TblLookupTypeMasterCreatedByNavigations { get; set; }

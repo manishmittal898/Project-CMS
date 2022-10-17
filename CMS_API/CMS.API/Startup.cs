@@ -5,6 +5,7 @@ using CMS.Data.Models;
 using CMS.Service.Services.Account;
 using CMS.Service.Services.CMSPage;
 using CMS.Service.Services.Common;
+using CMS.Service.Services.GeneralEntry;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
 using CMS.Service.Services.ProductMaster;
@@ -170,6 +171,8 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
             services.AddScoped<IUserMasterService, UserMasterService>();
             services.AddScoped<ICMSPageService, CMSPageService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IGECategoryService, GECategoryService>();
+
         }
     }
 }
