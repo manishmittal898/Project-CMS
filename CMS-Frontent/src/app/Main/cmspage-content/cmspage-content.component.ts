@@ -19,6 +19,10 @@ export class CMSPageContentComponent implements OnInit {
   ngOnInit(): void {
     this._route.queryParams.subscribe(x => {
       this.recordId = x?.id ? x?.id : '';
+      if (this._securityService?.getStorage(`cms-page-content_${this._securityService.decrypt(this.recordId)}`)) {
+        this.model = JSON.parse(this._securityService?.getStorage(`cms-page-content_${this._securityService.decrypt(this.recordId)}`));
+      }
+
       this.getDetails();
     });
   }
@@ -26,10 +30,11 @@ export class CMSPageContentComponent implements OnInit {
   getDetails() {
     this._cmsPageService.GetDetails(Number(this._securityService.decrypt(this.recordId))).subscribe(res => {
       if (res.IsSuccess) {
-        debugger
-
         const data = res.Data;
         this.model = data.sort(x => x.SortedOrder);
+        setTimeout(() => {
+          this._securityService?.setStorage(`cms-page-content_${this._securityService.decrypt(this.recordId)}`, JSON.stringify(this.model))
+        }, 10);
       }
     },
       error => {

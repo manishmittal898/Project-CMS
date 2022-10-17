@@ -11,12 +11,16 @@ import { SecurityService } from '../../Services/security.service';
 })
 export class FooterComponent implements OnInit {
   cmsPageMenu: DropDownItem[];
+  ddlCategory: DropDownItem[];
+
   constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService) {
 
     if (this._securityService.getStorage('nav-cms-page-menu')) {
       this.cmsPageMenu = JSON.parse(this._securityService.getStorage('nav-cms-page-menu'));
     }
-
+    if (this._securityService.getStorage('nav-Category')) {
+      this.ddlCategory = JSON.parse(this._securityService.getStorage('nav-Category'));
+    }
   }
 
   ngOnInit(): void {
@@ -24,14 +28,18 @@ export class FooterComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCMSPage], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
 
-        this.cmsPageMenu = ddls.ddlCMSPage;
+        this.cmsPageMenu = ddls.ddlCMSPage.map(x => { return { Text: x.Text, Value: this._securityService.encrypt((String(x.Value))) } as DropDownItem });
+        this.ddlCategory = ddls.ddlCategory.slice(0, 5).map(x => { return { Text: x.Text, Value: this._securityService.encrypt(String(x.Value)) } as DropDownItem });
+        setTimeout(() => {
+          this._securityService?.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
+          this._securityService?.setStorage('nav-Category', JSON.stringify(this.ddlCategory))
 
-        this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
+        }, 10);
 
 
       }

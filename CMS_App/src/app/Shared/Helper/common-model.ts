@@ -115,3 +115,9 @@ export interface FilterDropDownPostModel {
   FileterFromKey: string;
   Values: number[];
 }
+export interface MenuModel {
+  Name: string;
+  Icon?: string;
+  Url?: string
+  children?: MenuModel[]
+}

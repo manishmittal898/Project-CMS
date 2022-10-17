@@ -7,11 +7,9 @@
           Collections
         </button>
         <ul class="footer-link collapse mt-2 mt-md-0" id="Footer1" data-bs-parent="#Footer">
-          <li> <a href="javascript:void(0)">Category name 1</a></li>
-          <li> <a href="javascript:void(0)">Category name 2</a></li>
-          <li> <a href="javascript:void(0)">Category name 3</a></li>
-          <li> <a href="javascript:void(0)">Category name 4</a></li>
-          <li> <a href="javascript:void(0)">Category name 5</a></li>
+          <li *ngFor="let itms of this.ddlCategory"> <a routerLink="./store/{{itms.Text.split(' ').join('_')}}"
+              href="javascript:void(0)" [queryParams]="{id : itms.Value}">{{itms.Text |titlecase}}</a></li>
+
         </ul>
       </div>
       <div class="col-md-3 mb-3 mb-md-0" *ngIf="cmsPageMenu?.length>0">
