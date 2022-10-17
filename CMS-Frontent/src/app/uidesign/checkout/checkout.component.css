@@ -1,0 +1,87 @@
+.register-wizard #msform fieldset:not(:first-of-type) {
+	display: none
+}
+.register-wizard #msform fieldset .form-card {
+	text-align: left;
+	color: #9E9E9E
+}
+.register-wizard select.list-dt {
+	border: none;
+	outline: 0;
+	border-bottom: 1px solid #ccc;
+	padding: 2px 5px 3px 5px;
+	margin: 2px
+}
+.register-wizard select.list-dt:focus {
+	border-bottom: 2px solid skyblue
+}
+.register-wizard .card {
+	z-index: 0;
+	border: none;
+	border-radius: 0.5rem;
+	position: relative;
+	box-shadow: none;
+}
+.register-wizard .fs-title {
+	font-size: 25px;
+	color: #2C3E50;
+	margin-bottom: 10px;
+	font-weight: bold;
+	text-align: left
+}
+.register-wizard #progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	color: lightgrey
+}
+.register-wizard #progressbar .active {
+	color: #000000
+}
+.register-wizard #progressbar li {
+	list-style-type: none;
+	font-size: 12px;
+	width: 33.33%;
+	float: left;
+	position: relative
+}
+.register-wizard #progressbar #account:before {
+	content: "1"
+}
+.register-wizard #progressbar #personal:before {
+	content: "2"
+}
+.register-wizard #progressbar #payment:before {
+	content: "3"
+}
+#progressbar #confirm:before {
+	content: "4"
+}
+#progressbar li:before {
+	width: 50px;
+	height: 50px;
+	line-height: 45px;
+	display: block;
+	font-size: 18px;
+	color: #909090;
+	background: white;
+	border-radius: 50%;
+	margin: 0 auto 10px auto;
+	padding: 2px;
+	border: solid 2px #909090;
+}
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: lightgray;
+	position: absolute;
+	left: 0;
+	top: 25px;
+	z-index: -1
+}
+#progressbar li.active:before, #progressbar li.active:after {
+	background: #07339e;
+	color: #fff;
+	border-color: #ffd439;
+}
+
