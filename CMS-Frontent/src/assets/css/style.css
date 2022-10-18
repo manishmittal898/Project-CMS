@@ -1827,6 +1827,21 @@ table tr td {
 .modal {
   padding: 0px;
 }
+.form-check-input:checked[type=radio]
+{
+  background-image: none;
+  position: relative;
+}
+.form-check-input:checked[type=radio]:before {
+  font-family: bootstrap-icons !important;
+  content: "\f633";
+  background-image: none;
+  color: #fff;
+  position: absolute;
+  top: -5px;
+  font-size: 22px;
+  left: 0px;
+}
 .btn-delete {
   background: #c15151;
 }
