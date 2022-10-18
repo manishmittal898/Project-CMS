@@ -84,3 +84,12 @@
 .checkout-card-address-list-action a {
   font-size: 17px;
 }
+.btn-add-new-address {
+  color: #000;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-add-new-address i {
+  font-size: 18px;
+}
