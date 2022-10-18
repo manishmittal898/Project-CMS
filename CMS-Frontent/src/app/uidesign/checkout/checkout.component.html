@@ -13,211 +13,317 @@
 </nav>
 <!-- Breadcrum End -->
 
-<section class="register-area checkout-page">
-  <!-- MultiStep Form -->
-  <div class="container register-wizard" id="RegisterWizard">
-    <div class="row justify-content-center mt-0">
-      <div class="col-sm-12 text-center">
-        <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-          <form id="msform">
-            <!-- progressbar -->
-            <ul id="progressbar">
-              <li class="active" id="account"><strong>Address</strong></li>
-              <li id="personal"><strong>Payment</strong></li>
-              <li id="payment"><strong>Order Summary</strong></li>
-            </ul>
-            <!-- fieldsets -->
-            <fieldset class="step1">
-
-              <h4 class="mb-2">Beeling Address </h4>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">First Name</label>
-                    <input class="form-control" type="text" name="#" id="$">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Last Name</label>
-                    <input class="form-control" type="text" name="#" id="#">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Company Name</label>
-                    <input class="form-control" type="text" name="#" id="$">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Address</label>
-                    <input class="form-control" type="text" name="#" id="#">
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Phone Number</label>
-                    <input class="form-control" type="text" name="#" id="$">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Email ID</label>
-                    <input class="form-control" type="text" name="#" id="#">
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="form-group text-left">
-                    <label class="form-control-label">Add a Note</label>
-                    <textarea class="form-control" rows="4"></textarea>
-                  </div>
-                </div>
-
-
-              </div>
-
-              <input type="button" name="next" class="next action-button btn  btn-yellow  mt-4" value="Next: Order Summary" />
-            </fieldset>
-            <fieldset>
-              <h4 class="mb-2">Order Summary </h4>
-
-              <div class="table-responsive">
-                <table class="table text-left">
-                  <thead>
-                    <tr>
-                      <th class=" bg-light">
-                        <div class="p-2 px-3 text-uppercase">Product</div>
-                      </th>
-                      <th class=" bg-light">
-                        <div class="py-2 text-uppercase">Price</div>
-                      </th>
-                      <th class=" bg-light  text-center">
-                        <div class="py-2 text-uppercase">Quantity</div>
-                      </th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr>
-                      <td>
-                        <div class="p-2">
-                          <img src="img/book4.png" alt="iBRAIN" width="70" class="img-fluid rounded shadow-sm">
-                          <div class="ml-3 d-inline-block align-middle">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Trigonometry Revision Workbook</a></h5>
-                          </div>
-                        </div>
-                      </td>
-                      <td class=" align-middle"><strong>$79.00</strong></td>
-                      <td class=" align-middle text-center"><strong>3</strong></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="p-2">
-                          <div class="ml-3 d-inline-block align-middle">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Trigonometry Revision Workbook</a></h5>
-                          </div>
-                        </div>
-                      </td>
-                      <td class=" align-middle"><strong>$79.00</strong></td>
-                      <td class=" align-middle text-center"><strong>3</strong></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="p-2">
-                          <div class="ml-3 d-inline-block align-middle">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Trigonometry Revision Workbook</a></h5>
-                          </div>
-                        </div>
-                      </td>
-                      <td class=" align-middle"><strong>$79.00</strong></td>
-                      <td class=" align-middle text-center"><strong>3</strong></td>
-                    </tr>
-
-
-                  </tbody>
-                </table>
-              </div>
-              <ul class="list-unstyled mb-4">
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                  <h5 class="font-weight-bold">$400.00</h5>
-                </li>
-              </ul>
-              <input type="button" name="previous" class="previous action-button-previous btn  btn-black  mt-4" value="Previous" />
-              <input type="button" name="next" class="next action-button btn  btn-yellow  mt-4" value="Final Step: Payment Method
-              " />
-            </fieldset>
-            <fieldset>
-              <h4 class="mb-2">Payment Method </h4>
-
-
-
-              <div class="d-block mt-4">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                  <label class="custom-control-label" for="credit">Credit card</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                  <label class="custom-control-label" for="debit">Debit card</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                  <label class="custom-control-label" for="paypal">Other</label>
+<section class="inner-page-space checkout-page">
+  <div class="container checkout-wizard" id="CheckoutSteps">
+    <div class="row">
+      <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5">
+        <ul class="text-center overflow-hidden mb-5" id="progressbar">
+          <li class="active" id="Address"><strong>Address</strong></li>
+          <li id="Payment"><strong>Payment</strong></li>
+          <li id="OrderSummary"><strong>Order Summary</strong></li>
+        </ul>
+        <!-- Shipping Address Start -->
+        <fieldset class="checkout-address">
+          <h5 class="mb-4">Welcome Manish !</h5>
+          <div class="checkout-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="mb-4">
+                  <select class="form-select">
+                    <option>--Country--</option>
+                  </select>
                 </div>
               </div>
-              <div class="row text-left">
-                <div class="col-md-6 mb-3">
-                  <label for="cc-name">Name on card</label>
-                  <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                  <small class="text-muted">Full name as displayed on card</small>
-                  <div class="invalid-feedback">
-                    Name on card is required
-                  </div>
+              <div class="col-xl-6">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="First-name" placeholder="First name*">
+                  <label for="First-name">First name*</label>
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-number">Credit card number</label>
-                  <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                  <label for="cc-expiration">Expiration</label>
-                  <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-expiration">CVV</label>
-                  <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Security code required
-                  </div>
-                </div>
-
-
               </div>
+              <div class="col-xl-6">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
+                  <label for="Last-name">Last name*</label>
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="Address1" placeholder="Address*">
+                  <label for="Address1">Address*</label>
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
+                  <label for="Address2">Apartment, suite, etc. (optional)</label>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="City" placeholder="City*">
+                  <label for="City">City*</label>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="State" placeholder="State*">
+                  <label for="State">State*</label>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
+                  <label for="Postal-code">Postal code*</label>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                  <label for="Phone-number">Phone number*</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checkout-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="checkout-card-address-list">
+                  <div class="checkout-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                    <h5 class="m-0">Rahul sharma</h5>
+                    <div class="checkout-card-address-list-action d-flex align-items-center">
+                      <span class="me-3">Default Address</span>
+                      <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
+                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Edit" class="bi bi-pencil-square"></i> </a>
+                      <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Remove" class="bi bi-trash"></i> </a>
+                    </div>
+                  </div>
+                  <div class="checkout-card-address-list-items form-check">
+                    <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
+                    <label class="form-check-label" for="SaveAdd1">
+                      4-RA-5 Monilek Marg, Near Monilek Hospital
+                      Jawahar Nagar
+                      Jaipur, Raj, 302013
+                      Mobile : 8952098741
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checkout-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="checkout-card-address-list">
+                  <div class="checkout-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                    <h5 class="m-0">Nitesh mathur</h5>
+                    <div class="checkout-card-address-list-action d-flex align-items-center">
+                      <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
+                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Edit" class="bi bi-pencil-square"></i> </a>
+                      <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Remove" class="bi bi-trash"></i> </a>
+                    </div>
+                  </div>
+                  <div class="checkout-card-address-list-items form-check">
+                    <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
+                    <label class="form-check-label" for="SaveAdd1">
+                      4-RA-5 Monilek Marg, Near Monilek Hospital
+                      Jawahar Nagar
+                      Jaipur, Raj, 302013
+                      Mobile : 8952098741
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" name="next" class="next btn btn-default px-4 float-end">Save & Continue</button>
+        </fieldset>
+        <!-- Shipping Address End -->
+        <!-- Payment Start -->
+        <fieldset class="checkout-payment">
+          <div>
+            Payment
+          </div>
+          <button type="button" name="previous" class="previous btn btn-default btn-border px-4 me-3 "><i
+              class="bi bi-chevron-left"></i> Previous</button>
+          <button type="button" name="next" class="next btn btn-default px-4 float-end">Save & Continue</button>
+        </fieldset>
+        <!-- Payment End -->
+        <!-- Order Summary Start -->
+        <fieldset class="order-summary">
+          <div>
+            Order Summary
+          </div>
+          <button type="button" name="previous" class="previous btn btn-default btn-border px-4 me-3"><i
+              class="bi bi-chevron-left"></i> Previous</button>
+        </fieldset>
+        <!-- Order Summary End -->
+      </div>
+
+      <!-- Add or Update Address Modal Start -->
+      <div class="modal fade modal-custom-design" id="Add-Update-Address" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header pb-0">
+              <h5 class="m-0">Add or update address</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
+                  class="bi bi-x-lg"></i> </button>
+            </div>
+            <div class="modal-body p-4 modal-form-update">
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="mb-4">
+                      <select class="form-select">
+                        <option>--Country--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="First-name" placeholder="First name*">
+                      <label for="First-name">First name*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
+                      <label for="Last-name">Last name*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-12">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="Address1" placeholder="Address*">
+                      <label for="Address1">Address*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-12">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
+                      <label for="Address2">Apartment, suite, etc. (optional)</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="City" placeholder="City*">
+                      <label for="City">City*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating mb-4">
+                      <input type="text" class="form-control" id="State" placeholder="State*">
+                      <label for="State">State*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
+                      <label for="Postal-code">Postal code*</label>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                      <label for="Phone-number">Phone number*</label>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer pt-0">
+              <button type="button" class="btn btn-default px-3 py-2 btn-save" data-bs-dismiss="modal"><i
+                  class="bi bi-check2"></i> Save</button>
+              <button type="button" class="btn btn-default btn-border px-3 py-2 btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add or Update Address Modal End -->
+
+      <!-- Delete Address items Modal Start -->
+      <div class="modal fade modal-custom-design" id="DeleteAddress" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header pb-0">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
+                  class="bi bi-x-lg"></i> </button>
+            </div>
+            <div class="modal-body p-4 modal-alert">
+              <h1 class="mb-0">
+                Are you sure want to delete this address from the address book ?
+              </h1>
+            </div>
+            <div class="modal-footer pt-0">
+              <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i
+                  class="bi bi-trash me-1"></i> Delete</button>
+              <button type="button" class="btn btn-default btn-cancel btn-border px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Delete Address items Modal End -->
 
 
-              <input type="button" name="previous" class="previous action-button-previous btn  btn-black  mt-4" value="Previous" />
-              <input type="button" name="next" class="next action-button btn  btn-yellow  mt-4" value="Make Payment" />
-            </fieldset>
-          </form>
+      <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0">
+        <div class="shopping-cart-sidebar">
+          <div class="cart-sidebar-body-cart mb-4">
+            <h5 class="mb-3">Order Details</h5>
+            <div class="cart-sidebar-body-cart-items d-flex py-2">
+              <div class="cart-sidebar-body-cart-items-img d-flex align-items-center justify-content-center"> <img
+                  src="assets/images/no-img.svg" alt="StoreOne" /></div>
+              <div class="cart-sidebar-body-cart-items-info">
+                <a href="javascript:void()">
+                  <h1>Rayon Long Flared Anarkali Kurti</h1>
+                  <div class="d-flex justify-content-between text-muted font-13">
+                    <div> <strong>Size:</strong> L</div>
+                    <div> <strong>Qty:</strong> 6</div>
+                  </div>
+                  <h2>₹ 399</h2>
+                </a>
+              </div>
+            </div>
+            <div class="cart-sidebar-body-cart-items d-flex py-2">
+              <div class="cart-sidebar-body-cart-items-img d-flex align-items-center justify-content-center"> <img
+                  src="assets/images/no-img.svg" alt="StoreOne" /></div>
+              <div class="cart-sidebar-body-cart-items-info">
+                <a href="javascript:void()">
+                  <h1>Rayon Bandhani Printed Kurti with Pant</h1>
+                  <div class="d-flex justify-content-between text-muted font-13">
+                    <div> <strong>Size:</strong> L</div>
+                    <div> <strong>Qty:</strong> 6</div>
+                  </div>
+                  <h2>₹ 399</h2>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="shopping-cart-summary">
+            <h5 class="mb-3">Cart Summary</h5>
+            <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+              <p>Subtotal</p>
+              <p>₹ 11,000</p>
+            </div>
+            <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+              <p>Shipping</p>
+              <p>Free</p>
+            </div>
+            <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+              <p>Warranty</p>
+              <p>Free</p>
+            </div>
+            <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+              <p>Tax</p>
+              <p>₹ 590</p>
+            </div>
+            <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+              <strong> Total </strong><strong> ₹ 11,590 </strong>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
