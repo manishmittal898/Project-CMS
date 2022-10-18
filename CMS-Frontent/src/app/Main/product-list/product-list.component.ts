@@ -3,6 +3,8 @@ import { ProductFilterModel, ProductMasterViewModel, ProductService } from './..
 import { Component, OnInit } from '@angular/core';
 import { Route, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CommonService } from '../../Shared/Services/common.service';
+import { SecurityService } from '../../Shared/Services/security.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +16,7 @@ export class ProductListComponent implements OnInit {
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
-  constructor(private readonly _productService: ProductService, private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer) {
+  constructor(private readonly _productService: ProductService, private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
 
 
 
@@ -23,11 +25,16 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this._router.queryParams.subscribe(p => {
       if (p.id) {
-        this.indexModel.CategoryId = [Number(this._router.snapshot.queryParams.id)];
+        debugger
+        const id = this._securityService.decrypt(this._router.snapshot.queryParams.id);
+        this.indexModel.CategoryId = [Number(id)];
         this.indexModel.SubCategoryId = [];
       }
+
       if (p.subid) {
-        this.indexModel.SubCategoryId = [Number(this._router.snapshot.queryParams.subid)];
+        debugger
+        const sid = this._securityService.decrypt(this._router.snapshot.queryParams.subid);
+        this.indexModel.SubCategoryId = [Number(sid)];
       }
 
       if (this._router.snapshot.params?.name) {

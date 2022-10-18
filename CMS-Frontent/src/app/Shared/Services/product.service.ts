@@ -81,8 +81,7 @@ export interface ProductCategoryViewModel {
   CreatedOn: string;
   ModifiedBy: number;
   ModifiedOn: string;
-  IsActive: boolean | null;
-  IsDelete: boolean;
+
 }
 export interface ProductStockModel {
   Id: number;
