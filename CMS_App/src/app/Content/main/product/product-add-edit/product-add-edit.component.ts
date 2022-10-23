@@ -177,7 +177,7 @@ export class ProductAddEditComponent implements OnInit {
     }
 
   }
-  deleteProdcutFile(id: number) {
+  deleteProductFile(id: number) {
     this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
       if (result) {
         let subscription = this._productService.DeleteProductFile(id).subscribe(

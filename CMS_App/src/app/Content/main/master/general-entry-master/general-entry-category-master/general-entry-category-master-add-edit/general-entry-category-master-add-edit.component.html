@@ -8,7 +8,7 @@
         <ol class="breadcrumb justify-content-center justify-content-sm-start">
           <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
           <li class="breadcrumb-item"><a routerLink="../" href="javascript:void()">{{pageName | titlecase}}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add /Update </li>
+          <li class="breadcrumb-item active" aria-current="page">{{model.Id > 0 ?'Update':'Add' }} </li>
         </ol>
       </nav>
       <!-- Breadcrumb End -->
@@ -17,3 +17,100 @@
   </div>
 </div>
 <!-- Page Header Title end -->
+<div class="custom-form p-3 p-md-3">
+  <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <!-- Done -->
+      <div class="form-group col-md-6">
+        <label>Name</label>
+        <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
+          [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
+          Please enter <strong>Name</strong>...!</div>
+      </div>
+
+      <div class="form-group col-md-6 mb-0">
+        <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+        <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
+        <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
+          [CurrentFileLength]="model?.ImagePath ? 1: 0"
+          [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
+        </app-file-selector>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
+          Please upload image...!</div>
+
+        <span *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+
+          <a href="javascript:void()" class="small-media-items position-relative mb-3">
+            <div class="small-media-items-img"> <img [src]="model.ImagePath"
+                onerror="this.src='assets/img/300x300.jpg'" /> </div>
+            <div class="small-media-items-action">
+              <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
+                  class="bi bi-trash"></i></a>
+              <a [href]="model.ImagePath" target="_blank">
+                <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+              </a>
+            </div>
+          </a>
+
+        </span>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Sort Order (1-999999)</label>
+
+        <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
+          [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
+          [ngClass]="{ 'is-invalid': f.SortedOrder.errors && f.SortedOrder.touched}" class="form-control" id="input4"
+          placeholder="Sort Order">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('SortedOrder')?.hasError('required') && formgrp.get('SortedOrder')?.touched)">
+          Enter Sort Order </div>
+        <div class="invalid-feedback"
+          *ngIf="!formgrp.get('SortedOrder')?.hasError('required') && ((formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength')) && formgrp.get('SortedOrder')?.touched) || (formgrp.get('SortedOrder')?.hasError('maxlength') || formgrp.get('SortedOrder')?.hasError('minlength'))">
+          Sort Order length must be 1-6 digit. </div>
+
+
+      </div>
+      <div class="form-group col-md-6">
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
+            formControlName="IsShowInMain" id="IsShowInMain">
+          <label class="form-check-label" for="IsShowInMain">
+            Is Show In Main
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
+            formControlName="IsShowDataInMain" id="IsShowDataInMain">
+          <label class="form-check-label" for="IsShowDataInMain">
+            Is Show Data In Main
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsSingleEntry"
+            formControlName="IsSingleEntry" id="IsSingleEntry">
+          <label class="form-check-label" for="IsSingleEntry">
+            Is Single Entry
+          </label>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
+      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i>
+        {{model.Id > 0 ? 'Save ' : 'Add '}}</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+    </div>
+  </form>
+</div>

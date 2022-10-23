@@ -21,7 +21,6 @@ namespace CMS.API.Controllers
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -36,6 +35,7 @@ namespace CMS.API.Controllers
         {
             return await _common.GetFilterDropDown(model);
         }
+     
         [HttpPost]
         public async Task<ServiceResponse<Dictionary<string, object>>> GetFilterDropDown(FilterDropDownPostModel model)
         {
