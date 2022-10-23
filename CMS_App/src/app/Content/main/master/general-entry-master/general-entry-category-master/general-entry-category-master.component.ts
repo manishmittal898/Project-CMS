@@ -29,7 +29,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
   totalRecords = 0;
 
   noRecordData = {
-    subject: 'Can you please add your first record.',
+    subject: 'Could you please add your first record.',
     Description: 'No Record Found, please add new record!',
     url: './add',
     urlLable: 'Create'
