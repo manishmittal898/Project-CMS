@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IndexModel } from 'src/app/Shared/Helper/common-model';
 import { Message } from 'src/app/Shared/Helper/constants';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { GeneralEntryCategoryViewModel, GeneralEntryServiceService } from '../../../../../Shared/Services/Master/general-entry-service.service';
+import { GeneralEntryCategoryViewModel, GeneralEntryService } from '../../../../../Shared/Services/Master/general-entry.service';
 
 @Component({
   selector: 'app-general-entry-category-master',
@@ -35,7 +35,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     urlLable: 'Create'
   };
   constructor(private _router: Router, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _generalEntryService: GeneralEntryServiceService,
+    private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService,
     public dialog: MatDialog
 
   ) {

@@ -6,7 +6,7 @@ import { IndexModel, ApiResponse } from '../../Helper/common-model';
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralEntryServiceService {
+export class GeneralEntryService{
 
 
   constructor(private readonly _baseService: BaseAPIService) { }

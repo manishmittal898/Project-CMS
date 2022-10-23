@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { GeneralEntryCategoryPostModel } from 'src/app/Shared/Services/Master/general-entry-service.service';
+import { GeneralEntryCategoryPostModel, GeneralEntryCategoryViewModel, GeneralEntryService } from 'src/app/Shared/Services/Master/general-entry.service';
 
 @Component({
   selector: 'app-general-entry-category-master-add-edit',
@@ -25,7 +25,14 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   isFileAttached = false;
   get f() { return this.formgrp.controls; }
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
-    public _commonService: CommonService, private readonly toast: ToastrService,) { }
+    public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
+    this._activatedRoute.params.subscribe(x => {
+      this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
+      if (this.model.Id > 0) {
+        this.onGetDetail();
+      }
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -40,8 +47,34 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      
+
+      this._generalEntryService.AddUpdateGeneralEntryCategory(this.model).subscribe(x => {
+        if (x.IsSuccess) {
+          this.toast.success("General Entry Category added sucessfully...", "Saved");
+          this._route.navigate(['./admin/product']);
+        } else {
+          this.toast.error(x.Message as string, "Faild");
+        }
+      })
     }
+  }
+
+  onGetDetail() {
+    this._generalEntryService.GetGeneralEntryCategory(this.model.Id).subscribe(response => {
+      if (response.IsSuccess) {
+        const data = response.Data as GeneralEntryCategoryViewModel;
+        this.model.Name = data.Name;
+        this.model.ImagePath = data.ImagePath;
+        this.model.IsShowInMain = data.IsShowInMain;
+        this.model.IsShowDataInMain = data.IsShowDataInMain;
+        this.model.IsSingleEntry = data.IsSingleEntry;
+        this.model.SortedOrder = data.SortedOrder;
+      } else {
+        this.toast.error(response.Message?.toString(), 'Error');
+      }
+    },
+      error => {
+      });
   }
 
 }
