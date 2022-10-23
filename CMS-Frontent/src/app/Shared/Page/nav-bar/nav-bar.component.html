@@ -257,7 +257,7 @@
     </div>
     <div class="cart-sidebar-body-cart-items-final-action d-flex">
       <button data-bs-dismiss="offcanvas" aria-label="Close" type="button"
-        class="btn btn-default px-1 text-uppercase"><i class="bi bi-credit-card-2-front me-1"></i>
+        class="btn btn-default px-1 text-uppercase" [routerLink]="['/design/checkout']"><i class="bi bi-credit-card-2-front me-1"></i>
         checkout</button>
       <button data-bs-dismiss="offcanvas" aria-label="Close" type="button" [routerLink]="['/design/cart']"
         class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="bi bi-eye me-1"></i>
@@ -271,7 +271,7 @@
 
 <!-- Delete cart items Modal Start -->
 <div class="modal fade modal-custom-design" id="DeleteCartItems" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header pb-0">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i> </button>
@@ -282,8 +282,8 @@
       </h1>
       </div>
       <div class="modal-footer pt-0">
-        <button type="button" class="btn btn-default px-3 py-2" data-bs-dismiss="modal"><i class="bi bi-trash me-1"></i> Delete</button>
-        <button type="button" class="btn btn-default btn-border px-3 py-2" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i class="bi bi-trash me-1"></i> Delete</button>
+        <button type="button" class="btn btn-default btn-border btn-cancel px-3 py-2" data-bs-dismiss="modal" >Cancel</button>
       </div>
     </div>
   </div>

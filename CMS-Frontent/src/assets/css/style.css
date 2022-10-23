@@ -1147,13 +1147,13 @@ select:focus-visible {
     max-height: max-content;
 }
 
-.form-control {
+.form-control, .form-select {
     border-radius: 10px;
     font-size: 14px;
     padding: 10px 15px;
 }
 
-.form-control:focus {
+.form-control:focus, .form-select:focus {
     box-shadow: none;
     border-color: #787878;
 }
@@ -1821,8 +1821,46 @@ table tr td {
 }
 
 .modal-alert h1 {
-  font-size: 1.4rem;
-  line-height: 35px;
+  font-size: 1.2rem;
+  line-height: 30px;
+}
+.modal {
+  padding: 0px;
+}
+.form-check-input:checked[type=radio]
+{
+  background-image: none;
+  position: relative;
+}
+.form-check-input:checked[type=radio]:before {
+  font-family: bootstrap-icons !important;
+  content: "\f633";
+  background-image: none;
+  color: #fff;
+  position: absolute;
+  top: -5px;
+  font-size: 22px;
+  left: 0px;
+}
+.btn-delete {
+  background: #c15151;
+}
+.btn-delete:hover {
+  border-color: #c15151;
+  color: #c15151;
+}
+.btn-border {
+  outline-color: #cbcbcb;
+}
+.btn-border:hover {
+  background: #dfdfdf;
+  color: #000;
+}
+.btn-save {
+  background: #3a8919;
+}
+.btn-save:hover {
+  border-color: #3a8919;
 }
 /* CUSTOM CSS END */
 
