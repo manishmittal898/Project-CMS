@@ -105,6 +105,7 @@ namespace CMS.Service.Services.GeneralEntry
                     IsShowDataInMain = x.IsShowDataInMain,
                     IsShowInMain = x.IsShowInMain,
                     IsSingleEntry = x.IsSingleEntry,
+                    IsSystemEntry = x.IsSystemEntry,
                     CreatedBy = x.CreatedBy,
                     CreatedOn = x.CreatedOn,
                     ModifiedBy = x.ModifiedBy,
@@ -143,17 +144,20 @@ namespace CMS.Service.Services.GeneralEntry
 
                     TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == model.Id);
 
+
+
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    //  objData.EnumValue = model.EnumValue;
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objData.ModifiedOn = DateTime.Now;
 
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
-                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
                     }
                     else
                     {
@@ -161,9 +165,6 @@ namespace CMS.Service.Services.GeneralEntry
                         objData.ImagePath = null;
 
                     }
-
-
-                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblGecategoryMaters.Update(objData);
                     _db.SaveChanges();
                     return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
@@ -180,7 +181,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
@@ -206,13 +207,21 @@ namespace CMS.Service.Services.GeneralEntry
         {
             try
             {
-                TblGecategoryMater objData = new TblGecategoryMater();
-                objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
-                objData.IsDelete = true;
-                objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                objData.ModifiedOn = DateTime.Now;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
+                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+
+                if (objData.IsSystemEntry)
+                {
+                    return CreateResponse(objData, ResponseMessage.RestrictedRecord, true, (int)ApiStatusCode.Ok);
+                }
+                else
+                {
+
+                    objData.IsDelete = true;
+                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objData.ModifiedOn = DateTime.Now;
+                    await _db.SaveChangesAsync();
+                    return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
+                }
             }
             catch (Exception ex)
             {
@@ -227,12 +236,19 @@ namespace CMS.Service.Services.GeneralEntry
         {
             try
             {
-                TblGecategoryMater objData = new TblGecategoryMater();
-                objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+                if (objData.IsSystemEntry)
+                {
+                    return CreateResponse(objData, ResponseMessage.RestrictedRecord, true, (int)ApiStatusCode.Ok);
+                }
+                else
+                {
+                    objData.IsActive = !objData.IsActive;
+                    await _db.SaveChangesAsync();
+                    return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
 
-                objData.IsActive = !objData.IsActive;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+                }
+
             }
             catch (Exception ex)
             {
@@ -269,7 +285,7 @@ namespace CMS.Service.Services.GeneralEntry
                     default:
                         break;
                 }
-              
+
                 await _db.SaveChangesAsync();
                 return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
             }

@@ -16,6 +16,7 @@ namespace CMS.Service.Utility
         public const string Lookup = "\\Content\\Lookup\\";
         public const string SubLookupType = "\\Content\\SubLookupType\\";
         public const string SubLookup = "\\Content\\SubLookup\\";
+        public const string GeneralEntryCategory = "\\Content\\GeneralEntryCategory\\";
 
 
 
