@@ -57,6 +57,7 @@ export interface GeneralEntryCategoryViewModel {
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
+  IsSystemEntry:boolean;
   SortedOrder: number | null;
   CreatedBy: number;
   CreatedOn: string;

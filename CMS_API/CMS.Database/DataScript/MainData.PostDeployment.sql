@@ -43,10 +43,10 @@ GO
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF
 GO
 
-SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
+SET IDENTITY_INSERT [dbo].[tblGECategoryMater] ON 
 GO
 INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1)
 GO
 
-SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF 
+SET IDENTITY_INSERT [dbo].[tblGECategoryMater] OFF 
 GO

@@ -16,6 +16,7 @@ namespace CMS.Service.Services.GeneralEntry
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
         public int? SortedOrder { get; set; }
+        public bool IsSystemEntry { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }

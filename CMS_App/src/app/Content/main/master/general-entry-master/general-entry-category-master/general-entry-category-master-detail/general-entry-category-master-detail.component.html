@@ -1,1 +1,59 @@
-<p>general-entry-category-master-detail works!</p>
+<!-- Page Header Title start -->
+<div class="widget-header">
+  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
+    <div>
+      <h1>General Entry Category Detail</h1>
+      <!-- Breadcrumb Start -->
+      <nav class="custom-breadcrum">
+        <ol class="breadcrumb justify-content-center justify-content-sm-start">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void()"
+              routerLink="/admin/master/general-entry-category">General Entry Category List</a></li>
+          <li class="breadcrumb-item active" aria-current="page">General Entry Category Detail</li>
+        </ol>
+      </nav>
+      <!-- Breadcrumb End -->
+    </div>
+    <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
+      <button class="btn btn-success mr-3" *ngIf="!this.model?.IsSystemEntry" routerLink="../../edit/{{recordId}}">
+        <i class="bi bi-pencil-square mr-1"></i>Edit</button>
+      <button class="btn btn-dark btn-sm" routerLink="/admin/master/general-entry-category"> <i
+          class="bi bi-chevron-left"></i>
+        Back to list</button>
+    </div>
+  </div>
+</div>
+<!-- Page Header Title end -->
+
+<div class="widget-content p-3 ">
+
+  <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3">
+    <img [src]="this.model.ImagePath" onerror="this.src='assets/img/no-img.svg'">
+  </div>
+  <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
+    <tbody>
+
+      <tr>
+        <td style="width: 18%;"> <strong> Name: </strong> </td>
+        <td style="width: 32%;">{{this.model.Name}}</td>
+        <td style="width: 18%;"><strong>Sort Order: </strong> </td>
+        <td style="width: 32%;">{{this.model.SortedOrder}}</td>
+      </tr>
+
+      <tr>
+        <td><strong> Is Show In Main: </strong> </td>
+        <td>{{this.model.IsShowInMain?'Yes':'No'}}</td>
+        <td><strong> Is Show Data In Main: </strong> </td>
+        <td>{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
+      </tr>
+
+      <tr>
+        <td><strong> Is Single Entry: </strong> </td>
+        <td>{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
+        <td><strong> Is System Entry: </strong> </td>
+        <td>{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
