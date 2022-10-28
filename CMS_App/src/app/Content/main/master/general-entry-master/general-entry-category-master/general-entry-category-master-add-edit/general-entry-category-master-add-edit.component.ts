@@ -51,7 +51,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       this._generalEntryService.AddUpdateGeneralEntryCategory(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success("General Entry Category added sucessfully...", "Saved");
-          this._route.navigate(['./admin/product']);
+          this._route.navigate(['./admin/master/general-entry-category']);
         } else {
           this.toast.error(x.Message as string, "Faild");
         }
