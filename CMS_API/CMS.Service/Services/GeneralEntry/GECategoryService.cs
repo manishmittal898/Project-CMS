@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 
 namespace CMS.Service.Services.GeneralEntry
 {
@@ -60,6 +61,8 @@ namespace CMS.Service.Services.GeneralEntry
                                             SortedOrder = x.SortedOrder.Value,
                                             EnumValue = x.EnumValue,
                                             IsShowDataInMain = x.IsShowDataInMain,
+                                            ContentType = x.ContentType,
+
                                             IsShowInMain = x.IsShowInMain,
                                             IsSingleEntry = x.IsSingleEntry,
                                             CreatedBy = x.CreatedBy,
@@ -73,6 +76,11 @@ namespace CMS.Service.Services.GeneralEntry
 
                 if (result != null)
                 {
+                    foreach (var item in objResult.Data)
+                    {
+                        item.ContentTypeText = item.ContentType > 0 ? Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => item.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault() : string.Empty;
+                    }
+
 
                     return CreateResponse(objResult.Data as IEnumerable<GeneralEntryCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
@@ -102,6 +110,7 @@ namespace CMS.Service.Services.GeneralEntry
                     ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
                     SortedOrder = x.SortedOrder.Value,
                     EnumValue = x.EnumValue,
+                    ContentType = x.ContentType,
                     IsShowDataInMain = x.IsShowDataInMain,
                     IsShowInMain = x.IsShowInMain,
                     IsSingleEntry = x.IsSingleEntry,
@@ -117,6 +126,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                 if (detail != null)
                 {
+                    detail.ContentTypeText = detail.ContentType > 0 ? Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => detail.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault() : string.Empty;
                     ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
 
                 }

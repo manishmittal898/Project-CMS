@@ -14,6 +14,7 @@ namespace CMS.Data.Models
         public bool IsShowInMain { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
+        public int ContentType { get; set; }
         public int? SortedOrder { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

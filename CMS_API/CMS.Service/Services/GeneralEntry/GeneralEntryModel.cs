@@ -12,6 +12,10 @@ namespace CMS.Service.Services.GeneralEntry
         public string Name { get; set; }
         public string EnumValue { get; set; }
         public string ImagePath { get; set; }
+
+        public int ContentType { get; set; }
+        public string ContentTypeText { get; set; }
+
         public bool IsShowInMain { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
@@ -24,7 +28,7 @@ namespace CMS.Service.Services.GeneralEntry
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
 
-        
+
 
 
     }
@@ -40,11 +44,15 @@ namespace CMS.Service.Services.GeneralEntry
         [Display(Name = "Image")]
 
         public string ImagePath { get; set; }
+        [Required]
+        [Display(Name = "ContentType")]
+        public int ContentType { get; set; }
+
         public bool IsShowInMain { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
         public int? SortedOrder { get; set; }
-     
- 
+
+
     }
 }

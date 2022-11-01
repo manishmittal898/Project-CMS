@@ -43,6 +43,7 @@ export interface GeneralEntryCategoryPostModel {
   Name: string;
   EnumValue: string;
   ImagePath: string;
+  ContentType :number;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
@@ -54,6 +55,7 @@ export interface GeneralEntryCategoryViewModel {
   Name: string;
   EnumValue: string;
   ImagePath: string;
+  ContentType :number;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
