@@ -4832,6 +4832,25 @@ td.mat-footer-cell:last-of-type {
 .breadcrum-action-btn {
   font-size: 18px;
 }
+.checkbox-card {
+  border: dotted 2px #dae0ff;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.custom-control-label::before, .custom-control-label::after {
+  width: 22px;
+  height: 22px;
+  top: 0px;
+  left: -10px;
+}
+.custom-control-input:checked~.custom-control-label::before {
+  background: #002767;
+  border-color: #002767;
+}
+.custom-control-label {
+  padding-left: 20px;
+  color: #000;
+}
 
 /* Manish CSS End */
 
