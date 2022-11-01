@@ -26,7 +26,7 @@
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <!-- Done -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label>Name</label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
           [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
@@ -35,7 +35,7 @@
           Please enter <strong>Name</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-6 mb-0">
+      <div class="form-group col-md-4">
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label>Sort Order (1-999999)</label>
 
         <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
@@ -80,29 +80,29 @@
 
 
       </div>
-      <div class="form-group col-md-6">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
+      <div class="form-group col-md-4">
+        <div class="custom-control custom-checkbox checkbox-card">
+          <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
             formControlName="IsShowInMain" id="IsShowInMain">
-          <label class="form-check-label" for="IsShowInMain">
+          <label class="custom-control-label" for="IsShowInMain">
             Is Show In Main
           </label>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
+      <div class="form-group col-md-4">
+        <div class="custom-control custom-checkbox checkbox-card">
+          <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
             formControlName="IsShowDataInMain" id="IsShowDataInMain">
-          <label class="form-check-label" for="IsShowDataInMain">
+          <label class="custom-control-label" for="IsShowDataInMain">
             Is Show Data In Main
           </label>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" [(ngModel)]="model.IsSingleEntry"
+      <div class="form-group col-md-4">
+        <div class="custom-control custom-checkbox checkbox-card">
+          <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsSingleEntry"
             formControlName="IsSingleEntry" id="IsSingleEntry">
-          <label class="form-check-label" for="IsSingleEntry">
+          <label class="custom-control-label" for="IsSingleEntry">
             Is Single Entry
           </label>
         </div>
