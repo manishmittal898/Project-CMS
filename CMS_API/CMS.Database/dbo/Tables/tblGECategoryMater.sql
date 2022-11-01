@@ -7,6 +7,7 @@
     [IsShowInMain]   BIT NOT NULL DEFAULT 0,
     [IsShowDataInMain]   BIT NOT NULL DEFAULT 0,
     [IsSingleEntry]   BIT NOT NULL DEFAULT 0,
+    [ContentType]   INT NOT NULL ,
     [SortedOrder] INT NULL,
     [CreatedBy]  BIGINT NOT NULL,
     [CreatedOn]  DATETIME  NOT NULL DEFAULT getdate(),
@@ -17,6 +18,6 @@
     [IsDelete] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_tblGECategoryMater] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_tblGECategoryMater_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
-    CONSTRAINT [FK_tblGECategoryMater_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId])
-
+    CONSTRAINT [FK_tblGECategoryMater_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId]),
+    
 )

@@ -21,5 +21,16 @@ namespace CMS.Core.FixedValue
             [StringValue("CMS_Page")]
             CMS_Page
         }
+
+        public enum ContentTypeEnum
+        {
+            [StringValue("Photo")]
+            Photo= 1,
+            [StringValue("Documents")]
+            Document=2,
+            [StringValue("URL")]
+            URL=3,
+           
+        }
     }
 }

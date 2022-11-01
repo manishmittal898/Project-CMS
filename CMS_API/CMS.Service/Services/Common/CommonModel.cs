@@ -29,6 +29,9 @@ namespace CMS.Service.Services.Common
 
             public const string ddlCMSPage = "ddlcmspage";
 
+            public const string ddlContentType = "ddlcontenttype";
+
+            
 
 
         }

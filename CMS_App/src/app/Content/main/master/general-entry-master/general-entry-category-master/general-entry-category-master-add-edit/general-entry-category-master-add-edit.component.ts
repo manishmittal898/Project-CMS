@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DropDownModel } from 'src/app/Shared/Helper/common-model';
+import { DropDown_key } from 'src/app/Shared/Helper/constants';
 import { FileInfo } from 'src/app/Shared/Helper/shared/file-selector/file-selector.component';
 import { CommonService } from 'src/app/Shared/Services/common.service';
 import { GeneralEntryCategoryPostModel, GeneralEntryCategoryViewModel, GeneralEntryService } from 'src/app/Shared/Services/Master/general-entry.service';
@@ -14,13 +16,15 @@ import { GeneralEntryCategoryPostModel, GeneralEntryCategoryViewModel, GeneralEn
 export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   pageName = 'General Entry Category'
   model = {} as GeneralEntryCategoryPostModel;
+  dropDown = new DropDownModel();
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
     ImagePath: [undefined, Validators.required],
     IsShowInMain: [undefined],
     IsShowDataInMain: [undefined],
     IsSingleEntry: [undefined],
-    SortedOrder: [undefined, Validators.required]
+    SortedOrder: [undefined, Validators.required],
+    ContentType: [undefined, Validators.required],
   });
   isFileAttached = false;
   get f() { return this.formgrp.controls; }
@@ -44,6 +48,18 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   RemoveDocument(file: string) {
     this.model.ImagePath = '';
   }
+
+  GetDropDown() {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlContentType]).subscribe(res => {
+      serve.unsubscribe();
+      if (res.IsSuccess) {
+        const ddls = res?.Data as DropDownModel;
+        this.dropDown.ddlContentType = ddls?.ddlContentType;
+
+      }
+    });
+  }
+
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {

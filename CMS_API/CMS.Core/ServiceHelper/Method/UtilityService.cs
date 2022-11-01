@@ -1,4 +1,5 @@
-﻿using HeyRed.Mime;
+﻿using CMS.Core.Attribute;
+using HeyRed.Mime;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -129,6 +131,9 @@ namespace CMS.Core.ServiceHelper.Method
                 throw;
             }
         }
+
+
+       
 
     }
 }

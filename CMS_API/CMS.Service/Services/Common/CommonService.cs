@@ -80,6 +80,11 @@ namespace CMS.Service.Services.Common
                             break;
 
 
+                        case DropDownKey.ddlContentType:
+
+                            objData.Add(item, GetContentTypeEnum());
+                            break;
+
 
 
                         default:
@@ -286,6 +291,10 @@ namespace CMS.Service.Services.Common
             }
         }
 
+        private  object GetContentTypeEnum()
+        {
+            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Text = r, Value = r.GetStringValue()});
+        }
 
     }
 }
