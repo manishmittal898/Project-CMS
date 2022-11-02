@@ -19,7 +19,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   dropDown = new DropDownModel();
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
-    ImagePath: [undefined, Validators.required],
+    ImagePath: [undefined],
     IsShowInMain: [undefined],
     IsShowDataInMain: [undefined],
     IsSingleEntry: [undefined],
@@ -30,15 +30,17 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   get f() { return this.formgrp.controls; }
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
+
+  }
+
+  ngOnInit(): void {
+    this.GetDropDown();
     this._activatedRoute.params.subscribe(x => {
       this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
       if (this.model.Id > 0) {
         this.onGetDetail();
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onDocumentAttach(file: FileInfo[]) {
@@ -54,6 +56,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
+        debugger
         this.dropDown.ddlContentType = ddls?.ddlContentType;
 
       }
@@ -80,6 +83,8 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       if (response.IsSuccess) {
         const data = response.Data as GeneralEntryCategoryViewModel;
         this.model.Name = data.Name;
+        debugger
+        this.model.ContentType = data.ContentType;
         this.model.ImagePath = data.ImagePath;
         this.model.IsShowInMain = data.IsShowInMain;
         this.model.IsShowDataInMain = data.IsShowDataInMain;

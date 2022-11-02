@@ -56,6 +56,7 @@ export interface GeneralEntryCategoryViewModel {
   EnumValue: string;
   ImagePath: string;
   ContentType :number;
+  ContentTypeText :string;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;

@@ -38,20 +38,27 @@
         <td style="width: 32%;">{{this.model.Name}}</td>
         <td style="width: 18%;"><strong>Sort Order: </strong> </td>
         <td style="width: 32%;">{{this.model.SortedOrder}}</td>
+
       </tr>
 
       <tr>
-        <td><strong> Is Show In Main: </strong> </td>
-        <td>{{this.model.IsShowInMain?'Yes':'No'}}</td>
-        <td><strong> Is Show Data In Main: </strong> </td>
-        <td>{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
+        <td style="width: 18%;"><strong>Content Type : </strong> </td>
+        <td style="width: 32%;">{{this.model.ContentTypeText}}</td>
+        <td style="width: 18%;"><strong> Is Show In Main: </strong> </td>
+        <td style="width: 32%;">{{this.model.IsShowInMain?'Yes':'No'}}</td>
+
+
       </tr>
 
       <tr>
-        <td><strong> Is Single Entry: </strong> </td>
-        <td>{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
-        <td><strong> Is System Entry: </strong> </td>
-        <td>{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
+        <td style="width: 16%;"><strong> Is Show Data In Main: </strong> </td>
+        <td style="width: 16%;">{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
+
+        <td style="width: 16%;"><strong> Is Single Entry: </strong> </td>
+        <td style="width: 16%;">{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
+
+        <td style="width: 16%;"><strong> Is System Entry: </strong> </td>
+        <td style="width: 16%;">{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
       </tr>
 
     </tbody>

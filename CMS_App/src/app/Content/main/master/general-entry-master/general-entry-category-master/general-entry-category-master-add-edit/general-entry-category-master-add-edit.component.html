@@ -36,6 +36,18 @@
       </div>
 
       <div class="form-group col-md-4">
+        <label>Content Type</label>
+        <ng-select [items]="this.dropDown.ddlContentType" formControlName="ContentType" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Size Id"
+          [ngClass]="{ 'is-invalid': f.ContentType.errors && f.ContentType.touched}" [(ngModel)]="model.ContentType">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('ContentType')?.hasError('required') && formgrp.get('ContentType')?.touched)">
+          Please select <strong>ContentType</strong>...!</div>
+
+      </div>
+
+      <div class="form-group col-md-4">
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -99,6 +111,7 @@
         </div>
       </div>
       <div class="form-group col-md-4">
+        
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsSingleEntry"
             formControlName="IsSingleEntry" id="IsSingleEntry">

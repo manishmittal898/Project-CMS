@@ -158,18 +158,20 @@ namespace CMS.Service.Services.GeneralEntry
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
+                    objData.ContentType = model.ContentType;
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedOn = DateTime.Now;
 
+
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
                         objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
                     }
-                    else
+                    else if(!string.IsNullOrEmpty(objData.ImagePath))
                     {
                         _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
@@ -187,6 +189,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
+                    objData.ContentType = model.ContentType;
                     objData.EnumValue = model.EnumValue;
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;

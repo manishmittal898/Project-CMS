@@ -293,7 +293,7 @@ namespace CMS.Service.Services.Common
 
         private  object GetContentTypeEnum()
         {
-            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Text = r, Value = r.GetStringValue()}).ToList();
+            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Value = r, Text= r.GetStringValue()}).ToList();
         }
 
     }

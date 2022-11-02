@@ -22,8 +22,9 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-   displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'SortedOrder', 'Flags', 'IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'ContentTypeText', 'ImagePath', 'SortedOrder', 'Flags', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
+  { Value: 'ContentTypeText', Text: 'Content Type' },
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords = 0;
@@ -36,10 +37,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
   };
   constructor(private _router: Router, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService,
-    public dialog: MatDialog
-
-  ) {
-
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
