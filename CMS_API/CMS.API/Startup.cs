@@ -27,7 +27,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
-using System.Text; 
+using System.Text;
 
 namespace CMS.API
 {
@@ -99,11 +99,12 @@ namespace CMS.API
 options.UseSqlServer(Configuration[CONNECTION_STRING]));
 
             services.AddMvc()
-               
-                .AddJsonOptions(options => { 
+
+                .AddJsonOptions(options =>
+                {
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                    
-                }) ;
+
+                });
             Registerservice(services);
         }
 
@@ -172,6 +173,10 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
             services.AddScoped<ICMSPageService, CMSPageService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IGECategoryService, GECategoryService>();
+            services.AddScoped<IGeneralEntryService, GeneralEntryService>();
+
+
+
 
         }
     }

@@ -7,6 +7,11 @@ namespace CMS.Data.Models
 {
     public partial class TblGecategoryMater
     {
+        public TblGecategoryMater()
+        {
+            TblGeneralEntries = new HashSet<TblGeneralEntry>();
+        }
+
         public long Id { get; set; }
         public string Name { get; set; }
         public string EnumValue { get; set; }
@@ -26,5 +31,6 @@ namespace CMS.Data.Models
 
         public virtual TblUserMaster CreatedByNavigation { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
+        public virtual ICollection<TblGeneralEntry> TblGeneralEntries { get; set; }
     }
 }

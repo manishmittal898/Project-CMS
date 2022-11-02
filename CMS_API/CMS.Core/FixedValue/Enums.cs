@@ -25,12 +25,16 @@ namespace CMS.Core.FixedValue
         public enum ContentTypeEnum
         {
             [StringValue("Photo")]
-            Photo= 1,
+            Photo = 1,
+            [StringValue("Multiple Images")]
+            MultipleImages = 2,
+            [StringValue("Video")]
+            Video = 3,
             [StringValue("Documents")]
-            Document=2,
+            Document = 4,
             [StringValue("URL")]
-            URL=3,
-           
+            URL = 5,
+
         }
     }
 }

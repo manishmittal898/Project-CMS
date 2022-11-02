@@ -5,6 +5,47 @@ using System.Text;
 
 namespace CMS.Service.Services.GeneralEntry
 {
+    public class GeneralEntryPostModel
+    {
+        public long Id { get; set; }
+
+        [Required]
+        [Display(Name = "CategoryId")]
+        public long CategoryId { get; set; }  
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+        [Required]
+        [Display(Name = "SortedOrder")]
+        public int? SortedOrder { get; set; }
+        public List<string>? Data { get; set; } 
+    }
+
+    public class GeneralEntryViewModel
+    {
+        public long Id { get; set; }
+        public string Title { get; set; }
+        public long CategoryId { get; set; }
+        public string Category { get; set; }
+
+        public string Description { get; set; }
+        public string DataId { get; set; }
+        public int? SortedOrder { get; set; }
+        public bool? IsActive { get; set; }
+        public bool IsDeleted { get; set; } 
+        public List<GeneralEntryDataViewModel> Data { get; set; } 
+    }
+
+    public class GeneralEntryDataViewModel
+    {
+        public long Id { get; set; }
+        public string Value { get; set; }
+        public long? GeneralEntryId { get; set; }
+    }
+
     public class GeneralEntryCategoryViewModel
     {
 
@@ -36,6 +77,7 @@ namespace CMS.Service.Services.GeneralEntry
     {
 
         public long Id { get; set; }
+
         [Required]
         [Display(Name = "Name")]
 

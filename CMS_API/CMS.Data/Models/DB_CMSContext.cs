@@ -18,7 +18,9 @@ namespace CMS.Data.Models
         }
 
         public virtual DbSet<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
+        public virtual DbSet<TblFileDataMaster> TblFileDataMasters { get; set; }
         public virtual DbSet<TblGecategoryMater> TblGecategoryMaters { get; set; }
+        public virtual DbSet<TblGeneralEntry> TblGeneralEntries { get; set; }
         public virtual DbSet<TblLookupMaster> TblLookupMasters { get; set; }
         public virtual DbSet<TblLookupTypeMaster> TblLookupTypeMasters { get; set; }
         public virtual DbSet<TblProductImage> TblProductImages { get; set; }
@@ -79,6 +81,35 @@ namespace CMS.Data.Models
                     .HasConstraintName("tblCMSPageContentMaster_PageId");
             });
 
+            modelBuilder.Entity<TblFileDataMaster>(entity =>
+            {
+                entity.ToTable("tblFileDataMaster");
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DataId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblFileDataMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("FK_tblFileDataMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblFileDataMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblFileDataMaster_ModifiedBy");
+            });
+
             modelBuilder.Entity<TblGecategoryMater>(entity =>
             {
                 entity.ToTable("tblGECategoryMater");
@@ -118,6 +149,48 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.ModifiedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblGECategoryMater_ModifiedBy");
+            });
+
+            modelBuilder.Entity<TblGeneralEntry>(entity =>
+            {
+                entity.ToTable("tblGeneralEntry");
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DataId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description).HasColumnType("ntext");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Title).HasMaxLength(400);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.TblGeneralEntries)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblGeneralEntry_CategoryId");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblGeneralEntryCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("FK_tblGeneralEntry_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblGeneralEntryModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblGeneralEntry_ModifiedBy");
             });
 
             modelBuilder.Entity<TblLookupMaster>(entity =>

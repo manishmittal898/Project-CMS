@@ -11,8 +11,12 @@ namespace CMS.Data.Models
         {
             TblCmspageContentMasterCreatedByNavigations = new HashSet<TblCmspageContentMaster>();
             TblCmspageContentMasterModifiedByNavigations = new HashSet<TblCmspageContentMaster>();
+            TblFileDataMasterCreatedByNavigations = new HashSet<TblFileDataMaster>();
+            TblFileDataMasterModifiedByNavigations = new HashSet<TblFileDataMaster>();
             TblGecategoryMaterCreatedByNavigations = new HashSet<TblGecategoryMater>();
             TblGecategoryMaterModifiedByNavigations = new HashSet<TblGecategoryMater>();
+            TblGeneralEntryCreatedByNavigations = new HashSet<TblGeneralEntry>();
+            TblGeneralEntryModifiedByNavigations = new HashSet<TblGeneralEntry>();
             TblLookupMasterCreatedByNavigations = new HashSet<TblLookupMaster>();
             TblLookupMasterModifiedByNavigations = new HashSet<TblLookupMaster>();
             TblLookupTypeMasterCreatedByNavigations = new HashSet<TblLookupTypeMaster>();
@@ -48,8 +52,12 @@ namespace CMS.Data.Models
         public virtual TblRoleType Role { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterModifiedByNavigations { get; set; }
+        public virtual ICollection<TblFileDataMaster> TblFileDataMasterCreatedByNavigations { get; set; }
+        public virtual ICollection<TblFileDataMaster> TblFileDataMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblGecategoryMater> TblGecategoryMaterCreatedByNavigations { get; set; }
         public virtual ICollection<TblGecategoryMater> TblGecategoryMaterModifiedByNavigations { get; set; }
+        public virtual ICollection<TblGeneralEntry> TblGeneralEntryCreatedByNavigations { get; set; }
+        public virtual ICollection<TblGeneralEntry> TblGeneralEntryModifiedByNavigations { get; set; }
         public virtual ICollection<TblLookupMaster> TblLookupMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblLookupMaster> TblLookupMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblLookupTypeMaster> TblLookupTypeMasterCreatedByNavigations { get; set; }
