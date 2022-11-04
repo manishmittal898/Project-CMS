@@ -129,6 +129,11 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
                   this.model[idx].IsSingleEntry = !this.model[idx].IsSingleEntry;
                   break;
 
+                  case 'IsShowThumbnail':
+                    this.model[idx].IsShowThumbnail = !this.model[idx].IsShowThumbnail;
+                    break;
+
+
                 default:
                   break;
               }

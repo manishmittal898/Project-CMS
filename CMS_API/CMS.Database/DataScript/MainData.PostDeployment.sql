@@ -27,7 +27,6 @@ INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB],
 GO
 SET IDENTITY_INSERT [dbo].[tblUserMaster] OFF
 GO
-
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
 GO
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (1, N'Gender', N'GENDER',0, 1,GETDATE(), 1, GETDATE(), 0, 0,0)
@@ -40,14 +39,12 @@ INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[Cr
 GO
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (5, N'CMS Pages', N'CMS_Page',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
 GO
-
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF
 GO
 
 SET IDENTITY_INSERT [dbo].[tblGECategoryMater] ON 
 GO
-INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry],[ContentType]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1,1)
+INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry],[ContentType],[IsShowThumbnail]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1,1,0)
 GO
-
 SET IDENTITY_INSERT [dbo].[tblGECategoryMater] OFF 
 GO

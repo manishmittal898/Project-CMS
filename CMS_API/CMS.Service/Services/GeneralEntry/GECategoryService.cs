@@ -62,7 +62,7 @@ namespace CMS.Service.Services.GeneralEntry
                                             EnumValue = x.EnumValue,
                                             IsShowDataInMain = x.IsShowDataInMain,
                                             ContentType = x.ContentType,
-
+                                            IsShowThumbnail = x.IsShowThumbnail,
                                             IsShowInMain = x.IsShowInMain,
                                             IsSingleEntry = x.IsSingleEntry,
                                             CreatedBy = x.CreatedBy,
@@ -115,6 +115,7 @@ namespace CMS.Service.Services.GeneralEntry
                     IsShowInMain = x.IsShowInMain,
                     IsSingleEntry = x.IsSingleEntry,
                     IsSystemEntry = x.IsSystemEntry,
+                    IsShowThumbnail = x.IsShowThumbnail,
                     CreatedBy = x.CreatedBy,
                     CreatedOn = x.CreatedOn,
                     ModifiedBy = x.ModifiedBy,
@@ -161,6 +162,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.ContentType = model.ContentType;
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
+                    objData.IsShowThumbnail = model.IsShowThumbnail;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedOn = DateTime.Now;
@@ -171,7 +173,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                         objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
                     }
-                    else if(!string.IsNullOrEmpty(objData.ImagePath))
+                    else if (!string.IsNullOrEmpty(objData.ImagePath))
                     {
                         _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
@@ -194,6 +196,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
+                    objData.IsShowThumbnail = model.IsShowThumbnail;
                     objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
 
                     objData.IsActive = true;
@@ -293,7 +296,9 @@ namespace CMS.Service.Services.GeneralEntry
                     case "IsSingleEntry":
                         objData.IsSingleEntry = !objData.IsSingleEntry;
 
-
+                        break;
+                    case "IsShowThumbnail":
+                        objData.IsShowThumbnail = !objData.IsShowThumbnail;
                         break;
                     default:
                         break;

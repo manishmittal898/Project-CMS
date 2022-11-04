@@ -94,19 +94,30 @@
 
 
                 </a>
-                <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowDataInMain')" title="Update Active Status">
+                <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowDataInMain')"
+                  title="Update Status">
                   <span *ngIf="element!.IsShowDataInMain" class="d-inline-block w-100 badge badge-success"><i
                       class="bi bi-check-circle"></i>&nbsp;Show data in Main</span>
                   <span *ngIf="!element!.IsShowDataInMain" class="d-inline-block w-100 badge btn-outline-success"><i
                       class="bi bi-check-circle "></i>&nbsp;Show data in Main</span>
                 </a>
 
-                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsSingleEntry')" title="Update Active Status">
+                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsSingleEntry')" title="Update Status">
                   <span *ngIf="element!.IsSingleEntry" class="d-inline-block w-100 badge badge-success"><i
                       class="bi bi-check-circle"></i>&nbsp;Single Entry</span>
                   <span *ngIf="!element!.IsSingleEntry" class="d-inline-block w-100 badge btn-outline-primary"><i
                       class="bi bi-check-circle "></i>&nbsp;Single Entry</span>
                 </a>
+
+                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')" title="Update Status">
+                  <span *ngIf="element!.IsShowThumbnail" class="d-inline-block w-100 badge badge-success"><i
+                      class="bi bi-check-circle"></i>&nbsp;Show Thumbnail</span>
+                  <span *ngIf="!element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-outline-primary"><i
+                      class="bi bi-check-circle "></i>&nbsp;Show Thumbnail</span>
+                </a>
+
+
+
               </td>
             </ng-container>
 

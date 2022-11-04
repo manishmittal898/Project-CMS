@@ -47,6 +47,7 @@ export interface GeneralEntryCategoryPostModel {
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
+  IsShowThumbnail : boolean;
   SortedOrder: number | null;
 }
 
@@ -61,6 +62,7 @@ export interface GeneralEntryCategoryViewModel {
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
   IsSystemEntry:boolean;
+  IsShowThumbnail :boolean;
   SortedOrder: number | null;
   CreatedBy: number;
   CreatedOn: string;

@@ -5,6 +5,7 @@
     [EnumValue]  VARCHAR(20) NOT NULL UNIQUE,
     [ImagePath]  NVARCHAR (4000) NULL,
     [IsShowInMain]   BIT NOT NULL DEFAULT 0,
+    [IsShowThumbnail]   BIT NOT NULL DEFAULT 0,
     [IsShowDataInMain]   BIT NOT NULL DEFAULT 0,
     [IsSingleEntry]   BIT NOT NULL DEFAULT 0,
     [ContentType]   INT NOT NULL ,

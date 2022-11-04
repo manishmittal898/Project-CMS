@@ -17,6 +17,7 @@ namespace CMS.Data.Models
         public string EnumValue { get; set; }
         public string ImagePath { get; set; }
         public bool IsShowInMain { get; set; }
+        public bool IsShowThumbnail { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
         public int ContentType { get; set; }

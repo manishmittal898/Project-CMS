@@ -114,7 +114,7 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblGECategoryMater");
 
-                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C171152E72A")
+                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C17EB9C766E")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedOn)

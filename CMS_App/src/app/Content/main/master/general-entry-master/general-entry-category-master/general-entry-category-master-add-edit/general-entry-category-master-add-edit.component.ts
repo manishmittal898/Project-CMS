@@ -23,6 +23,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
     IsShowInMain: [undefined],
     IsShowDataInMain: [undefined],
     IsSingleEntry: [undefined],
+    IsShowThumbnail:[undefined],
     SortedOrder: [undefined, Validators.required],
     ContentType: [undefined, Validators.required],
   });
@@ -89,6 +90,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
         this.model.IsShowInMain = data.IsShowInMain;
         this.model.IsShowDataInMain = data.IsShowDataInMain;
         this.model.IsSingleEntry = data.IsSingleEntry;
+        this.model.IsShowThumbnail =data.IsShowThumbnail;
         this.model.SortedOrder = data.SortedOrder;
       } else {
         this.toast.error(response.Message?.toString(), 'Error');

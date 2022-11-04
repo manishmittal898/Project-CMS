@@ -97,7 +97,7 @@
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
             formControlName="IsShowInMain" id="IsShowInMain">
           <label class="custom-control-label" for="IsShowInMain">
-            Is Show In Main
+            Show Category In Main screen
           </label>
         </div>
       </div>
@@ -106,7 +106,7 @@
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
             formControlName="IsShowDataInMain" id="IsShowDataInMain">
           <label class="custom-control-label" for="IsShowDataInMain">
-            Is Show Data In Main
+            Show Data In Main Screen
           </label>
         </div>
       </div>
@@ -117,6 +117,17 @@
             formControlName="IsSingleEntry" id="IsSingleEntry">
           <label class="custom-control-label" for="IsSingleEntry">
             Is Single Entry
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+
+        <div class="custom-control custom-checkbox checkbox-card">
+          <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowThumbnail"
+            formControlName="IsShowThumbnail" id="IsShowThumbnail">
+          <label class="custom-control-label" for="IsShowThumbnail">
+            Show Thumbnail
           </label>
         </div>
       </div>

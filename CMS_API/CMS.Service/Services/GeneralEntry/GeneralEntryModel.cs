@@ -11,7 +11,7 @@ namespace CMS.Service.Services.GeneralEntry
 
         [Required]
         [Display(Name = "CategoryId")]
-        public long CategoryId { get; set; }  
+        public long CategoryId { get; set; }
         [Required]
         [Display(Name = "Title")]
         public string Title { get; set; }
@@ -21,7 +21,7 @@ namespace CMS.Service.Services.GeneralEntry
         [Required]
         [Display(Name = "SortedOrder")]
         public int? SortedOrder { get; set; }
-        public List<string>? Data { get; set; } 
+        public List<string>? Data { get; set; }
     }
 
     public class GeneralEntryViewModel
@@ -35,8 +35,8 @@ namespace CMS.Service.Services.GeneralEntry
         public string DataId { get; set; }
         public int? SortedOrder { get; set; }
         public bool? IsActive { get; set; }
-        public bool IsDeleted { get; set; } 
-        public List<GeneralEntryDataViewModel>? Data { get; set; } 
+        public bool IsDeleted { get; set; }
+        public List<GeneralEntryDataViewModel>? Data { get; set; }
     }
 
     public class GeneralEntryDataViewModel
@@ -62,6 +62,7 @@ namespace CMS.Service.Services.GeneralEntry
         public bool IsSingleEntry { get; set; }
         public int? SortedOrder { get; set; }
         public bool IsSystemEntry { get; set; }
+        public bool IsShowThumbnail { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }
@@ -93,6 +94,9 @@ namespace CMS.Service.Services.GeneralEntry
         public bool IsShowInMain { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
+
+        public bool IsShowThumbnail { get; set; }
+
         public int? SortedOrder { get; set; }
 
 
