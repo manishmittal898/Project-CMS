@@ -86,14 +86,13 @@
 
 
                 <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowInMain')" title="Update Status">
-                  <span *ngIf="element!.IsShowInMain" class="d-inline-block w-100 badge badge-success">
+                  <span *ngIf="element!.IsShowInMain" class="d-inline-block w-100 badge badge-warning">
                     <i class="bi bi-check-circle"></i>&nbsp;Show In Home
                   </span>
                   <span *ngIf="!element!.IsShowInMain" class="d-inline-block w-100 badge btn-outline-warning"><i
                       class="bi bi-check-circle "></i>&nbsp;Show In Home</span>
-
-
                 </a>
+
                 <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowDataInMain')"
                   title="Update Status">
                   <span *ngIf="element!.IsShowDataInMain" class="d-inline-block w-100 badge badge-success"><i
@@ -102,17 +101,17 @@
                       class="bi bi-check-circle "></i>&nbsp;Show data in Main</span>
                 </a>
 
-                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsSingleEntry')" title="Update Status">
-                  <span *ngIf="element!.IsSingleEntry" class="d-inline-block w-100 badge badge-success"><i
+                <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsSingleEntry')" title="Update Status">
+                  <span *ngIf="element!.IsSingleEntry" class="d-inline-block w-100 badge btn-primary"><i
                       class="bi bi-check-circle"></i>&nbsp;Single Entry</span>
                   <span *ngIf="!element!.IsSingleEntry" class="d-inline-block w-100 badge btn-outline-primary"><i
                       class="bi bi-check-circle "></i>&nbsp;Single Entry</span>
                 </a>
 
                 <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')" title="Update Status">
-                  <span *ngIf="element!.IsShowThumbnail" class="d-inline-block w-100 badge badge-success"><i
+                  <span *ngIf="element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-info"><i
                       class="bi bi-check-circle"></i>&nbsp;Show Thumbnail</span>
-                  <span *ngIf="!element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-outline-primary"><i
+                  <span *ngIf="!element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-outline-info"><i
                       class="bi bi-check-circle "></i>&nbsp;Show Thumbnail</span>
                 </a>
 
