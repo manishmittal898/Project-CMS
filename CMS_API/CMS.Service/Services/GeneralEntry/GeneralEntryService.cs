@@ -3,6 +3,7 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using CMS.Service.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -183,9 +184,97 @@ namespace CMS.Service.Services.GeneralEntry
             return objResult;
         }
 
-        public Task<ServiceResponse<TblGeneralEntry>> Save(GeneralEntryPostModel model)
+        public async Task<ServiceResponse<TblGeneralEntry>> Save(GeneralEntryPostModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TblGeneralEntry objGeneralEntry = new TblGeneralEntry();
+                List<TblFileDataMaster> productImages = new List<TblFileDataMaster>();
+
+                if (model.Id > 0)
+                {
+                    objGeneralEntry = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == model.Id);
+
+                    objGeneralEntry.Id = model.Id;
+                    objGeneralEntry.Title = model.Title;
+                    objGeneralEntry.CategoryId = model.CategoryId;
+                    objGeneralEntry.Description = model.Description;
+                    objGeneralEntry.SortedOrder = model.SortedOrder;
+                    objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objGeneralEntry.ModifiedOn = DateTime.Now;
+                    var product = _db.TblGeneralEntries.Update(objGeneralEntry);
+
+                    _db.SaveChanges();
+                    if (model.Data != null && model.Data.Count > 0)
+                    {
+                        string[] existingFilePaths = _db.TblFileDataMasters.Where(x => x.DataId == objGeneralEntry.DataId).Select(x => x.Value).ToArray();
+                        if (objGeneralEntry.Category.ContentType == (int)ContentTypeEnum.URL)
+                        {
+                            model.Data = model.Data.FindAll(x => !existingFilePaths.Contains(x));
+
+                        }
+                        else
+                        {
+                            model.Data = model.Data.FindAll(x => !existingFilePaths.Contains(x.Replace("\\", "/")));
+
+                        }
+
+                        productImages = model.Data.Select(x => new TblFileDataMaster
+                        {
+                            Value = objGeneralEntry.Category.ContentType != (int)ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
+                            DataId = objGeneralEntry.DataId,
+                            ModifiedOn = DateTime.Now,
+                            ModifiedBy = _loginUserDetail.UserId.Value,
+                        }).ToList();
+                        await _db.TblFileDataMasters.AddRangeAsync(productImages);
+                        _db.SaveChanges();
+                    }
+
+                    return CreateResponse(objGeneralEntry, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                }
+                else
+                {
+
+                    objGeneralEntry.Title = model.Title;
+                    objGeneralEntry.CategoryId = model.CategoryId;
+                    objGeneralEntry.Description = model.Description;
+                    objGeneralEntry.DataId = Guid.NewGuid().ToString();
+                    objGeneralEntry.SortedOrder = model.SortedOrder;
+                    objGeneralEntry.IsActive = true;
+                    objGeneralEntry.IsDeleted = false;
+                    objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objGeneralEntry.ModifiedOn = DateTime.Now;
+                    objGeneralEntry.CreatedBy = _loginUserDetail.UserId.Value;
+                    objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
+                    var product = await _db.TblGeneralEntries.AddAsync(objGeneralEntry);
+                    _db.SaveChanges();
+
+                    if (model.Data != null && model.Data.Count > 0)
+                    {
+                        productImages = model.Data.Select(x => new TblFileDataMaster
+                        {
+                            Value = objGeneralEntry.Category.ContentType != (int)
+                                              ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
+                            DataId = objGeneralEntry.DataId,
+                            CreatedBy = _loginUserDetail.UserId.Value,
+                            ModifiedBy = _loginUserDetail.UserId.Value,
+
+                        }).ToList();
+                        await _db.TblFileDataMasters.AddRangeAsync(productImages);
+                        _db.SaveChanges();
+
+                    }
+                    return CreateResponse(objGeneralEntry, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return CreateResponse<TblGeneralEntry>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+
+            }
         }
 
         public async Task<ServiceResponse<List<GeneralEntryDataViewModel>>> GetProductFile(string DataId, bool IsFile)
