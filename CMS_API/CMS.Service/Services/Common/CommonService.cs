@@ -85,6 +85,15 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, GetContentTypeEnum());
                             break;
 
+                        case DropDownKey.ddlGeneralEntryCategory:
+                            objData.Add(item, await GetGeneralEntryCategory(true));
+
+                           
+                            break;
+
+
+
+
 
 
                         default:
@@ -291,10 +300,29 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private  object GetContentTypeEnum()
+        private object GetContentTypeEnum()
         {
-            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Value = r, Text= r.GetStringValue()}).ToList();
+            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Value = r, Text = r.GetStringValue() }).ToList();
         }
+
+        private async Task<object> GetGeneralEntryCategory(bool isTransactionData = false)
+        {
+            try
+            {
+                return await (from type in _db.TblGecategoryMaters
+                              where type.IsActive == true && !type.IsDelete
+                              && (isTransactionData ? type.TblGeneralEntries.Any(g => g.CategoryId == type.Id) : true)
+                              select type).OrderBy(x => x.Name)
+                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType })
+                     .ToListAsync();
+            }
+            catch
+            {
+
+                return null;
+            }
+        }
+
 
     }
 }
