@@ -343,7 +343,7 @@ namespace CMS.Service.Services.ProductMaster
             catch (Exception ex)
             {
 
-                return null;
+                return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
 
             }
         }

@@ -36,7 +36,7 @@ namespace CMS.Service.Services.GeneralEntry
         public int? SortedOrder { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; } 
-        public List<GeneralEntryDataViewModel> Data { get; set; } 
+        public List<GeneralEntryDataViewModel>? Data { get; set; } 
     }
 
     public class GeneralEntryDataViewModel
