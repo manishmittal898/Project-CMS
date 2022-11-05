@@ -30,7 +30,7 @@ export class GeneralEntryMasterComponent implements OnInit {
   noRecordData = {
     subject: 'Can you please add your first general Entry.',
     Description: "You haven't added general Entry yet. please add your new general Entrys",
-    url: '../add',
+    url: './add',
     urlLable: 'Add New general Entry'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
