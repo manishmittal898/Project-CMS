@@ -5,6 +5,7 @@
     [CategoryId] BIGINT NOT NULL,
     [Description] NTEXT NULL,
     [DataId] VARCHAR(50) NULL, 
+    [ImagePath]        NVARCHAR (1000) NULL,
     [SortedOrder] INT            NULL,
 	[CreatedOn]  DATETIME       DEFAULT (getdate()) NOT NULL,
     [CreatedBy]  BIGINT         NULL,

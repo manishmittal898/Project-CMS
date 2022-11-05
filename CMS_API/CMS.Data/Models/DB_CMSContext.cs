@@ -114,7 +114,7 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblGECategoryMater");
 
-                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C17EB9C766E")
+                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C178865D9BF")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedOn)
@@ -164,6 +164,8 @@ namespace CMS.Data.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Description).HasColumnType("ntext");
+
+                entity.Property(e => e.ImagePath).HasMaxLength(1000);
 
                 entity.Property(e => e.IsActive)
                     .IsRequired()

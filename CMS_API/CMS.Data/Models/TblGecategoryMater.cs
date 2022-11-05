@@ -20,13 +20,13 @@ namespace CMS.Data.Models
         public bool IsShowThumbnail { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
+        public bool IsSystemEntry { get; set; }
         public int ContentType { get; set; }
         public int? SortedOrder { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
-        public bool IsSystemEntry { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
 

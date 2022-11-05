@@ -85,6 +85,8 @@ namespace CMS.Service.Services.GeneralEntry
                                         Description = gen.Description,
                                         DataId = gen.DataId,
                                         SortedOrder = gen.SortedOrder,
+                                        ImagePath = !string.IsNullOrEmpty(gen.ImagePath) ? gen.ImagePath.ToAbsolutePath() : null,
+
                                         IsActive = gen.IsActive,
                                         IsDeleted = gen.IsDeleted,
                                         Data = lstGroup.Select(x => new GeneralEntryDataViewModel
@@ -157,6 +159,7 @@ namespace CMS.Service.Services.GeneralEntry
                                           Description = x.m.Description,
                                           DataId = x.m.DataId,
                                           SortedOrder = x.m.SortedOrder,
+                                          ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
                                           IsActive = x.m.IsActive,
                                           IsDeleted = x.m.IsDeleted,
                                           Data = x.dt.Select(xt => new GeneralEntryDataViewModel
@@ -202,6 +205,17 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.SortedOrder = model.SortedOrder;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedOn = DateTime.Now;
+                    if (!string.IsNullOrEmpty(model.ImagePath))
+                    {
+
+                        objGeneralEntry.ImagePath = !string.IsNullOrEmpty(objGeneralEntry.ImagePath) && model.ImagePath.Contains(objGeneralEntry.ImagePath.Replace("\\", "/")) ? objGeneralEntry.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry);
+                    }
+                    else
+                    {
+                        _fileHelper.Delete(objGeneralEntry.ImagePath);
+                        objGeneralEntry.ImagePath = null;
+                    }
+
                     var product = _db.TblGeneralEntries.Update(objGeneralEntry);
 
                     _db.SaveChanges();
@@ -240,6 +254,8 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.Description = model.Description;
                     objGeneralEntry.DataId = Guid.NewGuid().ToString();
                     objGeneralEntry.SortedOrder = model.SortedOrder;
+                    objGeneralEntry.ImagePath = !string.IsNullOrEmpty(model.ImagePath) ? _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry) : null;
+
                     objGeneralEntry.IsActive = true;
                     objGeneralEntry.IsDeleted = false;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;

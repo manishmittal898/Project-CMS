@@ -21,6 +21,8 @@ namespace CMS.Service.Services.GeneralEntry
         [Required]
         [Display(Name = "SortedOrder")]
         public int? SortedOrder { get; set; }
+        public string ImagePath { get; set; }
+
         public List<string>? Data { get; set; }
     }
 
@@ -30,7 +32,7 @@ namespace CMS.Service.Services.GeneralEntry
         public string Title { get; set; }
         public long CategoryId { get; set; }
         public string Category { get; set; }
-
+        public string ImagePath { get; set; }
         public string Description { get; set; }
         public string DataId { get; set; }
         public int? SortedOrder { get; set; }

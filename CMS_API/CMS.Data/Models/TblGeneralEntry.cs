@@ -12,6 +12,7 @@ namespace CMS.Data.Models
         public long CategoryId { get; set; }
         public string Description { get; set; }
         public string DataId { get; set; }
+        public string ImagePath { get; set; }
         public int? SortedOrder { get; set; }
         public DateTime CreatedOn { get; set; }
         public long? CreatedBy { get; set; }
