@@ -46,7 +46,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
 
   getList(): void {
     this.indexModel.AdvanceSearchModel = {};
-    this._generalEntryService.GetList(this.indexModel).subscribe(response => {
+    this._generalEntryService.GetListEntryCategory(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data as GeneralEntryCategoryViewModel[];
         this.dataSource = new MatTableDataSource<GeneralEntryCategoryViewModel>(this.model);

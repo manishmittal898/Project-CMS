@@ -10,7 +10,34 @@ export class GeneralEntryService{
 
 
   constructor(private readonly _baseService: BaseAPIService) { }
-  GetList(model: IndexModel): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
+
+  GetListGeneralEntry(model: IndexModel): Observable<ApiResponse<GeneralEntryViewModel[]>> {
+    let url = `${this._baseService.API_Url.GeneralEntryList_Api}`;
+    return this._baseService.post(url, model);
+  }
+
+  GetGeneralEntry(id: number): Observable<ApiResponse<GeneralEntryViewModel>> {
+    let url = `${this._baseService.API_Url.GeneralEntryDetail_Api}${id}`;
+    return this._baseService.get(url);
+  }
+
+  AddUpdateGeneralEntry(model: GeneralEntryPostModel): Observable<ApiResponse<string>> {
+    let url = `${this._baseService.API_Url.GeneralEntryAddUpdate_Api}`;
+    return this._baseService.post(url, model);
+  }
+  ChangeGeneralEntryActiveStatus(id: number, status?: string): Observable<ApiResponse<GeneralEntryViewModel[]>> {
+    let url = `${this._baseService.API_Url.GeneralEntryChangeActiveStatus_Api}${id}`;
+    return this._baseService.get(url);
+  }
+
+  DeleteGeneralEntry(id: number): Observable<ApiResponse<GeneralEntryViewModel[]>> {
+    let url = `${this._baseService.API_Url.GeneralEntryDelete_Api}${id}/${status}`;
+    return this._baseService.Delete(url);
+  }
+
+
+
+  GetListEntryCategory(model: IndexModel): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryList_Api}`;
     return this._baseService.post(url, model);
   }
@@ -70,4 +97,35 @@ export interface GeneralEntryCategoryViewModel {
   ModifiedOn: string;
   IsActive: boolean | null;
   IsDelete: boolean;
+}
+
+
+export interface GeneralEntryPostModel {
+  Id: number;
+  CategoryId: number;
+  Title: string;
+  Description: string;
+  SortedOrder: number | null;
+  ImagePath: string;
+  Data: string[] | null;
+}
+
+export interface GeneralEntryViewModel {
+  Id: number;
+  Title: string;
+  CategoryId: number;
+  Category: string;
+  ImagePath: string;
+  Description: string;
+  DataId: string;
+  SortedOrder: number | null;
+  IsActive: boolean | null;
+  IsDeleted: boolean;
+  Data: GeneralEntryDataViewModel[] | null;
+}
+
+export interface GeneralEntryDataViewModel {
+  Id: number;
+  Value: string;
+  GeneralEntryId: number | null;
 }
