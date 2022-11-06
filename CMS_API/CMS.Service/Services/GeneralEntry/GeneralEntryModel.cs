@@ -22,7 +22,7 @@ namespace CMS.Service.Services.GeneralEntry
         [Display(Name = "SortedOrder")]
         public int? SortedOrder { get; set; }
         public string ImagePath { get; set; }
-
+        public string Keyword { get; set; }
         public List<string>? Data { get; set; }
     }
 
@@ -36,6 +36,7 @@ namespace CMS.Service.Services.GeneralEntry
         public string Description { get; set; }
         public string DataId { get; set; }
         public int? SortedOrder { get; set; }
+        public string Keyword { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public List<GeneralEntryDataViewModel>? Data { get; set; }

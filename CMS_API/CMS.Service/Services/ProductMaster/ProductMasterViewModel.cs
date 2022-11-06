@@ -30,6 +30,8 @@ namespace CMS.Service.Services.ProductMaster
         public string Keyword { get; set; }
         public List<string>? Files { get; set; }
         public List<ProductStockModel>? Stocks { get; set; }
+        public string MetaTitle { get; set; }
+        public string MetaDesc { get; set; }
     }
 
     public class ProductMasterViewModel
@@ -43,6 +45,8 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
+        public string MetaTitle { get; set; }
+        public string MetaDesc { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }

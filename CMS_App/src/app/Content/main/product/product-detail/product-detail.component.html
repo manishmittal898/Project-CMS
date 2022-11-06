@@ -88,6 +88,21 @@
           <p class="m-0" [innerHTML]="model.Summary"></p>
         </div>
 
+        <div class="mt-4" *ngIf="model.MetaTitle">
+          <strong class="mb-2 d-block font-16"> Meta Title: </strong>
+          <p class="m-0" [innerHTML]="model.MetaTitle"></p>
+        </div>
+
+        <div class="mt-4" *ngIf="model.MetaDesc">
+          <strong class="mb-2 d-block font-16"> Meta Description: </strong>
+          <p class="m-0" [innerHTML]="model.MetaDesc"></p>
+        </div>
+
+        <div class="mt-4" *ngIf="model.MetaDesc">
+          <strong class="mb-2 d-block font-16"> Keyword: </strong>
+          <p class="m-0" [innerHTML]="model.Keyword"></p>
+        </div>
+
         <div class="mt-4" *ngIf="this.model.Stocks">
           <fieldset class="border border-radius p-2 w-100" >
             <legend class="w-auto text-black">Stock</legend>
@@ -104,9 +119,9 @@
                 <tbody>
                   <tr *ngFor="let item of this.model.Stocks;let index=index">
                     <td>{{index+1}}</td>
-                    <td>{{item.Size}}</td>
-                    <td>{{item.UnitPrice}}</td>
-                    <td>{{item.Quantity}}</td>
+                    <td>{{item?.Size}}</td>
+                    <td>{{item?.UnitPrice}}</td>
+                    <td>{{item?.Quantity}}</td>
                   </tr>
                 </tbody>
               </table>

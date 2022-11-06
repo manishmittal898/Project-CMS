@@ -36,7 +36,7 @@ namespace CMS.Data.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-VC0IBCS1;Database=DB_CMS;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=Sandy-PC;Database=DB_CMS;Trusted_Connection=True;");
             }
         }
 
@@ -171,11 +171,13 @@ namespace CMS.Data.Models
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.Keyword).HasMaxLength(200);
+
                 entity.Property(e => e.ModifiedOn)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Title).HasMaxLength(400);
+                entity.Property(e => e.Title).HasMaxLength(4000);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.TblGeneralEntries)
@@ -318,6 +320,10 @@ namespace CMS.Data.Models
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Keyword).HasMaxLength(4000);
+
+                entity.Property(e => e.MetaDesc).HasMaxLength(4000);
+
+                entity.Property(e => e.MetaTitle).HasMaxLength(1000);
 
                 entity.Property(e => e.ModifiedOn)
                     .HasColumnType("datetime")

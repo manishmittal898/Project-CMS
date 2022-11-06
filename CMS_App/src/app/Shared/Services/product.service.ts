@@ -58,6 +58,8 @@ export interface ProductMasterViewModel {
   SubCategory: string;
   ShippingCharge: number | undefined;
   Keyword: string;
+  MetaTitle: string;
+  MetaDesc: string;
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 
@@ -76,6 +78,8 @@ export interface ProductMasterPostModel {
   ShippingCharge: number | undefined;
   Keyword: string;
   Files?: string[];
+  MetaTitle: string;
+  MetaDesc: string;
   Stocks: ProductStockModel[];
 }
 

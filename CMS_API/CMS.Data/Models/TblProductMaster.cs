@@ -22,6 +22,8 @@ namespace CMS.Data.Models
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }
         public string Summary { get; set; }
+        public string MetaTitle { get; set; }
+        public string MetaDesc { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }

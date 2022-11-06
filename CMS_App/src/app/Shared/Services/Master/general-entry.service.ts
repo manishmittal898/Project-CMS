@@ -108,6 +108,7 @@ export interface GeneralEntryPostModel {
   SortedOrder: number | null;
   ImagePath: string;
   Data: string[] | null;
+  Keyword:string;
 }
 
 export interface GeneralEntryViewModel {
@@ -122,6 +123,7 @@ export interface GeneralEntryViewModel {
   IsActive: boolean | null;
   IsDeleted: boolean;
   Data: GeneralEntryDataViewModel[] | null;
+  Keyword:string;
 }
 
 export interface GeneralEntryDataViewModel {

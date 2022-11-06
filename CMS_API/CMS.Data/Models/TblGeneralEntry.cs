@@ -14,6 +14,7 @@ namespace CMS.Data.Models
         public string DataId { get; set; }
         public string ImagePath { get; set; }
         public int? SortedOrder { get; set; }
+        public string Keyword { get; set; }
         public DateTime CreatedOn { get; set; }
         public long? CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }

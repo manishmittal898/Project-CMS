@@ -63,6 +63,8 @@ namespace CMS.Service.Services.ProductMaster
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
+                                            MetaTitle = x.MetaTitle,
+                                            MetaDesc = x.MetaDesc,
                                             CreatedBy = x.CreatedBy,
                                             CreatedOn = x.CreatedOn,
                                             ModifiedBy = x.ModifiedBy,
@@ -113,6 +115,8 @@ namespace CMS.Service.Services.ProductMaster
                     Desc = x.Desc,
                     Summary = x.Summary,
                     Price = x.Price,
+                    MetaTitle = x.MetaTitle,
+                    MetaDesc = x.MetaDesc,
                     CreatedBy = x.CreatedBy,
                     CreatedOn = x.CreatedOn,
                     ModifiedBy = x.ModifiedBy,
@@ -186,6 +190,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     objProduct.ShippingCharge = model.ShippingCharge ?? null;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
+                    objProduct.MetaTitle = model.MetaTitle;
+                    objProduct.MetaDesc = model.MetaDesc;
                     var product = _db.TblProductMasters.Update(objProduct);
 
                     if (model.Stocks != null && model.Stocks.Count > 0)
@@ -279,6 +285,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objProduct.MetaTitle = model.MetaTitle;
+                    objProduct.MetaDesc = model.MetaDesc;
                     var product = await _db.TblProductMasters.AddAsync(objProduct);
                     _db.SaveChanges();
 
@@ -352,12 +360,12 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
                 TblProductMaster objProduct = new TblProductMaster();
-                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
+                objProduct = await _db.TblProductMasters.FirstOrDefaultAsync(r => r.Id == id);
 
                 objProduct.IsDelete = (bool)true;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
                 return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
 
             }
@@ -430,8 +438,8 @@ namespace CMS.Service.Services.ProductMaster
             {
 
 
-                var result = (from lkType in _db.TblProductMasters 
-                              where !lkType.IsDelete && lkType.IsActive.Value && !lkType.Category.IsDelete && lkType.Category.IsActive==true && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
+                var result = (from lkType in _db.TblProductMasters
+                              where !lkType.IsDelete && lkType.IsActive.Value && !lkType.Category.IsDelete && lkType.Category.IsActive == true && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
                               select lkType.Category).Distinct();
                 switch (model.OrderBy)
                 {
@@ -490,10 +498,10 @@ namespace CMS.Service.Services.ProductMaster
                 var result = (from prd in _db.TblProductMasters
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
-                              && (model.CategoryId == null ||  model.CategoryId.Count == 0 ||  model.CategoryId.Contains(prd.CategoryId))
-                              && (model.SubCategoryId == null ||  model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
-                              && (model.SizeId == null ||  model.SizeId.Count == 0 ||  prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
-                             && (model.Price.Count == 0 ||  (model.Price[0] <= prd.Price && prd.Price <= (model.Price[1])))
+                              && (model.CategoryId == null || model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
+                              && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
+                              && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+                             && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && prd.Price <= (model.Price[1])))
                               select prd);
                 switch (model.OrderBy)
                 {
@@ -532,7 +540,9 @@ namespace CMS.Service.Services.ProductMaster
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
                                             Keyword = x.Keyword,
-                                            ShippingCharge = x.ShippingCharge ?? null
+                                            ShippingCharge = x.ShippingCharge ?? null,
+                                            MetaTitle = x.MetaTitle,
+                                            MetaDesc = x.MetaDesc
 
                                         }).ToListAsync();
 

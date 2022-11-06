@@ -88,7 +88,7 @@ namespace CMS.Service.Services.Common
                         case DropDownKey.ddlGeneralEntryCategory:
                             objData.Add(item, await GetGeneralEntryCategory(true));
 
-                           
+
                             break;
 
 
@@ -184,9 +184,9 @@ namespace CMS.Service.Services.Common
                     {
                         data = data.Where(x => x.TblCmspageContentMasters.Any(y => y.PageId == x.Id && y.IsDeleted == false && y.IsActive == true));
 
-                    } 
+                    }
 
-                } 
+                }
 
                 return await data.OrderBy(x => x.SortedOrder)
                     .Select(r => new { Text = r.Name, Value = r.Id })
@@ -311,7 +311,7 @@ namespace CMS.Service.Services.Common
                               where type.IsActive == true && !type.IsDelete
                               && (isTransactionData ? type.TblGeneralEntries.Any(g => g.CategoryId == type.Id) : true)
                               select type).OrderBy(x => x.Name)
-                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType })
+                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType, IsShowThumbnail = r.IsShowThumbnail })
                      .ToListAsync();
             }
             catch

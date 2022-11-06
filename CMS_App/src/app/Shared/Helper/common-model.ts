@@ -105,12 +105,20 @@ export class DropDownModel {
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
   ddlContentType!: DropDownItem[];
+  ddlGeneralEntryCategory!: GECategoryDropDownItem[];
 }
 
 export class DropDownItem {
   Text: string = "";
   Value: string = "";
 }
+export class GECategoryDropDownItem {
+  Text: string = "";
+  Value: string = "";
+  ContentType: string = '';
+  IsShowThumbnail: boolean = false;
+}
+
 export interface FilterDropDownPostModel {
   Key: string;
   FileterFromKey: string;

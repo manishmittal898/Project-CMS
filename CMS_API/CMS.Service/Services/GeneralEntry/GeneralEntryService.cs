@@ -86,13 +86,13 @@ namespace CMS.Service.Services.GeneralEntry
                                         DataId = gen.DataId,
                                         SortedOrder = gen.SortedOrder,
                                         ImagePath = !string.IsNullOrEmpty(gen.ImagePath) ? gen.ImagePath.ToAbsolutePath() : null,
-
+                                        Keyword = gen.Keyword,
                                         IsActive = gen.IsActive,
                                         IsDeleted = gen.IsDeleted,
                                         Data = lstGroup.Select(x => new GeneralEntryDataViewModel
                                         {
                                             Id = x.Id,
-                                            Value = !string.IsNullOrEmpty(x.Value) ? (gen.Category.ContentType != (int)ContentTypeEnum.URL ? x.Value.ToAbsolutePath() : x.Value) : null,
+                                            Value = !string.IsNullOrEmpty(x.Value) ? (gen.Category.ContentType != (int)                        ContentTypeEnum.URL ? x.Value.ToAbsolutePath() : x.Value) : null,
                                             GeneralEntryId = gen.Id
                                         }).ToList()
                                     }).FirstOrDefaultAsync();
@@ -117,11 +117,11 @@ namespace CMS.Service.Services.GeneralEntry
             try
             {
 
-                var result1 = (from gen in _db.TblGeneralEntries.DefaultIfEmpty()
-                               join data in _db.TblFileDataMasters.DefaultIfEmpty() on gen.DataId equals data.DataId
-                               into lstGroup
-                               where !gen.IsDeleted && (string.IsNullOrEmpty(model.Search) || gen.Title.Contains(model.Search))
-                               select new { m = gen, dt = lstGroup });
+                //var result1 = (from gen in _db.TblGeneralEntries.DefaultIfEmpty()
+                //               join data in _db.TblFileDataMasters.DefaultIfEmpty() on gen.DataId equals data.DataId
+                //               into lstGroup
+                //               where !gen.IsDeleted && (string.IsNullOrEmpty(model.Search) || gen.Title.Contains(model.Search))
+                //               select new { m = gen, dt = lstGroup });
 
                 var result = from b in _db.Set<TblGeneralEntry>()
                              join p in _db.Set<TblFileDataMaster>()
@@ -157,6 +157,7 @@ namespace CMS.Service.Services.GeneralEntry
                                           CategoryId = x.m.CategoryId,
                                           Category = x.m.Category.Name,
                                           Description = x.m.Description,
+                                          Keyword=x.m.Keyword,
                                           DataId = x.m.DataId,
                                           SortedOrder = x.m.SortedOrder,
                                           ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
@@ -203,6 +204,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.CategoryId = model.CategoryId;
                     objGeneralEntry.Description = model.Description;
                     objGeneralEntry.SortedOrder = model.SortedOrder;
+                    objGeneralEntry.Keyword = model.Keyword;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedOn = DateTime.Now;
                     if (!string.IsNullOrEmpty(model.ImagePath))
@@ -255,7 +257,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.DataId = Guid.NewGuid().ToString();
                     objGeneralEntry.SortedOrder = model.SortedOrder;
                     objGeneralEntry.ImagePath = !string.IsNullOrEmpty(model.ImagePath) ? _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry) : null;
-
+                    objGeneralEntry.Keyword = model.Keyword;
                     objGeneralEntry.IsActive = true;
                     objGeneralEntry.IsDeleted = false;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;

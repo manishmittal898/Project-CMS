@@ -239,8 +239,27 @@
           [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
-          Please enter Discription</div>
+          Please enter Keyword</div>
       </div>
+
+      <div class="form-group col-md-12">
+        <label>Meta Title</label>
+        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="MetaTitle" class="form-control"
+          [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}" id="MetaTitle"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
+          Please enter Meta Title</div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label>Meta Discription</label>
+        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="MetaDesc" class="form-control"
+          [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}" id="MetaDesc"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('MetaDesc')?.hasError('required') && formgrp.get('MetaDesc')?.touched)">
+          Please enter Meta Discription</div>
+      </div>
+
       <fieldset class="border border-radius p-2 w-100 mx-2 mt-4">
 
         <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">

@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [dbo].[tblGeneralEntry]
 (
 	[Id] BIGINT NOT NULL IDENTITY(1,1),
-    [Title] NVARCHAR(400) NULL, 
+    [Title] NVARCHAR(4000) NULL, 
     [CategoryId] BIGINT NOT NULL,
     [Description] NTEXT NULL,
     [DataId] VARCHAR(50) NULL, 
     [ImagePath]        NVARCHAR (1000) NULL,
     [SortedOrder] INT            NULL,
+    [Keyword] nvarchar(200)            NULL,
 	[CreatedOn]  DATETIME       DEFAULT (getdate()) NOT NULL,
     [CreatedBy]  BIGINT         NULL,
     [ModifiedOn] DATETIME       NOT NULL DEFAULT GETDATE(),

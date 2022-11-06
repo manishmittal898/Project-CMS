@@ -8,6 +8,8 @@
     [Price]      DECIMAL (18)   NULL,
     [CaptionTagId]    BIGINT NULL,
     [Summary]    NTEXT NULL,
+    [MetaTitle]        NVARCHAR (1000) NULL,
+    [MetaDesc]        NVARCHAR (4000) NULL,
     [CreatedBy]  BIGINT NOT NULL,
     [CreatedOn]  DATETIME       NOT NULL DEFAULT getdate(),
     [ModifiedBy] BIGINT NOT NULL,

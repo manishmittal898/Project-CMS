@@ -31,8 +31,11 @@ export class ProductAddEditComponent implements OnInit {
     Description: [undefined],
     ShippingCharge: [undefined],
     Keyword: [undefined],
+    MetaTitle: [undefined],
+    MetaDesc: [undefined],
     ImagePath: [undefined, Validators.required],
     productFile: [undefined, undefined]
+
   });
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
@@ -105,6 +108,8 @@ export class ProductAddEditComponent implements OnInit {
         this.model.Summary = data.Summary;
         this.model.ShippingCharge = data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
         this.model.Keyword = data.Keyword;
+        this.model.MetaTitle = data.MetaTitle;
+        this.model.MetaDesc = data.MetaDesc;
         this.ProductFiles = data.Files;
         this.model.Stocks = data.Stocks;
       } else {
