@@ -57,20 +57,20 @@
         <div class="table-responsive">
           <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
             <tbody>
-              <tr *ngIf="model.Category">
+              <tr *ngIf="model?.Category">
                 <td width="110px"><strong> Category: </strong></td>
                 <td>{{model.Category | titlecase}}</td>
               </tr>
-              <tr *ngIf="model.SubCategory">
+              <tr *ngIf="model?.SubCategory">
                 <td><strong> Sub Category: </strong></td>
                 <td>{{model.SubCategory | titlecase}}</td>
               </tr>
-              <tr *ngIf="model.CaptionTag">
+              <tr *ngIf="model?.CaptionTag">
                 <td><strong> Tag/Label: </strong></td>
                 <td>{{model.CaptionTag | titlecase}}</td>
               </tr>
 
-              <tr *ngIf="model.ShippingCharge">
+              <tr *ngIf="model?.ShippingCharge">
                 <td><strong> Shipping Charge: </strong></td>
                 <td>₹ {{model.ShippingCharge }}</td>
               </tr>
@@ -79,28 +79,28 @@
             </tbody>
           </table>
         </div>
-        <div class="mt-4" *ngIf="model.Desc">
+        <div class="mt-4" *ngIf="model?.Desc">
           <strong class="mb-2 d-block font-16"> Discription: </strong>
-          <p class="m-0" [innerHTML]="model.Desc"></p>
+          <p class="m-0" [innerHTML]="model?.Desc"></p>
         </div>
-        <div class="mt-4" *ngIf="model.Summary">
+        <div class="mt-4" *ngIf="model?.Summary">
           <strong class="mb-2 d-block font-16"> Additional Information: </strong>
-          <p class="m-0" [innerHTML]="model.Summary"></p>
+          <p class="m-0" [innerHTML]="model?.Summary"></p>
         </div>
 
-        <div class="mt-4" *ngIf="model.MetaTitle">
+        <div class="mt-4" *ngIf="model?.MetaTitle">
           <strong class="mb-2 d-block font-16"> Meta Title: </strong>
-          <p class="m-0" [innerHTML]="model.MetaTitle"></p>
+          <p class="m-0" [innerHTML]="model?.MetaTitle"></p>
         </div>
 
-        <div class="mt-4" *ngIf="model.MetaDesc">
+        <div class="mt-4" *ngIf="model?.MetaDesc">
           <strong class="mb-2 d-block font-16"> Meta Description: </strong>
-          <p class="m-0" [innerHTML]="model.MetaDesc"></p>
+          <p class="m-0" [innerHTML]="model?.MetaDesc"></p>
         </div>
 
-        <div class="mt-4" *ngIf="model.MetaDesc">
+        <div class="mt-4" *ngIf="model?.Keyword">
           <strong class="mb-2 d-block font-16"> Keyword: </strong>
-          <p class="m-0" [innerHTML]="model.Keyword"></p>
+          <p class="m-0" [innerHTML]="model?.Keyword"></p>
         </div>
 
         <div class="mt-4" *ngIf="this.model.Stocks">
