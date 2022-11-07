@@ -242,18 +242,18 @@
           Please enter Keyword</div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-12 col-lg-6">
         <label>Meta Title</label>
-        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="MetaTitle" class="form-control"
+        <textarea [(ngModel)]="model.MetaTitle" formControlName="Meta Title" placeholder="MetaTitle" class="form-control"
           [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}" id="MetaTitle"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
           Please enter Meta Title</div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-12 col-lg-6">
         <label>Meta Discription</label>
-        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="MetaDesc" class="form-control"
+        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="Meta Discription" class="form-control"
           [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}" id="MetaDesc"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('MetaDesc')?.hasError('required') && formgrp.get('MetaDesc')?.touched)">

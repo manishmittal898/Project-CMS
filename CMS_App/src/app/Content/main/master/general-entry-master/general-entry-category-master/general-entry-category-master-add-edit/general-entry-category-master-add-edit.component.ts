@@ -57,7 +57,6 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
-        debugger
         this.dropDown.ddlContentType = ddls?.ddlContentType;
 
       }
@@ -84,7 +83,6 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       if (response.IsSuccess) {
         const data = response.Data as GeneralEntryCategoryViewModel;
         this.model.Name = data.Name;
-        debugger
         this.model.ContentType = data.ContentType;
         this.model.ImagePath = data.ImagePath;
         this.model.IsShowInMain = data.IsShowInMain;

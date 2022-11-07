@@ -4851,7 +4851,22 @@ td.mat-footer-cell:last-of-type {
   padding-left: 20px;
   color: #000;
 }
-
+.single-detail-info h2 {
+  font-size: 24px !important;
+  margin-bottom: 8px !important;
+  color: #000;
+  line-height: 28px !important;
+}
+.single-detail-img img {
+  max-height: 500px;
+  margin: auto;
+}
+.single-detail-img {
+  background: #fff;
+  text-align: center;
+  padding: 10px;
+  border: solid 1px #e7e7e7;
+}
 /* Manish CSS End */
 
 

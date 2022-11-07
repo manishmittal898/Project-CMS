@@ -25,47 +25,50 @@
 </div>
 <!-- Page Header Title end -->
 
-<div class="widget-content p-3 ">
+<div class="widget-content p-4">
 
-  <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3">
-    <img [src]="this.model.ImagePath" onerror="this.src='assets/img/no-img.svg'">
+  <div class="row">
+    <div class="col-md-4">
+     <div class="single-detail-img">
+      <img [src]="this.model.ImagePath" onerror="this.src='assets/img/no-img.svg'">
+     </div>
+    </div>
+    <div class="col-md-8 mt-4 mt-md-0">
+      <div class="single-detail-info">
+      <h2>{{this.model.Name}}</h2>
+      <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
+        <tbody>
+          <tr>
+            <td width="250px"><strong>Sort Order: </strong> </td>
+            <td>{{this.model.SortedOrder}}</td>
+          </tr>
+          <tr>
+            <td><strong>Content Type : </strong> </td>
+            <td>{{this.model.ContentTypeText}}</td>
+          </tr>
+          <tr>
+            <td><strong> Is Show In Main: </strong> </td>
+            <td>{{this.model.IsShowInMain?'Yes':'No'}}</td>
+          </tr>
+          <tr>
+            <td><strong> Is Show Data In Main: </strong> </td>
+            <td>{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
+          </tr>
+          <tr>
+            <td><strong> Is Single Entry: </strong> </td>
+            <td>{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
+          </tr>
+          <tr>
+            <td><strong> Is System Entry: </strong> </td>
+            <td>{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
+          </tr>
+          <tr>
+            <td><strong>Show Thumbnail: </strong> </td>
+            <td>{{this.model.IsShowThumbnail? 'Yes': 'No'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
   </div>
-  <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
-    <tbody>
-
-      <tr>
-        <td style="width: 18%;"> <strong> Name: </strong> </td>
-        <td style="width: 32%;">{{this.model.Name}}</td>
-        <td style="width: 18%;"><strong>Sort Order: </strong> </td>
-        <td style="width: 32%;">{{this.model.SortedOrder}}</td>
-
-      </tr>
-
-      <tr>
-        <td style="width: 18%;"><strong>Content Type : </strong> </td>
-        <td style="width: 32%;">{{this.model.ContentTypeText}}</td>
-        <td style="width: 18%;"><strong> Is Show In Main: </strong> </td>
-        <td style="width: 32%;">{{this.model.IsShowInMain?'Yes':'No'}}</td>
-
-
-      </tr>
-
-      <tr>
-        <td style="width: 16%;"><strong> Is Show Data In Main: </strong> </td>
-        <td style="width: 16%;">{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
-
-        <td style="width: 16%;"><strong> Is Single Entry: </strong> </td>
-        <td style="width: 16%;">{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
-      </tr>
-      <tr>
-        <td style="width: 16%;"><strong> Is System Entry: </strong> </td>
-        <td style="width: 16%;">{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
-        <td style="width: 16%;"><strong>Show Thumbnail: </strong> </td>
-        <td style="width: 16%;">{{this.model.IsShowThumbnail? 'Yes': 'No'}}</td>
-
-
-      </tr>
-
-    </tbody>
-  </table>
 </div>

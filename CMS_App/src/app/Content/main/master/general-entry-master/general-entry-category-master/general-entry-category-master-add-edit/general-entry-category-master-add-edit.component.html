@@ -26,7 +26,7 @@
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <!-- Done -->
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-4 mb-2">
         <label>Name</label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
           [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
@@ -35,7 +35,7 @@
           Please enter <strong>Name</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-4 mb-2">
         <label>Content Type</label>
         <ng-select [items]="this.dropDown.ddlContentType" formControlName="ContentType" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Size Id"
@@ -47,7 +47,7 @@
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-4 mb-2">
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -93,6 +93,7 @@
 
       </div>
       <div class="form-group col-md-4">
+        <label class="d-none d-md-block"> &nbsp; </label>
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
             formControlName="IsShowInMain" id="IsShowInMain">
@@ -102,6 +103,7 @@
         </div>
       </div>
       <div class="form-group col-md-4">
+        <label class="d-none d-md-block"> &nbsp; </label>
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
             formControlName="IsShowDataInMain" id="IsShowDataInMain">
