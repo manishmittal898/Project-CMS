@@ -244,7 +244,7 @@
 
       <div class="form-group col-md-12 col-lg-6">
         <label>Meta Title</label>
-        <textarea [(ngModel)]="model.MetaTitle" formControlName="Meta Title" placeholder="MetaTitle" class="form-control"
+        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="Meta Title" class="form-control"
           [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}" id="MetaTitle"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
