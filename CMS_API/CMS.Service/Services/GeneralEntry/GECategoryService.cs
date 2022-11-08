@@ -65,6 +65,7 @@ namespace CMS.Service.Services.GeneralEntry
                                             IsShowThumbnail = x.IsShowThumbnail,
                                             IsShowInMain = x.IsShowInMain,
                                             IsSingleEntry = x.IsSingleEntry,
+                                            IsSystemEntry = x.IsSystemEntry,
                                             CreatedBy = x.CreatedBy,
                                             CreatedOn = x.CreatedOn,
                                             ModifiedBy = x.ModifiedBy,
@@ -197,6 +198,8 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
                     objData.IsShowThumbnail = model.IsShowThumbnail;
+                    objData.IsSystemEntry = false;
+
                     objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
 
                     objData.IsActive = true;
