@@ -123,10 +123,22 @@
             <ng-container matColumnDef="IsActive">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
               <td mat-cell *matCellDef="let element" class="table-action-btn">
-                <a [attr.disabled]="element.IsSystemEntry" (click)="OnActiveStatus(element!.Id)" title="Update Active Status">
-                  <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>
-                  <i *ngIf="!element!.IsActive" class="fas fa-ban text-danger"></i>
-                </a>
+                
+                <ng-container *ngIf="element.IsSystemEntry;else editStatus">
+                  <a title="Active Status">
+                    <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="!element!.IsActive" class="fas fa-ban text-danger"></i>
+                  </a>
+                </ng-container>
+
+                <ng-template #editStatus>
+                  <a (click)="OnActiveStatus(element!.Id)" title="Update Active Status">
+                    <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>
+                    <i *ngIf="!element!.IsActive" class="fas fa-ban text-danger"></i>
+                  </a>
+                </ng-template>
+
+
               </td>
             </ng-container>
 
@@ -139,9 +151,9 @@
                 <a href="#" class="table-action-btn-edit" routerLink="./edit/{{+row.Id}}" data-title="Edit"><i
                     class="bi bi-pencil-square"></i>
                 </a>
-{{row | json}}
-                <a *ngIf="!row.IsSystemEntry" class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" data-title="Delete"> <i
-                    class="bi bi-trash"></i> </a>
+
+                <a *ngIf="!row.IsSystemEntry" class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)"
+                  data-title="Delete"> <i class="bi bi-trash"></i> </a>
               </td>
             </ng-container>
 
