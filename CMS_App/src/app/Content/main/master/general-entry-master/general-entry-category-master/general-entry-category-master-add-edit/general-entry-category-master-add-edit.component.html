@@ -16,9 +16,7 @@
       <!-- Breadcrumb End -->
     </div>
     <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="{{model.Id > 0 ?'../../' :'../'}}"> <i
-        class="bi bi-chevron-left"></i> Back
-      to
-      list</button>
+        class="bi bi-chevron-left"></i> Back to list</button>
   </div>
 </div>
 <!-- Page Header Title end -->
@@ -37,13 +35,13 @@
 
       <div class="form-group col-md-4 mb-2">
         <label>Content Type</label>
-        <ng-select [items]="this.dropDown.ddlContentType" formControlName="ContentType" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select Size Id"
+        <ng-select [items]="this.dropDown.ddlContentType" formControlName="ContentType" [searchable]="true"
+          bindLabel="Text" bindValue="Value" placeholder="Content Type"
           [ngClass]="{ 'is-invalid': f.ContentType.errors && f.ContentType.touched}" [(ngModel)]="model.ContentType">
         </ng-select>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('ContentType')?.hasError('required') && formgrp.get('ContentType')?.touched)">
-          Please select <strong>ContentType</strong>...!</div>
+          Please select <strong>Content Type</strong>...!</div>
 
       </div>
 
@@ -145,4 +143,3 @@
     </div>
   </form>
 </div>
-

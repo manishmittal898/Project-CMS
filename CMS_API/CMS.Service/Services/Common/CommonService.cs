@@ -86,7 +86,7 @@ namespace CMS.Service.Services.Common
                             break;
 
                         case DropDownKey.ddlGeneralEntryCategory:
-                            objData.Add(item, await GetGeneralEntryCategory(true));
+                            objData.Add(item, await GetGeneralEntryCategory(isTransactionData));
 
 
                             break;
