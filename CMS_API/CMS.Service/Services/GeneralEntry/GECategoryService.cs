@@ -160,11 +160,11 @@ namespace CMS.Service.Services.GeneralEntry
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.ContentType = model.ContentType;
-                    objData.IsSingleEntry = model.IsSingleEntry;
-                    objData.IsShowInMain = model.IsShowInMain;
-                    objData.IsShowThumbnail = model.IsShowThumbnail;
-                    objData.IsShowDataInMain = model.IsShowDataInMain;
+                    objData.ContentType = objData.IsSystemEntry ? objData.ContentType : model.ContentType;
+                    objData.IsSingleEntry = objData.IsSystemEntry ? objData.IsSingleEntry : model.IsSingleEntry;
+                    objData.IsShowInMain = objData.IsSystemEntry ? objData.IsShowInMain : model.IsShowInMain;
+                    objData.IsShowThumbnail = objData.IsSystemEntry ? objData.IsShowThumbnail : model.IsShowThumbnail;
+                    objData.IsShowDataInMain = objData.IsSystemEntry ? objData.IsShowDataInMain : model.IsShowDataInMain;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedOn = DateTime.Now;
 
@@ -193,7 +193,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.ContentType = model.ContentType;
-                    objData.EnumValue = model.EnumValue;
+                    objData.EnumValue = model.Name.Replace(' ', '_');
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
                     objData.IsShowDataInMain = model.IsShowDataInMain;
