@@ -110,6 +110,8 @@ export class API_Url {
   public static GeneralEntryAddUpdate_Api = `${environment.apiEndPoint}admin/GeneralEntry/Save`;
   public static GeneralEntryChangeActiveStatus_Api = `${environment.apiEndPoint}admin/GeneralEntry/ChangeActiveStatus/`;
   public static GeneralEntryDelete_Api = `${environment.apiEndPoint}admin/GeneralEntry/delete/`;
+  public static GeneralEntryItems_Delete_Api = `${environment.apiEndPoint}admin/GeneralEntry/DeleteDataItem/`;
+
   //#endregion
 
   //#region <<Customer Registration>>

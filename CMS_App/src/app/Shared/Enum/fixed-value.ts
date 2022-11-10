@@ -10,3 +10,10 @@ export enum LookupTypeEnum {
   Product_Size=4,
   CMS_Page=5
 }
+export enum ContentTypeEnum {
+  Photo = 1,
+  MultipleImages = 2,
+  Video = 3,
+  Document = 4,
+  URL = 5
+}

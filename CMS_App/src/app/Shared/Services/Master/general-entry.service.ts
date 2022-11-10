@@ -34,6 +34,10 @@ export class GeneralEntryService{
     let url = `${this._baseService.API_Url.GeneralEntryDelete_Api}${id}/${status}`;
     return this._baseService.Delete(url);
   }
+  DeleteGeneralEntryItems(id: number): Observable<ApiResponse<GeneralEntryDataViewModel>> {
+    let url = `${this._baseService.API_Url.GeneralEntryItems_Delete_Api}${id}`;
+    return this._baseService.Delete(url);
+  }
 
 
 
@@ -122,7 +126,7 @@ export interface GeneralEntryViewModel {
   SortedOrder: number | null;
   IsActive: boolean | null;
   IsDeleted: boolean;
-  Data: GeneralEntryDataViewModel[] | null;
+  Data: GeneralEntryDataViewModel[] ;
   Keyword:string;
 }
 

@@ -26,7 +26,7 @@
       <!-- Done -->
       <div class="form-group col-md-4 mb-2">
         <label>Title</label>
-        <input type="text" class="form-control" [(ngModel)]="model.Title" formControlTitle="Title"
+        <input type="text" class="form-control" [(ngModel)]="model.Title" formControlName="Title"
           [ngClass]="{ 'is-invalid': f.Title.errors && f.Title.touched}" placeholder="Title">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Title')?.hasError('required') && formgrp.get('Title')?.touched)">
@@ -67,7 +67,7 @@
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
-          [CurrentFileLength]="model!.ImagePath ? 1: 0"
+          [CurrentFileLength]="model!.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg'"
           [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
         </app-file-selector>
         <div class="invalid-feedback"
@@ -91,6 +91,69 @@
         </span>
 
       </div>
+
+      <div class="form-group col-md-6 mb-0"
+        *ngIf="selectedCategory?.ContentType==(contentTypeEnum.Photo).toString() || selectedCategory?.ContentType==(contentTypeEnum.MultipleImages).toString() ||selectedCategory?.ContentType==(contentTypeEnum.Document).toString() || selectedCategory?.ContentType==(contentTypeEnum.Video).toString()">
+        <label>Attachments <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+        <div class="dropzone dropzone-light upload-btn-wrapper w-100">
+          <input type="hidden" name="DataItems" [(ngModel)]="this.model!.Data?.length==0 ? dataItems: this.model.Data"
+            formControlName="DataItems">
+          <app-file-selector [MaxFileLength]="selectedCategory?.ContentType==(contentTypeEnum.Photo).toString() ?1:5"
+            (FilesChanged)="onFileAttach($event)"
+            [CurrentFileLength]="(this.dataItems.length +(this.model.Data?.length??0))" [FileFilter]="acceptedFiles"
+            [ngClass]="{ 'is-invalid': f.DataItems.errors && f.DataItems.touched}">
+          </app-file-selector>
+          <div class="invalid-feedback"
+            *ngIf="(formgrp.get('DataItems')?.hasError('required') && formgrp.get('DataItems')?.touched)">
+            Please Add File...!</div>
+        </div>
+
+        <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="dataItems">
+          <ng-container *ngFor="let itm of dataItems">
+            <span [ngSwitch]="getFileType(itm.Value)">
+
+              <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
+                <div class="small-media-items-img"> <img [src]="itm.Value"
+                    onerror="this.src='assets/img/300x300.jpg'" /> </div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.Value" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </a>
+              <a *ngSwitchCase="'doc'" href="javascript:void()"
+                class="small-media-items small-media-items-pdf text-danger position-relative mb-3">
+                <div class="small-media-items-img"><i class="bi bi-file-earmark-pdf"></i></div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.Value" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </a>
+
+
+              <a *ngSwitchCase="'video'" href="javascript:void()"
+                class="small-media-items small-media-items-video position-relative mb-3">
+                <div class="small-media-items-img"> <i class="bi bi-camera-video"></i> </div>
+                <div class="small-media-items-action">
+                  <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
+                      class="bi bi-trash"></i></a>
+                  <a [href]="itm.Value" target="_blank">
+                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </a>
+
+            </span>
+          </ng-container>
+
+        </div>
+      </div>
+
 
       <div class="form-group col-md-12">
         <label>Description</label>

@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Validators, FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { ContentTypeEnum } from "src/app/Shared/Enum/fixed-value";
 import { DropDownModel } from "src/app/Shared/Helper/common-model";
-import { EditorConfig, DropDown_key } from "src/app/Shared/Helper/constants";
+import { EditorConfig, DropDown_key, Message } from "src/app/Shared/Helper/constants";
 import { FileInfo } from "src/app/Shared/Helper/shared/file-selector/file-selector.component";
 import { CommonService } from "src/app/Shared/Services/common.service";
-import { GeneralEntryPostModel, GeneralEntryService, GeneralEntryViewModel } from "src/app/Shared/Services/Master/general-entry.service";
+import { GeneralEntryDataViewModel, GeneralEntryPostModel, GeneralEntryService, GeneralEntryViewModel } from "src/app/Shared/Services/Master/general-entry.service";
 
 @Component({
   selector: 'app-general-entry-master-add-edit',
@@ -17,6 +18,8 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
 
   pageName = 'General Entry'
   model = {} as GeneralEntryPostModel;
+  dataItems: GeneralEntryDataViewModel[] = [];
+  fileSelector: any
   dropDown = new DropDownModel();
   formgrp = this.fb.group({
     Category: [undefined, Validators.required], //done
@@ -25,16 +28,23 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     ImagePath: [undefined],//done
     Keyword: [undefined],
     SortedOrder: [undefined, Validators.required],
-    Data: []
+    DataItems: [undefined]
   });
   editorConfig = EditorConfig.Config;
   isFileAttached = false;
+  contentTypeEnum = ContentTypeEnum;
   get f() { return this.formgrp.controls; }
   get selectedCategory() { return this.model.CategoryId > 0 ? this.dropDown.ddlGeneralEntryCategory.find(x => x.Value == this.model.CategoryId.toString()) : undefined }
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
   }
+get acceptedFiles(){
+  return this.selectedCategory?.ContentType==(this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType==(this.contentTypeEnum.MultipleImages).toString()  ? '.jpeg,.gif,.png,.jpg':
+  this.selectedCategory?.ContentType==(this.contentTypeEnum.Document).toString()? '.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt':
+  this.selectedCategory?.ContentType==(this.contentTypeEnum.Video).toString()? 'mp4,mkv,avi':''
+}
+
 
   ngOnInit(): void {
     this.GetDropDown();
@@ -66,6 +76,56 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     });
   }
 
+  deleteItems(id: number) {
+    this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
+      if (result) {
+        let subscription = this._generalEntryService.DeleteGeneralEntryItems(id).subscribe(
+          data => {
+            subscription.unsubscribe();
+            if (data.IsSuccess) {
+              this._commonService.Success(data.Message as string)
+              const idx = this.dataItems.findIndex(x => x.Id == id);
+              this.dataItems.splice(idx, 1);
+            }
+          },
+          error => {
+            this._commonService.Error(error.message as string)
+
+          }
+        );
+      }
+    });
+  }
+
+  getFileType(fileName: string) {
+
+
+    const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
+    if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
+      return 'doc';
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+      return 'image';
+    }
+    else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
+      return 'video';
+    } else {
+      return ext;
+    }
+
+  }
+
+  onFileAttach(file: FileInfo[]) {
+
+    if (file.length > 0) {
+      if (!this.model.Data) {
+        this.model.Data = [];
+      }
+      this.model.Data = file.map(x => { return x.FileBase64 });
+      //this.productFile = undefined
+    } else {
+      this.model.Data = [];
+    }
+  }
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
@@ -91,7 +151,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
         this.model.Description = data.Description;
         this.model.SortedOrder = data.SortedOrder;
         this.model.ImagePath = data.ImagePath;
-        this.model.Data = data.Data?.map(r => { return r.Value }) as string[];
+        this.dataItems = data.Data;//?.map(r => { return r.Value }) as string[];
         this.model.Keyword = data.Keyword;
       } else {
         this.toast.error(response.Message?.toString(), 'Error');
