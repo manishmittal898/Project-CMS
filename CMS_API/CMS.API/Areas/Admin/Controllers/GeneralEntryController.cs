@@ -67,5 +67,12 @@ namespace CMS.API.Areas.Admin.Controllers
         {
             return await _service.Delete(id);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<object> DeleteGeneralEntryItems(long id)
+        {
+            return await _service.DeleteGeneralEntryItems(id);
+        }
+
     }
 }

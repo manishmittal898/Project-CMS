@@ -92,7 +92,7 @@ namespace CMS.Service.Services.GeneralEntry
                                         Data = lstGroup.Select(x => new GeneralEntryDataViewModel
                                         {
                                             Id = x.Id,
-                                            Value = !string.IsNullOrEmpty(x.Value) ? (gen.Category.ContentType != (int)                        ContentTypeEnum.URL ? x.Value.ToAbsolutePath() : x.Value) : null,
+                                            Value = !string.IsNullOrEmpty(x.Value) ? (gen.Category.ContentType != (int)ContentTypeEnum.URL ? x.Value.ToAbsolutePath() : x.Value) : null,
                                             GeneralEntryId = gen.Id
                                         }).ToList()
                                     }).FirstOrDefaultAsync();
@@ -157,7 +157,7 @@ namespace CMS.Service.Services.GeneralEntry
                                           CategoryId = x.m.CategoryId,
                                           Category = x.m.Category.Name,
                                           Description = x.m.Description,
-                                          Keyword=x.m.Keyword,
+                                          Keyword = x.m.Keyword,
                                           DataId = x.m.DataId,
                                           SortedOrder = x.m.SortedOrder,
                                           ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
@@ -318,5 +318,42 @@ namespace CMS.Service.Services.GeneralEntry
             return objResponse;
         }
 
+        public async Task<object> DeleteGeneralEntryItems(long id)
+        {
+            try
+            {
+                TblFileDataMaster dataItem = _db.TblFileDataMasters.FirstOrDefault(r => r.Id == id);
+
+                if (dataItem != null)
+                {
+
+                    TblGeneralEntry mainData = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == id);
+                    if (mainData != null && mainData.Category.ContentType != (int)ContentTypeEnum.URL)
+                    {
+                        _fileHelper.Delete(dataItem.Value);
+
+
+                    }
+                    dataItem.ModifiedBy = _loginUserDetail.UserId ?? dataItem.ModifiedBy;
+                    dataItem.ModifiedOn = DateTime.Now;
+                    _db.TblFileDataMasters.Remove(dataItem);
+                  
+                    await _db.SaveChangesAsync();
+                    return CreateResponse(dataItem, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                }
+                else
+                {
+                    return CreateResponse<TblProductImage>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse<TblProductImage>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+
+            }
+        }
     }
 }
