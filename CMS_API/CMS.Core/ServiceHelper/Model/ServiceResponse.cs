@@ -17,6 +17,8 @@ namespace CMS.Core.ServiceHelper.Model
         public string Exception { get; set; }
 
         public long? TotalRecord { get; set; }
+
+       
     }
 
     public static class ResponseMessage

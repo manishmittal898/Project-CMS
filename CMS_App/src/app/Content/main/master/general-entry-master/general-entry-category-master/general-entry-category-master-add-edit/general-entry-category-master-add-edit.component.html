@@ -77,7 +77,7 @@
       <div class="form-group col-md-4">
         <label>Sort Order (1-999999)</label>
 
-        <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
+        <input type="number" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
           [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
           [ngClass]="{ 'is-invalid': f.SortedOrder.errors && f.SortedOrder.touched}" class="form-control" id="input4"
           placeholder="Sort Order">

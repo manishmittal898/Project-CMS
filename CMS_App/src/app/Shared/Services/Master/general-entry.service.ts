@@ -79,7 +79,7 @@ export interface GeneralEntryCategoryPostModel {
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
   IsShowThumbnail : boolean;
-  SortedOrder: number | null;
+  SortedOrder: number ;
 }
 
 export interface GeneralEntryCategoryViewModel {

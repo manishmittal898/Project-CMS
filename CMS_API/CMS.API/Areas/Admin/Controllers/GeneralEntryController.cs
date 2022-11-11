@@ -40,18 +40,17 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpPost]
         public async Task<object> Save(GeneralEntryPostModel model)
         {
+            ServiceResponse<object> objReturn = new ServiceResponse<object>();
+
             if (ModelState.IsValid)
             {
                 return await _service.Save(model);
-
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
                 objReturn.Message = "Invalid";
                 objReturn.IsSuccess = false;
                 objReturn.Data = null;
-
                 return objReturn;
             }
         }

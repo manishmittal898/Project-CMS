@@ -50,7 +50,7 @@
       <div class="form-group col-md-4">
         <label>Sort Order (1-999999)</label>
 
-        <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
+        <input type="number" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
           [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
           [ngClass]="{ 'is-invalid': f.SortedOrder.errors && f.SortedOrder.touched}" class="form-control" id="input4"
           placeholder="Sort Order">
@@ -154,6 +154,14 @@
         </div>
       </div>
 
+      <div class="form-group col-md-4 mb-2" *ngIf="selectedCategory?.ContentType==(contentTypeEnum.URL).toString()">
+        <label>Link</label>
+        <input type="text" class="form-control" [(ngModel)]="model.Data" formControlName="DataItems"
+          [ngClass]="{ 'is-invalid': f.DataItems.errors && f.DataItems.touched}" placeholder="Link">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('DataItems')?.hasError('required') && formgrp.get('DataItems')?.touched)">
+          Please enter <strong>Link</strong>...!</div>
+      </div>
 
       <div class="form-group col-md-12">
         <label>Description</label>

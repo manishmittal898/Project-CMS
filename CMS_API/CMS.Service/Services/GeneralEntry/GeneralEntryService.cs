@@ -74,8 +74,8 @@ namespace CMS.Service.Services.GeneralEntry
             try
             {
                 var result = await (from gen in _db.TblGeneralEntries
-                                    join data in _db.TblFileDataMasters.DefaultIfEmpty() on gen.DataId equals data.DataId
-                                    into lstGroup
+                                    where gen.Id == id
+
                                     select new GeneralEntryViewModel
                                     {
                                         Id = gen.Id,
@@ -88,14 +88,19 @@ namespace CMS.Service.Services.GeneralEntry
                                         ImagePath = !string.IsNullOrEmpty(gen.ImagePath) ? gen.ImagePath.ToAbsolutePath() : null,
                                         Keyword = gen.Keyword,
                                         IsActive = gen.IsActive,
-                                        IsDeleted = gen.IsDeleted,
-                                        Data = lstGroup.Select(x => new GeneralEntryDataViewModel
-                                        {
-                                            Id = x.Id,
-                                            Value = !string.IsNullOrEmpty(x.Value) ? (gen.Category.ContentType != (int)ContentTypeEnum.URL ? x.Value.ToAbsolutePath() : x.Value) : null,
-                                            GeneralEntryId = gen.Id
-                                        }).ToList()
+                                        IsDeleted = gen.IsDeleted
+
                                     }).FirstOrDefaultAsync();
+
+                result.Data = await (from data in _db.TblFileDataMasters
+                                     join mData in _db.TblGeneralEntries.DefaultIfEmpty() on data.DataId equals mData.DataId
+                                     where data.DataId == result.DataId
+                                     select new GeneralEntryDataViewModel
+                                     {
+                                         Id = data.Id,
+                                         Value = !string.IsNullOrEmpty(data.Value) ? (mData.Category.ContentType != (int)ContentTypeEnum.URL ? data.Value.ToAbsolutePath() : data.Value) : null,
+                                         GeneralEntryId = result.Id
+                                     }).ToListAsync();
 
 
 
@@ -110,25 +115,16 @@ namespace CMS.Service.Services.GeneralEntry
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<IEnumerable<GeneralEntryViewModel>>> GetList(IndexModel model)
+        public async Task<ServiceResponse<List<GeneralEntryViewModel>>> GetList(IndexModel model)
         {
 
-            ServiceResponse<IEnumerable<GeneralEntryViewModel>> objResult = new ServiceResponse<IEnumerable<GeneralEntryViewModel>>();
+            ServiceResponse<List<GeneralEntryViewModel>> objResult = new ServiceResponse<List<GeneralEntryViewModel>>();
             try
             {
 
-                //var result1 = (from gen in _db.TblGeneralEntries.DefaultIfEmpty()
-                //               join data in _db.TblFileDataMasters.DefaultIfEmpty() on gen.DataId equals data.DataId
-                //               into lstGroup
-                //               where !gen.IsDeleted && (string.IsNullOrEmpty(model.Search) || gen.Title.Contains(model.Search))
-                //               select new { m = gen, dt = lstGroup });
-
                 var result = from b in _db.Set<TblGeneralEntry>()
-                             join p in _db.Set<TblFileDataMaster>()
-                                 on b.DataId equals p.DataId into grouping
-                             from p in grouping.DefaultIfEmpty()
-                             select new { m = b, dt = grouping };
-
+                             where b.IsDeleted == false
+                             select new { m = b };
 
                 switch (model.OrderBy)
                 {
@@ -149,6 +145,7 @@ namespace CMS.Service.Services.GeneralEntry
                 if (result.Count() > 0)
                 {
 
+
                     objResult.Data = (from x in result
                                       select new GeneralEntryViewModel
                                       {
@@ -162,20 +159,13 @@ namespace CMS.Service.Services.GeneralEntry
                                           SortedOrder = x.m.SortedOrder,
                                           ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
                                           IsActive = x.m.IsActive,
-                                          IsDeleted = x.m.IsDeleted,
-                                          Data = x.dt.Select(xt => new GeneralEntryDataViewModel
-                                          {
-                                              Id = xt.Id,
-                                              Value = !string.IsNullOrEmpty(xt.Value) ? (x.m.Category.ContentType != (int)
-                                              ContentTypeEnum.URL ? xt.Value.ToAbsolutePath() : xt.Value) : null,
-                                              GeneralEntryId = x.m.Id
-                                          }).ToList()
+                                          IsDeleted = x.m.IsDeleted
                                       }).ToList();
-                    return CreateResponse(objResult.Data as IEnumerable<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data as List<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<IEnumerable<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
             catch (Exception ex)
@@ -188,16 +178,16 @@ namespace CMS.Service.Services.GeneralEntry
             return objResult;
         }
 
-        public async Task<ServiceResponse<TblGeneralEntry>> Save(GeneralEntryPostModel model)
+        public async Task<ServiceResponse<object>> Save(GeneralEntryPostModel model)
         {
             try
             {
                 TblGeneralEntry objGeneralEntry = new TblGeneralEntry();
-                List<TblFileDataMaster> productImages = new List<TblFileDataMaster>();
+                List<TblFileDataMaster> dataItems = new List<TblFileDataMaster>();
 
                 if (model.Id > 0)
                 {
-                    objGeneralEntry = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == model.Id);
+                    objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == model.Id);
 
                     objGeneralEntry.Id = model.Id;
                     objGeneralEntry.Title = model.Title;
@@ -220,7 +210,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                     var product = _db.TblGeneralEntries.Update(objGeneralEntry);
 
-                    _db.SaveChanges();
+                    await _db.SaveChangesAsync();
                     if (model.Data != null && model.Data.Count > 0)
                     {
                         string[] existingFilePaths = _db.TblFileDataMasters.Where(x => x.DataId == objGeneralEntry.DataId).Select(x => x.Value).ToArray();
@@ -235,18 +225,18 @@ namespace CMS.Service.Services.GeneralEntry
 
                         }
 
-                        productImages = model.Data.Select(x => new TblFileDataMaster
+                        dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
                             Value = objGeneralEntry.Category.ContentType != (int)ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
                             DataId = objGeneralEntry.DataId,
                             ModifiedOn = DateTime.Now,
                             ModifiedBy = _loginUserDetail.UserId.Value,
                         }).ToList();
-                        await _db.TblFileDataMasters.AddRangeAsync(productImages);
-                        _db.SaveChanges();
+                        await _db.TblFileDataMasters.AddRangeAsync(dataItems);
+                        await _db.SaveChangesAsync();
                     }
 
-                    return CreateResponse(objGeneralEntry, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)objGeneralEntry.Id, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
@@ -265,24 +255,26 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.CreatedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     var product = await _db.TblGeneralEntries.AddAsync(objGeneralEntry);
-                    _db.SaveChanges();
+                    await _db.SaveChangesAsync();
 
                     if (model.Data != null && model.Data.Count > 0)
                     {
-                        productImages = model.Data.Select(x => new TblFileDataMaster
+                        objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == product.Entity.Id);
+
+                        dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
                             Value = objGeneralEntry.Category.ContentType != (int)
-                                              ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
+                            ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
                             DataId = objGeneralEntry.DataId,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
 
                         }).ToList();
-                        await _db.TblFileDataMasters.AddRangeAsync(productImages);
-                        _db.SaveChanges();
+                        await _db.TblFileDataMasters.AddRangeAsync(dataItems);
+                        await _db.SaveChangesAsync();
 
                     }
-                    return CreateResponse(objGeneralEntry, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)objGeneralEntry.Id, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -290,7 +282,7 @@ namespace CMS.Service.Services.GeneralEntry
             catch (Exception ex)
             {
 
-                return CreateResponse<TblGeneralEntry>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<object>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -337,7 +329,7 @@ namespace CMS.Service.Services.GeneralEntry
                     dataItem.ModifiedBy = _loginUserDetail.UserId ?? dataItem.ModifiedBy;
                     dataItem.ModifiedOn = DateTime.Now;
                     _db.TblFileDataMasters.Remove(dataItem);
-                  
+
                     await _db.SaveChangesAsync();
                     return CreateResponse(dataItem, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
                 }

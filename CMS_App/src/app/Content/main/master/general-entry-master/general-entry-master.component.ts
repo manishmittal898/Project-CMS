@@ -35,14 +35,14 @@ export class GeneralEntryMasterComponent implements OnInit {
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService) {
-    _activatedRoute.params.subscribe(x => {
-      this.getList();
-    })
+
   }
 
 
   ngOnInit(): void {
-    this.getList();
+   this._activatedRoute.params.subscribe(x => {
+      this.getList();
+    })
   }
 
   getList(): void {

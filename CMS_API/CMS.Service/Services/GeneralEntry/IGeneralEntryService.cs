@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.GeneralEntry
 {
-   public interface IGeneralEntryService
+    public interface IGeneralEntryService
     {
-        Task<ServiceResponse<IEnumerable<GeneralEntryViewModel>>> GetList(IndexModel model);
+        Task<ServiceResponse<List<GeneralEntryViewModel>>> GetList(IndexModel model);
         Task<ServiceResponse<GeneralEntryViewModel>> GetById(long id);
-        Task<ServiceResponse<TblGeneralEntry>> Save(GeneralEntryPostModel model);
+        Task<ServiceResponse<object>> Save(GeneralEntryPostModel model);
         Task<ServiceResponse<TblGeneralEntry>> ActiveStatusUpdate(long id);
-         Task<ServiceResponse<TblGeneralEntry>> Delete(long id);
+        Task<ServiceResponse<TblGeneralEntry>> Delete(long id);
         Task<object> DeleteGeneralEntryItems(long id);
     }
 }

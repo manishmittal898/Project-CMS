@@ -19,6 +19,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   pageName = 'General Entry'
   model = {} as GeneralEntryPostModel;
   dataItems: GeneralEntryDataViewModel[] = [];
+
   fileSelector: any
   dropDown = new DropDownModel();
   formgrp = this.fb.group({
@@ -39,11 +40,11 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
   }
-get acceptedFiles(){
-  return this.selectedCategory?.ContentType==(this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType==(this.contentTypeEnum.MultipleImages).toString()  ? '.jpeg,.gif,.png,.jpg':
-  this.selectedCategory?.ContentType==(this.contentTypeEnum.Document).toString()? '.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt':
-  this.selectedCategory?.ContentType==(this.contentTypeEnum.Video).toString()? 'mp4,mkv,avi':''
-}
+  get acceptedFiles() {
+    return this.selectedCategory?.ContentType == (this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType == (this.contentTypeEnum.MultipleImages).toString() ? '.jpeg,.gif,.png,.jpg' :
+      this.selectedCategory?.ContentType == (this.contentTypeEnum.Document).toString() ? '.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt' :
+        this.selectedCategory?.ContentType == (this.contentTypeEnum.Video).toString() ? 'mp4,mkv,avi' : ''
+  }
 
 
   ngOnInit(): void {
@@ -65,7 +66,7 @@ get acceptedFiles(){
   }
 
   GetDropDown() {
-    debugger
+     
     let serve = this._commonService.GetDropDown([DropDown_key.ddlGeneralEntryCategory], false).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
@@ -129,7 +130,7 @@ get acceptedFiles(){
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-
+      this.model.Data = (Array.isArray(this.model.Data) ? this.model.Data : [this.model.Data]) as string[];
       this._generalEntryService.AddUpdateGeneralEntry(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success("General Entry added sucessfully...", "Saved");

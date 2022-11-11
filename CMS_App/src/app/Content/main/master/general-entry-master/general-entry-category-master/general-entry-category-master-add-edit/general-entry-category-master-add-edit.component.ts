@@ -23,7 +23,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
     IsShowInMain: [undefined],
     IsShowDataInMain: [undefined],
     IsSingleEntry: [undefined],
-    IsShowThumbnail:[undefined],
+    IsShowThumbnail: [undefined],
     SortedOrder: [undefined, Validators.required],
     ContentType: [undefined, Validators.required],
   });
@@ -66,7 +66,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-
+      this.model.SortedOrder = Number(this.model.SortedOrder);
       this._generalEntryService.AddUpdateGeneralEntryCategory(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success("General Entry Category added sucessfully...", "Saved");
@@ -79,6 +79,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   }
 
   onGetDetail() {
+    debugger
     this._generalEntryService.GetGeneralEntryCategory(this.model.Id).subscribe(response => {
       if (response.IsSuccess) {
         const data = response.Data as GeneralEntryCategoryViewModel;
@@ -88,8 +89,8 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
         this.model.IsShowInMain = data.IsShowInMain;
         this.model.IsShowDataInMain = data.IsShowDataInMain;
         this.model.IsSingleEntry = data.IsSingleEntry;
-        this.model.IsShowThumbnail =data.IsShowThumbnail;
-        this.model.SortedOrder = data.SortedOrder;
+        this.model.IsShowThumbnail = data.IsShowThumbnail;
+        this.model.SortedOrder = Number(data.SortedOrder);
       } else {
         this.toast.error(response.Message?.toString(), 'Error');
       }

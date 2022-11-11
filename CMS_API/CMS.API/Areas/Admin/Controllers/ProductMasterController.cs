@@ -58,7 +58,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
                 return objReturn;
             }
-            //return _roleTyp
+           
         }
 
         [HttpGet("{id}")]
