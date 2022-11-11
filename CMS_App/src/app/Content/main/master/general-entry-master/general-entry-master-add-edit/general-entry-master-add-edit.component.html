@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-4 mb-2" *ngIf="selectedCategory?.ContentType==(contentTypeEnum.URL).toString()">
+      <div class="form-group col-md-6 mb-2" *ngIf="selectedCategory?.ContentType==(contentTypeEnum.URL).toString()">
         <label>Link</label>
         <input type="text" class="form-control" [(ngModel)]="model.Data" formControlName="DataItems"
           [ngClass]="{ 'is-invalid': f.DataItems.errors && f.DataItems.touched}" placeholder="Link">
