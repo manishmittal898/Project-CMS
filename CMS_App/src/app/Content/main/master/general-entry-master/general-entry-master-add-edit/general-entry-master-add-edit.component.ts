@@ -142,7 +142,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   }
 
   onGetDetail() {
-    this._generalEntryService.GetGeneralEntry(this.model.Id).subscribe(response => {
+    this._generalEntryService.GetGeneralEntry(this.model.Id,true).subscribe(response => {
       if (response.IsSuccess) {
         const data = response.Data as GeneralEntryViewModel;
         this.model.Id = data.Id;

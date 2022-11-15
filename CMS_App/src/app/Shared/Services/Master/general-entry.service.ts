@@ -16,8 +16,8 @@ export class GeneralEntryService {
     return this._baseService.post(url, model);
   }
 
-  GetGeneralEntry(id: number): Observable<ApiResponse<GeneralEntryViewModel>> {
-    let url = `${this._baseService.API_Url.GeneralEntryDetail_Api}${id}`;
+  GetGeneralEntry(id: number, isEdit :boolean=false): Observable<ApiResponse<GeneralEntryViewModel>> {
+    let url = `${this._baseService.API_Url.GeneralEntryDetail_Api}${id}/${isEdit}`;
     return this._baseService.get(url);
   }
 

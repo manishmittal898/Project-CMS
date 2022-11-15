@@ -68,7 +68,7 @@ namespace CMS.Service.Services.GeneralEntry
         }
 
 
-        public async Task<ServiceResponse<GeneralEntryViewModel>> GetById(long id)
+        public async Task<ServiceResponse<GeneralEntryViewModel>> GetById(long id, bool isEdit = false)
         {
             ServiceResponse<GeneralEntryViewModel> ObjResponse = new ServiceResponse<GeneralEntryViewModel>();
             try
@@ -85,8 +85,8 @@ namespace CMS.Service.Services.GeneralEntry
                                         Description = gen.Description,
                                         DataId = gen.DataId,
                                         SortedOrder = gen.SortedOrder,
-                                        ImagePath = !string.IsNullOrEmpty(gen.ImagePath) ? gen.ImagePath.ToAbsolutePath() : null,
-                                        Url = gen.Url,
+                                        ImagePath = !string.IsNullOrEmpty(gen.ImagePath) && (gen.Category.IsShowThumbnail || isEdit) ? gen.ImagePath.ToAbsolutePath() : null,
+                                        Url = !string.IsNullOrEmpty(gen.Url) && (gen.Category.IsShowUrl || isEdit) ? gen.Url : null,
                                         Keyword = gen.Keyword,
                                         IsActive = gen.IsActive,
                                         IsDeleted = gen.IsDeleted
@@ -158,8 +158,8 @@ namespace CMS.Service.Services.GeneralEntry
                                           Keyword = x.m.Keyword,
                                           DataId = x.m.DataId,
                                           SortedOrder = x.m.SortedOrder,
-                                          ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
-                                          Url = x.m.Url,
+                                          ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) && x.m.Category.IsShowThumbnail ? x.m.ImagePath.ToAbsolutePath() : null,
+                                          Url = !string.IsNullOrEmpty(x.m.Url) && x.m.Category.IsShowUrl ? x.m.Url : null,
                                           IsActive = x.m.IsActive,
                                           IsDeleted = x.m.IsDeleted
                                       }).ToList();
@@ -191,6 +191,8 @@ namespace CMS.Service.Services.GeneralEntry
                 {
                     objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == model.Id);
 
+                    var currentCat = model.CategoryId == objGeneralEntry.CategoryId ? objGeneralEntry.Category : await _db.TblGecategoryMaters.FirstOrDefaultAsync(r => r.Id == model.CategoryId);
+
                     objGeneralEntry.Id = model.Id;
                     objGeneralEntry.Title = model.Title;
                     objGeneralEntry.CategoryId = model.CategoryId;
@@ -199,7 +201,8 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.Keyword = model.Keyword;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedOn = DateTime.Now;
-                    objGeneralEntry.Url = model.Url;
+                    objGeneralEntry.Url = !string.IsNullOrEmpty(model.Url) && currentCat.IsShowUrl ? model.Url : objGeneralEntry.Url;
+                     
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 

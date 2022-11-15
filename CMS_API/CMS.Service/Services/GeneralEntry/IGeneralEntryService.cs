@@ -10,7 +10,7 @@ namespace CMS.Service.Services.GeneralEntry
     public interface IGeneralEntryService
     {
         Task<ServiceResponse<List<GeneralEntryViewModel>>> GetList(IndexModel model);
-        Task<ServiceResponse<GeneralEntryViewModel>> GetById(long id);
+        Task<ServiceResponse<GeneralEntryViewModel>> GetById(long id, bool isEdit = false);
         Task<ServiceResponse<object>> Save(GeneralEntryPostModel model);
         Task<ServiceResponse<TblGeneralEntry>> ActiveStatusUpdate(long id);
         Task<ServiceResponse<TblGeneralEntry>> Delete(long id);

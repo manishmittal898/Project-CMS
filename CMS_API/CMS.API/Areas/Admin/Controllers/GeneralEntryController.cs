@@ -29,11 +29,11 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         // GET api/<GeneralEntryCategory>/5
-        [HttpGet("{id}")]
-        public async Task<object> Get(long id)
+        [HttpGet("{id}/{isEdit}")]
+        public async Task<object> Get(long id, bool isEdit = false)
 
         {
-            return await _service.GetById(id);
+            return await _service.GetById(id, isEdit);
         }
 
         // POST api/<GeneralEntryCategory>
