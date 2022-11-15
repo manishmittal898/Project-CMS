@@ -117,6 +117,7 @@ export class GECategoryDropDownItem {
   Value: string = "";
   ContentType: string = '';
   IsShowThumbnail: boolean = false;
+  IsShowUrl: boolean = false;
 }
 
 export interface FilterDropDownPostModel {

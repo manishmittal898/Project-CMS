@@ -114,7 +114,7 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblGECategoryMater");
 
-                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C178865D9BF")
+                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C17DD9D77B8")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedOn)
@@ -131,6 +131,8 @@ namespace CMS.Data.Models
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.IsShowUrl).HasColumnName("IsShowURL");
 
                 entity.Property(e => e.ModifiedOn)
                     .HasColumnType("datetime")
@@ -178,6 +180,10 @@ namespace CMS.Data.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Title).HasMaxLength(4000);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(4000)
+                    .HasColumnName("URL");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.TblGeneralEntries)

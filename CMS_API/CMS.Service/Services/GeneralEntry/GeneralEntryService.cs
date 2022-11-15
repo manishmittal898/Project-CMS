@@ -86,6 +86,7 @@ namespace CMS.Service.Services.GeneralEntry
                                         DataId = gen.DataId,
                                         SortedOrder = gen.SortedOrder,
                                         ImagePath = !string.IsNullOrEmpty(gen.ImagePath) ? gen.ImagePath.ToAbsolutePath() : null,
+                                        Url = gen.Url,
                                         Keyword = gen.Keyword,
                                         IsActive = gen.IsActive,
                                         IsDeleted = gen.IsDeleted
@@ -98,7 +99,7 @@ namespace CMS.Service.Services.GeneralEntry
                                      select new GeneralEntryDataViewModel
                                      {
                                          Id = data.Id,
-                                         Value = !string.IsNullOrEmpty(data.Value) ? (mData.Category.ContentType != (int)ContentTypeEnum.URL ? data.Value.ToAbsolutePath() : data.Value) : null,
+                                         Value = !string.IsNullOrEmpty(data.Value) ? data.Value.ToAbsolutePath() : null,
                                          GeneralEntryId = result.Id
                                      }).ToListAsync();
 
@@ -158,6 +159,7 @@ namespace CMS.Service.Services.GeneralEntry
                                           DataId = x.m.DataId,
                                           SortedOrder = x.m.SortedOrder,
                                           ImagePath = !string.IsNullOrEmpty(x.m.ImagePath) ? x.m.ImagePath.ToAbsolutePath() : null,
+                                          Url = x.m.Url,
                                           IsActive = x.m.IsActive,
                                           IsDeleted = x.m.IsDeleted
                                       }).ToList();
@@ -197,6 +199,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.Keyword = model.Keyword;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedOn = DateTime.Now;
+                    objGeneralEntry.Url = model.Url;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
@@ -208,26 +211,16 @@ namespace CMS.Service.Services.GeneralEntry
                         objGeneralEntry.ImagePath = null;
                     }
 
-                    var product = _db.TblGeneralEntries.Update(objGeneralEntry);
-
+                    _db.TblGeneralEntries.Update(objGeneralEntry);
                     await _db.SaveChangesAsync();
                     if (model.Data != null && model.Data.Count > 0)
                     {
                         string[] existingFilePaths = _db.TblFileDataMasters.Where(x => x.DataId == objGeneralEntry.DataId).Select(x => x.Value).ToArray();
-                        if (objGeneralEntry.Category.ContentType == (int)ContentTypeEnum.URL)
-                        {
-                            model.Data = model.Data.FindAll(x => !existingFilePaths.Contains(x));
-
-                        }
-                        else
-                        {
-                            model.Data = model.Data.FindAll(x => !existingFilePaths.Contains(x.Replace("\\", "/")));
-
-                        }
+                        model.Data = model.Data.FindAll(x => !existingFilePaths.Contains(x.Replace("\\", "/")));
 
                         dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
-                            Value = objGeneralEntry.Category.ContentType != (int)ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
+                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry),
                             DataId = objGeneralEntry.DataId,
                             ModifiedOn = DateTime.Now,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -254,6 +247,8 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.ModifiedOn = DateTime.Now;
                     objGeneralEntry.CreatedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
+                    objGeneralEntry.Url = model.Url;
+
                     var product = await _db.TblGeneralEntries.AddAsync(objGeneralEntry);
                     await _db.SaveChangesAsync();
 
@@ -263,8 +258,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                         dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
-                            Value = objGeneralEntry.Category.ContentType != (int)
-                            ContentTypeEnum.URL ? _fileHelper.Save(x, FilePaths.GeneralEntry) : x,
+                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry),
                             DataId = objGeneralEntry.DataId,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -320,7 +314,7 @@ namespace CMS.Service.Services.GeneralEntry
                 {
 
                     TblGeneralEntry mainData = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == id);
-                    if (mainData != null && mainData.Category.ContentType != (int)ContentTypeEnum.URL)
+                    if (mainData != null)
                     {
                         _fileHelper.Delete(dataItem.Value);
 

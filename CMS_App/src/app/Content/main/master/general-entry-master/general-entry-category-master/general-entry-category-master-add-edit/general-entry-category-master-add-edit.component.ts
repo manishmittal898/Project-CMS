@@ -24,6 +24,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
     IsShowDataInMain: [undefined],
     IsSingleEntry: [undefined],
     IsShowThumbnail: [undefined],
+    IsShowUrl: [undefined],
     SortedOrder: [undefined, Validators.required],
     ContentType: [undefined, Validators.required],
   });
@@ -79,7 +80,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   }
 
   onGetDetail() {
-    debugger
+
     this._generalEntryService.GetGeneralEntryCategory(this.model.Id).subscribe(response => {
       if (response.IsSuccess) {
         const data = response.Data as GeneralEntryCategoryViewModel;
@@ -90,6 +91,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
         this.model.IsShowDataInMain = data.IsShowDataInMain;
         this.model.IsSingleEntry = data.IsSingleEntry;
         this.model.IsShowThumbnail = data.IsShowThumbnail;
+        this.model.IsShowUrl = data.IsShowUrl;
         this.model.SortedOrder = Number(data.SortedOrder);
       } else {
         this.toast.error(response.Message?.toString(), 'Error');

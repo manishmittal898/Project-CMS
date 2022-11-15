@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IndexModel } from 'src/app/Shared/Helper/common-model';
 import { Message } from 'src/app/Shared/Helper/constants';
 import { CommonService } from 'src/app/Shared/Services/common.service';
-import { GeneralEntryService ,GeneralEntryViewModel} from '../../../../Shared/Services/Master/general-entry.service';
+import { GeneralEntryService, GeneralEntryViewModel } from '../../../../Shared/Services/Master/general-entry.service';
 
 @Component({
   selector: 'app-general-entry-master',
@@ -15,16 +15,13 @@ import { GeneralEntryService ,GeneralEntryViewModel} from '../../../../Shared/Se
   styleUrls: ['./general-entry-master.component.scss']
 })
 export class GeneralEntryMasterComponent implements OnInit {
-
-
   model!: GeneralEntryViewModel[];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-
   displayedColumns: string[] = ['index', 'Title', 'ImagePath', 'Category', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Title', Text: 'Title' },
-  { Value: 'Category', Text: 'Category' }, ];
+  { Value: 'Category', Text: 'Category' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
   noRecordData = {
@@ -33,14 +30,12 @@ export class GeneralEntryMasterComponent implements OnInit {
     url: './add',
     urlLable: 'Add New general Entry'
   };
-  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
-    private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService) {
-
-  }
-
+  constructor(private readonly _activatedRoute: ActivatedRoute,
+    private readonly _commonService: CommonService,
+    private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService) { }
 
   ngOnInit(): void {
-   this._activatedRoute.params.subscribe(x => {
+    this._activatedRoute.params.subscribe(x => {
       this.getList();
     })
   }
@@ -48,7 +43,6 @@ export class GeneralEntryMasterComponent implements OnInit {
   getList(): void {
     this._generalEntryService.GetListGeneralEntry(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        debugger
         this.model = response.Data as GeneralEntryViewModel[];
         this.dataSource = new MatTableDataSource<GeneralEntryViewModel>(this.model);
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
@@ -57,11 +51,11 @@ export class GeneralEntryMasterComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }
       } else {
-        // Toast message if  return false ;
-        this.toast.error(response.Message?.toString(), 'Error');
+               this.toast.error(response.Message?.toString(), 'Error');
       }
     },
       error => {
+        this.toast.error(error.Message as string, 'Error');
       });
   }
 
@@ -109,15 +103,13 @@ export class GeneralEntryMasterComponent implements OnInit {
   }
 
   updateDeleteStatus(id: number) {
-
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
-        let subscription = this._generalEntryService.DeleteGeneralEntry(id).subscribe(
+        const subscription = this._generalEntryService.DeleteGeneralEntry(id).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              debugger
               const idx = this.model.findIndex(x => x.Id == id);
               this.model.splice(idx, 1);
               this.totalRecords--;
@@ -125,8 +117,7 @@ export class GeneralEntryMasterComponent implements OnInit {
             }
           },
           error => {
-            this._commonService.Error(error.message as string)
-
+            this._commonService.Error(error.message as string);
           }
         );
       }

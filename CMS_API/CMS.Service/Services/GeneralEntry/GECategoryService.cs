@@ -32,7 +32,6 @@ namespace CMS.Service.Services.GeneralEntry
             try
             {
 
-
                 var result = (from data in _db.TblGecategoryMaters
                               where !data.IsDelete && (string.IsNullOrEmpty(model.Search) || data.Name.Contains(model.Search))
                               select data);
@@ -52,38 +51,32 @@ namespace CMS.Service.Services.GeneralEntry
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
-                objResult.Data = await (from x in result
-                                        select new GeneralEntryCategoryViewModel
-                                        {
-                                            Id = x.Id,
-                                            Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
-                                            SortedOrder = x.SortedOrder.Value,
-                                            EnumValue = x.EnumValue,
-                                            IsShowDataInMain = x.IsShowDataInMain,
-                                            ContentType = x.ContentType,
-                                            IsShowThumbnail = x.IsShowThumbnail,
-                                            IsShowInMain = x.IsShowInMain,
-                                            IsSingleEntry = x.IsSingleEntry,
-                                            IsSystemEntry = x.IsSystemEntry,
-                                            CreatedBy = x.CreatedBy,
-                                            CreatedOn = x.CreatedOn,
-                                            ModifiedBy = x.ModifiedBy,
-                                            ModifiedOn = x.ModifiedOn,
-                                            IsActive = x.IsActive.Value,
-                                            IsDelete = x.IsDelete
-
-                                        }).ToListAsync();
-
-                if (result != null)
+                if (objResult.TotalRecord > 0)
                 {
-                    foreach (var item in objResult.Data)
+                    objResult.Data = result.ToList().Select(x => new GeneralEntryCategoryViewModel
                     {
-                        item.ContentTypeText = item.ContentType > 0 ? Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => item.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault() : string.Empty;
-                    }
-
-
-                    return CreateResponse(objResult.Data as IEnumerable<GeneralEntryCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                        Id = x.Id,
+                        Name = x.Name,
+                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                        SortedOrder = x.SortedOrder.Value,
+                        EnumValue = x.EnumValue,
+                        IsShowDataInMain = x.IsShowDataInMain,
+                        IsShowUrl = x.IsShowUrl,
+                        ContentType = x.ContentType,
+                        IsShowThumbnail = x.IsShowThumbnail,
+                        IsShowInMain = x.IsShowInMain,
+                        IsSingleEntry = x.IsSingleEntry,
+                        IsSystemEntry = x.IsSystemEntry,
+                        CreatedBy = x.CreatedBy,
+                        CreatedOn = x.CreatedOn,
+                        ModifiedBy = x.ModifiedBy,
+                        ModifiedOn = x.ModifiedOn,
+                        IsActive = x.IsActive.Value,
+                        IsDelete = x.IsDelete,
+                        ContentTypeText = Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => x.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault()
+                    });
+                     
+                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
@@ -104,32 +97,34 @@ namespace CMS.Service.Services.GeneralEntry
             ServiceResponse<GeneralEntryCategoryViewModel> ObjResponse = new ServiceResponse<GeneralEntryCategoryViewModel>();
             try
             {
-                var detail = await _db.TblGecategoryMaters.Select(x => new GeneralEntryCategoryViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
-                    SortedOrder = x.SortedOrder.Value,
-                    EnumValue = x.EnumValue,
-                    ContentType = x.ContentType,
-                    IsShowDataInMain = x.IsShowDataInMain,
-                    IsShowInMain = x.IsShowInMain,
-                    IsSingleEntry = x.IsSingleEntry,
-                    IsSystemEntry = x.IsSystemEntry,
-                    IsShowThumbnail = x.IsShowThumbnail,
-                    CreatedBy = x.CreatedBy,
-                    CreatedOn = x.CreatedOn,
-                    ModifiedBy = x.ModifiedBy,
-                    ModifiedOn = x.ModifiedOn,
-                    IsActive = x.IsActive.Value,
-                    IsDelete = x.IsDelete
-
-                }).FirstOrDefaultAsync(x => x.Id == id && x.IsActive.Value && x.IsDelete == false);
-
+                TblGecategoryMater detail = await _db.TblGecategoryMaters.Where(x => x.Id == id && x.IsActive.Value && x.IsDelete == false).FirstOrDefaultAsync();
                 if (detail != null)
                 {
-                    detail.ContentTypeText = detail.ContentType > 0 ? Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => detail.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault() : string.Empty;
-                    ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+
+                    ObjResponse.Data = new GeneralEntryCategoryViewModel
+                    {
+                        Id = detail.Id,
+                        Name = detail.Name,
+                        ImagePath = !string.IsNullOrEmpty(detail.ImagePath) ? detail.ImagePath.ToAbsolutePath() : null,
+                        SortedOrder = detail.SortedOrder.Value,
+                        EnumValue = detail.EnumValue,
+                        ContentType = detail.ContentType,
+                        IsShowUrl = detail.IsShowUrl,
+                        IsShowDataInMain = detail.IsShowDataInMain,
+                        IsShowInMain = detail.IsShowInMain,
+                        IsSingleEntry = detail.IsSingleEntry,
+                        IsSystemEntry = detail.IsSystemEntry,
+                        IsShowThumbnail = detail.IsShowThumbnail,
+                        CreatedBy = detail.CreatedBy,
+                        CreatedOn = detail.CreatedOn,
+                        ModifiedBy = detail.ModifiedBy,
+                        ModifiedOn = detail.ModifiedOn,
+                        IsActive = detail.IsActive.Value,
+                        IsDelete = detail.IsDelete,
+                        ContentTypeText = Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => detail.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault()
+
+                    };
+                    ObjResponse = CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
 
                 }
                 else
@@ -160,11 +155,13 @@ namespace CMS.Service.Services.GeneralEntry
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.ContentType = objData.IsSystemEntry ? objData.ContentType : model.ContentType;
-                    objData.IsSingleEntry = objData.IsSystemEntry ? objData.IsSingleEntry : model.IsSingleEntry;
-                    objData.IsShowInMain = objData.IsSystemEntry ? objData.IsShowInMain : model.IsShowInMain;
-                    objData.IsShowThumbnail = objData.IsSystemEntry ? objData.IsShowThumbnail : model.IsShowThumbnail;
-                    objData.IsShowDataInMain = objData.IsSystemEntry ? objData.IsShowDataInMain : model.IsShowDataInMain;
+                    objData.ContentType = model.ContentType;
+                    objData.IsSingleEntry = objData.IsSingleEntry ? objData.IsSingleEntry : model.IsSingleEntry;
+                    objData.IsShowInMain = objData.IsShowInMain ? objData.IsShowInMain : model.IsShowInMain;
+                    objData.IsShowThumbnail = objData.IsShowThumbnail ? objData.IsShowThumbnail : model.IsShowThumbnail;
+                    objData.IsShowDataInMain = objData.IsShowDataInMain ? objData.IsShowDataInMain : model.IsShowDataInMain;
+                    objData.IsShowUrl = objData.IsShowUrl ? objData.IsShowUrl : model.IsShowUrl;
+
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedOn = DateTime.Now;
 
@@ -199,6 +196,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsShowDataInMain = model.IsShowDataInMain;
                     objData.IsShowThumbnail = model.IsShowThumbnail;
                     objData.IsSystemEntry = false;
+                    objData.IsShowUrl = model.IsShowUrl;
 
                     objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
 
@@ -302,6 +300,9 @@ namespace CMS.Service.Services.GeneralEntry
                         break;
                     case "IsShowThumbnail":
                         objData.IsShowThumbnail = !objData.IsShowThumbnail;
+                        break;
+                    case "IsShowUrl":
+                        objData.IsShowUrl = !objData.IsShowUrl;
                         break;
                     default:
                         break;

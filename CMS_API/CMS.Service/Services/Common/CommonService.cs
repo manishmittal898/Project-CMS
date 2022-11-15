@@ -311,7 +311,7 @@ namespace CMS.Service.Services.Common
                               where type.IsActive == true && !type.IsDelete
                               && (isTransactionData ? type.TblGeneralEntries.Any(g => g.CategoryId == type.Id) : true)
                               select type).OrderBy(x => x.Name)
-                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType, IsShowThumbnail = r.IsShowThumbnail })
+                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType, IsShowThumbnail = r.IsShowThumbnail, IsShowUrl = r.IsShowUrl })
                      .ToListAsync();
             }
             catch

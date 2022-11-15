@@ -5,6 +5,7 @@
     [CategoryId] BIGINT NOT NULL,
     [Description] NTEXT NULL,
     [DataId] VARCHAR(50) NULL, 
+    [URL]        NVARCHAR (4000) NULL,
     [ImagePath]        NVARCHAR (1000) NULL,
     [SortedOrder] INT            NULL,
     [Keyword] nvarchar(200)            NULL,

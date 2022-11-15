@@ -82,9 +82,7 @@
 
             <ng-container matColumnDef="Flags">
               <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:130px;">Flags </th>
-              <td mat-cell *matCellDef="let element" class="table-action-btn">
-
-
+              <td mat-cell *matCellDef="let element" class="table-action-btn"> 
                 <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowInMain')" title="Update Status">
                   <span *ngIf="element!.IsShowInMain" class="d-inline-block w-100 badge badge-warning">
                     <i class="bi bi-check-circle"></i>&nbsp;Show In Home
@@ -108,22 +106,26 @@
                       class="bi bi-check-circle "></i>&nbsp;Single Entry</span>
                 </a>
 
-                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')" title="Update Status">
+                <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')" title="Update Status">
                   <span *ngIf="element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-info"><i
                       class="bi bi-check-circle"></i>&nbsp;Show Thumbnail</span>
                   <span *ngIf="!element!.IsShowThumbnail" class="d-inline-block w-100 badge btn-outline-info"><i
                       class="bi bi-check-circle "></i>&nbsp;Show Thumbnail</span>
                 </a>
 
-
-
+                <a class="d-block mx-0" (click)="onFlagStatus(element!.Id,'IsShowUrl')" title="Update Status">
+                  <span *ngIf="element!.IsShowUrl" class="d-inline-block w-100 badge btn-secondary"><i
+                      class="bi bi-check-circle"></i>&nbsp;Show URL</span>
+                  <span *ngIf="!element!.IsShowUrl" class="d-inline-block w-100 badge btn-outline-secondary"><i
+                      class="bi bi-check-circle "></i>&nbsp;Show URL</span>
+                </a>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="IsActive">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
               <td mat-cell *matCellDef="let element" class="table-action-btn">
-                
+
                 <ng-container *ngIf="element.IsSystemEntry;else editStatus">
                   <a title="Active Status">
                     <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>

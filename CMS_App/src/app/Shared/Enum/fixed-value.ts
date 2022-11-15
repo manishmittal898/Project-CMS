@@ -11,9 +11,10 @@ export enum LookupTypeEnum {
   CMS_Page=5
 }
 export enum ContentTypeEnum {
+  None = 0,
   Photo = 1,
   MultipleImages = 2,
   Video = 3,
   Document = 4,
-  URL = 5
+
 }

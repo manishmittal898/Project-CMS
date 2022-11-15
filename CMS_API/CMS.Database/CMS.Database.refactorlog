@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Value" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="09aa1307-26a4-4de7-a821-6fb8262f0971" ChangeDateTime="11/15/2022 10:18:27">
+    <Property Name="ElementName" Value="[dbo].[tblGECategoryMater].[IsShow]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblGECategoryMater]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsShowURL" />
+  </Operation>
 </Operations>

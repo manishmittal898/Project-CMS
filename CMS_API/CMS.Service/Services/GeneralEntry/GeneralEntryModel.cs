@@ -21,6 +21,8 @@ namespace CMS.Service.Services.GeneralEntry
         [Required]
         [Display(Name = "SortedOrder")]
         public int? SortedOrder { get; set; }
+        public string Url { get; set; }
+
         public string ImagePath { get; set; }
         public string Keyword { get; set; }
         public List<string>? Data { get; set; }
@@ -33,6 +35,8 @@ namespace CMS.Service.Services.GeneralEntry
         public long CategoryId { get; set; }
         public string Category { get; set; }
         public string ImagePath { get; set; }
+        public string Url { get; set; }
+
         public string Description { get; set; }
         public string DataId { get; set; }
         public int? SortedOrder { get; set; }
@@ -59,7 +63,7 @@ namespace CMS.Service.Services.GeneralEntry
 
         public int ContentType { get; set; }
         public string ContentTypeText { get; set; }
-
+        public bool IsShowUrl { get; set; }
         public bool IsShowInMain { get; set; }
         public bool IsShowDataInMain { get; set; }
         public bool IsSingleEntry { get; set; }
@@ -100,6 +104,7 @@ namespace CMS.Service.Services.GeneralEntry
 
         public bool IsShowThumbnail { get; set; }
 
+        public bool IsShowUrl { get; set; }
         public int? SortedOrder { get; set; }
 
 

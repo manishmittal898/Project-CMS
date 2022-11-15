@@ -6,7 +6,7 @@ import { IndexModel, ApiResponse } from '../../Helper/common-model';
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralEntryService{
+export class GeneralEntryService {
 
 
   constructor(private readonly _baseService: BaseAPIService) { }
@@ -74,12 +74,13 @@ export interface GeneralEntryCategoryPostModel {
   Name: string;
   EnumValue: string;
   ImagePath: string;
-  ContentType :number;
+  ContentType: number;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
-  IsShowThumbnail : boolean;
-  SortedOrder: number ;
+  IsShowThumbnail: boolean;
+  IsShowUrl: boolean;
+  SortedOrder: number;
 }
 
 export interface GeneralEntryCategoryViewModel {
@@ -87,13 +88,14 @@ export interface GeneralEntryCategoryViewModel {
   Name: string;
   EnumValue: string;
   ImagePath: string;
-  ContentType :number;
-  ContentTypeText :string;
+  ContentType: number;
+  ContentTypeText: string;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
-  IsSystemEntry:boolean;
-  IsShowThumbnail :boolean;
+  IsSystemEntry: boolean;
+  IsShowThumbnail: boolean;
+  IsShowUrl: boolean;
   SortedOrder: number | null;
   CreatedBy: number;
   CreatedOn: string;
@@ -111,8 +113,9 @@ export interface GeneralEntryPostModel {
   Description: string;
   SortedOrder: number | null;
   ImagePath: string;
+  Url: string;
   Data: string[] | null;
-  Keyword:string;
+  Keyword: string;
 }
 
 export interface GeneralEntryViewModel {
@@ -121,13 +124,14 @@ export interface GeneralEntryViewModel {
   CategoryId: number;
   Category: string;
   ImagePath: string;
+  Url: string;
   Description: string;
   DataId: string;
   SortedOrder: number | null;
   IsActive: boolean | null;
   IsDeleted: boolean;
-  Data: GeneralEntryDataViewModel[] ;
-  Keyword:string;
+  Data: GeneralEntryDataViewModel[];
+  Keyword: string;
 }
 
 export interface GeneralEntryDataViewModel {

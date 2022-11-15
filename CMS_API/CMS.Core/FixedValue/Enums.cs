@@ -24,6 +24,8 @@ namespace CMS.Core.FixedValue
 
         public enum ContentTypeEnum
         {
+            [StringValue("None")]
+            None = 0,
             [StringValue("Single Photo")]
             Photo = 1,
             [StringValue("Multiple Images")]
@@ -32,8 +34,7 @@ namespace CMS.Core.FixedValue
             Video = 3,
             [StringValue("Documents")]
             Document = 4,
-            [StringValue("URL")]
-            URL = 5,
+
 
         }
     }

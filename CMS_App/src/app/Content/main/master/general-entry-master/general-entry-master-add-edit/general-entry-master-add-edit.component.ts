@@ -27,6 +27,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     Title: [undefined, Validators.required],//done
     Description: [undefined],//done
     ImagePath: [undefined],//done
+    Url: [undefined],
     Keyword: [undefined],
     SortedOrder: [undefined, Validators.required],
     DataItems: [undefined]
@@ -43,7 +44,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   get acceptedFiles() {
     return this.selectedCategory?.ContentType == (this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType == (this.contentTypeEnum.MultipleImages).toString() ? '.jpeg,.gif,.png,.jpg' :
       this.selectedCategory?.ContentType == (this.contentTypeEnum.Document).toString() ? '.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt' :
-        this.selectedCategory?.ContentType == (this.contentTypeEnum.Video).toString() ? 'mp4,mkv,avi' : ''
+        this.selectedCategory?.ContentType == (this.contentTypeEnum.Video).toString() ? '.mp4,.mkv,.avi' : ''
   }
 
 
@@ -66,7 +67,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   }
 
   GetDropDown() {
-     
+
     let serve = this._commonService.GetDropDown([DropDown_key.ddlGeneralEntryCategory], false).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
@@ -99,8 +100,6 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   }
 
   getFileType(fileName: string) {
-
-
     const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
@@ -122,7 +121,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
         this.model.Data = [];
       }
       this.model.Data = file.map(x => { return x.FileBase64 });
-      //this.productFile = undefined
+
     } else {
       this.model.Data = [];
     }
@@ -130,7 +129,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.Data = (Array.isArray(this.model.Data) ? this.model.Data : [this.model.Data]) as string[];
+      this.model.Data = this.model.Data ? (Array.isArray(this.model.Data) ? this.model.Data : [this.model.Data]) as string[] : this.model.Data;
       this._generalEntryService.AddUpdateGeneralEntry(this.model).subscribe(x => {
         if (x.IsSuccess) {
           this.toast.success("General Entry added sucessfully...", "Saved");
@@ -152,6 +151,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
         this.model.Description = data.Description;
         this.model.SortedOrder = data.SortedOrder;
         this.model.ImagePath = data.ImagePath;
+        this.model.Url = data.Url;
         this.dataItems = data.Data;//?.map(r => { return r.Value }) as string[];
         this.model.Keyword = data.Keyword;
       } else {

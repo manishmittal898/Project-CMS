@@ -16,7 +16,7 @@
           </nav>
           <!-- Breadcrumb End -->
         </div>
-        <button routerLink="../add" class="btn btn-dark btn-sm"> <i class="bi bi-plus-lg"></i> Add New
+        <button routerLink="./add" class="btn btn-dark btn-sm"> <i class="bi bi-plus-lg"></i> Add New
           General Entry</button>
       </div>
     </div>
@@ -99,10 +99,10 @@
             <ng-container matColumnDef="Action">
               <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
               <td mat-cell *matCellDef="let row" class="table-action-btn">
-                <a href="#" class="table-action-btn-view" routerLink="../detail/{{+row.Id}}" data-title="View Detail"><i
+                <a href="#" class="table-action-btn-view" routerLink="./detail/{{+row.Id}}" data-title="View Detail"><i
                     class="bi bi-eye"></i>
                 </a>
-                <a href="#" class="table-action-btn-edit" routerLink="../edit/{{+row.Id}}" data-title="Edit"><i
+                <a href="#" class="table-action-btn-edit" routerLink="./edit/{{+row.Id}}" data-title="Edit"><i
                     class="bi bi-pencil-square"></i>
                 </a>
                 <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" data-title="Delete">
@@ -119,7 +119,7 @@
           <div class="no-record-found text-center" *ngIf="totalRecords==0">
             <img src="assets/img/record-not-found.png" alt="" />
             <p class="mb-0"> Sorry, No Record Found </p>
-          </div> 
+          </div>
         </div>
         <div class="dt--bottom-section d-sm-flex justify-content-sm-between text-center">
           <div class="dt--pagination">

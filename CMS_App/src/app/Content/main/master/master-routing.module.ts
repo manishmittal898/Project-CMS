@@ -22,8 +22,8 @@ const routes: Routes = [
 
   { path: 'general-entry', component: GeneralEntryMasterComponent },
   { path: 'general-entry/add', component: GeneralEntryMasterAddEditComponent },
-  { path: 'general-entry/edit', component: GeneralEntryMasterAddEditComponent },
-  { path: 'general-entry/detail', component: GeneralEntryMasterDetailComponent },
+  { path: 'general-entry/edit/:id', component: GeneralEntryMasterAddEditComponent },
+  { path: 'general-entry/detail/:id', component: GeneralEntryMasterDetailComponent },
 
   { path: 'general-entry-category', component: GeneralEntryCategoryMasterComponent },
   { path: 'general-entry-category/add', component: GeneralEntryCategoryMasterAddEditComponent },
@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'general-entry-sub-category/edit/:', component: GeneralEntrySubCategoryMasterAddEditComponent },
   { path: 'general-entry-sub-category/detail/:', component: GeneralEntrySubCategoryMasterDetailComponent },
 
-  
+
   { path: 'cms-page', component: CMSPageMasterComponent },
   { path: 'cms-page/:name', component: CMSPageAddUpdateComponent },
 
