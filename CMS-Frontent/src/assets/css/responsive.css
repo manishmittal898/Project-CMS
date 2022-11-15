@@ -68,6 +68,13 @@
 }
 
 @media screen and (max-width:992px) {
+    ul.dropdown-menu.megamenu .accordion-button::after
+    {
+        display: none;
+    }
+    ul.dropdown-menu.megamenu button.accordion-button.sub-menus:after {
+        display: block;
+    }
     .container,
     .container-md,
     .container-sm {
