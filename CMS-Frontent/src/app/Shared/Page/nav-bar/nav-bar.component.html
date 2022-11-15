@@ -50,22 +50,26 @@
                 <ul class="dropdown-menu megamenu">
                   <div class="container px-2">
                     <div class="row m-0 py-2" id="NavCollections">
+                      <ng-container *ngFor="let item of this.menuModel;let ind=index">
+                        <div class="col-lg-3">
 
-                      <div class="col-lg-3" *ngFor="let item of this.menuModel;let ind=index">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          [attr.data-bs-target]="'#collection_'+ind"
-                          [routerLink]="['store/'+item.Category.split(' ').join('_')]"
-                          [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
-                          {{item.Category}}
-                        </button>
-                        <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'collection_'+ind"
-                          data-bs-parent="#NavCollections">
-                          <li><a class="dropdown-item" href="javascript:void()"
-                              [routerLink]="['store/'+item.Category.split(' ').join('_')]"
-                              [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
+                          <button class="accordion-button collapsed" [ngClass]="{'sub-menus':item?.Data?.length>0}"
+                            type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collection_'+ind"
+                            [routerLink]="['store/'+item.Category.split(' ').join('_')]"
+                            [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
+                            {{item.Category}}
+                          </button>
+                          <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse "
+                            [ngClass]="{'show' : ind==0}" [id]="'collection_'+ind" data-bs-parent="#NavCollections">
+                            <li><a class="dropdown-item" href="javascript:void()"
+                                [routerLink]="['store/'+item.Category.split(' ').join('_')]"
+                                [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
 
-                        </ul>
-                      </div>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+
                     </div>
                   </div>
                 </ul>
@@ -145,7 +149,8 @@
             <h2>₹ 399</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
+            <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#DeleteCartItems" class="text-danger"> <i
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -177,7 +182,8 @@
             <h2>₹ 410</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
+            <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#DeleteCartItems" class="text-danger"> <i
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -209,7 +215,8 @@
             <h2>₹ 897</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
+            <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#DeleteCartItems" class="text-danger"> <i
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -245,7 +252,8 @@
             <h2>₹ 1140</h2>
           </a>
           <div class="cart-sidebar-body-cart-items-action text-end">
-            <a href="javascript:void()"  data-bs-toggle="modal" data-bs-target="#DeleteCartItems"  class="text-danger"> <i data-bs-toggle="tooltip" data-bs-placement="top"  title="Remove" class="bi bi-trash"></i> </a>
+            <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#DeleteCartItems" class="text-danger"> <i
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" class="bi bi-trash"></i> </a>
           </div>
         </div>
       </div>
@@ -256,8 +264,8 @@
       </div>
     </div>
     <div class="cart-sidebar-body-cart-items-final-action d-flex">
-      <button data-bs-dismiss="offcanvas" aria-label="Close" type="button"
-        class="btn btn-default px-1 text-uppercase" [routerLink]="['/design/checkout']"><i class="bi bi-credit-card-2-front me-1"></i>
+      <button data-bs-dismiss="offcanvas" aria-label="Close" type="button" class="btn btn-default px-1 text-uppercase"
+        [routerLink]="['/design/checkout']"><i class="bi bi-credit-card-2-front me-1"></i>
         checkout</button>
       <button data-bs-dismiss="offcanvas" aria-label="Close" type="button" [routerLink]="['/design/cart']"
         class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="bi bi-eye me-1"></i>
@@ -274,16 +282,19 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header pb-0">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i> </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x-lg"></i>
+        </button>
       </div>
       <div class="modal-body p-4 modal-alert">
         <h1 class="mb-0">
           Are you sure want to delete this cart items from the shopping cart ?
-      </h1>
+        </h1>
       </div>
       <div class="modal-footer pt-0">
-        <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i class="bi bi-trash me-1"></i> Delete</button>
-        <button type="button" class="btn btn-default btn-border btn-cancel px-3 py-2" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i
+            class="bi bi-trash me-1"></i> Delete</button>
+        <button type="button" class="btn btn-default btn-border btn-cancel px-3 py-2"
+          data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

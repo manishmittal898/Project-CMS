@@ -31,7 +31,6 @@ export class NavBarComponent implements OnInit {
     const serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
         this.menuModel = ddls.ddlLookupGroup.map(x => {
           return {
