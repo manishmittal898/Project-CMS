@@ -677,6 +677,7 @@ section.home-category-d-1 {
     bottom: 10%;
     font-weight: 600;
     line-height: 25px;
+    max-width: 60%;
 }
 
 .btn-share-whatsapp a {
@@ -1909,7 +1910,7 @@ table tr td {
   margin: 0px;
 }
 section.deals-opt-d-1 {
-  padding: 70px 0px;
+  padding: 70px 0px 0px 0px;
 }
 .card-deals-opt-d-1-items-discount {
   background: #b52a2a;
