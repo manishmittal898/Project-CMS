@@ -620,7 +620,7 @@ section.home-category-d-1 {
     border-radius: 0px;
     background: #fff;
     overflow: hidden;
-    border: solid 1px transparent;
+    /* border: solid 1px transparent; */
     position: relative;
     height: 100%;
     display: flex;
@@ -667,14 +667,16 @@ section.home-category-d-1 {
 }
 
 .home-category-d-1 .home-category-items-caption {
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    /* background: rgba(0, 0, 0, 0.6); */
+    color: #000;
     font-size: 22px;
     padding: 5px;
     position: absolute;
     top: auto;
     width: 100%;
-    bottom: 15%;
+    bottom: 10%;
+    font-weight: 600;
+    line-height: 25px;
 }
 
 .btn-share-whatsapp a {
@@ -1908,6 +1910,30 @@ table tr td {
 }
 section.deals-opt-d-1 {
   padding: 70px 0px;
+}
+.card-deals-opt-d-1-items-discount {
+  background: #b52a2a;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 15px #d1d1d1;
+  flex-direction: column;
+  line-height: 20px;
+}
+.card-deals-opt-d-1-items-discount strong {
+  font-size: 20px;
+  margin-top: 9px;
+}
+.card-deals-opt-d-1-items-discount span {
+  display: block;
+  font-size: 12px;
 }
 /* CUSTOM CSS END */
 
