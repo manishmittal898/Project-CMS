@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMS.Core.ServiceHelper.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -108,5 +109,10 @@ namespace CMS.Service.Services.GeneralEntry
         public int? SortedOrder { get; set; }
 
 
+    }
+    public class GeneralEntryFilterModel : IndexModel
+    {
+        public string Title { get; set; }
+        public long? CategoryId { get; set; }
     }
 }

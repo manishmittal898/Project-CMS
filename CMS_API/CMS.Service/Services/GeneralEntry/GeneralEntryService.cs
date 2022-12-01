@@ -202,7 +202,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.ModifiedOn = DateTime.Now;
                     objGeneralEntry.Url = !string.IsNullOrEmpty(model.Url) && currentCat.IsShowUrl ? model.Url : objGeneralEntry.Url;
-                     
+
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
@@ -307,6 +307,85 @@ namespace CMS.Service.Services.GeneralEntry
             return objResponse;
         }
 
+        public async Task<ServiceResponse<List<GeneralEntryViewModel>>> GetDataList(GeneralEntryFilterModel model)
+        {
+            ServiceResponse<List<GeneralEntryViewModel>> objResult = new ServiceResponse<List<GeneralEntryViewModel>>();
+
+            try
+            {
+                var result = (from g in _db.TblGeneralEntries.Include(x => x.Category)
+                              where g.IsDeleted == false && g.IsActive == true &&
+                             (string.IsNullOrEmpty(model.Title) ? true : g.Title.Contains(model.Title)) &&
+                             (model.CategoryId == g.CategoryId || (model.CategoryId.HasValue && model.CategoryId == 0))
+                              select g);
+
+
+
+
+
+
+
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Title ascending select orderData) : (from orderData in result orderby orderData.Title descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
+                        break;
+                }
+
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+                objResult.TotalRecord = result.Count();
+
+                if (result.Count() > 0)
+                {
+                    var imgData = await (from d in _db.TblFileDataMasters where result.Any(y => y.DataId == d.DataId) select d).ToListAsync();
+
+                    objResult.Data = await result.Select(x => new GeneralEntryViewModel
+                    {
+
+
+                        Id = x.Id,
+                        Title = x.Title,
+                        CategoryId = x.CategoryId,
+                        Category = x.Category.Name,
+                        Description = x.Description,
+                        Keyword = x.Keyword,
+                        DataId = x.DataId,
+                        SortedOrder = x.SortedOrder,
+                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) && x.Category.IsShowThumbnail ? x.ImagePath.ToAbsolutePath() : null,
+                        Url = !string.IsNullOrEmpty(x.Url) && x.Category.IsShowUrl ? x.Url : null,
+                        IsActive = x.IsActive,
+                        IsDeleted = x.IsDeleted,
+                        Data = imgData.Count>0 ? imgData.Where(y => y.DataId == x.DataId).Select(r => new GeneralEntryDataViewModel
+                        {
+                            GeneralEntryId = x.Id,
+                            Id = r.Id,
+                            Value = !string.IsNullOrEmpty(r.Value) ? r.Value.ToAbsolutePath() : null
+                        }
+                    ).ToList() : null
+                    }).ToListAsync();
+
+                    return CreateResponse(objResult.Data as List<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                }
+                else
+                {
+                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message);
+
+
+            }
+
+        }
         public async Task<object> DeleteGeneralEntryItems(long id)
         {
             try

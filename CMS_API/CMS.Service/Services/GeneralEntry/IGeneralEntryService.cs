@@ -15,5 +15,7 @@ namespace CMS.Service.Services.GeneralEntry
         Task<ServiceResponse<TblGeneralEntry>> ActiveStatusUpdate(long id);
         Task<ServiceResponse<TblGeneralEntry>> Delete(long id);
         Task<object> DeleteGeneralEntryItems(long id);
+
+        Task<ServiceResponse<List<GeneralEntryViewModel>>> GetDataList(GeneralEntryFilterModel model);
     }
 }
