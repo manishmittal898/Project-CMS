@@ -620,7 +620,7 @@ section.home-category-d-1 {
     border-radius: 0px;
     background: #fff;
     overflow: hidden;
-    border: solid 1px transparent;
+    /* border: solid 1px transparent; */
     position: relative;
     height: 100%;
     display: flex;
@@ -667,14 +667,17 @@ section.home-category-d-1 {
 }
 
 .home-category-d-1 .home-category-items-caption {
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    /* background: rgba(0, 0, 0, 0.6); */
+    color: #000;
     font-size: 22px;
     padding: 5px;
     position: absolute;
     top: auto;
     width: 100%;
-    bottom: 15%;
+    bottom: 10%;
+    font-weight: 600;
+    line-height: 25px;
+    max-width: 60%;
 }
 
 .btn-share-whatsapp a {
@@ -1861,6 +1864,77 @@ table tr td {
 }
 .btn-save:hover {
   border-color: #3a8919;
+}
+.card-deals-opt-d-1-items {
+  background: #f1f1f1;
+  min-height: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+}
+.card-deals-opt-d-1-items-img {
+  background: url(https://cdn.shopify.com/s/files/1/0081/3305/0458/files/banner-1-compressor_1880x.jpg?v=1632456769);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: all ease-out .4s;
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
+.card-deals-opt-d-1-items:hover .card-deals-opt-d-1-items-img
+{
+  transform: scale(1.1);
+}
+.card-deals-opt-d-1-items-info {
+  position: absolute;
+  bottom: 20px;
+  transform: inherit;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgba(255, 255, 255, .72);
+}
+.card-deals-opt-d-1-items h3 {
+  font-size: 22px;
+  color: #000;
+  font-weight: 600;
+  margin: 0px;
+}
+section.deals-opt-d-1 {
+  padding: 70px 0px 0px 0px;
+}
+.card-deals-opt-d-1-items-discount {
+  background: #b52a2a;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 15px #d1d1d1;
+  flex-direction: column;
+  line-height: 20px;
+}
+.card-deals-opt-d-1-items-discount strong {
+  font-size: 20px;
+  margin-top: 9px;
+}
+.card-deals-opt-d-1-items-discount span {
+  display: block;
+  font-size: 12px;
 }
 /* CUSTOM CSS END */
 
