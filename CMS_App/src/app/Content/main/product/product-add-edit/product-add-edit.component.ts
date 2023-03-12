@@ -80,6 +80,10 @@ export class ProductAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
+      if (this.model?.Stocks == undefined || this.model?.Stocks?.length === 0) {
+        this.toast.warning("Please add atlease 1 stock...", "Opps");
+        return;
+      }
       this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
       this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
 
@@ -224,6 +228,7 @@ export class ProductAddEditComponent implements OnInit {
       this.model.Stocks.push(this.tempStock)
     }
   }
+
   onSaveStock() {
 
     if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {
@@ -243,10 +248,12 @@ export class ProductAddEditComponent implements OnInit {
       this.stockModelPopup.nativeElement.click();
     }
   }
+
   applyMainPrice() {
 
     this.stockModel.UnitPrice = Number(this.model.Price);
   }
+  
   onGetProductSizeLabel(sizeId: any) {
     return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;
   }
