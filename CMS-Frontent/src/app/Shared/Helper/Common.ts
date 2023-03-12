@@ -100,6 +100,7 @@ export class DropDownModel {
 
   ddlCaptionTag!: DropDownItem[];
   ddlProductSize!: DropDownItem[];
+  ddlProductPrice!: DropDownItem;
   ddlSubCategory!: DropDownItem[];
   ddlSublookup!: DropDownItem[];
   ddlSubLookupGroup!: GroupDropDownItem[];
@@ -109,10 +110,10 @@ export class DropDownModel {
 }
 
 export class DropDownItem {
-  Text: string = "";
-  Value: string = "";
+  Text: any = "";
+  Value: any = "";
   CategoryId?: number;
-  Category: string;
+  Category?: string;
 }
 
 export class GroupDropDownItem {

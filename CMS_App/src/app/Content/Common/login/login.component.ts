@@ -23,8 +23,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
     this.model.Plateform = "Web";
+    debugger
+   var k= this._security.encrypt(this.model.Password);
+
+   var j= this._security.decrypt(k)
     if (this.model.Email == undefined || this.model.Password == undefined) {
       this.toast.warning('Please enter username and password', 'Required');
       return;

@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-
+  isTrue: boolean=true;
   constructor() { }
 
   ngOnInit(): void {
+    this.isTrue=true
   }
 
 }

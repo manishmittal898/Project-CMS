@@ -8,9 +8,9 @@ describe('AboutUsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AboutUsComponent ]
+      declarations: [AboutUsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -20,6 +20,13 @@ describe('AboutUsComponent', () => {
   });
 
   it('should create', () => {
+    if(component.isTrue){
+
+    }else{
+      
+    }
     expect(component).toBeTruthy();
   });
+
+
 });

@@ -15,17 +15,14 @@ export class CommonService extends AlertService {
   }
 
   GetDropDown(key: string[], isTransactionData = false): Observable<ApiResponse<any>> {
-
     return this._baseService.post(`${this._baseService.API_Url.DropDown_Api}/${isTransactionData}`, key);
   }
 
   GetFilterDropDown(model: FilterDropDownPostModel): Observable<ApiResponse<any>> {
-
     return this._baseService.post(this._baseService.API_Url.FilterDropDown_Api, model);
   }
 
   GetMultipleFilterDropDown(model: FilterDropDownPostModel[]): Observable<ApiResponse<any>> {
-
     return this._baseService.post(this._baseService.API_Url.MultipleFilterDropDown_Api, model);
   }
 
@@ -48,7 +45,6 @@ export class CommonService extends AlertService {
   }
 
   checkDecimalNumberOnly(event: any): boolean {
-
     var charCode = (event.which) ? event.which : event.keyCode;
     if (charCode == 46) {
       //Check if the text already contains the . character

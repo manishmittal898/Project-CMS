@@ -216,7 +216,7 @@ namespace CMS.Service.Services.LookupMaster
             catch (Exception ex)
             {
 
-                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError));
+                return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message);
             }
 
 

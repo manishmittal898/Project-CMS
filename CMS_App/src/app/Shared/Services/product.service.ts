@@ -29,11 +29,11 @@ export class ProductService {
   }
   DeleteProductMaster(id: number): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_Delete_Api}${id}`;
-    return this._baseService.Delete(url);
+    return this._baseService.get(url);
   }
   DeleteProductFile(id: number): Observable<ApiResponse<ProductImageViewModel>> {
     let url = `${this._baseService.API_Url.ProductFile_Delete_Api}${id}`;
-    return this._baseService.Delete(url);
+    return this._baseService.get(url);
   }
 }
 

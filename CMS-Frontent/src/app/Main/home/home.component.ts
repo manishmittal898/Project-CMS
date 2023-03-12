@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     this._productService.GetCategoryProduct(this.indexModel).subscribe(response => {
 
       if (response.IsSuccess) {
+        debugger
         console.log(response.Data)
         this.model = response.Data.map(x => {
           return {

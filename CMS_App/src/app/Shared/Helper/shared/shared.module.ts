@@ -58,7 +58,6 @@ const sharedComponent = [
   NavigationComponent,
   LoaderComponent,
   AppNoRecordsComponent
-
 ];
 
 @NgModule({

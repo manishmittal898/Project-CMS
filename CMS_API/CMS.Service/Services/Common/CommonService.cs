@@ -58,6 +58,12 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Size.GetStringValue()));
                             break;
 
+                        case DropDownKey.ddlProductPrice:
+
+                            objData.Add(item, await GetProductPrice());
+                            break;
+
+
                         case DropDownKey.ddlSubCategory:
 
                             objData.Add(item, await GetSubLookupMasters(null, LookupTypeEnum.Product_Category.GetStringValue()));
@@ -200,6 +206,7 @@ namespace CMS.Service.Services.Common
             }
         }
 
+
         private async Task<object> GetSubLookupMasters(long[] lookupId = null, string lktype = null)
         {
             try
@@ -290,6 +297,21 @@ namespace CMS.Service.Services.Common
                 return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type).OrderBy(x => x.Name)
                      .Select(r => new { Text = r.Name, Value = r.Id })
                      .ToListAsync();
+            }
+            catch
+            {
+
+                return null;
+            }
+        }
+
+        private async Task<object> GetProductPrice()
+        {
+            try
+            {
+                return await (from type in _db.TblProductMasters where type.IsActive == true && !type.IsDelete select type).OrderByDescending(x => x.Price)
+                     .Select(r => new { Text = r.Price, Value = r.Price }).FirstAsync();
+
             }
             catch
             {

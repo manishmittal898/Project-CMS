@@ -77,18 +77,11 @@ namespace CMS.API.Areas.Admin.Controllers
                 objReturn.Data = null;
 
                 return objReturn;
-            }
-
-
-
-
-
-
-
+            } 
         }
 
         // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public void Delete(int id)
         {
 

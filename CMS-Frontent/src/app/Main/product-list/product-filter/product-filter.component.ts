@@ -20,20 +20,24 @@ export class ProductFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetDropDown();
-
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup], true).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup, DropDown_key.ddlProductPrice], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
+        debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
         this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
-
+        this.dropDown.ddlProductPrice = ddls.ddlProductPrice
+        if (this.dropDown.ddlProductPrice.Value > 1) {
+          this.filterModel.Price[1] = this.dropDown.ddlProductPrice.Value;
+        }
         //  this.getSubLookUpDropDown();
+      this. applyFilter();
       }
     });
   }
