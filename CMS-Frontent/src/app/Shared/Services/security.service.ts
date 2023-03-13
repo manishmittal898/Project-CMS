@@ -29,15 +29,15 @@ export class SecurityService {
   }
 
   encrypt(txt: string) {
-    return CryptoJS.AES?.encrypt(txt, environment.AESKey?.trim()).toString();
+    return CryptoJS.AES?.encrypt(txt, environment.AESKey?.trim()).toString() ?? null;
   }
 
   decrypt(txt: string) {
-    return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8) ?? null;
   }
   private getKey(key) {
-    for (let i = 0; i < localStorage.length; i++) {
-      if (this.decrypt(localStorage.key(i)) === key) {
+    for (let i = 0; i < localStorage?.length; i++) {
+      if (this.decrypt(localStorage?.key(i)) === key) {
         return localStorage.key(i);
       }
 

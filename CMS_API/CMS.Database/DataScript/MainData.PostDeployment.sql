@@ -14,6 +14,8 @@ SET IDENTITY_INSERT [dbo].[tblRoleType] ON
 GO
 INSERT [dbo].[tblRoleType] ([RoleId], [RoleName], [RoleLevel], [ParentRoleId], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (1, N'Super Admin', 0, NULL, GETDATE(), NULL,GETDATE(), NULL, 1, 0)
 INSERT [dbo].[tblRoleType] ([RoleId], [RoleName], [RoleLevel], [ParentRoleId], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (2, N'Admin', 1, NULL, GETDATE(), NULL,GETDATE(), NULL, 1, 0)
+INSERT [dbo].[tblRoleType] ([RoleId], [RoleName], [RoleLevel], [ParentRoleId], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (3, N'Customer', 2, NULL, GETDATE(), NULL,GETDATE(), NULL, 1, 0)
+
 GO
 SET IDENTITY_INSERT [dbo].[tblRoleType] OFF
 GO

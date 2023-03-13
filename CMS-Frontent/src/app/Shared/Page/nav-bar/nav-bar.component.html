@@ -55,7 +55,7 @@
 
                           <button class="accordion-button collapsed" [ngClass]="{'sub-menus':item?.Data?.length>0}"
                             type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collection_'+ind"
-                            [routerLink]="['store/'+item.Category.split(' ').join('_')]"
+                            [routerLink]="['/store/'+item.Category.split(' ').join('_')]"
                             [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
                             {{item.Category}}
                           </button>
@@ -63,7 +63,7 @@
                           [ngClass]="{'show' : ind==0}" [id]="'collection_'+ind" data-bs-parent="#NavCollections"> -->
                           <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse" [id]="'collection_'+ind" data-bs-parent="#NavCollections">
                             <li><a class="dropdown-item" href="javascript:void()"
-                                [routerLink]="['store/'+item.Category.split(' ').join('_')]"
+                                [routerLink]="['/store/'+item.Category.split(' ').join('_')]"
                                 [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
 
                           </ul>

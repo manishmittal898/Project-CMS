@@ -81,7 +81,7 @@ export class ProductAddEditComponent implements OnInit {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
       if (this.model?.Stocks == undefined || this.model?.Stocks?.length === 0) {
-        this.toast.warning("Please add atlease 1 stock...", "Opps");
+        this.toast.warning("Please add atleast 1 stock item...", "Opps");
         return;
       }
       this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
@@ -253,7 +253,7 @@ export class ProductAddEditComponent implements OnInit {
 
     this.stockModel.UnitPrice = Number(this.model.Price);
   }
-  
+
   onGetProductSizeLabel(sizeId: any) {
     return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;
   }

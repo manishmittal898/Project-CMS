@@ -115,10 +115,9 @@ namespace CMS.Service.Services.RoleType
             try
             {
                 TblRoleType objRole = new TblRoleType();
-                objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id);
-            
-                            var roletype =  _db.TblRoleTypes.Remove(objRole);
-                _db.SaveChangesAsync();
+                objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id); 
+                var roletype =  _db.TblRoleTypes.Remove(objRole);
+              await  _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch(Exception ex)

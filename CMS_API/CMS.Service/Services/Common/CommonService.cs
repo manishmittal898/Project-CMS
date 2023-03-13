@@ -60,7 +60,7 @@ namespace CMS.Service.Services.Common
 
                         case DropDownKey.ddlProductPrice:
 
-                            objData.Add(item, await GetProductPrice());
+                            objData.Add(item, await GetProductMaxPrice());
                             break;
 
 
@@ -305,7 +305,7 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private async Task<object> GetProductPrice()
+        private async Task<object> GetProductMaxPrice()
         {
             try
             {

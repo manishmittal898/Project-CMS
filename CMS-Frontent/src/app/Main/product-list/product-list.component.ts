@@ -40,9 +40,9 @@ export class ProductListComponent implements OnInit {
       if (this._router.snapshot.params?.name) {
         this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
       }
-      // setTimeout(() => {
-      //   this.getList();
-      // }, 100);
+       setTimeout(() => {
+         this.getList();
+       }, 100);
 
     });
 
