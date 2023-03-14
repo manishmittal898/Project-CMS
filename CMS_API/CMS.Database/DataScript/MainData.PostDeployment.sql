@@ -41,6 +41,10 @@ INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[Cr
 GO
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (5, N'CMS Pages', N'CMS_Page',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
 GO
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (6, N'Address Type', N'Address_Type',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
+GO
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (7, N'State', N'State',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
+GO
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] OFF
 GO
 
@@ -49,4 +53,13 @@ GO
 INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry],[ContentType],[IsShowThumbnail],[IsShowUrl]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1,1,0,0)
 GO
 SET IDENTITY_INSERT [dbo].[tblGECategoryMater] OFF 
+GO
+
+SET IDENTITY_INSERT [dbo].[tblLookupMaster] ON 
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete]) VALUES (1,'Home',1,6, 1, GETDATE(), 1,GETDATE(), 1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (2,'Office',2,6, 1, GETDATE(), 1,GETDATE(), 1,0)
+GO
+SET IDENTITY_INSERT [dbo].[tblLookupMaster] OFF 
 GO

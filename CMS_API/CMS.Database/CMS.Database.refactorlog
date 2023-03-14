@@ -35,4 +35,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IsShowURL" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cc2fa186-6516-4ca3-895c-1a7b6c8fd97f" ChangeDateTime="03/14/2023 06:37:56">
+    <Property Name="ElementName" Value="[dbo].[tblUserAddressMaster].[State]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblUserAddressMaster]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StateId" />
+  </Operation>
 </Operations>
