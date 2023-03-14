@@ -604,7 +604,7 @@ section.header-logo {
 }
 
 .home-category-d-1 .home-category-items-img img {
-    max-height: 600px;
+    max-height: 570px;
     margin: auto;
     transition: all .3s ease-in-out;
 }
@@ -1936,6 +1936,22 @@ section.deals-opt-d-1 {
 .card-deals-opt-d-1-items-discount span {
   display: block;
   font-size: 12px;
+}
+.footer-newsletter input {
+  min-width: 320px;
+  padding: 6px 12px;
+  border-radius: 0px;
+  border: solid 1px #c6c6c6;
+}
+.footer-newsletter .btn {
+  border-radius: 0px;
+  padding: 5px 15px;
+}
+.footer-newsletter h3 {
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding-right: 25px;
+  line-height: 32px;
 }
 /* CUSTOM CSS END */
 
