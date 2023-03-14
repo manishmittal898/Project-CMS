@@ -63,7 +63,7 @@
           Shipping Charge length must be 1-10 digit. </div>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6 col-lg-3">
         <label>Tag/Label</label>
 
         <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
@@ -74,7 +74,7 @@
           *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
           Please select <strong>Caption</strong>...!</div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6 col-lg-3">
         <label>Select Category</label>
         <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
@@ -84,13 +84,26 @@
           *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
           Please select <strong>Category</strong>...!</div>
       </div>
-      <div class=" form-group col-md-4">
+      <div class=" form-group col-md-6 col-lg-3">
         <label>Select Sub Category</label>
         <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Sub-category"
           [ngClass]="{ 'is-invalid': f.SubCategory.errors && f.SubCategory.touched}" [(ngModel)]="model.SubCategoryId">
         </ng-select>
 
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
+          Please select <strong>Sub Category</strong>...!</div>
+      </div>
+      <div class=" form-group col-md-6 col-lg-3">
+        <label>Home page Section</label>
+         <select class="form-control">
+         <option>--Select--</option>
+         <option>Featured</option>
+         <option>New</option>
+         <option>Top</option>
+         <option>Trending</option>
+         </select>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
           Please select <strong>Sub Category</strong>...!</div>

@@ -2,7 +2,7 @@ import { SecurityService } from './../../Shared/Services/security.service';
 import { Component, OnInit } from '@angular/core';
 import { IndexModel } from 'src/app/Shared/Helper/Common';
 import { ProductCategoryViewModel, ProductService } from 'src/app/Shared/Services/product.service';
-
+declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,9 +17,10 @@ export class HomeComponent implements OnInit {
       this.model = JSON.parse(this._securityService.getStorage('home-page-product'));
     }
   }
-
+  isLoading = false;
   ngOnInit(): void {
     this.getCategoryList()
+    this.AddSlider()
   }
 
   getCategoryList() {
@@ -48,4 +49,51 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  AddSlider() {
+    this.isLoading = false;
+
+    setTimeout(() => {
+      $('.home-product-slider')?.slick({
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [{
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 595,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        ]
+      });
+    }, 50);
+
+  }
 }

@@ -9,7 +9,7 @@
   <div class="carousel-inner">
     <div class="carousel-item text-center active">
       <img src="assets/images/slider2.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-caption d-none d-lg-block">
         <h1>Everything You Need To Sell Products Online</h1>
         <!-- <p>Some representative placeholder content for the first slide.</p> -->
         <a routerLink="/store" href="javascript:void()" class="btn btn-default px-4 text-uppercase">Shop Now</a>
@@ -17,7 +17,7 @@
     </div>
     <div class="carousel-item text-center">
       <img src="assets/images/slider2.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-caption d-none d-lg-block">
         <h1>Everything You Need To Sell Products Online</h1>
         <!-- <p>Some representative placeholder content for the first slide.</p> -->
         <a routerLink="/store" href="javascript:void()" class="btn btn-default px-4 text-uppercase">Shop Now</a>
@@ -25,7 +25,7 @@
     </div>
     <div class="carousel-item text-center">
       <img src="assets/images/slider2.jpg" alt="...">
-      <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-caption d-none d-lg-block">
         <h1>Everything You Need To Sell Products Online</h1>
         <!-- <p>Some representative placeholder content for the first slide.</p> -->
         <a routerLink="/store" href="javascript:void()" class="btn btn-default px-4 text-uppercase">Shop Now</a>
@@ -45,7 +45,7 @@
 
 
 <!-- Home Deals Start -->
-<section class="deals-opt-d-1">
+<section class="deals-opt-d-1 d-none">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center section-title"> Deals & Offers </div>
@@ -84,14 +84,14 @@
 
 
 <!-- Home Category Start -->
-<Section class="home-category-d-1 py-5">
+<Section class="home-category-d-1 home-category-spacing home-category-d-1-caption-color">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center section-title">Shop by Category</div>
 
       <ng-container *ngFor="let itm of model">
         <!-- Home Category Start -->
-        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 font-fam-newsreader">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 font-fam-newsreader">
           <a href="javascript:void()" [routerLink]="'/store/'+itm.Name.split(' ').join('_')"
             [queryParams]="{id: itm.Id}" class="home-category-items text-center">
             <div class="home-category-items-img d-flex align-items-center">
@@ -108,3 +108,244 @@
   </div>
 </Section>
 <!-- Home Category End -->
+
+
+<!-- Top Product Start -->
+<section class="home-product home-top-product mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center section-title"> Top Product</div>
+      <section class="home-product-slider">
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">New</div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1895</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>A Green Abstracted Print...</h3>
+            <p>₹ 1500</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 899</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1589</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+      </section>
+    </div>
+  </div>
+</section>
+<!-- Featured Product End -->
+
+<!-- Trending Product Start -->
+<section class="home-product home-trending-product mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center section-title"> Trending Product</div>
+      <section class="home-product-slider">
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">Hot</div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1895</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">Hot</div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">Hot</div>
+          <div class="product-list-info">
+            <h3>A Green Abstracted Print...</h3>
+            <p>₹ 1500</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 899</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">Hot</div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1589</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+      </section>
+    </div>
+  </div>
+</section>
+<!-- Featured Product End -->
+
+<!-- Featured Product Start -->
+<section class="home-product home-featured-product mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center section-title"> Featured Product</div>
+      <section class="home-product-slider">
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-items-tag">New</div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1895</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Embroidered Yarn Dyed...</h3>
+            <p>₹ 2,000</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>A Green Abstracted Print...</h3>
+            <p>₹ 1500</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 899</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+        <!-- Product Items Start -->
+        <a href="javascript:void(0)" class="product-list-items">
+          <div class="product-list-items-img d-flex align-items-center justify-content-center">
+            <img src="assets/images/no-img.svg" alt="" />
+          </div>
+          <div class="product-list-info">
+            <h3>Pink Mirror Embroidered Anarkali...</h3>
+            <p>₹ 1589</p>
+          </div>
+        </a>
+        <!-- Product Items End -->
+      </section>
+    </div>
+  </div>
+</section>
+<!-- Featured Product End -->
