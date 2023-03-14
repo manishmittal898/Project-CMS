@@ -1,14 +1,8 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Account;
-using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using static CMS.Service.Services.Account.AccountViewModel;
 
@@ -27,12 +21,11 @@ namespace CMS.API.Controllers
             _accountService = accountService;
             _config = config;
         }
-       
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
         {
-
             return await _accountService.Login(model);
         }
 
@@ -65,7 +58,6 @@ namespace CMS.API.Controllers
         public async Task<ServiceResponse<object>> Logout(long id)
         {
             return await _accountService.LogoutUser(id);
-
         }
 
         //Get api/Account/Logout

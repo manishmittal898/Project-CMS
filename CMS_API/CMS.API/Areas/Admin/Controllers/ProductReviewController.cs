@@ -90,7 +90,7 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         // DELETE api/<ProductReviewController>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public void Delete(int id)
         {
 

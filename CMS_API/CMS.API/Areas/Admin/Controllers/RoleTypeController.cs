@@ -86,7 +86,7 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         // DELETE api/<RoleTypeController>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public void Delete(int id)
         {
 

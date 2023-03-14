@@ -29,7 +29,7 @@ export class LookupTypeService {
   }
   DeleteLookupTypeMaster(id: number): Observable<ApiResponse<LookupTypeMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupTypeMasterDelete_Api}${id}/${status}`;
-    return this._baseService.Delete(url);
+    return this._baseService.get(url);
   }
 }
 

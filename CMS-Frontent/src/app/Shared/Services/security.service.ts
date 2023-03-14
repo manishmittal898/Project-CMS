@@ -36,7 +36,6 @@ export class SecurityService {
     return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8);
   }
   private getKey(key) {
-
     for (let i = 0; i < localStorage.length; i++) {
       if (this.decrypt(localStorage.key(i)) === key) {
         return localStorage.key(i);

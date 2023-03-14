@@ -15,8 +15,7 @@ export class DropDown_key {
   static ddlSublookup = "ddlSublookup";
   static ddlSubLookupGroup = "ddlSubLookupGroup";
   static ddlCMSPage = "ddlCMSPage";
-
-
+  static ddlProductPrice = "ddlProductPrice";
 
 }
 
@@ -38,11 +37,11 @@ export class API_Url {
 
   //#endregion
 
-    //#region  << CMS Page  >>
-    public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;
+  //#region  << CMS Page  >>
+  public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;
 
 
-    //#endregion
+  //#endregion
 
 
 

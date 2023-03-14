@@ -497,11 +497,16 @@ namespace CMS.Service.Services.ProductMaster
 
                 var result = (from prd in _db.TblProductMasters
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
+
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
-                              && (model.CategoryId == null || model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
-                              && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
-                              && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
-                             && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && prd.Price <= (model.Price[1])))
+
+                                && (model.CategoryId == null || model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
+
+                                 && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
+
+                                 && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+
+                                && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price ))
                               select prd);
                 switch (model.OrderBy)
                 {

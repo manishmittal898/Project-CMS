@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static CMS.Service.Services.Account.AccountViewModel;
 
+
 namespace CMS.Service.Services.Account
 {
     public class AccountService : BaseService, IAccountService
@@ -34,12 +35,17 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-                var user = await _db.TblUserMasters.Where(x => x.Email == model.Email && x.Password == model.Password && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                //var j = _security.EncryptData("123");
+                //var k = _security.DecryptData(j);
+                //var l = _security.DecryptData(model.Password);
+
+                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.Password.Equals(model.Password) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+
+
                 if (user != null)
                 {
 
                     var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
-
                     response.UserId = user.UserId;
                     response.Token = fresh_token.Data;
                     response.RoleId = user.RoleId;
@@ -85,7 +91,7 @@ namespace CMS.Service.Services.Account
         {
             try
             {
-                var encrptPassword = _security.Base64Encode(model.Password);
+                var encrptPassword = _security.EncryptData(model.Password);
                 var user = await _db.TblUserMasters.Where(x => x.Mobile == model.Email).FirstOrDefaultAsync();
                 if (user != null)
                 {
@@ -129,7 +135,7 @@ namespace CMS.Service.Services.Account
             ServiceResponse<string> objModel = new ServiceResponse<string>();
             try
             {
-                var encrptPassword = _security.Base64Encode(value);
+                var encrptPassword = _security.EncryptData(value);
                 objModel.Data = encrptPassword;
                 objModel.IsSuccess = true;
                 return objModel;

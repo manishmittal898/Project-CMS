@@ -28,7 +28,7 @@ export class SubLookupService {
   }
   DeleteLookupMaster(id: number): Observable<ApiResponse<SubLookupMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.SubLookupMasterDelete_Api}${id}/${status}`;
-    return this._baseService.Delete(url);
+    return this._baseService.get(url);
   }
 }
 export interface SubLookupMasterPostModel {

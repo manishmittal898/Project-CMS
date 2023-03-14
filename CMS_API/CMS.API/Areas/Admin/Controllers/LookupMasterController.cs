@@ -63,7 +63,7 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         // DELETE api/<LookupMaster>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<object> Delete(long id)
         {
         return  await  _lookupmstr.Delete(id);

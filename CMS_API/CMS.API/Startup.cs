@@ -16,7 +16,7 @@ using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http; 
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -81,24 +81,21 @@ namespace CMS.API
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = Configuration[JWT_ISSUER],
-        ValidAudience = Configuration[JWT_ISSUER],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
-    };
-});
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration[JWT_ISSUER],
+                    ValidAudience = Configuration[JWT_ISSUER],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
+                };
+            });
 
-            services.AddDbContext<DB_CMSContext>(options =>
-options.UseSqlServer(Configuration[CONNECTION_STRING]));
-
+            services.AddDbContext<DB_CMSContext>(options => options.UseSqlServer(Configuration[CONNECTION_STRING]));
             services.AddMvc()
-
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -154,8 +151,6 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
                 endpoints.MapControllers();
             });
             app.UseDeveloperExceptionPage();
-
-
         }
 
         private void Registerservice(IServiceCollection services)
@@ -173,10 +168,6 @@ options.UseSqlServer(Configuration[CONNECTION_STRING]));
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IGECategoryService, GECategoryService>();
             services.AddScoped<IGeneralEntryService, GeneralEntryService>();
-
-
-
-
         }
     }
 }

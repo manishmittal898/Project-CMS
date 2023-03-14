@@ -71,7 +71,7 @@ namespace CMS.API.Areas.Admin.Controllers
  
 
         // DELETE api/<GeneralEntryCategory>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<object> Delete(long id)
         {
             return await _service.Delete(id);

@@ -58,7 +58,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
                 return objReturn;
             }
-           
+
         }
 
         [HttpGet("{id}")]
@@ -68,14 +68,13 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         // DELETE api/<ProductMasterController>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<object> Delete(long id)
         {
             return await _productmstr.Delete(id);
         }
-
         // DELETE api/<ProductMasterController>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<object> DeleteProductFile(long id)
         {
             return await _productmstr.DeleteProductFile(id);

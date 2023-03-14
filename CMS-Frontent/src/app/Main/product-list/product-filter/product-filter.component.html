@@ -107,7 +107,7 @@
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[1]}}</label>
       </div>
 
-      <p-slider (onChange)="applyFilter()" [min]="50" [max]="10000" [(ngModel)]="this.filterModel.Price" [step]="100"
+      <p-slider (onChange)="applyFilter()" [min]="50" [max]="dropDown.ddlProductPrice.Value" [(ngModel)]="this.filterModel.Price" [step]="100"
         [range]="true"></p-slider>
     </div>
     <!-- Filter Price End -->
