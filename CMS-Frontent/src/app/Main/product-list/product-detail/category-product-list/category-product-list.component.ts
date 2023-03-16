@@ -25,7 +25,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
   constructor(private readonly _productService: ProductService) {
     this.indexModel.CategoryId = [Number(this.CategoryId)];
   }
- 
+
   ngOnChanges(changes: SimpleChanges): void {
 
     if (changes && changes?.CategoryId?.currentValue != changes?.CategoryId?.previousValue) {
@@ -103,6 +103,46 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         },
         {
           breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        ]
+      });
+      $('.slider-items-5')?.slick({
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [{
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 595,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1

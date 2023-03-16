@@ -2,7 +2,7 @@
 <div class="col-lg-12 mt-5 section-related" *ngIf="this.totalRecords>0">
   <div class="col-lg-12 text-center section-title"> You might be interested in</div>
   <ng-container *ngIf="!isLoading">
-    <section class="slider-items-4 product-list-slider">
+    <section class="slider-items-5 product-list-slider">
       <ng-container *ngFor="let item of productModel">
         <div [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id" class="product-list-items">
 

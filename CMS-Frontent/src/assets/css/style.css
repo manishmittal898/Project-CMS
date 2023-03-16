@@ -756,7 +756,8 @@ font-weight: 600;
 }
 
 .product-list-items-img img {
-    max-height: 245px;
+    /* max-height: 245px; */
+    max-height: 300px;
 }
 
 .product-list-items-img {
@@ -1462,6 +1463,10 @@ pre {
   text-align: left;
   word-break: break-all;
   white-space: normal;
+}
+pre p {
+  margin: 0px;
+  line-height: 25px;
 }
 .product-list-accordion-filter .accordion-button::after {
   width: 1rem;
