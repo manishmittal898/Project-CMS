@@ -122,6 +122,7 @@
     margin: 0;
     list-style: none;
     text-align: center;
+    right: 0;
 }
 
 .slick-dots li {
@@ -196,4 +197,19 @@
 
 .slick-current {
     opacity: 1;
+}
+@media screen and (max-width:767px) {
+
+  .slick-dots li, .slick-dots li button, .slick-dots li button::before {
+    height: 12px;
+    width: 12px;
+    margin: 0px 2px;
+}
+  .slick-dots li button:before {
+    font-size: 10px !important;
+  }
+  .slick-dots
+  {
+    bottom: -25px !important;
+  }
 }

@@ -20,7 +20,7 @@ Text Domain:  StoreOne
     --yellow-color: #fa930c;
     --gray-color: #394640;
     --bg-color: #efede6;
-    --primary-color: #000 !important;
+    --primary-color: #000000 !important;
     --secondary-color: #dddddd !important;
     /* Font/text values */
     --font-style-normal: normal;
@@ -220,7 +220,7 @@ img {
     background: var(--primary-color);
     color: var(--white);
     font-weight: var(--font-weight-400);
-    border-radius: 10px
+    border-radius: 8px;
 }
 
 .btn-default:hover {
