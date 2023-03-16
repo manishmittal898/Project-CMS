@@ -1117,8 +1117,9 @@ ul.dropdown-menu {
 }
 
 .form-check-input {
-    width: 16px;
-    height: 16px;
+  width: 17px;
+  height: 17px;
+  border-color: #727272;
 }
 
 .form-check-input:checked {
@@ -1129,7 +1130,11 @@ ul.dropdown-menu {
 label.form-check-label {
     color: #707070;
 }
-
+.form-check label.form-check-label {
+  color: #000;
+  position: relative;
+  top: 2px;
+}
 select.select-sm {
     border: none;
 }
@@ -1738,12 +1743,12 @@ table tr td {
   border: solid 1px #ccc;
   background: #fff;
   font-size: 25px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 29px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 .cart-list-qty-btn:hover {
   box-shadow: 0 0 15px #d7d7d7;
@@ -1760,9 +1765,9 @@ table tr td {
   max-width: 35px;
 }
 .cart-list-qty input {
-  border-radius: 8px;
+  border-radius: 5px;
   margin: 0px 4px;
-  max-width: 50px;
+  max-width: 40px;
   text-align: center;
   border: solid 1px #ccc;
 }
@@ -1811,7 +1816,7 @@ table tr td {
 }
 
 .form-floating>.form-control, .form-floating>.form-select {
-  height: 48px;
+  height: 43px;
 }
 
 .form-floating>label {
@@ -1952,6 +1957,37 @@ section.deals-opt-d-1 {
   font-size: 1.3rem;
   padding-right: 25px;
   line-height: 32px;
+}
+.login-with-social-acc {
+  padding: 25px 0px 10px 0px;
+  display: flex;
+}
+.login-with-social-acc button.login-with-social-acc-btn {
+  flex: 1;
+  border: solid 1px #000;
+  background: transparent;
+  padding: 8px;
+  font-size: 18px;
+}
+.login-with-social-acc button.login-with-social-acc-btn {
+  flex: 1;
+  border: solid 1px #000;
+  background: transparent;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+.login-with-social-acc button.login-with-social-acc-btn.login-with-facebook-btn {
+  border-color: #0671e1;
+  color: #0671e1;
+}
+.login-with-social-acc button.login-with-social-acc-btn.login-with-google-btn {
+  border-color: #e34133;
+  color: #e34133;
+}
+.login-with-social-acc button.login-with-social-acc-btn:hover {
+  border-color: #000;
+  color: #000;
 }
 /* CUSTOM CSS END */
 

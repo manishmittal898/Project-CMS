@@ -28,25 +28,18 @@
           <div class="checkout-card">
             <div class="row">
               <div class="col-xl-12">
-                <div class="mb-4">
-                  <select class="form-select">
-                    <option>--Country--</option>
-                  </select>
+                <div class="form-floating mb-4">
+                  <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
+                  <label for="First-name">Enter full name*</label>
                 </div>
               </div>
               <div class="col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="First-name" placeholder="First name*">
-                  <label for="First-name">First name*</label>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                  <label for="Phone-number">Phone number*</label>
                 </div>
               </div>
               <div class="col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
-                  <label for="Last-name">Last name*</label>
-                </div>
-              </div>
-              <div class="col-xl-12">
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="Address1" placeholder="Address*">
                   <label for="Address1">Address*</label>
@@ -59,17 +52,19 @@
                 </div>
               </div>
               <div class="col-xl-6">
+                <div class="mb-4">
+                  <select class="form-select">
+                    <option>--State--</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xl-6">
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="City" placeholder="City*">
                   <label for="City">City*</label>
                 </div>
               </div>
-              <div class="col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="State" placeholder="State*">
-                  <label for="State">State*</label>
-                </div>
-              </div>
+
               <div class="col-xl-6">
                 <div class="form-floating">
                   <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
@@ -77,9 +72,10 @@
                 </div>
               </div>
               <div class="col-xl-6">
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
-                  <label for="Phone-number">Phone number*</label>
+                <div class="mb-0">
+                  <select class="form-select">
+                    <option>--Address Type--</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -177,63 +173,65 @@
                   class="bi bi-x-lg"></i> </button>
             </div>
             <div class="modal-body p-4 modal-form-update">
-                <div class="row">
-                  <div class="col-xl-12">
-                    <div class="mb-4">
-                      <select class="form-select">
-                        <option>--Country--</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="First-name" placeholder="First name*">
-                      <label for="First-name">First name*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
-                      <label for="Last-name">Last name*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-12">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Address1" placeholder="Address*">
-                      <label for="Address1">Address*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-12">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
-                      <label for="Address2">Apartment, suite, etc. (optional)</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="City" placeholder="City*">
-                      <label for="City">City*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="State" placeholder="State*">
-                      <label for="State">State*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
-                      <label for="Postal-code">Postal code*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
-                      <label for="Phone-number">Phone number*</label>
-                    </div>
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
+                    <label for="First-name">Enter full name*</label>
                   </div>
                 </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                    <label for="Phone-number">Phone number*</label>
+                  </div>
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Address1" placeholder="Address*">
+                    <label for="Address1">Address*</label>
+                  </div>
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
+                    <label for="Address2">Apartment, suite, etc. (optional)</label>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="mb-4">
+                    <select class="form-select">
+                      <option>--State--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="City" placeholder="City*">
+                    <label for="City">City*</label>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
+                    <label for="Postal-code">Postal code*</label>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="mb-0">
+                    <select class="form-select">
+                      <option>--Address Type--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xl-12 mt-3">
+                  <div class="form-check d-flex align-items-center">
+                    <input type="checkbox" class="form-check-input" id="check22">
+                    <label class="form-check-label ms-2" for="check22">Set as Default</label>
+                </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer pt-0">
               <button type="button" class="btn btn-default px-3 py-2 btn-save" data-bs-dismiss="modal"><i
