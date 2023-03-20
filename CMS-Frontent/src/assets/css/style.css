@@ -1594,6 +1594,9 @@ section.cmis-pages .cmis-pages-items-list p {
   font-size: 15px;
   line-height: 28px;
 }
+section.cmis-pages .cmis-pages-items-list p br {
+  display: none;
+}
 section.cmis-pages .cmis-pages-items-list h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
@@ -1993,6 +1996,54 @@ section.deals-opt-d-1 {
 .login-with-social-acc button.login-with-social-acc-btn:hover {
   border-color: #000;
   color: #000;
+}
+.order-summary-header h1 span {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.order-summary-header h1 {
+  font-size: 2.2rem;
+  line-height: 48px;
+  font-weight: 500;
+  color: #202020;
+  text-transform: capitalize;
+}
+.order-summary-header p {
+  color: #000;
+  font-size: 16px;
+  margin: 15px 0px;
+  line-height: 26px;
+}
+.order-summary-header p a {
+  color: #000;
+}
+.order-summary-cart-items {
+  box-shadow: 0 0 30px #e7e9f5;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  height: 100%;
+}
+.order-summary-cart-items h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.order-summary-cart-items p {
+  font-size: 15px;
+  line-height: 25px;
+  max-width: 240px;
+  padding-left: 30px;
+  margin: 0px;
+}
+.order-summary-payment-option {
+  padding-left: 30px;
+}
+.order-summary-payment-option img {
+  max-width: 70px;
+}
+.order-summary-header h1 i {
+  color: green;
+  font-size: 42px;
 }
 /* CUSTOM CSS END */
 

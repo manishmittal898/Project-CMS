@@ -403,6 +403,11 @@
 .cart-page-list-items-price {
   font-size: 15px;
 }
+.order-summary-header h1 {
+  font-size: 1.8rem;
+  line-height: 40px;
+}
+
 }
 
 @media screen and (max-width:575px) {
