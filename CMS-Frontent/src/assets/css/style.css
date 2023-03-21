@@ -1703,7 +1703,7 @@ table tr td {
 /* Table CSS End */
 
 
-.cart-page-list-items-img {
+.cart-list-items-img {
   height: 160px;
   width: 160px;
   display: flex;
@@ -1717,32 +1717,32 @@ table tr td {
   box-shadow: 0 0 10px #f3f3f3;
 }
 
-.cart-page-list-items-img img {
+.cart-list-items-img img {
   max-height: 158px;
   margin: auto;
 }
 
-.cart-page-list-items-description {
+.cart-list-items-description {
   flex: auto;
   width: 100%;
 }
-.cart-page-list-items-description h3 {
+.cart-list-items-description h3 {
     font-size: 1.1rem;
     line-height: 25px;
     margin: 0px;
     flex: 1 auto;
     color: #444444;
 }
-.cart-page-list-items-action {
+.cart-list-items-action {
   margin-left: 12px;
   color: #a1a1a1;
   display: block;
   min-width: 25px;
 }
-.cart-page-list-items-action:hover {
+.cart-list-items-action:hover {
   color: #000;
 }
-.cart-page-list-items-action i {
+.cart-list-items-action i {
   font-size: 30px;
   line-height: 0;
 }
@@ -1779,17 +1779,17 @@ table tr td {
   text-align: center;
   border: solid 1px #ccc;
 }
-.cart-page-list-items-price {
+.cart-list-items-price {
   font-size: 18px;
   font-weight: 600;
 }
-.cart-page-list .cart-page-list-items {
+.cart-page-list .cart-list-items {
   padding: 20px 0px;
   border-bottom: solid 1px #f1f1f1;
 }
 
 
-.cart-page-list .cart-page-list-items:last-child {
+.cart-page-list .cart-list-items:last-child {
   border: none;
   padding-bottom: 0px;
 }
