@@ -60,12 +60,6 @@ namespace CMS.API.Controllers
             return await _accountService.LogoutUser(id);
         }
 
-        //Get api/Account/Logout
-        [HttpGet]
-        public string test()
-        {
-            return "test";
-
-        }
+       
     }
 }

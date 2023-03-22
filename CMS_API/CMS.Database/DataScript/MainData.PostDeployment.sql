@@ -61,5 +61,78 @@ INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[Cre
 GO
 INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (2,'Office',2,6, 1, GETDATE(), 1,GETDATE(), 1,0)
 GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (3,'Andaman & Nicobar Islands',1,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (4,'Andhra Pradesh',2,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (5,'Arunachal Pradesh',3,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (6,'Assam',4,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (7,'Bihar',5,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (8,'Chandigarh',6,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (9,'Chhattisgarh',7,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (10,'Dadra & Nagar Haveli & Daman & Diu',8,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (11,'Delhi',9,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (12,'Goa',10,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (13,'Gujarat',11,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (14,'Haryana',12,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (15,'Himachal Pradesh',13,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (16,'Jammu & Kashmir',14,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (17,'Jharkhand',15,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (18,'Karnataka',16,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (19,'Kerala',17,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (20,'Ladakh',18,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (21,'Lakshadweep',19,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (22,'Madhya Pradesh',20,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (23,'Maharashtra',21,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (24,'Manipur',22,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (25,'Meghalaya',23,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (26,'Mizoram',24,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (27,'Nagaland',25,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (28,'Odisha',26,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (29,'Puducherry',27,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (30,'Punjab',28,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (31,'Rajasthan',29,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (32,'Sikkim',30,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (33,'Tamil Nadu',31,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (34,'Telangana',32,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (35,'Tripura',33,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (36,'Uttarakhand',34,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (37,'Uttar Pradesh',35,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+INSERT INTO [dbo].[tblLookupMaster]([Id],[Name],[SortedOrder],[LookUp_Type],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete])  VALUES (38,'West Bengal',36,7,1, GETDATE(), 1, GETDATE(),1,0)
+GO
+
 SET IDENTITY_INSERT [dbo].[tblLookupMaster] OFF 
 GO

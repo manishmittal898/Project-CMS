@@ -146,7 +146,7 @@
     <Build Include="dbo\Tables\tblGECategoryMater.sql" />
     <Build Include="dbo\Tables\tblGeneralEntry.sql" />
     <Build Include="dbo\Tables\tblFileDataMaster.sql" />
-    <Build Include="dbo\tblUserAddressMaster.sql" />
+    <Build Include="dbo\Tables\tblUserAddressMaster.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CMS.Database.publish.xml" />

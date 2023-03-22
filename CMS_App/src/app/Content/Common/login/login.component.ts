@@ -25,35 +25,36 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     this.model.Plateform = "Web";
-    debugger
-   var k= this._security.encrypt(this.model.Password);
-
-   var j= this._security.decrypt(k)
-    if (this.model.Email == undefined || this.model.Password == undefined) {
-      this.toast.warning('Please enter username and password', 'Required');
-      return;
-    }
-    if (!environment.IsAutoLogin) {
-      const postModel = {
-        Email: this.model.Email,
-        Password: this.model.Password,
-        Plateform: this.model.Plateform
-      };
-      this._authService.Login(postModel).subscribe((res) => {
-        if (res.IsSuccess) {
-          let data = res.Data as LoginUserDetailModel;
-          this._authService.SaveUserToken(data.Token);
-          this._authService.SaveUserDetail(data);
-          this.toast.success(res.Message?.toString(), 'Login Response');
-          this._route.navigate(['/admin']);
-
-        } else {
-          this.toast.info(res.Message?.toString(), 'Login Response');
+    this._security.GenerateEncrptPassword(this.model.Password).then(x => {
+      if (x.IsSuccess) {
+        const encPass = x.Data;
+        if (this.model.Email == undefined || this.model.Password == undefined) {
+          this.toast.warning('Please enter username and password', 'Required');
+          return;
         }
-      });
-    } else {
-      this._authService.SaveUserToken("testtoken");
-      this._route.navigate(['']);
-    }
+        if (!environment.IsAutoLogin) {
+          const postModel = {
+            Email: this.model.Email,
+            Password: encPass,
+            Plateform: this.model.Plateform
+          };
+          this._authService.Login(postModel).subscribe((res) => {
+            if (res.IsSuccess) {
+              let data = res.Data as LoginUserDetailModel;
+              this._authService.SaveUserToken(data.Token);
+              this._authService.SaveUserDetail(data);
+              this.toast.success(res.Message?.toString(), 'Login Response');
+              this._route.navigate(['/admin']);
+
+            } else {
+              this.toast.info(res.Message?.toString(), 'Login Response');
+            }
+          });
+        } else {
+          this._authService.SaveUserToken("testtoken");
+          this._route.navigate(['']);
+        }
+      }
+    });
   }
 }
