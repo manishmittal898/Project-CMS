@@ -16,7 +16,7 @@
 <section class="inner-page-space checkout-page">
   <div class="container checkout-wizard" id="CheckoutSteps">
     <div class="row">
-      <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5">
+      <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5 m-auto">
         <ul class="text-center overflow-hidden mb-5" id="progressbar">
           <li class="active" id="Address"><strong>Address</strong></li>
           <li id="Payment"><strong>Payment</strong></li>
@@ -27,59 +27,55 @@
           <h5 class="mb-4">Welcome Manish !</h5>
           <div class="checkout-card">
             <div class="row">
-              <div class="col-xl-12">
-                <div class="mb-4">
-                  <select class="form-select">
-                    <option>--Country--</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-xl-6">
+              <div class="col-sm-6 col-xl-12">
                 <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="First-name" placeholder="First name*">
-                  <label for="First-name">First name*</label>
+                  <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
+                  <label for="First-name">Enter full name*</label>
                 </div>
               </div>
-              <div class="col-xl-6">
+              <div class="col-sm-6 col-xl-6">
                 <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
-                  <label for="Last-name">Last name*</label>
+                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                  <label for="Phone-number">Phone number*</label>
                 </div>
               </div>
-              <div class="col-xl-12">
+              <div class="col-sm-6 col-xl-6">
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="Address1" placeholder="Address*">
                   <label for="Address1">Address*</label>
                 </div>
               </div>
-              <div class="col-xl-12">
+              <div class="col-sm-6 col-xl-12">
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
                   <label for="Address2">Apartment, suite, etc. (optional)</label>
                 </div>
               </div>
-              <div class="col-xl-6">
+              <div class="col-sm-6 col-xl-6">
+                <div class="mb-4">
+                  <select class="form-select">
+                    <option>--State--</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-6">
                 <div class="form-floating mb-4">
                   <input type="text" class="form-control" id="City" placeholder="City*">
                   <label for="City">City*</label>
                 </div>
               </div>
-              <div class="col-xl-6">
+
+              <div class="col-sm-6 col-xl-6">
                 <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="State" placeholder="State*">
-                  <label for="State">State*</label>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="form-floating">
                   <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
                   <label for="Postal-code">Postal code*</label>
                 </div>
               </div>
-              <div class="col-xl-6">
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
-                  <label for="Phone-number">Phone number*</label>
+              <div class="col-sm-6 col-xl-6">
+                <div class="mb-0">
+                  <select class="form-select">
+                    <option>--Address Type--</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -142,7 +138,8 @@
             </div>
           </div>
 
-          <a class="btn-add-new-address" href="javascript:void()" data-bs-toggle="modal" data-bs-target="#Add-Update-Address"><i class="bi bi-plus-circle me-2"></i> Add new address</a>
+          <a class="btn-add-new-address" href="javascript:void()" data-bs-toggle="modal"
+            data-bs-target="#Add-Update-Address"><i class="bi bi-plus-circle me-2"></i> Add new address</a>
           <button type="button" name="next" class="next btn btn-default px-4 float-end">Save & Continue</button>
         </fieldset>
         <!-- Shipping Address End -->
@@ -158,11 +155,45 @@
         <!-- Payment End -->
         <!-- Order Summary Start -->
         <fieldset class="order-summary">
-          <div>
-            Order Summary
+          <div class="order-summary-header text-center">
+            <h1 class="mb-3"><i class="bi bi-check2-circle"></i> Woo Hoo! You Did it! <br />
+              Your Order <span> #8262475 </span> has been placed! </h1>
+            <p class="p-0">We sent an email to <a href="javascript:void(0)"> <strong> abby.kidman@gmail.com </strong> </a> with your order confirmation and receipt. If the email hasn’t
+              arrived within a few minutes, please check your spam folder to see if the email was routed there.</p>
           </div>
-          <button type="button" name="previous" class="previous btn btn-default btn-border px-4 me-3"><i
-              class="bi bi-chevron-left"></i> Previous</button>
+
+          <div class="row order-summary-cart pt-4">
+          <div class="col-sm-6 col-lg-6 mb-4 mb-sm-0">
+          <div class="order-summary-cart-items">
+            <h3><i class="bi bi-geo-alt me-1"></i> Shipping Address: </h3>
+            <p class="m-0">Abby Kidman
+              3709 S Dennis Dr Ste 112
+              Tempe, AZ 85282
+              (520) 302-6936 </p>
+          </div>
+          </div>
+          <div class="col-sm-6 col-lg-6">
+            <div class="order-summary-cart-items">
+              <div class="order-summary-cart-items-list mb-3">
+                <h3><i class="bi bi-calendar-week me-1"></i> Date:: 05/12/2022 </h3>
+              </div>
+              <div class="order-summary-cart-items-list mb-3">
+                <h3><i class="bi bi-credit-card-2-front me-1"></i> Payment Method: </h3>
+                <div class="order-summary-payment-option mt-3">
+                  <img src="assets/images/paytm.png" alt=""/>
+                </div>
+              </div>
+              <div class="order-summary-cart-items-list">
+              <h3><i class="bi bi-truck me-1"></i> Shipping Method : </h3>
+              <p>Standard Shipping</p>
+            </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- <button type="button" name="previous" class="previous btn btn-default btn-border px-4 me-3"><i
+              class="bi bi-chevron-left"></i> Previous</button> -->
+
         </fieldset>
         <!-- Order Summary End -->
       </div>
@@ -177,68 +208,72 @@
                   class="bi bi-x-lg"></i> </button>
             </div>
             <div class="modal-body p-4 modal-form-update">
-                <div class="row">
-                  <div class="col-xl-12">
-                    <div class="mb-4">
-                      <select class="form-select">
-                        <option>--Country--</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="First-name" placeholder="First name*">
-                      <label for="First-name">First name*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Last-name" placeholder="Last name*">
-                      <label for="Last-name">Last name*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-12">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Address1" placeholder="Address*">
-                      <label for="Address1">Address*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-12">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
-                      <label for="Address2">Apartment, suite, etc. (optional)</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="City" placeholder="City*">
-                      <label for="City">City*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating mb-4">
-                      <input type="text" class="form-control" id="State" placeholder="State*">
-                      <label for="State">State*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
-                      <label for="Postal-code">Postal code*</label>
-                    </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
-                      <label for="Phone-number">Phone number*</label>
-                    </div>
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
+                    <label for="First-name">Enter full name*</label>
                   </div>
                 </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                    <label for="Phone-number">Phone number*</label>
+                  </div>
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Address1" placeholder="Address*">
+                    <label for="Address1">Address*</label>
+                  </div>
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="Address2"
+                      placeholder="Apartment, suite, etc. (optional)">
+                    <label for="Address2">Apartment, suite, etc. (optional)</label>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="mb-4">
+                    <select class="form-select">
+                      <option>--State--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="City" placeholder="City*">
+                    <label for="City">City*</label>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
+                    <label for="Postal-code">Postal code*</label>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="mb-0">
+                    <select class="form-select">
+                      <option>--Address Type--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xl-12 mt-3">
+                  <div class="form-check d-flex align-items-center">
+                    <input type="checkbox" class="form-check-input" id="check22">
+                    <label class="form-check-label ms-2" for="check22">Set as Default</label>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer pt-0">
               <button type="button" class="btn btn-default px-3 py-2 btn-save" data-bs-dismiss="modal"><i
                   class="bi bi-check2"></i> Save</button>
-              <button type="button" class="btn btn-default btn-border px-3 py-2 btn-cancel" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-default btn-border px-3 py-2 btn-cancel"
+                data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -262,7 +297,8 @@
             <div class="modal-footer pt-0">
               <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i
                   class="bi bi-trash me-1"></i> Delete</button>
-              <button type="button" class="btn btn-default btn-cancel btn-border px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-default btn-cancel btn-border px-3 py-2"
+                data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -270,7 +306,7 @@
       <!-- Delete Address items Modal End -->
 
 
-      <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0">
+      <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0 ">
         <div class="shopping-cart-sidebar">
           <div class="cart-sidebar-body-cart mb-4">
             <h5 class="mb-3">Order Details</h5>
@@ -327,6 +363,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>

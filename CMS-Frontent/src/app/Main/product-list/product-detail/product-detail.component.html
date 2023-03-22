@@ -55,15 +55,15 @@
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
             Avail in stock : <strong> {{totalStock}} </strong>
           </div>
-
-          <div class="product-add-info mb-3" *ngIf="model?.Summary">
-            <strong class="d-block mb-1">Additional Information:</strong>
-            <pre [innerHTML]="model.Summary">  </pre>
-          </div>
           <div class="product-discription mb-3" *ngIf="model?.Desc">
             <strong class="d-block mb-1">Description:</strong>
             <pre [innerHTML]="model?.Desc"> </pre>
           </div>
+          <div class="product-add-info mb-3" *ngIf="model?.Summary">
+            <strong class="d-block mb-1">Additional Information:</strong>
+            <pre [innerHTML]="model.Summary">  </pre>
+          </div>
+
 
           <div class="product-detail-size mb-4">
             <p class="mb-2" *ngIf="SelectedSizeModel"> Size: <strong>{{SelectedSizeModel.Size}}</strong> </p>
