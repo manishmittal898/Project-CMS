@@ -197,8 +197,8 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
                 new Claim(TokenClaimsConstant.RoleName, RoleType),
                 new Claim(TokenClaimsConstant.RoleId, RoleId.ToString()),
                 new Claim(TokenClaimsConstant.GenerateTime, DateTime.Now.ToString("dd-mm-yyyy HH:mm:ss")),
-                new Claim(TokenClaimsConstant.UniqueId,  Guid.NewGuid().ToString())
-
+                new Claim(TokenClaimsConstant.UniqueId,  Guid.NewGuid().ToString()),
+                  new Claim(ClaimTypes.Role,  RoleId.ToString())
 
             };
             var token = new JwtSecurityToken(issuer, issuer, claims, expires: isWeb ? DateTime.Now.AddHours(10) : DateTime.Now.AddDays(90),

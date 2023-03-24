@@ -46,3 +46,18 @@ export class API_Url {
 
 
 }
+
+export class Routing_Url {
+
+  //#region <<Module URL>>
+
+  public static MasterModule = 'master';
+
+  //#endregion
+
+  //#region <<Login URL>>
+  public static LoginUrl = 'login';
+
+  //#endregion
+
+}
