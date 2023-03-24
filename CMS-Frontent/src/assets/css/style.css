@@ -95,7 +95,9 @@ a {
     transition: 0.3s;
     text-decoration: none;
 }
-
+a:focus-visible, button:focus-visible{
+outline: none;
+}
 .btn.focus,
 .btn:focus {
     box-shadow: none;
@@ -139,7 +141,9 @@ img {
 .font-w-400 {
     font-weight: 400;
 }
-
+.font-w-600 {
+  font-weight: 600;
+}
 .font-13 {
     font-size: 13px;
 }
@@ -163,6 +167,9 @@ img {
     border-radius: 100%;
 }
 
+.navbar-light .navbar-brand:focus-visible {
+  outline: none;
+}
 
 /* CUSTOM CSS START */
 
@@ -870,7 +877,10 @@ input:focus-visible {
     font-size: 16px;
     color: var(--black);
 }
-
+.my-account-sidebar-btn {
+  font-size: 18px;
+  color: #000;
+}
 .page-item.active .page-link {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -2044,6 +2054,129 @@ section.deals-opt-d-1 {
 .order-summary-header h1 i {
   color: green;
   font-size: 42px;
+}
+.my-account-sidebar ul li:last-child a {
+  margin: 0px;
+}
+.my-account-sidebar ul li a.active, .my-account-sidebar ul li a:hover {
+  background: #f1f3ff;
+}
+.my-account-sidebar ul li a {
+  color: #000;
+  font-size: 18px;
+  display: block;
+  padding: 8px 15px;
+  border-radius: 5px;
+  position: relative;
+}
+.my-account-sidebar ul li a.active:after {
+  background: #f1f3ff;
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  right: -6px;
+  transform: rotate(45deg);
+  top: 16px;
+}
+.my-account-sidebar ul li {
+  list-style: none;
+}
+.my-account-sidebar {
+  box-shadow: 0 0 30px #e7e9f5;
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px;
+}
+.my-account-sidebar ul li a i {
+  font-size: 20px;
+}
+.order-summary-list-img {
+  height: 160px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 4px;
+  margin-right: 20px;
+  flex: 0 0 150px;
+  overflow: hidden;
+}
+.order-summary-list-info {
+  flex: auto;
+  width: 100%;
+}
+.order-summary-list-info h3 {
+  font-size: 1.2rem;
+  line-height: 25px;
+  margin-bottom: 10px;
+  color: #444444;
+}
+.order-summary-list-info-price {
+  font-size: 18px;
+  font-weight: 400;
+}
+.order-summary-list-items {
+  /* box-shadow: 0 0 30px #e7e9f5; */
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  border: solid 1px #e7e7e7;
+  margin-bottom: 20px;
+}
+.order-summary-list-items-header {
+  padding: 10px 20px;
+  background: #f1f3ff;
+  font-weight: 600;
+}
+.order-summary-list-items-status {
+  font-size: 16px;
+  font-weight: 500;
+}
+.order-summary-list-items-footer p {
+  max-width: 300px;
+}
+.order-summary-list-items-footer {
+  padding: 0px 20px 10px 20px;
+}
+.order-summary-list .order-summary-list-items:last-child {
+  margin: 0px;
+}
+.order-summary-list-items-delivered {
+  border-color: #198754;
+}
+.order-summary-list-items-delivered .order-summary-list-items-header {
+  background: #eeffee;
+}
+.order-summary-list-items-pending {
+  border-color: #ffc107;
+}
+.order-summary-list-items-pending .order-summary-list-items-header {
+  background: #fffbee;
+}
+.order-summary-list-items-cancel {
+  border-color: #dc3545;
+}
+.order-summary-list-items-cancel .order-summary-list-items-header {
+  background: #fff4f5;
+}
+.page-fliter-items.page-filter-search a {
+  color: #000;
+  position: absolute;
+  right: 12px;
+  top: 11px;
+  font-size: 15px;
+}
+.page-fliter {
+  background: #f1f3ff;
+  margin: 0;
+  margin-bottom: 25px;
+  padding: 15px 10px;
+  border-radius: 10px;
+}
+.offcanvas {
+  border: none;
 }
 /* CUSTOM CSS END */
 
