@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
 
     {
       component: CheckoutComponent, path: 'checkout',
+
+    }
+    ,
+    {
+      component: MyAccountComponent, path: 'my-account',
 
     }
 
