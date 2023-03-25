@@ -16,7 +16,7 @@
 <section class="inner-page-space checkout-page">
   <div class="container checkout-wizard" id="CheckoutSteps">
     <div class="row">
-      <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5 mx-auto">
+      <div class="col-xl-9 col-lg-12 mx-auto">
         <ul class="text-center overflow-hidden mb-5" id="progressbar">
           <li class="active" id="Address"><strong>Address</strong></li>
           <li id="Payment"><strong>Payment</strong></li>
@@ -25,7 +25,7 @@
         <!-- Shipping Address Start -->
         <fieldset class="checkout-address">
           <h5 class="mb-4">Welcome Manish !</h5>
-          <div class="checkout-card">
+          <div class="custom-card">
             <div class="row">
               <div class="col-sm-6 col-xl-12">
                 <div class="form-floating mb-4">
@@ -72,21 +72,25 @@
                 </div>
               </div>
               <div class="col-sm-6 col-xl-6">
-                <div class="mb-0">
+                <div class="mb-4">
                   <select class="form-select">
                     <option>--Address Type--</option>
                   </select>
                 </div>
               </div>
+              <div class="col-lg-12">
+                <a href="javascript:void()" class="btn btn-default px-4 btn-border bg-light-custom"><i
+                    class="bi bi-check-lg"></i> Submit</a>
+              </div>
             </div>
           </div>
-          <div class="checkout-card">
+          <div class="custom-card">
             <div class="row">
               <div class="col-xl-12">
-                <div class="checkout-card-address-list">
-                  <div class="checkout-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                <div class="custom-card-address-list">
+                  <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
                     <h5 class="m-0">Rahul sharma</h5>
-                    <div class="checkout-card-address-list-action d-flex align-items-center">
+                    <div class="custom-card-address-list-action d-flex align-items-center">
                       <span class="me-3">Default Address</span>
                       <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
                         data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -96,7 +100,7 @@
                           title="Remove" class="bi bi-trash"></i> </a>
                     </div>
                   </div>
-                  <div class="checkout-card-address-list-items form-check">
+                  <div class="custom-card-address-list-items form-check">
                     <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
                     <label class="form-check-label" for="SaveAdd1">
                       4-RA-5 Monilek Marg, Near Monilek Hospital
@@ -109,13 +113,13 @@
               </div>
             </div>
           </div>
-          <div class="checkout-card">
+          <div class="custom-card">
             <div class="row">
               <div class="col-xl-12">
-                <div class="checkout-card-address-list">
-                  <div class="checkout-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                <div class="custom-card-address-list">
+                  <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
                     <h5 class="m-0">Nitesh mathur</h5>
-                    <div class="checkout-card-address-list-action d-flex align-items-center">
+                    <div class="custom-card-address-list-action d-flex align-items-center">
                       <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
                         data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
                           title="Edit" class="bi bi-pencil-square"></i> </a>
@@ -124,7 +128,7 @@
                           title="Remove" class="bi bi-trash"></i> </a>
                     </div>
                   </div>
-                  <div class="checkout-card-address-list-items form-check">
+                  <div class="custom-card-address-list-items form-check">
                     <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
                     <label class="form-check-label" for="SaveAdd1">
                       4-RA-5 Monilek Marg, Near Monilek Hospital
@@ -158,42 +162,135 @@
           <div class="order-summary-header text-center">
             <h1 class="mb-3"><i class="bi bi-check2-circle"></i> Woo Hoo! You Did it! <br />
               Your Order <span> #8262475 </span> has been placed! </h1>
-            <p class="p-0">We sent an email to <a href="javascript:void(0)"> <strong> abby.kidman@gmail.com </strong> </a> with your order confirmation and receipt. If the email hasn’t
+            <p class="p-0">We sent an email to <a href="javascript:void(0)"> <strong> abby.kidman@gmail.com </strong>
+              </a> with your order confirmation and receipt. If the email hasn’t
               arrived within a few minutes, please check your spam folder to see if the email was routed there.</p>
           </div>
 
           <div class="row order-summary-cart pt-4">
-          <div class="col-sm-6 col-lg-6 mb-4 mb-sm-0">
-          <div class="order-summary-cart-items">
-            <h3><i class="bi bi-geo-alt me-1"></i> Shipping Address: </h3>
-            <p class="m-0">Abby Kidman
-              3709 S Dennis Dr Ste 112
-              Tempe, AZ 85282
-              (520) 302-6936 </p>
-          </div>
-          </div>
-          <div class="col-sm-6 col-lg-6">
-            <div class="order-summary-cart-items">
-              <div class="order-summary-cart-items-list mb-3">
-                <h3><i class="bi bi-calendar-week me-1"></i> Date:: 05/12/2022 </h3>
+            <div class="col-sm-6 col-lg-6 mb-4 mb-sm-0">
+              <div class="order-summary-cart-items">
+                <h3><i class="bi bi-geo-alt me-1"></i> Shipping Address: </h3>
+                <p class="m-0">Abby Kidman
+                  3709 S Dennis Dr Ste 112
+                  Tempe, AZ 85282
+                  (520) 302-6936 </p>
               </div>
-              <div class="order-summary-cart-items-list mb-3">
-                <h3><i class="bi bi-credit-card-2-front me-1"></i> Payment Method: </h3>
-                <div class="order-summary-payment-option mt-3">
-                  <img src="assets/images/paytm.png" alt=""/>
+            </div>
+            <div class="col-sm-6 col-lg-6">
+              <div class="order-summary-cart-items">
+                <div class="order-summary-cart-items-list mb-3">
+                  <h3><i class="bi bi-calendar-week me-1"></i> Date:: 05/12/2022 </h3>
+                </div>
+                <div class="order-summary-cart-items-list mb-3">
+                  <h3><i class="bi bi-credit-card-2-front me-1"></i> Payment Method: </h3>
+                  <div class="order-summary-payment-option mt-3">
+                    <img src="assets/images/paytm.png" alt="" />
+                  </div>
+                </div>
+                <div class="order-summary-cart-items-list">
+                  <h3><i class="bi bi-truck me-1"></i> Shipping Method : </h3>
+                  <p>Standard Shipping</p>
                 </div>
               </div>
-              <div class="order-summary-cart-items-list">
-              <h3><i class="bi bi-truck me-1"></i> Shipping Method : </h3>
-              <p>Standard Shipping</p>
-            </div>
-            </div>
             </div>
           </div>
 
-          <!-- <button type="button" name="previous" class="previous btn btn-default btn-border px-4 me-3"><i
-              class="bi bi-chevron-left"></i> Previous</button> -->
+          <div class="row mt-5">
+            <div class="col-xl-8 col-lg-8 col-md-7">
+              <h4 class="mb-4">Order Details</h4>
+              <div class="order-summary-list">
+                <div class="order-summary-list-items">
+                  <div class="order-summary-list-items-body d-flex py-3">
+                    <div class="order-summary-list-img"><img src="assets/images/no-img.svg" alt="StoreOne" /></div>
+                    <div class="order-summary-list-info">
+                      <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
+                      <div class="order-summary-list-info-price"> ₹ 450 </div>
+                      <div class="d-flex mt-2">
+                        <p class="mb-0 me-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
+                        <p class="mb-0 me-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
+                        <p class="mb-0 me-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-summary-list-items-footer">
+                    <strong class="mb-1 d-block">Delivery Address</strong>
+                    <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+                      8952098741</p>
+                  </div>
+                </div>
+                <div class="order-summary-list-items">
+                  <div class="order-summary-list-items-body d-flex py-3">
+                    <div class="order-summary-list-img"><img src="assets/images/no-img.svg" alt="StoreOne" /></div>
+                    <div class="order-summary-list-info">
+                      <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
+                      <div class="order-summary-list-info-price"> ₹ 450 </div>
+                      <div class="d-flex mt-2">
+                        <p class="mb-0 me-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
+                        <p class="mb-0 me-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
+                        <p class="mb-0 me-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-summary-list-items-footer">
+                    <strong class="mb-1 d-block">Delivery Address</strong>
+                    <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+                      8952098741</p>
+                  </div>
+                </div>
+                <div class="order-summary-list-items">
+                  <div class="order-summary-list-items-body d-flex py-3">
+                    <div class="order-summary-list-img"><img src="assets/images/no-img.svg" alt="StoreOne" /></div>
+                    <div class="order-summary-list-info">
+                      <h3> Pink Bandhej Printed Kurti Pant Set.</h3>
+                      <div class="order-summary-list-info-price"> ₹ 450 </div>
+                      <div class="d-flex mt-2">
+                        <p class="mb-0 me-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
+                        <p class="mb-0 me-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
+                        <p class="mb-0 me-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-summary-list-items-footer">
+                    <strong class="mb-1 d-block">Delivery Address</strong>
+                    <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+                      8952098741</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-5 mt-4 mt-md-0">
+              <div class="shopping-cart-sidebar">
+                <div class="shopping-cart-summary">
+                  <h4 class="mb-4">Cart Summary</h4>
+                  <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+                    <p>Subtotal</p>
+                    <p>₹ 11,000</p>
+                  </div>
+                  <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+                    <p>Shipping</p>
+                    <p>Free</p>
+                  </div>
+                  <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+                    <p>Warranty</p>
+                    <p>Free</p>
+                  </div>
+                  <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+                    <p>Tax</p>
+                    <p>₹ 590</p>
+                  </div>
+                  <div class="shopping-cart-summary-items d-flex justify-content-between mb-2">
+                    <strong> Total </strong><strong> ₹ 11,590 </strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="col-lg-12 mt-5 text-center">
+            <button type="button" class="btn btn-default  px-4"><i class="bi bi-house-door me-2"></i> Back to home
+            </button>
+          </div>
         </fieldset>
         <!-- Order Summary End -->
       </div>
@@ -205,7 +302,7 @@
             <div class="modal-header pb-0">
               <h5 class="m-0">Add or update address</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
-                  class="bi bi-x-lg"></i> </button>
+                  class="bi bi-x"></i> </button>
             </div>
             <div class="modal-body p-4 modal-form-update">
               <div class="row">
@@ -287,7 +384,7 @@
           <div class="modal-content">
             <div class="modal-header pb-0">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
-                  class="bi bi-x-lg"></i> </button>
+                  class="bi bi-x"></i> </button>
             </div>
             <div class="modal-body p-4 modal-alert">
               <h1 class="mb-0">
@@ -306,7 +403,7 @@
       <!-- Delete Address items Modal End -->
 
 
-      <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0 ">
+      <!-- <div class="col-xl-3 col-lg-4 mt-5 mt-lg-0 ">
         <div class="shopping-cart-sidebar">
           <div class="cart-sidebar-body-cart mb-4">
             <h5 class="mb-3">Order Details</h5>
@@ -362,7 +459,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
