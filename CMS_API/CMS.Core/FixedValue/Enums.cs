@@ -19,7 +19,11 @@ namespace CMS.Core.FixedValue
             [StringValue("Product_Size")]
             Product_Size,
             [StringValue("CMS_Page")]
-            CMS_Page
+            CMS_Page,
+            [StringValue("Address_Type")]
+            Address_Type,
+            [StringValue("State")]
+            State
         }
 
         public enum ContentTypeEnum
@@ -36,6 +40,13 @@ namespace CMS.Core.FixedValue
             Document = 4,
 
 
+        }
+
+        public enum RoleEnum
+        {
+            SuperAdmin,
+            Admin ,
+            Customer
         }
     }
 }

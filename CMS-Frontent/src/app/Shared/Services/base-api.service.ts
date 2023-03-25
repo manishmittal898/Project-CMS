@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { IDictionary, ApiResponse } from '../Helper/Common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { API_Url } from '../Constant';
+import { API_Url ,Routing_Url} from '../Constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseAPIService {
   API_Url= API_Url;
+  readonly Routing_Url = Routing_Url;
 
   constructor(private readonly _httpClient: HttpClient) { }
 
