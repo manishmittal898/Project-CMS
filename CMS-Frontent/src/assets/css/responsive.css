@@ -316,6 +316,7 @@
       width: auto;
       visibility: visible;
       position: sticky;
+      z-index: 9;
   }
   .page-fliter {
     display: block !important;
@@ -448,6 +449,11 @@
 {
   display: none;
 }
+.custom-card {
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
 }
 
 @media screen and (max-width:575px) {
@@ -535,6 +541,9 @@
 }
 .order-summary-list-items-status {
   font-size: 14px;
+}
+.my-account-sidebar-btn {
+    font-size: 15px;
 }
 }
 

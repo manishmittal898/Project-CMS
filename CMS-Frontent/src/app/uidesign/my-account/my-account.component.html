@@ -86,38 +86,39 @@
 
         <!-- My Accout Orders Start -->
         <div class="my-account-content my-account-orders">
-                  <!-- Page Filter Start -->
-        <div class="page-fliter offcanvas offcanvas-end" tabindex="-1" id="PageFilter">
-          <div class="offcanvas-header d-flex d-md-none pt-0 px-0">
-            <h6 class="offcanvas-title"><i class="bi bi-funnel me-1"></i> Filter</h6>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <!-- Page Filter Start -->
+          <div class="page-fliter offcanvas offcanvas-end" tabindex="-1" id="PageFilter">
+            <div class="offcanvas-header d-flex d-md-none pt-0 px-0">
+              <h6 class="offcanvas-title"><i class="bi bi-funnel me-1"></i> Filter</h6>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
+                <div class="page-fliter-items page-filter-search position-relative">
+                  <input type="text" class="form-control" placeholder="Search in order" />
+                  <a href="javascript:void()"><i class="bi bi-search"></i></a>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
+                <div class="page-fliter-items">
+                  <select class="form-select">
+                    <option>--Status--</option>
+                    <option>--Delivered--</option>
+                    <option>--Pending--</option>
+                    <option>--Cancelled--</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
+                <div class="form-floating mb-0">
+                  <input type="text" class="form-control" id="Datepicker" placeholder="Date Picker">
+                  <label for="Datepicker">Date Picker</label>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
-              <div class="page-fliter-items page-filter-search position-relative">
-                <input type="text" class="form-control" placeholder="Search in order" />
-                <a href="javascript:void()"><i class="bi bi-search"></i></a>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
-              <div class="page-fliter-items">
-                <select class="form-select">
-                  <option>--Status--</option>
-                  <option>--Delivered--</option>
-                  <option>--Pending--</option>
-                  <option>--Cancelled--</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3 mb-md-0">
-              <div class="form-floating mb-0">
-                <input type="text" class="form-control" id="Datepicker" placeholder="Date Picker">
-                <label for="Datepicker">Date Picker</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Page Filter End -->
+          <!-- Page Filter End -->
           <div class="order-summary-list">
             <div class="order-summary-list-items order-summary-list-items-delivered">
               <div class="order-summary-list-items-header d-flex align-items-center justify-content-between">
@@ -211,6 +212,212 @@
           </ul>
         </div>
         <!-- My Accout Orders End -->
+
+        <!-- My Account Address Start -->
+        <div class="my-account-content my-account-address d-none">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="mb-0">Saved Addresses</h4>
+            <a class="btn-add-new-address" href="javascript:void()" data-bs-toggle="modal"
+              data-bs-target="#Add-Update-Address"><i class="bi bi-plus-circle me-2"></i> Add new address</a>
+          </div>
+
+          <div class="custom-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="custom-card-address-list">
+                  <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                    <h5 class="m-0">Rahul sharma</h5>
+                    <div class="custom-card-address-list-action d-flex align-items-center">
+                      <span class="me-3">Default Address</span>
+                      <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
+                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Edit" class="bi bi-pencil-square"></i> </a>
+                      <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Remove" class="bi bi-trash"></i> </a>
+                    </div>
+                  </div>
+                  <div class="custom-card-address-list-items form-check">
+                    <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
+                    <label class="form-check-label" for="SaveAdd1">
+                      4-RA-5 Monilek Marg, Near Monilek Hospital
+                      Jawahar Nagar
+                      Jaipur, Raj, 302013
+                      Mobile : 8952098741
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="custom-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="custom-card-address-list">
+                  <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                    <h5 class="m-0">Peter johnsan</h5>
+                    <div class="custom-card-address-list-action d-flex align-items-center">
+                      <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
+                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Edit" class="bi bi-pencil-square"></i> </a>
+                      <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Remove" class="bi bi-trash"></i> </a>
+                    </div>
+                  </div>
+                  <div class="custom-card-address-list-items form-check">
+                    <input class="form-check-input" type="radio" name="SaveAdd2" id="SaveAdd2">
+                    <label class="form-check-label" for="SaveAdd2">
+                      4-RA-5 Monilek Marg, Near Monilek Hospital
+                      Jawahar Nagar
+                      Jaipur, Raj, 302013
+                      Mobile : 8952098741
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="custom-card">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="custom-card-address-list">
+                  <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+                    <h5 class="m-0">Nitesh mathur</h5>
+                    <div class="custom-card-address-list-action d-flex align-items-center">
+                      <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
+                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Edit" class="bi bi-pencil-square"></i> </a>
+                      <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="Remove" class="bi bi-trash"></i> </a>
+                    </div>
+                  </div>
+                  <div class="custom-card-address-list-items form-check">
+                    <input class="form-check-input" type="radio" name="SaveAdd3" id="SaveAdd3">
+                    <label class="form-check-label" for="SaveAdd3">
+                      4-RA-5 Monilek Marg, Near Monilek Hospital
+                      Jawahar Nagar
+                      Jaipur, Raj, 302013
+                      Mobile : 8952098741
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add or Update Address Modal Start -->
+          <div class="modal fade modal-custom-design" id="Add-Update-Address" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header pb-0">
+                  <h5 class="m-0">Add or update address</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
+                      class="bi bi-x"></i> </button>
+                </div>
+                <div class="modal-body p-4 modal-form-update">
+                  <div class="row">
+                    <div class="col-xl-12">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
+                        <label for="First-name">Enter full name*</label>
+                      </div>
+                    </div>
+                    <div class="col-xl-12">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
+                        <label for="Phone-number">Phone number*</label>
+                      </div>
+                    </div>
+                    <div class="col-xl-12">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="Address1" placeholder="Address*">
+                        <label for="Address1">Address*</label>
+                      </div>
+                    </div>
+                    <div class="col-xl-12">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="Address2"
+                          placeholder="Apartment, suite, etc. (optional)">
+                        <label for="Address2">Apartment, suite, etc. (optional)</label>
+                      </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div class="mb-4">
+                        <select class="form-select">
+                          <option>--State--</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="City" placeholder="City*">
+                        <label for="City">City*</label>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
+                        <label for="Postal-code">Postal code*</label>
+                      </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div class="mb-0">
+                        <select class="form-select">
+                          <option>--Address Type--</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xl-12 mt-3">
+                      <div class="form-check d-flex align-items-center">
+                        <input type="checkbox" class="form-check-input" id="check22">
+                        <label class="form-check-label ms-2" for="check22">Set as Default</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer pt-0">
+                  <button type="button" class="btn btn-default px-3 py-2 btn-save" data-bs-dismiss="modal"><i
+                      class="bi bi-check2"></i> Save</button>
+                  <button type="button" class="btn btn-default btn-border px-3 py-2 btn-cancel"
+                    data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Add or Update Address Modal End -->
+
+          <!-- Delete Address items Modal Start -->
+          <div class="modal fade modal-custom-design" id="DeleteAddress" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header pb-0">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
+                      class="bi bi-x"></i> </button>
+                </div>
+                <div class="modal-body p-4 modal-alert">
+                  <h1 class="mb-0">
+                    Are you sure want to delete this address from the address book ?
+                  </h1>
+                </div>
+                <div class="modal-footer pt-0">
+                  <button type="button" class="btn btn-default btn-delete px-3 py-2" data-bs-dismiss="modal"><i
+                      class="bi bi-trash me-1"></i> Delete</button>
+                  <button type="button" class="btn btn-default btn-cancel btn-border px-3 py-2"
+                    data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Delete Address items Modal End -->
+        </div>
+        <!-- My Account Address End -->
+
+
       </div>
     </div>
   </div>
