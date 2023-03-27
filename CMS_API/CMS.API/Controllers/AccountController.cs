@@ -49,7 +49,7 @@ namespace CMS.API.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ServiceResponse<string> GenerateEncrptPassword(string value)
+        public ServiceResponse<string> GetEncrptedText(string value)
         {
             return _accountService.GetEncrptedPassword(value);
         }

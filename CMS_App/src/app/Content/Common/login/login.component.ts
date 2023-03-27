@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     this.model.Plateform = "Web";
-    this._security.GenerateEncrptPassword(this.model.Password).then(x => {
+    this._security.GetEncrptedText(this.model.Password).then(x => {
       if (x.IsSuccess) {
         const encPass = x.Data;
         if (this.model.Email == undefined || this.model.Password == undefined) {

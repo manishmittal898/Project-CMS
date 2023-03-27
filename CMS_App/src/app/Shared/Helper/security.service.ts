@@ -53,8 +53,8 @@ export class SecurityService {
 
   }
 
-  GenerateEncrptPassword(value: string): Promise<ApiResponse<string>> {
-    let url = `${this._baseService.API_Url.GenerateEncrptPassword_Api}?value=${value}`;
+  GetEncrptedText(value: string): Promise<ApiResponse<string>> {
+    let url = `${this._baseService.API_Url.GetEncrptedText_Api}?value=${value}`;
     return this._baseService.get(url).toPromise();
   }
 

@@ -1,7 +1,9 @@
 ﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,10 @@ namespace CMS.Service.Services.User
     public class UserMasterService : BaseService, IUserMasterService
     {
         DB_CMSContext _db;
-        public UserMasterService(DB_CMSContext db)
+        private readonly Security _security;
+        public UserMasterService(DB_CMSContext db,, IConfiguration _configuration)
         {
+            _security = new Security(_configuration);
             _db = db;
         }
 
@@ -65,7 +69,7 @@ namespace CMS.Service.Services.User
                 objRole.Email = model.Email;
                 objRole.Dob = model.Dob;
                 objRole.Mobile = model.Mobile;
-                objRole.Password = encryptpass(model.Password);
+                objRole.Password = _security.EncryptData(model.Password);
                 objRole.Address = model.Address;
                 objRole.ProfilePhoto = model.ProfilePhoto;
                 //  objRole.Role = model.Role;
@@ -82,7 +86,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -100,7 +104,7 @@ namespace CMS.Service.Services.User
                 objRole.Email = model.Email;
                 objRole.Dob = model.Dob;
                 objRole.Mobile = model.Mobile;
-                objRole.Password = encryptpass(model.Password);
+                objRole.Password = _security.EncryptData(model.Password);
                 objRole.Address = model.Address;
                 objRole.ProfilePhoto = model.ProfilePhoto;
                 // objRole.Role = model.Role;
@@ -117,7 +121,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
 
@@ -144,14 +148,6 @@ namespace CMS.Service.Services.User
 
         }
 
-        public string encryptpass(string password)
-        {
-            string msg = "";
-            byte[] encode = new byte[password.Length];
-            encode = Encoding.UTF8.GetBytes(password);
-            msg = Convert.ToBase64String(encode);
-            return msg;
-        }
 
     }
 }

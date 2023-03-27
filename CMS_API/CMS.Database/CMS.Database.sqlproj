@@ -149,8 +149,9 @@
     <Build Include="dbo\Tables\tblUserAddressMaster.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CMS.Database.publish.xml" />
     <None Include="Storeone_DB_CMS.Database.publish.xml" />
+    <None Include="CMS.Database.publish.xml" />
+    <None Include="LocalCMS.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="DataScript\MainData.PostDeployment.sql" />

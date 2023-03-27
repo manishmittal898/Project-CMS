@@ -6,7 +6,7 @@ export class API_Url {
 
   //#region <<Login>>
   public static Login_Api = `${environment.apiEndPoint}account/Login`;
-  public static GenerateEncrptPassword_Api = `${environment.apiEndPoint}account/GenerateEncrptPassword`;
+  public static GetEncrptedText_Api = `${environment.apiEndPoint}account/GetEncrptedText`;
 
   //#endregion
 

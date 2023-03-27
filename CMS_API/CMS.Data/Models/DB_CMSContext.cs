@@ -29,6 +29,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblProductStock> TblProductStocks { get; set; }
         public virtual DbSet<TblRoleType> TblRoleTypes { get; set; }
         public virtual DbSet<TblSubLookupMaster> TblSubLookupMasters { get; set; }
+        public virtual DbSet<TblUserAddressMaster> TblUserAddressMasters { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -114,7 +115,7 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblGECategoryMater");
 
-                entity.HasIndex(e => e.EnumValue, "UQ__tmp_ms_x__C06D7C17DD9D77B8")
+                entity.HasIndex(e => e.EnumValue, "UQ__tblGECat__C06D7C171A9F171C")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedOn)
@@ -430,7 +431,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1A750C2A0B");
+                    .HasName("PK__tblRoleT__8AFACE1A9F5C7623");
 
                 entity.ToTable("tblRoleType");
 
@@ -498,10 +499,76 @@ namespace CMS.Data.Models
                     .HasConstraintName("tblSubLookupMaster_ModifiedBy");
             });
 
+            modelBuilder.Entity<TblUserAddressMaster>(entity =>
+            {
+                entity.ToTable("tblUserAddressMaster");
+
+                entity.Property(e => e.BuildingNumber).HasMaxLength(500);
+
+                entity.Property(e => e.City)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FullName)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Landmark).HasMaxLength(2000);
+
+                entity.Property(e => e.Mobile)
+                    .IsRequired()
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PinCode)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.AddressTypeNavigation)
+                    .WithMany(p => p.TblUserAddressMasterAddressTypeNavigations)
+                    .HasForeignKey(d => d.AddressType)
+                    .HasConstraintName("FK_tblUserAddressMaster_AddressType");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.TblUserAddressMasterCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserAddressMaster_CreatedBy");
+
+                entity.HasOne(d => d.ModifiedByNavigation)
+                    .WithMany(p => p.TblUserAddressMasterModifiedByNavigations)
+                    .HasForeignKey(d => d.ModifiedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserAddressMaster_ModifiedBy");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.TblUserAddressMasterStates)
+                    .HasForeignKey(d => d.StateId)
+                    .HasConstraintName("FK_tblUserAddressMaster_StateId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblUserAddressMasterUsers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserAddressMaster_UserId");
+            });
+
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C1AEC9452");
+                    .HasName("PK__tblUserM__1788CC4C22CC59D8");
 
                 entity.ToTable("tblUserMaster");
 
@@ -539,7 +606,7 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__6477ECF3");
+                    .HasConstraintName("FK__tblUserMa__RoleI__7E37BEF6");
             });
 
             OnModelCreatingPartial(modelBuilder);
