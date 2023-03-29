@@ -10,6 +10,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PolicyComponent } from './policy/policy.component';
 import { RequestDemoComponent } from './request-demo/request-demo.component';
+import { TryForFreeComponent } from './try-for-free/try-for-free.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RequestDemoComponent } from './request-demo/request-demo.component';
     AboutUsComponent,
     ContactUsComponent,
     PolicyComponent,
-    RequestDemoComponent
+    RequestDemoComponent,
+    TryForFreeComponent
   ],
   imports: [
     CommonModule,

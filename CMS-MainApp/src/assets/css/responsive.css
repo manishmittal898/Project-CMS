@@ -310,6 +310,14 @@
     .home-hero-banner-img img {
       margin-bottom: -22px;
   }
+  section.page-free-trial {
+    flex-wrap: wrap;
+}
+  .page-free-trial a {
+    margin: 0px;
+    flex: 0 0 100%;
+    max-width: 80%;
+}
 }
 
 @media screen and (max-width:575px) {
