@@ -7,6 +7,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PolicyComponent } from './policy/policy.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { RequestDemoComponent } from './request-demo/request-demo.component';
+import { TryForFreeComponent } from './try-for-free/try-for-free.component';
 
 const routes: Routes = [
   {
@@ -19,8 +20,7 @@ const routes: Routes = [
     { component: PolicyComponent, path: 'policy' },
     { component: PricingComponent, path: 'pricing' },
     { component: RequestDemoComponent, path: 'request-demo' },
-
-
+    { component: TryForFreeComponent, path: 'Freedemo' },
   ]
   }
 ];
