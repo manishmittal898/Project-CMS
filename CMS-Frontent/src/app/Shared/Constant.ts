@@ -43,6 +43,11 @@ export class API_Url {
 
   //#endregion
 
+    //#region <<Login>>
+    public static Login_Api = `${environment.apiEndPoint}account/Login`;
+    public static GetEncrptedText_Api = `${environment.apiEndPoint}account/GetEncrptedText`;
+
+    //#endregion
 
 
 }

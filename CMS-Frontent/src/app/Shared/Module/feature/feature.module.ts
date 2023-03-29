@@ -10,6 +10,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CheckboxModule} from 'primeng-lts/checkbox';
 import {SliderModule} from 'primeng/slider';
+import { ToastrModule } from 'ngx-toastr';
+
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -20,13 +22,21 @@ const commonModules = [
 const component = [
   HeaderComponent,
   FooterComponent,
-  NavBarComponent];
+  NavBarComponent
+
+];
 
 const installedModule = [
   NgxPaginationModule,
   NgSelectModule,
   CheckboxModule,
-  SliderModule
+  SliderModule,
+  ToastrModule.forRoot({
+    timeOut: 3000,
+    closeButton: true,
+    autoDismiss: true,
+    maxOpened: 5
+  }),
 ]
 
 @NgModule({

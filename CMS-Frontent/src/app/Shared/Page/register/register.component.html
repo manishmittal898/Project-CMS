@@ -1,0 +1,57 @@
+<!-- Breadcrum Start -->
+<nav aria-label="breadcrumb" class="inner-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Register</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Breadcrum End -->
+
+
+<Section class="login-reister-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="text-center section-title">Register</h3>
+        <form class="mx-400 m-auto">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="FirstName" placeholder="First Name">
+            <label for="FirstName">First Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="LastName" placeholder="Last Name">
+            <label for="LastName">Last Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="EmailAddress" placeholder="Email">
+            <label for="EmailAddress">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="tel" class="form-control" id="Mobile" placeholder="Mobile">
+            <label for="Mobile">Mobile</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="Password2" placeholder="Password">
+            <label for="Password2">Password</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password">
+            <label for="ConfirmPassword">Confirm password</label>
+          </div>
+
+          <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign up</button>
+
+          <div class="text-center mt-3">Allready account ? <a href="javascript:void(0)" [routerLink]="['/login']"
+              class="text-theme-primary font-w-500">Login</a> </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</Section>

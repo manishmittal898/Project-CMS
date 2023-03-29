@@ -22,6 +22,7 @@ export class AuthService {
   }
 
   Login(model: any): Observable<ApiResponse<any>> {
+    model.Plateform = "Admin";
     let url = `${this._baseService.API_Url.Login_Api}`;
     return this._baseService.post(url, model);
   }
@@ -60,6 +61,7 @@ export class AuthService {
       } else {
 
         this.LogOut();
+        this.IsAuthentication.next(false);
       }
     }, 5);
   }
@@ -84,5 +86,5 @@ export interface LoginUserDetailModel {
   Token: string;
   UserName: string;
   RoleName: string;
-  ProfilePhoto:string;
+  ProfilePhoto: string;
 }

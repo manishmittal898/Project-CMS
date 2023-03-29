@@ -5,6 +5,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { MainComponent } from './main.component';
 import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
+import { UserAccountModule } from './user-account/user-account.module';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
     },
     {
       component: CMSPageContentComponent, path: 'page/:name'
-    }
+    },
+    {
+      path: "user",
+      loadChildren: () => import("./user-account/user-account.module").then(m => m.UserAccountModule)
+    },
 
     ]
   }

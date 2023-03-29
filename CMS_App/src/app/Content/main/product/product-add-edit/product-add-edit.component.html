@@ -95,20 +95,18 @@
           *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
           Please select <strong>Sub Category</strong>...!</div>
       </div>
-      <div class=" form-group col-md-6 col-lg-3">
+      <div class="form-group col-md-6 col-lg-3">
         <label>Home page Section</label>
-         <select class="form-control">
-         <option>--Select--</option>
-         <option>New</option>
-         <option>Top</option>
-         <option>Featured</option>
-         <option>Best Selling</option>
-         <option>Trending</option>
-         </select>
+
+        <ng-select [items]="dropDown.ddlProductViewSection" formControlName="ViewSection" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="--Select--" [ngClass]="{ 'is-invalid': f.ViewSection.errors && f.ViewSection.touched}"
+          [(ngModel)]="model.ViewSectionId">
+        </ng-select>
         <div class="invalid-feedback"
-          *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
-          Please select <strong>Sub Category</strong>...!</div>
+          *ngIf="(formgrp.get('ViewSection')?.hasError('required') && formgrp.get('ViewSection')?.touched)">
+          Please select <strong>Home Page Section</strong>...!</div>
       </div>
+
       <div class="form-group col-md-6 mb-0">
         <label>Product main image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">

@@ -74,6 +74,7 @@ export interface ProductMasterPostModel {
   CategoryId: number | undefined;
   SubCategoryId: number | undefined;
   CaptionTagId: number | undefined;
+  ViewSectionId : number | undefined;
   Summary: string;
   ShippingCharge: number | undefined;
   Keyword: string;

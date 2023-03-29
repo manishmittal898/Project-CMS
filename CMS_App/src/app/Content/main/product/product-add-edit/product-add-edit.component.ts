@@ -25,6 +25,7 @@ export class ProductAddEditComponent implements OnInit {
     Name: [undefined, Validators.required],
     Price: [undefined, Validators.required],
     Caption: [undefined,],
+    ViewSection: [undefined,],
     Category: [undefined, Validators.required],
     SubCategory: [undefined],
     Summary: [undefined],
@@ -124,13 +125,15 @@ export class ProductAddEditComponent implements OnInit {
       });
   }
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize]).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductViewSection, DropDown_key.ddlProductSize]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlCaptionTag = ddls?.ddlCaptionTag;
         this.dropDown.ddlCategory = ddls?.ddlCategory;
+        this.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
+
         this.ddlProductSize();
       }
     });

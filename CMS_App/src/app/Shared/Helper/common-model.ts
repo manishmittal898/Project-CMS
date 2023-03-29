@@ -106,6 +106,7 @@ export class DropDownModel {
   ddlSublookup!: DropDownItem[];
   ddlContentType!: DropDownItem[];
   ddlGeneralEntryCategory!: GECategoryDropDownItem[];
+  ddlProductViewSection!: DropDownItem[];
 }
 
 export class DropDownItem {

@@ -9,19 +9,26 @@ import { HtmlComponent } from './Shared/Page/html/html.component';
 import { LocationStrategy, PathLocationStrategy, CommonModule } from '@angular/common';
 import { BaseAPIService } from './Shared/Services/base-api.service';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LoginComponent } from './Shared/Page/login/login.component';
+import { RegisterComponent } from './Shared/Page/register/register.component';
+import { MainModule } from './Main/main.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HtmlComponent
+    HtmlComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FeatureModule
+    FeatureModule,
+    MainModule
   ],
-  providers: [BaseAPIService,  { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, { provide: LocationStrategy, useClass: PathLocationStrategy }],
+  providers: [BaseAPIService,  { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
 
 })
