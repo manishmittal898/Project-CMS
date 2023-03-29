@@ -60,6 +60,8 @@ namespace CMS.Service.Services.ProductMaster
                                             SubCategory = x.SubCategory.Name,
                                             CaptionTagId = x.CaptionTagId,
                                             CaptionTag = x.CaptionTag.Name,
+                                            ViewSectionId = x.ViewSectionId,
+                                            ViewSection = x.ViewSection.Name,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
@@ -112,6 +114,8 @@ namespace CMS.Service.Services.ProductMaster
                     SubCategory = x.SubCategory.Name,
                     CaptionTagId = x.CaptionTagId,
                     CaptionTag = x.CaptionTag.Name,
+                    ViewSectionId= x.ViewSectionId,
+                    ViewSection=x.ViewSection.Name,
                     Desc = x.Desc,
                     Summary = x.Summary,
                     Price = x.Price,
@@ -187,6 +191,7 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
+                    objProduct.ViewSectionId = model.ViewSectionId;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     objProduct.ShippingCharge = model.ShippingCharge ?? null;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
@@ -280,6 +285,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
                     objProduct.CaptionTagId = model.CaptionTagId;
+                    objProduct.ViewSectionId = model.ViewSectionId;
+
                     objProduct.IsActive = true;
                     objProduct.ShippingCharge = model.ShippingCharge ?? null;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
@@ -506,7 +513,7 @@ namespace CMS.Service.Services.ProductMaster
 
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
 
-                                && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price ))
+                                && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
                 switch (model.OrderBy)
                 {

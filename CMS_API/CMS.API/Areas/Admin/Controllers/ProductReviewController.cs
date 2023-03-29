@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace CMS.API.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("api/[area]/[controller]")]
+    [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     public class ProductReviewController : ControllerBase
     {

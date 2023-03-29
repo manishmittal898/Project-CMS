@@ -115,7 +115,7 @@ namespace CMS.Data.Models
             {
                 entity.ToTable("tblGECategoryMater");
 
-                entity.HasIndex(e => e.EnumValue, "UQ__tblGECat__C06D7C171A9F171C")
+                entity.HasIndex(e => e.EnumValue, "UQ__tblGECat__C06D7C17040A55B7")
                     .IsUnique();
 
                 entity.Property(e => e.CreatedOn)
@@ -373,6 +373,11 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblProductMasters)
                     .HasForeignKey(d => d.SubCategoryId)
                     .HasConstraintName("FK_tblProductMaster_SubCategoryId");
+
+                entity.HasOne(d => d.ViewSection)
+                    .WithMany(p => p.TblProductMasterViewSections)
+                    .HasForeignKey(d => d.ViewSectionId)
+                    .HasConstraintName("FK_tblProductMaster_ViewSectionId");
             });
 
             modelBuilder.Entity<TblProductReview>(entity =>
@@ -431,7 +436,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblRoleType>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__tblRoleT__8AFACE1A9F5C7623");
+                    .HasName("PK__tblRoleT__8AFACE1A04105D16");
 
                 entity.ToTable("tblRoleType");
 
@@ -568,7 +573,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C22CC59D8");
+                    .HasName("PK__tblUserM__1788CC4C4AFD4A9C");
 
                 entity.ToTable("tblUserMaster");
 
@@ -606,7 +611,7 @@ namespace CMS.Data.Models
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__7E37BEF6");
+                    .HasConstraintName("FK__tblUserMa__RoleI__19DFD96B");
             });
 
             OnModelCreatingPartial(modelBuilder);

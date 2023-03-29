@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 using static CMS.Service.Services.Account.AccountViewModel;
 
 
@@ -35,9 +36,9 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.Password.Equals(_security.DecryptData(model.Password)) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.Password.Equals(model.Password) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
-                if (user != null)
+                if (user != null && ((model.Plateform == PlatformEnum.Customer.GetStringValue()  && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId <(int)RoleEnum.Customer)))
                 {
 
                     var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);

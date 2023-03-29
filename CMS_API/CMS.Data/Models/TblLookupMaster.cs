@@ -12,6 +12,7 @@ namespace CMS.Data.Models
             TblCmspageContentMasters = new HashSet<TblCmspageContentMaster>();
             TblProductMasterCaptionTags = new HashSet<TblProductMaster>();
             TblProductMasterCategories = new HashSet<TblProductMaster>();
+            TblProductMasterViewSections = new HashSet<TblProductMaster>();
             TblProductStocks = new HashSet<TblProductStock>();
             TblSubLookupMasters = new HashSet<TblSubLookupMaster>();
             TblUserAddressMasterAddressTypeNavigations = new HashSet<TblUserAddressMaster>();
@@ -36,6 +37,7 @@ namespace CMS.Data.Models
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCaptionTags { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCategories { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterViewSections { get; set; }
         public virtual ICollection<TblProductStock> TblProductStocks { get; set; }
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterAddressTypeNavigations { get; set; }

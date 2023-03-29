@@ -58,6 +58,11 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Size.GetStringValue()));
                             break;
 
+                        case DropDownKey.ddlProductViewSection:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_View_Section.GetStringValue()));
+                            break;
+
                         case DropDownKey.ddlProductPrice:
 
                             objData.Add(item, await GetProductMaxPrice());
