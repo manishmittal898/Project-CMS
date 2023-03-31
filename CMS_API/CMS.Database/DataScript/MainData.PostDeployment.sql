@@ -48,7 +48,8 @@ GO
 
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
 GO
-IF  (SELECT COUNT(*) FROM  [dbo].[tblLookupTypeMaster])<8
+
+IF  (SELECT COUNT(*) FROM  [dbo].[tblLookupTypeMaster] )<8
 
 BEGIN
 

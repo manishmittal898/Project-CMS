@@ -49,7 +49,7 @@
               <div *ngIf="f.Email.errors.required">Email is required.</div>
               <div *ngIf="f.Email.errors.email">Email must be a valid email address.</div>
               <div *ngIf="f.Email.errors.maxlength">Email cannot be more than 20 characters long..</div>
-              <div *ngIf="f.Email.errors.existsEmail">User already exist with this mail.</div>
+              <div *ngIf="f.Email.errors.existsEmail">User already register with this mail.</div>
 
             </div>
 
@@ -61,7 +61,7 @@
             <div *ngIf="f.Mobile.invalid && (f.Mobile.dirty || f.Mobile.touched)">
               <div *ngIf="f.Mobile.errors.required">Mobile is required.</div>
               <div *ngIf="f.Mobile.errors.pattern">Invalid Mobile Number.</div>
-              <div *ngIf="f.Mobile.errors.existsMobile">User already exist with this mobile.</div>
+              <div *ngIf="f.Mobile.errors.existsMobile">User already register with this mobile.</div>
 
             </div>
 
