@@ -2282,6 +2282,13 @@ section.deals-opt-d-1 {
   font-size: 18px;
 }
 
+.pas-check-icon {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  color: #5f5f5f;
+}
+
 /* CUSTOM CSS END */
 
 
