@@ -41,6 +41,7 @@ namespace CMS.Service.Services.User
     public class UserViewPostModel
     {
         public long UserId { get; set; }
+        [Required]
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

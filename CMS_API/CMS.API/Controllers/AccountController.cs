@@ -1,9 +1,11 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Account;
+using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 using static CMS.Service.Services.Account.AccountViewModel;
 
 namespace CMS.API.Controllers
@@ -14,12 +16,14 @@ namespace CMS.API.Controllers
     {
         private IConfiguration _config;
         private IAccountService _accountService;
+        private readonly IUserMasterService _user;
 
         public AccountController(IConfiguration config, IAccountService
-        accountService)
+        accountService, IUserMasterService user)
         {
             _accountService = accountService;
             _config = config;
+            _user = user;
         }
 
         [HttpPost]
@@ -28,6 +32,29 @@ namespace CMS.API.Controllers
         {
             return await _accountService.Login(model);
         }
+
+        // POST api/<UserController>
+        [HttpPost]
+        public async Task<object> Register([FromBody] UserViewPostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.RoleId = (int)RoleEnum.Customer;
+                return await _user.Save(model);
+
+            }
+            else
+            {
+                ServiceResponse<object> objReturn = new ServiceResponse<object>();
+                objReturn.Message = "Invalid";
+                objReturn.IsSuccess = false;
+                objReturn.Data = null;
+
+                return objReturn;
+            }
+            //return _roleTyp
+        }
+
 
 
         //Post api/Account/WebChangePassword
@@ -42,9 +69,9 @@ namespace CMS.API.Controllers
         [HttpGet]
         [AllowAnonymous]
         //Get api/Account/ValidateUserWithMobileNumber
-        public async Task<ServiceResponse<string>> ValidateUserWithMobileNUmber(string mobileNumber)
+        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile,long userId)
         {
-            return await _accountService.CheckUserExist(mobileNumber);
+            return await _accountService.CheckUserExist(loginId,  isMobile, userId);
         }
 
         [HttpGet]
@@ -60,6 +87,6 @@ namespace CMS.API.Controllers
             return await _accountService.LogoutUser(id);
         }
 
-       
+
     }
 }

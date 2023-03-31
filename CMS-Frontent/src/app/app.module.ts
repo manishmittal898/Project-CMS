@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginComponent } from './Shared/Page/login/login.component';
 import { RegisterComponent } from './Shared/Page/register/register.component';
 import { MainModule } from './Main/main.module';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
