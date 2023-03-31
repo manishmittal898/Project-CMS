@@ -26,11 +26,10 @@
               [(ngModel)]="model.Email">
             <label for="EmailAddress">Email address</label>
           </div>
-          <div class="form-floating mb-3">
+          <div class="form-floating mb-3 position-relative">
             <input class="form-control" id="Password" placeholder="Password" name="Password" type="{{isShowPass ? 'text':'password'}}"
               [(ngModel)]="model.Password">
-            <i (click)="isShowPass=!isShowPass" class="fas"
-              [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i>
+              <a href="javascript:void" class="pas-check-icon" (click)="isShowPass=!isShowPass"> <i class="fas" [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i></a>
             <label for="Password">Password</label>
           </div>
 
