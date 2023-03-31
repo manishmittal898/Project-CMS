@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../environments/environment';
+import { ApiResponse } from '../Helper/Common';
+import { BaseAPIService } from "./base-api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SecurityService {
 
-  constructor() { }
+  constructor(private readonly _baseService: BaseAPIService) { }
 
   setStorage(key: string, value: string) {
     const encKey = this.getKey(key) ?? this.encrypt(key);
@@ -29,20 +31,41 @@ export class SecurityService {
   }
 
   encrypt(txt: string) {
-    return CryptoJS.AES?.encrypt(txt, environment.AESKey?.trim()).toString() ?? null;
+    try {
+
+      return CryptoJS.AES?.encrypt(txt, environment.AESKey?.trim()).toString() ?? null;
+    } catch (error) {
+      return null
+    }
   }
 
   decrypt(txt: string) {
-    return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8) ?? null;
+    try {
+
+      return CryptoJS.AES?.decrypt(txt, environment.AESKey?.trim()).toString(CryptoJS.enc.Utf8) ?? null;
+    } catch (error) {
+      return null
+    }
   }
   private getKey(key) {
-    for (let i = 0; i < localStorage?.length; i++) {
-      if (this.decrypt(localStorage?.key(i)) === key) {
-        return localStorage.key(i);
-      }
+    try {
+      for (let i = 0; i < localStorage?.length; i++) {
 
+        if (this.decrypt(localStorage?.key(i)) === key) {
+          return localStorage.key(i) ?? null;
+        }
+      }
+    } catch (error) {
+      return null;
     }
-    return null;
+
+
   }
+
+  GetEncrptedText(value: string): Promise<ApiResponse<string>> {
+    let url = `${this._baseService.API_Url.GetEncrptedText_Api}?value=${value}`;
+    return this._baseService.get(url).toPromise();
+  }
+
 
 }

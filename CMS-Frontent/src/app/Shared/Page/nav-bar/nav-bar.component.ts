@@ -4,6 +4,7 @@ import { CommonService } from '../../Services/common.service';
 import { DropDownItem, DropDownModel, GroupDropDownItem } from '../../Helper/Common';
 import { SecurityService } from '../../Services/security.service';
 import { x64 } from 'crypto-js';
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -11,9 +12,10 @@ import { x64 } from 'crypto-js';
 })
 
 export class NavBarComponent implements OnInit {
+  isLoggedIn = false;
   menuModel: GroupDropDownItem[];
   cmsPageMenu: DropDownItem[];
-  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService) {
+  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService, private readonly _authService: AuthService,) {
     if (this._securityService.getStorage('nav-collections-menu')) {
       this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
     }
@@ -24,7 +26,12 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._authService.IsAuthenticate();
+
     this.GetDropDown();
+    this._authService.IsAuthentication.subscribe(x => {
+      this.isLoggedIn = x as boolean ?? false;
+    });
   }
 
   GetDropDown() {

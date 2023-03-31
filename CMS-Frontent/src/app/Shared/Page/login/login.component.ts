@@ -1,30 +1,31 @@
-import { SecurityService } from './../../../Shared/Helper/security.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthService, LoginUserDetailModel } from "src/app/Shared/Helper/auth.service";
-import { environment } from "src/environments/environment";
-import { Routing_Url } from 'src/app/Shared/Helper/constants';
+import { environment } from 'src/environments/environment';
+import { AuthService, LoginUserDetailModel } from '../../auth.service';
+import { Routing_Url } from '../../Constant';
+import { SecurityService } from '../../Services/security.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   isShowPass = false;
-  model = {} as any;
+  model: any = {};
   get routing_Url() { return Routing_Url };
 
   constructor(private readonly _authService: AuthService, private readonly _security: SecurityService,
-    private readonly _route: Router, private readonly toast: ToastrService
-  ) { }
+    private readonly _route: Router, private readonly toast: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
+    debugger
+    this.model.Plateform = "Customer";
 
-    this.model.Plateform = "Admin";
     if (this.model.Email == undefined || this.model.Password == undefined) {
       this.toast.warning('Please enter username and password', 'Required');
       return;
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login Response');
-              this._route.navigate(['/admin']);
+              this._route.navigate(['/user']);
 
             } else {
               this.toast.info(res.Message?.toString(), 'Login Response');
@@ -60,4 +61,5 @@ export class LoginComponent implements OnInit {
     }
 
   }
+
 }

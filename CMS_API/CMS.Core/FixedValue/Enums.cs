@@ -23,7 +23,9 @@ namespace CMS.Core.FixedValue
             [StringValue("Address_Type")]
             Address_Type,
             [StringValue("State")]
-            State
+            State,
+            [StringValue("Product_View_Section")]
+            Product_View_Section,
         }
 
         public enum ContentTypeEnum
@@ -44,8 +46,16 @@ namespace CMS.Core.FixedValue
 
         public enum RoleEnum
         {
-            SuperAdmin,
-            Admin ,
+            SuperAdmin=1,
+            Admin=2,
+            Customer=3
+        }
+
+        public enum PlatformEnum
+        {
+            [StringValue("Admin")]
+            Admin,
+            [StringValue("Customer")]
             Customer
         }
     }

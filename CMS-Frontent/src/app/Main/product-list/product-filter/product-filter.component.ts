@@ -16,6 +16,9 @@ export class ProductFilterComponent implements OnInit {
   get subCategory() {
     return this.dropDown?.ddlSubLookupGroup?.filter(x => this.filterModel.CategoryId.includes(Number(x.CategoryId))) ?? [];
   }
+  get maxPrice() {
+    return this.dropDown?.ddlProductPrice?.Value ?? 1000;
+  }
   constructor(private _commonService: CommonService) { }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class ProductFilterComponent implements OnInit {
           this.filterModel.Price[1] = this.dropDown.ddlProductPrice.Value;
         }
         //  this.getSubLookUpDropDown();
-      this. applyFilter();
+        this.applyFilter();
       }
     });
   }

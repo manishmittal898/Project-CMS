@@ -7,6 +7,7 @@
     [Desc]       NTEXT NULL,
     [Price]      DECIMAL (18)   NULL,
     [CaptionTagId]    BIGINT NULL,
+    [ViewSectionId]    BIGINT NULL,
     [Summary]    NTEXT NULL,
     [MetaTitle]        NVARCHAR (1000) NULL,
     [MetaDesc]        NVARCHAR (4000) NULL,
@@ -22,6 +23,7 @@
     CONSTRAINT [FK_tblProductMaster_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [tblLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_SubCategoryId] FOREIGN KEY ([SubCategoryId]) REFERENCES [tblSubLookupMaster]([Id]),
     CONSTRAINT [FK_tblProductMaster_CaptionTagId] FOREIGN KEY ([CaptionTagId]) REFERENCES [tblLookupMaster]([Id]),
+    CONSTRAINT [FK_tblProductMaster_ViewSectionId] FOREIGN KEY ([ViewSectionId]) REFERENCES [tblLookupMaster]([Id]),    
     CONSTRAINT [FK_tblProductMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [FK_tblProductMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId])
 

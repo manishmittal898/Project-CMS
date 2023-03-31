@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
 import { ProductListComponent } from './product-list/product-list.component';
 import { HomeComponent } from './home/home.component';
 import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
+import { UserAccountModule } from './user-account/user-account.module';
 
 @NgModule({
   declarations: [HomeComponent,
@@ -21,7 +22,8 @@ import { CMSPageContentComponent } from './cmspage-content/cmspage-content.compo
   imports: [
     CommonModule,
     MainRoutingModule,
-    FeatureModule
+    FeatureModule,
+    UserAccountModule
   ],
   exports: []
 })

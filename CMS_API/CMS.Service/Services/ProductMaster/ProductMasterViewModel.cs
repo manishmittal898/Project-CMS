@@ -25,6 +25,7 @@ namespace CMS.Service.Services.ProductMaster
         public long CategoryId { get; set; }
         public long? SubCategoryId { get; set; }
         public long? CaptionTagId { get; set; }
+        public long? ViewSectionId { get; set; }
         public string Summary { get; set; }
         public decimal? ShippingCharge { get; set; }
         public string Keyword { get; set; }
@@ -44,6 +45,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Desc { get; set; }
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }
+        public long? ViewSectionId { get; set; }
         public string Summary { get; set; }
         public string MetaTitle { get; set; }
         public string MetaDesc { get; set; }
@@ -56,6 +58,7 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? ShippingCharge { get; set; }
         public string Keyword { get; set; }
         public string CaptionTag { get; set; }
+        public string ViewSection { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public List<ProductImageViewModel>? Files { get; set; }

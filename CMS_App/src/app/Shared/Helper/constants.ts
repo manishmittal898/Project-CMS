@@ -167,7 +167,7 @@ export class DropDown_key {
   static ddlSubLookupGroup = "ddlSubLookupGroup";
   static ddlContentType = "ddlContentType";
   static ddlGeneralEntryCategory= "ddlGeneralEntryCategory";
-
+  static ddlProductViewSection="ddlProductViewSection"
 
 }
 

@@ -1,0 +1,97 @@
+<app-header></app-header>
+<!-- Breadcrum Start -->
+<nav aria-label="breadcrumb" class="inner-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Login</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Breadcrum End -->
+
+
+<Section class="login-reister-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="text-center section-title">Login</h3>
+        <form class="mx-400 m-auto" (ngSubmit)="onSubmit()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="EmailAddress" name="EmailAddress" placeholder="Email address"
+              [(ngModel)]="model.Email">
+            <label for="EmailAddress">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input class="form-control" id="Password" placeholder="Password" name="Password" type="{{isShowPass ? 'text':'password'}}"
+              [(ngModel)]="model.Password">
+            <i (click)="isShowPass=!isShowPass" class="fas"
+              [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i>
+            <label for="Password">Password</label>
+          </div>
+
+
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="form-check d-flex align-items-center">
+              <input type="checkbox" class="form-check-input" id="check1">
+              <label class="form-check-label ms-2" for="check1">Remember me?</label>
+            </div>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ForgotPas"
+              class="font-13 text-dark">Forgot password ?</a>
+          </div>
+
+          <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign in</button>
+
+          <div class="login-with-social-acc">
+            <button type="button" class="login-with-social-acc-btn login-with-facebook-btn me-2"><i
+                class="bi bi-facebook me-1"></i>Facebook</button>
+            <button type="button" class="login-with-social-acc-btn login-with-google-btn ms-2"><i
+                class="bi bi-google me-1"></i>Google</button>
+          </div>
+
+          <div class="text-center mt-3">Not register yet? <a href="javascript:void(0)" [routerLink]="['/register']"
+              href="javascript:void()" class="text-theme-primary font-w-500">Create an Account</a> </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</Section>
+
+
+<!-- Reset Password Modal Start -->
+<div class="modal fade modal-custom-design" id="ForgotPas" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <h5 class="modal-title">Reset your password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="EnterNewPas" placeholder="Enter new password">
+            <label for="EnterNewPas">Enter new password</label>
+          </div>
+          <div class="form-floating mb-0">
+            <input type="password" class="form-control" id="ConfirmrNewPas" placeholder="Confirm new password">
+            <label for="ConfirmrNewPas">Confirm new password</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer pt-0">
+        <button type="button" class="btn btn-default px-3 py-2">Save changes</button>
+        <button type="button" class="btn btn-default btn-border px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reset Password Modal End -->
+<app-footer></app-footer>

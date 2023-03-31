@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   Login(model: any): Observable<ApiResponse<any>> {
-    let url = `${this._baseService.Routing_Url.LoginUrl}`;
+    let url = `${this._baseService.API_Url.Login_Api}`;
     return this._baseService.post(url, model);
   }
 
@@ -59,7 +59,8 @@ export class AuthService {
         this.IsAuthentication.next(true);
       } else {
 
-        this.LogOut();
+       // this.LogOut();
+        this.IsAuthentication.next(false);
       }
     }, 5);
   }
