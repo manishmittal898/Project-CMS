@@ -25,10 +25,7 @@ export class HomeComponent implements OnInit {
 
   getCategoryList() {
     this._productService.GetCategoryProduct(this.indexModel).subscribe(response => {
-
       if (response.IsSuccess) {
-        debugger
-        console.log(response.Data)
         this.model = response.Data.map(x => {
           return {
             Id: this._securityService.encrypt(String(x.Id)),
@@ -37,12 +34,10 @@ export class HomeComponent implements OnInit {
           } as any
 
         });
-
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
 
         setTimeout(() => {
           this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
-
         }, 10);
 
       }

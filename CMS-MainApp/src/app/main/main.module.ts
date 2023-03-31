@@ -10,8 +10,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PolicyComponent } from './policy/policy.component';
 import { RequestDemoComponent } from './request-demo/request-demo.component';
-import { TryForFreeComponent } from './try-for-free/try-for-free.component';
-
+ 
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { TryForFreeComponent } from './try-for-free/try-for-free.component';
     ContactUsComponent,
     PolicyComponent,
     RequestDemoComponent,
-    TryForFreeComponent
+
   ],
   imports: [
     CommonModule,
