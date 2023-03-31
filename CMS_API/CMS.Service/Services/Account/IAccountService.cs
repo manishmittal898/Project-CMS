@@ -12,7 +12,7 @@ namespace CMS.Service.Services.Account
     {
 
          Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model);
-         Task<ServiceResponse<string>> CheckUserExist(string mobileNumber);
+         Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long id = 0);
 
          Task<ServiceResponse<string>> WebChangePassword(ChangePasswordModel model);
          Task<ServiceResponse<object>> LogoutUser(long id);

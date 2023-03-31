@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService, LoginUserDetailModel } from '../../auth.service';
 import { Routing_Url } from '../../Constant';
 import { SecurityService } from '../../Services/security.service';
+import { AccountService } from '../../Services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -16,22 +17,20 @@ export class LoginComponent implements OnInit {
   model: any = {};
   get routing_Url() { return Routing_Url };
 
-  constructor(private readonly _authService: AuthService, private readonly _security: SecurityService,
+  constructor(private readonly _accountService :AccountService,private readonly _authService: AuthService, private readonly _security: SecurityService,
     private readonly _route: Router, private readonly toast: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    debugger
-    this.model.Plateform = "Customer";
 
+    this.model.Plateform = "Customer";
     if (this.model.Email == undefined || this.model.Password == undefined) {
       this.toast.warning('Please enter username and password', 'Required');
       return;
     }
     if (!environment.IsAutoLogin) {
-
       this._security.GetEncrptedText(this.model.Password).then(x => {
         if (x.IsSuccess) {
           const encPass = x.Data;
@@ -40,19 +39,17 @@ export class LoginComponent implements OnInit {
             Password: encPass,
             Plateform: this.model.Plateform
           };
-          this._authService.Login(postModel).subscribe((res) => {
+          this._accountService.Login(postModel).subscribe((res) => {
             if (res.IsSuccess) {
               let data = res.Data as LoginUserDetailModel;
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login Response');
               this._route.navigate(['/user']);
-
             } else {
               this.toast.info(res.Message?.toString(), 'Login Response');
             }
           });
-
         }
       });
     } else {
@@ -61,5 +58,4 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
 }

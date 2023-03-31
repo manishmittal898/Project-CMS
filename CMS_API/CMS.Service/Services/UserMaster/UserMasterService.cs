@@ -62,24 +62,24 @@ namespace CMS.Service.Services.User
         {
             try
             {
-                TblUserMaster objRole = new TblUserMaster();
-                // objRole.RoleId = model.RoleId;
-                objRole.FirstName = model.FirstName ?? null;
-                objRole.LastName = model.LastName;
-                objRole.Email = model.Email;
-                objRole.Dob = model.Dob;
-                objRole.Mobile = model.Mobile;
-                objRole.Password = _security.EncryptData(model.Password);
-                objRole.Address = model.Address;
-                objRole.ProfilePhoto = model.ProfilePhoto;
-                //  objRole.Role = model.Role;
-                objRole.RoleId = model.RoleId;
-                objRole.IsDeleted = false;
-                objRole.IsActive = true;
-                objRole.CreatedBy = model.CreatedBy;
-                var roletype = await _db.TblUserMasters.AddAsync(objRole);
+                TblUserMaster objUser = new TblUserMaster();
+                // objUser.RoleId = model.RoleId;
+                objUser.FirstName = model.FirstName ?? null;
+                objUser.LastName = model.LastName;
+                objUser.Email = model.Email;
+                objUser.Dob = model.Dob;
+                objUser.Mobile = model.Mobile;
+                objUser.Password = _security.EncryptData(model.Password);
+                objUser.Address = model.Address;
+                objUser.ProfilePhoto = model.ProfilePhoto;
+                //  objUser.Role = model.Role;
+                objUser.RoleId = model.RoleId;
+                objUser.IsDeleted = false;
+                objUser.IsActive = true;
+                objUser.CreatedBy = model.CreatedBy;
+                var roletype = await _db.TblUserMasters.AddAsync(objUser);
                 _db.SaveChanges();
-                return CreateResponse(objRole, "Added", true);
+                return CreateResponse(objUser, "Added", true);
 
 
             }

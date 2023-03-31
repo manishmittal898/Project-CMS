@@ -1,8 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject, Observable } from 'rxjs';
-import { IndexModel, ApiResponse } from './Helper/Common';
+import { Subject} from 'rxjs';
 import { BaseAPIService } from './Services/base-api.service';
 import { SecurityService } from './Services/security.service';
 
@@ -21,10 +20,7 @@ export class AuthService {
     return true;
   }
 
-  Login(model: any): Observable<ApiResponse<any>> {
-    let url = `${this._baseService.API_Url.Login_Api}`;
-    return this._baseService.post(url, model);
-  }
+
 
   SaveUserToken(token: string) {
     this._securityService.setStorage('authToken', token)

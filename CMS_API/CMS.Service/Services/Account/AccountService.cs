@@ -38,7 +38,7 @@ namespace CMS.Service.Services.Account
             {
                 var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.Password.Equals(model.Password) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
-                if (user != null && ((model.Plateform == PlatformEnum.Customer.GetStringValue()  && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId <(int)RoleEnum.Customer)))
+                if (user != null && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
 
                     var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
@@ -49,6 +49,11 @@ namespace CMS.Service.Services.Account
                     response.RoleName = user.Role.RoleName;
                     response.RoleLevel = user.Role.RoleLevel;
                     response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
+                }
+                else if (user != null)
+                {
+                    return CreateResponse<LoginResponseModel>(null, "You are not authorised to access " + model.Plateform + " Portal.", false, ((int)ApiStatusCode.RecordNotFound));
+
                 }
                 else
                 {
@@ -62,20 +67,20 @@ namespace CMS.Service.Services.Account
                 return CreateResponse<LoginResponseModel>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
             }
         }
-        public async Task<ServiceResponse<string>> CheckUserExist(string email)
+        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long id = 0)
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(email))
+                if (!string.IsNullOrWhiteSpace(loginId))
                 {
-                    var user = await _db.TblUserMasters.Where(x => x.Email == email && !x.IsDeleted).FirstOrDefaultAsync();
+                    var user = await _db.TblUserMasters.Where(x => (isMobile ? x.Mobile == loginId : x.Email == loginId) && (id == 0 || x.UserId != id) && !x.IsDeleted).FirstOrDefaultAsync();
                     if (user != null)
                     {
-                        return CreateResponse<string>(null, "User email already exist", true, ((int)ApiStatusCode.AlreadyExist));
+                        return CreateResponse<string>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
                     }
-                    return CreateResponse<string>(null, "User email not exist with system", true, ((int)ApiStatusCode.Ok));
+                    return CreateResponse<string>(null, "User not exist with system", true, ((int)ApiStatusCode.Ok));
                 }
-                return CreateResponse<string>(null, "User email not exist with system", true, ((int)ApiStatusCode.BadRequest));
+                return CreateResponse<string>(null, "User not exist with system", true, ((int)ApiStatusCode.BadRequest));
             }
             catch (Exception ex)
             {

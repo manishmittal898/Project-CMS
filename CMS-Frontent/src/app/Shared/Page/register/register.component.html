@@ -19,37 +19,77 @@
     <div class="row">
       <div class="col-lg-12">
         <h3 class="text-center section-title">Register</h3>
-        <form class="mx-400 m-auto">
+        <form class="mx-400 m-auto" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="FirstName" placeholder="First Name">
+            <input type="email" class="form-control" id="FirstName" name="FirstName" formControlName="FirstName"
+              placeholder="First Name">
             <label for="FirstName">First Name</label>
+            <div *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
+              <div *ngIf="f.FirstName.errors.required">First Name is required.</div>
+              <div *ngIf="f.FirstName.errors.minlength">First Name must be at least 3 characters long.</div>
+              <div *ngIf="f.FirstName.errors.maxlength">First Name cannot be more than 100 characters long..</div>
+
+            </div>
           </div>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="LastName" placeholder="Last Name">
+            <input type="email" class="form-control" id="LastName" name="LastName" formControlName="LastName"
+              placeholder="Last Name">
             <label for="LastName">Last Name</label>
+            <div *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
+              <div *ngIf="f.LastName.errors.required">Last Name is required.</div>
+              <div *ngIf="f.LastName.errors.minlength">Last Name must be at least 3 characters long.</div>
+              <div *ngIf="f.LastName.errors.maxlength">Last Name cannot be more than 100 characters long..</div>
+
+            </div>
           </div>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="EmailAddress" placeholder="Email">
-            <label for="EmailAddress">Email</label>
+            <input class="form-control" id="Email" type="email" id="email" formControlName="Email" placeholder="Email">
+            <label for="Email">Email</label>
+            <div *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
+              <div *ngIf="f.Email.errors.required">Email is required.</div>
+              <div *ngIf="f.Email.errors.email">Email must be a valid email address.</div>
+              <div *ngIf="f.Email.errors.maxlength">Email cannot be more than 20 characters long..</div>
+              <div *ngIf="f.Email.errors.existsEmail">User already exist with this mail.</div>
+
+            </div>
+
           </div>
           <div class="form-floating mb-3">
-            <input type="tel" class="form-control" id="Mobile" placeholder="Mobile">
+            <input type="tel" class="form-control" id="Mobile" name="Mobile" formControlName="Mobile"
+              placeholder="Mobile" [maxlength]="10">
             <label for="Mobile">Mobile</label>
+            <div *ngIf="f.Mobile.invalid && (f.Mobile.dirty || f.Mobile.touched)">
+              <div *ngIf="f.Mobile.errors.required">Mobile is required.</div>
+              <div *ngIf="f.Mobile.errors.pattern">Invalid Mobile Number.</div>
+              <div *ngIf="f.Mobile.errors.existsMobile">User already exist with this mobile.</div>
+
+            </div>
+
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="Password2" placeholder="Password">
+            <input type="password" class="form-control" id="Password" name="Password" formControlName="Password"
+              placeholder="Password">
             <label for="Password2">Password</label>
+            <div *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
+              <div *ngIf="f.Password.errors.required">Password is required.</div>
+              <div *ngIf="f.Password.errors.minlength">Password must be at least 8 characters long.</div>
+            </div>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password">
+            <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword"
+              formControlName="ConfirmPassword" placeholder="Confirm password">
             <label for="ConfirmPassword">Confirm password</label>
+            <div
+              *ngIf="f.Password.valid && f.ConfirmPassword.invalid && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)">
+              <div *ngIf="f.ConfirmPassword.errors.required">Confirm Password is required.</div>
+              <div *ngIf="f.ConfirmPassword.errors.notMatched">Passwords must match.</div>
+            </div>
           </div>
 
-          <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign up</button>
-
+          <button type="submit" [disabled]="!registrationForm.valid"
+            class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign up</button>
           <div class="text-center mt-3">Allready account ? <a href="javascript:void(0)" [routerLink]="['/login']"
               class="text-theme-primary font-w-500">Login</a> </div>
-
         </form>
       </div>
     </div>
