@@ -1009,4 +1009,16 @@ section.page-free-trial:before {
   max-height: 190px;
   margin-bottom: 15px;
 }
+button.page-free-trial-back-btn i {
+    color: #fff;
+    font-size: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+button.page-free-trial-back-btn {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
 /* CUSTOM CSS END */
