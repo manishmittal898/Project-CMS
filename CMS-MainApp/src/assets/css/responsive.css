@@ -313,7 +313,12 @@
   .page-free-trial a {
     margin: 0px;
     flex: 0 0 100%;
-    max-width: 80%;
+    max-width: 70%;
+}
+button.page-free-trial-back-btn i {
+    font-size: 30px;
+    top: 15px;
+    left: 15px;
 }
 }
 
