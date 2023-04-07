@@ -3,13 +3,18 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using CMS.Service.Services.ProductMaster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 
 namespace CMS.Service.Services.User
 {
@@ -24,15 +29,65 @@ namespace CMS.Service.Services.User
         }
 
 
-        public ServiceResponse<IEnumerable<Data.Models.TblUserMaster>> GetList()
+
+        public async Task<ServiceResponse<IEnumerable<UserMasterViewModel>>> GetList(IndexModel model)
         {
-            ServiceResponse<IEnumerable<Data.Models.TblUserMaster>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblUserMaster>>();
+            ServiceResponse<IEnumerable<UserMasterViewModel>> objResult = new ServiceResponse<IEnumerable<UserMasterViewModel>>();
             try
             {
-                var objData = _db.TblUserMasters.ToList();
-                objResult = CreateResponse(objData as IEnumerable<Data.Models.TblUserMaster>, "Success", true);
+
+                var result = (from user in _db.TblUserMasters
+                              where !user.IsDeleted && (string.IsNullOrEmpty(model.Search) || user.FirstName.Contains(model.Search) || user.LastName.Contains(model.Search) || user.Email.Contains(model.Search) || user.Mobile.Contains(model.Search)) && ((int)RoleEnum.SuperAdmin != user.RoleId && (int)RoleEnum.Admin != user.RoleId)
+                              select user);
+                switch (model.OrderBy)
+                {
+                    case "Name":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.FirstName ascending select orderData) : (from orderData in result orderby orderData.FirstName descending select orderData);
+                        break;
+                    case "CreatedOn":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        break;
+                    default:
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        break;
+                }
+                objResult.TotalRecord = result.Count();
+                result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
+
+                objResult.Data = await (from x in result
+                                        select new UserMasterViewModel
+                                        {
+                                            UserId = x.UserId,
+                                            FirstName = x.FirstName,
+                                            LastName = x.LastName,
+                                            Email = x.Email,
+                                            Mobile = x.Mobile,
+                                            Dob = x.Dob,
+                                            Address = x.Address,
+                                            RoleId = x.RoleId,
+                                            Role = x.Role.RoleName,
+                                            ProfilePhoto = !string.IsNullOrEmpty(x.ProfilePhoto) ? x.ProfilePhoto.ToAbsolutePath() : null,
+                                            CreatedBy = x.CreatedBy,
+                                            CreatedOn = x.CreatedOn,
+                                            ModifiedBy = x.ModifiedBy,
+                                            ModifiedOn = x.ModifiedOn,
+                                            IsActive = x.IsActive.Value,
+                                            IsDeleted = x.IsDeleted,
+
+
+                                        }).ToListAsync();
+
+                if (result != null)
+                {
+
+                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                }
+                else
+                {
+                    return CreateResponse<IEnumerable<UserMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 objResult.Data = null;
@@ -41,19 +96,64 @@ namespace CMS.Service.Services.User
             }
             return objResult;
         }
-        public ServiceResponse<TblUserMaster> GetById(int id)
+
+        public async Task<ServiceResponse<UserMasterViewModel>> GetById(long id)
         {
-            ServiceResponse<TblUserMaster> ObjResponse = new ServiceResponse<TblUserMaster>();
+            ServiceResponse<UserMasterViewModel> ObjResponse = new ServiceResponse<UserMasterViewModel>();
             try
             {
+                ObjResponse.Data = await _db.TblUserMasters.Include(r => r.Role).Include(add => add.TblUserAddressMasterUsers).ThenInclude(st => st.State).ThenInclude(add => add.TblUserAddressMasterAddressTypeNavigations).Where(
+                           x => x.UserId == id && x.IsDeleted == false && x.IsActive.Value == false).Select(x => new UserMasterViewModel
+                           {
 
-                var detail = _db.TblUserMasters.FirstOrDefault(x => x.UserId == id && !x.IsDeleted && x.IsActive.Value);
-                ObjResponse = CreateResponse(detail, "Success", true);
+                               UserId = x.UserId,
+                               FirstName = x.FirstName,
+                               LastName = x.LastName,
+                               Email = x.Email,
+                               Mobile = x.Mobile,
+                               Dob = x.Dob,
+                               Address = x.Address,
+                               RoleId = x.RoleId,
+                               Role = x.Role.RoleName,
+                               ProfilePhoto = !string.IsNullOrEmpty(x.ProfilePhoto) ? x.ProfilePhoto.ToAbsolutePath() : null,
+                               CreatedBy = x.CreatedBy,
+                               CreatedOn = x.CreatedOn,
+                               ModifiedBy = x.ModifiedBy,
+                               ModifiedOn = x.ModifiedOn,
+                               IsActive = x.IsActive.Value,
+                               IsDeleted = x.IsDeleted,
+                               CustomerAddresses = x.TblUserAddressMasterUsers.Count > 0 ? x.TblUserAddressMasterUsers.Where(xs => !x.IsDeleted).Select(ad => new UserAddressMasterViewModel
+                               {
+                                   Id = ad.Id,
+                                   UserId = ad.UserId,
+                                   FullName = ad.FullName,
+                                   Mobile = ad.Mobile,
+                                   BuildingNumber = ad.BuildingNumber,
+                                   Address = ad.Address,
+                                   PinCode = ad.PinCode,
+                                   Landmark = ad.Landmark,
+                                   City = ad.City,
+                                   StateId = ad.StateId,
+                                   State = ad.State.Name,
+                                   AddressType = ad.AddressType,
+                                   AddressTypeName = ad.AddressTypeNavigation.Name,
+                                   IsPrimary = ad.IsPrimary,
+                                   IsActive = ad.IsActive,
+
+
+                               }).ToList() : null
+
+                           }).FirstOrDefaultAsync();
+
+
+
+
+                ObjResponse = CreateResponse(ObjResponse.Data, "Success", true);
             }
             catch (Exception ex)
             {
 
-                ObjResponse = CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                ObjResponse = CreateResponse<UserMasterViewModel>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
             return ObjResponse;
@@ -63,31 +163,62 @@ namespace CMS.Service.Services.User
         {
             try
             {
-                var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && !x.IsDeleted).FirstOrDefaultAsync();
-
-                if (user == null)
+                if (model.UserId > 0)
                 {
+                    var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && x.UserId != model.UserId && !x.IsDeleted).FirstOrDefaultAsync();
 
-                    TblUserMaster objUser = new TblUserMaster();
-                    objUser.FirstName = model.FirstName ?? null;
-                    objUser.LastName = model.LastName;
-                    objUser.Email = model.Email;
-                    objUser.Dob = model.Dob;
-                    objUser.Mobile = model.Mobile;
-                    objUser.Password = _security.EncryptData(model.Password);
-                    objUser.Address = model.Address;
-                    objUser.ProfilePhoto = model.ProfilePhoto;
-                    objUser.RoleId = model.RoleId;
-                    objUser.IsDeleted = false;
-                    objUser.IsActive = true;
-                    objUser.CreatedBy = model.CreatedBy;
-                    var roletype = await _db.TblUserMasters.AddAsync(objUser);
-                    _db.SaveChanges();
-                    return CreateResponse(objUser, "User Added Succefully...", true);
+                    if (user == null)
+                    {
+                        TblUserMaster objUser = _db.TblUserMasters.FirstOrDefault(r => r.UserId == model.UserId);
+                        objUser.FirstName = model.FirstName ?? null;
+                        objUser.LastName = model.LastName;
+                        objUser.Email = model.Email;
+                        objUser.Dob = model.Dob;
+                        objUser.Mobile = model.Mobile;
+                        objUser.Password = _security.EncryptData(model.Password);
+                        objUser.Address = model.Address;
+                        objUser.ProfilePhoto = model.ProfilePhoto;
+                        objUser.ModifiedBy = model.ModifiedBy;
+                        var roletype = _db.TblUserMasters.Update(objUser);
+                        _db.SaveChanges();
+                        return CreateResponse(objUser, "User update Succefully...", true);
+                    }
+                    else
+                    {
+                        return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
+
+                    }
+
                 }
                 else
                 {
-                    return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
+
+                    var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && !x.IsDeleted).FirstOrDefaultAsync();
+
+                    if (user == null)
+                    {
+
+                        TblUserMaster objUser = new TblUserMaster();
+                        objUser.FirstName = model.FirstName ?? null;
+                        objUser.LastName = model.LastName;
+                        objUser.Email = model.Email;
+                        objUser.Dob = model.Dob;
+                        objUser.Mobile = model.Mobile;
+                        objUser.Password = _security.EncryptData(model.Password);
+                        objUser.Address = model.Address;
+                        objUser.ProfilePhoto = model.ProfilePhoto;
+                        objUser.RoleId = model.RoleId;
+                        objUser.IsDeleted = false;
+                        objUser.IsActive = true;
+                        objUser.CreatedBy = model.CreatedBy;
+                        var roletype = await _db.TblUserMasters.AddAsync(objUser);
+                        _db.SaveChanges();
+                        return CreateResponse(objUser, "User Added Succefully...", true);
+                    }
+                    else
+                    {
+                        return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
+                    }
                 }
 
             }
@@ -98,44 +229,6 @@ namespace CMS.Service.Services.User
 
             }
         }
-
-        public async Task<ServiceResponse<TblUserMaster>> Edit(int id, UserViewPostModel model)
-        {
-            try
-            {
-                var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && x.UserId != id && !x.IsDeleted).FirstOrDefaultAsync();
-
-                if (user != null)
-                {
-                    TblUserMaster objRole = _db.TblUserMasters.FirstOrDefault(r => r.UserId == id);
-                    objRole.FirstName = model.FirstName ?? null;
-                    objRole.LastName = model.LastName;
-                    objRole.Email = model.Email;
-                    objRole.Dob = model.Dob;
-                    objRole.Mobile = model.Mobile;
-                    objRole.Password = _security.EncryptData(model.Password);
-                    objRole.Address = model.Address;
-                    objRole.ProfilePhoto = model.ProfilePhoto;
-                    objRole.ModifiedBy = model.ModifiedBy;
-                    var roletype = _db.TblUserMasters.Update(objRole);
-                    _db.SaveChanges();
-                    return CreateResponse(objRole, "User update Succefully...", true);
-                }
-                else
-                {
-                    return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
-            }
-
-        }
-
 
         public async Task<ServiceResponse<TblUserMaster>> Delete(int id)
         {

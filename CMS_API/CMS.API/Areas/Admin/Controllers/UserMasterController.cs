@@ -21,11 +21,11 @@ namespace CMS.API.Areas.Admin.Controllers
         {
             _user = user;
         }
-        // GET: api/<UserController>
-        [HttpGet]
-        public object Get()
+
+        [HttpPost]
+        public async Task<object> Get(IndexModel model)
         {
-            return _user.GetList();
+            return await _user.GetList(model);
         }
 
         // GET api/<UserController>/5
@@ -56,39 +56,12 @@ namespace CMS.API.Areas.Admin.Controllers
             //return _roleTyp
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] UserViewPostModel model)
-        {
-
-
-            if (ModelState.IsValid)
-            {
-
-
-                return await _user.Edit(id, model);
-
-            }
-            else
-            {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
-
-                return objReturn;
-            } 
-        }
 
         // DELETE api/<UserController>/5
         [HttpGet("{id}")]
         public void Delete(int id)
         {
-
             _user.Delete(id);
-
-
-
         }
 
     }

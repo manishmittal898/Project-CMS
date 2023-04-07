@@ -6,6 +6,7 @@ import { MainRoutingModule } from "./main-routing.module";
 import { MainComponent } from './main.component';
 import { ProductModule } from "./product/product.module";
 import { MasterModule } from './master/master.module';
+import { UserModule } from './user/user.module';
 
 
 
@@ -19,6 +20,7 @@ import { MasterModule } from './master/master.module';
     MainRoutingModule,
     ProductModule,
     MasterModule,
+    UserModule,
     SharedModule
   ],
   bootstrap: [MainComponent]

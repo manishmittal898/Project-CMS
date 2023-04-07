@@ -17,6 +17,8 @@ const routes: Routes = [
     },
     { path: "product", loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
     { path: "master", loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+    { path: "user", loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+
     { path: 'manish', component: HtmlComponent },
     ]
   }

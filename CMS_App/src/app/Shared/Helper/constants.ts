@@ -78,6 +78,16 @@ export class API_Url {
   //#endregion
 
 
+  //#region  << User  >>
+  public static User_List_Api = `${environment.apiEndPoint}admin/UserMaster/Get`;
+  public static User_Detail_Api = `${environment.apiEndPoint}admin/UserMaster/Get/`;
+  public static User_AddUpdate_Api = `${environment.apiEndPoint}admin/UserMaster/Post`;
+  public static User_Delete_Api = `${environment.apiEndPoint}admin/UserMaster/Delete/`;
+  public static User_ActiveStatus_Api = `${environment.apiEndPoint}admin/UserMaster/ChangeActiveStatus/`;
+
+
+  //#endregion
+
 
   //#region <<CMSPage>>
   public static CMSPageList_Api = `${environment.apiEndPoint}admin/CMSPage/get`;

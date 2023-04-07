@@ -11,19 +11,18 @@ namespace CMS.Service.Services.User
     public class UserMasterViewModel
     {
         public long UserId { get; set; }
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
 
-      //  [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? Dob { get; set; }
         public string Address { get; set; }
-    
+
         public string Password { get; set; }
-      
+
         public string Mobile { get; set; }
         public int RoleId { get; set; }
+        public string Role { get; set; }
         public string ProfilePhoto { get; set; }
         public DateTime? CreatedOn { get; set; }
         public long? CreatedBy { get; set; }
@@ -31,17 +30,15 @@ namespace CMS.Service.Services.User
         public long? ModifiedBy { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
+        public List<UserAddressMasterViewModel>? CustomerAddresses { get; set; }
 
-        public virtual TblRoleType Role { get; set; }
-        public virtual ICollection<TblProductImage> TblProductImages { get; set; }
-        public virtual ICollection<TblProductReview> TblProductReviews { get; set; }
-        public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }
     }
 
     public class UserViewPostModel
     {
         public long UserId { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -64,6 +61,27 @@ namespace CMS.Service.Services.User
         public long? CreatedBy { get; set; }
         public long? ModifiedBy { get; set; }
 
+
+    }
+
+    public partial class UserAddressMasterViewModel
+    {
+        public long Id { get; set; }
+        public long UserId { get; set; }
+        public string FullName { get; set; }
+        public string Mobile { get; set; }
+        public string BuildingNumber { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string Landmark { get; set; }
+        public string City { get; set; }
+        public long? StateId { get; set; }
+        public virtual string State { get; set; }
+        public long? AddressType { get; set; }
+        public string AddressTypeName { get; set; }
+        public bool IsPrimary { get; set; }
+        public bool? IsActive { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

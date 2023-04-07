@@ -39,7 +39,7 @@ BEGIN
 
 INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (1, N'sandeep.suthar08@gmail.com', N'Sandeep', N'Suthar', NULL, NULL, N'vKkop56NIq7X09yArdmvew==', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
 INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (2, N'manish1994@gmail.com', N'Manish', N'Kumar', NULL, NULL, N'vKkop56NIq7X09yArdmvew==', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
-INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (3, N'storeone@gmail.com', N'Store one', N'User', NULL, NULL, N'vKkop56NIq7X09yArdmvew==', NULL, 1, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
+INSERT [dbo].[tblUserMaster] ([UserId], [Email], [FirstName], [LastName], [DOB], [Address], [Password], [Mobile], [RoleId], [ProfilePhoto], [CreatedOn], [CreatedBy], [ModifiedOn], [ModifiedBy], [IsActive], [IsDeleted]) VALUES (3, N'storeone@gmail.com', N'Store one', N'User', NULL, NULL, N'vKkop56NIq7X09yArdmvew==', NULL, 3, NULL, GETDATE(), NULL, GETDATE(), NULL, 1, 0)
 
 END
 

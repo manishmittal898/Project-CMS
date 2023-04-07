@@ -19,14 +19,16 @@ export class NavigationComponent implements OnInit {
   constructor(private readonly _authService: AuthService, private readonly _commonService: CommonService) {
     this.menuModel = [
       { Name: "Dashboard", Icon: "bi bi-house-door", Url: "/admin" },
-      {
-        Name: "Product", Icon: "bi bi-columns-gap", children: [
-          { Name: "List", Icon: "bi bi-list-check", Url: "./product/list" },
-          { Name: "Add", Icon: "bi bi-plus-circle", Url: "./product/add" }]
-      },
+
       {
         Name: "Master", Icon: "bi bi-box-seam", children: []
       },
+      {
+        Name: "Customer", Icon: "bi bi-columns-gap", children: [
+          { Name: "List", Icon: "bi bi-list-check", Url: "./user/list" }
+        ]
+      },
+
       {
         Name: "CMS Page", Icon: "bi bi-file-earmark-break", children: [
           { Name: "List", Icon: "bi bi-list-check", Url: "./master/cms-page" },
