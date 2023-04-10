@@ -35,9 +35,16 @@ namespace CMS.Service.Services.User
             ServiceResponse<IEnumerable<UserMasterViewModel>> objResult = new ServiceResponse<IEnumerable<UserMasterViewModel>>();
             try
             {
+                int roleId = 0;
+                if (model.AdvanceSearchModel !=null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("roleId"))
+                {
+                    model.AdvanceSearchModel.TryGetValue("roleId", out object role);
+                    roleId = Convert.ToInt32(role.ToString());
+
+                }
 
                 var result = (from user in _db.TblUserMasters
-                              where !user.IsDeleted && (string.IsNullOrEmpty(model.Search) || user.FirstName.Contains(model.Search) || user.LastName.Contains(model.Search) || user.Email.Contains(model.Search) || user.Mobile.Contains(model.Search)) && ((int)RoleEnum.SuperAdmin != user.RoleId && (int)RoleEnum.Admin != user.RoleId)
+                              where !user.IsDeleted && (string.IsNullOrEmpty(model.Search) || user.FirstName.Contains(model.Search) || user.LastName.Contains(model.Search) || user.Email.Contains(model.Search) || user.Mobile.Contains(model.Search)) && ((roleId == 0 && user.RoleId!= (int)RoleEnum.Customer) || user.RoleId == roleId)
                               select user);
                 switch (model.OrderBy)
                 {

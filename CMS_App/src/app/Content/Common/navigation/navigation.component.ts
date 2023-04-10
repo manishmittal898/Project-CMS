@@ -25,6 +25,12 @@ export class NavigationComponent implements OnInit {
       },
       {
         Name: "Customer", Icon: "bi bi-columns-gap", children: [
+          { Name: "List", Icon: "bi bi-list-check", Url: "./customer/list" }
+        ]
+      },
+
+      {
+        Name: "Users", Icon: "bi bi-columns-gap", children: [
           { Name: "List", Icon: "bi bi-list-check", Url: "./user/list" }
         ]
       },

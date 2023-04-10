@@ -88,6 +88,16 @@ export class API_Url {
 
   //#endregion
 
+    //#region  << Customer  >>
+    public static Customer_List_Api = `${environment.apiEndPoint}admin/Customer/Get`;
+    public static Customer_Detail_Api = `${environment.apiEndPoint}admin/Customer/Get/`;
+    public static Customer_AddUpdate_Api = `${environment.apiEndPoint}admin/Customer/Post`;
+    public static Customer_Delete_Api = `${environment.apiEndPoint}admin/Customer/Delete/`;
+    public static Customer_ActiveStatus_Api = `${environment.apiEndPoint}admin/Customer/ChangeActiveStatus/`;
+
+
+    //#endregion
+
 
   //#region <<CMSPage>>
   public static CMSPageList_Api = `${environment.apiEndPoint}admin/CMSPage/get`;

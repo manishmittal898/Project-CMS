@@ -3,8 +3,10 @@ using CMS.Service.Services.ProductMaster;
 using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,8 +25,13 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<object> GetList(IndexModel model)
+        public async Task<object> Get(IndexModel model)
         {
+            if (model.AdvanceSearchModel == null)
+            {
+                model.AdvanceSearchModel = new Dictionary<string, object>();
+            }
+            model.AdvanceSearchModel["roleId"] = (int)RoleEnum.Customer;
             return await _user.GetList(model);
         }
         // GET api/<CustomerController>/5

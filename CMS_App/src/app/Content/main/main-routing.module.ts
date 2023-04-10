@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HtmlComponent } from '../html/html.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MainComponent } from './main.component';
+import { CustomerModule } from './customer/customer.module';
 
 const routes: Routes = [
 
@@ -18,7 +19,7 @@ const routes: Routes = [
     { path: "product", loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
     { path: "master", loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
     { path: "user", loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
-
+    { path: "customer", loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
     { path: 'manish', component: HtmlComponent },
     ]
   }
