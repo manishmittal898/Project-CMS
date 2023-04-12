@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { BaseAPIService } from './Services/base-api.service';
 import { SecurityService } from './Services/security.service';
 
@@ -55,13 +55,24 @@ export class AuthService {
         this.IsAuthentication.next(true);
       } else {
 
-       // this.LogOut();
+        // this.LogOut();
         this.IsAuthentication.next(false);
       }
     }, 5);
   }
 
+
+
   LogOut() {
+    let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
+    this._baseService.get(url).subscribe(x => {
+
+      this.removeLocalData();
+    }, err => {
+      this.removeLocalData();
+    });
+  }
+  private removeLocalData() {
     this.IsAuthentication.next(false);
     this._securityService.removeStorage('authToken');
     this._securityService.removeStorage('sessionTime');
@@ -81,5 +92,5 @@ export interface LoginUserDetailModel {
   Token: string;
   UserName: string;
   RoleName: string;
-  ProfilePhoto:string;
+  ProfilePhoto: string;
 }

@@ -25,14 +25,14 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this._router.queryParams.subscribe(p => {
       if (p.id) {
-        debugger
+
         const id = this._securityService.decrypt(this._router.snapshot.queryParams.id);
         this.indexModel.CategoryId = [Number(id)];
         this.indexModel.SubCategoryId = [];
       }
 
       if (p.subid) {
-        debugger
+
         const sid = this._securityService.decrypt(this._router.snapshot.queryParams.subid);
         this.indexModel.SubCategoryId = [Number(sid)];
       }
@@ -40,9 +40,9 @@ export class ProductListComponent implements OnInit {
       if (this._router.snapshot.params?.name) {
         this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
       }
-       setTimeout(() => {
-         this.getList();
-       }, 100);
+      setTimeout(() => {
+        this.getList();
+      }, 100);
 
     });
 
@@ -58,10 +58,7 @@ export class ProductListComponent implements OnInit {
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data;
-debugger
-
-        this.model = this.model.map(x=> {return {Id :  this._securityService.encrypt(String(x.Id)),...x}});
-
+        this.model = this.model.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
 
       }

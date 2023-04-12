@@ -4,6 +4,7 @@
   <ng-container *ngIf="!isLoading">
     <section class="slider-items-5 product-list-slider">
       <ng-container *ngFor="let item of productModel">
+
         <div [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id" class="product-list-items">
 
           <div class="product-list-items-img d-flex align-items-center justify-content-center">
@@ -13,7 +14,6 @@
             <h3>{{item?.Name}}</h3>
             <p>₹ {{item?.Price}}</p>
           </div>
-
         </div>
       </ng-container>
     </section>

@@ -36,9 +36,9 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.Password.Equals(model.Password) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email)  && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
-                if (user != null && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
+                if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
 
                     var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
@@ -51,6 +51,11 @@ namespace CMS.Service.Services.Account
                     response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
 
                     await SaveUserLog(user.UserId, response);
+                }
+                else if (!user.Password.Equals(model.Password))
+                {
+                    return CreateResponse<LoginResponseModel>(null, "Incorrect Username or Password...", false, ((int)ApiStatusCode.RecordNotFound));
+
                 }
                 else if (user != null)
                 {
@@ -95,7 +100,7 @@ namespace CMS.Service.Services.Account
             try
             {
                 var encrptPassword = _security.EncryptData(model.Password);
-                var user = await _db.TblUserMasters.Where(x => x.Mobile == model.Email).FirstOrDefaultAsync();
+                var user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     user.Password = encrptPassword;

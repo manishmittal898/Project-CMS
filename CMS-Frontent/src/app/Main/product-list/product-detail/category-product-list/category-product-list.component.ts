@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ProductFilterModel, ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
+import { SecurityService } from 'src/app/Shared/Services/security.service';
 declare var $: any;
 @Component({
   selector: 'app-category-product-list',
@@ -22,7 +23,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
   //   return this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
 
   // }
-  constructor(private readonly _productService: ProductService) {
+  constructor(private readonly _productService: ProductService, private readonly _securityService: SecurityService) {
     this.indexModel.CategoryId = [Number(this.CategoryId)];
   }
 
@@ -52,6 +53,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
       this._productService.GetList(this.indexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.model = response.Data;
+          this.model = this.model.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
           this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId > 0 ? 1 : 0) : 0) as number;
           this.bindRelatedList();
 
@@ -61,16 +63,16 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   }
   bindRelatedList() {
-    this.productModel = this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
+    this.productModel = this.model.filter(x => Number(this._securityService.decrypt(String(x.Id))) !== Number(this.ExcludeId));
     this.isLoading = false;
-     this.AddSlider();
+    this.AddSlider();
 
   }
   AddSlider() {
     this.isLoading = false;
 
     setTimeout(() => {
-      $('.slider-items-4')?.slick({
+      $('.slider-items-5')?.slick({
         dots: true,
         infinite: true,
         speed: 1000,
@@ -110,47 +112,8 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         }
         ]
       });
-      $('.slider-items-5')?.slick({
-        dots: true,
-        infinite: true,
-        speed: 1000,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [{
-          breakpoint: 1400,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        },
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 595,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-        ]
-      });
-    }, 50);
+
+    }, 150);
 
   }
 

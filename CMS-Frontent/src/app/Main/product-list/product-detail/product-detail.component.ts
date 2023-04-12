@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductMasterViewModel, ProductService, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { SecurityService } from 'src/app/Shared/Services/security.service';
 declare var $: any;
 @Component({
   selector: 'app-product-detail',
@@ -24,12 +25,12 @@ export class ProductDetailComponent implements OnInit {
   SelectedSizeModel: ProductStockModel;
 
   shareLink: SafeUrl;
-  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer) {
+  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
   }
 
   ngOnInit(): void {
     this._route.params.subscribe(x => {
-      this.recordId = x.id;
+      this.recordId = this._securityService.decrypt(x.id) as any;
       this.getDetailData();
     });
 

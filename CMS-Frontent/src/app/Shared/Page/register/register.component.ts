@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
 
   }
   onSubmit() {
-    debugger
+
     if (this.registrationForm.valid) {
       const frm = {
         FirstName: this.registrationForm.value.FirstName,
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       }
       this._accountService.Register(frm).subscribe((res) => {
         if (res.IsSuccess) {
-          debugger
+
           let data = res.Data as any;
           this.toast.success(res.Message?.toString(), 'Registeration');
           this._route.navigate(['/login']);
@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
 
       this._accountService.CheckUserExist(control.value, isMoble, 0).then
         (x => {
-          debugger
+
           if (x.IsSuccess) {
             if (isMoble) {
               if (x.StatusCode == 205) {
