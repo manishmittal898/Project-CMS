@@ -36,7 +36,7 @@ namespace CMS.Service.Services.User
             try
             {
                 int roleId = 0;
-                if (model.AdvanceSearchModel !=null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("roleId"))
+                if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("roleId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("roleId", out object role);
                     roleId = Convert.ToInt32(role.ToString());
@@ -44,7 +44,7 @@ namespace CMS.Service.Services.User
                 }
 
                 var result = (from user in _db.TblUserMasters
-                              where !user.IsDeleted && (string.IsNullOrEmpty(model.Search) || user.FirstName.Contains(model.Search) || user.LastName.Contains(model.Search) || user.Email.Contains(model.Search) || user.Mobile.Contains(model.Search)) && ((roleId == 0 && user.RoleId!= (int)RoleEnum.Customer) || user.RoleId == roleId)
+                              where !user.IsDeleted && (string.IsNullOrEmpty(model.Search) || user.FirstName.Contains(model.Search) || user.LastName.Contains(model.Search) || user.Email.Contains(model.Search) || user.Mobile.Contains(model.Search)) && ((roleId == 0 && user.RoleId != (int)RoleEnum.Customer) || user.RoleId == roleId)
                               select user);
                 switch (model.OrderBy)
                 {
@@ -110,16 +110,16 @@ namespace CMS.Service.Services.User
             try
             {
                 ObjResponse.Data = await _db.TblUserMasters.Include(r => r.Role).Include(add => add.TblUserAddressMasterUsers).ThenInclude(st => st.State).ThenInclude(add => add.TblUserAddressMasterAddressTypeNavigations).Where(
-                           x => x.UserId == id && x.IsDeleted == false && x.IsActive.Value == false).Select(x => new UserMasterViewModel
+                           x => x.UserId == id && x.IsDeleted == false && x.IsActive.Value == true).Select(x => new UserMasterViewModel
                            {
 
                                UserId = x.UserId,
-                               FirstName = x.FirstName,
-                               LastName = x.LastName,
-                               Email = x.Email,
-                               Mobile = x.Mobile,
-                               Dob = x.Dob,
-                               Address = x.Address,
+                               FirstName = x.FirstName ?? "N/A",
+                               LastName = x.LastName ?? "N/A",
+                               Email = x.Email ?? "N/A",
+                               Mobile = x.Mobile ?? "N/A",
+                               Dob = x.Dob ?? null,
+                               Address = x.Address ?? "N/A",
                                RoleId = x.RoleId,
                                Role = x.Role.RoleName,
                                ProfilePhoto = !string.IsNullOrEmpty(x.ProfilePhoto) ? x.ProfilePhoto.ToAbsolutePath() : null,
@@ -147,13 +147,8 @@ namespace CMS.Service.Services.User
                                    IsPrimary = ad.IsPrimary,
                                    IsActive = ad.IsActive,
 
-
                                }).ToList() : null
-
                            }).FirstOrDefaultAsync();
-
-
-
 
                 ObjResponse = CreateResponse(ObjResponse.Data, "Success", true);
             }

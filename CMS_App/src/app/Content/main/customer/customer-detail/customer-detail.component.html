@@ -14,62 +14,35 @@
       <!-- Breadcrumb End -->
     </div>
     <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
-      <button class="btn btn-success mr-3" routerLink="../../edit/{{00}}"> <i class="bi bi-pencil-square mr-1"></i>Edit</button>
-    <button class="btn btn-dark btn-sm" routerLink="/admin/Customer"> <i class="bi bi-chevron-left"></i>
-      Back to list</button>
+      <button class="btn btn-success mr-3" routerLink="../../edit/{{00}}"> <i
+          class="bi bi-pencil-square mr-1"></i>Edit</button>
+      <button class="btn btn-dark btn-sm" routerLink="/admin/Customer"> <i class="bi bi-chevron-left"></i>
+        Back to list</button>
     </div>
   </div>
 </div>
 <!-- Page Header Title end -->
 
 <div class="widget-content widget-content p-3 form-grp-w-border">
-  <h2> <img src="assets/img/default.jpg"> Personal Details</h2>
+  <h2> <img [src]="model?.ProfilePhoto" onerror="this.src='assets/img/default.jpg'"> Personal Details</h2>
 
-  <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3"><img src="assets/img/user-default.jpg"></div>
+  <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3"><img
+      src="assets/img/user-default.jpg"></div>
   <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
-      <tbody>
-          <tr>
-              <td style="width: 18%;"> <strong> Name: </strong> </td>
-              <td style="width: 32%;">Akash agarwal</td>
-              <td style="width: 18%;"><strong> Date of birth: </strong> </td>
-              <td style="width: 32%;">20-20-1997</td>
-          </tr>
+    <tbody>
+      <tr>
+        <td style="width: 18%;"> <strong> Name: </strong> </td>
+        <td style="width: 32%;">{{this.model?.FirstName}} {{this.model?.LastName}}</td>
+        <td style="width: 18%;"><strong> Date of birth: </strong> </td>
+        <td style="width: 32%;">{{this.model?.Dob}}</td>
+      </tr>
 
-          <tr>
-              <td><strong> Father name: </strong> </td>
-              <td>Enter name</td>
-              <td><strong> Mobile number: </strong> </td>
-              <td>+91 8953078951</td>
-          </tr>
-
-          <tr>
-              <td><strong> Qualification: </strong> </td>
-              <td>Enter Qualification</td>
-              <td><strong> Personal Email ID: </strong> </td>
-              <td>test@gmail.com</td>
-          </tr>
-
-          <tr>
-              <td><strong> Ability to self fund: </strong> </td>
-              <td>Yes</td>
-              <td><strong> Gender: </strong> </td>
-              <td>Male</td>
-          </tr>
-
-          <tr>
-              <td><strong> Address: </strong> </td>
-              <td>Kemp House 152 – 160 City Road London EC1V 2NX</td>
-              <td><strong> State: </strong> </td>
-              <td>Rajasthan</td>
-          </tr>
-
-          <tr>
-              <td><strong> District: </strong> </td>
-              <td>Jaipur</td>
-              <td><strong> Pincode: </strong> </td>
-              <td>302008</td>
-          </tr>
-
-      </tbody>
+      <tr>
+        <td><strong> Email: </strong> </td>
+        <td>{{this.model?.Email}}</td>
+        <td><strong> Mobile number: </strong> </td>
+        <td>{{this.model?.Mobile}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
