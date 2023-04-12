@@ -49,6 +49,8 @@ namespace CMS.Service.Services.Account
                     response.RoleName = user.Role.RoleName;
                     response.RoleLevel = user.Role.RoleLevel;
                     response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
+
+                    await SaveUserLog(user.UserId, response);
                 }
                 else if (user != null)
                 {
@@ -118,8 +120,8 @@ namespace CMS.Service.Services.Account
                 if (isExist != null)
                 {
 
-                    // await _db.SaveChangesAsync();
-                    return CreateResponse<object>(true, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                    await SaveUserLog(isExist.UserId);
+                    return CreateResponse<object>(true, ResponseMessage.Logout, true, ((int)ApiStatusCode.Ok));
                 }
                 else
                 {
@@ -147,6 +149,45 @@ namespace CMS.Service.Services.Account
                 objModel.IsSuccess = false;
                 objModel.Message = ex.Message + "-- " + ex.InnerException.Message;
                 return objModel;
+            }
+        }
+        /// <summary>
+        /// Save Log
+        /// </summary>
+        /// <param name="userId">Logged in UserId</param>
+        /// <param name="model">pass while Login</param>
+        /// <returns></returns>
+        private async Task<ServiceResponse<TblUserMasterLog>> SaveUserLog(long userId, LoginResponseModel model = null)
+        {
+            try
+            {
+                var OldActiveSession = await _db.TblUserMasterLogs.Where(x => x.UserId == userId && x.SessionEndTime == null).ToListAsync();
+                if (OldActiveSession.Count > 0)
+                {
+                    foreach (var item in OldActiveSession)
+                    {
+                        item.SessionEndTime = DateTime.Now;
+                    }
+                    _db.TblUserMasterLogs.UpdateRange(OldActiveSession);
+                    await _db.SaveChangesAsync();
+                }
+                TblUserMasterLog objLog = new TblUserMasterLog();
+                if (model != null)
+                {
+                    objLog.UserId = model.UserId;
+                    objLog.Token = model.Token;
+                    await _db.TblUserMasterLogs.AddAsync(objLog);
+                    await _db.SaveChangesAsync();
+
+                }
+                return CreateResponse(objLog, ResponseMessage.Save, true, ((int)ApiStatusCode.Ok));
+
+            }
+            catch (Exception ex)
+            {
+
+                return CreateResponse<TblUserMasterLog>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
+
             }
         }
     }

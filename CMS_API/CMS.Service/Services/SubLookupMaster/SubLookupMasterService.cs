@@ -175,7 +175,6 @@ namespace CMS.Service.Services.SubLookupMaster
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpId = model.LookUpId;
                     objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
-
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;

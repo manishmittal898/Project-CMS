@@ -31,6 +31,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblSubLookupMaster> TblSubLookupMasters { get; set; }
         public virtual DbSet<TblUserAddressMaster> TblUserAddressMasters { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
+        public virtual DbSet<TblUserMasterLog> TblUserMasterLogs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -612,6 +613,30 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__tblUserMa__RoleI__19DFD96B");
+            });
+
+            modelBuilder.Entity<TblUserMasterLog>(entity =>
+            {
+                entity.ToTable("tblUserMasterLog");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.SessionEndTime).HasColumnType("datetime");
+
+                entity.Property(e => e.SessionStartTime)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Token)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblUserMasterLogs)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserMasterLog_UserId");
             });
 
             OnModelCreatingPartial(modelBuilder);

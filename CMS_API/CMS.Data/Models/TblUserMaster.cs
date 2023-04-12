@@ -33,6 +33,7 @@ namespace CMS.Data.Models
             TblUserAddressMasterCreatedByNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterModifiedByNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterUsers = new HashSet<TblUserAddressMaster>();
+            TblUserMasterLogs = new HashSet<TblUserMasterLog>();
         }
 
         public long UserId { get; set; }
@@ -77,5 +78,6 @@ namespace CMS.Data.Models
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterUsers { get; set; }
+        public virtual ICollection<TblUserMasterLog> TblUserMasterLogs { get; set; }
     }
 }

@@ -37,6 +37,8 @@ namespace CMS.Core.ServiceHelper.Model
 
         public const string RecordAlreadyExist = "Record already exist, Please try with other !";
         public const string FileUpdated = "File sucessfully uploaded...!";
+        public const string Logout = "Logout sucessfully...!";
+
     }
 
     public class FilterDropDownPostModel

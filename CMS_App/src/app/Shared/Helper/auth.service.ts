@@ -67,6 +67,15 @@ export class AuthService {
   }
 
   LogOut() {
+    let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
+    this._baseService.get(url).subscribe(x => {
+      debugger
+      this.removeLocalData();
+    }, err => {
+      this.removeLocalData();
+    });
+  }
+  private removeLocalData() {
     this.IsAuthentication.next(false);
     this._securityService.removeStorage('authToken');
     this._securityService.removeStorage('sessionTime');
