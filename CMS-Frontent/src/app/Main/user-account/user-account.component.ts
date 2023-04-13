@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/Shared/auth.service';
   styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit {
-
+  pageName = 'My Profile';
   constructor(private readonly _authService: AuthService) { }
 
   ngOnInit(): void {
