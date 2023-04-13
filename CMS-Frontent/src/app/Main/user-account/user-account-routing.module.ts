@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserAccountComponent } from './user-account.component';
 import { MyAccountComponent } from './my-account/my-account.component';
-import { MyOdersComponent } from './my-oders/my-oders.component';
 import { MyAddressComponent } from './my-address/my-address.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
 
 const routes: Routes = [
   {
@@ -12,10 +13,9 @@ const routes: Routes = [
     children: [
       { component: MyAccountComponent, path: '' },
       { component: MyAccountComponent, path: 'profile' },
-      { component: MyOdersComponent, path: 'orders' },
-      { component: MyAddressComponent, path: 'address' }
-
-
+      { component: MyOrdersComponent, path: 'orders' },
+      { component: MyAddressComponent, path: 'address' },
+      { component: MyWishlistComponent, path: 'wishlist' }
     ]
 
   }

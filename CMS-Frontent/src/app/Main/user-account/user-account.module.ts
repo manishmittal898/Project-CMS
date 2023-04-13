@@ -6,11 +6,12 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { FeatureModule } from '../../Shared/Module/feature/feature.module';
 import { UserAccountComponent } from './user-account.component';
 import { MyAddressComponent } from './my-address/my-address.component';
-import { MyOdersComponent } from './my-oders/my-oders.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
 
 
 @NgModule({
-  declarations: [MyAccountComponent, UserAccountComponent, MyAddressComponent, MyOdersComponent],
+  declarations: [MyAccountComponent, UserAccountComponent, MyAddressComponent, MyOrdersComponent, MyWishlistComponent],
   imports: [
     CommonModule,
     UserAccountRoutingModule,
