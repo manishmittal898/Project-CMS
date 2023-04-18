@@ -751,14 +751,16 @@ font-weight: 600;
     padding-top: 12px;
 }
 
-.product-list-info h3, .product-list-info h3 a {
+.product-list-info h3, .product-list-info  a {
     font-size: 16px;
     margin-bottom: 3px;
     color: var(--black);
     font-weight: 500;
     cursor: pointer;
+    display: block;
+    line-height: 20px;
 }
-.product-list-info h3:hover, .product-list-info h3 a:hover {
+.product-list-info h3:hover, .product-list-info  a:hover {
   color: var(--black);
 }
 

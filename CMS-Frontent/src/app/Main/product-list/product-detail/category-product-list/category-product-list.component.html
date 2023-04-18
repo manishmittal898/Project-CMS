@@ -16,8 +16,8 @@
             <!-- #Hover items End-->
           </div>
           <div class="product-list-info">
-            <h3> <a href="javascript:void(0)"
-                [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id"> {{item?.Name}} </a></h3>
+             <a href="javascript:void(0)"
+                [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id"> {{item?.Name}} </a>
             <p>₹ {{item?.Price}}</p>
           </div>
         </div>
