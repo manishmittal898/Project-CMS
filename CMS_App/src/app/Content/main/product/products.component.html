@@ -99,10 +99,10 @@
             <ng-container matColumnDef="Action">
               <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
               <td mat-cell *matCellDef="let row" class="table-action-btn">
-                <a href="#" class="table-action-btn-view" routerLink="../detail/{{+row.Id}}" data-title="View Detail"><i
+                <a href="javascript:void(0)" class="table-action-btn-view" routerLink="../detail/{{+row.Id}}" data-title="View Detail"><i
                     class="bi bi-eye"></i>
                 </a>
-                <a href="#" class="table-action-btn-edit" routerLink="../edit/{{+row.Id}}" data-title="Edit"><i
+                <a href="javascript:void(0)" class="table-action-btn-edit" routerLink="../edit/{{+row.Id}}" data-title="Edit"><i
                     class="bi bi-pencil-square"></i>
                 </a>
                 <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" data-title="Delete">

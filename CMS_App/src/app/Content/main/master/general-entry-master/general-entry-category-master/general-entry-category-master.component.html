@@ -82,7 +82,7 @@
 
             <ng-container matColumnDef="Flags">
               <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:130px;">Flags </th>
-              <td mat-cell *matCellDef="let element" class="table-action-btn"> 
+              <td mat-cell *matCellDef="let element" class="table-action-btn">
                 <a class="d-block mb-2 mx-0" (click)="onFlagStatus(element!.Id,'IsShowInMain')" title="Update Status">
                   <span *ngIf="element!.IsShowInMain" class="d-inline-block w-100 badge badge-warning">
                     <i class="bi bi-check-circle"></i>&nbsp;Show In Home
@@ -147,10 +147,10 @@
             <ng-container matColumnDef="Action">
               <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
               <td mat-cell *matCellDef="let row" class="table-action-btn">
-                <a href="#" class="table-action-btn-view" routerLink="./detail/{{+row.Id}}" data-title="View Detail"><i
+                <a href="javascript:void(0)" class="table-action-btn-view" routerLink="./detail/{{+row.Id}}" data-title="View Detail"><i
                     class="bi bi-eye"></i>
                 </a>
-                <a href="#" class="table-action-btn-edit" routerLink="./edit/{{+row.Id}}" data-title="Edit"><i
+                <a href="javascript:void(0)" class="table-action-btn-edit" routerLink="./edit/{{+row.Id}}" data-title="Edit"><i
                     class="bi bi-pencil-square"></i>
                 </a>
 

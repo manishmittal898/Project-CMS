@@ -13,16 +13,34 @@
               alt="StoreOne" />
             <span>Bootstrap V5</span>
           </a>
-          <div class="navbar-user-icons">
+          <div class="navbar-user-icons d-flex align-items-center">
             <a href="javascript:void()" data-title="Search" data-bs-toggle="offcanvas" data-bs-target="#GlobalSearch"><i
                 class="bi bi-search"></i></a>
 
             <a *ngIf="!isLoggedIn;else autherized" [routerLink]="['/login']" href="javascript:void()"
               data-title="Account"><i class="bi bi-person-circle"></i></a>
 
-            <ng-template #autherized>
+            <!-- <ng-template #autherized>
               <a [routerLink]="['/user/profile']" href="javascript:void()" data-title="Profile"><i class="bi bi-box-arrow-left"></i></a>
-            </ng-template>
+            </ng-template> -->
+            <ng-template #autherized>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle d-block d-sm-none"></i>
+                  <span class="login-user-name d-none d-sm-block">
+                 User name
+                </span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" routerLink="./user/profile" href="javascript:void(0)"><i class="bi bi-person-circle me-2"></i> Profile</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/orders" href="javascript:void(0)"><i class="bi bi-handbag me-2"></i> My Orders</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/address" href="javascript:void(0)"><i class="bi bi-geo-alt me-2"></i> Address</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/wishlist" href="javascript:void(0)"><i class="bi bi-heart me-2"></i> Wishlist</a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0)"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+              </ul>
+          </div>
+        </ng-template>
 
             <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i
                 class="bi bi-bag"></i>

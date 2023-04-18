@@ -23,7 +23,7 @@ export class CustomerComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  displayedColumns: string[] = ['index', 'Name', 'ProfilePhoto', 'Email', 'Mobile', 'Role', 'IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'Email', 'Mobile', 'Role', 'IsActive', 'Action'];
   ViewdisplayedColumns = [
 
     { Value: 'Email', Text: 'Email' },

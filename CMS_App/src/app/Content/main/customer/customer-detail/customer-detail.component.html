@@ -1,48 +1,192 @@
-<!-- Page Header Title start -->
-<div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>Customer Detail</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/Customer">Customer List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Customer Detail</li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
-      <button class="btn btn-success mr-3" routerLink="../../edit/{{00}}"> <i
-          class="bi bi-pencil-square mr-1"></i>Edit</button>
-      <button class="btn btn-dark btn-sm" routerLink="/admin/Customer"> <i class="bi bi-chevron-left"></i>
-        Back to list</button>
+<div class="pb-2">
+  <!-- Page Header Title start -->
+  <div class="widget-header">
+    <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
+      <div>
+        <h1>Customer Detail</h1>
+        <!-- Breadcrumb Start -->
+        <nav class="custom-breadcrum">
+          <ol class="breadcrumb justify-content-center justify-content-sm-start">
+            <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/Customer">Customer List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Customer Detail</li>
+          </ol>
+        </nav>
+        <!-- Breadcrumb End -->
+      </div>
+      <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
+        <button class="btn btn-success mr-3" routerLink="../../edit/{{00}}"> <i
+            class="bi bi-pencil-square mr-1"></i>Edit</button>
+        <button class="btn btn-dark btn-sm" routerLink="/admin/Customer"> <i class="bi bi-chevron-left"></i>
+          Back to list</button>
+      </div>
     </div>
   </div>
-</div>
-<!-- Page Header Title end -->
+  <!-- Page Header Title end -->
 
-<div class="widget-content widget-content p-3 form-grp-w-border">
-  <h2> <img [src]="model?.ProfilePhoto" onerror="this.src='assets/img/default.jpg'"> Personal Details</h2>
+  <div class="widget-content p-3 form-grp-w-border">
+    <h2> <i class="bi bi-person-bounding-box"></i> Personal Details</h2>
+    <!-- <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3"><img
+      src="assets/img/user-default.jpg"></div> -->
+    <div class="table-responsive">
+      <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
+        <tbody>
+          <tr>
+            <td style="width: 18%;"> <strong> Name: </strong> </td>
+            <td style="width: 32%;">{{this.model?.FirstName}} {{this.model?.LastName}}</td>
+            <td style="width: 18%;"><strong> Date of birth: </strong> </td>
+            <td style="width: 32%;">{{this.model?.Dob}}</td>
+          </tr>
 
-  <div class="page-profile d-flex align-items-center justify-content-center mx-auto mb-3"><img
-      src="assets/img/user-default.jpg"></div>
-  <table class="table  table-borderless table-data-info table-font-17 table-v-align-top m-0">
-    <tbody>
-      <tr>
-        <td style="width: 18%;"> <strong> Name: </strong> </td>
-        <td style="width: 32%;">{{this.model?.FirstName}} {{this.model?.LastName}}</td>
-        <td style="width: 18%;"><strong> Date of birth: </strong> </td>
-        <td style="width: 32%;">{{this.model?.Dob}}</td>
-      </tr>
+          <tr>
+            <td><strong> Email: </strong> </td>
+            <td>{{this.model?.Email}}</td>
+            <td><strong> Mobile number: </strong> </td>
+            <td>{{this.model?.Mobile}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-      <tr>
-        <td><strong> Email: </strong> </td>
-        <td>{{this.model?.Email}}</td>
-        <td><strong> Mobile number: </strong> </td>
-        <td>{{this.model?.Mobile}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="widget-content p-3 form-grp-w-border">
+    <h2> <i class="bi bi-geo-alt"></i> Address</h2>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card-d-1">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="m-0">Address 1</h3>
+            <span class="badge badge-success border-round px-3">Default</span>
+          </div>
+          <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+            8952098741</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card-d-1">
+          <h3>Address 2</h3>
+          <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+            8952098741</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card-d-1">
+          <h3>Address 3</h3>
+          <p class="m-0">4-RA-5 Monilek Marg, Near Monilek Hospital Jawahar Nagar Jaipur, Raj, 302013 Mobile :
+            8952098741</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="widget-content p-3 form-grp-w-border">
+    <h2> <i class="bi bi-shop-window"></i> Orders</h2>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+          <div class="table-responsive">
+            <table id="zero-config" class="table table-striped dataTable table-header w-100">
+              <thead>
+                <tr>
+                  <th style="width: 20px;">S. no</th>
+                  <th style="width: 200px;">Product image</th>
+                  <th>Product name</th>
+                  <th style="width: 100px;">Price</th>
+                  <th style="width: 50px;">Qty</th>
+                  <th style="width: 100px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td>
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                      <img src="assets/img/no-img.svg">
+                    </div>
+                  </td>
+                  <td>Pink Bandhej Printed Kurti Pant Set.</td>
+                  <td>₹ 450</td>
+                  <td>04</td>
+                  <td class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" data-toggle="tooltip" data-placement="bottom"
+                      title="View"><i class="bi bi-eye"></i></a>
+                    <a href="javascript:void(0)" class="table-action-btn-delete" data-toggle="tooltip" data-placement="bottom"
+                      title="Remove"><i class="bi bi-trash"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>02</td>
+                  <td>
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                      <img src="assets/img/no-img.svg">
+                    </div>
+                  </td>
+                  <td>Pink Bandhej Printed Kurti Pant Set.</td>
+                  <td>₹ 450</td>
+                  <td>04</td>
+                  <td class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" data-toggle="tooltip" data-placement="bottom"
+                      title="View"><i class="bi bi-eye"></i></a>
+                    <a href="javascript:void(0)" class="table-action-btn-delete" data-toggle="tooltip" data-placement="bottom"
+                      title="Remove"><i class="bi bi-trash"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>03</td>
+                  <td>
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                      <img src="assets/img/no-img.svg">
+                    </div>
+                  </td>
+                  <td>Pink Bandhej Printed Kurti Pant Set.</td>
+                  <td>₹ 450</td>
+                  <td>04</td>
+                  <td class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" data-toggle="tooltip" data-placement="bottom"
+                      title="View"><i class="bi bi-eye"></i></a>
+                    <a href="javascript:void(0)" class="table-action-btn-delete" data-toggle="tooltip" data-placement="bottom"
+                      title="Remove"><i class="bi bi-trash"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>04</td>
+                  <td>
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                      <img src="assets/img/no-img.svg">
+                    </div>
+                  </td>
+                  <td>Pink Bandhej Printed Kurti Pant Set.</td>
+                  <td>₹ 450</td>
+                  <td>04</td>
+                  <td class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" data-toggle="tooltip" data-placement="bottom"
+                      title="View"><i class="bi bi-eye"></i></a>
+                    <a href="javascript:void(0)" class="table-action-btn-delete" data-toggle="tooltip" data-placement="bottom"
+                      title="Remove"><i class="bi bi-trash"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>05</td>
+                  <td>
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                      <img src="assets/img/no-img.svg">
+                    </div>
+                  </td>
+                  <td>Pink Bandhej Printed Kurti Pant Set.</td>
+                  <td>₹ 450</td>
+                  <td>04</td>
+                  <td class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" data-toggle="tooltip" data-placement="bottom"
+                      title="View"><i class="bi bi-eye"></i></a>
+                    <a href="javascript:void(0)" class="table-action-btn-delete" data-toggle="tooltip" data-placement="bottom"
+                      title="Remove"><i class="bi bi-trash"></i></a>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

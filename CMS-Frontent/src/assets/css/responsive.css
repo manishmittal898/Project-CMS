@@ -76,6 +76,14 @@
     ul.dropdown-menu.megamenu button.accordion-button.sub-menus:after {
         display: block;
     }
+    .navbar-user-icons .dropdown-toggle::after {
+      right: -2px;
+      font-size: 14px;
+      top: 13px;
+  }
+  .navbar-user-icons a.dropdown-item:hover {
+    color: #fff;
+  }
     .container,
     .container-md,
     .container-sm {
@@ -545,6 +553,10 @@
 .my-account-sidebar-btn {
     font-size: 15px;
 }
+.navbar-user-icons .nav-item > a {
+  font-size: 18px;
+}
+
 }
 
 

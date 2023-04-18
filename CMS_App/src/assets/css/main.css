@@ -3110,7 +3110,7 @@ td.table-action-btn button {
     line-height: normal;
     display: flex;
     align-items: center;
-    border: solid 2px #f8c300;
+    border: solid 2px #d2d2d2;
     font-weight: 600 !important;
 }
 
@@ -3120,9 +3120,9 @@ td.table-action-btn button {
 }
 
 .form-grp-w-border h2 i {
-    font-size: 28px;
-    color: #ffffff;
-    margin-right: 10px;
+  font-size: 24px;
+  color: #000;
+  margin-right: 6px;
 }
 
 .form-group>label {
@@ -4364,7 +4364,7 @@ form .icon-login-form {
     }
     .form-grp-w-border {
         margin: 40px 0px;
-        border-radius: 10px;
+        border-radius:0px;
         box-shadow: none;
     }
     .form-row>.col,
@@ -4866,6 +4866,24 @@ td.mat-footer-cell:last-of-type {
   text-align: center;
   padding: 10px;
   border: solid 1px #e7e7e7;
+}
+.card-d-1 h3 {
+  font-size: 18px !important;
+  font-family: 'Nunito', sans-serif !important;
+  color: #3e3e3e;
+  font-weight: 600 !important;
+}
+.card-d-1 {
+  background: #f7f7f7;
+  padding: 15px;
+  border-radius: 10px;
+}
+.border-round {
+  border-radius: 30px;
+}
+.form-grp-w-border .table-responsive {
+  border-radius: 20px;
+  overflow: hidden;
 }
 /* Manish CSS End */
 

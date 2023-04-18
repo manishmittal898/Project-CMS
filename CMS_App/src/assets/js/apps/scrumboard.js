@@ -98,16 +98,16 @@ $(function() {
             var $_taskProgress = $('.range-count-number').attr('data-rangeCountNumber');
 
             if ($_taskText == '') {
-                
+
                 $html = '<div data-draggable="true" class="card task-text-progress" style="">'+
                             '<div class="card-body">'+
 
                                 '<div class="task-header">'+
-                                    
+
                                     '<div class="">'+
                                         '<h4 class="" data-taskTitle="'+ $_task +'">'+ $_task +'</h4>'+
                                     '</div>'+
-                                    
+
                                     '<div class="">'+
                                         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 s-task-edit"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>'+
                                     '</div>'+
@@ -125,7 +125,7 @@ $(function() {
                                             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 s-task-delete"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>'+
                                         '</div>'+
                                     '</div>'+
-                                        
+
                                 '</div>'+
 
                             '</div>'+
@@ -136,11 +136,11 @@ $(function() {
                             '<div class="card-body">'+
 
                                 '<div class="task-header">'+
-                                    
+
                                     '<div class="">'+
                                         '<h4 class="" data-taskTitle="'+ $_task +'">'+ $_task +'</h4>'+
                                     '</div>'+
-                                    
+
                                     '<div class="">'+
                                         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 s-task-edit"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>'+
                                     '</div>'+
@@ -161,7 +161,7 @@ $(function() {
                                             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 s-task-delete"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>'+
                                         '</div>'+
                                     '</div>'+
-                                    
+
                                 '</div>'+
 
                             '</div>'+
@@ -169,8 +169,8 @@ $(function() {
 
             }
 
-            $("[data-section='"+$_getParent+"'] .connect-sorting-content").append($html); 
-            
+            $("[data-section='"+$_getParent+"'] .connect-sorting-content").append($html);
+
 
             $('#addTaskModal').modal('hide');
 
@@ -209,7 +209,7 @@ $(function() {
                         '<div class="task-container-header">'+
                             '<h6 class="s-heading" data-listTitle="'+$_listTitle+'">'+$_listTitle+'</h6>'+
                             '<div class="dropdown">'+
-                                '<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
+                                '<a class="dropdown-toggle" href="javascript:void(0)" role="button" id="dropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
                                     '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>'+
                                 '</a>'+
                                 '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-4">'+
@@ -221,8 +221,8 @@ $(function() {
                         '</div>'+
 
                         '<div class="connect-sorting-content" data-sortable="true">'+
-                            
-                            
+
+
                         '</div>'+
 
                         '<div class="add-s-task">'+
@@ -232,7 +232,7 @@ $(function() {
                     '</div>'+
                 '</div>';
 
-        $(".task-list-section").append($html); 
+        $(".task-list-section").append($html);
         $('#addListModal').modal('hide');
         $('#s-list-name').val('');
         $_taskSortable();
@@ -258,7 +258,7 @@ $(function() {
             event.preventDefault();
 
             var $_outerThis = $(this);
-           
+
             $('.add-list').hide();
             $('.edit-list').show();
 
@@ -294,7 +294,7 @@ $(function() {
         })
     }
 
-    // Delete the task on click 
+    // Delete the task on click
 
     function $_taskDelete() {
         $('.card .s-task-delete').off('click').on('click', function(event) {
@@ -320,7 +320,7 @@ $(function() {
         event.preventDefault();
 
         var $_outerThis = $(this);
-       
+
         $('.add-task-title').hide();
         $('.edit-task-title').show();
 

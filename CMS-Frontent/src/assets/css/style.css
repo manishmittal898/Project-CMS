@@ -227,7 +227,7 @@ img {
     background: var(--primary-color);
     color: var(--white);
     font-weight: var(--font-weight-400);
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .btn-default:hover {
@@ -751,11 +751,15 @@ font-weight: 600;
     padding-top: 12px;
 }
 
-.product-list-info h3 {
+.product-list-info h3, .product-list-info h3 a {
     font-size: 16px;
     margin-bottom: 3px;
     color: var(--black);
     font-weight: 500;
+    cursor: pointer;
+}
+.product-list-info h3:hover, .product-list-info h3 a:hover {
+  color: var(--black);
 }
 
 .product-list-info p {
@@ -775,6 +779,7 @@ font-weight: 600;
     overflow: hidden;
     box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
     border-radius: 0px;
+    position: relative;
 }
 
 .product-details-info h4 {
@@ -845,6 +850,7 @@ ul.product-details-sm-img {
     font-size: 30px;
     font-weight: 600;
     color: var(--black);
+    text-transform: capitalize;
 }
 
 input:focus-visible {
@@ -2288,7 +2294,58 @@ section.deals-opt-d-1 {
   top: 12px;
   color: #5f5f5f;
 }
-
+.navbar-user-icons .nav-item > a {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.login-user-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  display: block;
+}
+.navbar-user-icons .dropdown-toggle::after {
+  top: 1px;
+}
+.product-list-items-hover-action {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 12px;
+  bottom: 15px;
+  opacity: 0;
+  transform: translatex(60px);
+  transition: transform .3s ease-in-out;
+}
+.product-list-items:hover .product-list-items-hover-action
+{
+opacity: 10;
+transform: translatex(0px);
+}
+.product-list-items:hover .product-list-items-hover-cart-btn
+{
+opacity: 10;
+}
+.product-list-items-hover-action a {
+  color: #fff;
+  margin: 2px 0px;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  height: 28px;
+  width: 28px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px #cdcdcd;
+}
+.product-list-items-hover-action a:hover
+{
+  color: #fff;
+  background: rgba(0, 0, 0, 0.9);
+}
 /* CUSTOM CSS END */
 
 

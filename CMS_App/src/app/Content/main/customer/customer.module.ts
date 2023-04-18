@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/Shared/Helper/shared/shared.module';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerAddEditComponent } from './customer-add-edit/customer-add-edit.component';
 import { CustomerAddressComponent } from './customer-address/customer-address.component';
+import { OrderDetailsComponent } from './customer-detail/order-details/order-details.component';
 
 
 
@@ -14,7 +15,8 @@ import { CustomerAddressComponent } from './customer-address/customer-address.co
     CustomerComponent,
     CustomerDetailComponent,
     CustomerAddEditComponent,
-    CustomerAddressComponent
+    CustomerAddressComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,

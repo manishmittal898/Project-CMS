@@ -68,7 +68,7 @@ $(document).ready(function() {
           $('#ct > div').not($el).hide();
         }
         $btns.removeClass('active');
-        $(this).addClass('active');  
+        $(this).addClass('active');
     })
 
     $('#btn-add-notes').on('click', function(event) {
@@ -105,7 +105,7 @@ $(document).ready(function() {
                         '</div>' +
                         '<div class="note-footer">' +
                             '<div class="tags-selector btn-group">' +
-                                '<a class="nav-link dropdown-toggle d-icon label-group" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">' +
+                                '<a class="nav-link dropdown-toggle d-icon label-group" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">' +
                                     '<span>' +
                                         '<div class="tags">' +
                                             '<div class="g-dot-personal"></div>' +
