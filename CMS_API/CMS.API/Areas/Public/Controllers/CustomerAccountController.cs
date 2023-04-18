@@ -1,4 +1,5 @@
-﻿using CMS.Service.Services.User;
+﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace CMS.API.Areas.Public.Controllers
         }
 
 
-        // GET api/<CustomerAccountController>/5
+        // GET api/<CustomerAccount>/5
         [HttpGet("{id}")]
         public async Task<object> Get(long id)
 
@@ -31,5 +32,31 @@ namespace CMS.API.Areas.Public.Controllers
             return await _user.GetById(id);
 
         }
+
+
+        // POST api/<CustomerAccount>
+        [HttpPost]
+        public async Task<object> Update([FromBody] UserViewPostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.RoleId = (int)RoleEnum.Customer;
+                return await _user.Save(model);
+
+            }
+            else
+            {
+                ServiceResponse<object> objReturn = new ServiceResponse<object>();
+                objReturn.Message = "Invalid";
+                objReturn.IsSuccess = false;
+                objReturn.Data = null;
+
+                return objReturn;
+            }
+            //return _roleTyp
+        }
+
+
+
     }
 }
