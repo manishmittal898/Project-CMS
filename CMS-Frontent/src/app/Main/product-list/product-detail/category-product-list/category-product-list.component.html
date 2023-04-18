@@ -5,13 +5,19 @@
     <section class="slider-items-5 product-list-slider">
       <ng-container *ngFor="let item of productModel">
 
-        <div [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id" class="product-list-items">
-
+        <div class="product-list-items">
           <div class="product-list-items-img d-flex align-items-center justify-content-center">
             <img [src]="item?.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
+            <!-- #Hover items start-->
+            <div class="product-list-items-hover-action">
+              <a href="javascript:void(0)" title="Wishlist"><i class="bi bi-heart-fill"></i></a>
+              <a href="javascript:void(0)" title="Add to cart"><i class="bi bi-cart2"></i></a>
+            </div>
+            <!-- #Hover items End-->
           </div>
           <div class="product-list-info">
-            <h3>{{item?.Name}}</h3>
+            <h3> <a href="javascript:void(0)"
+                [routerLink]="'/store/'+item?.Category?.split(' ').join('_')+'/'+item?.Id"> {{item?.Name}} </a></h3>
             <p>₹ {{item?.Price}}</p>
           </div>
         </div>
