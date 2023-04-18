@@ -76,15 +76,15 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         dots: true,
         infinite: true,
         speed: 1000,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         autoplay: true,
         autoplaySpeed: 2000,
         responsive: [{
-          breakpoint: 1600,
+          breakpoint: 1400,
           settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToShow: 4,
+            slidesToScroll: 4,
             infinite: true,
             dots: true
           }
@@ -97,14 +97,14 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
           }
         },
         {
-          breakpoint: 600,
+          breakpoint: 767,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2
           }
         },
         {
-          breakpoint: 480,
+          breakpoint: 595,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1
@@ -113,7 +113,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         ]
       });
 
-    }, 150);
+    }, 50);
 
   }
 
