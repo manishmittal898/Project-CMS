@@ -1,4 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Service.Services.CustomerAddress;
+using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,16 +13,18 @@ using static CMS.Core.FixedValue.Enums;
 
 namespace CMS.API.Areas.Public.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Customer")]
     public class CustomerAccountController : ControllerBase
     {
 
         private readonly IUserMasterService _user;
-        public CustomerAccountController(IUserMasterService user)
+        private readonly ICustomerAddressService _address;
+        public CustomerAccountController(IUserMasterService user, ICustomerAddressService address)
         {
             _user = user;
+            _address = address;
         }
 
 
@@ -56,6 +60,39 @@ namespace CMS.API.Areas.Public.Controllers
             //return _roleTyp
         }
 
+
+        [HttpPost]
+        public async Task<object> GetAddressAsync(IndexModel model)
+        {
+            return await _address.GetList(model);
+        }
+
+        // GET api/<LookupMaster>/5
+        [HttpGet("{id}")]
+        public object GetAddress(long id)
+        {
+            return _address.GetById(id);
+        }
+
+        // POST api/<LookupMaster>
+        [HttpPost]
+        public async Task<object> SaveAddress(CustomerAddressPostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return await _address.Save(model);
+
+            }
+            else
+            {
+                ServiceResponse<object> objReturn = new ServiceResponse<object>();
+                objReturn.Message = "Invalid";
+                objReturn.IsSuccess = false;
+                objReturn.Data = null;
+
+                return objReturn;
+            }
+        }
 
 
     }

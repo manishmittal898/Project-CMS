@@ -240,7 +240,7 @@ namespace CMS.Service.Services.User
                 objRole = _db.TblUserMasters.FirstOrDefault(r => r.UserId == id);
 
                 var roletype = _db.TblUserMasters.Remove(objRole);
-                _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch (Exception ex)

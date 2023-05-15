@@ -43,17 +43,29 @@ namespace CMS.API.Areas.Admin.Controllers
 
         }
 
-        // POST api/<CustomerController>
+
+        // POST api/<CustomerAccount>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<object> Save([FromBody] UserViewPostModel model)
         {
+            if (ModelState.IsValid)
+            {
+                model.RoleId = (int)RoleEnum.Customer;
+                return await _user.Save(model);
+
+            }
+            else
+            {
+                ServiceResponse<object> objReturn = new ServiceResponse<object>();
+                objReturn.Message = "Invalid";
+                objReturn.IsSuccess = false;
+                objReturn.Data = null;
+
+                return objReturn;
+            }
+            //return _roleTyp
         }
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]

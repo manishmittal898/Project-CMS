@@ -5,6 +5,7 @@ using CMS.Data.Models;
 using CMS.Service.Services.Account;
 using CMS.Service.Services.CMSPage;
 using CMS.Service.Services.Common;
+using CMS.Service.Services.CustomerAddress;
 using CMS.Service.Services.GeneralEntry;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
@@ -168,6 +169,8 @@ namespace CMS.API
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IGECategoryService, GECategoryService>();
             services.AddScoped<IGeneralEntryService, GeneralEntryService>();
+            services.AddScoped<ICustomerAddressService, CustomerAddressService>();
+
         }
     }
 }
