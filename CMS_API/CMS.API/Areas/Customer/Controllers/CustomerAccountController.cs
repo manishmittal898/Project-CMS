@@ -11,9 +11,10 @@ using static CMS.Core.FixedValue.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CMS.API.Areas.Public.Controllers
+namespace CMS.API.Areas.Customer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Area("Public")]
+    [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Customer")]
     public class CustomerAccountController : ControllerBase
@@ -61,39 +62,7 @@ namespace CMS.API.Areas.Public.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<object> GetAddressAsync(IndexModel model)
-        {
-            return await _address.GetList(model);
-        }
-
-        // GET api/<LookupMaster>/5
-        [HttpGet("{id}")]
-        public object GetAddress(long id)
-        {
-            return _address.GetById(id);
-        }
-
-        // POST api/<LookupMaster>
-        [HttpPost]
-        public async Task<object> SaveAddress(CustomerAddressPostModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                return await _address.Save(model);
-
-            }
-            else
-            {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
-
-                return objReturn;
-            }
-        }
-
+    
 
     }
 }
