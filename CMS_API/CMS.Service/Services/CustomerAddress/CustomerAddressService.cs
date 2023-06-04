@@ -40,7 +40,7 @@ namespace CMS.Service.Services.CustomerAddress
 
 
                 var result = (from addrs in _db.TblUserAddressMasters
-                              where addrs.UserId.Equals(userId) && !addrs.IsDelete && (string.IsNullOrEmpty(model.Search) || addrs.Address.Contains(model.Search))
+                              where (userId == 0 || addrs.UserId == userId) && !addrs.IsDelete && (string.IsNullOrEmpty(model.Search) || addrs.Address.Contains(model.Search))
                               select addrs);
                 switch (model.OrderBy)
                 {
@@ -165,8 +165,6 @@ namespace CMS.Service.Services.CustomerAddress
                     objData.Mobile = model.Mobile;
                     objData.PinCode = model.PinCode;
                     objData.StateId = model.StateId;
-                    objData.UserId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId;
-
 
                     var data = _db.TblUserAddressMasters.Update(objData);
                     await _db.SaveChangesAsync();
@@ -195,10 +193,10 @@ namespace CMS.Service.Services.CustomerAddress
                         Mobile = model.Mobile,
                         PinCode = model.PinCode,
                         StateId = model.StateId,
-                        UserId = model.UserId,
+                        UserId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId
 
                     };
-                   await _db.SaveChangesAsync();
+                    await _db.SaveChangesAsync();
                     return CreateResponse(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
@@ -270,7 +268,7 @@ namespace CMS.Service.Services.CustomerAddress
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
                 objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == id);
-                objAddress.IsDelete = true;
+                objAddress.IsDelete = !objAddress.IsDelete;
                 var roletype = _db.TblUserAddressMasters.Update(objAddress);
                 await _db.SaveChangesAsync();
                 return CreateResponse(objAddress, ResponseMessage.Delete, true);
