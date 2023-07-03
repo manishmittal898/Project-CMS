@@ -1179,7 +1179,7 @@ select:focus-visible {
 }
 
 .form-control, .form-select {
-    border-radius: 10px;
+    border-radius: 6px;
     font-size: 14px;
     padding: 10px 15px;
 }
