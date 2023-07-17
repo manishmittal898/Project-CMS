@@ -9,7 +9,8 @@ import { RouterModule } from "@angular/router";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { NgxPaginationModule } from "ngx-pagination";
 import { ToastrModule } from "ngx-toastr";
-import { CheckboxModule, SliderModule } from "primeng-lts";
+import { CheckboxModule } from 'primeng/checkbox';
+import { SliderModule } from 'primeng/slider';
 
 const commonModules = [
   HttpClientModule,
@@ -28,14 +29,15 @@ const component = [
 const installedModule = [
   NgxPaginationModule,
   NgSelectModule,
-  CheckboxModule,
-  SliderModule,
+
   ToastrModule.forRoot({
     timeOut: 3000,
     closeButton: true,
     autoDismiss: true,
     maxOpened: 5
   }),
+  CheckboxModule,
+  SliderModule,
 ]
 
 @NgModule({
