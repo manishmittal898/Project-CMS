@@ -29,7 +29,7 @@
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^13.2.1",
     "primeicons": "^5.0.0",
-    "primeng-lts": "^9.2.8",
+    "primeng": "^11.4.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
