@@ -5,93 +5,41 @@
       data-bs-target="#Add-Update-Address"><i class="bi bi-plus-circle me-2"></i> Add new address</a>
   </div>
 
-  <div class="custom-card">
-    <div class="row">
-      <div class="col-xl-12">
-        <div class="custom-card-address-list">
-          <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
-            <h5 class="m-0">Rahul sharma</h5>
-            <div class="custom-card-address-list-action d-flex align-items-center">
-              <span class="me-3">Default Address</span>
-              <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
-                data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  title="Edit" class="bi bi-pencil-square"></i> </a>
-              <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
-                data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove"
-                  class="bi bi-trash"></i> </a>
+  <ng-container *ngFor="let address of data">
+    <div class="custom-card">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="custom-card-address-list">
+            <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
+              <h5 class="m-0">{{address.FullName}}</h5>
+              <div class="custom-card-address-list-action d-flex align-items-center">
+                <span class="me-3" *ngIf="address.IsPrimary">Default Address</span>
+                <a href="javascript:void()" (click)="editAddress()" class="text-success ms-2" data-bs-toggle="modal"
+                  data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Edit" class="bi bi-pencil-square"></i> </a>
+                <a href="javascript:void()" (click)="deleteAddress()" class="text-danger ms-2" data-bs-toggle="modal"
+                  data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove"
+                    class="bi bi-trash"></i> </a>
+              </div>
             </div>
-          </div>
-          <div class="custom-card-address-list-items form-check">
-            <input class="form-check-input" type="radio" name="SaveAdd1" id="SaveAdd1">
-            <label class="form-check-label" for="SaveAdd1">
-              4-RA-5 Monilek Marg, Near Monilek Hospital
-              Jawahar Nagar
-              Jaipur, Raj, 302013
-              Mobile : 8952098741
-            </label>
-          </div>
+            <div class="custom-card-address-list-items form-check">
+              <input class="form-check-input" [checked]="address.IsPrimary" value="address.IsPrimary" type="radio"
+                name="PrimaryAddress" id="PrimaryAddress">
+              <label class="form-check-label" for="SaveAdd1">
+                {{address.BuildingNumber }} {{address.Address}}
+                {{address.City }}, {{address.State }}, {{address.PinCode}}
+                Landmark: {{address.Landmark }}
+                Mobile : {{address.Mobile}}
+              </label>
+            </div>
 
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="custom-card">
-    <div class="row">
-      <div class="col-xl-12">
-        <div class="custom-card-address-list">
-          <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
-            <h5 class="m-0">Peter johnsan</h5>
-            <div class="custom-card-address-list-action d-flex align-items-center">
-              <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
-                data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  title="Edit" class="bi bi-pencil-square"></i> </a>
-              <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
-                data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove"
-                  class="bi bi-trash"></i> </a>
-            </div>
-          </div>
-          <div class="custom-card-address-list-items form-check">
-            <input class="form-check-input" type="radio" name="SaveAdd2" id="SaveAdd2">
-            <label class="form-check-label" for="SaveAdd2">
-              4-RA-5 Monilek Marg, Near Monilek Hospital
-              Jawahar Nagar
-              Jaipur, Raj, 302013
-              Mobile : 8952098741
-            </label>
-          </div>
+  </ng-container>
 
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="custom-card">
-    <div class="row">
-      <div class="col-xl-12">
-        <div class="custom-card-address-list">
-          <div class="custom-card-address-list-header mb-3 d-flex align-items-center justify-content-between">
-            <h5 class="m-0">Nitesh mathur</h5>
-            <div class="custom-card-address-list-action d-flex align-items-center">
-              <a href="javascript:void()" class="text-success ms-2" data-bs-toggle="modal"
-                data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  title="Edit" class="bi bi-pencil-square"></i> </a>
-              <a href="javascript:void()" class="text-danger ms-2" data-bs-toggle="modal"
-                data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove"
-                  class="bi bi-trash"></i> </a>
-            </div>
-          </div>
-          <div class="custom-card-address-list-items form-check">
-            <input class="form-check-input" type="radio" name="SaveAdd3" id="SaveAdd3">
-            <label class="form-check-label" for="SaveAdd3">
-              4-RA-5 Monilek Marg, Near Monilek Hospital
-              Jawahar Nagar
-              Jaipur, Raj, 302013
-              Mobile : 8952098741
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Add or Update Address Modal Start -->
   <div class="modal fade modal-custom-design" id="Add-Update-Address" aria-hidden="true">
