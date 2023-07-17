@@ -1,7 +1,8 @@
-import { SecurityService } from './../../Shared/Services/security.service';
-import { Component, OnInit } from '@angular/core';
-import { IndexModel } from 'src/app/Shared/Helper/Common';
-import { ProductCategoryViewModel, ProductService } from 'src/app/Shared/Services/product.service';
+import { Component, OnInit } from "@angular/core";
+import { IndexModel } from "src/app/Shared/Helper/Common";
+import { SecurityService } from "src/app/Shared/Services/Core/security.service";
+import { ProductCategoryViewModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+
 declare var $: any;
 @Component({
   selector: 'app-home',

@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ProductFilterModel, ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
-import { SecurityService } from 'src/app/Shared/Services/security.service';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from "@angular/core";
+import { SecurityService } from "src/app/Shared/Services/Core/security.service";
+import { ProductFilterModel, ProductMasterViewModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+
 declare var $: any;
 @Component({
   selector: 'app-category-product-list',

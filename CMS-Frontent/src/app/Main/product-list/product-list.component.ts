@@ -1,10 +1,10 @@
-import { DomSanitizer } from '@angular/platform-browser';
-import { ProductFilterModel, ProductMasterViewModel, ProductService } from './../../Shared/Services/product.service';
-import { Component, OnInit } from '@angular/core';
-import { Route, ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { CommonService } from '../../Shared/Services/common.service';
-import { SecurityService } from '../../Shared/Services/security.service';
+import { Component, OnInit } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
+import { SecurityService } from "src/app/Shared/Services/Core/security.service";
+import { ProductFilterModel, ProductMasterViewModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+import { environment } from "src/environments/environment";
+
 
 @Component({
   selector: 'app-product-list',

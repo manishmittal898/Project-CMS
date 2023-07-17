@@ -13,7 +13,7 @@ using static CMS.Core.FixedValue.Enums;
 
 namespace CMS.API.Areas.Customer.Controllers
 {
-    [Area("Public")]
+    [Area("Customer")]
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Customer")]

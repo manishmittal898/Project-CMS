@@ -31,7 +31,7 @@ namespace CMS.Service.Services.CustomerAddress
 
 
                 long userId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : 0;
-                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId") && userId == 0)
+                if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId") && userId == 0)
                 {
                     model.AdvanceSearchModel.TryGetValue("userId", out object CustomerId);
                     userId = Convert.ToInt64(CustomerId.ToString());

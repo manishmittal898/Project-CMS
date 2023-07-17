@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../Page/header/header.component';
-import { FooterComponent } from '../../Page/footer/footer.component';
-import { NavBarComponent } from '../../Page/nav-bar/nav-bar.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { NgSelectModule } from '@ng-select/ng-select';
-import {CheckboxModule} from 'primeng-lts/checkbox';
-import {SliderModule} from 'primeng/slider';
-import { ToastrModule } from 'ngx-toastr';
+import { NavBarComponent } from './../../Page/nav-bar/nav-bar.component';
+import { FooterComponent } from './../../Page/footer/footer.component';
+import { HeaderComponent } from './../../Page/header/header.component';
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { NgxPaginationModule } from "ngx-pagination";
+import { ToastrModule } from "ngx-toastr";
+import { CheckboxModule, SliderModule } from "primeng-lts";
 
 const commonModules = [
   HttpClientModule,
@@ -40,9 +39,7 @@ const installedModule = [
 ]
 
 @NgModule({
-  declarations: [
-    component
-  ],
+  declarations: [component],
   imports: [
     CommonModule,
     installedModule,

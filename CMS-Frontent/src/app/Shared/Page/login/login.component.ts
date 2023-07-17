@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { AuthService, LoginUserDetailModel } from '../../auth.service';
+import { AuthService, LoginUserDetailModel } from '../../Services/UserService/auth.service';
 import { Routing_Url } from '../../Constant';
-import { SecurityService } from '../../Services/security.service';
-import { AccountService } from '../../Services/account.service';
+import { AccountService } from '../../Services/UserService/account.service';
+import { SecurityService } from '../../Services/Core/security.service';
 
 @Component({
   selector: 'app-login',
@@ -41,13 +41,15 @@ export class LoginComponent implements OnInit {
           };
           this._accountService.Login(postModel).subscribe((res) => {
             if (res.IsSuccess) {
+              debugger
               let data = res.Data as LoginUserDetailModel;
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
-              this.toast.success(res.Message?.toString(), 'Login Response');
+              this.toast.success(res.Message?.toString(), 'Login');
               this._route.navigate(['/user']);
+              this._authService.IsAuthenticate()
             } else {
-              this.toast.info(res.Message?.toString(), 'Login Response');
+              this.toast.info(res.Message?.toString(), 'Login');
             }
           });
         }
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
       this._authService.SaveUserToken("testtoken");
       this._route.navigate(['']);
     }
-
   }
+
+  forgetPassword(){}
 }

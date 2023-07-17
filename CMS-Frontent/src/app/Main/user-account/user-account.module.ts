@@ -1,17 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { UserAccountRoutingModule } from './user-account-routing.module';
 import { MyAccountComponent } from './my-account/my-account.component';
-import { FeatureModule } from '../../Shared/Module/feature/feature.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { UserAccountRoutingModule } from './user-account-routing.module';
 import { UserAccountComponent } from './user-account.component';
 import { MyAddressComponent } from './my-address/my-address.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
-
+import { FeatureModule } from 'src/app/Shared/Module/feature/feature.module';
 
 @NgModule({
-  declarations: [MyAccountComponent, UserAccountComponent, MyAddressComponent, MyOrdersComponent, MyWishlistComponent],
+  declarations: [MyAccountComponent,
+    UserAccountComponent,
+     MyAddressComponent,
+    MyOrdersComponent,
+     MyWishlistComponent],
   imports: [
     CommonModule,
     UserAccountRoutingModule,

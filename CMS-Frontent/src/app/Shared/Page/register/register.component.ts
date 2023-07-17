@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../auth.service';
 import { Routing_Url } from '../../Constant';
-import { SecurityService } from '../../Services/security.service';
-import { AccountService } from '../../Services/account.service';
+import { AccountService } from '../../Services/UserService/account.service';
+import { SecurityService } from '../../Services/Core/security.service';
 
 @Component({
   selector: 'app-register',
@@ -59,7 +58,6 @@ export class RegisterComponent implements OnInit {
       }
       this._accountService.Register(frm).subscribe((res) => {
         if (res.IsSuccess) {
-
           let data = res.Data as any;
           this.toast.success(res.Message?.toString(), 'Registeration');
           this._route.navigate(['/login']);

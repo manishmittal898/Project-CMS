@@ -37,14 +37,14 @@
                   <li><a class="dropdown-item" routerLink="./user/orders" href="javascript:void(0)"><i class="bi bi-handbag me-2"></i> My Orders</a></li>
                   <li><a class="dropdown-item" routerLink="./user/address" href="javascript:void(0)"><i class="bi bi-geo-alt me-2"></i> Address</a></li>
                   <li><a class="dropdown-item" routerLink="./user/wishlist" href="javascript:void(0)"><i class="bi bi-heart me-2"></i> Wishlist</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0)"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
               </ul>
           </div>
         </ng-template>
 
             <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i
                 class="bi bi-bag"></i>
-              <div class="Cart-count">5</div>
+              <div class="Cart-count">0</div>
             </a>
           </div>
         </div>

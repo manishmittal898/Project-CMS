@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductMasterViewModel, ProductService, ProductStockModel } from 'src/app/Shared/Services/product.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { SecurityService } from 'src/app/Shared/Services/security.service';
+import { Component, OnInit } from "@angular/core";
+import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
+import { SecurityService } from "src/app/Shared/Services/Core/security.service";
+import { ProductMasterViewModel, ProductStockModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+import { environment } from "src/environments/environment";
+
 declare var $: any;
 @Component({
   selector: 'app-product-detail',

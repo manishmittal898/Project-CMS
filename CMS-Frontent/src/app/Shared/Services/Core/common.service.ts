@@ -1,7 +1,7 @@
 
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ApiResponse, FilterDropDownPostModel } from '../Helper/Common';
+import { ApiResponse, FilterDropDownPostModel } from '../../Helper/Common';
 import { BaseAPIService } from './base-api.service';
 
 @Injectable({
