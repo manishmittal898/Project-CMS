@@ -4885,6 +4885,9 @@ td.mat-footer-cell:last-of-type {
   border-radius: 20px;
   overflow: hidden;
 }
+.widget.box .widget-header .row>* {
+    width: auto;
+}
 /* Manish CSS End */
 
 
