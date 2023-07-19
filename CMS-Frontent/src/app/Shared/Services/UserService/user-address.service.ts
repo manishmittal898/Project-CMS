@@ -2,12 +2,13 @@ import { BaseAPIService } from './../Core/base-api.service';
 import { Injectable } from '@angular/core';
 import { ApiResponse, IndexModel } from '../../Helper/Common';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class UserAddressService {
 
-  constructor(private readonly _baseService: BaseAPIService) { }
+  constructor(private readonly _baseService: BaseAPIService, private readonly _httpClient: HttpClient) { }
 
   GetList(model: IndexModel): Observable<ApiResponse<UserAddressViewModel[]>> {
     let url = `${this._baseService.API_Url.UserAddress_List_Api}`;
@@ -33,10 +34,14 @@ export class UserAddressService {
     return this._baseService.get(`${url + Id}`);
   }
 
+  getAddressDetailByPinCode(pinCode: number) {
+    let url = `https://api.postalpincode.in/pincode/${pinCode}`;
+    return this._httpClient.get<any>(`${url}`);
+  }
+
 }
 export interface UserAddressPostModel {
   Id: number;
-  UserId: number;
   FullName: string;
   Mobile: string;
   BuildingNumber: string;

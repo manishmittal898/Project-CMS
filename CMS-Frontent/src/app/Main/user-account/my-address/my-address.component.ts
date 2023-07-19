@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserAddressService, UserAddressViewModel } from '../../../Shared/Services/UserService/user-address.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { UserAddressService, UserAddressViewModel, UserAddressPostModel } from '../../../Shared/Services/UserService/user-address.service';
 import { IndexModel } from 'src/app/Shared/Helper/Common';
 import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
 
@@ -9,7 +9,10 @@ import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
   styleUrls: ['./my-address.component.css']
 })
 export class MyAddressComponent implements OnInit {
+  @ViewChild('btnShow') btnShow: ElementRef;
+  @ViewChild('btnClose') btnClose: ElementRef;
   data = [] as UserAddressViewModel[];
+  selectedData = {} as UserAddressPostModel;
   constructor(private _userAddressService: UserAddressService, private _securityService: SecurityService) { }
 
   ngOnInit(): void {
@@ -26,10 +29,24 @@ export class MyAddressComponent implements OnInit {
       }
     })
   }
+  addAddress() {
+    this.selectedData = {} as UserAddressPostModel;
+    debugger
+    this.btnShow.nativeElement.click();
+
+  }
+  editAddress(address: UserAddressViewModel) {
+    this.selectedData = address;
+    this.btnShow.nativeElement.click();
+
+  }
   deleteAddress() {
-
   }
-  editAddress() {
-
+  closePopup() {
+    this.btnClose.nativeElement.click();
   }
+  onSave(data) {
+    this.closePopup();
+  }
+
 }

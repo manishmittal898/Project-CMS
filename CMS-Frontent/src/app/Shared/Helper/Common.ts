@@ -97,7 +97,6 @@ export class DropDownModel {
   ddlLookupTypeMaster!: DropDownItem[];
   ddlCategory !: DropDownItem[];
   ddlLookupGroup!: GroupDropDownItem[];
-
   ddlCaptionTag!: DropDownItem[];
   ddlProductSize!: DropDownItem[];
   ddlProductPrice!: DropDownItem;
@@ -105,6 +104,7 @@ export class DropDownModel {
   ddlSublookup!: DropDownItem[];
   ddlSubLookupGroup!: GroupDropDownItem[];
   ddlCMSPage!: DropDownItem[];
+  ddlAddressType!: DropDownItem[];
 
 
 }

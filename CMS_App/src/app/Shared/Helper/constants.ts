@@ -189,6 +189,8 @@ export class DropDown_key {
   static ddlContentType = "ddlContentType";
   static ddlGeneralEntryCategory= "ddlGeneralEntryCategory";
   static ddlProductViewSection="ddlProductViewSection"
+  static ddlAddressType="ddlAddressType"
+
 
 }
 

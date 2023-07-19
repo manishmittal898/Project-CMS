@@ -5,6 +5,7 @@ import { environment } from './../../environments/environment';
 export class DropDown_key {
 
   static ddlState = "ddlState";
+  static ddlAddressType = "ddlAddressType";
   static ddlDistrict = "ddlDistrict";
   static ddlLookupTypeMasters = "ddlLookupTypeMaster";
   static ddlCaptionTag = "ddlCaptionTag";
@@ -51,15 +52,15 @@ export class API_Url {
   public static Logout_Api = `${environment.apiEndPoint}account/Logout`;
   //#endregion
 
-    //#region  << User Address  >>
-    public static UserAddress_List_Api = `${environment.apiEndPoint}customer/Address/Get`;
-    public static UserAddress_Detail_Api = `${environment.apiEndPoint}customer/Address/Get/`;
-    public static UserAddress_Save_Api = `${environment.apiEndPoint}customer/Address/Save`;
-    public static UserAddress_SetDefaultAddress_Api = `${environment.apiEndPoint}customer/Address/SetPrimary/`;
-    public static UserAddress_Delete_Api = `${environment.apiEndPoint}customer/Address/Delete/`;
+  //#region  << User Address  >>
+  public static UserAddress_List_Api = `${environment.apiEndPoint}customer/Address/Get`;
+  public static UserAddress_Detail_Api = `${environment.apiEndPoint}customer/Address/Get/`;
+  public static UserAddress_Save_Api = `${environment.apiEndPoint}customer/Address/Save`;
+  public static UserAddress_SetDefaultAddress_Api = `${environment.apiEndPoint}customer/Address/SetPrimary/`;
+  public static UserAddress_Delete_Api = `${environment.apiEndPoint}customer/Address/Delete/`;
 
 
-    //#endregion
+  //#endregion
 
 }
 

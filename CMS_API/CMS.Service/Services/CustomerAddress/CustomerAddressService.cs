@@ -151,10 +151,7 @@ namespace CMS.Service.Services.CustomerAddress
                 {
 
                     TblUserAddressMaster objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == model.Id);
-
-
-
-                    objData.Address = model.Address;
+                                        objData.Address = model.Address;
                     objData.AddressType = model.AddressType;
                     objData.BuildingNumber = model.BuildingNumber;
                     objData.City = model.City;
