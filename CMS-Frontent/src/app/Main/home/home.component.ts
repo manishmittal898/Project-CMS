@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
         });
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
 
+        this.AddSlider();
         setTimeout(() => {
           this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
         }, 10);
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
 
     setTimeout(() => {
-      $('.home-product-slider')?.slick({
+      $('.slider-items-5')?.slick({
         dots: true,
         infinite: true,
         speed: 1000,
@@ -88,6 +89,55 @@ export class HomeComponent implements OnInit {
         }
         ]
       });
+
+      $('.slider-items-6')?.slick({
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 6,
+        slidesToScroll: 6,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [{
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4
+          }
+        },
+        {
+          breakpoint: 900,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 595,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        }
+        ]
+      });
+
     }, 50);
 
   }
