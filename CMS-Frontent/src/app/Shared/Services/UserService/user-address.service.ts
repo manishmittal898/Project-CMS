@@ -41,7 +41,7 @@ export class UserAddressService {
 
 }
 export interface UserAddressPostModel {
-  Id: number;
+  Id: string;
   FullName: string;
   Mobile: string;
   BuildingNumber: string;
@@ -55,7 +55,7 @@ export interface UserAddressPostModel {
 }
 
 export interface UserAddressViewModel {
-  Id: number;
+  Id: string;
   UserId: number;
   FullName: string;
   Mobile: string;

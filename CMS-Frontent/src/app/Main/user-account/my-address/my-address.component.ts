@@ -59,6 +59,20 @@ export class MyAddressComponent implements OnInit {
     })
   }
 
+  setPrimaryeAddress(address) {
+    this._commonService.Question(Message.ConfirmUpdate).then(result => {
+      if (result) {
+        this._userAddressService.SetPrimary(address.Id).subscribe(res => {
+          if (res.IsSuccess) {
+            this._toasterService.success(res.Message as string, 'Success');
+          } else {
+            this._toasterService.error(res.Message as string, 'Oops');
+          }
+        })
+      }
+    })
+  }
+
   closePopup() {
     this.btnClose.nativeElement.click();
   }
