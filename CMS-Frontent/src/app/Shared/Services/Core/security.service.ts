@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import * as CryptoJS from 'crypto-js';
-import { environment } from '../../../environments/environment';
-import { ApiResponse } from '../Helper/Common';
 import { BaseAPIService } from "./base-api.service";
+import { ApiResponse } from '../../Helper/Common';
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'

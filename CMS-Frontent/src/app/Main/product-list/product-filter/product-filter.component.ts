@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DropDown_key } from 'src/app/Shared/Constant';
 import { DropDownModel, FilterDropDownPostModel } from 'src/app/Shared/Helper/Common';
-import { ProductFilterModel } from 'src/app/Shared/Services/product.service';
-import { CommonService } from '../../../Shared/Services/common.service';
+import { CommonService } from '../../../Shared/Services/Core/common.service';
+import { ProductFilterModel } from 'src/app/Shared/Services/ProductService/product.service';
 
 @Component({
   selector: 'app-product-filter',

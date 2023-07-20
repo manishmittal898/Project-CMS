@@ -1,0 +1,118 @@
+<form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
+
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="form-floating mb-4">
+        <input type="text" class="form-control" id="FullName" placeholder="Enter full name*"
+          [(ngModel)]="model.FullName" formControlName="FullName"
+          [ngClass]="{ 'is-invalid': f.FullName.errors && f.FullName.touched}">
+        <label for="FullName">Enter full name*</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('FullName')?.hasError('required') && formgrp.get('FullName')?.touched)">
+          Please enter <strong>Full Name</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="form-floating mb-4">
+        <input type="text" (keypress)="_commonService.NumberOnly($event)" maxlength="10" minlength="10"
+          class="form-control" id="Mobile" placeholder="Mobile number*" [(ngModel)]="model.Mobile"
+          formControlName="Mobile" [ngClass]="{ 'is-invalid': f.Mobile.errors && f.Mobile.touched}">
+        <label for="Mobile">Mobile number*</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Mobile')?.hasError('required') && formgrp.get('Mobile')?.touched)">
+          Please enter <strong>Mobile</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="form-floating mb-4">
+        <input type="text" class="form-control" (blur)="getAddress(model.PinCode)" id="Postal-code"
+          placeholder="Postal code*" [(ngModel)]="model.PinCode" formControlName="PinCode"
+          [ngClass]="{ 'is-invalid': f.PinCode.errors && f.PinCode.touched}">
+        <label for="Postal-code">Postal code*</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('PinCode')?.hasError('required') && formgrp.get('PinCode')?.touched)">
+          Please enter <strong>Postal code</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="form-floating mb-4">
+        <input type="text" class="form-control" id="Building" [(ngModel)]="model.BuildingNumber"
+          formControlName="BuildingNumber"
+          [ngClass]="{ 'is-invalid': f.BuildingNumber.errors && f.BuildingNumber.touched}"
+          placeholder="House No. /Apartment, suite, etc.[optional]">
+        <label for="Building">House No. /Apartment, suite, etc. [optional]</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('BuildingNumber')?.hasError('required') && formgrp.get('BuildingNumber')?.touched)">
+          Please enter <strong>House No. /Apartment, suite, etc.</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="form-floating mb-4">
+        <input type="text" class="form-control" id="Address1" placeholder="Address*" [(ngModel)]="model.Address"
+          formControlName="Address" [ngClass]="{ 'is-invalid': f.Address.errors && f.Address.touched}">
+        <label for="Address1">Address*</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Address')?.hasError('required') && formgrp.get('Address')?.touched)">
+          Please enter <strong>Address</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="form-floating mb-4">
+        <ng-select [items]="this.dropDown!.ddlDistrict" formControlName="City" [searchable]="true" bindLabel="Text"
+          bindValue="Value" id="City" [ngClass]="{ 'is-invalid': f.City.errors && f.City.touched}"
+          [(ngModel)]="model.City">
+        </ng-select>
+        <label for="City">City*</label>
+
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('City')?.hasError('required') && formgrp.get('City')?.touched)">
+          Please select <strong>City</strong>...!</div>
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <div class="form-floating  mb-4">
+        <ng-select [items]="this.dropDown!.ddlState" formControlName="StateId" [searchable]="true" bindLabel="Text"
+          bindValue="Value" id="State" [ngClass]="{ 'is-invalid': f.StateId.errors && f.StateId.touched}"
+          [(ngModel)]="model.StateId">
+        </ng-select>
+        <label for="State">State*</label>
+
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('StateId')?.hasError('required') && formgrp.get('StateId')?.touched)">
+          Please select <strong>State</strong>...!</div>
+      </div>
+    </div>
+
+
+
+    <div class="col-xl-6">
+      <div class="form-floating  mb-0">
+        <ng-select [items]="this.dropDown!.ddlAddressType" formControlName="AddressType" [searchable]="true"
+          bindLabel="Text" bindValue="Value" id="AddressType"
+          [ngClass]="{ 'is-invalid': f.AddressType.errors && f.AddressType.touched}" [(ngModel)]="model.AddressType">
+        </ng-select>
+        <label for="AddressType">Address Type*</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('AddressType')?.hasError('required') && formgrp.get('AddressType')?.touched)">
+          Please select <strong>Address Type</strong>...!</div>
+      </div>
+    </div>
+    <div class="col-xl-6 mt-1">
+      <div class="form-check d-flex align-items-center">
+        <input type="checkbox" class="form-check-input" id="IsPrimary" [(ngModel)]="model.IsPrimary"
+          formControlName="IsPrimary" id="IsPrimary">
+        <label class="form-check-label ms-2" for="IsPrimary">Set as Default</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12 pt-2">
+      <button type="submit" class="btn btn-default px-3 py-2 btn-save me-2"><i class="bi bi-check2"></i> Save</button>
+      <button type="button" (click)="onCancel.emit()"
+        class="btn btn-default btn-border px-3 py-2 btn-cancel">Cancel</button>
+    </div>
+  </div>
+
+</form>

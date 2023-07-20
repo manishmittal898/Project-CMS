@@ -37,7 +37,6 @@ namespace CMS.Service.Services.LookupMaster
 
                 }
 
-
                 var result = (from lkType in _db.TblLookupMasters
                               where lkType.LookUpType.Value.Equals(TypeId) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
                               select lkType);
@@ -109,7 +108,6 @@ namespace CMS.Service.Services.LookupMaster
                     LookUpType = X.LookUpType,
                     LookUpTypeName = X.LookUpTypeNavigation.Name,
                     IsSubLookup = X.LookUpTypeNavigation.IsSubLookup,
-
                     CreatedBy = X.CreatedBy,
                     CreatedOn = X.CreatedOn,
                     ModifiedBy = X.ModifiedBy,
@@ -122,12 +120,10 @@ namespace CMS.Service.Services.LookupMaster
                 if (detail != null)
                 {
                     ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
-
-                }
+                                    }
                 else
                 {
                     ObjResponse = CreateResponse<LookupMasterViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
-
                 }
 
             }
@@ -142,18 +138,15 @@ namespace CMS.Service.Services.LookupMaster
         {
             try
             {
-
                 if (model.Id > 0)
                 {
 
                     TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == model.Id);
-
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
-
                         objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
                     }
                     else
@@ -162,8 +155,6 @@ namespace CMS.Service.Services.LookupMaster
                         objData.ImagePath = null;
 
                     }
-
-
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblLookupMasters.Update(objData);
                     _db.SaveChanges();
@@ -174,11 +165,10 @@ namespace CMS.Service.Services.LookupMaster
                 {
 
                     TblLookupMaster objData = new TblLookupMaster();
-
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null :  _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
@@ -188,12 +178,9 @@ namespace CMS.Service.Services.LookupMaster
                     return CreateResponse<TblLookupMaster>(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
-
-
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
@@ -205,21 +192,18 @@ namespace CMS.Service.Services.LookupMaster
             try
             {
                 TblLookupMaster objData = new TblLookupMaster();
-                objData =  _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
                 objData.IsDelete = true;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
                 objData.ModifiedOn = DateTime.Now;
                 // _db.TblLookupMasters.Update(objData);
-               await  _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<TblLookupMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message);
             }
-
-
         }
 
         public async Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(long id)

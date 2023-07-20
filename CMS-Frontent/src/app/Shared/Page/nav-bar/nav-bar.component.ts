@@ -1,10 +1,10 @@
-import { DropDown_key } from 'src/app/Shared/Constant';
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from '../../Services/common.service';
+import { CommonService } from '../../Services/Core/common.service';
 import { DropDownItem, DropDownModel, GroupDropDownItem } from '../../Helper/Common';
-import { SecurityService } from '../../Services/security.service';
 import { x64 } from 'crypto-js';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../Services/UserService/auth.service';
+import { SecurityService } from '../../Services/Core/security.service';
+import { DropDown_key } from '../../Constant';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -27,10 +27,12 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this._authService.IsAuthenticate();
-
     this.GetDropDown();
     this._authService.IsAuthentication.subscribe(x => {
       this.isLoggedIn = x as boolean ?? false;
+      if (!this.isLoggedIn) {
+        this.logout();
+      }
     });
   }
 
@@ -50,6 +52,11 @@ export class NavBarComponent implements OnInit {
         this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu));
       }
     });
+  }
+
+
+  logout() {
+    this._authService.LogOut();
   }
 
 }

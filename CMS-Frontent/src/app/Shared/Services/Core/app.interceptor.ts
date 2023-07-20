@@ -7,8 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { LoaderService } from './loader.service';
-import { SecurityService } from './Services/security.service';
+import { LoaderService } from './loader.service'; 
+import { SecurityService } from './security.service';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {

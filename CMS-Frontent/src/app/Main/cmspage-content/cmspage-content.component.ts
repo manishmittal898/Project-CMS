@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SecurityService } from '../../Shared/Services/security.service';
-import { CMSPageService, CMSPageViewModel } from '../../Shared/Services/cmspage.service';
+import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
+import { CMSPageService, CMSPageViewModel } from '../../Shared/Services/CMSPageService/cmspage.service';
 
 @Component({
   selector: 'app-cmspage-content',
@@ -12,7 +12,8 @@ export class CMSPageContentComponent implements OnInit {
   recordId: string;
   model = [] as CMSPageViewModel[];
 
-  constructor(private readonly _route: ActivatedRoute, private readonly _securityService: SecurityService, private _cmsPageService: CMSPageService) {
+  constructor(private readonly _route: ActivatedRoute, private readonly _securityService: SecurityService,
+    private _cmsPageService: CMSPageService) {
 
   }
 

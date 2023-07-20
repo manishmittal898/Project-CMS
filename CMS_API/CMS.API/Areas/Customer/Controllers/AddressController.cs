@@ -1,14 +1,20 @@
-﻿using CMS.Core.ServiceHelper.Model;
+﻿using CMS.Core.ServiceHelper.ExtensionMethod;
+using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.CustomerAddress;
 using CMS.Service.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Threading.Tasks;
+using static CMS.Core.FixedValue.Enums;
 
 namespace CMS.API.Areas.Customer.Controllers
 {
-    [Route("api/[controller]")]
+    [Area("Customer")]
+    [Route("api/[area]/[controller]/[action]")]
     [ApiController]
+    [Authorize(Roles = "Customer")]
     public class AddressController : ControllerBase
     {
         private readonly ICustomerAddressService _address;
@@ -49,7 +55,7 @@ namespace CMS.API.Areas.Customer.Controllers
                 return objReturn;
             }
         }
- 
+
 
 
         // DELETE api/<GeneralEntryCategory>/5

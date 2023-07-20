@@ -1,18 +1,18 @@
-import { AppInterceptor } from './Shared/app.interceptor';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FeatureModule } from 'src/app/Shared/Module/feature/feature.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { AppInterceptor } from './Shared/Services/Core/app.interceptor';
+import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { FeatureModule } from './Shared/Module/feature/feature.module';
 import { HtmlComponent } from './Shared/Page/html/html.component';
-import { LocationStrategy, PathLocationStrategy, CommonModule } from '@angular/common';
-import { BaseAPIService } from './Shared/Services/base-api.service';
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginComponent } from './Shared/Page/login/login.component';
 import { RegisterComponent } from './Shared/Page/register/register.component';
+import { BaseAPIService } from './Shared/Services/Core/base-api.service';
 import { MainModule } from './Main/main.module';
-import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,

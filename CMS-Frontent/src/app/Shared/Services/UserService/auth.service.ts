@@ -2,8 +2,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from 'rxjs';
-import { BaseAPIService } from './Services/base-api.service';
-import { SecurityService } from './Services/security.service';
+import { BaseAPIService } from "../Core/base-api.service";
+import { SecurityService } from '../Core/security.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,7 @@ export class AuthService {
   public IsAuthentication = new Subject<boolean>();
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
-
-    this.IsAuthenticate();
+   // this.IsAuthenticate();
   }
 
   IsAccessibleUrl(requestedUrl: string): boolean {
@@ -64,13 +63,17 @@ export class AuthService {
 
 
   LogOut() {
-    let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
-    this._baseService.get(url).subscribe(x => {
-      debugger
-      this.removeLocalData();
-    }, err => {
-      this.removeLocalData();
-    });
+    if(this.GetUserDetail()?.UserId)
+    {
+      let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
+      this._baseService.get(url).subscribe(x => {
+        debugger
+        this.removeLocalData();
+      }, err => {
+        this.removeLocalData();
+      });
+    }
+
   }
   private removeLocalData() {
     this.IsAuthentication.next(false);

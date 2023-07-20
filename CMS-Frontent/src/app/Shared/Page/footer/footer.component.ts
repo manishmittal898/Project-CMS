@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DropDown_key } from '../../Constant';
 import { DropDownItem, DropDownModel } from '../../Helper/Common';
-import { CommonService } from '../../Services/common.service';
-import { SecurityService } from '../../Services/security.service';
-
+import { CommonService } from '../../Services/Core/common.service';
+import { SecurityService } from '../../Services/Core/security.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',

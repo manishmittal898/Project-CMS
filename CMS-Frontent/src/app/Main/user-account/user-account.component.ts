@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/Shared/auth.service';
+import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 
 @Component({
   selector: 'app-user-account',
@@ -21,6 +21,6 @@ export class UserAccountComponent implements OnInit {
   }
 
   logout() {
-    this._authService.LogOut()
+    this._authService.LogOut();
   }
 }
