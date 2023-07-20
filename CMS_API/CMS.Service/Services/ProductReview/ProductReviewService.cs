@@ -2,6 +2,7 @@
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace CMS.Service.Services.ProductReview
   public  class ProductReviewService : BaseService, IProductReviewService
     {
         DB_CMSContext _db;
-        public ProductReviewService(DB_CMSContext db)
+        public ProductReviewService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
         }

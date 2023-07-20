@@ -8,7 +8,7 @@ namespace CMS.Service.Services.CustomerAddress
     public class CustomerAddressViewModel
     {
   
-        public long Id { get; set; }
+        public string Id { get; set; }
         public long UserId { get; set; }
         public string FullName { get; set; }
         public string Mobile { get; set; }
@@ -29,7 +29,7 @@ namespace CMS.Service.Services.CustomerAddress
     public class CustomerAddressPostModel
     {
 
-        public long Id { get; set; }
+        public string Id { get; set; }
         public long UserId { get; set; }
         public string FullName { get; set; }
         public string Mobile { get; set; }

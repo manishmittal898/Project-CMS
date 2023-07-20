@@ -28,9 +28,9 @@ namespace CMS.Service.Services.Common
             public const string ddlProductPrice = "ddlproductprice";
             public const string ddlProductViewSection = "ddlproductviewsection";
 
-            
-            public const string ddlGender = "ddlgender";
 
+            public const string ddlGender = "ddlgender";
+            public const string ddlAddressType = "ddladdresstype";
             public const string ddlCMSPage = "ddlcmspage";
 
             public const string ddlContentType = "ddlcontenttype";

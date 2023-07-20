@@ -3,6 +3,7 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace CMS.Service.Services.LookupTypeMaster
     public class LookupTypeMasterService : BaseService, ILookupTypeMasterService
     {
         DB_CMSContext _db;
-        public LookupTypeMasterService(DB_CMSContext db)
+        public LookupTypeMasterService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
         }

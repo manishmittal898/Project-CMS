@@ -22,9 +22,8 @@ namespace CMS.Service.Services.User
     {
         DB_CMSContext _db;
         private readonly Security _security;
-        public UserMasterService(DB_CMSContext db, IConfiguration _configuration)
+        public UserMasterService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
-            _security = new Security(_configuration);
             _db = db;
         }
 

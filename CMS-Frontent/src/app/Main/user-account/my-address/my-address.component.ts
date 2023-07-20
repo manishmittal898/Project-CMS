@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserAddressService, UserAddressViewModel, UserAddressPostModel } from '../../../Shared/Services/UserService/user-address.service';
 import { IndexModel } from 'src/app/Shared/Helper/Common';
 import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
+import { Message } from 'src/app/Shared/Constant';
+import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/Shared/Services/Core/common.service';
 
 @Component({
   selector: 'app-my-address',
@@ -13,7 +16,9 @@ export class MyAddressComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
   data = [] as UserAddressViewModel[];
   selectedData = {} as UserAddressPostModel;
-  constructor(private _userAddressService: UserAddressService, private _securityService: SecurityService) { }
+  constructor(private _userAddressService: UserAddressService,
+    private _securityService: SecurityService, private _toasterService: ToastrService,
+    private _commonService: CommonService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -21,7 +26,7 @@ export class MyAddressComponent implements OnInit {
 
   getData() {
 
-    const model = new IndexModel()
+    const model = new IndexModel();
     model.PageSize = 101;
     this._userAddressService.GetList(model).subscribe(res => {
       if (res.IsSuccess) {
@@ -29,22 +34,35 @@ export class MyAddressComponent implements OnInit {
       }
     })
   }
+
   addAddress() {
     this.selectedData = {} as UserAddressPostModel;
-    debugger
     this.btnShow.nativeElement.click();
-
   }
+
   editAddress(address: UserAddressViewModel) {
     this.selectedData = address;
     this.btnShow.nativeElement.click();
+  }
 
+  deleteAddress(address) {
+    this._commonService.Question(Message.DeleteConfirmation).then(result => {
+      if (result) {
+        this._userAddressService.Delete(address.Id).subscribe(res => {
+          if (res.IsSuccess) {
+            this._toasterService.success(res.Message as string, 'Success');
+          } else {
+            this._toasterService.error(res.Message as string, 'Oops');
+          }
+        })
+      }
+    })
   }
-  deleteAddress() {
-  }
+
   closePopup() {
     this.btnClose.nativeElement.click();
   }
+
   onSave(data) {
     this.closePopup();
   }

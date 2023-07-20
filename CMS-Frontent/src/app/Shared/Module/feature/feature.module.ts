@@ -12,6 +12,7 @@ import { ToastrModule } from "ngx-toastr";
 import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
 
+
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -38,6 +39,7 @@ const installedModule = [
   }),
   CheckboxModule,
   SliderModule,
+  
 ]
 
 @NgModule({

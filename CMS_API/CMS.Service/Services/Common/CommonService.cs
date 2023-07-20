@@ -4,6 +4,7 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CMS.Service.Services.Common
     public class CommonService : BaseService, ICommonService
     {
         private readonly DB_CMSContext _db;
-        public CommonService(DB_CMSContext db)
+        public CommonService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
         {
 
             _db = db;

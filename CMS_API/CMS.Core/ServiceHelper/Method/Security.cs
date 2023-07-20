@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace CMS.Core.ServiceHelper.ExtensionMethod
 {
-    public class Security : BaseService
+    public class Security 
     {
         IConfiguration _configuration;
         // private byte[] IV = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
@@ -185,7 +185,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
             result = prefix + "/" + month.ToString() + "/" + year + "/" + random.Next(10000, 199999).ToString();
             return result;
         }
-        public ServiceResponse<string> CreateToken(long UserId, string UserName, string RoleType, int RoleId, bool isWeb = true)
+        public string CreateToken(long UserId, string UserName, string RoleType, int RoleId, bool isWeb = true)
         {
 
             var key = _configuration.GetValue<string>("Jwt:Key");
@@ -214,7 +214,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
             var token = new JwtSecurityToken(issuer, issuer, claims, expires: isWeb ? DateTime.Now.AddHours(10) : DateTime.Now.AddDays(90),
                   signingCredentials: credentials);
 
-            return CreateResponse<string>(new JwtSecurityTokenHandler().WriteToken(token), ResponseMessage.Success, true);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
     }

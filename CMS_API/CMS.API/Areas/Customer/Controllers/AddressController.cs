@@ -31,7 +31,7 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(long id)
+        public object Get(string id)
         {
             return _address.GetById(id);
         }
@@ -60,14 +60,14 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> SetPrimary(long id)
+        public async Task<object> SetPrimary(string id)
         {
             return await _address.PrimaryStatusUpdate(id);
         }
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(long id)
+        public async Task<object> ChangeActiveStatus(string id)
         {
             return await _address.ActiveStatusUpdate(id);
         }
@@ -76,7 +76,7 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(long id)
+        public async Task<object> Delete(string id)
         {
             return await _address.Delete(id);
         }

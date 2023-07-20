@@ -6,6 +6,7 @@ using CMS.Data.Models;
 using CMS.Service.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CMS.Service.Services.ProductMaster
     {
         DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
-        public ProductMasterService(DB_CMSContext db, IHostingEnvironment environment)
+        public ProductMasterService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
             _fileHelper = new FileHelper(environment);

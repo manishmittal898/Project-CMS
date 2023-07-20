@@ -1,6 +1,8 @@
 ﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 
@@ -9,13 +11,14 @@ namespace CMS.Core.ServiceHelper.Method
     public class BaseService
     {
         public readonly LoginUserViewModel _loginUserDetail;
-        public BaseService()
+        public Security _security;
+        public BaseService(IConfiguration _configuration)
         {
             _loginUserDetail = SetLoginUserDetail();
-            
+            _security = new Security(_configuration);
         }
 
-        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode= (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "", long? TotalRecord = null) where T : class
+        public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode = (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "", long? TotalRecord = null) where T : class
         {
             ServiceResponse<T> objReturn = new ServiceResponse<T>();
             objReturn.Message = Message;
@@ -32,11 +35,11 @@ namespace CMS.Core.ServiceHelper.Method
             public long? UserId { get; set; }
             public int? RoleId { get; set; }
             public string RoleName { get; set; }
-            
+
             public string UserName { get; set; }
 
             public DateTime? LoginTime { get; set; }
-         
+
         }
 
         private LoginUserViewModel SetLoginUserDetail()

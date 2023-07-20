@@ -3,13 +3,16 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ApiResponse, FilterDropDownPostModel } from '../../Helper/Common';
 import { BaseAPIService } from './base-api.service';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommonService {
+export class CommonService extends AlertService {
 
-  constructor(private readonly _baseService: BaseAPIService) { }
+  constructor(private readonly _baseService: BaseAPIService) {
+    super();
+  }
 
   GetDropDown(key: string[], isTransactionData = false): Observable<ApiResponse<any>> {
 

@@ -11,11 +11,11 @@ namespace CMS.Service.Services.CustomerAddress
     public interface ICustomerAddressService
     {
         Task<ServiceResponse<IEnumerable<CustomerAddressViewModel>>> GetList(IndexModel model);
-        ServiceResponse<CustomerAddressViewModel> GetById(long id);
+        ServiceResponse<CustomerAddressViewModel> GetById(string id);
         Task<ServiceResponse<TblUserAddressMaster>> Save(CustomerAddressPostModel model);
-        Task<ServiceResponse<TblUserAddressMaster>> PrimaryStatusUpdate(long id);
-        Task<ServiceResponse<TblUserAddressMaster>> ActiveStatusUpdate(long id);
+        Task<ServiceResponse<TblUserAddressMaster>> PrimaryStatusUpdate(string id);
+        Task<ServiceResponse<TblUserAddressMaster>> ActiveStatusUpdate(string id);
  
-        Task<ServiceResponse<TblUserAddressMaster>> Delete(long id);
+        Task<ServiceResponse<TblUserAddressMaster>> Delete(string id);
     }
 }

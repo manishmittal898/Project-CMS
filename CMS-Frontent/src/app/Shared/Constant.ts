@@ -78,3 +78,19 @@ export class Routing_Url {
   //#endregion
 
 }
+
+export class Message {
+  //#region <<Alert Message >>
+  static SaveSuccess = 'Record successfully saved...!';
+  static SaveFail = 'Record failed to save...!';
+  static UpdateSuccess = 'Record successfully updated...!';
+  static UpdateFail = 'Record failed to update...!';
+  static DeleteSuccess = 'Record successfully deleted...!';
+  static DeleteFail = 'Record failed to Delete...!';
+
+  static ConfirmUpdate = 'Are you Sure update this record?';
+  static DeleteConfirmation = 'Are you want to delete record ?';
+  static VerifyInput = 'Please Verify input data?';
+
+  //#endregion
+}

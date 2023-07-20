@@ -1,10 +1,12 @@
 ﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Utility;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,11 @@ namespace CMS.Service.Services.CustomerAddress
     public class CustomerAddressService : BaseService, ICustomerAddressService
     {
         DB_CMSContext _db;
-        public CustomerAddressService(DB_CMSContext db)
+
+        public CustomerAddressService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
+
         }
         public async Task<ServiceResponse<IEnumerable<CustomerAddressViewModel>>> GetList(IndexModel model)
         {
@@ -71,7 +75,7 @@ namespace CMS.Service.Services.CustomerAddress
                                                   City = x.City,
                                                   FullName = x.FullName,
                                                   IsPrimary = x.IsPrimary,
-                                                  Id = x.Id,
+                                                  Id = _security.EncryptData(x.Id.ToString()),
                                                   Landmark = x.Landmark,
                                                   Mobile = x.Mobile,
                                                   PinCode = x.PinCode,
@@ -117,7 +121,7 @@ namespace CMS.Service.Services.CustomerAddress
                         City = result.City,
                         FullName = result.FullName,
                         IsPrimary = result.IsPrimary,
-                        Id = result.Id,
+                        Id = _security.EncryptData(result.Id.ToString()),
                         Landmark = result.Landmark,
                         Mobile = result.Mobile,
                         PinCode = result.PinCode,
@@ -147,11 +151,11 @@ namespace CMS.Service.Services.CustomerAddress
             try
             {
 
-                if (model.Id > 0)
+                if (!string.IsNullOrEmpty(model.Id))
                 {
 
-                    TblUserAddressMaster objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == model.Id);
-                                        objData.Address = model.Address;
+                    TblUserAddressMaster objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(model.Id)));
+                    objData.Address = model.Address;
                     objData.AddressType = model.AddressType;
                     objData.BuildingNumber = model.BuildingNumber;
                     objData.City = model.City;
@@ -208,12 +212,12 @@ namespace CMS.Service.Services.CustomerAddress
             }
         }
 
-        public async Task<ServiceResponse<TblUserAddressMaster>> PrimaryStatusUpdate(long id)
+        public async Task<ServiceResponse<TblUserAddressMaster>> PrimaryStatusUpdate(string id)
         {
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == id);
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
                 objAddress.IsPrimary = !objAddress.IsPrimary;
 
 
@@ -221,7 +225,7 @@ namespace CMS.Service.Services.CustomerAddress
                 await _db.SaveChangesAsync();
                 if (objAddress.IsPrimary)
                 {
-                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != id).ToList();
+                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != Convert.ToInt64(_security.DecryptData(id))).ToList();
                     foreach (var item in address)
                     {
                         item.IsPrimary = false;
@@ -240,12 +244,12 @@ namespace CMS.Service.Services.CustomerAddress
             }
         }
 
-        public async Task<ServiceResponse<TblUserAddressMaster>> ActiveStatusUpdate(long id)
+        public async Task<ServiceResponse<TblUserAddressMaster>> ActiveStatusUpdate(string id)
         {
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == id);
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
                 objAddress.IsActive = !objAddress.IsActive;
                 var roletype = _db.TblUserAddressMasters.Update(objAddress);
                 await _db.SaveChangesAsync();
@@ -259,12 +263,12 @@ namespace CMS.Service.Services.CustomerAddress
             }
         }
 
-        public async Task<ServiceResponse<TblUserAddressMaster>> Delete(long id)
+        public async Task<ServiceResponse<TblUserAddressMaster>> Delete(string id)
         {
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == id);
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
                 objAddress.IsDelete = !objAddress.IsDelete;
                 var roletype = _db.TblUserAddressMasters.Update(objAddress);
                 await _db.SaveChangesAsync();

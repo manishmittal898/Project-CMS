@@ -20,15 +20,10 @@ namespace CMS.Service.Services.Account
     public class AccountService : BaseService, IAccountService
     {
 
-        private readonly Security _security;
         DB_CMSContext _db;
-        public AccountService(DB_CMSContext db, IConfiguration _configuration)
+        public AccountService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
-
-            _security = new Security(_configuration);
             _db = db;
-
-
         }
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
         {
@@ -36,14 +31,14 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email)  && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
                 if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
 
                     var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
                     response.UserId = user.UserId;
-                    response.Token = fresh_token.Data;
+                    response.Token = fresh_token;
                     response.RoleId = user.RoleId;
                     response.UserName = user.Email;
                     response.RoleName = user.Role.RoleName;
