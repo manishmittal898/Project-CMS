@@ -332,6 +332,7 @@
     width: auto;
     visibility: visible;
     position: static;
+    height: auto;
 }
 }
 
@@ -438,6 +439,7 @@
 .my-account-sidebar {
   box-shadow: none;
   border-radius: 0;
+  width: 320px;
 }
 .page-fliter {
   margin-bottom: 0;
