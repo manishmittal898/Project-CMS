@@ -41,7 +41,7 @@
           formControlName="BuildingNumber"
           [ngClass]="{ 'is-invalid': f.BuildingNumber.errors && f.BuildingNumber.touched}"
           placeholder="House No. /Apartment, suite, etc.[optional]">
-        <label for="Building">House No. /Apartment, suite, etc. [optional]</label>
+        <label for="Building">House No. /Apartment, suite, etc.</label>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('BuildingNumber')?.hasError('required') && formgrp.get('BuildingNumber')?.touched)">
           Please enter <strong>House No. /Apartment, suite, etc.</strong>...!</div>
