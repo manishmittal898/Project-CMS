@@ -2413,6 +2413,27 @@ ul.footer-benefits li p {
   margin: 10px 0px 0px 0px;
   font-weight: 500;
 }
+.form-floating-ngx-dropdown label {
+  top: 10px;
+}
+.form-floating-title {
+  font-weight: 500;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+.form-floating-ngx-dropdown label {
+  top: 33px;
+  padding: 0px;
+  height: auto;
+  left: 10px;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 43px;
+  line-height: 33px;
+  min-height: 43px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
 /* CUSTOM CSS END */
 
 

@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-xl-12">
-      <div class="form-floating mb-4">
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" id="FullName" placeholder="Enter full name*"
           [(ngModel)]="model.FullName" formControlName="FullName"
           [ngClass]="{ 'is-invalid': f.FullName.errors && f.FullName.touched}">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-xl-12">
-      <div class="form-floating mb-4">
+      <div class="form-floating mb-3">
         <input type="text" (keypress)="_commonService.NumberOnly($event)" maxlength="10" minlength="10"
           class="form-control" id="Mobile" placeholder="Mobile number*" [(ngModel)]="model.Mobile"
           formControlName="Mobile" [ngClass]="{ 'is-invalid': f.Mobile.errors && f.Mobile.touched}">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="col-xl-12">
-      <div class="form-floating mb-4">
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" (blur)="getAddress(model.PinCode)" id="Postal-code"
           placeholder="Postal code*" [(ngModel)]="model.PinCode" formControlName="PinCode"
           [ngClass]="{ 'is-invalid': f.PinCode.errors && f.PinCode.touched}">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="col-xl-12">
-      <div class="form-floating mb-4">
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Building" [(ngModel)]="model.BuildingNumber"
           formControlName="BuildingNumber"
           [ngClass]="{ 'is-invalid': f.BuildingNumber.errors && f.BuildingNumber.touched}"
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col-xl-12">
-      <div class="form-floating mb-4">
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Address1" placeholder="Address*" [(ngModel)]="model.Address"
           formControlName="Address" [ngClass]="{ 'is-invalid': f.Address.errors && f.Address.touched}">
         <label for="Address1">Address*</label>
@@ -58,12 +58,13 @@
       </div>
     </div>
     <div class="col-xl-6">
-      <div class="form-floating mb-4">
+      <div class="form-floating form-floating-ngx-dropdown mb-3">
+        <div class="form-floating-title">City*</div>
         <ng-select [items]="this.dropDown!.ddlDistrict" formControlName="City" [searchable]="true" bindLabel="Text"
           bindValue="Value" id="City" [ngClass]="{ 'is-invalid': f.City.errors && f.City.touched}"
           [(ngModel)]="model.City">
         </ng-select>
-        <label for="City">City*</label>
+        <label for="City">--Select--</label>
 
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('City')?.hasError('required') && formgrp.get('City')?.touched)">
@@ -72,12 +73,13 @@
     </div>
 
     <div class="col-xl-6">
-      <div class="form-floating  mb-4">
+      <div class="form-floating form-floating-ngx-dropdown mb-3">
+        <div class="form-floating-title">State*</div>
         <ng-select [items]="this.dropDown!.ddlState" formControlName="StateId" [searchable]="true" bindLabel="Text"
           bindValue="Value" id="State" [ngClass]="{ 'is-invalid': f.StateId.errors && f.StateId.touched}"
           [(ngModel)]="model.StateId">
         </ng-select>
-        <label for="State">State*</label>
+        <label for="State">--Select--</label>
 
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('StateId')?.hasError('required') && formgrp.get('StateId')?.touched)">
@@ -88,18 +90,19 @@
 
 
     <div class="col-xl-6">
-      <div class="form-floating  mb-0">
+      <div class="form-floating form-floating-ngx-dropdown mb-0">
+        <div class="form-floating-title">Address Type*</div>
         <ng-select [items]="this.dropDown!.ddlAddressType" formControlName="AddressType" [searchable]="true"
           bindLabel="Text" bindValue="Value" id="AddressType"
           [ngClass]="{ 'is-invalid': f.AddressType.errors && f.AddressType.touched}" [(ngModel)]="model.AddressType">
         </ng-select>
-        <label for="AddressType">Address Type*</label>
+        <label for="AddressType">--Select--</label>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('AddressType')?.hasError('required') && formgrp.get('AddressType')?.touched)">
           Please select <strong>Address Type</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6 mt-1">
+    <div class="col-xl-6 mt-4">
       <div class="form-check d-flex align-items-center">
         <input type="checkbox" class="form-check-input" id="IsPrimary" [(ngModel)]="model.IsPrimary"
           formControlName="IsPrimary" id="IsPrimary">
