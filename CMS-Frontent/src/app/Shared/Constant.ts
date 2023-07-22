@@ -57,7 +57,7 @@ export class API_Url {
   public static UserAddress_Detail_Api = `${environment.apiEndPoint}customer/Address/Get/`;
   public static UserAddress_Save_Api = `${environment.apiEndPoint}customer/Address/Save`;
   public static UserAddress_SetDefaultAddress_Api = `${environment.apiEndPoint}customer/Address/SetPrimary/`;
-  public static UserAddress_Delete_Api = `${environment.apiEndPoint}customer/Address/Delete/`;
+  public static UserAddress_Delete_Api = `${environment.apiEndPoint}customer/Address/Delete`;
 
 
   //#endregion
@@ -91,7 +91,7 @@ export class Message {
   static ConfirmUpdate = 'Are you Sure update this record?';
   static DeleteConfirmation = 'Are you want to delete record ?';
   static VerifyInput = 'Please Verify input data?';
-  
+
 
   //#endregion
 }

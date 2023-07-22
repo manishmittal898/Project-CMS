@@ -96,6 +96,12 @@ namespace CMS.Service.Services.Common
                             break;
 
 
+                        case DropDownKey.ddlState:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.State.GetStringValue(), isTransactionData));
+                            break;
+
+
                         case DropDownKey.ddlContentType:
 
                             objData.Add(item, GetContentTypeEnum());

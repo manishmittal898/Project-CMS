@@ -57,6 +57,19 @@
           Please enter <strong>Address</strong>...!</div>
       </div>
     </div>
+
+    <div class="col-xl-12">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="Landmark" placeholder="Landmark[optional]"
+          [(ngModel)]="model.Landmark" formControlName="Landmark"
+          [ngClass]="{ 'is-invalid': f.Landmark.errors && f.Landmark.touched}">
+        <label for="Landmark">Landmark [optional]</label>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Landmark')?.hasError('required') && formgrp.get('Landmark')?.touched)">
+          Please enter <strong>Landmark</strong>...!</div>
+      </div>
+    </div>
+
     <div class="col-xl-6">
       <div class="form-floating form-floating-ngx-dropdown mb-3">
         <div class="form-floating-title">City*</div>

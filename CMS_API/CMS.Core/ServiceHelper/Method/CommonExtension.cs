@@ -36,5 +36,19 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
             }
 
         }
+
+        public static long ToLongValue(this string value)
+        {
+            try
+            {
+                return long.Parse(value);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

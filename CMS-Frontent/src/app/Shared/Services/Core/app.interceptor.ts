@@ -7,8 +7,9 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { LoaderService } from './loader.service'; 
+import { LoaderService } from './loader.service';
 import { SecurityService } from './security.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
@@ -24,17 +25,18 @@ export class AppInterceptor implements HttpInterceptor {
 
 
     this._loaderService.show();
-
-    let Token = this._commonService.getStorage("authToken") != null ? this._commonService.getStorage("authToken") : null;
-
-    if (Token != null) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: "Bearer " + Token,
-
-        }
-      });
+    
+    if (req.url.includes(environment.apiEndPoint)) {
+      let Token = this._commonService.getStorage("authToken") != null ? this._commonService.getStorage("authToken") : null;
+      if (Token != null) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: "Bearer " + Token,
+          }
+        });
+      }
     }
+
 
     return next.handle(req).pipe(
       finalize(() => this._loaderService.hide()));

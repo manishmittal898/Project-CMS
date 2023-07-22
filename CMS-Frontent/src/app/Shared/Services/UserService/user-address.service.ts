@@ -15,7 +15,7 @@ export class UserAddressService {
     return this._baseService.post(url, model);
   }
 
-  GetDetail(Id: Number): Observable<ApiResponse<UserAddressViewModel>> {
+  GetDetail(Id: string): Observable<ApiResponse<UserAddressViewModel>> {
     let url = `${this._baseService.API_Url.UserAddress_Detail_Api}`;
     return this._baseService.get(`${url + Id}`);
   }
@@ -24,14 +24,14 @@ export class UserAddressService {
     return this._baseService.post(url, model);
   }
 
-  SetPrimary(Id: Number): Observable<ApiResponse<any>> {
+  SetPrimary(Id: string): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.UserAddress_SetDefaultAddress_Api}`;
     return this._baseService.get(`${url + Id}`);
   }
 
-  Delete(Id: Number): Observable<ApiResponse<any>> {
+  Delete(Id: string): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.UserAddress_Delete_Api}`;
-    return this._baseService.get(`${url + Id}`);
+    return this._baseService.get(`${url}?id=${Id}`);
   }
 
   getAddressDetailByPinCode(pinCode: number) {

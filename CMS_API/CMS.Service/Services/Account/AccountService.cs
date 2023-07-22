@@ -44,6 +44,7 @@ namespace CMS.Service.Services.Account
                     response.RoleName = user.Role.RoleName;
                     response.RoleLevel = user.Role.RoleLevel;
                     response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
+                    response.FullName = user.FirstName + ' ' + user.LastName;
 
                     await SaveUserLog(user.UserId, response);
                 }

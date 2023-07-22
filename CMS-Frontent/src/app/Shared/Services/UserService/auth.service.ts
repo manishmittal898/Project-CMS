@@ -12,7 +12,7 @@ export class AuthService {
   public IsAuthentication = new Subject<boolean>();
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
-   // this.IsAuthenticate();
+    // this.IsAuthenticate();
   }
 
   IsAccessibleUrl(requestedUrl: string): boolean {
@@ -63,8 +63,7 @@ export class AuthService {
 
 
   LogOut() {
-    if(this.GetUserDetail()?.UserId)
-    {
+    if (this.GetUserDetail()?.UserId) {
       let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
       this._baseService.get(url).subscribe(x => {
         debugger
@@ -90,6 +89,7 @@ export class AuthService {
 }
 export interface LoginUserDetailModel {
   UserId: number;
+  FullName: string;
   RoleId: number;
   RoleLeve: number;
   Token: string;
