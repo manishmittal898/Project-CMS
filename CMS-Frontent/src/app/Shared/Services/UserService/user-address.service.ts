@@ -31,7 +31,7 @@ export class UserAddressService {
 
   Delete(Id: string): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.UserAddress_Delete_Api}`;
-    return this._baseService.get(`${url}?id=${Id}`);
+    return this._baseService.get(`${url + Id}`);
   }
 
   getAddressDetailByPinCode(pinCode: number) {

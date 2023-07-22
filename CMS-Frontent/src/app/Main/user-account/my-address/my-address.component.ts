@@ -66,6 +66,9 @@ export class MyAddressComponent implements OnInit {
           }
         })
       }
+    }, err => {
+      this._toasterService.error(err.message as string, 'Oops');
+
     })
   }
 
@@ -83,7 +86,12 @@ export class MyAddressComponent implements OnInit {
             } else {
               this._toasterService.error(res.Message as string, 'Oops');
             }
-          })
+          },
+            err => {
+              this._toasterService.error(err.message as string, 'Oops');
+
+            }
+          )
         }
       })
     }
