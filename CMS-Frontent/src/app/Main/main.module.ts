@@ -10,6 +10,7 @@ import { FeatureModule } from '../Shared/Module/feature/feature.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
+import { ProductCardComponent } from './product-list/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
     MainComponent,
     CategoryProductListComponent,
     ProductFilterComponent,
-    CMSPageContentComponent],
+    CMSPageContentComponent,
+    ProductCardComponent
+  ],
   imports: [
     CommonModule,
     MainRoutingModule,

@@ -14,7 +14,7 @@ declare var $: any;
 
 export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
-  recordId: number;
+  recordId: string;
   isLoading = false;
   get totalStock() {
     let stockCount = 0;
@@ -31,7 +31,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(x => {
-      this.recordId = this._securityService.decrypt(x.id) as any;
+      this.recordId = x.id as string;
       this.getDetailData();
     });
 
@@ -46,7 +46,7 @@ export class ProductDetailComponent implements OnInit {
         if (this.model?.Stocks?.length > 0) {
           this.SelectedSizeModel = this.model.Stocks[0];
         }
-        this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${this.model.Name.split(' ').join('-')}/${this.recordId}
+        this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
          `);
 
         setTimeout(() => {
@@ -85,7 +85,7 @@ export class ProductDetailComponent implements OnInit {
         asNavFor: '.product-d-main-slider',
         focusOnSelect: true
       });
-    }, 100);
+    }, 500);
 
   }
 

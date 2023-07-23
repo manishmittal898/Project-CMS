@@ -14,7 +14,7 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
 
-  GetDetail(Id: Number): Observable<ApiResponse<ProductMasterViewModel>> {
+  GetDetail(Id: string): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_Detail_Api}`;
     return this._baseService.get(`${url + Id}`);
   }

@@ -30,6 +30,9 @@ const routes: Routes = [
       component: ProductDetailComponent, path: 'store/:name/:id'
     },
     {
+      component: ProductDetailComponent, path: 'store/:category/:name/:id'
+    },
+    {
       component: CMSPageContentComponent, path: 'page/:name'
     },
     {
