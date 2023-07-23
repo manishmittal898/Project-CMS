@@ -17,6 +17,7 @@ export class DropDown_key {
   static ddlSubLookupGroup = "ddlSubLookupGroup";
   static ddlCMSPage = "ddlCMSPage";
   static ddlProductPrice = "ddlProductPrice";
+  static ddlGender = "ddlGender";
 
 }
 

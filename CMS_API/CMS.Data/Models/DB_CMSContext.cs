@@ -32,6 +32,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblUserAddressMaster> TblUserAddressMasters { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
         public virtual DbSet<TblUserMasterLog> TblUserMasterLogs { get; set; }
+        public virtual DbSet<TblUserWishList> TblUserWishLists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -574,7 +575,7 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblUserMaster>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__tblUserM__1788CC4C4AFD4A9C");
+                    .HasName("PK__tmp_ms_x__1788CC4C69C2F205");
 
                 entity.ToTable("tblUserMaster");
 
@@ -608,11 +609,16 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.ProfilePhoto).HasMaxLength(1000);
 
+                entity.HasOne(d => d.Gender)
+                    .WithMany(p => p.TblUserMasters)
+                    .HasForeignKey(d => d.GenderId)
+                    .HasConstraintName("FK__tblUserMa__Gende__5CA1C101");
+
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tblUserMa__RoleI__19DFD96B");
+                    .HasConstraintName("FK__tblUserMa__RoleI__5BAD9CC8");
             });
 
             modelBuilder.Entity<TblUserMasterLog>(entity =>
@@ -637,6 +643,27 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblUserMasterLog_UserId");
+            });
+
+            modelBuilder.Entity<TblUserWishList>(entity =>
+            {
+                entity.ToTable("tblUserWishList");
+
+                entity.Property(e => e.AddedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.TblUserWishLists)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserWishList_ProductId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblUserWishLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserWishList_UserId");
             });
 
             OnModelCreatingPartial(modelBuilder);

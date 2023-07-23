@@ -65,5 +65,5 @@ export interface UserViewPostModel {
   Dob: string | null;
   Mobile: string;
   ProfilePhoto: string;
-
+  GenderId: number;
 }

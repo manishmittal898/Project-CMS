@@ -17,6 +17,7 @@ namespace CMS.Data.Models
             TblSubLookupMasters = new HashSet<TblSubLookupMaster>();
             TblUserAddressMasterAddressTypeNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterStates = new HashSet<TblUserAddressMaster>();
+            TblUserMasters = new HashSet<TblUserMaster>();
         }
 
         public long Id { get; set; }
@@ -42,5 +43,6 @@ namespace CMS.Data.Models
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterAddressTypeNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterStates { get; set; }
+        public virtual ICollection<TblUserMaster> TblUserMasters { get; set; }
     }
 }
