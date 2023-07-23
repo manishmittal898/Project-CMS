@@ -2,10 +2,16 @@
 <div class="my-account-content my-account-profiles">
   <div class="row">
     <form class="mx-400 m-auto">
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="FullName" placeholder="Full name">
-          <label for="FullName">Full name</label>
+          <input type="text" class="form-control" id="FirstName" placeholder="First name">
+          <label for="FirstName">First name</label>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="LastNamr" placeholder="Last name">
+          <label for="LastNamr">Last name</label>
         </div>
       </div>
       <div class="col-lg-12">
@@ -20,12 +26,14 @@
           <label for="Mobile">Mobile number</label>
         </div>
       </div>
+
       <div class="col-lg-12">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="EmailAddress" placeholder="Address">
-          <label for="EmailAddress">Address</label>
+          <p-calendar class="form-control" id="DateOfBirth" placeholder="Date of birth"></p-calendar>
+          <label for="DateOfBirth">Date of birth</label>
         </div>
       </div>
+
       <div class="mt-3">
         <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100"><i
             class="bi bi-check2 me-2"></i>Save Details</button>

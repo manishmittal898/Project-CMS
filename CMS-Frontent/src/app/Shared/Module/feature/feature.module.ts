@@ -11,6 +11,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { ToastrModule } from "ngx-toastr";
 import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
+import { CalendarModule } from 'primeng/calendar';
 
 
 const commonModules = [
@@ -39,7 +40,8 @@ const installedModule = [
   }),
   CheckboxModule,
   SliderModule,
-  
+  CalendarModule
+
 ]
 
 @NgModule({

@@ -86,7 +86,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
                     {
                         byte[] plaintextBytes = Encoding.UTF8.GetBytes(strValue);
                         byte[] encryptedData = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
-                        return Convert.ToBase64String(encryptedData);
+                        return Base64UrlEncoder.Encode(encryptedData);
 
                     }
                 }
@@ -103,7 +103,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
         {
 
             byte[] key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("EncryptionKey"));
-            byte[] encryptedData = Convert.FromBase64String(strValue);
+            byte[] encryptedData = Base64UrlEncoder.DecodeBytes(strValue);
             try
             {
                 using (AesManaged aes = new AesManaged())

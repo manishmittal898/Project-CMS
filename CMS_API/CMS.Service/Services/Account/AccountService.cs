@@ -31,6 +31,9 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
+                var enc = _security.EncryptData("123");
+                var dec = _security.DecryptData(enc);
+
                 var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
                 if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))

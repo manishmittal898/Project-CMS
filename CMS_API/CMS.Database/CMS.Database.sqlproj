@@ -148,6 +148,7 @@
     <Build Include="dbo\Tables\tblFileDataMaster.sql" />
     <Build Include="dbo\Tables\tblUserAddressMaster.sql" />
     <Build Include="dbo\Tables\tblUserMasterLog.sql" />
+    <Build Include="dbo\Tables\tblUserWishList.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Storeone_DB_CMS.Database.publish.xml" />
