@@ -1,6 +1,5 @@
 <div class="my-account-content my-account-profiles">
-  <div class="row">
-    <form class="mx-400 m-auto">
+    <form class="col-lg-12 col-xl-9 row m-auto">
       <div class="col-lg-6">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="FirstName" placeholder="First name">
@@ -13,30 +12,50 @@
           <label for="LastNamr">Last name</label>
         </div>
       </div>
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <div class="form-floating mb-3">
           <input type="email" class="form-control" id="EmailAddress" placeholder="Email address">
           <label for="EmailAddress">Email address</label>
         </div>
       </div>
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="Mobile" placeholder="Mobile number">
           <label for="Mobile">Mobile number</label>
         </div>
       </div>
 
-      <div class="col-lg-12">
-        <div class="form-floating mb-3">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="DateOfBirth" class="form-floating-title">Date of birth</label>
           <p-calendar id="DateOfBirth" placeholder="Date of birth"></p-calendar>
-          <label for="DateOfBirth">Date of birth</label>
         </div>
       </div>
 
-      <div class="mt-3">
-        <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100"><i
+      <div class="col-lg-6">
+        <div class="mb-3 sm-radio-btn">
+          <label class="form-floating-title">Gender</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Male" value="option1">
+            <label class="form-check-label" for="Male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Female" value="option2">
+            <label class="form-check-label" for="Female">Female</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label class="form-floating-title">Profile photo</label>
+          <input type="file" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="mt-3 text-end">
+        <button type="submit" class="btn btn-default px-3 py-2 text-uppercase"><i
             class="bi bi-check2 me-2"></i>Save Details</button>
       </div>
     </form>
-  </div>
 </div>
