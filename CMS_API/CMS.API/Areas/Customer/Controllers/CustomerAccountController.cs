@@ -58,7 +58,7 @@ namespace CMS.API.Areas.Customer.Controllers
 
                 return objReturn;
             }
-            //return _roleTyp
+         
         }
 
 

@@ -58,8 +58,11 @@ export class API_Url {
   public static UserAddress_Save_Api = `${environment.apiEndPoint}customer/Address/Save`;
   public static UserAddress_SetDefaultAddress_Api = `${environment.apiEndPoint}customer/Address/SetPrimary/`;
   public static UserAddress_Delete_Api = `${environment.apiEndPoint}customer/Address/Delete/`;
+  //#endregion
 
-
+  //#region  << User Account  >>
+  public static UserAccount_Detail_Api = `${environment.apiEndPoint}customer/customerAccount/Get/`;
+  public static UserAccount_Save_Api = `${environment.apiEndPoint}customer/customerAccount/Save`;
   //#endregion
 
 }

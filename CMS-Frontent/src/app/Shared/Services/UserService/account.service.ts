@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse, Dictionary } from '../../Helper/Common'; 
+import { ApiResponse, Dictionary } from '../../Helper/Common';
 import { BaseAPIService } from '../Core/base-api.service';
 
 @Injectable({
@@ -45,4 +45,25 @@ export class AccountService {
       );
     });
   }
+
+  UpdateProfile(model: UserViewPostModel): Observable<ApiResponse<any>> {
+    let url = `${this._baseService.API_Url.UserAccount_Save_Api}`;
+    return this._baseService.post(url, model);
+  }
+  GetUserDetail(userId: any): Observable<ApiResponse<any>> {
+    let url = `${this._baseService.API_Url.UserAccount_Detail_Api}`;
+    return this._baseService.get(url + userId);
+  }
+
+}
+
+export interface UserViewPostModel {
+  UserId: number;
+  Email: string;
+  FirstName: string;
+  LastName: string;
+  Dob: string | null;
+  Mobile: string;
+  ProfilePhoto: string;
+
 }

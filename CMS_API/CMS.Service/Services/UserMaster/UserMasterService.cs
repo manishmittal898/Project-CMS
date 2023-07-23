@@ -176,7 +176,7 @@ namespace CMS.Service.Services.User
                         objUser.Email = model.Email;
                         objUser.Dob = model.Dob;
                         objUser.Mobile = model.Mobile;
-                        objUser.Password = _security.EncryptData(model.Password);
+                        // objUser.Password = _security.EncryptData(model.Password);
                         objUser.Address = model.Address;
                         objUser.ProfilePhoto = model.ProfilePhoto;
                         objUser.ModifiedBy = model.ModifiedBy;
