@@ -35,7 +35,7 @@ namespace CMS.API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task<object> Register([FromBody] UserViewPostModel model)
+        public async Task<object> Register([FromBody] UserMasterPostModel model)
         {
             if (ModelState.IsValid)
             {

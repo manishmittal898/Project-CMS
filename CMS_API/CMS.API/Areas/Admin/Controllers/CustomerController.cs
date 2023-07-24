@@ -46,7 +46,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // POST api/<CustomerAccount>
         [HttpPost]
-        public async Task<object> Save([FromBody] UserViewPostModel model)
+        public async Task<object> Save([FromBody] UserMasterPostModel model)
         {
             if (ModelState.IsValid)
             {

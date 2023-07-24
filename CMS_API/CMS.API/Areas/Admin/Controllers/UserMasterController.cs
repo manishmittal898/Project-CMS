@@ -37,7 +37,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task<object> Post([FromBody] UserViewPostModel model)
+        public async Task<object> Post([FromBody] UserMasterPostModel model)
         {
             if (ModelState.IsValid)
             {

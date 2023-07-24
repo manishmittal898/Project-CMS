@@ -14,7 +14,7 @@ namespace CMS.Service.Services.User
 
         Task<ServiceResponse<UserMasterViewModel>> GetById(long id);        
         Task<ServiceResponse<IEnumerable<UserMasterViewModel>>> GetList(IndexModel model);
-        Task<ServiceResponse<TblUserMaster>> Save(UserViewPostModel model);
+        Task<ServiceResponse<TblUserMaster>> Save(UserMasterPostModel model);
         Task<ServiceResponse<TblUserMaster>> Delete(int id);
     }
 }
