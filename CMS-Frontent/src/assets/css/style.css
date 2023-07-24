@@ -186,7 +186,9 @@ color: #000;
 .navbar-brand img {
     max-width: 38px;
 }
-
+.brand-logo img {
+  max-width: 280px;
+}
 .navbar-expand-lg .navbar-nav .nav-link {
     padding: 0px 18px;
     color: rgba(0, 0, 0, .7);
@@ -2464,6 +2466,12 @@ ul.footer-benefits li p {
 {
   background: var(--primary-color) !important;
   color: #fff !important;
+  border-radius: 100%;
+}
+.p-datepicker table td > span.p-highlight {
+  background: var(--secondary-color) !important;
+  color: #000 !important;
+  border-radius: 100%;
 }
 .p-inputtext:enabled:focus
 {
@@ -2475,6 +2483,7 @@ ul.footer-benefits li p {
   right: 15px;
   top: 35px;
 }
+
 /* CUSTOM CSS END */
 
 
