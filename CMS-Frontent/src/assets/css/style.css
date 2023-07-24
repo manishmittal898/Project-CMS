@@ -2441,7 +2441,7 @@ ul.footer-benefits li p {
 }
 .p-calendar, .p-inputtext {
   width: 100% !important;
-  flex: 1 1 100% !important; 
+  flex: 1 1 100% !important;
   border-color: #ced4da !important;
   border-radius: 6px !important;
 }
@@ -2453,6 +2453,27 @@ ul.footer-benefits li p {
 {
   top: -3px;
   font-size: 14px;
+}
+.p-calendar .p-datepicker {
+  max-width: 300px !important;
+}
+.p-datepicker table td {
+  padding: 0px !important;
+}
+.p-datepicker table td.p-datepicker-today > span
+{
+  background: var(--primary-color) !important;
+  color: #fff !important;
+}
+.p-inputtext:enabled:focus
+{
+  box-shadow: none !important;
+  border-color: #000 !important;
+}
+.icon-dob {
+  position: absolute;
+  right: 15px;
+  top: 35px;
 }
 /* CUSTOM CSS END */
 

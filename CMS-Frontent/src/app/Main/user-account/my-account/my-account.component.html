@@ -46,10 +46,11 @@
     </div>
 
     <div class="col-lg-6">
-      <div class="mb-3">
+      <div class="mb-3 position-relative">
         <label for="DateOfBirth" class="form-floating-title">Date of birth</label>
         <p-calendar id="DateOfBirth" placeholder="Date of birth" [(ngModel)]="model.Dob" formControlName="Dob"
           [ngClass]="{ 'is-invalid': f.Dob.errors && f.Dob.touched}"></p-calendar>
+          <i class="bi bi-calendar3 icon-dob"></i>
         <div class="invalid-feedback" *ngIf="(formgrp.get('Dob')?.hasError('required') && formgrp.get('Dob')?.touched)">
           Please enter <strong>Date of birth</strong>...!</div>
       </div>
