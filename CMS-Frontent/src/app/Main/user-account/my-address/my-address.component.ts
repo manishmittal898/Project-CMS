@@ -16,6 +16,8 @@ export class MyAddressComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
   data = [] as UserAddressViewModel[];
   selectedData = {} as UserAddressPostModel;
+  showSavePopup = false;
+  isAdd = true;
   constructor(private _userAddressService: UserAddressService,
     private _securityService: SecurityService, private _toasterService: ToastrService,
     private _commonService: CommonService) { }
@@ -30,19 +32,27 @@ export class MyAddressComponent implements OnInit {
     model.PageSize = 101;
     this._userAddressService.GetList(model).subscribe(res => {
       if (res.IsSuccess) {
-        this.data = res.Data.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } })
+        this.data = res.Data;//.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } })
       }
     })
   }
 
   addAddress() {
     this.selectedData = {} as UserAddressPostModel;
-    this.btnShow.nativeElement.click();
+    this.isAdd = true;
+    this.showSavePopup = true;
+    setTimeout(() => {
+      this.btnShow.nativeElement.click();
+    }, 100);
   }
 
   editAddress(address: UserAddressViewModel) {
     this.selectedData = address;
-    this.btnShow.nativeElement.click();
+    this.showSavePopup = true;
+    this.isAdd = false;
+    setTimeout(() => {
+      this.btnShow.nativeElement.click();
+    }, 100);
   }
 
   deleteAddress(address) {
@@ -56,28 +66,57 @@ export class MyAddressComponent implements OnInit {
           }
         })
       }
+    }, err => {
+      this._toasterService.error(err.message as string, 'Oops');
+
     })
   }
 
-  setPrimaryeAddress(address) {
-    this._commonService.Question(Message.ConfirmUpdate).then(result => {
-      if (result) {
-        this._userAddressService.SetPrimary(address.Id).subscribe(res => {
-          if (res.IsSuccess) {
-            this._toasterService.success(res.Message as string, 'Success');
-          } else {
-            this._toasterService.error(res.Message as string, 'Oops');
-          }
-        })
-      }
-    })
+  setPrimaryeAddress(address: UserAddressViewModel) {
+    if (this.data.length > 1) {
+      this._commonService.Question(Message.ConfirmUpdate).then(result => {
+        if (result) {
+          this._userAddressService.SetPrimary(address.Id).subscribe(res => {
+            if (res.IsSuccess) {
+              this._toasterService.success(res.Message as string, 'Success');
+              this.data.forEach(x => {
+                x.IsPrimary = x.Id == address.Id ? !x.IsPrimary : false;
+              }
+              )
+            } else {
+              this._toasterService.error(res.Message as string, 'Oops');
+            }
+          },
+            err => {
+              this._toasterService.error(err.message as string, 'Oops');
+
+            }
+          )
+        }
+      })
+    }
+
   }
 
   closePopup() {
+    this.selectedData = {} as UserAddressPostModel;
     this.btnClose.nativeElement.click();
+    this.showSavePopup = false;
   }
 
-  onSave(data) {
+  onSave(data: UserAddressViewModel) {
+    debugger
+    if (data.IsPrimary) {
+      this.data.forEach(ele => {
+        ele.IsPrimary = false;
+      })
+    }
+    if (this.isAdd) {
+      this.data.push(data);
+    } else {
+      let ind = this.data.findIndex(res => res.Id == data.Id);
+      this.data[ind] = data;
+    }
     this.closePopup();
   }
 

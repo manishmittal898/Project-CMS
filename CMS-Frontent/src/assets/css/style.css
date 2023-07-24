@@ -2420,6 +2420,7 @@ ul.footer-benefits li p {
   font-weight: 500;
   margin-bottom: 3px;
   font-size: 13px;
+  width: 100%;
 }
 .form-floating-ngx-dropdown label {
   top: 33px;
@@ -2438,7 +2439,21 @@ ul.footer-benefits li p {
 {
   background: var(--primary-color) !important;
 }
-
+.p-calendar, .p-inputtext {
+  width: 100% !important;
+  flex: 1 1 100% !important; 
+  border-color: #ced4da !important;
+  border-radius: 6px !important;
+}
+.p-inputtext {
+  padding: 10px 15px !important;
+  font-size: 14px !important;
+}
+.sm-radio-btn .form-check-input:checked[type=radio]:before
+{
+  top: -3px;
+  font-size: 14px;
+}
 /* CUSTOM CSS END */
 
 

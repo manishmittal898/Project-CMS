@@ -1,0 +1,21 @@
+<div class="product-list-items">
+  <div class="product-list-items-tag" *ngIf="Product.CaptionTag">{{Product.CaptionTag}}</div>
+  <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
+    <a href="javascript:void(0)"
+      routerLink="/store/{{Product.Category?.split(' ').join('-')}}/{{Product.Name.split(' ').join('-')}}/{{Product.Id}}">
+      <img [src]="Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
+    </a>
+    <!-- #Hover items start-->
+    <div class="product-list-items-hover-action">
+      <a href="javascript:void(0)" title="Wishlist"><i class="bi bi-heart-fill"></i></a>
+      <a href="javascript:void(0)" title="Add to cart"><i class="bi bi-cart2"></i></a>
+    </div>
+    <!-- #Hover items End-->
+  </div>
+  <div class="product-list-info">
+    <a href="javascript:void(0)"
+      routerLink="/store/{{Product.Category?.split(' ').join('-')}}/{{Product.Name.split(' ').join('-')}}/{{Product.Id}}">
+      {{Product.Name}} </a>
+    <p>₹ {{Product.Price}}</p>
+  </div>
+</div>

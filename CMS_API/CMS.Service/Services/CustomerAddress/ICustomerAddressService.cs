@@ -12,7 +12,7 @@ namespace CMS.Service.Services.CustomerAddress
     {
         Task<ServiceResponse<IEnumerable<CustomerAddressViewModel>>> GetList(IndexModel model);
         ServiceResponse<CustomerAddressViewModel> GetById(string id);
-        Task<ServiceResponse<TblUserAddressMaster>> Save(CustomerAddressPostModel model);
+        Task<ServiceResponse<CustomerAddressPostModel>> Save(CustomerAddressPostModel model);
         Task<ServiceResponse<TblUserAddressMaster>> PrimaryStatusUpdate(string id);
         Task<ServiceResponse<TblUserAddressMaster>> ActiveStatusUpdate(string id);
  

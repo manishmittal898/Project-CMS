@@ -52,26 +52,7 @@
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
             *ngFor="let item of model | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords }">
             <div class="position-relative product-list-hover-items-outside overflow-hidden">
-              <div class="product-list-items">
-                <div class="product-list-items-tag" *ngIf="item.CaptionTag">{{item.CaptionTag}}</div>
-                <div
-                  class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
-                  <a href="javascript:void(0)" routerLink="/store/{{item.Name.split(' ').join('-')}}/{{item.Id}}">
-                    <img [src]="item.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
-                  </a>
-                  <!-- #Hover items start-->
-                  <div class="product-list-items-hover-action">
-                    <a href="javascript:void(0)" title="Wishlist"><i class="bi bi-heart-fill"></i></a>
-                    <a href="javascript:void(0)" title="Add to cart"><i class="bi bi-cart2"></i></a>
-                  </div>
-                  <!-- #Hover items End-->
-                </div>
-                <div class="product-list-info">
-                  <a href="javascript:void(0)" routerLink="/store/{{item.Name.split(' ').join('-')}}/{{item.Id}}">
-                    {{item.Name}} </a>
-                  <p>₹ {{item.Price}}</p>
-                </div>
-              </div>
+              <app-product-card [Product]="item"></app-product-card>
             </div>
           </div>
           <!-- Product End -->

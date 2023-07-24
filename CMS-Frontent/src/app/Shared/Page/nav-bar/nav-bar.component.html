@@ -3,11 +3,11 @@
     <div class="container p-0 py-lg-2">
       <div class="row w-100 m-0">
         <div class="col-lg-12 d-flex align-items-center justify-content-between p-0">
-           <a class="navbar-brand m-0 p-0 d-inline-flex align-items-center" routerLink="/home" href="javascript:void()">
+          <a class="navbar-brand m-0 p-0 d-inline-flex align-items-center" routerLink="/home" href="javascript:void()">
             <img src="assets/images/logo-icon.png" alt="StoreOne" />
             <span>StoreOne</span>
           </a>
-           <!-- <a class="navbar-brand m-0 p-0 d-inline-flex align-items-center" routerLink="/home" href="javascript:void()">
+          <!-- <a class="navbar-brand m-0 p-0 d-inline-flex align-items-center" routerLink="/home" href="javascript:void()">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/2560px-Bootstrap_logo.svg.png"
               alt="StoreOne" />
@@ -24,23 +24,28 @@
               <a [routerLink]="['/user/profile']" href="javascript:void()" data-title="Profile"><i class="bi bi-box-arrow-left"></i></a>
             </ng-template> -->
             <ng-template #autherized>
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
                   <i class="bi bi-person-circle d-block d-sm-none"></i>
                   <span class="login-user-name d-none d-sm-block">
-                 User name
-                </span>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" routerLink="./user/profile" href="javascript:void(0)"><i class="bi bi-person-circle me-2"></i> Profile</a></li>
-                  <li><a class="dropdown-item" routerLink="./user/orders" href="javascript:void(0)"><i class="bi bi-handbag me-2"></i> My Orders</a></li>
-                  <li><a class="dropdown-item" routerLink="./user/address" href="javascript:void(0)"><i class="bi bi-geo-alt me-2"></i> Address</a></li>
-                  <li><a class="dropdown-item" routerLink="./user/wishlist" href="javascript:void(0)"><i class="bi bi-heart me-2"></i> Wishlist</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
-              </ul>
-          </div>
-        </ng-template>
+                    {{_authService.GetUserDetail()?.FullName }}
+                  </span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" routerLink="./user/profile" href="javascript:void(0)"><i
+                        class="bi bi-person-circle me-2"></i> Profile</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/orders" href="javascript:void(0)"><i
+                        class="bi bi-handbag me-2"></i> My Orders</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/address" href="javascript:void(0)"><i
+                        class="bi bi-geo-alt me-2"></i> Address</a></li>
+                  <li><a class="dropdown-item" routerLink="./user/wishlist" href="javascript:void(0)"><i
+                        class="bi bi-heart me-2"></i> Wishlist</a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i
+                        class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                </ul>
+              </div>
+            </ng-template>
 
             <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i
                 class="bi bi-cart3"></i>

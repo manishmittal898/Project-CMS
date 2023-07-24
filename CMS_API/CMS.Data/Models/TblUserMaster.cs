@@ -34,6 +34,7 @@ namespace CMS.Data.Models
             TblUserAddressMasterModifiedByNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterUsers = new HashSet<TblUserAddressMaster>();
             TblUserMasterLogs = new HashSet<TblUserMasterLog>();
+            TblUserWishLists = new HashSet<TblUserWishList>();
         }
 
         public long UserId { get; set; }
@@ -44,6 +45,7 @@ namespace CMS.Data.Models
         public string Address { get; set; }
         public string Password { get; set; }
         public string Mobile { get; set; }
+        public long? GenderId { get; set; }
         public int RoleId { get; set; }
         public string ProfilePhoto { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -53,6 +55,7 @@ namespace CMS.Data.Models
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
+        public virtual TblLookupMaster Gender { get; set; }
         public virtual TblRoleType Role { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasterModifiedByNavigations { get; set; }
@@ -79,5 +82,6 @@ namespace CMS.Data.Models
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterUsers { get; set; }
         public virtual ICollection<TblUserMasterLog> TblUserMasterLogs { get; set; }
+        public virtual ICollection<TblUserWishList> TblUserWishLists { get; set; }
     }
 }

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           };
           this._accountService.Login(postModel).subscribe((res) => {
             if (res.IsSuccess) {
-              debugger
+              
               let data = res.Data as LoginUserDetailModel;
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);

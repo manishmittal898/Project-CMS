@@ -17,7 +17,8 @@ namespace CMS.Service.Services.User
         public string LastName { get; set; }
         public DateTime? Dob { get; set; }
         public string Address { get; set; }
-
+        public long? GenderId { get; set; }
+        public string Gender { get; set; }
         public string Password { get; set; }
 
         public string Mobile { get; set; }
@@ -43,6 +44,8 @@ namespace CMS.Service.Services.User
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? Dob { get; set; }
+
+        public long? GenderId { get; set; }
         public string Address { get; set; }
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

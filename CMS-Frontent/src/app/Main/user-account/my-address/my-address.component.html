@@ -19,8 +19,9 @@
                       class="bi bi-star"></i> </a>
                 </ng-container>
                 <ng-template #primaryAddress>
-                  <a href="javascript:void()" class="text-danger ms-2"> <i data-bs-toggle="tooltip"
-                      data-bs-placement="bottom" title="Primary address" class="bi bi-star-fill"></i> </a>
+                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-danger ms-2"> <i
+                      data-bs-toggle="tooltip" data-bs-placement="bottom" title="Primary address"
+                      class="bi bi-star-fill"></i> </a>
                 </ng-template>
                 <a href="javascript:void()" (click)="editAddress(address)" class="text-success ms-2"
                   data-bs-toggle="modal" data-bs-target="#addressPopup"> <i data-bs-toggle="tooltip"
@@ -35,7 +36,7 @@
               <label class="form-check-label" for="SaveAdd1">
                 {{address.BuildingNumber }} {{address.Address}}
                 {{address.City }}, {{address.State }}, {{address.PinCode}}
-                Landmark: {{address.Landmark }}
+                <ng-container *ngIf="address.Landmark"> Landmark: {{address.Landmark }} </ng-container>
                 Mobile : {{address.Mobile}}
               </label>
             </div>
@@ -58,7 +59,7 @@
           </button>
         </div>
         <div class="modal-body p-4 modal-form-update">
-          <app-save-address [(model)]="selectedData" (onCancel)="closePopup()"
+          <app-save-address [(model)]="selectedData" *ngIf="this.showSavePopup" (onCancel)="closePopup()"
             (onSave)="selectedData=$event;onSave($event)"></app-save-address>
         </div>
         <div class="modal-footer pt-0">

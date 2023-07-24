@@ -102,13 +102,13 @@ namespace CMS.Service.Services.CustomerAddress
 
         }
 
-        public ServiceResponse<CustomerAddressViewModel> GetById(long id)
+        public ServiceResponse<CustomerAddressViewModel> GetById(string id)
         {
             ServiceResponse<CustomerAddressViewModel> ObjResponse = new ServiceResponse<CustomerAddressViewModel>();
             try
             {
 
-                var result = _db.TblUserAddressMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value && x.IsDelete == false);
+                var result = _db.TblUserAddressMasters.FirstOrDefault(x => x.Id == _security.DecryptData(id).ToLongValue() && x.IsActive.Value && x.IsDelete == false);
                 if (result != null)
                 {
                     ObjResponse.Data = new CustomerAddressViewModel()
@@ -146,15 +146,21 @@ namespace CMS.Service.Services.CustomerAddress
             }
         }
 
-        public async Task<ServiceResponse<TblUserAddressMaster>> Save(CustomerAddressPostModel model)
+        public async Task<ServiceResponse<CustomerAddressPostModel>> Save(CustomerAddressPostModel model)
         {
             try
             {
+                TblUserAddressMaster existingData = _db.TblUserAddressMasters.FirstOrDefault(r => !r.IsDelete && r.IsActive.Value && r.IsPrimary && r.UserId == (_loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId));
 
+                if (existingData == null)
+                {
+                    model.IsPrimary = true;
+                }
+                TblUserAddressMaster objData;
+                bool isAdd = true;
                 if (!string.IsNullOrEmpty(model.Id))
                 {
-
-                    TblUserAddressMaster objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(model.Id)));
+                    objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(model.Id).ToLongValue());
                     objData.Address = model.Address;
                     objData.AddressType = model.AddressType;
                     objData.BuildingNumber = model.BuildingNumber;
@@ -169,13 +175,11 @@ namespace CMS.Service.Services.CustomerAddress
 
                     var data = _db.TblUserAddressMasters.Update(objData);
                     await _db.SaveChangesAsync();
-                    return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
-
+                    isAdd = false;
                 }
                 else
                 {
-
-                    TblUserAddressMaster objData = new TblUserAddressMaster()
+                    objData = new TblUserAddressMaster()
                     {
 
                         Address = model.Address,
@@ -197,17 +201,33 @@ namespace CMS.Service.Services.CustomerAddress
                         UserId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId
 
                     };
-                    await _db.SaveChangesAsync();
-                    return CreateResponse(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    var resultData = await _db.TblUserAddressMasters.AddAsync(objData);
 
+                    await _db.SaveChangesAsync();
+                    objData = resultData.Entity;
+                    model.Id = _security.EncryptData(objData.Id.ToString());
                 }
+
+                //if set primary then remove primary for old record
+                if (model.IsPrimary)
+                {
+                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != objData.Id).ToList();
+                    foreach (var item in address)
+                    {
+                        item.IsPrimary = false;
+                    }
+                    _db.UpdateRange(address);
+                    await _db.SaveChangesAsync();
+                }
+                return CreateResponse(model, isAdd ? ResponseMessage.Save : ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+
 
 
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<CustomerAddressPostModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -217,7 +237,7 @@ namespace CMS.Service.Services.CustomerAddress
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(id).ToLongValue());
                 objAddress.IsPrimary = !objAddress.IsPrimary;
 
 
@@ -225,7 +245,7 @@ namespace CMS.Service.Services.CustomerAddress
                 await _db.SaveChangesAsync();
                 if (objAddress.IsPrimary)
                 {
-                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != Convert.ToInt64(_security.DecryptData(id))).ToList();
+                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != _security.DecryptData(id).ToLongValue()).ToList();
                     foreach (var item in address)
                     {
                         item.IsPrimary = false;
@@ -249,7 +269,7 @@ namespace CMS.Service.Services.CustomerAddress
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(id).ToLongValue());
                 objAddress.IsActive = !objAddress.IsActive;
                 var roletype = _db.TblUserAddressMasters.Update(objAddress);
                 await _db.SaveChangesAsync();
@@ -268,7 +288,7 @@ namespace CMS.Service.Services.CustomerAddress
             try
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
-                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == Convert.ToInt64(_security.DecryptData(id)));
+                objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(id).ToLongValue());
                 objAddress.IsDelete = !objAddress.IsDelete;
                 var roletype = _db.TblUserAddressMasters.Update(objAddress);
                 await _db.SaveChangesAsync();

@@ -70,6 +70,8 @@ namespace CMS.Service.Services.User
                                             Mobile = x.Mobile,
                                             Dob = x.Dob,
                                             Address = x.Address,
+                                            GenderId = x.GenderId ?? null,
+                                            Gender = x.Gender.Name ?? null,
                                             RoleId = x.RoleId,
                                             Role = x.Role.RoleName,
                                             ProfilePhoto = !string.IsNullOrEmpty(x.ProfilePhoto) ? x.ProfilePhoto.ToAbsolutePath() : null,
@@ -119,6 +121,8 @@ namespace CMS.Service.Services.User
                                Mobile = x.Mobile ?? "N/A",
                                Dob = x.Dob ?? null,
                                Address = x.Address ?? "N/A",
+                               GenderId = x.GenderId ?? null,
+                               Gender = x.Gender.Name ?? null,
                                RoleId = x.RoleId,
                                Role = x.Role.RoleName,
                                ProfilePhoto = !string.IsNullOrEmpty(x.ProfilePhoto) ? x.ProfilePhoto.ToAbsolutePath() : null,
@@ -176,8 +180,8 @@ namespace CMS.Service.Services.User
                         objUser.Email = model.Email;
                         objUser.Dob = model.Dob;
                         objUser.Mobile = model.Mobile;
-                        objUser.Password = _security.EncryptData(model.Password);
-                        objUser.Address = model.Address;
+                        // objUser.Password = _security.EncryptData(model.Password);
+                        objUser.GenderId = model.GenderId;
                         objUser.ProfilePhoto = model.ProfilePhoto;
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
@@ -204,6 +208,7 @@ namespace CMS.Service.Services.User
                         objUser.LastName = model.LastName;
                         objUser.Email = model.Email;
                         objUser.Dob = model.Dob;
+                        objUser.GenderId = model.GenderId;
                         objUser.Mobile = model.Mobile;
                         objUser.Password = _security.EncryptData(model.Password);
                         objUser.Address = model.Address;
