@@ -41,7 +41,7 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // POST api/<CustomerAccount>
         [HttpPost]
-        public async Task<object> Update([FromBody] UserViewPostModel model)
+        public async Task<object> Update([FromBody] UserMasterPostModel model)
         {
             if (ModelState.IsValid)
             {

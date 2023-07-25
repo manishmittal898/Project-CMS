@@ -19,8 +19,7 @@ namespace CMS.Service.Services.User
         public string Address { get; set; }
         public long? GenderId { get; set; }
         public string Gender { get; set; }
-        public string Password { get; set; }
-
+      
         public string Mobile { get; set; }
         public int RoleId { get; set; }
         public string Role { get; set; }
@@ -35,7 +34,7 @@ namespace CMS.Service.Services.User
 
     }
 
-    public class UserViewPostModel
+    public class UserMasterPostModel
     {
         public long UserId { get; set; }
         [Required]
@@ -46,7 +45,7 @@ namespace CMS.Service.Services.User
         public DateTime? Dob { get; set; }
 
         public long? GenderId { get; set; }
-        public string Address { get; set; }
+      
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -63,8 +62,6 @@ namespace CMS.Service.Services.User
         public string ProfilePhoto { get; set; }
         public long? CreatedBy { get; set; }
         public long? ModifiedBy { get; set; }
-
-
     }
 
     public partial class UserAddressMasterViewModel

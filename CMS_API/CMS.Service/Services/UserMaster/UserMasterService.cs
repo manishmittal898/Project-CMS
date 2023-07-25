@@ -164,7 +164,7 @@ namespace CMS.Service.Services.User
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<TblUserMaster>> Save(UserViewPostModel model)
+        public async Task<ServiceResponse<TblUserMaster>> Save(UserMasterPostModel model)
         {
             try
             {
@@ -211,7 +211,6 @@ namespace CMS.Service.Services.User
                         objUser.GenderId = model.GenderId;
                         objUser.Mobile = model.Mobile;
                         objUser.Password = _security.EncryptData(model.Password);
-                        objUser.Address = model.Address;
                         objUser.ProfilePhoto = model.ProfilePhoto;
                         objUser.RoleId = model.RoleId;
                         objUser.IsDeleted = false;
