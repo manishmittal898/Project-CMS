@@ -3350,14 +3350,13 @@ li.menu span.shape2 {
 }
 
 .menu-active .shape2 {
-    position: absolute;
-    top: 35px;
-    width: 20px;
-    height: 30px;
-    right: 0px;
-    overflow: visible !important;
+  position: absolute;
+  top: 33px;
+  width: 14px;
+  height: 30px;
+  right: 0px;
+  overflow: visible !important;
 }
-
 .menu-active>a::after,
 .menu-active>a::before {
     border-right: 20px solid #002767;
@@ -3366,7 +3365,7 @@ li.menu span.shape2 {
 .menu-active a::after {
     content: "";
     position: absolute;
-    top: 41px;
+    top: 40px;
     z-index: 0;
     right: 0px;
     bottom: 0;
@@ -4288,6 +4287,8 @@ form .icon-login-form {
 /* Color theme CSS end */
 
 
+
+
 /* Responsive start */
 
 @media (max-width: 992px) {
@@ -4393,16 +4394,16 @@ form .icon-login-form {
 }
 
 .lsit-category-img {
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
     background: transparent;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .lsit-category-img img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 75px;
+    max-height: 75px;
 }
 
 .table>tbody tr:last-child {
