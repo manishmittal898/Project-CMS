@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace CMS.Core.ServiceHelper.ExtensionMethod
 {
-    public class Security 
+    public class Security
     {
         IConfiguration _configuration;
         // private byte[] IV = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
@@ -86,7 +86,8 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
                     {
                         byte[] plaintextBytes = Encoding.UTF8.GetBytes(strValue);
                         byte[] encryptedData = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
-                        return Base64UrlEncoder.Encode(encryptedData);
+                       return Base64UrlEncoder.Encode(encryptedData);
+                      //  return Convert.ToBase64String(encryptedData);
 
                     }
                 }
@@ -103,7 +104,10 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
         {
 
             byte[] key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("EncryptionKey"));
-            byte[] encryptedData = Base64UrlEncoder.DecodeBytes(strValue);
+              byte[] encryptedData = Base64UrlEncoder.DecodeBytes(strValue);
+           // byte[] encryptedData = Convert.FromBase64String(strValue);
+
+
             try
             {
                 using (AesManaged aes = new AesManaged())
