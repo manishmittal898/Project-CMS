@@ -290,13 +290,14 @@ code {
 }
 
 .navbar .theme-brand li.theme-text a {
-    font-size: 24px !important;
-    color: #fff !important;
-    line-height: 2.75rem;
-    padding: 0 0.8rem;
-    text-transform: initial;
-    position: unset;
-    font-weight: 700;
+  font-size: 24px !important;
+  color: #fff !important;
+  line-height: 2.75rem;
+  padding: 0 0.8rem;
+  text-transform: initial;
+  position: unset;
+  font-weight: 600;
+  letter-spacing: normal;
 }
 
 .navbar.expand-header {
@@ -1467,7 +1468,6 @@ li.sub-menu-active a:before {
     margin-bottom: 0;
     color: #515365;
     font-size: 13px;
-    letter-spacing: 1px;
 }
 
 .footer-wrapper .footer-section p a {
