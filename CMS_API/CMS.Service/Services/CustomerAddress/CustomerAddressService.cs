@@ -85,7 +85,7 @@ namespace CMS.Service.Services.CustomerAddress
 
                                               }).ToListAsync();
 
-                    return CreateResponse(ObjResponse.Data, ResponseMessage.NotFound, true, ((int)ApiStatusCode.Ok), TotalRecord: ObjResponse.TotalRecord);
+                    return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: ObjResponse.TotalRecord);
                 }
                 else
                 {
