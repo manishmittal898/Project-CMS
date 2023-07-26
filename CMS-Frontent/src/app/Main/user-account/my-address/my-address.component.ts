@@ -75,7 +75,7 @@ export class MyAddressComponent implements OnInit {
   }
 
   setPrimaryeAddress(address: UserAddressViewModel) {
-    if (this.data.length > 1) {
+    if (this.data.length > 0) {
       this._commonService.Question(Message.ConfirmUpdate).then(result => {
         if (result) {
           this._userAddressService.SetPrimary(address.Id).subscribe(res => {
@@ -86,11 +86,11 @@ export class MyAddressComponent implements OnInit {
               }
               )
             } else {
-              this._toasterService.error(res.Message as string, 'Oops');
+              this._toasterService.error(res.Message as string, 'Failed');
             }
           },
             err => {
-              this._toasterService.error(err.message as string, 'Oops');
+              this._toasterService.error(err.message as string, 'Internal error');
 
             }
           )

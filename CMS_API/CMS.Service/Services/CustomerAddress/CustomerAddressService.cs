@@ -286,10 +286,23 @@ namespace CMS.Service.Services.CustomerAddress
             {
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
                 objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(id).ToLongValue());
-                objAddress.IsDelete = !objAddress.IsDelete;
-                var roletype = _db.TblUserAddressMasters.Update(objAddress);
-                await _db.SaveChangesAsync();
-                return CreateResponse(objAddress, ResponseMessage.Delete, true);
+                if (objAddress != null && !objAddress.IsPrimary)
+                {
+                    objAddress.IsDelete = !objAddress.IsDelete;
+                    var roletype = _db.TblUserAddressMasters.Update(objAddress);
+                    await _db.SaveChangesAsync();
+                    return CreateResponse(objAddress, ResponseMessage.Delete, true);
+
+                }
+                else if (objAddress != null && objAddress.IsPrimary) {
+                    return CreateResponse(objAddress, ResponseMessage.DeleteDenied, true);
+                }
+                else
+                {
+                    return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, true);
+
+                }
+
             }
             catch (Exception ex)
             {
