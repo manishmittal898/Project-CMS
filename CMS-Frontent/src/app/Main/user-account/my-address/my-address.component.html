@@ -14,12 +14,12 @@
               <h5 class="m-0">{{address.FullName}}</h5>
               <div class="custom-card-address-list-action d-flex align-items-center">
                 <ng-container *ngIf="!address.IsPrimary; else primaryAddress">
-                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-danger ms-2"> <i
+                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set primary address"
                       class="bi bi-star"></i> </a>
                 </ng-container>
                 <ng-template #primaryAddress>
-                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-danger ms-2"> <i
+                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Primary address"
                       class="bi bi-star-fill"></i> </a>
                 </ng-template>
