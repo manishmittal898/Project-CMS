@@ -61,6 +61,8 @@ export class MyAddressComponent implements OnInit {
         this._userAddressService.Delete(address.Id).subscribe(res => {
           if (res.IsSuccess) {
             this._toasterService.success(res.Message as string, 'Success');
+            let indx = this.data.findIndex(x => x.Id == address.Id)
+            this.data.splice(indx, 1);
           } else {
             this._toasterService.error(res.Message as string, 'Oops');
           }

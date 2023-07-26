@@ -220,9 +220,6 @@ namespace CMS.Service.Services.CustomerAddress
                     await _db.SaveChangesAsync();
                 }
                 return CreateResponse(model, isAdd ? ResponseMessage.Save : ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
-
-
-
             }
             catch (Exception ex)
             {

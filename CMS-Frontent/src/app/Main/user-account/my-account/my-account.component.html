@@ -58,11 +58,11 @@
 
     <div class="col-lg-6">
       <div class="form-floating form-floating-ngx-dropdown mb-3">
-        <div class="form-floating-title">City*</div>
-        <ng-select [items]="this.dropDown!.ddlGender" formControlName="GenderId" [searchable]="true" bindLabel="Text"
+        <div class="form-floating-title">Gender*</div>
+        <ng-select [items]="this.dropDown!.ddlGender" placeholder="Gender" formControlName="GenderId" [searchable]="true" bindLabel="Text"
           bindValue="Value" id="GenderId" [ngClass]="{ 'is-invalid': f.GenderId.errors && f.GenderId.touched}"
           [(ngModel)]="model.GenderId">
-        </ng-select>
+                </ng-select>
 
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('GenderId')?.hasError('required') && formgrp.get('GenderId')?.touched)">
