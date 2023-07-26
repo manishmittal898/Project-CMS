@@ -46,7 +46,10 @@ Text Domain:  StoreOne
     --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
     --bd-pink-rgb: 214, 51, 132;
 }
-
+.text-theme-primary
+{
+  color: var(--primary-color);
+}
 body {
     margin: 0px;
     padding: 0px;
@@ -229,11 +232,41 @@ color: #000;
     margin-bottom: 30px;
     font-size: 0.9rem;
 }
-
+.swal2-styled {
+  padding: 4px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.swal2-actions .swal2-confirm {
+  background: var(--primary-color);
+  color: var(--white) ;
+  border-radius: 5px ;
+  box-shadow: 0 0 20px #e3e3e3 ;
+  border: 1px solid transparent;
+}
+.swal2-actions .swal2-confirm:hover {
+  background: var(--white) !important;
+  color: var(--black) ;
+  border-color: var(--primary-color);
+}
+.swal2-actions .swal2-cancel
+{
+  border: none;
+  outline: solid 1px #000;
+  background: #fff;
+  color: var(--black);
+  outline-offset: -1px;
+}
+.swal2-actions .swal2-cancel:hover
+{
+  background: var(--secondary-color);
+  color: #000;
+  outline: solid 1px #000;
+}
 .btn-default {
-    background: var(--primary-color);
+    background: var(--primary-color) ;
     color: var(--white);
-    font-weight: var(--font-weight-400);
     border-radius: 5px;
     box-shadow: 0 0 20px #e3e3e3;
     font-weight: 500;
@@ -719,7 +752,7 @@ section.header-logo {
   background: #fff;
   padding: 15px;
   box-shadow: 0 0 20px #dbdbdb;
-  border: solid 1px #a10965 !important;
+  border: solid 1px var(--primary-color) !important;
   border-radius: 20px;
 }
 
@@ -2483,7 +2516,35 @@ ul.footer-benefits li p {
   right: 15px;
   top: 35px;
 }
-
+.swal2-popup {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 20px;
+  padding-bottom: 12px;
+}
+.swal2-popup .swal2-icon {
+  height: 50px;
+  width: 50px;
+  border: solid 1px;
+  margin-top: 15px;
+  border-color: #c7c7c7;
+  color: #000;
+}
+.swal2-icon .swal2-icon-content {
+  font-size: 40px;
+}
+.swal2-title {
+  padding-top: 10px;
+  color: #000;
+  font-weight: 500;
+  font-size: 25px;
+}
+.swal2-container .swal2-html-container {
+  font-size: 15px;
+}
+.swal2-container .swal2-actions {
+  margin-top: 15px;
+}
 /* CUSTOM CSS END */
 
 
