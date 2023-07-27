@@ -12,5 +12,8 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+getUrl(){
+  return `/store/${this.Product.Category?.split(' ').join('-')}/${this.Product.Name.split(' ').join('-')}/${this.Product.Id}`
 
+}
 }

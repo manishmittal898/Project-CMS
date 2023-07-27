@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { DropDown_key } from 'src/app/Shared/Constant';
 import { DropDownModel } from 'src/app/Shared/Helper/Common';
 import { CommonService } from 'src/app/Shared/Services/Core/common.service';
@@ -25,7 +26,7 @@ export class MyAccountComponent implements OnInit {
   get ddlkeys() { return DropDown_key };
   dropDown = new DropDownModel();
   get f() { return this.formgrp.controls; }
-  constructor(private _accounntService: AccountService, private _authService: AuthService,
+  constructor(private _accounntService: AccountService, private _authService: AuthService, private _toasterService: ToastrService,
     private readonly fb: FormBuilder, public _commonService: CommonService,) { }
 
   ngOnInit(): void {
@@ -55,7 +56,11 @@ export class MyAccountComponent implements OnInit {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
       this._accounntService.UpdateProfile(this.model).subscribe(res => {
-
+        if (res.IsSuccess) {
+          this._toasterService.success(res.Message as string, 'Success');
+        } else {
+          this._toasterService.error(res.Message as string, 'Failed');
+        }
       })
     }
 
@@ -67,7 +72,7 @@ export class MyAccountComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-     this.model.ProfilePhoto=reader.result.toString();
+      this.model.ProfilePhoto = reader.result.toString();
     };
 
   }

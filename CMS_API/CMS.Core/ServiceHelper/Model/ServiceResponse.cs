@@ -26,13 +26,13 @@ namespace CMS.Core.ServiceHelper.Model
         public const string Success = "Data retrived successfully.";
         public const string Found = "Record found.";
         public const string NotFound = "No record found.";
-        public const string Save = "Record Saved sucessfully.";
-        public const string Update = "Record Update sucessfully.";
-        public const string Delete = "Record Delete sucessfully.";
+        public const string Save = "Record saved sucessfully.";
+        public const string Update = "Record update sucessfully.";
+        public const string Delete = "Record delete sucessfully.";
         public const string UpdateDenied = "Record can't be update. Please try another record";
         public const string DeleteDenied = "Record can't be deleted. Please try another record";
 
-        public const string InvalidData = "Invalid Data Pass.";
+        public const string InvalidData = "Invalid data pass.";
         public const string UserExist = "User already mapped with mobile or email.";
         public const string Fail = "Operation Faild.";
         public const string RestrictedRecord = "Operation Faild due to Restricted Record.";
