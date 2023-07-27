@@ -295,11 +295,11 @@ namespace CMS.Service.Services.CustomerAddress
 
                 }
                 else if (objAddress != null && objAddress.IsPrimary) {
-                    return CreateResponse(objAddress, ResponseMessage.DeleteDenied, true);
+                    return CreateResponse(objAddress, ResponseMessage.DeleteDenied, false);
                 }
                 else
                 {
-                    return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, true);
+                    return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, false);
 
                 }
 

@@ -4,6 +4,8 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.ProductMaster;
+using CMS.Service.Utility;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -21,13 +23,14 @@ namespace CMS.Service.Services.User
     public class UserMasterService : BaseService, IUserMasterService
     {
         DB_CMSContext _db;
-        private readonly Security _security;
-        public UserMasterService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
+        private readonly FileHelper _fileHelper;
+
+
+        public UserMasterService(DB_CMSContext db, IConfiguration _configuration, IHostingEnvironment environment) : base(_configuration)
         {
             _db = db;
+            _fileHelper = new FileHelper(environment);
         }
-
-
 
         public async Task<ServiceResponse<IEnumerable<UserMasterViewModel>>> GetList(IndexModel model)
         {
@@ -181,16 +184,20 @@ namespace CMS.Service.Services.User
                         objUser.Dob = model.Dob;
                         objUser.Mobile = model.Mobile;
                         // objUser.Password = _security.EncryptData(model.Password);
+                        if (model.ProfilePhoto != null)
+                        {
+                            objUser.ProfilePhoto = _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
+                        }
                         objUser.GenderId = model.GenderId;
                         objUser.ProfilePhoto = model.ProfilePhoto;
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
                         _db.SaveChanges();
-                        return CreateResponse(objUser, "User update Succefully...", true);
+                        return CreateResponse(objUser, ResponseMessage.Update.Replace("Record", "User"), true);
                     }
                     else
                     {
-                        return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
+                        return CreateResponse<TblUserMaster>(null, ResponseMessage.UserExist, true, ((int)ApiStatusCode.AlreadyExist));
 
                     }
 
@@ -218,11 +225,11 @@ namespace CMS.Service.Services.User
                         objUser.CreatedBy = model.CreatedBy;
                         var roletype = await _db.TblUserMasters.AddAsync(objUser);
                         _db.SaveChanges();
-                        return CreateResponse(objUser, "User Added Succefully...", true);
+                        return CreateResponse(objUser, ResponseMessage.Save.Replace("Record", "User"), true);
                     }
                     else
                     {
-                        return CreateResponse<TblUserMaster>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
+                        return CreateResponse<TblUserMaster>(null, ResponseMessage.UserExist, true, ((int)ApiStatusCode.AlreadyExist));
                     }
                 }
 
@@ -230,7 +237,7 @@ namespace CMS.Service.Services.User
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<TblUserMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -245,6 +252,26 @@ namespace CMS.Service.Services.User
                 var roletype = _db.TblUserMasters.Remove(objRole);
                 await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+
+
+        }
+
+        public async Task<ServiceResponse<TblUserMaster>> UpdateProfile(UserProfilePostModel model)
+        {
+            try
+            {
+                TblUserMaster objUser = new TblUserMaster();
+                objUser = _db.TblUserMasters.FirstOrDefault(r => r.UserId == _loginUserDetail.UserId);
+
+                objUser.ProfilePhoto = _fileHelper.Save(model.File, FilePaths.UserProfile);
+                await _db.SaveChangesAsync();
+                return CreateResponse(objUser, ResponseMessage.Save, true);
             }
             catch (Exception ex)
             {

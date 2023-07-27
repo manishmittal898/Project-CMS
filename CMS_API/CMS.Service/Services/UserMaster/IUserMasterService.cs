@@ -16,5 +16,6 @@ namespace CMS.Service.Services.User
         Task<ServiceResponse<IEnumerable<UserMasterViewModel>>> GetList(IndexModel model);
         Task<ServiceResponse<TblUserMaster>> Save(UserMasterPostModel model);
         Task<ServiceResponse<TblUserMaster>> Delete(int id);
+        Task<ServiceResponse<TblUserMaster>> UpdateProfile(UserProfilePostModel model);
     }
 }

@@ -2,7 +2,7 @@
   <div class="product-list-items-tag" *ngIf="Product.CaptionTag">{{Product.CaptionTag}}</div>
   <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
     <a href="javascript:void(0)"
-      routerLink="/store/{{Product.Category?.split(' ').join('-')}}/{{Product.Name.split(' ').join('-')}}/{{Product.Id}}">
+      routerLink="{{getUrl()}}">
       <img [src]="Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
     </a>
     <!-- #Hover items start-->
@@ -14,7 +14,7 @@
   </div>
   <div class="product-list-info">
     <a href="javascript:void(0)"
-      routerLink="/store/{{Product.Category?.split(' ').join('-')}}/{{Product.Name.split(' ').join('-')}}/{{Product.Id}}">
+      routerLink="{{getUrl()}}">
       {{Product.Name}} </a>
     <p>₹ {{Product.Price}}</p>
   </div>

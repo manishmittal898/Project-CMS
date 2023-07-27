@@ -1,4 +1,5 @@
 ﻿using CMS.Core.ServiceHelper.Model;
+using CMS.Data.Models;
 using CMS.Service.Services.CustomerAddress;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.User;
@@ -58,11 +59,36 @@ namespace CMS.API.Areas.Customer.Controllers
 
                 return objReturn;
             }
-         
+
+        }
+
+        // POST api/<CustomerAccount>
+        [HttpPost]
+        public async Task<object> UpdateProfile([FromBody] UserProfilePostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                return await _user.UpdateProfile(model);
+
+            }
+            else
+            {
+                ServiceResponse<object> objReturn = new ServiceResponse<object>();
+                objReturn.Message = "Invalid";
+                objReturn.IsSuccess = false;
+                objReturn.Data = null;
+
+                return objReturn;
+            }
+
         }
 
 
-    
+
+
+
+
 
     }
 }
