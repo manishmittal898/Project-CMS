@@ -64,7 +64,7 @@ namespace CMS.Service.Services.User
         public long? ModifiedBy { get; set; }
     }
 
-    public partial class UserAddressMasterViewModel
+    public  class UserAddressMasterViewModel
     {
         public long Id { get; set; }
         public long UserId { get; set; }
@@ -83,5 +83,10 @@ namespace CMS.Service.Services.User
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
 
+    }
+
+    public class UserProfilePostModel
+    {
+        public string File { get; set; }
     }
 }

@@ -61,5 +61,14 @@ export class MyAccountComponent implements OnInit {
 
 
   }
+  onImageChages(event: any) {
+    debugger
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+     this.model.ProfilePhoto=reader.result.toString();
+    };
 
+  }
 }
