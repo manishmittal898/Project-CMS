@@ -271,7 +271,7 @@ code {
 }
 
 .navbar .theme-brand {
-    padding: 0.9px 0 0.9px 27px !important;
+    padding: 0.9px 0 0.9px 10px !important;
     border-radius: 6px 6px 0 0;
     justify-content: space-between;
 }
@@ -281,8 +281,9 @@ code {
 }
 
 .navbar .theme-brand li.theme-logo img {
-    max-width: 30px;
-    max-height: 30px;
+  max-width: 85px;
+  max-height: 85px;
+  margin-right: 8px;
 }
 
 .navbar .theme-brand li.theme-text {
@@ -293,7 +294,7 @@ code {
   font-size: 24px !important;
   color: #fff !important;
   line-height: 2.75rem;
-  padding: 0 0.8rem;
+  padding: 0px;
   text-transform: initial;
   position: unset;
   font-weight: 600;
