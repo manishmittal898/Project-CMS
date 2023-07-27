@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DropDown_key } from 'src/app/Shared/Constant';
 import { DropDownModel } from 'src/app/Shared/Helper/Common';
 import { CommonService } from 'src/app/Shared/Services/Core/common.service';
-import { AccountService, UserViewPostModel } from 'src/app/Shared/Services/UserService/account.service';
+import { AccountService, UserPostModel } from 'src/app/Shared/Services/UserService/account.service';
 import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  model = {} as UserViewPostModel;
+  model = {} as UserPostModel;
 
   formgrp = this.fb.group({
     FirstName: [undefined, Validators.required],
@@ -21,7 +21,9 @@ export class MyAccountComponent implements OnInit {
     Mobile: [undefined, Validators.required],
     Email: [undefined, Validators.required],
     Dob: [undefined, Validators.required],
-    GenderId: [undefined, Validators.required]
+    GenderId: [undefined, Validators.required],
+    ProfilePhoto: [undefined, Validators.required]
+
   });
   get ddlkeys() { return DropDown_key };
   dropDown = new DropDownModel();
@@ -35,7 +37,18 @@ export class MyAccountComponent implements OnInit {
   }
 
   getProfileDetail() {
-    this._accounntService.GetUserDetail(this._authService.GetUserDetail().UserId).subscribe(res => {
+    this._accounntService.GetUserDetail().subscribe(res => {
+      if (res.IsSuccess) {
+        let data = res.Data as UserPostModel;
+        this.model.UserId=data.UserId;
+        this.model.Email=data.Email;
+        this.model.FirstName=data.FirstName;
+        this.model.LastName=data.LastName;
+        this.model.Dob=new Date(data.Dob);
+        this.model.Mobile=data.Mobile;
+        this.model.ProfilePhoto=data.ProfilePhoto;
+        this.model.GenderId=data.GenderId;
+      }
     })
   }
 
@@ -67,8 +80,7 @@ export class MyAccountComponent implements OnInit {
 
   }
   onImageChages(event: any) {
-    debugger
-    const file = event.target.files[0];
+        const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {

@@ -31,23 +31,22 @@ namespace CMS.API.Areas.Customer.Controllers
 
 
         // GET api/<CustomerAccount>/5
-        [HttpGet("{id}")]
-        public async Task<object> Get(long id)
+        [HttpGet]
+        public async Task<object> Get()
 
         {
-            return await _user.GetById(id);
+            return await _user.GetById();
 
         }
 
 
         // POST api/<CustomerAccount>
-        [HttpPost]
-        public async Task<object> Update([FromBody] UserMasterPostModel model)
+        [HttpPut]
+        public async Task<object> Save([FromBody] UserDetailPostModel model)
         {
             if (ModelState.IsValid)
             {
-                model.RoleId = (int)RoleEnum.Customer;
-                return await _user.Save(model);
+                return await _user.updateProfileDetail(model);
 
             }
             else
@@ -64,12 +63,12 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // POST api/<CustomerAccount>
         [HttpPost]
-        public async Task<object> UpdateProfile([FromBody] UserProfilePostModel model)
+        public async Task<object> UpdateProfilePic([FromBody] UserProfilePostModel model)
         {
             if (ModelState.IsValid)
             {
 
-                return await _user.UpdateProfile(model);
+                return await _user.UpdateProfilePic(model);
 
             }
             else

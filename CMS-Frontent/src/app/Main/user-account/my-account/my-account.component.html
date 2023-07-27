@@ -50,7 +50,7 @@
         <label for="DateOfBirth" class="form-floating-title">Date of birth</label>
         <p-calendar id="DateOfBirth" placeholder="Date of birth" [(ngModel)]="model.Dob" formControlName="Dob"
           [ngClass]="{ 'is-invalid': f.Dob.errors && f.Dob.touched}"></p-calendar>
-          <i class="bi bi-calendar3 icon-dob"></i>
+        <i class="bi bi-calendar3 icon-dob"></i>
         <div class="invalid-feedback" *ngIf="(formgrp.get('Dob')?.hasError('required') && formgrp.get('Dob')?.touched)">
           Please enter <strong>Date of birth</strong>...!</div>
       </div>
@@ -59,10 +59,10 @@
     <div class="col-lg-6">
       <div class="form-floating form-floating-ngx-dropdown mb-3">
         <div class="form-floating-title">Gender*</div>
-        <ng-select [items]="this.dropDown!.ddlGender" placeholder="Gender" formControlName="GenderId" [searchable]="true" bindLabel="Text"
-          bindValue="Value" id="GenderId" [ngClass]="{ 'is-invalid': f.GenderId.errors && f.GenderId.touched}"
-          [(ngModel)]="model.GenderId">
-                </ng-select>
+        <ng-select [items]="this.dropDown!.ddlGender" placeholder="Gender" formControlName="GenderId"
+          [searchable]="true" bindLabel="Text" bindValue="Value" id="GenderId"
+          [ngClass]="{ 'is-invalid': f.GenderId.errors && f.GenderId.touched}" [(ngModel)]="model.GenderId">
+        </ng-select>
 
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('GenderId')?.hasError('required') && formgrp.get('GenderId')?.touched)">
@@ -73,8 +73,14 @@
     <div class="col-lg-6">
       <div class="mb-3">
         <label class="form-floating-title">Profile photo</label>
-        <input type="file"  (change)="onImageChages($event)" class="form-control" />
+        <input type="hidden" [(ngModel)]="model.ProfilePhoto" formControlName="ProfilePhoto" name="ProfilePhoto">
+        <input type="file" (change)="onImageChages($event)"
+          [ngClass]="{ 'is-invalid': f.ProfilePhoto.errors && f.ProfilePhoto.touched}" class="form-control" />
       </div>
+      <div class="invalid-feedback"
+        *ngIf="(formgrp.get('ProfilePhoto')?.hasError('required') && formgrp.get('ProfilePhoto')?.touched)">
+        Please Upload <strong>Profile Photo</strong>...!</div>
+
     </div>
 
     <div class="mt-3 text-end">

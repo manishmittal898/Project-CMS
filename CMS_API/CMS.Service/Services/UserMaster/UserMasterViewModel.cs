@@ -19,7 +19,7 @@ namespace CMS.Service.Services.User
         public string Address { get; set; }
         public long? GenderId { get; set; }
         public string Gender { get; set; }
-      
+
         public string Mobile { get; set; }
         public int RoleId { get; set; }
         public string Role { get; set; }
@@ -45,7 +45,7 @@ namespace CMS.Service.Services.User
         public DateTime? Dob { get; set; }
 
         public long? GenderId { get; set; }
-      
+
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -64,7 +64,7 @@ namespace CMS.Service.Services.User
         public long? ModifiedBy { get; set; }
     }
 
-    public  class UserAddressMasterViewModel
+    public class UserAddressMasterViewModel
     {
         public long Id { get; set; }
         public long UserId { get; set; }
@@ -88,5 +88,25 @@ namespace CMS.Service.Services.User
     public class UserProfilePostModel
     {
         public string File { get; set; }
+    }
+
+    public class UserDetailPostModel
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        public string Email { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "Date of birth is required")]
+        public DateTime Dob { get; set; }
+        [MaxLength(16, ErrorMessage = "Phone Number should not be more than 16 digit")]
+        [MinLength(9, ErrorMessage = "Phone Number should not be less than 9 digit")]
+        [Display(Name = "Phone Number")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Phone Number must be number.")]
+        public string Mobile { get; set; }
+        public string ProfilePhoto { get; set; }
+        [Required(ErrorMessage = "Gender is required")]
+        public long? GenderId { get; set; }
     }
 }

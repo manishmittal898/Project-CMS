@@ -46,23 +46,23 @@ export class AccountService {
     });
   }
 
-  UpdateProfile(model: UserViewPostModel): Observable<ApiResponse<any>> {
+  UpdateProfile(model: UserPostModel): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.UserAccount_Save_Api}`;
-    return this._baseService.post(url, model);
+    return this._baseService.put(url, model);
   }
-  GetUserDetail(userId: any): Observable<ApiResponse<any>> {
+  GetUserDetail(): Observable<ApiResponse<UserPostModel>> {
     let url = `${this._baseService.API_Url.UserAccount_Detail_Api}`;
-    return this._baseService.get(url + userId);
+    return this._baseService.get(url);
   }
 
 }
 
-export interface UserViewPostModel {
+export interface UserPostModel {
   UserId: number;
   Email: string;
   FirstName: string;
   LastName: string;
-  Dob: string | null;
+  Dob: Date;
   Mobile: string;
   ProfilePhoto: string;
   GenderId: number;

@@ -108,11 +108,16 @@ namespace CMS.Service.Services.User
             return objResult;
         }
 
-        public async Task<ServiceResponse<UserMasterViewModel>> GetById(long id)
+        public async Task<ServiceResponse<UserMasterViewModel>> GetById(long? id= null)
         {
             ServiceResponse<UserMasterViewModel> ObjResponse = new ServiceResponse<UserMasterViewModel>();
             try
             {
+                if (_loginUserDetail != null && _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer)
+                {
+                    id = _loginUserDetail.UserId ?? id;
+
+                }
                 ObjResponse.Data = await _db.TblUserMasters.Include(r => r.Role).Include(add => add.TblUserAddressMasterUsers).ThenInclude(st => st.State).ThenInclude(add => add.TblUserAddressMasterAddressTypeNavigations).Where(
                            x => x.UserId == id && x.IsDeleted == false && x.IsActive.Value == true).Select(x => new UserMasterViewModel
                            {
@@ -189,7 +194,7 @@ namespace CMS.Service.Services.User
                             objUser.ProfilePhoto = _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                         }
                         objUser.GenderId = model.GenderId;
-                        objUser.ProfilePhoto = model.ProfilePhoto;
+                       
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
                         _db.SaveChanges();
@@ -262,7 +267,7 @@ namespace CMS.Service.Services.User
 
         }
 
-        public async Task<ServiceResponse<TblUserMaster>> UpdateProfile(UserProfilePostModel model)
+        public async Task<ServiceResponse<TblUserMaster>> UpdateProfilePic(UserProfilePostModel model)
         {
             try
             {
@@ -282,6 +287,34 @@ namespace CMS.Service.Services.User
 
         }
 
+        public async Task<ServiceResponse<TblUserMaster>> updateProfileDetail(UserDetailPostModel model)
+        {
+            var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && x.UserId !=_loginUserDetail.UserId && !x.IsDeleted).FirstOrDefaultAsync();
 
+            if (user == null)
+            {
+                TblUserMaster objUser = _db.TblUserMasters.FirstOrDefault(r => r.UserId == _loginUserDetail.UserId);
+                objUser.FirstName = model.FirstName ?? null;
+                objUser.LastName = model.LastName;
+                objUser.Email = model.Email;
+                objUser.Dob = model.Dob;
+                objUser.Mobile = model.Mobile;
+                if (model.ProfilePhoto != null)
+                {
+                    objUser.ProfilePhoto = _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
+                }
+                objUser.GenderId = model.GenderId;
+                
+                var roletype = _db.TblUserMasters.Update(objUser);
+                _db.SaveChanges();
+                return CreateResponse(objUser, ResponseMessage.Update.Replace("Record", "User"), true);
+            }
+            else
+            {
+                return CreateResponse<TblUserMaster>(null, ResponseMessage.UserExist, true, ((int)ApiStatusCode.AlreadyExist));
+
+            }
+
+        }
     }
 }
