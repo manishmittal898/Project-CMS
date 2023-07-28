@@ -32,7 +32,7 @@
                   aria-expanded="false">
                   <i class="bi bi-person-circle d-block d-sm-none"></i>
                   <span class="login-user-name d-none d-sm-flex align-items-center">
-                    <div class="user-img d-flex align-items-center justify-content-center me-2"><img src="assets/images/avatar.png" alt="" /></div>
+                    <div class="user-img d-flex align-items-center justify-content-center me-2"><img [src]="_authService.GetUserDetail()?.ProfilePhoto" onerror="this.src='assets/images/avatar.png'" alt="" /></div>
                     <span>  {{_authService.GetUserDetail()?.FullName }} </span>
                   </span>
                 </a>

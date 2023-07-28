@@ -198,6 +198,7 @@ namespace CMS.Service.Services.User
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
                         _db.SaveChanges();
+                        objUser.ProfilePhoto = !string.IsNullOrEmpty(objUser.ProfilePhoto) ? objUser.ProfilePhoto.ToAbsolutePath() : null;
                         return CreateResponse(objUser, ResponseMessage.Update.Replace("Record", "User"), true);
                     }
                     else
@@ -276,6 +277,8 @@ namespace CMS.Service.Services.User
 
                 objUser.ProfilePhoto = _fileHelper.Save(model.File, FilePaths.UserProfile);
                 await _db.SaveChangesAsync();
+                objUser.ProfilePhoto = !string.IsNullOrEmpty(objUser.ProfilePhoto) ? objUser.ProfilePhoto.ToAbsolutePath() : null;
+
                 return CreateResponse(objUser, ResponseMessage.Save, true);
             }
             catch (Exception ex)
@@ -307,6 +310,7 @@ namespace CMS.Service.Services.User
                 
                 var roletype = _db.TblUserMasters.Update(objUser);
                 _db.SaveChanges();
+                objUser.ProfilePhoto = !string.IsNullOrEmpty(objUser.ProfilePhoto) ? objUser.ProfilePhoto.ToAbsolutePath() : null;
                 return CreateResponse(objUser, ResponseMessage.Update.Replace("Record", "User"), true);
             }
             else

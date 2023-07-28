@@ -40,14 +40,13 @@ export class MyAccountComponent implements OnInit {
     this._accounntService.GetUserDetail().subscribe(res => {
       if (res.IsSuccess) {
         let data = res.Data as UserPostModel;
-        this.model.UserId=data.UserId;
-        this.model.Email=data.Email;
-        this.model.FirstName=data.FirstName;
-        this.model.LastName=data.LastName;
-        this.model.Dob=new Date(data.Dob);
-        this.model.Mobile=data.Mobile;
-        this.model.ProfilePhoto=data.ProfilePhoto;
-        this.model.GenderId=data.GenderId;
+        this.model.Email = data.Email;
+        this.model.FirstName = data.FirstName;
+        this.model.LastName = data.LastName;
+        this.model.Dob = new Date(data.Dob);
+        this.model.Mobile = data.Mobile;
+        this.model.ProfilePhoto = data.ProfilePhoto;
+        this.model.GenderId = data.GenderId;
       }
     })
   }
@@ -71,6 +70,11 @@ export class MyAccountComponent implements OnInit {
       this._accounntService.UpdateProfile(this.model).subscribe(res => {
         if (res.IsSuccess) {
           this._toasterService.success(res.Message as string, 'Success');
+          debugger
+          let data = this._authService.GetUserDetail();
+          data.ProfilePhoto = res.Data.ProfilePhoto;
+          data.FullName = res.Data.FirstName + ' ' + res.Data.LastName;
+          this._authService.SaveUserDetail(data);
         } else {
           this._toasterService.error(res.Message as string, 'Failed');
         }
@@ -80,7 +84,7 @@ export class MyAccountComponent implements OnInit {
 
   }
   onImageChages(event: any) {
-        const file = event.target.files[0];
+    const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {

@@ -58,8 +58,7 @@ export class AccountService {
 }
 
 export interface UserPostModel {
-  UserId: number;
-  Email: string;
+    Email: string;
   FirstName: string;
   LastName: string;
   Dob: Date;

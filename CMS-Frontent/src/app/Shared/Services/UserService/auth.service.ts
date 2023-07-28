@@ -28,7 +28,7 @@ export class AuthService {
 
   }
 
-  SaveUserDetail(model: any) {
+  SaveUserDetail(model: LoginUserDetailModel) {
     let data = JSON.stringify(model);
     this._securityService.setStorage('userDetail', data);
 
