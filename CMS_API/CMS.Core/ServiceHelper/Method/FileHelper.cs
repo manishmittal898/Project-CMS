@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 namespace CMS.Core.ServiceHelper.Method
@@ -55,6 +56,16 @@ namespace CMS.Core.ServiceHelper.Method
                         fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + GetFileExtension(base64str) : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + GetFileExtension(base64str);
                         File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
                         return withFilePath ? string.Concat(filePath, fileName) : fileName;
+                    }
+                    else
+                    {
+                        Uri uriResult;
+                        bool result = Uri.TryCreate(base64str, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                        if (result)
+                        {
+                            return uriResult.AbsolutePath.Replace("/", "\\");
+                        }
+
                     }
                 }
             }
@@ -218,5 +229,7 @@ namespace CMS.Core.ServiceHelper.Method
             }
 
         }
+
+
     }
 }

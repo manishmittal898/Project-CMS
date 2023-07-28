@@ -39,6 +39,7 @@ export class MyAccountComponent implements OnInit {
   getProfileDetail() {
     this._accounntService.GetUserDetail().subscribe(res => {
       if (res.IsSuccess) {
+        debugger
         let data = res.Data as UserPostModel;
         this.model.Email = data.Email;
         this.model.FirstName = data.FirstName;
