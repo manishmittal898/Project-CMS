@@ -4891,6 +4891,41 @@ td.mat-footer-cell:last-of-type {
 }
 
 
+.swal2-container .swal2-popup {
+  width: 100% !important;
+  max-width: 320px !important;
+  border-radius: 20px !important;
+  padding-bottom: 12px !important;
+}
+.swal2-container .swal2-popup .swal2-icon {
+  height: 50px !important;
+  width: 50px !important;
+  border: solid 1px !important;
+  margin-top: 15px !important;
+  border-color: #c7c7c7 !important;
+  color: #000 !important;
+}
+.swal2-container .swal2-popup .swal2-icon .swal2-icon-content {
+  font-size: 40px !important;
+}
+.swal2-container .swal2-popup .swal2-title {
+  padding-top: 10px !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  font-size: 25px !important;
+}
+.swal2-container .swal2-html-container {
+  font-size: 15px !important;
+}
+.swal2-container .swal2-actions {
+  margin-top: 15px !important;
+}
+.mat-table {
+  box-shadow: none !important;
+}
+.mat-paginator-container {
+  min-height: auto !important;
+}
 /* Manish CSS End */
 
 
