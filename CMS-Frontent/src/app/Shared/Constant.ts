@@ -35,9 +35,15 @@ export class API_Url {
   public static Product_List_Api = `${environment.apiEndPoint}public/Product/GetList`;
   public static Product_Category_Api = `${environment.apiEndPoint}public/Product/GetProductCategory`;
   public static Product_Detail_Api = `${environment.apiEndPoint}public/Product/Get/`;
-
-
   //#endregion
+
+ //#region  << ProductWishList  >>
+ public static ProductWishList_Api = `${environment.apiEndPoint}customer/ProductWishList/Get`;
+ public static ProductWishList_Add_Apo = `${environment.apiEndPoint}customer/ProductWishList/AddWishListProduct`;
+ public static ProductWishList_Remove_Apo = `${environment.apiEndPoint}customer/ProductWishList/RemoveWishListProduct/`;
+
+
+ //#endregion
 
   //#region  << CMS Page  >>
   public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;

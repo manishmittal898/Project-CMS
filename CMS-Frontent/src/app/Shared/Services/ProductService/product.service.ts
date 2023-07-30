@@ -60,6 +60,7 @@ export interface ProductMasterViewModel {
   Category: string;
   SubCategory: string;
   ShippingCharge: number | undefined;
+  IsWhishList :boolean;
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 

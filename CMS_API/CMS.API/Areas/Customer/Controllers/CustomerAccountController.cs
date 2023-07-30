@@ -1,14 +1,9 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Data.Models;
 using CMS.Service.Services.CustomerAddress;
-using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
-using static CMS.Core.FixedValue.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

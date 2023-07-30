@@ -9,7 +9,11 @@ namespace CMS.Service.Services.WishList
     public interface IWishListService
     {
         Task<ServiceResponse<IEnumerable<WishListViewModel>>> GetList(IndexModel model);
-        Task<ServiceResponse<WishListViewModel>> Add(WishListPostModel model);
+        Task<ServiceResponse<WishListViewModel>> AddProduct(WishListPostModel model);
+        Task<ServiceResponse<WishListViewModel>> RemoveProduct(WishListPostModel model);
+
+        
+
 
     }
 }

@@ -29,7 +29,7 @@ namespace CMS.Service.Services.WishList
 
         }
 
-        public async Task<ServiceResponse<WishListViewModel>> Add(WishListPostModel model)
+        public async Task<ServiceResponse<WishListViewModel>> AddProduct(WishListPostModel model)
         {
             ServiceResponse<WishListViewModel> objResult = new ServiceResponse<WishListViewModel>();
 
@@ -39,11 +39,10 @@ namespace CMS.Service.Services.WishList
                 objProduct.ProductId = model.ProductId;
                 objProduct.UserId = _loginUserDetail.UserId.Value;
                 objProduct.AddedOn = DateTime.Now;
-
                 var product = await _db.TblUserWishLists.AddAsync(objProduct);
                 await _db.SaveChangesAsync();
 
-                
+
 
                 return CreateResponse<WishListViewModel>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
@@ -55,15 +54,46 @@ namespace CMS.Service.Services.WishList
             }
         }
 
+        public async Task<ServiceResponse<WishListViewModel>> RemoveProduct(WishListPostModel model)
+        {
+            ServiceResponse<WishListViewModel> objResult = new ServiceResponse<WishListViewModel>();
+
+            try
+            {
+
+                TblUserWishList objProduct = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).FirstOrDefaultAsync();
+                var product = _db.TblUserWishLists.Remove(objProduct);
+                await _db.SaveChangesAsync();
+
+
+
+                return CreateResponse<WishListViewModel>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public async Task<ServiceResponse<IEnumerable<WishListViewModel>>> GetList(IndexModel model)
         {
             ServiceResponse<IEnumerable<WishListViewModel>> objResult = new ServiceResponse<IEnumerable<WishListViewModel>>();
             try
             {
+                long userId = 0;
+                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId"))
+                {
+                    model.AdvanceSearchModel.TryGetValue("userId", out object _userId);
+                    userId = Convert.ToInt64(_userId.ToString());
+
+                }
 
 
                 var result = (from data in _db.TblUserWishLists.Include(x => x.Product)
-                              where data.UserId == _loginUserDetail.UserId
+                              where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);
                 switch (model.OrderBy)
                 {

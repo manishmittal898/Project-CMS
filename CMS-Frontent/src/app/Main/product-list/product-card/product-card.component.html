@@ -7,7 +7,7 @@
     </a>
     <!-- #Hover items start-->
     <div class="product-list-items-hover-action">
-      <a href="javascript:void(0)" title="Wishlist"><i class="bi bi-heart-fill"></i></a>
+      <a href="javascript:void(0)" (click)="updateWishlist()" title="Wishlist"><i class="bi" [ngClass]="{'bi-heart-fill':Product.IsWhishList,'bi-heart':!Product.IsWhishList }"></i></a>
       <a href="javascript:void(0)" title="Add to cart"><i class="bi bi-cart2"></i></a>
     </div>
     <!-- #Hover items End-->

@@ -61,6 +61,7 @@ namespace CMS.Service.Services.ProductMaster
         public string ViewSection { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
+        public bool IsWhishList { get; set; }
         public List<ProductImageViewModel>? Files { get; set; }
         public List<ProductStockModel>? Stocks { get; set; }
 
