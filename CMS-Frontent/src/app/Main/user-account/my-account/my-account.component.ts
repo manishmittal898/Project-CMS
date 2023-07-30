@@ -39,7 +39,6 @@ export class MyAccountComponent implements OnInit {
   getProfileDetail() {
     this._accounntService.GetUserDetail().subscribe(res => {
       if (res.IsSuccess) {
-        debugger
         let data = res.Data as UserPostModel;
         this.model.Email = data.Email;
         this.model.FirstName = data.FirstName;
@@ -71,7 +70,7 @@ export class MyAccountComponent implements OnInit {
       this._accounntService.UpdateProfile(this.model).subscribe(res => {
         if (res.IsSuccess) {
           this._toasterService.success(res.Message as string, 'Success');
-          debugger
+
           let data = this._authService.GetUserDetail();
           data.ProfilePhoto = res.Data.ProfilePhoto;
           data.FullName = res.Data.FirstName + ' ' + res.Data.LastName;
@@ -79,6 +78,9 @@ export class MyAccountComponent implements OnInit {
         } else {
           this._toasterService.error(res.Message as string, 'Failed');
         }
+      },error=>{
+        this._toasterService.error(error.message as string, 'Failed');
+
       })
     }
 

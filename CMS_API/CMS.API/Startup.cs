@@ -14,6 +14,7 @@ using CMS.Service.Services.ProductReview;
 using CMS.Service.Services.RoleType;
 using CMS.Service.Services.SubLookupMaster;
 using CMS.Service.Services.User;
+using CMS.Service.Services.WishList;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -170,6 +171,7 @@ namespace CMS.API
             services.AddScoped<IGECategoryService, GECategoryService>();
             services.AddScoped<IGeneralEntryService, GeneralEntryService>();
             services.AddScoped<ICustomerAddressService, CustomerAddressService>();
+            services.AddScoped<IWishListService, WishListService>();
 
         }
     }
