@@ -1430,10 +1430,10 @@ ul.megamenu-sub-list {
     max-height: 480px;
 }
 
-.product-d-main-slider {
+/* .product-d-main-slider {
     background: #f7f7f7;
-    /* box-shadow: 0 0 20px #e5e5e5; */
-}
+    box-shadow: 0 0 20px #e5e5e5;
+} */
 
 .product-d-main-slider .slick-prev {
     left: 12px;

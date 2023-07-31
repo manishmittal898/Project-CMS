@@ -91,7 +91,7 @@
 
 
         <!-- Home Category Start -->
-        <div class="slider-items-6 font-fam-newsreader">
+        <div class="slider-items-6">
         <ng-container *ngFor="let itm of model">
           <a href="javascript:void()" [routerLink]="'/store/'+itm.Name.split(' ').join('_')"
             [queryParams]="{id: itm.Id}" class="home-category-items text-center">
