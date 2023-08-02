@@ -32,8 +32,10 @@
                   aria-expanded="false">
                   <i class="bi bi-person-circle d-block d-sm-none"></i>
                   <span class="login-user-name d-none d-sm-flex align-items-center">
-                    <div class="user-img d-flex align-items-center justify-content-center me-2"><img [src]="_authService.GetUserDetail()?.ProfilePhoto" onerror="this.src='assets/images/avatar.png'" alt="" /></div>
-                    <span>  {{_authService.GetUserDetail()?.FullName }} </span>
+                    <div class="user-img d-flex align-items-center justify-content-center me-2"><img
+                        [src]="_authService.GetUserDetail()?.ProfilePhoto" onerror="this.src='assets/images/avatar.png'"
+                        alt="" /></div>
+                    <span> {{_authService.GetUserDetail()?.FullName }} </span>
                   </span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,13 +77,30 @@
             <ul class="navbar-nav justify-content-center w-100">
               <a class="d-block d-lg-none mobile-nav-close" href="javascript:void()" data-bs-toggle="collapse"
                 data-bs-target="#MenuNavbar"> <i class="bi bi-x"></i></a>
-              <li class="nav-item"> <a class="nav-link active" aria-current="page" href="javascript:void()"
+              <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
                   routerLink="/home"> <i class="bi bi-house-door"></i> </a>
               </li>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
                   routerLink="/store"> Store </a> </li>
 
-              <li class="nav-item dropdown" *ngIf="this.menuModel">
+              <ng-container *ngFor="let item of this.menuModel;let ind=index">
+                <li class="nav-item dropdown cat-dropdown-list"> <a class="nav-link dropdown-toggle" ole="button"
+                    data-bs-toggle="dropdown" aria-expanded="false" href="javascript:void()"
+                    [routerLink]="['/store/'+item.Category.split(' ').join('_')]" [queryParams]="{id:item.CategoryId}">
+                    {{item.Category}} <i *ngIf="item.Data?.length" class="bi bi-chevron-down"></i> </a>
+
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let sitem of item.Data"><a class="dropdown-item" href="javascript:void()"
+                        [routerLink]="['/store/'+item.Category.split(' ').join('_')]"
+                        [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
+
+                  </ul>
+                </li>
+
+              </ng-container>
+
+
+               <!-- <li class="nav-item dropdown" *ngIf="this.menuModel">
                 <a class="nav-link dropdown-toggle" href="javascript:void()" id="DropDown1" data-bs-toggle="dropdown">
                   Collections
                 </a>
@@ -97,8 +116,6 @@
                             [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
                             {{item.Category}}
                           </button>
-                          <!-- <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse "
-                          [ngClass]="{'show' : ind==0}" [id]="'collection_'+ind" data-bs-parent="#NavCollections"> -->
                           <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse"
                             [id]="'collection_'+ind" data-bs-parent="#NavCollections">
                             <li><a class="dropdown-item" href="javascript:void()"
@@ -108,16 +125,14 @@
                           </ul>
                         </div>
                       </ng-container>
-
-
                     </div>
                   </div>
                 </ul>
-              </li>
-              <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
+              </li> -->
+              <!-- <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
                   href="javascript:void()" [routerLink]="['/page/'+itm.Text.split(' ').join('_')]"
                   [queryParams]="{id :  itm.Value }" routerLinkActive="router-link-active">
-                  {{itm.Text | titlecase}} </a> </li>
+                  {{itm.Text | titlecase}} </a> </li> -->
             </ul>
           </div>
         </div>
