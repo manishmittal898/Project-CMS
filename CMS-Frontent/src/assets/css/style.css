@@ -287,7 +287,7 @@ color: #000;
     outline-offset: -1px;
 }
 .btn-border.btn-border-light {
-  outline-color: #c9c9c9;
+  outline-color: #e5e5e5;
 }
 
 .btn-border:hover, .btn-border:focus, .btn-border:focus-visible, .btn-border:active, .btn-border:focus:not(:focus-visible) {
@@ -1556,7 +1556,7 @@ ul.megamenu-sub-list {
   display: inline-flex;
 }
 .product-details-price {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -2617,6 +2617,18 @@ padding: 0px;
 }
 .section-related {
   margin-top: 70px;
+}
+.profile-page-img {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  margin: auto;
+  border: solid 1px var(--primary-color);
+  position: relative;
 }
 /* CUSTOM CSS END */
 
