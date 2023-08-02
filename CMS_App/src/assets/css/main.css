@@ -4898,8 +4898,8 @@ td.mat-footer-cell:last-of-type {
   padding-bottom: 12px !important;
 }
 .swal2-container .swal2-popup .swal2-icon {
-  height: 50px !important;
-  width: 50px !important;
+  /* height: 50px !important;
+  width: 50px !important; */
   border: solid 1px !important;
   margin-top: 15px !important;
   border-color: #c7c7c7 !important;
