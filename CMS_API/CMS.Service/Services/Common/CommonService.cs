@@ -66,7 +66,7 @@ namespace CMS.Service.Services.Common
 
                         case DropDownKey.ddlProductViewSection:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_View_Section.GetStringValue()));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_View_Section.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlAddressType:
 
@@ -210,6 +210,10 @@ namespace CMS.Service.Services.Common
                     else if (lktype == LookupTypeEnum.CMS_Page.GetStringValue())
                     {
                         data = data.Where(x => x.TblCmspageContentMasters.Any(y => y.PageId == x.Id && y.IsDeleted == false && y.IsActive == true));
+
+                    }else if(lktype == LookupTypeEnum.Product_View_Section.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId == x.Id && y.IsDelete==false && y.IsActive.Value == true));
 
                     }
 

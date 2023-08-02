@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import("./Main/main.module").then(m => m.MainModule)
   },
   {
+    path: "b-to-b",
+    loadChildren: () => import("./btob/btob.module").then(m => m.BtoBModule)
+  },
+  {
     path: "design",
     loadChildren: () => import("./uidesign/uidesign-routing.module").then(m => m.UIDesignRoutingModule)
   },

@@ -11,6 +11,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { ProductCardComponent } from './product-list/product-card/product-card.component';
+import { ProductSectionComponent } from './home/product-section/product-section.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductCardComponent } from './product-list/product-card/product-card.c
     CategoryProductListComponent,
     ProductFilterComponent,
     CMSPageContentComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductSectionComponent
   ],
   imports: [
     CommonModule,

@@ -105,6 +105,7 @@ export class DropDownModel {
   ddlSubLookupGroup!: GroupDropDownItem[];
   ddlCMSPage!: DropDownItem[];
   ddlAddressType!: DropDownItem[];
+  ddlProductViewSection!: DropDownItem[];
 
 
 }

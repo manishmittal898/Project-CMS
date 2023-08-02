@@ -75,7 +75,8 @@ namespace CMS.Service.Services.ProductMaster
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
                                             Keyword = x.Keyword,
-                                            ShippingCharge = x.ShippingCharge ?? null
+                                            ShippingCharge = x.ShippingCharge ?? null,
+                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
 
                                         }).ToListAsync();
 
@@ -510,6 +511,7 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
 
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
+                                && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
 
                                 && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
@@ -553,7 +555,8 @@ namespace CMS.Service.Services.ProductMaster
                                             ShippingCharge = x.ShippingCharge ?? null,
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
-                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
+                                            ViewSectionId= x.ViewSectionId,
+                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.FirstOrDefault(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) != null) ? true : false,
                                         }).ToListAsync();
 
                 if (result != null)

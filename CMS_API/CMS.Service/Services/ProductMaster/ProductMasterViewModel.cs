@@ -102,6 +102,7 @@ namespace CMS.Service.Services.ProductMaster
         public List<long?> Price { get; set; }
         public bool IsAvailableStock { get; set; }
         public List<long> SizeId { get; set; }
+        public List<long> ViewSectionId { get; set; }
         public string Keyword { get; set; }
     }
 

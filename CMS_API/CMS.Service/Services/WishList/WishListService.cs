@@ -35,12 +35,23 @@ namespace CMS.Service.Services.WishList
 
             try
             {
-                TblUserWishList objProduct = new TblUserWishList();
-                objProduct.ProductId = model.ProductId;
-                objProduct.UserId = _loginUserDetail.UserId.Value;
-                objProduct.AddedOn = DateTime.Now;
-                var product = await _db.TblUserWishLists.AddAsync(objProduct);
-                await _db.SaveChangesAsync();
+                List<TblUserWishList> objProducts = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                if (objProducts.Count == 0)
+                {
+                    TblUserWishList objProduct = new TblUserWishList();
+                    objProduct.ProductId = model.ProductId;
+                    objProduct.UserId = _loginUserDetail.UserId.Value;
+                    objProduct.AddedOn = DateTime.Now;
+                    var product = await _db.TblUserWishLists.AddAsync(objProduct);
+                    await _db.SaveChangesAsync();
+                }
+                else if (objProducts.Count > 1)
+                {
+
+                    _db.TblUserWishLists.RemoveRange(objProducts.SkipLast(1));
+                    await _db.SaveChangesAsync();
+                }
+
 
 
 
@@ -61,8 +72,8 @@ namespace CMS.Service.Services.WishList
             try
             {
 
-                TblUserWishList objProduct = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).FirstOrDefaultAsync();
-                var product = _db.TblUserWishLists.Remove(objProduct);
+                List<TblUserWishList> objProduct = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                _db.TblUserWishLists.RemoveRange(objProduct);
                 await _db.SaveChangesAsync();
 
 

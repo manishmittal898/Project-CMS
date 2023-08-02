@@ -35,7 +35,8 @@ export class ProductFilterModel extends IndexModel {
     this.CategoryId = [];
     this.SubCategoryId = [];
     this.SizeId = [];
-    this.Price=[50,10000];
+    this.Price = [50, 10000];
+    this.ViewSectionId = [];
   }
   CategoryId!: number[];
   SubCategoryId!: number[];
@@ -43,6 +44,7 @@ export class ProductFilterModel extends IndexModel {
   IsAvailableStock!: boolean;
   SizeId!: number[];
   Keyword!: string;
+  ViewSectionId!: number[];
 }
 
 
@@ -60,7 +62,8 @@ export interface ProductMasterViewModel {
   Category: string;
   SubCategory: string;
   ShippingCharge: number | undefined;
-  IsWhishList :boolean;
+  IsWhishList: boolean;
+  ViewSectionId: number | null;
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 
