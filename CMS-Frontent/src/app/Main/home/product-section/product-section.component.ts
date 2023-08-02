@@ -15,10 +15,13 @@ export class ProductSectionComponent implements OnInit {
   dropDown = new DropDownModel();
   model = {} as IDictionary<ProductMasterViewModel[]>;
 
-  constructor(private _commonService: CommonService, private readonly _productService: ProductService) { }
+  constructor(private _commonService: CommonService, private readonly _productService: ProductService) {
+
+  }
 
   ngOnInit(): void {
     this.GetDropDown();
+
   }
   GetDropDown() {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlProductViewSection], true).subscribe(res => {
@@ -27,7 +30,7 @@ export class ProductSectionComponent implements OnInit {
         debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
-        this.loadProductSection()
+        this.loadProductSection();
       }
     });
   }
@@ -38,21 +41,24 @@ export class ProductSectionComponent implements OnInit {
     this._productService.GetList(indexModel).subscribe(response => {
       if (response.IsSuccess) {
         let data = response.Data;
+
         this.dropDown.ddlProductViewSection.forEach(X => {
           this.model[X.Value.toString()] = data.filter(x => x.ViewSectionId == X.Value)
         })
-        this.AddSlider();
-        debugger
+        //setTimeout(() => {
+          this.AddSlider();
+       // }, 100);
+
       }
     })
 
   };
 
 
-  AddSlider() {
+  private AddSlider() {
 
     setTimeout(() => {
-      $('.slider-items-5')?.slick({
+      $('.product-items-5')?.slick({
         dots: true,
         infinite: true,
         speed: 1000,
@@ -92,7 +98,7 @@ export class ProductSectionComponent implements OnInit {
         }
         ]
       });
-    }, 50);
+    }, 100);
 
   }
 }
