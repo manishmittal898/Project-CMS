@@ -286,6 +286,9 @@ color: #000;
     color: var(--black);
     outline-offset: -1px;
 }
+.btn-border.btn-border-light {
+  outline-color: #c9c9c9;
+}
 
 .btn-border:hover, .btn-border:focus, .btn-border:focus-visible, .btn-border:active, .btn-border:focus:not(:focus-visible) {
     background: var(--secondary-color);
@@ -799,7 +802,7 @@ font-weight: 600;
 }
 
 .product-list-info h3, .product-list-info  a {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 3px;
     color: var(--black);
     font-weight: 500;
@@ -807,14 +810,22 @@ font-weight: 600;
     display: block;
     line-height: 20px;
 }
+
 .product-list-info h3:hover, .product-list-info  a:hover {
   color: var(--black);
 }
 
-.product-list-info p {
-    margin: 0px;
-    font-size: 14px;
-    font-weight: 800;
+.product-list-info .product-list-info-price {
+  margin: 0px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.info-price-discount {
+  display: inline;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: line-through;
 }
 
 .product-list-items-img img {
@@ -1428,7 +1439,7 @@ ul.megamenu-sub-list {
 }
 
 .product-d-main-slider img {
-    max-height: 480px;
+    max-height: 600px;
 }
 
 /* .product-d-main-slider {
@@ -1543,6 +1554,17 @@ ul.megamenu-sub-list {
 }
 .product-detail-total-stock {
   display: inline-flex;
+}
+.product-details-price {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.product-details-price .product-details-price-discount {
+  font-size: 15px;
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-weight: 500;
 }
 pre {
   font-family: 'Manrope', sans-serif;
@@ -2578,6 +2600,23 @@ ul.footer-benefits li p {
 .cat-dropdown-list .dropdown-menu
 {
 padding: 0px;
+}
+.accordion-item {
+  border-color: snow;
+  border-radius: 0px !important;
+  box-shadow: 0 0 20px #f3f3f3;
+}
+.accordion-item .accordion-button:not(.collapsed) {
+  background: #fffef7;
+  color: #000;
+}
+.accordion-item .accordion-button {
+  font-size: 16px;
+  padding: 12px 15px;
+  font-weight: 500;
+}
+.section-related {
+  margin-top: 70px;
 }
 /* CUSTOM CSS END */
 
