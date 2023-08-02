@@ -78,16 +78,18 @@
               <a class="d-block d-lg-none mobile-nav-close" href="javascript:void()" data-bs-toggle="collapse"
                 data-bs-target="#MenuNavbar"> <i class="bi bi-x"></i></a>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
-                  routerLink="/home"> <i class="bi bi-house-door"></i> </a>
+                  routerLink="/home" routerLinkActive="active"> <i class="bi bi-house-door"></i> </a>
               </li>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()"
-                  routerLink="/store"> Store </a> </li>
+                  routerLink="/store" routerLinkActive="active"> Store </a> </li>
 
               <ng-container *ngFor="let item of this.menuModel;let ind=index">
-                <li class="nav-item dropdown cat-dropdown-list"> <a class="nav-link dropdown-toggle" ole="button"
+                <li class="nav-item dropdown cat-dropdown-list">
+                  <a class="nav-link dropdown-toggle" routerLinkActive="active"
                     data-bs-toggle="dropdown" aria-expanded="false" href="javascript:void()"
                     [routerLink]="['/store/'+item.Category.split(' ').join('_')]" [queryParams]="{id:item.CategoryId}">
-                    {{item.Category}} <i *ngIf="item.Data?.length" class="bi bi-chevron-down"></i> </a>
+                    {{item.Category}} <i *ngIf="item.Data?.length" class="bi bi-chevron-down"></i>
+                  </a>
 
                   <ul class="dropdown-menu">
                     <li *ngFor="let sitem of item.Data"><a class="dropdown-item" href="javascript:void()"
@@ -130,7 +132,7 @@
                 </ul>
               </li> -->
               <!-- <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
-                  href="javascript:void()" [routerLink]="['/page/'+itm.Text.split(' ').join('_')]"
+                  href="javascript:void()" routerLinkActive="active" [routerLink]="['/page/'+itm.Text.split(' ').join('_')]"
                   [queryParams]="{id :  itm.Value }" routerLinkActive="router-link-active">
                   {{itm.Text | titlecase}} </a> </li> -->
             </ul>
