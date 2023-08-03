@@ -501,7 +501,7 @@ namespace CMS.Service.Services.ProductMaster
             {
 
 
-                var result = (from prd in _db.TblProductMasters
+                var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
 
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
@@ -555,10 +555,11 @@ namespace CMS.Service.Services.ProductMaster
                                             ShippingCharge = x.ShippingCharge ?? null,
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
-                                            ViewSectionId= x.ViewSectionId,
-                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.FirstOrDefault(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) != null) ? true : false,
+                                            ViewSectionId = x.ViewSectionId,
+                                            IsWhishList = x.TblUserWishLists.Count > 0  && _loginUserDetail != null  ? x.TblUserWishLists.Any(y=> y.ProductId==x.Id && y.UserId==_loginUserDetail.UserId) : false                                           
                                         }).ToListAsync();
 
+              
                 if (result != null)
                 {
 
