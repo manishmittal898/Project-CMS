@@ -27,7 +27,6 @@ export class ProductSectionComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlProductViewSection], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        debugger
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
         this.loadProductSection();
@@ -41,13 +40,12 @@ export class ProductSectionComponent implements OnInit {
     this._productService.GetList(indexModel).subscribe(response => {
       if (response.IsSuccess) {
         let data = response.Data;
-
         this.dropDown.ddlProductViewSection.forEach(X => {
           this.model[X.Value.toString()] = data.filter(x => x.ViewSectionId == X.Value)
         })
         //setTimeout(() => {
-          this.AddSlider();
-       // }, 100);
+        this.AddSlider();
+        // }, 100);
 
       }
     })

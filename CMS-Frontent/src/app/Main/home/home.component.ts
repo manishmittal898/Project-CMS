@@ -45,12 +45,14 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-
+getUrl(item){
+  return `/store/${item.Name.split(' ').join('_')}?id=${item.Id}`
+}
   AddSlider() {
     this.isLoading = false;
 
     setTimeout(() => {
-     
+
       $('.slider-items-6')?.slick({
         dots: true,
         infinite: true,

@@ -99,19 +99,20 @@
       <div class="col-lg-12 text-center section-title">Shop by Category</div>
 
 
-        <!-- Home Category Start -->
-        <div class="slider-items-6">
+      <!-- Home Category Start -->
+      <div class="slider-items-6" *ngIf="model.length>0">
         <ng-container *ngFor="let itm of model">
-          <a href="javascript:void()" [routerLink]="'/store/'+itm.Name.split(' ').join('_')"
-            [queryParams]="{id: itm.Id}" class="home-category-items text-center">
+          <a href="javascript:void(0);" routerLinkActive="active"
+            [routerLink]="['/store/'+itm.Name.split(' ').join('_')]" [queryParams]="{id: itm.Id}"
+            class="home-category-items text-center">
             <div class="home-category-items-img d-flex align-items-center">
-              <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="" />
+              <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="itm.Name" />
             </div>
             <div class="home-category-items-caption">{{itm.Name}}</div>
           </a>
-      </ng-container>
-    </div>
-        <!-- Home Category End -->
+        </ng-container>
+      </div>
+      <!-- Home Category End -->
     </div>
   </div>
 </Section>
