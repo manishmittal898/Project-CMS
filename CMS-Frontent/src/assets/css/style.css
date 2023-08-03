@@ -286,13 +286,12 @@ color: #000;
     outline-offset: -1px;
 }
 .btn-border.btn-border-light {
-  outline-color: #e5e5e5;
+  outline-color: #d1d1d1;
 }
 
 .btn-border:hover, .btn-border:focus, .btn-border:focus-visible, .btn-border:active, .btn-border:focus:not(:focus-visible) {
-    background: var(--secondary-color);
     color: #000;
-    outline: solid 1px #000;
+    outline: solid 1px var(--primary-color);
 }
 
 .bg-light-custom {
