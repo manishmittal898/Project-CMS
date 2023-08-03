@@ -303,11 +303,18 @@
 
 @media (max-width: 1024px) {
     .product-list-items-img {
-        height: 235px;
+        height: 240px;
     }
-    .product-list-info .product-list-info-price {
+    .product-list-items-img img {
+      max-height: 240px;
+  }
+    .product-list-info .product-list-price, .product-list-info .product-list-price-off {
         font-size: 15px;
     }
+    .product-list-info h3, .product-list-info a {
+      font-size: 14px;
+      line-height: 18px;
+  }
 }
 
 @media screen and (min-width:767px) {

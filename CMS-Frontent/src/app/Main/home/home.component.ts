@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
         this.AddSlider();
         setTimeout(() => {
           this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
-        }, 10);
+        }, 100);
 
       }
     })
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
 
     setTimeout(() => {
-     
+
       $('.slider-items-6')?.slick({
         dots: true,
         infinite: true,
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
         ]
       });
 
-    }, 50);
+    }, 100);
 
   }
 }

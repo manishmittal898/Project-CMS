@@ -39,7 +39,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
       setTimeout(() => {
         this.bindRelatedList();
 
-      }, 10);
+      }, 100);
     }
   }
 
@@ -114,7 +114,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         ]
       });
 
-    }, 500);
+    }, 100);
 
   }
 

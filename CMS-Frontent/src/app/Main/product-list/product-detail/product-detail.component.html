@@ -19,7 +19,7 @@
 <Section class="product-details py-5">
   <div class="container">
     <div class="row" *ngIf="!isLoading">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <!-- Product Detail Slider Start -->
         <div class="position-relative">
           <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div>
@@ -43,11 +43,14 @@
         </div>
         <!-- Product Detail Slider End -->
       </div>
-      <div class="col-md-7 mt-4 mt-md-0 ps-3 ps-md-4">
+      <div class="col-md-6 mt-4 mt-lg-0 ps-3 ps-lg-4">
         <div class="product-details-info">
           <h2>{{model.Name}}</h2>
           <div class="product-details-price"> ₹ {{this.SelectedSizeModel?.UnitPrice
-            ?this.SelectedSizeModel?.UnitPrice: model.Price}} <span class="product-details-price-discount">₹ 6,499.00</span></div>
+            ?this.SelectedSizeModel?.UnitPrice: model.Price}}
+            <span class="product-details-cutting-price">₹ 6,499.00</span>
+            <span class="product-details-price-off">40% Off</span>
+          </div>
           <!-- <h4 class="d-flex align-items-center justify-content-between ">₹ {{this.SelectedSizeModel?.UnitPrice
             ?this.SelectedSizeModel?.UnitPrice: model.Price}}
             <div class="ship-charges" *ngIf="model?.ShippingCharge"> <span>Shipping Charge: </span> <strong
@@ -125,8 +128,8 @@
             </div>
           </div>
           <div class="product-detail-action-btn">
-            <button type="button" class="btn btn-default btn-border btn-border-light me-2 me-lg-3" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
-            <button type="button" class="btn btn-default px-3 px-lg-4 text-uppercase" [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
+            <button type="button" style="font-size: 20px;" class="btn btn-default btn-border btn-border-light me-2 me-lg-3" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase" [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
               Add to cart</button>
             <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
               checkout</button> -->
