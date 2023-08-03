@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
         this.AddSlider();
         setTimeout(() => {
           this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
-        }, 10);
+        }, 100);
 
       }
     })
@@ -101,7 +101,7 @@ getUrl(item){
         ]
       });
 
-    }, 50);
+    }, 100);
 
   }
 }
