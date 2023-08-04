@@ -32,10 +32,11 @@ export class ProductService {
 export class ProductFilterModel extends IndexModel {
   constructor() {
     super();
+    this.PageSize=40;
     this.CategoryId = [];
     this.SubCategoryId = [];
     this.SizeId = [];
-    this.Price = [50, 10000];
+    this.Price = [50, 100000];
     this.ViewSectionId = [];
   }
   CategoryId!: number[];
