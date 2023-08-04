@@ -89,25 +89,17 @@ export class FileSelectorComponent {
   }
 
   openFile(file: FileInfo) {
-
     if (file) {
-
       let fileUrl = file.FileBase64;
-
       let isDoc = ['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === file.Name.split('.')[1].toLowerCase())
-
       var newWin = open("'url'", "_blank");
       if (isDoc) {
-
         newWin!.document.write(`<iframe title="PDF" src="${fileUrl}"  height="99%" width="100%"></iframe>`);
       }
       else {
         newWin!.document.write(`<img  src="${fileUrl}" style="margin:auto; display:flex;"/>`);
       }
-
     }
-
-
   }
 
   HandleFileInput(event: any) {
@@ -153,8 +145,7 @@ export class FileSelectorComponent {
     }
   }
   getFileType(fileName: string) {
-    const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
-
+    const ext = fileName?.split('.')[fileName?.split('.').length - 1]?.toLowerCase()??'';
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
     } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
@@ -165,7 +156,5 @@ export class FileSelectorComponent {
     } else {
       return ext;
     }
-
   }
-
 }
