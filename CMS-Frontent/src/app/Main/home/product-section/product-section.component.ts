@@ -57,7 +57,7 @@ export class ProductSectionComponent implements OnInit {
 
     setTimeout(() => {
       $('.product-items-5')?.slick({
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
         slidesToShow: 5,
@@ -90,8 +90,8 @@ export class ProductSectionComponent implements OnInit {
         {
           breakpoint: 595,
           settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToShow: 2,
+            slidesToScroll: 2
           }
         }
         ]

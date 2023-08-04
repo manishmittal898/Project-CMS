@@ -1075,11 +1075,7 @@ input:focus-visible {
     content: "\f285" !important;
 }
 
-@media screen and (max-width:1024px) {
-    .product-list-slider {
-        margin: 0px 25px;
-    }
-}
+
 
 
 /* Slick Slider End */
@@ -2463,7 +2459,7 @@ opacity: 10;
   background: rgba(0, 0, 0, 0.9);
 }
 .home-product {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 #HomeSlider {
   margin-bottom: 60px;

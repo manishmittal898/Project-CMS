@@ -26,6 +26,10 @@
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <!-- Done -->
+      <div class="form-group col-md-2">
+        <label>SKU ID</label>
+        <input type="text" class="form-control" formControlName="Name" placeholder="Enter ID">
+      </div>
       <div class="form-group col-md-4">
         <label>Name</label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
@@ -34,12 +38,16 @@
           *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
           Please enter <strong>Name</strong>...!</div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label>Price</label>
+        <input type="text" class="form-control" formControlName="Name" placeholder="Price">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Last Price</label>
 
         <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
           [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
-          class="form-control" id="input4" placeholder="Price">
+          class="form-control" id="input4" placeholder="Last Price">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
           Please enter Price...! </div>
@@ -47,7 +55,7 @@
           *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
           Price length must be 1-10 digit. </div>
       </div>
-
+      <!--
       <div class="form-group col-md-4">
         <label>Shipping Charge</label>
 
@@ -61,7 +69,7 @@
         <div class="invalid-feedback"
           *ngIf="!formgrp.get('ShippingCharge')?.hasError('required') && ((formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength')) && formgrp.get('ShippingCharge')?.touched) || (formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength'))">
           Shipping Charge length must be 1-10 digit. </div>
-      </div>
+      </div> -->
 
       <div class="form-group col-md-6 col-lg-3">
         <label>Tag/Label</label>

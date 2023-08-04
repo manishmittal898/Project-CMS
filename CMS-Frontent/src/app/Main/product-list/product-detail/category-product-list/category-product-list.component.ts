@@ -74,7 +74,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
     setTimeout(() => {
       $('.slider-items-5')?.slick({
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
         slidesToShow: 5,
@@ -107,8 +107,8 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         {
           breakpoint: 595,
           settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToShow: 2,
+            slidesToScroll: 2
           }
         }
         ]
