@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DropDown_key } from 'src/app/Shared/Constant';
 import { DropDownModel } from 'src/app/Shared/Helper/Common';
@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class MyAccountComponent implements OnInit {
   model = {} as UserPostModel;
 
-  formgrp = this.fb.group({
+  formgrp: FormGroup = this.fb.group({
     FirstName: [undefined, Validators.required],
     LastName: [undefined, Validators.required],
     Mobile: [undefined, Validators.required],
@@ -78,7 +78,7 @@ export class MyAccountComponent implements OnInit {
         } else {
           this._toasterService.error(res.Message as string, 'Failed');
         }
-      },error=>{
+      }, error => {
         this._toasterService.error(error.message as string, 'Failed');
 
       })

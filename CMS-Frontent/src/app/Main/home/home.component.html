@@ -106,7 +106,7 @@
             [routerLink]="['/store/'+itm.Name.split(' ').join('_')]" [queryParams]="{id: itm.Id}"
             class="home-category-items text-center">
             <div class="home-category-items-img d-flex align-items-center">
-              <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="itm.Name" />
+              <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="{{itm.Name}}" />
             </div>
             <div class="home-category-items-caption">{{itm.Name}}</div>
           </a>
@@ -117,7 +117,6 @@
   </div>
 </Section>
 <!-- Home Category End -->
-
 
 <!-- Product Section Start -->
 <app-product-section></app-product-section>

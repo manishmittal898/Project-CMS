@@ -117,6 +117,8 @@ export class ProductAddEditComponent implements OnInit {
         this.model.MetaDesc = data.MetaDesc;
         this.ProductFiles = data.Files;
         this.model.Stocks = data.Stocks;
+        this.model.ViewSectionId = data.ViewSectionId;
+
       } else {
         this.toast.error(response.Message?.toString(), 'Error');
       }
@@ -176,7 +178,7 @@ export class ProductAddEditComponent implements OnInit {
     }
   }
   getFileType(fileName: string) {
-    const ext = fileName?.split('.')[fileName?.split('.').length - 1]?.toLowerCase()??'';
+    const ext = fileName?.split('.')[fileName?.split('.').length - 1]?.toLowerCase() ?? '';
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
     } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {

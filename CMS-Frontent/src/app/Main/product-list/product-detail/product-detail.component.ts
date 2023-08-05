@@ -26,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
   SelectedSizeModel: ProductStockModel;
 
   shareLink: SafeUrl;
-  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
+  constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute,
+    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class ProductDetailComponent implements OnInit {
         this.isLoading = false;
         this.model = res.Data;
         if (this.model?.Stocks?.length > 0) {
+
           this.SelectedSizeModel = this.model.Stocks[0];
         }
         this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
@@ -65,9 +67,9 @@ export class ProductDetailComponent implements OnInit {
         slidesToScroll: 1,
         arrows: true,
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         asNavFor: '.product-d-main-slider-nav'
       });
@@ -78,9 +80,9 @@ export class ProductDetailComponent implements OnInit {
         slidesToScroll: 1,
         arrows: false,
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         asNavFor: '.product-d-main-slider',
         focusOnSelect: true

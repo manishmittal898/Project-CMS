@@ -174,7 +174,7 @@
         <label>Other images <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
           <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
-          <app-file-selector [MaxFileLength]="5" (FilesChanged)="onProductFileAttach($event)"  [FileFilter]="'.jpeg,.gif,.png,.jpg'"
+          <app-file-selector [MaxFileLength]="10" (FilesChanged)="onProductFileAttach($event)"  [FileFilter]="'.jpeg,.gif,.png,.jpg'"
             [CurrentFileLength]="(this.ProductFiles.length +(this.model.Files?.length??0))"
             [ngClass]="{ 'is-invalid': f.productFile.errors && f.productFile.touched}">
           </app-file-selector>

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
-using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 namespace CMS.Core.ServiceHelper.Method
@@ -46,6 +45,11 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             byteArr = Convert.FromBase64String(base64str);
                         }
+
+
+                        // Optimize the image (e.g., reduce size, compress, etc.)
+                     //   byte[] optimizedImageData = OptimizeImageData(byteArr);
+
 
                         //  saveFile = filePath;
                         string path = GetPhysicalPath(filePath);
@@ -149,7 +153,28 @@ namespace CMS.Core.ServiceHelper.Method
 
             return false;
         }
+        //private byte[] OptimizeImageData(byte[] imageData)
+        //{
+        //    // Implement your image optimization logic here.
+        //    // For example, you can resize the image or apply compression.
 
+        //    // Example: Resize the image to a specific width and height using System.Drawing
+        //    using (var ms = new MemoryStream(imageData))
+        //    {
+        //        using (var image = Image.Load(imageData))
+        //        {
+        //            // Optimize the image (e.g., resize, compress, etc.)
+        //            image.Mutate(x => x.Resize(100, 100)); // Set desired width and height
+
+        //            // Save the image to a new byte array in WebP format
+        //            using (var msOptimized = new MemoryStream())
+        //            {
+        //                image.SaveAsWebP(msOptimized);
+        //                return msOptimized.ToArray();
+        //            }
+        //        }
+        //    }
+        //}
         private string GetFileExtension(string base64String)
         {
             string ext = string.Empty;

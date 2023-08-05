@@ -130,9 +130,10 @@ namespace CMS.Service.Services.ProductMaster
                     IsActive = x.IsActive.Value,
                     IsDelete = x.IsDelete,
                     Keyword = x.Keyword,
+                    IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
                     ShippingCharge = x.ShippingCharge ?? null,
 
-                    Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.Select(st => new ProductStockModel
+                    Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x=> x.Size.SortedOrder).Select(st => new ProductStockModel
                     {
                         Id = st.Id,
                         ProductId = st.ProductId,
@@ -556,10 +557,10 @@ namespace CMS.Service.Services.ProductMaster
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
                                             ViewSectionId = x.ViewSectionId,
-                                            IsWhishList = x.TblUserWishLists.Count > 0  && _loginUserDetail != null  ? x.TblUserWishLists.Any(y=> y.ProductId==x.Id && y.UserId==_loginUserDetail.UserId) : false                                           
+                                            IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false
                                         }).ToListAsync();
 
-              
+
                 if (result != null)
                 {
 

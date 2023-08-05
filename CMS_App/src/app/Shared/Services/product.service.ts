@@ -60,6 +60,9 @@ export interface ProductMasterViewModel {
   Keyword: string;
   MetaTitle: string;
   MetaDesc: string;
+  IsWhishList: boolean;
+  ViewSectionId: number,
+  ViewSection: string,
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 
@@ -74,7 +77,7 @@ export interface ProductMasterPostModel {
   CategoryId: number | undefined;
   SubCategoryId: number | undefined;
   CaptionTagId: number | undefined;
-  ViewSectionId : number | undefined;
+  ViewSectionId: number | undefined;
   Summary: string;
   ShippingCharge: number | undefined;
   Keyword: string;
