@@ -63,7 +63,8 @@
           <div class="accordion product-details-accordion" id="accordionExample">
             <div class="accordion-item mb-2" *ngIf="model?.Desc">
               <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Description" aria-expanded="true" aria-controls="Description">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Description"
+                  aria-expanded="true" aria-controls="Description">
                   Description
                 </button>
               </h2>
@@ -73,9 +74,10 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item"*ngIf="model?.Summary">
+            <div class="accordion-item" *ngIf="model?.Summary">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#AdditionalInformation" aria-expanded="false" aria-controls="AdditionalInformation">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#AdditionalInformation" aria-expanded="false" aria-controls="AdditionalInformation">
                   Additional Information
                 </button>
               </h2>
@@ -118,23 +120,30 @@
             </ul>
           </div>
 
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="product-detail-share">
-            <strong>Share with</strong>
-            <div class="btn-share-list">
-              <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on whatsapp"><i class="bi bi-whatsapp"></i></a>
-              <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on facebook"><i class="bi bi-facebook"></i></a>
-              <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on instagram"><i class="bi bi-instagram"></i></a>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="product-detail-share">
+              <strong>Share with</strong>
+              <div class="btn-share-list">
+                <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on whatsapp"><i
+                    class="bi bi-whatsapp"></i></a>
+                <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on facebook"><i
+                    class="bi bi-facebook"></i></a>
+                <a [href]="shareLink" data-action="share/whatsapp/share" class="text-dark" title="Share on instagram"><i
+                    class="bi bi-instagram"></i></a>
+              </div>
+            </div>
+            <div class="product-detail-action-btn">
+              <button type="button" style="font-size: 20px;"
+                class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
+                title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
+                  [ngClass]="{'bi-heart-fill': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
+              <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
+                [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
+                Add to cart</button>
+              <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
+              checkout</button> -->
             </div>
           </div>
-          <div class="product-detail-action-btn">
-            <button type="button" style="font-size: 20px;" class="btn btn-default btn-border btn-border-light me-2 me-lg-3" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
-            <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase" [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
-              Add to cart</button>
-            <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
-              checkout</button> -->
-          </div>
-        </div>
         </div>
       </div>
       <app-category-product-list [CategoryId]="model.CategoryId" [ExcludeId]="recordId"></app-category-product-list>

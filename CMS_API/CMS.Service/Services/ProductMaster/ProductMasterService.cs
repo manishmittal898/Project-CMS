@@ -512,7 +512,8 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
 
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
-                                && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
+                             
+                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
 
                                 && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
