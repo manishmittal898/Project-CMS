@@ -207,7 +207,7 @@ namespace CMS.Service.Services.GeneralEntry
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
-                        objGeneralEntry.ImagePath = !string.IsNullOrEmpty(objGeneralEntry.ImagePath) && model.ImagePath.Contains(objGeneralEntry.ImagePath.Replace("\\", "/")) ? objGeneralEntry.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry);
+                        objGeneralEntry.ImagePath = !string.IsNullOrEmpty(objGeneralEntry.ImagePath) && model.ImagePath.Contains(objGeneralEntry.ImagePath.Replace("\\", "/")) ? objGeneralEntry.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry);
                     }
                     else
                     {
@@ -224,7 +224,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                         dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
-                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry),
+                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry).Result,
                             DataId = objGeneralEntry.DataId,
                             ModifiedOn = DateTime.Now,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -243,7 +243,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.Description = model.Description;
                     objGeneralEntry.DataId = Guid.NewGuid().ToString();
                     objGeneralEntry.SortedOrder = model.SortedOrder;
-                    objGeneralEntry.ImagePath = !string.IsNullOrEmpty(model.ImagePath) ? _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry) : null;
+                    objGeneralEntry.ImagePath = !string.IsNullOrEmpty(model.ImagePath) ? await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntry) : null;
                     objGeneralEntry.Keyword = model.Keyword;
                     objGeneralEntry.IsActive = true;
                     objGeneralEntry.IsDeleted = false;
@@ -260,9 +260,9 @@ namespace CMS.Service.Services.GeneralEntry
                     {
                         objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == product.Entity.Id);
 
-                        dataItems = model.Data.Select(x => new TblFileDataMaster
+                        dataItems = model.Data.Select( x => new TblFileDataMaster
                         {
-                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry),
+                            Value =   _fileHelper.Save(x, FilePaths.GeneralEntry).Result,
                             DataId = objGeneralEntry.DataId,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -362,7 +362,7 @@ namespace CMS.Service.Services.GeneralEntry
                         Url = !string.IsNullOrEmpty(x.Url) && x.Category.IsShowUrl ? x.Url : null,
                         IsActive = x.IsActive,
                         IsDeleted = x.IsDeleted,
-                        Data = imgData.Count>0 ? imgData.Where(y => y.DataId == x.DataId).Select(r => new GeneralEntryDataViewModel
+                        Data = imgData.Count > 0 ? imgData.Where(y => y.DataId == x.DataId).Select(r => new GeneralEntryDataViewModel
                         {
                             GeneralEntryId = x.Id,
                             Id = r.Id,

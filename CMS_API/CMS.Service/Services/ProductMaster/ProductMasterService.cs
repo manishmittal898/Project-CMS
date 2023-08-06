@@ -179,7 +179,7 @@ namespace CMS.Service.Services.ProductMaster
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
-                        objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                        objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
                     }
                     else
                     {
@@ -257,9 +257,9 @@ namespace CMS.Service.Services.ProductMaster
 
                         model.Files = model.Files.FindAll(x => !existingfilePaths.Contains(x.Replace("\\", "/")));
 
-                        productImages = model.Files.Select(x => new TblProductImage
+                        productImages = model.Files.Select( x => new TblProductImage
                         {
-                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery),
+                            FilePath =  _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -280,7 +280,7 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
                     objProduct.SubCategoryId = model.SubCategoryId;
-                    objProduct.ImagePath = _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                    objProduct.ImagePath =await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
@@ -299,9 +299,9 @@ namespace CMS.Service.Services.ProductMaster
 
                     if (model.Files != null && model.Files.Count > 0)
                     {
-                        productImages = model.Files.Select(x => new TblProductImage
+                        productImages = model.Files.Select( x => new TblProductImage
                         {
-                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery),
+                            FilePath =  _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,

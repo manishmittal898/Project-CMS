@@ -191,7 +191,7 @@ namespace CMS.Service.Services.User
                         // objUser.Password = _security.EncryptData(model.Password);
                         if (model.ProfilePhoto != null)
                         {
-                            objUser.ProfilePhoto = _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
+                            objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                         }
                         objUser.GenderId = model.GenderId;
                        
@@ -275,7 +275,7 @@ namespace CMS.Service.Services.User
                 TblUserMaster objUser = new TblUserMaster();
                 objUser = _db.TblUserMasters.FirstOrDefault(r => r.UserId == _loginUserDetail.UserId);
 
-                objUser.ProfilePhoto = _fileHelper.Save(model.File, FilePaths.UserProfile);
+                objUser.ProfilePhoto = await _fileHelper.Save(model.File, FilePaths.UserProfile);
                 await _db.SaveChangesAsync();
                 objUser.ProfilePhoto = !string.IsNullOrEmpty(objUser.ProfilePhoto) ? objUser.ProfilePhoto.ToAbsolutePath() : null;
 
@@ -304,7 +304,7 @@ namespace CMS.Service.Services.User
                 objUser.Mobile = model.Mobile;
                 if (model.ProfilePhoto != null)
                 {
-                    objUser.ProfilePhoto = _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
+                    objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                 }
                 objUser.GenderId = model.GenderId;
                 

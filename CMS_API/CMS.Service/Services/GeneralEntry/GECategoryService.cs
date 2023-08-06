@@ -170,7 +170,7 @@ namespace CMS.Service.Services.GeneralEntry
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
-                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
+                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
                     }
                     else if (!string.IsNullOrEmpty(objData.ImagePath))
                     {
@@ -199,7 +199,7 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsSystemEntry = false;
                     objData.IsShowUrl = model.IsShowUrl;
 
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;

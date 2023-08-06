@@ -148,7 +148,7 @@ namespace CMS.Service.Services.LookupMaster
                     objData.LookUpType = model.LookUpType;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
-                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath :await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace CMS.Service.Services.LookupMaster
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null :await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
