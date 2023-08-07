@@ -1591,6 +1591,10 @@ pre {
   word-break: break-all;
   white-space: normal;
 }
+pre ol, pre ul {
+  margin: 0px;
+  padding: 0px 0px 0px 16px;
+}
 pre p {
   margin: 0px;
   line-height: 25px;
@@ -2626,7 +2630,11 @@ padding: 0px;
   border-color: snow;
   border-radius: 0px !important;
   /* box-shadow: 0 0 20px #f3f3f3; */
-  border: solid 1px #e3e3e3 !important;
+  border-bottom: solid 1px #e3e3e3 !important;
+  border: none;
+}
+.accordion-item:last-child {
+  border: none !important;
 }
 .accordion-item .accordion-button:not(.collapsed) {
   background: #f9f9f9;
@@ -2636,9 +2644,9 @@ padding: 0px;
   background: #ffffff;
 }
 .accordion-item .accordion-button {
-  font-size: 16px;
-  padding: 12px 15px;
-  font-weight: 500;
+  font-size: 15px;
+  padding: 12px 0px;
+  font-weight: 600;
 }
 .section-related {
   margin-top: 70px;
