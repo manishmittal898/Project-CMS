@@ -136,7 +136,7 @@
               <button type="button" style="font-size: 20px;"
                 class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
                 title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
-                  [ngClass]="{'bi-heart-fill': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
+                  [ngClass]="{'bi-heart-fill text-theme-primary': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
               <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
                 [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
                 Add to cart</button>

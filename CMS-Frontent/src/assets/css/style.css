@@ -1281,7 +1281,6 @@ select:focus-visible {
     position: absolute;
     background: #c50d00;
     top: 12px;
-    /* left: -8px; */
     left: 0px;
     z-index: 9;
     padding: 1px 6px;
@@ -2440,23 +2439,26 @@ transform: translatex(0px);
 {
 opacity: 10;
 }
-.product-list-items-hover-action a {
+.product-list-items-hover-action a i {
   color: #fff;
   margin: 2px 0px;
-  font-size: 14px;
+  font-size: 18px;
   background: rgba(0, 0, 0, 0.5);
-  height: 28px;
-  width: 28px;
+  height: 32px;
+  width: 32px;
   border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 20px #cdcdcd;
 }
-.product-list-items-hover-action a:hover
+.product-list-items-hover-action a i:hover
 {
   color: #fff;
   background: rgba(0, 0, 0, 0.9);
+}
+.product-list-items-hover-action a i.Wishlist-active {
+  background: var(--primary-color);
 }
 .home-product {
   margin-bottom: 50px;
