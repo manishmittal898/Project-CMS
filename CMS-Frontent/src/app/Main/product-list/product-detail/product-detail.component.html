@@ -133,9 +133,9 @@
               </div>
             </div>
             <div class="product-detail-action-btn">
-              <button type="button" style="font-size: 20px;"
+              <button type="button" style="font-size: 20px;" (click)="updateWishlist()"
                 class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
-                title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
+                title="{{!model?.IsWhishList ? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
                   [ngClass]="{'bi-heart-fill': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
               <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
                 [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>

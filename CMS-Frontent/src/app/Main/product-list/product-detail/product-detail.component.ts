@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { SecurityService } from "src/app/Shared/Services/Core/security.service";
 import { ProductMasterViewModel, ProductStockModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+import { WishListService, WishListPostModel } from "src/app/Shared/Services/ProductService/wish-list.service";
+import { AuthService } from "src/app/Shared/Services/UserService/auth.service";
 import { environment } from "src/environments/environment";
 
 declare var $: any;
@@ -27,7 +30,8 @@ export class ProductDetailComponent implements OnInit {
 
   shareLink: SafeUrl;
   constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute,
-    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
+    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService,
+    private readonly _wishListService: WishListService, private _toasterService: ToastrService, private _auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -89,6 +93,10 @@ export class ProductDetailComponent implements OnInit {
       });
     }, 500);
 
+  }
+
+  updateWishlist() {
+    this._wishListService.SetWishlistProduct(this.model);
   }
 
 

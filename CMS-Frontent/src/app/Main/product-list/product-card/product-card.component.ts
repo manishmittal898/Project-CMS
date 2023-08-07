@@ -22,45 +22,8 @@ export class ProductCardComponent implements OnInit {
 
   }
   updateWishlist() {
-    let model = { ProductId: this.Product.Id } as WishListPostModel;
-    if (this._auth.IsAuthentication) {
-      if (this.Product.IsWhishList) {
 
-        this._wishListService.RemoveProduct(model).subscribe(x => {
-          if (x.IsSuccess) {
-            this.Product.IsWhishList = !this.Product.IsWhishList;
-            this._toasterService.success(x.Message as string, 'Success');
-            this.productChange.emit(this.Product);
-          } else {
-            this._toasterService.error(x.Message as string, 'Faild');
-
-          }
-        }, error => {
-          this._toasterService.error(error.message as string, 'Failed');
-        })
-
-      } else {
-        this._wishListService.AddProduct(model).subscribe(x => {
-          if (x.IsSuccess) {
-            this.Product.IsWhishList = !this.Product.IsWhishList;
-            this._toasterService.success(x.Message as string, 'Success');
-            this.productChange.emit(this.Product);
-
-          }
-          else {
-            this._toasterService.error(x.Message as string, 'Faild');
-
-          }
-        },
-          error => {
-            this._toasterService.error(error.message as string, 'Failed');
-
-          })
-
-      }
-    } else {
-
-    }
+    this._wishListService.SetWishlistProduct(this.Product);
 
   }
 
