@@ -18,7 +18,7 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
   getUrl() {
-    return `/store/${this.Product.Category?.replace('/','-').split(' ').join('-')}/${this.Product.Name.replace('/','-').split(' ').join('-')}/${this.Product.Id}`
+    return `/store/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`
 
   }
   updateWishlist() {

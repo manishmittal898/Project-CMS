@@ -18,18 +18,18 @@ export class WishListService {
     return this._baseService.post(url, model);
   }
 
- private AddProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
+  private AddProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
     let url = `${this._baseService.API_Url.ProductWishList_Add_Apo}`;
     return this._baseService.post(url, model);
   }
 
- private RemoveProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
+  private RemoveProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
     let url = `${this._baseService.API_Url.ProductWishList_Remove_Apo}`;
     return this._baseService.post(url, model);
   }
 
 
- async SetWishlistProduct(product: ProductMasterViewModel)  {
+  public async SetWishlistProduct(product: ProductMasterViewModel) {
     let model = { ProductId: product.Id } as WishListPostModel;
     if (this._auth.IsAuthentication) {
       if (product.IsWhishList) {
