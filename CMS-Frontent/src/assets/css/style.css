@@ -2663,6 +2663,41 @@ padding: 0px;
   border: solid 1px var(--primary-color);
   position: relative;
 }
+.pro-detail-btn-wishlist {
+  background: transparent;
+  border: none;
+}
+.pro-detail-btn-wishlist i {
+  font-size: 22px;
+  border-radius: 100%;
+  border: solid 1px #c9c9c9;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  line-height: 44px;
+  color: #747474;
+}
+.pro-detail-btn-wishlist i:hover
+{
+  border-color: var(--primary-color);
+}
+.pro-detail-btn-wishlist .pro-detail-btn-wishlist-active {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.form-floating-datepicker .p-button
+{
+  background: transparent;
+  color: #000;
+  border: none;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+}
+.form-floating-datepicker .p-button:hover {
+  background: transparent !important;
+  color: #000 !important;
+}
 /* CUSTOM CSS END */
 
 
