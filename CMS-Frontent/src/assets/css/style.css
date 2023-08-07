@@ -844,12 +844,12 @@ font-weight: 600;
 
 .product-list-items-img img {
     /* max-height: 245px; */
-    max-height: 300px;
+    max-height: 325px;
 }
 
 .product-list-items-img {
-    background: #f6f6f6;
-    height: 300px;
+    background: #f8f8f8;
+    height: 325px;
     overflow: hidden;
     box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
     border-radius: 0px;
@@ -1281,7 +1281,6 @@ select:focus-visible {
     position: absolute;
     background: #c50d00;
     top: 12px;
-    /* left: -8px; */
     left: 0px;
     z-index: 9;
     padding: 1px 6px;
@@ -1591,6 +1590,10 @@ pre {
   text-align: left;
   word-break: break-all;
   white-space: normal;
+}
+pre ol, pre ul {
+  margin: 0px;
+  padding: 0px 0px 0px 16px;
 }
 pre p {
   margin: 0px;
@@ -2440,23 +2443,26 @@ transform: translatex(0px);
 {
 opacity: 10;
 }
-.product-list-items-hover-action a {
+.product-list-items-hover-action a i {
   color: #fff;
   margin: 2px 0px;
-  font-size: 14px;
+  font-size: 18px;
   background: rgba(0, 0, 0, 0.5);
-  height: 28px;
-  width: 28px;
+  height: 32px;
+  width: 32px;
   border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 20px #cdcdcd;
 }
-.product-list-items-hover-action a:hover
+.product-list-items-hover-action a i:hover
 {
   color: #fff;
   background: rgba(0, 0, 0, 0.9);
+}
+.product-list-items-hover-action a i.Wishlist-active {
+  background: var(--primary-color);
 }
 .home-product {
   margin-bottom: 50px;
@@ -2624,7 +2630,11 @@ padding: 0px;
   border-color: snow;
   border-radius: 0px !important;
   /* box-shadow: 0 0 20px #f3f3f3; */
-  border: solid 1px #e3e3e3 !important;
+  border-bottom: solid 1px #e3e3e3 !important;
+  border: none;
+}
+.accordion-item:last-child {
+  border: none !important;
 }
 .accordion-item .accordion-button:not(.collapsed) {
   background: #f9f9f9;
@@ -2634,9 +2644,9 @@ padding: 0px;
   background: #ffffff;
 }
 .accordion-item .accordion-button {
-  font-size: 16px;
-  padding: 12px 15px;
-  font-weight: 500;
+  font-size: 15px;
+  padding: 12px 0px;
+  font-weight: 600;
 }
 .section-related {
   margin-top: 70px;

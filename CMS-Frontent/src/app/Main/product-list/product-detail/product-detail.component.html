@@ -69,7 +69,7 @@
                 </button>
               </h2>
               <div id="Description" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div class="accordion-body p-3">
+                <div class="accordion-body px-0 py-0">
                   <pre [innerHTML]="model?.Desc"> </pre>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                 </button>
               </h2>
               <div id="AdditionalInformation" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body p-3">
+                <div class="accordion-body px-0 py-0">
                   <pre [innerHTML]="model.Summary">  </pre>
                 </div>
               </div>
@@ -135,8 +135,8 @@
             <div class="product-detail-action-btn">
               <button type="button" style="font-size: 20px;" (click)="updateWishlist()"
                 class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
-                title="{{!model?.IsWhishList ? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
-                  [ngClass]="{'bi-heart-fill': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
+                title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
+                  [ngClass]="{'bi-heart-fill text-theme-primary': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
               <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
                 [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
                 Add to cart</button>

@@ -102,8 +102,7 @@
       <!-- Home Category Start -->
       <div class="slider-items-6" *ngIf="model.length>0">
         <ng-container *ngFor="let itm of model">
-          <a href="javascript:void(0);" routerLinkActive="active"
-            [routerLink]="['/store/'+itm.Name.split(' ').join('_')]" [queryParams]="{id: itm.Id}"
+          <a href="javascript:void(0)" [routerLink]="['/store/'+itm.Name.split(' ').join('_')]" [queryParams]="{id: itm.Id}"
             class="home-category-items text-center">
             <div class="home-category-items-img d-flex align-items-center">
               <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="{{itm.Name}}" />
