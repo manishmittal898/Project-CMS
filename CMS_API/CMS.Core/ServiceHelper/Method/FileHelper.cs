@@ -59,7 +59,7 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             byteArr = Convert.FromBase64String(base64str);
                         }
-                        string[] imageExt = { ".jpg", ".png", ".jpeg", };
+                        string[] imageExt = { ".jpg", ".png", ".jpeg",".bmp",".tiff" };
                         if (imageExt.Contains(GetFileExtension(base64str)))
                         {
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + ".webp" : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + ".webp";
@@ -84,6 +84,19 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + GetFileExtension(base64str) : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + GetFileExtension(base64str);
                             File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
+
+                            if (isThumbnail && GetFileExtension(base64str)==".webp")
+                            {
+                                string thumbnailPath = path + "/Thumnail";
+                                if (!Directory.Exists(thumbnailPath))
+                                {
+                                    Directory.CreateDirectory(thumbnailPath);
+                                }
+
+                                var webPThumbnailBytArr = await ConvertToOptimizedWebPAsync(byteArr, 100, 100);
+                                File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
+                            }
+
                         }
                         //  saveFile = filePath;
                         return withFilePath ? string.Concat(filePath, fileName) : fileName;
@@ -273,20 +286,15 @@ namespace CMS.Core.ServiceHelper.Method
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Size = new Size(100, 100),
+                            
 
                         }));
                     }
-                    else
-                    {
-                        image.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = new Size(image.Width, image.Height)
-                        }));
-                    }
+
                     // Remove metadata to reduce file size
                     //image.Metadata.ExifProfile = null;
                     // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality };
+                    var webpEncoder = new WebpEncoder { Quality =(int)QualityMode.High, UseAlphaCompression=false, Method=WebpEncodingMethod.BestQuality,SpatialNoiseShaping = 100};
                     //var webpEncoder = new WebpEncoder();
                     image.Save(output, webpEncoder);
                     //image.Save(output, webpEncoder);

@@ -181,7 +181,7 @@ export class ProductAddEditComponent implements OnInit {
     const ext = fileName?.split('.')[fileName?.split('.').length - 1]?.toLowerCase() ?? '';
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
-    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg','webp'].some(x => x.toLowerCase() === ext)) {
       return 'image';
     }
     else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
@@ -260,6 +260,6 @@ export class ProductAddEditComponent implements OnInit {
   }
 
   onGetProductSizeLabel(sizeId: any) {
-    return this.dropDown.ddlProductSize.find(x => Number(x.Value) === Number(sizeId))?.Text;
+    return this.dropDown?.ddlProductSize?.find(x => Number(x.Value) === Number(sizeId))?.Text ?? '';
   }
 }
