@@ -31,7 +31,7 @@ namespace CMS.Service.Services.LookupMaster
             try
             {
                 long TypeId = 0;
-                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("typeId"))
+                if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("typeId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("typeId", out object typeId);
                     TypeId = Convert.ToInt64(typeId.ToString());

@@ -133,12 +133,13 @@
               </div>
             </div>
             <div class="product-detail-action-btn">
-              <button type="button" style="font-size: 20px;" (click)="updateWishlist()"
-                class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
+              <button type="button" [disabled]="this.loading.WishList" style="font-size: 20px;"
+                (click)="updateWishlist()" class="btn btn-default btn-border btn-border-light me-2 me-lg-3"
                 title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
-                  [ngClass]="{'bi-heart-fill text-theme-primary': model?.IsWhishList , 'bi-heart':!model?.IsWhishList}"></i></button>
+                  [ngClass]="{'bi-heart-fill text-theme-primary':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i></button>
               <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
-                [routerLink]="['/design/cart']"><i class="bi bi-cart3 me-1"></i>
+                [disabled]="this.loading.AddToCart" [routerLink]="['/design/cart']"><i class="bi me-1"
+                  [ngClass]="{'bi-cart3':!this.loading.AddToCart,'bi-hourglass-split':this.loading.AddToCart}"></i>
                 Add to cart</button>
               <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
               checkout</button> -->

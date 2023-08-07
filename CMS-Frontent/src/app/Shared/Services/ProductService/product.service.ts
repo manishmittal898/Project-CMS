@@ -19,20 +19,16 @@ export class ProductService {
     return this._baseService.get(`${url + Id}`);
   }
 
-
   GetCategoryProduct(model: IndexModel): Observable<ApiResponse<ProductCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.Product_Category_Api}`;
     return this._baseService.post(url, model);
   }
-
-
-
 }
 
 export class ProductFilterModel extends IndexModel {
   constructor() {
     super();
-    this.PageSize=40;
+    this.PageSize = 40;
     this.CategoryId = [];
     this.SubCategoryId = [];
     this.SizeId = [];
@@ -46,6 +42,7 @@ export class ProductFilterModel extends IndexModel {
   SizeId!: number[];
   Keyword!: string;
   ViewSectionId!: number[];
+  Ids!: number[]
 }
 
 

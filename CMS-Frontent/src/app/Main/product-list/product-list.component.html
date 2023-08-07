@@ -52,7 +52,6 @@
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-4 col-6 mb-4"
             *ngFor="let item of model  | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords };let index=index">
             <div class="position-relative product-list-hover-items-outside overflow-hidden">
-              {{model[index].IsWhishList}}
               <app-product-card [(Product)]="model[index]"></app-product-card>
             </div>
           </div>

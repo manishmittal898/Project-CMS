@@ -133,7 +133,7 @@ namespace CMS.Service.Services.ProductMaster
                     IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
                     ShippingCharge = x.ShippingCharge ?? null,
 
-                    Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x=> x.Size.SortedOrder).Select(st => new ProductStockModel
+                    Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
                     {
                         Id = st.Id,
                         ProductId = st.ProductId,
@@ -257,9 +257,9 @@ namespace CMS.Service.Services.ProductMaster
 
                         model.Files = model.Files.FindAll(x => !existingfilePaths.Contains(x.Replace("\\", "/")));
 
-                        productImages = model.Files.Select( x => new TblProductImage
+                        productImages = model.Files.Select(x => new TblProductImage
                         {
-                            FilePath =  _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -280,7 +280,7 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
                     objProduct.SubCategoryId = model.SubCategoryId;
-                    objProduct.ImagePath =await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                    objProduct.ImagePath = await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
@@ -299,9 +299,9 @@ namespace CMS.Service.Services.ProductMaster
 
                     if (model.Files != null && model.Files.Count > 0)
                     {
-                        productImages = model.Files.Select( x => new TblProductImage
+                        productImages = model.Files.Select(x => new TblProductImage
                         {
-                            FilePath =  _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -512,10 +512,11 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
 
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
-                             
-                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
 
-                                && (model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
+                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
+                                 && (model.Ids == null || model.Ids.Count == 0 || model.Ids.Contains(prd.Id))
+
+                                && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
                 switch (model.OrderBy)
                 {

@@ -12,6 +12,7 @@ import { ToastrModule } from "ngx-toastr";
 import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
 import { CalendarModule } from 'primeng/calendar';
+import { ProductCardComponent } from '../../../Main/product-list/product-card/product-card.component';
 
 
 const commonModules = [
@@ -24,8 +25,8 @@ const commonModules = [
 const component = [
   HeaderComponent,
   FooterComponent,
-  NavBarComponent
-
+  NavBarComponent,
+  ProductCardComponent
 ];
 
 const installedModule = [

@@ -9,8 +9,7 @@ import { NgModule } from '@angular/core';
 import { FeatureModule } from '../Shared/Module/feature/feature.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
-import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
-import { ProductCardComponent } from './product-list/product-card/product-card.component';
+import { ProductDetailComponent } from './product-list/product-detail/product-detail.component'; 
 import { ProductSectionComponent } from './home/product-section/product-section.component';
 
 @NgModule({
@@ -22,7 +21,7 @@ import { ProductSectionComponent } from './home/product-section/product-section.
     CategoryProductListComponent,
     ProductFilterComponent,
     CMSPageContentComponent,
-    ProductCardComponent,
+
     ProductSectionComponent
   ],
   imports: [

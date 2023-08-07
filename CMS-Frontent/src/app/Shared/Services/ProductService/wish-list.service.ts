@@ -13,7 +13,7 @@ export class WishListService {
 
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService) { }
 
-  GetList(model: IndexModel): Observable<ApiResponse<WishListViewModel[]>> {
+  GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.ProductWishList_Api}`;
     return this._baseService.post(url, model);
   }

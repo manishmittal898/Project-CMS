@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
   recordId: string;
   isLoading = false;
+  loading = new Loading();
   get totalStock() {
     let stockCount = 0;
     this.model?.Stocks?.forEach(x => {
@@ -96,8 +97,23 @@ export class ProductDetailComponent implements OnInit {
   }
 
   updateWishlist() {
-    this._wishListService.SetWishlistProduct(this.model);
+    this.loading.WishList = true;
+    this._wishListService.SetWishlistProduct(this.model).then(() => {
+      setTimeout(() => {
+        this.loading.WishList = false;
+      }, 1000);
+    });
   }
 
+
+}
+export class Loading {
+  WishList: boolean = false;
+  AddToCart: boolean = false;
+
+  reset() {
+    this.AddToCart = false;
+    this.WishList = false;
+  }
 
 }

@@ -1,5 +1,5 @@
 <ng-container *ngFor="let section of this.dropDown.ddlProductViewSection">
-  <section class="home-product" *ngIf="this.model[section.Value].length>0">
+  <section class="home-product" *ngIf="this.model[section.Value]?.length>0">
     <div class="container">
       <div class="col-lg-12 text-center section-title"> {{section.Text}}</div>
       <section class="product-items-5 product-list-slider">

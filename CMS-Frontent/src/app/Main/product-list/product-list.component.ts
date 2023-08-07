@@ -16,7 +16,8 @@ export class ProductListComponent implements OnInit {
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
-  constructor(private readonly _productService: ProductService, private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
+  constructor(private readonly _productService: ProductService,
+    private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
 
 
 

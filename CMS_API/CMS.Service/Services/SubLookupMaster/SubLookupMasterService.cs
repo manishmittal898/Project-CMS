@@ -32,7 +32,7 @@ namespace CMS.Service.Services.SubLookupMaster
             try
             {
                 long LookupId = 0;
-                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("lookupId"))
+                if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("lookupId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("lookupId", out object lookupId);
                     LookupId = Convert.ToInt64(lookupId.ToString());

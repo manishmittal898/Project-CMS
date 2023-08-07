@@ -104,6 +104,8 @@ namespace CMS.Service.Services.ProductMaster
         public List<long> SizeId { get; set; }
         public List<long> ViewSectionId { get; set; }
         public string Keyword { get; set; }
+        public List<long>? Ids { get; set; }
+
     }
 
 

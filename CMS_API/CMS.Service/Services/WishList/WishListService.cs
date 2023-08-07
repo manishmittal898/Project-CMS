@@ -89,13 +89,13 @@ namespace CMS.Service.Services.WishList
         }
 
 
-        public async Task<ServiceResponse<IEnumerable<WishListViewModel>>> GetList(IndexModel model)
+        public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model)
         {
-            ServiceResponse<IEnumerable<WishListViewModel>> objResult = new ServiceResponse<IEnumerable<WishListViewModel>>();
+            ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
             {
                 long userId = 0;
-                if (model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId"))
+                if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("userId", out object _userId);
                     userId = Convert.ToInt64(_userId.ToString());
@@ -104,6 +104,7 @@ namespace CMS.Service.Services.WishList
 
 
                 var result = (from data in _db.TblUserWishLists.Include(x => x.Product)
+
                               where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);
                 switch (model.OrderBy)
@@ -120,39 +121,34 @@ namespace CMS.Service.Services.WishList
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
                 objResult.Data = await (from x in result
-                                        select new WishListViewModel
+                                        select new ProductMasterViewModel
                                         {
-                                            Id = x.Id,
-                                            ProductId = x.ProductId,
-                                            AddedOn = x.AddedOn,
-                                            Product = new ProductMasterViewModel
-                                            {
-                                                Id = x.Product.Id,
-                                                Name = x.Product.Name,
-                                                ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
-                                                CategoryId = x.Product.CategoryId,
-                                                Category = x.Product.Category.Name,
-                                                SubCategoryId = x.Product.SubCategoryId,
-                                                SubCategory = x.Product.SubCategory.Name,
-                                                CaptionTagId = x.Product.CaptionTagId,
-                                                CaptionTag = x.Product.CaptionTag.Name,
-                                                ViewSectionId = x.Product.ViewSectionId,
-                                                ViewSection = x.Product.ViewSection.Name,
-                                                Desc = x.Product.Desc,
-                                                Summary = x.Product.Desc,
-                                                Price = x.Product.Price,
-                                                MetaTitle = x.Product.MetaTitle,
-                                                MetaDesc = x.Product.MetaDesc,
-                                                CreatedBy = x.Product.CreatedBy,
-                                                CreatedOn = x.Product.CreatedOn,
-                                                ModifiedBy = x.Product.ModifiedBy,
-                                                ModifiedOn = x.Product.ModifiedOn,
-                                                IsActive = x.Product.IsActive.Value,
-                                                IsDelete = x.Product.IsDelete,
-                                                Keyword = x.Product.Keyword,
-                                                ShippingCharge = x.Product.ShippingCharge ?? null
+                                            Id = x.Product.Id,
+                                            Name = x.Product.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
+                                            CategoryId = x.Product.CategoryId,
+                                            Category = x.Product.Category.Name,
+                                            SubCategoryId = x.Product.SubCategoryId,
+                                            SubCategory = x.Product.SubCategory.Name,
+                                            CaptionTagId = x.Product.CaptionTagId,
+                                            CaptionTag = x.Product.CaptionTag.Name,
+                                            ViewSectionId = x.Product.ViewSectionId,
+                                            ViewSection = x.Product.ViewSection.Name,
+                                            Desc = x.Product.Desc,
+                                            Summary = x.Product.Desc,
+                                            Price = x.Product.Price,
+                                            MetaTitle = x.Product.MetaTitle,
+                                            MetaDesc = x.Product.MetaDesc,
+                                            CreatedBy = x.Product.CreatedBy,
+                                            CreatedOn = x.Product.CreatedOn,
+                                            ModifiedBy = x.Product.ModifiedBy,
+                                            ModifiedOn = x.Product.ModifiedOn,
+                                            IsActive = x.Product.IsActive.Value,
+                                            IsDelete = x.Product.IsDelete,
+                                            Keyword = x.Product.Keyword,
+                                            ShippingCharge = x.Product.ShippingCharge ?? null,
+                                            IsWhishList = true
 
-                                            }
 
                                         }).ToListAsync();
 
@@ -161,11 +157,11 @@ namespace CMS.Service.Services.WishList
                 if (result != null)
                 {
 
-                    return CreateResponse(objResult.Data as IEnumerable<WishListViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<IEnumerable<WishListViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
             catch (Exception ex)

@@ -21,7 +21,7 @@ namespace CMS.API.Areas.Customer.Controllers
             _wishList=wishList;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<object> Get(IndexModel model)
 
         {

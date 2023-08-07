@@ -13,7 +13,8 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class ProductCardComponent implements OnInit {
   @Input() Product = {} as ProductMasterViewModel;
   @Output() productChange = new EventEmitter<ProductMasterViewModel>();
-  constructor(private readonly _wishListService: WishListService, private _toasterService: ToastrService, private _auth: AuthService) { }
+  loading = new Loading();
+  constructor(private readonly _wishListService: WishListService) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +24,22 @@ export class ProductCardComponent implements OnInit {
   }
   updateWishlist() {
 
-    this._wishListService.SetWishlistProduct(this.Product);
-
+    this.loading.WishList = true;
+    this._wishListService.SetWishlistProduct(this.Product).then(() => {
+      setTimeout(() => {
+        this.loading.WishList = false;
+        this.productChange.emit(this.Product);
+      }, 1000);
+    });
   }
 
+}
+
+export class Loading {
+  WishList: boolean = false;
+  AddToCart: boolean = false;
+  reset() {
+    this.AddToCart = false;
+    this.WishList = false;
+  }
 }
