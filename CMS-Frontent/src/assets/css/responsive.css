@@ -303,10 +303,10 @@
 
 @media (max-width: 1024px) {
     .product-list-items-img {
-        height: 240px;
+        height: 280px;
     }
     .product-list-items-img img {
-      max-height: 240px;
+      max-height: 280px;
   }
     .product-list-info .product-list-price, .product-list-info .product-list-price-off {
         font-size: 15px;
@@ -358,8 +358,10 @@
         background: #fff;
         border-radius: 0px;
         width: 80%;
+        max-width: 330px;
         display: inline-block;
         overflow: auto;
+        border: none !important;
     }
     .open-advance-filter {
         max-width: 88%;
@@ -498,6 +500,9 @@ ul.footer-benefits li {
 .home-product {
   margin-bottom: 35px;
 }
+.section-related {
+  margin-top: 40px;
+}
 .home-category-slider
 {
   margin-bottom: 40px;
@@ -615,7 +620,11 @@ display: none !important;
 .product-list-slider .slick-slide {
   margin: 0px 5px;
 }
-
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  height: 25px;
+  width: 25px;
+  background-size: 18px;
+}
 }
 
 
