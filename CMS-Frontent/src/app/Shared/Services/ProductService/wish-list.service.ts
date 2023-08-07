@@ -10,7 +10,7 @@ import { AuthService } from '../UserService/auth.service';
   providedIn: 'root'
 })
 export class WishListService {
-
+  wishListItem: ProductMasterViewModel[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService) { }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
@@ -31,7 +31,7 @@ export class WishListService {
 
   public async SetWishlistProduct(product: ProductMasterViewModel) {
     let model = { ProductId: product.Id } as WishListPostModel;
-    if (this._auth.IsAuthentication) {
+    if (this._auth.IsAuthentication.value) {
       if (product.IsWhishList) {
 
         this.RemoveProduct(model).subscribe(x => {
@@ -69,6 +69,15 @@ export class WishListService {
 
       }
     } else {
+      if (this.wishListItem.indexOf(product) == -1) {
+        this.wishListItem.push(product);
+        this._toasterService.success("Added Successfully" as string, 'Success');
+      } else {
+        this.wishListItem.splice(this.wishListItem.indexOf(product), 1);
+        this._toasterService.success("Removed successfully" as string, 'Success');
+
+      }
+      product.IsWhishList = !product.IsWhishList;
 
     }
 

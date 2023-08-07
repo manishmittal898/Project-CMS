@@ -17,6 +17,9 @@ export class ProductCardComponent implements OnInit {
   constructor(private readonly _wishListService: WishListService) { }
 
   ngOnInit(): void {
+    if (this._wishListService.wishListItem.length > 0) {
+      this.Product.IsWhishList = this._wishListService.wishListItem.find(x => x.Id == this.Product.Id).IsWhishList ?? this.Product.IsWhishList;
+    }
   }
   getUrl() {
     return `/store/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`

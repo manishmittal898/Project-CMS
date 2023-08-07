@@ -41,13 +41,13 @@ export class LoginComponent implements OnInit {
           };
           this._accountService.Login(postModel).subscribe((res) => {
             if (res.IsSuccess) {
-              
+
               let data = res.Data as LoginUserDetailModel;
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login');
               this._route.navigate(['/user']);
-              this._authService.IsAuthenticate()
+              this._authService.IsAuthenticate();
             } else {
               this.toast.info(res.Message?.toString(), 'Login');
             }

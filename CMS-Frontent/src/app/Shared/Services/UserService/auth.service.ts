@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { BaseAPIService } from "../Core/base-api.service";
 import { SecurityService } from '../Core/security.service';
 
@@ -9,7 +9,7 @@ import { SecurityService } from '../Core/security.service';
   providedIn: 'root'
 })
 export class AuthService {
-  public IsAuthentication = new Subject<boolean>();
+  public IsAuthentication = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
     // this.IsAuthenticate();

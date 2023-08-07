@@ -15,7 +15,7 @@ export class MyWishlistComponent implements OnInit {
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
   get IsAuthentication() {
-    return this._auth.IsAuthentication;
+    return this._auth.IsAuthentication.value;
   }
   constructor(private readonly _productService: ProductService,
     private readonly _auth: AuthService,
@@ -27,7 +27,7 @@ export class MyWishlistComponent implements OnInit {
     this.getList();
   }
   getList() {
-    if (!this._auth.IsAuthentication) {
+    if (!this.IsAuthentication) {
 
       this.unIndexModel.Ids = [];
       this._productService.GetList(this.unIndexModel).subscribe(response => {
@@ -49,7 +49,7 @@ export class MyWishlistComponent implements OnInit {
     }
   }
   removeProduct(product: ProductMasterViewModel, index) {
-    debugger
+    
     if (!product.IsWhishList) {
       this.model.splice(index, 1);
     }
