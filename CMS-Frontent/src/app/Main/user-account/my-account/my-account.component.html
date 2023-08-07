@@ -2,7 +2,7 @@
   <form class="col-lg-12 col-xl-9 row m-auto" [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="col-lg-12 mb-4">
       <div class="profile-page-img"><img src="{{model.ProfilePhoto}}"
-          onerror="this.src='assets/images/user-default.jpg'" alt="" /></div>
+          onerror="this.src='assets/images/avatar.png'" alt="" /></div>
     </div>
     <div class="col-lg-6">
       <div class="form-floating mb-3">
@@ -50,7 +50,7 @@
     </div>
 
     <div class="col-lg-6">
-      <div class="mb-3 position-relative">
+      <div class="mb-3 position-relative form-floating-datepicker">
         <label for="DateOfBirth" class="form-floating-title">Date of birth</label>
         <p-calendar id="DateOfBirth" placeholder="Date of birth" [(ngModel)]="model.Dob" formControlName="Dob"
           [ngClass]="{ 'is-invalid': f.Dob.errors && f.Dob.touched}"  [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2015" [showIcon]="true"></p-calendar>

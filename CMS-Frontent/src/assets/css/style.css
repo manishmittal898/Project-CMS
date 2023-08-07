@@ -2685,6 +2685,19 @@ padding: 0px;
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
+.form-floating-datepicker .p-button
+{
+  background: transparent;
+  color: #000;
+  border: none;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+}
+.form-floating-datepicker .p-button:hover {
+  background: transparent !important;
+  color: #000 !important;
+}
 /* CUSTOM CSS END */
 
 
