@@ -4671,11 +4671,11 @@ i.fas.fa-times {
 }
 
 .product-detail-img-tab .tab-content .tab-pane {
-    background: #f7f7f7;
+    background: #fff;
 }
 
 .product-detail-img-tab .tab-content .tab-pane img {
-    max-height: 450px;
+    max-height: 700px;
 }
 
 .product-details-right-info .table-responsive {

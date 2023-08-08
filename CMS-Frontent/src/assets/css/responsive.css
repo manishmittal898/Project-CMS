@@ -500,8 +500,11 @@ ul.footer-benefits li {
 .home-product {
   margin-bottom: 35px;
 }
+#HomeSlider {
+  margin-bottom: 40px;
+}
 .section-related {
-  margin-top: 40px;
+  margin-top: 50px;
 }
 .home-category-slider
 {
