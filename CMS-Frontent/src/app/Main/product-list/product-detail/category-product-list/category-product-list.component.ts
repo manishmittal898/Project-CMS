@@ -64,7 +64,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   }
   bindRelatedList() {
-    this.productModel = this.model.filter(x => Number(this._securityService.decrypt(String(x.Id))) !== Number(this.ExcludeId));
+    this.productModel = this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
     this.isLoading = false;
     this.AddSlider();
 

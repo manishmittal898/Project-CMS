@@ -117,7 +117,7 @@ export class ProductAddEditComponent implements OnInit {
         this.model.MetaDesc = data.MetaDesc;
         this.ProductFiles = data.Files;
         this.model.Stocks = data.Stocks;
-        this.model.ViewSectionId = data.ViewSectionId;
+        this.model.ViewSectionId = data.ViewSectionId ? Number(data.ViewSectionId) : undefined;;
 
       } else {
         this.toast.error(response.Message?.toString(), 'Error');

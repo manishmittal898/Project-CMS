@@ -9,7 +9,7 @@ import { SecurityService } from '../Core/security.service';
   providedIn: 'root'
 })
 export class AuthService {
-  public IsAuthentication = new BehaviorSubject<boolean>(false);
+  public IsAuthentication = new BehaviorSubject<boolean>(null);
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
     // this.IsAuthenticate();
@@ -53,11 +53,9 @@ export class AuthService {
       if (token != null && Number(sessionTime) > currentSessionTime) {
         this.IsAuthentication.next(true);
       } else {
-
-        // this.LogOut();
         this.IsAuthentication.next(false);
       }
-    }, 5);
+    }, 10);
   }
 
 

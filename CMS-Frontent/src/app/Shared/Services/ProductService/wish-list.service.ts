@@ -33,40 +33,31 @@ export class WishListService {
     let model = { ProductId: product.Id } as WishListPostModel;
     if (this._auth.IsAuthentication.value) {
       if (product.IsWhishList) {
-
         this.RemoveProduct(model).subscribe(x => {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
             this._toasterService.success(x.Message as string, 'Success');
           } else {
             this._toasterService.error(x.Message as string, 'Faild');
-
           }
           return x;
-
         }, error => {
           this._toasterService.error(error.message as string, 'Failed');
         })
-
       } else {
         this.AddProduct(model).subscribe(x => {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
             this._toasterService.success(x.Message as string, 'Success');
-
           }
           else {
             this._toasterService.error(x.Message as string, 'Faild');
-
           }
-          return x
-
+          return x;
         },
           error => {
             this._toasterService.error(error.message as string, 'Failed');
-
           })
-
       }
     } else {
       if (this.wishListItem.indexOf(product) == -1) {
@@ -75,10 +66,8 @@ export class WishListService {
       } else {
         this.wishListItem.splice(this.wishListItem.indexOf(product), 1);
         this._toasterService.success("Removed successfully" as string, 'Success');
-
       }
       product.IsWhishList = !product.IsWhishList;
-
     }
 
   }
