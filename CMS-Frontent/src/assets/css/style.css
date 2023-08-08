@@ -1174,9 +1174,10 @@ ul.dropdown-menu {
     transition: all 0.3s;
 }
 
-.dropdown-item.active,
-.dropdown-item:active {
+ul.dropdown-menu a.dropdown-item:hover, ul.dropdown-menu a.dropdown-item:focus,  ul.dropdown-menu a.dropdown-item.active,
+ul.dropdown-menu a.dropdown-item:active {
     background-color: var(--primary-color);
+    color: #fff;
 }
 
 [data-title] {
@@ -1213,11 +1214,20 @@ ul.dropdown-menu {
   border-color: #727272;
 }
 
-.form-check-input:checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+.form-check-input:checked, .p-checkbox .p-checkbox-box.p-highlight {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
 }
-
+.p-checkbox .p-checkbox-box {
+  border-color: #727272 !;
+  width: 17px !important;
+  height: 17px !important;
+  border-radius: 4px !important;
+}
+.p-field-checkbox .pi-check:before {
+  font-size: 10px !important;
+  top: -3px !important;
+}
 label.form-check-label {
     color: #707070;
 }

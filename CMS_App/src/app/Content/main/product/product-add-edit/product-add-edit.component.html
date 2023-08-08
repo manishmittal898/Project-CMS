@@ -115,8 +115,8 @@
           Please select <strong>Home Page Section</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-6 mb-0">
-        <label>Product main image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+      <div class="form-group col-md-5 mb-0">
+        <label>Product main image <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
           [CurrentFileLength]="model?.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg'"
@@ -170,8 +170,8 @@
 
       </div>
 
-      <div class="form-group col-md-6 mb-0">
-        <label>Other images <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+      <div class="form-group col-md-7 mb-0">
+        <label>Other images <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
           <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
           <app-file-selector [MaxFileLength]="10" (FilesChanged)="onProductFileAttach($event)"  [FileFilter]="'.jpeg,.gif,.png,.jpg'"
@@ -229,7 +229,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label>Description</label>
         <angular-editor [(ngModel)]="model.Desc" formControlName="Description" [config]="editorConfig"
           placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"
@@ -241,7 +241,7 @@
           Please enter Discription</div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
         <label>Additional Information</label>
         <angular-editor [(ngModel)]="model.Summary" formControlName="Summary" [config]="editorConfig"
           [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"

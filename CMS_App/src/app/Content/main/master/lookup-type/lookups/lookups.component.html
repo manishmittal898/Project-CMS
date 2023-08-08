@@ -97,8 +97,8 @@
               <td mat-cell *matCellDef="let row" class="table-action-btn">
                 <a class="table-action-btn-edit"
                   routerLink="../../{{this.pageName+'/'+row.Name.slice(0,15).toLowerCase()+'/'+row.Id}}"
-                  *ngIf="row.IsSubLookup" data-title="Sub List">
-                  <i class="bi bi-subtract"></i>
+                  *ngIf="row.IsSubLookup" data-title="Sub Category">
+                  <i class="bi bi-ui-checks-grid"></i>
                 </a>
 
                 <a class="table-action-btn-edit" (click)="onAddUpdateLookup(row.Id)" data-title="Edit">

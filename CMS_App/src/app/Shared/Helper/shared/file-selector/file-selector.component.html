@@ -13,7 +13,7 @@
     <button type="button" class="btn-upload-border"><i class="bi bi-plus-lg"></i>  Upload</button>
     <input type="file" name="myfile" />
 </div> -->
-<div class="d-flex align-items-center upload-content-list" *ngIf="IsShowFiles">
+<div class="d-flex flex-wrap align-items-center upload-content-list" *ngIf="IsShowFiles">
 
   <ng-container *ngFor="let file of Files">
 
