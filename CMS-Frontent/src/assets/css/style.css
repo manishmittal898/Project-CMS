@@ -1213,7 +1213,11 @@ ul.dropdown-menu a.dropdown-item:active {
   height: 17px;
   border-color: #727272;
 }
-
+.p-field-checkbox label {
+  margin-left: 5px;
+  top: 0px !important;
+  font-size: 13px;
+}
 .form-check-input:checked, .p-checkbox .p-checkbox-box.p-highlight {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
@@ -1226,7 +1230,7 @@ ul.dropdown-menu a.dropdown-item:active {
 }
 .p-field-checkbox .pi-check:before {
   font-size: 10px !important;
-  top: -3px !important;
+  top: -2px !important;
 }
 label.form-check-label {
     color: #707070;
@@ -2636,24 +2640,24 @@ ul.footer-benefits li p {
 {
 padding: 0px;
 }
-.accordion-item {
+.product-details-accordion .accordion-item {
   border-color: snow;
   border-radius: 0px !important;
   /* box-shadow: 0 0 20px #f3f3f3; */
   border-bottom: solid 1px #e3e3e3 !important;
   border: none;
 }
-.accordion-item:last-child {
+.product-details-accordion .accordion-item:last-child {
   border: none !important;
 }
-.accordion-item .accordion-button:not(.collapsed) {
+.product-details-accordion .accordion-item .accordion-button:not(.collapsed) {
   background: #f9f9f9;
   color: #000;
 }
 .product-details-accordion .accordion-item .accordion-button:not(.collapsed) {
   background: #ffffff;
 }
-.accordion-item .accordion-button {
+.product-details-accordion .accordion-item .accordion-button {
   font-size: 15px;
   padding: 12px 0px;
   font-weight: 600;
