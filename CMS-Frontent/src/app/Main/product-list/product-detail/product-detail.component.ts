@@ -55,6 +55,10 @@ export class ProductDetailComponent implements OnInit {
         }
         this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
          `);
+        if (!this._auth.IsAuthentication.value && this._wishListService?.wishListItem?.length > 0) {
+          debugger
+          this.model.IsWhishList = this._wishListService?.wishListItem?.some(x => x.Id == this.model.Id);
+        }
 
         setTimeout(() => {
           this.ProductDetailSlider();
@@ -97,6 +101,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   updateWishlist() {
+    debugger
     this.loading.WishList = true;
     this._wishListService.SetWishlistProduct(this.model).then(() => {
       setTimeout(() => {

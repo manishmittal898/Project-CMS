@@ -27,7 +27,7 @@
             <div class="product-d-main-slider-items">
               <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
             </div>
-            <div class="product-d-main-slider-items" *ngFor="let item of model.Files; let i=index">
+            <div class="product-d-main-slider-items" *ngFor="let item of model?.Files; let i=index">
               <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="product-d-main-slider-nav-items">
             <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
           </div>
-          <div class="product-d-main-slider-nav-items" *ngFor="let item of model.Files; let i=index">
+          <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
             <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
           </div>
         </div>
@@ -51,11 +51,6 @@
             <span class="product-details-cutting-price">₹ 6,499.00</span>
             <span class="product-details-price-off">40% Off</span>
           </div>
-          <!-- <h4 class="d-flex align-items-center justify-content-between ">₹ {{this.SelectedSizeModel?.UnitPrice
-            ?this.SelectedSizeModel?.UnitPrice: model.Price}}
-            <div class="ship-charges" *ngIf="model?.ShippingCharge"> <span>Shipping Charge: </span> <strong
-                class="text-danger">₹ {{model?.ShippingCharge}}</strong> </div>
-          </h4> -->
 
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
             Avail in stock : <strong class="text-theme-primary"> {{totalStock}} </strong>
@@ -81,25 +76,15 @@
                   Additional Information
                 </button>
               </h2>
-              <div id="AdditionalInformation" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div id="AdditionalInformation" *ngIf="model.Summary" class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample">
                 <div class="accordion-body px-0 py-0">
-                  <pre [innerHTML]="model.Summary">  </pre>
+                  <pre [innerHTML]="model.Summary"></pre>
                 </div>
               </div>
             </div>
 
           </div>
-
-          <!-- <div class="product-discription mb-3" *ngIf="model?.Desc">
-            <strong class="d-block mb-1">Description:</strong>
-            <pre [innerHTML]="model?.Desc"> </pre>
-          </div>
-          <div class="product-add-info mb-3" *ngIf="model?.Summary">
-            <strong class="d-block mb-1">Additional Information:</strong>
-            <pre [innerHTML]="model.Summary">  </pre>
-          </div> -->
-
-
           <div class="product-detail-size my-4">
             <p class="mb-2" *ngIf="SelectedSizeModel"> Size: <strong>{{SelectedSizeModel.Size}}</strong> </p>
             <ul class="d-flex flex-wrap">
@@ -109,14 +94,6 @@
                     href="javascript:void()">{{item.Size}}</a> <span class="pds-left"> {{item.Quantity}} left</span>
                 </li>
               </ng-container>
-
-              <!--
-              <li><a class="product-detail-size-btn pds-stock-0" href="javascript:void()">M</a></li>
-              <li><a class="product-detail-size-btn" href="javascript:void()">L</a> <span class="pds-left">3 Left</span>
-              </li>
-              <li><a class="product-detail-size-btn active" href="javascript:void()">XL</a> <span class="pds-left">9
-                  Left</span> </li>
-              <li><a class="product-detail-size-btn" href="javascript:void()">XXL</a></li> -->
             </ul>
           </div>
 
@@ -150,9 +127,7 @@
       <app-category-product-list [CategoryId]="model.CategoryId" [ExcludeId]="recordId"></app-category-product-list>
     </div>
     <div class="row" *ngIf="isLoading">
-      <div class="col-sm-12">
-        Loading..
-      </div>
+      <div class="col-sm-12"> Loading...</div>
     </div>
   </div>
 </Section>

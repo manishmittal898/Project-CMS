@@ -23,10 +23,9 @@ export class ProductCardComponent implements OnInit {
   }
   getUrl() {
     return `/store/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`
-
   }
+  
   updateWishlist() {
-
     this.loading.WishList = true;
     this._wishListService.SetWishlistProduct(this.Product).then(() => {
       setTimeout(() => {

@@ -28,12 +28,14 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this._authService.IsAuthenticate();
     this.GetDropDown();
-    this._authService.IsAuthentication.subscribe(x => {
-      this.isLoggedIn = x as boolean ?? false;
-      if (!this.isLoggedIn) {
-        this.logout();
-      }
-    });
+    setTimeout(() => {
+      this._authService.IsAuthentication.subscribe(x => {
+        this.isLoggedIn = x as boolean ?? false;
+        if (!this.isLoggedIn) {
+          this.logout();
+        }
+      });
+    }, 100);
   }
 
   GetDropDown() {
