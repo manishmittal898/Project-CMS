@@ -22,6 +22,9 @@ const routes: Routes = [
     component: LoginComponent, path: 'login',
   },
   {
+    component: LoginComponent, path: 'login/:returnURL',
+  },
+  {
     component: RegisterComponent, path: 'register',
   },
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AuthService, LoginUserDetailModel } from '../../Services/UserService/auth.service';
@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   model: any = {};
   get routing_Url() { return Routing_Url };
 
-  constructor(private readonly _accountService :AccountService,private readonly _authService: AuthService, private readonly _security: SecurityService,
-    private readonly _route: Router, private readonly toast: ToastrService) { }
+  constructor(private readonly _accountService: AccountService, private readonly _authService: AuthService, private readonly _security: SecurityService,
+    private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -46,8 +46,13 @@ export class LoginComponent implements OnInit {
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login');
-              this._route.navigate(['/user']);
               this._authService.IsAuthenticate();
+              if (this._activatedRoute.snapshot.queryParams.returnURL) {
+                this._route.navigate([this._activatedRoute.snapshot.queryParams.returnURL]);
+
+              } else {
+                this._route.navigate(['/user']);
+              }
             } else {
               this.toast.info(res.Message?.toString(), 'Login');
             }
@@ -60,5 +65,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  forgetPassword(){}
+  forgetPassword() { }
 }
