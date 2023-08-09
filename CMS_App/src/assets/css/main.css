@@ -276,15 +276,12 @@ label {
 /*      Form Control       */
 
 .form-control {
-    height: auto;
-    border: 1px solid #e2e2e2;
-    color: #000;
-    font-size: 15px;
-    padding: 8px 10px;
-    letter-spacing: 1px;
-    height: calc(1.4em + 1.4rem + 2px);
-    padding: .75rem 0.8rem .75rem 0.8rem;
-    border-radius: 6px;
+  border: 1px solid #e7e7e7;
+  color: #000;
+  font-size: 15px;
+  height: 40px;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .form-control:focus {
@@ -3336,7 +3333,7 @@ li.menu span.shape2 {
 
 .menu-active .shape1,
 .menu-active .shape2 {
-    background: #fff;
+    background: #f5f8fa;
     display: block !important;
 }
 
@@ -3409,7 +3406,7 @@ li.menu span.shape2 {
     background: #fff;
     margin: 0px 4px;
     border-radius: 100%;
-    box-shadow: 0px 0px 25px 0px #000000;
+    box-shadow: 0px 0px 10px 0px #c1c1c1;
 }
 
 .btn-theme-default {
@@ -4380,8 +4377,9 @@ form .icon-login-form {
 /* Responsive end */
 
 .table-responsive {
-    box-shadow: 0 0 20px #e3e3e3;
-    padding: 10px;
+    box-shadow: 0px 2px 6px #00000029;
+    padding: 5px;
+    background: #fff;
 }
 
 .form-grp-w-border .table-responsive {
@@ -4557,11 +4555,13 @@ app-header {
 
 [data-title]:hover::before {
     content: attr(data-title);
+    left: 50%;
+    transform: translateX(-50%);
     position: absolute;
     bottom: -26px;
     display: inline-block;
     padding: 3px 6px;
-    border-radius: 2px;
+    border-radius: 5px;
     background: #000;
     color: #fff;
     font-size: 12px;
@@ -4573,7 +4573,8 @@ app-header {
     content: '';
     position: absolute;
     bottom: -3px;
-    left: 0px;
+    left: 50%;
+    transform: translateX(-50%);
     display: inline-block;
     color: #fff;
     border: 8px solid transparent;
@@ -4925,6 +4926,89 @@ td.mat-footer-cell:last-of-type {
 }
 .mat-paginator-container {
   min-height: auto !important;
+}
+body .toast-container .ngx-toastr {
+  background-color: #fff;
+  color: #000;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #c9c9c9;
+  border: solid 2px transparent;
+  padding: 12px 15px 12px 60px;
+  background-size: 30px !important;
+}
+body .toast-container .ngx-toastr:hover {
+  box-shadow: 0 0 20px #b3b3b3;
+}
+body .toast-success {
+  border-color: #51A351 !important;
+  background-image: url(../img//check.svg) !important;
+}
+body .toast-error {
+  border-color: #BD362F !important;
+  background-image: url(../img//error.svg) !important;
+}
+body .toast-warning {
+  border-color: #F89406 !important;
+  background-image: url(../img//warning.svg) !important;
+}
+body .toast-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+body .toast-close-button {
+  color: #000;
+  text-shadow: none;
+  top: -5px;
+  left: 0px;
+}
+.sidebarCollapse {
+  font-size: 28px;
+  color: #000;
+  margin-left: 12px;
+}
+.page-new-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.page-new-header-title {
+  font-size: 25px;
+  color: #000;
+  font-weight: 600;
+}
+.page-new-header-action {
+  display: flex;
+}
+.page-new-header-action-items {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.page-new-header-action-search {
+  margin-left: 15px;
+  position: relative;
+  min-width: 310px;
+}
+.page-new-header-action-search input {
+  border-color: #bbb;
+}
+input[type="search"]:focus {
+  padding-right: 30px;
+}
+.content-box {
+  padding: 15px;
+  box-shadow: 0px 2px 6px #00000029;
+  background: #fff;
+}
+.mat-paginator {
+  background: transparent !important;
+}
+fieldset.border {
+  background: #fff;
 }
 /* Manish CSS End */
 

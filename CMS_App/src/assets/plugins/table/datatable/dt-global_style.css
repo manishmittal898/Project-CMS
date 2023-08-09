@@ -111,7 +111,7 @@ table.dataTable thead .sorting_desc:after {
     border-radius: 4px;
     -webkit-transition: all 0.1s ease;
     transition: all 0.1s ease;
-    border-bottom: 1px solid #e0e6ed;
+    border-bottom: 1px solid #F5F8FA;
 }
 
 .table>thead>tr>th {
@@ -141,7 +141,7 @@ table.dataTable thead .sorting_desc:after {
 }
 
 .dataTable.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #ebf0f3 !important;
+    background-color: #F5F8FA !important;
 }
 
 .table>tbody>tr:last-child>td .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu,

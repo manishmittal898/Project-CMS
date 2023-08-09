@@ -1,30 +1,19 @@
-<!-- Page Header Title start -->
-<div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>Product Detail</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/admin/product">Product List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
-      <button class="btn btn-success mr-3" routerLink="../../edit/{{+model.Id}}"> <i class="bi bi-pencil-square mr-1"></i>Edit</button>
-    <button class="btn btn-dark btn-sm" routerLink="/admin/product"> <i class="bi bi-chevron-left"></i>
-      Back to list</button>
-    </div>
+
+<!-- Page Header Start-->
+<div class="page-new-header">
+  <div class="page-new-header-title">
+    Product Detail
+  </div>
+  <div class="page-new-header-action">
+    <button routerLink="../../edit/{{+model.Id}}" class="page-new-header-action-items" data-title="Edit"> <i
+      class="bi bi-pencil"></i></button>
+    <button routerLink="/admin/product" class="page-new-header-action-items" data-title="Back to list"> <i class="bi bi-arrow-return-left"></i> </button>
   </div>
 </div>
-<!-- Page Header Title end -->
+<!-- Page Header End-->
 
 
-
-<div class="p-2 p-md-3 p-lg-4">
+<div class="content-box">
 
   <div class="row product-details">
     <div class="col-lg-5">
