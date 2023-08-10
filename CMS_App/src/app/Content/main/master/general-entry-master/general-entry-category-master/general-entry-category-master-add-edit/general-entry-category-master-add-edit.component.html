@@ -1,26 +1,16 @@
-<!-- Page Header Title start -->
-<div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>{{pageName | titlecase}}</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a routerLink="{{model.Id > 0 ?'../../' :'../'}}"
-              href="javascript:void()">{{pageName |
-              titlecase}}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{model.Id > 0 ?'Update':'Add' }} </li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <button class="btn btn-dark btn-sm mt-2 mt-sm-0" routerLink="{{model.Id > 0 ?'../../' :'../'}}"> <i
-        class="bi bi-chevron-left"></i> Back to list</button>
+<!-- Page Header Start-->
+<div class="page-new-header">
+  <div class="page-new-header-title">
+    {{pageName | titlecase}}
+  </div>
+  <div class="page-new-header-action">
+    <button routerLink="{{model.Id > 0 ?'../../' :'../'}}" class="page-new-header-action-items"
+      data-title="Back to list"> <i class="bi bi-arrow-return-left"></i> </button>
   </div>
 </div>
-<!-- Page Header Title end -->
-<div class="custom-form p-3 p-md-3">
+<!-- Page Header End-->
+
+<div class="content-box">
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <!-- Done -->

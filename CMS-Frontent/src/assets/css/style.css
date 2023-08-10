@@ -1646,7 +1646,7 @@ pre p {
     padding: 4px 5px;
     display: inline-flex;
     align-items: center;
-    color: #707070;
+    color: #000;
     width: 100%;
 }
 
@@ -2461,7 +2461,7 @@ opacity: 10;
   color: #fff;
   margin: 2px 0px;
   font-size: 18px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   height: 32px;
   width: 32px;
   border-radius: 100%;
@@ -2711,6 +2711,40 @@ padding: 0px;
 .form-floating-datepicker .p-button:hover {
   background: transparent !important;
   color: #000 !important;
+}
+body .toast-container .ngx-toastr {
+  background-color: #fff;
+  color: #000;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #c9c9c9;
+  border: solid 2px transparent;
+  padding: 12px 15px 12px 60px;
+  background-size: 30px !important;
+}
+body .toast-container .ngx-toastr:hover {
+  box-shadow: 0 0 20px #b3b3b3;
+}
+body .toast-success {
+  border-color: #51A351 !important;
+  background-image: url(../images//check.svg) !important;
+}
+body .toast-error {
+  border-color: #BD362F !important;
+  background-image: url(../images//error.svg) !important;
+}
+body .toast-warning {
+  border-color: #F89406 !important;
+  background-image: url(../images//warning.svg) !important;
+}
+body .toast-title {
+  font-weight: 600;
+  font-size: 20px;
+}
+body .toast-close-button {
+  color: #000;
+  text-shadow: none;
+  top: -10px;
+  left: 0px;
 }
 /* CUSTOM CSS END */
 
