@@ -3090,7 +3090,6 @@ td.table-action-btn button {
     margin: 40px 20px 20px 20px;
     border-radius: 20px;
     position: relative;
-    box-shadow: 1px 2px 12px 0 rgb(31 45 61 / 10%);
 }
 
 .form-grp-w-border h2 {
@@ -3431,7 +3430,7 @@ li.menu span.shape2 {
 }
 
 .custom-breadcrum .breadcrumb li {
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .ad-filter-btn {
@@ -5009,6 +5008,33 @@ input[type="search"]:focus {
 }
 fieldset.border {
   background: #fff;
+}
+.pagination {
+  justify-content: end;
+  margin-top: 5px;
+}
+.custom-mat-table {
+  width: 100%;
+}
+.custom-mat-table thead th {
+  background: #3f51b5;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 7px 5px;
+}
+.custom-mat-table th, .custom-mat-table td {
+  padding: 5px !important;
+}
+.custom-mat-table td.mat-cell, .custom-mat-table td {
+  border-bottom: solid 1px #f5f8fa;
+}
+table.custom-mat-table tbody tr:nth-child(even) {
+  background: #f5f8fa;
+}
+table.custom-mat-table.table-header-light th {
+  background: #eaf1ffbd;
+  color: #000;
 }
 /* Manish CSS End */
 

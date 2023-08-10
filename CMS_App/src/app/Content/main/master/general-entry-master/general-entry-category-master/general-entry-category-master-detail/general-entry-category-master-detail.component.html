@@ -1,78 +1,66 @@
-<!-- Page Header Title start -->
-<div class="widget-header">
-  <div class="row d-block d-sm-flex align-items-center justify-content-between text-center text-sm-left">
-    <div>
-      <h1>General Entry Category Detail</h1>
-      <!-- Breadcrumb Start -->
-      <nav class="custom-breadcrum">
-        <ol class="breadcrumb justify-content-center justify-content-sm-start">
-          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()"
-              routerLink="/admin/master/general-entry-category">General Entry Category List</a></li>
-          <li class="breadcrumb-item active" aria-current="page">General Entry Category Detail</li>
-        </ol>
-      </nav>
-      <!-- Breadcrumb End -->
-    </div>
-    <div class="d-flex align-items-center justify-content-center  mt-3 mt-sm-0">
-      <button class="btn btn-success mr-3" *ngIf="!this.model?.IsSystemEntry" routerLink="../../edit/{{recordId}}">
-        <i class="bi bi-pencil-square mr-1"></i>Edit</button>
-      <button class="btn btn-dark btn-sm" routerLink="/admin/master/general-entry-category"> <i
-          class="bi bi-chevron-left"></i>
-        Back to list</button>
-    </div>
+<!-- Page Header Start-->
+<div class="page-new-header">
+  <div class="page-new-header-title">
+    General Entry Category Detail
+  </div>
+  <div class="page-new-header-action">
+    <button *ngIf="!this.model?.IsSystemEntry" routerLink="../../edit/{{recordId}}" class="page-new-header-action-items"
+      data-title="Edit"> <i class="bi bi-pencil"></i></button>
+    <button routerLink="/admin/master/general-entry-category" class="page-new-header-action-items"
+      data-title="Back to list"> <i class="bi bi-arrow-return-left"></i> </button>
   </div>
 </div>
-<!-- Page Header Title end -->
+<!-- Page Header End-->
 
-<div class="widget-content p-4">
+
+<div class="content-box">
 
   <div class="row">
     <div class="col-md-4">
-     <div class="single-detail-img">
-      <img [src]="this.model.ImagePath" onerror="this.src='assets/img/no-img.svg'">
-     </div>
+      <div class="single-detail-img">
+        <img [src]="this.model.ImagePath" onerror="this.src='assets/img/no-img.svg'">
+      </div>
     </div>
     <div class="col-md-8 mt-4 mt-md-0">
       <div class="single-detail-info">
-      <h2>{{this.model.Name}}</h2>
-      <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
-        <tbody>
-          <tr>
-            <td width="250px"><strong>Sort Order: </strong> </td>
-            <td>{{this.model.SortedOrder}}</td>
-          </tr>
-          <tr>
-            <td><strong>Content Type : </strong> </td>
-            <td>{{this.model.ContentTypeText}}</td>
-          </tr>
-          <tr>
-            <td><strong> Is Show In Main: </strong> </td>
-            <td>{{this.model.IsShowInMain?'Yes':'No'}}</td>
-          </tr>
-          <tr>
-            <td><strong> Is Show Data In Main: </strong> </td>
-            <td>{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
-          </tr>
-          <tr>
-            <td><strong> Is Single Entry: </strong> </td>
-            <td>{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
-          </tr>
-          <tr>
-            <td><strong> Is System Entry: </strong> </td>
-            <td>{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
-          </tr>
-          <tr>
-            <td><strong>Show Thumbnail: </strong> </td>
-            <td>{{this.model.IsShowThumbnail? 'Yes': 'No'}}</td>
-          </tr>
-          <tr>
-            <td><strong>Show URL Field: </strong> </td>
-            <td>{{this.model.IsShowUrl? 'Yes': 'No'}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <h2>{{this.model.Name}}</h2>
+        <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
+          <tbody>
+            <tr>
+              <td width="250px"><strong>Sort Order: </strong> </td>
+              <td>{{this.model.SortedOrder}}</td>
+            </tr>
+            <tr>
+              <td><strong>Content Type : </strong> </td>
+              <td>{{this.model.ContentTypeText}}</td>
+            </tr>
+            <tr>
+              <td><strong> Is Show In Main: </strong> </td>
+              <td>{{this.model.IsShowInMain?'Yes':'No'}}</td>
+            </tr>
+            <tr>
+              <td><strong> Is Show Data In Main: </strong> </td>
+              <td>{{this.model.IsShowDataInMain?'Yes':'No'}}</td>
+            </tr>
+            <tr>
+              <td><strong> Is Single Entry: </strong> </td>
+              <td>{{this.model.IsSingleEntry? 'Yes': 'No'}}</td>
+            </tr>
+            <tr>
+              <td><strong> Is System Entry: </strong> </td>
+              <td>{{this.model.IsSystemEntry? 'Yes': 'No'}}</td>
+            </tr>
+            <tr>
+              <td><strong>Show Thumbnail: </strong> </td>
+              <td>{{this.model.IsShowThumbnail? 'Yes': 'No'}}</td>
+            </tr>
+            <tr>
+              <td><strong>Show URL Field: </strong> </td>
+              <td>{{this.model.IsShowUrl? 'Yes': 'No'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
