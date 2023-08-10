@@ -328,10 +328,10 @@ namespace CMS.Core.ServiceHelper.Method
                     }
 
                     // Apply color quantization to reduce the number of colors
-                    image.Mutate(x => x.Quantize(new WebSafePaletteQuantizer()));
+                    //image.Mutate(x => x.Quantize(new WebSafePaletteQuantizer));
 
                     // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality };
+                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality ,Quality= (int)QualityMode.High};
                     await image.SaveAsync(output, webpEncoder);
                 }
 
