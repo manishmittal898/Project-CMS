@@ -59,7 +59,7 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             byteArr = Convert.FromBase64String(base64str);
                         }
-                        string[] imageExt = { ".jpg", ".png", ".jpeg",".bmp",".tiff" };
+                        string[] imageExt = { ".jpg", ".png", ".jpeg", ".bmp", ".tiff" };
                         if (imageExt.Contains(GetFileExtension(base64str)))
                         {
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + ".webp" : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + ".webp";
@@ -85,7 +85,7 @@ namespace CMS.Core.ServiceHelper.Method
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + GetFileExtension(base64str) : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + GetFileExtension(base64str);
                             File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
 
-                            if (isThumbnail && GetFileExtension(base64str)==".webp")
+                            if (isThumbnail && GetFileExtension(base64str) == ".webp")
                             {
                                 string thumbnailPath = path + "/Thumnail";
                                 if (!Directory.Exists(thumbnailPath))
@@ -286,7 +286,7 @@ namespace CMS.Core.ServiceHelper.Method
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Size = new Size(100, 100),
-                            
+
 
                         }));
                     }
@@ -294,7 +294,7 @@ namespace CMS.Core.ServiceHelper.Method
                     // Remove metadata to reduce file size
                     //image.Metadata.ExifProfile = null;
                     // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Quality =(int)QualityMode.High, UseAlphaCompression=false, Method=WebpEncodingMethod.BestQuality,SpatialNoiseShaping = 100};
+                    var webpEncoder = new WebpEncoder { Quality = (int)QualityMode.High, UseAlphaCompression = false, Method = WebpEncodingMethod.BestQuality, SpatialNoiseShaping = 100 };
                     //var webpEncoder = new WebpEncoder();
                     image.Save(output, webpEncoder);
                     //image.Save(output, webpEncoder);
@@ -303,7 +303,7 @@ namespace CMS.Core.ServiceHelper.Method
             }
         }
 
-        private async Task<byte[]> ConvertToOptimizedWebPAsync(byte[] imageData, int newWidth=0, int newHeight = 0)
+        private async Task<byte[]> ConvertToOptimizedWebPAsync(byte[] imageData, int newWidth = 0, int newHeight = 0)
         {
             using (var input = new MemoryStream(imageData))
             using (var output = new MemoryStream())
@@ -319,19 +319,19 @@ namespace CMS.Core.ServiceHelper.Method
 
                         }));
                     }
-                    else
-                    {
-                        image.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = new Size(image.Width, image.Height)
-                        }));
-                    }
+                    //else
+                    //{
+                    //    image.Mutate(x => x.Resize(new ResizeOptions
+                    //    {
+                    //        Size = new Size(image.Width, image.Height)
+                    //    }));
+                    //}
 
                     // Apply color quantization to reduce the number of colors
                     //image.Mutate(x => x.Quantize(new WebSafePaletteQuantizer));
 
                     // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality ,Quality= (int)QualityMode.High};
+                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality, Quality = (int)QualityMode.High, NearLosslessQuality = 100 };
                     await image.SaveAsync(output, webpEncoder);
                 }
 
