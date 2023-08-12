@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.4" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CMS.Core\CMS.Core.csproj" />
     <ProjectReference Include="..\CMS.Data\CMS.Data.csproj" />
   </ItemGroup>
