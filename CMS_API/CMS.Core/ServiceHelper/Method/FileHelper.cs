@@ -270,13 +270,13 @@ namespace CMS.Core.ServiceHelper.Method
                 {
                     if (newWidth > 0 && newHeight > 0)
                     {
-                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(80).Resize(new Size(newWidth, newHeight));
+                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90).Resize(new Size(newWidth, newHeight));
                         
                     }
                     else
                     {
 
-                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(70);
+                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90);
                     }
 
 

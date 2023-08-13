@@ -66,7 +66,7 @@ export class ProductListComponent implements OnInit {
     })
   }
   safeURL(dataItem: ProductMasterViewModel) {
-    return this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/store/${dataItem.Name.split(' ').join('-')}/${dataItem.Id}`);
+    return this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/product/${dataItem.Name.split(' ').join('-')}/${dataItem.Id}`);
   }
 
 }

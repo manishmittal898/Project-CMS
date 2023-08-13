@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ProductCardComponent } from '../../../Main/product-list/product-card/product-card.component';
 
 
+
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
@@ -41,8 +42,7 @@ const installedModule = [
   }),
   CheckboxModule,
   SliderModule,
-  CalendarModule
-
+  CalendarModule,
 ]
 
 @NgModule({
@@ -55,6 +55,7 @@ const installedModule = [
   exports: [
     component,
     commonModules,
-    installedModule]
+    installedModule],
+    providers:[]
 })
 export class FeatureModule { }
