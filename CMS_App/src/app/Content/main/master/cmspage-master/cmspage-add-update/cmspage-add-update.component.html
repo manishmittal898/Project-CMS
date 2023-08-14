@@ -14,8 +14,8 @@
 <div class="row m-0 content-box">
   <div class="cmis-page-create-from">
     <form [formGroup]="formgrp" (ngSubmit)="SaveData()">
-      <div class="form-row">
-        <div class="form-group col-md-12">
+      <div class="row">
+        <div class="col-md-12 mb-3">
           <label>Display order</label>
           <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
             [minlength]="1" [maxLength]="6" formControlName="SortedOrder"
@@ -29,7 +29,7 @@
             Display Order length must be 1-6 digit. </div>
         </div>
 
-        <div class="form-group col-md-12">
+        <div class="col-md-12 mb-3">
           <label>Heading</label>
           <!-- <angular-editor [(ngModel)]="model.Heading" formControlName="Heading" [config]="editorConfig"
           placeholder="Heading" [ngClass]="{ 'is-invalid': f.Heading.errors && f.Heading.touched}" id="Heading">
@@ -41,7 +41,7 @@
             *ngIf="(formgrp.get('Heading')?.hasError('required') && formgrp.get('Heading')?.touched)">
             Please enter Heading</div>
         </div>
-        <div class="form-group col-md-12">
+        <div class="col-md-12 mb-3">
           <label>Content</label>
           <angular-editor class="angular-fix-min-height" [(ngModel)]="model.Content" formControlName="Content"
             [config]="editorConfig" placeholder="Content"
@@ -52,9 +52,9 @@
             Please enter Content</div>
         </div>
       </div>
-      <div class="form-footer-btn-grp widget-content widget-content pt-0 text-center">
-        <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> Save</button>
-        <button type="button" class="btn btn-outline-danger" (click)="onCancel()"> <i class="fas fa-times mr-1"></i>
+      <div class="form-footer-btn-grp widget-content widget-content text-center mt-3">
+        <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i> Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()"> <i class="fas fa-times me-1"></i>
           Cancel</button>
       </div>
     </form>

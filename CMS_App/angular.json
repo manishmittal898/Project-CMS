@@ -47,41 +47,19 @@
                             "src/.htaccess"
                         ],
                         "styles": [
-
                             "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/assets/bootstrap/css/bootstrap.min.css",
-                            "src/assets/css/plugins.css",
-                            "src/assets/css/scrollspyNav.css",
-                            "src/assets/plugins/table/datatable/datatables.css",
-                            "src/assets/plugins/table/datatable/dt-global_style.css",
-                            "src/assets/css/forms/theme-checkbox-radio.css",
+                            "src/assets/css/bootstrap.min.css",
                             "node_modules/sweetalert2/src/sweetalert2.scss",
                             "node_modules/ngx-toastr/toastr.css",
-                            "src/assets/css/authentication/form-1.css",
-                            "src/assets/css/authentication/form-2.css",
-                            "src/assets/css/forms/switches.css",
-                            "src/assets/css/components/tabs-accordian/custom-tabs.css",
-                            "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.css",
                             "src/assets/css/bootstrap-icons.css",
-                            "src/assets/plugins/lightbox/photoswipe.css",
-                            "src/assets/plugins/lightbox/default-skin/default-skin.css",
-                            "src/assets/plugins/lightbox/custom-photswipe.css",
+                            "src/assets/css/custom.css",
                             "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                         ],
                         "scripts": [
-                            "src/assets/js/custom/jquery3.5.min.js",
-                            "src/assets/bootstrap/js/popper.min.js",
-                            "src/assets/bootstrap/js/bootstrap.min.js",
-                            "src/assets/js/app.js",
-                            "src/assets/plugins/highlight/highlight.pack.js",
-                            "src/assets/js/custom.js",
-                            "src/assets/js/scrollspyNav.js",
-                            "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
-                            "src/assets/plugins/lightbox/photoswipe.min.js",
-                            "src/assets/plugins/lightbox/photoswipe-ui-default.min.js",
-                            "src/assets/plugins/lightbox/custom-photswipe.js",
-                            "src/assets/js/custom/index.bundle.min.js"
+                          "src/assets/js/jquery.min.js",
+                          "src/assets/js/popper.min.js",
+                          "src/assets/js/bootstrap.min.js",
+                          "src/assets/js/custom.js"
                         ]
                     },
                     "configurations": {
@@ -172,38 +150,19 @@
                             "src/.htaccess"
                         ],
                         "styles": [
-                            "src/assets/bootstrap/css/bootstrap.min.css",
-                            "src/assets/css/plugins.css",
-                            "src/assets/css/scrollspyNav.css",
-                            "src/assets/plugins/table/datatable/datatables.css",
-                            "src/assets/plugins/table/datatable/dt-global_style.css",
-                            "src/assets/css/forms/theme-checkbox-radio.css",
-                            "node_modules/sweetalert2/src/sweetalert2.scss",
-                            "node_modules/ngx-toastr/toastr.css",
-                            "src/assets/css/authentication/form-1.css",
-                            "src/assets/css/authentication/form-2.css",
-                            "src/assets/css/forms/switches.css",
-                            "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-                            "src/assets/css/components/tabs-accordian/custom-tabs.css",
-                            "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.css",
-                            "src/assets/css/bootstrap-icons.css",
-                            "src/assets/plugins/lightbox/photoswipe.css",
-                            "src/assets/plugins/lightbox/default-skin/default-skin.css",
-                            "src/assets/plugins/lightbox/custom-photswipe.css"
+                          "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                          "src/assets/css/bootstrap.min.css",
+                          "node_modules/sweetalert2/src/sweetalert2.scss",
+                          "node_modules/ngx-toastr/toastr.css",
+                          "src/assets/css/bootstrap-icons.css",
+                          "src/assets/css/custom.css",
+                          "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                         ],
                         "scripts": [
-                          "src/assets/js/custom/jquery3.5.min.js",
-                            "src/assets/bootstrap/js/popper.min.js",
-                            "src/assets/bootstrap/js/bootstrap.min.js",
-                            "src/assets/js/app.js",
-                            "src/assets/plugins/highlight/highlight.pack.js",
-                            "src/assets/js/custom.js",
-                            "src/assets/js/scrollspyNav.js",
-                            "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
-                            "src/assets/plugins/lightbox/photoswipe.min.js",
-                            "src/assets/plugins/lightbox/photoswipe-ui-default.min.js",
-                            "src/assets/plugins/lightbox/custom-photswipe.js",
-                            "src/assets/js/custom/index.bundle.min.js"
+                          "src/assets/js/jquery.min.js",
+                          "src/assets/js/popper.min.js",
+                          "src/assets/js/bootstrap.min.js",
+                          "src/assets/js/custom.js"
 
                         ]
                     }

@@ -4,20 +4,21 @@
     {{model.Id > 0 ? 'Update Product':'Add New Product'}}
   </div>
   <div class="page-new-header-action">
-    <button routerLink="/admin/product" class="page-new-header-action-items" data-title="Back to list"> <i class="bi bi-arrow-return-left"></i> </button>
+    <button routerLink="/admin/product" class="page-new-header-action-items" data-title="Back to list"> <i
+        class="bi bi-arrow-return-left"></i> </button>
   </div>
 </div>
 <!-- Page Header End-->
 
 <div class="content-box">
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
-    <div class="form-row">
+    <div class="row">
       <!-- Done -->
-      <div class="form-group col-md-2">
+      <div class="col-md-2">
         <label>SKU ID</label>
         <input type="text" class="form-control" formControlName="Name" placeholder="Enter ID">
       </div>
-      <div class="form-group col-md-4">
+      <div class="col-md-4 mb-3">
         <label>Name</label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
           [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
@@ -25,11 +26,11 @@
           *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
           Please enter <strong>Name</strong>...!</div>
       </div>
-      <div class="form-group col-md-3">
+      <div class="col-md-3 mb-3">
         <label>Price</label>
         <input type="text" class="form-control" formControlName="Name" placeholder="Price">
       </div>
-      <div class="form-group col-md-3">
+      <div class="col-md-3 mb-3">
         <label>Last Price</label>
 
         <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
@@ -43,7 +44,7 @@
           Price length must be 1-10 digit. </div>
       </div>
       <!--
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
         <label>Shipping Charge</label>
 
         <input type="number" [(ngModel)]="model.ShippingCharge" (keypress)="_commonService.NumberOnly($event)"
@@ -58,7 +59,7 @@
           Shipping Charge length must be 1-10 digit. </div>
       </div> -->
 
-      <div class="form-group col-md-6 col-lg-3">
+      <div class="col-md-6 col-lg-3 mb-3">
         <label>Tag/Label</label>
 
         <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
@@ -69,7 +70,7 @@
           *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
           Please select <strong>Caption</strong>...!</div>
       </div>
-      <div class="form-group col-md-6 col-lg-3">
+      <div class="col-md-6 col-lg-3 mb-3">
         <label>Select Category</label>
         <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
@@ -79,7 +80,7 @@
           *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
           Please select <strong>Category</strong>...!</div>
       </div>
-      <div class=" form-group col-md-6 col-lg-3">
+      <div class=" col-lg-3 mb-3">
         <label>Select Sub Category</label>
         <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Sub-category"
@@ -90,19 +91,19 @@
           *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
           Please select <strong>Sub Category</strong>...!</div>
       </div>
-      <div class="form-group col-md-6 col-lg-3">
+      <div class="col-md-6 col-lg-3 mb-3">
         <label>Home page Section</label>
 
-        <ng-select [items]="dropDown.ddlProductViewSection" formControlName="ViewSection" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="--Select--" [ngClass]="{ 'is-invalid': f.ViewSection.errors && f.ViewSection.touched}"
-          [(ngModel)]="model.ViewSectionId">
+        <ng-select [items]="dropDown.ddlProductViewSection" formControlName="ViewSection" [searchable]="true"
+          bindLabel="Text" bindValue="Value" placeholder="--Select--"
+          [ngClass]="{ 'is-invalid': f.ViewSection.errors && f.ViewSection.touched}" [(ngModel)]="model.ViewSectionId">
         </ng-select>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('ViewSection')?.hasError('required') && formgrp.get('ViewSection')?.touched)">
           Please select <strong>Home Page Section</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-5 mb-0">
+      <div class="col-md-5 mb-0">
         <label>Product main image <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -123,7 +124,7 @@
                 <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
                     class="bi bi-trash"></i></a>
                 <a [href]="model.ImagePath" target="_blank">
-                  <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                  <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                 </a>
               </div>
             </a>
@@ -157,11 +158,12 @@
 
       </div>
 
-      <div class="form-group col-md-7 mb-0">
+      <div class="col-md-7 mb-0">
         <label>Other images <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
           <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
-          <app-file-selector [MaxFileLength]="10" (FilesChanged)="onProductFileAttach($event)"  [FileFilter]="'.jpeg,.gif,.png,.jpg'"
+          <app-file-selector [MaxFileLength]="10" (FilesChanged)="onProductFileAttach($event)"
+            [FileFilter]="'.jpeg,.gif,.png,.jpg'"
             [CurrentFileLength]="(this.ProductFiles.length +(this.model.Files?.length??0))"
             [ngClass]="{ 'is-invalid': f.productFile.errors && f.productFile.touched}">
           </app-file-selector>
@@ -181,7 +183,7 @@
                   <a href="javascript:void()" (click)="deleteProductFile(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.FilePath" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -192,7 +194,7 @@
                   <a href="javascript:void()" (click)="deleteProductFile(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.FilePath" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -205,7 +207,7 @@
                   <a href="javascript:void()" (click)="deleteProductFile(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.FilePath" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -216,7 +218,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="col-md-6 mb-3">
         <label>Description</label>
         <angular-editor [(ngModel)]="model.Desc" formControlName="Description" [config]="editorConfig"
           placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"
@@ -228,7 +230,7 @@
           Please enter Discription</div>
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="col-md-6 mb-3">
         <label>Additional Information</label>
         <angular-editor [(ngModel)]="model.Summary" formControlName="Summary" [config]="editorConfig"
           [ngClass]="{ 'is-invalid': f.Summary.errors && f.Summary.touched}" id="Summary" rows="5"
@@ -240,7 +242,7 @@
           Please enter Summary...!</div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="col-md-12 mb-3">
         <label>Keyword</label>
         <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
           [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
@@ -249,19 +251,21 @@
           Please enter Keyword</div>
       </div>
 
-      <div class="form-group col-md-12 col-lg-6">
+      <div class="col-md-12 col-lg-6 mb-3">
         <label>Meta Title</label>
-        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="Meta Title" class="form-control"
-          [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}" id="MetaTitle"></textarea>
+        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="Meta Title"
+          class="form-control" [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}"
+          id="MetaTitle"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
           Please enter Meta Title</div>
       </div>
 
-      <div class="form-group col-md-12 col-lg-6">
+      <div class="col-md-12 col-lg-6 mb-3">
         <label>Meta Discription</label>
-        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="Meta Discription" class="form-control"
-          [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}" id="MetaDesc"></textarea>
+        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="Meta Discription"
+          class="form-control" [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}"
+          id="MetaDesc"></textarea>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('MetaDesc')?.hasError('required') && formgrp.get('MetaDesc')?.touched)">
           Please enter Meta Discription</div>
@@ -272,13 +276,13 @@
         <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">
           <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
 
-          <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-toggle="modal"
-            data-target="#stockModelPopup">
+          <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-bs-toggle="modal"
+            data-bs-target="#stockModelPopup">
             <i class="bi bi-plus-lg"></i> Add New
           </button>
         </div>
 
-        <div class="form-group col-md-12 m-0">
+        <div class="col-md-12 m-0">
           <div class="table-responsive-md">
             <table class="custom-mat-table table-header-light">
               <thead>
@@ -299,7 +303,7 @@
                   <td>{{item.Quantity}}</td>
                   <td class="table-action-btn">
                     <a href="javascript:void(0)" class="table-action-btn-edit" (click)="onEditStock(item,index)"
-                      data-title="Edit" data-toggle="modal" data-target="#stockModelPopup"><i
+                      data-title="Edit" data-bs-toggle="modal" data-bs-target="#stockModelPopup"><i
                         class="bi bi-pencil"></i>
                     </a>
                     <a class="table-action-btn-delete" data-title="Delete">
@@ -317,9 +321,9 @@
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
-      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i> {{model.Id > 0 ? 'Save
+      <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i> {{model.Id > 0 ? 'Save
         Product' : 'Add Product'}}</button>
-      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times me-1"></i> Cancel</button>
     </div>
   </form>
 </div>
@@ -328,18 +332,18 @@
   id="stockModelPopup" #stockModelPopup>
   <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header p-3 ">
+      <div class="modal-header ">
         <h5 class="modal-title m-0">Stock</h5>
-        <button type="button" #stockModelPopupClose class="close" (click)="onCancelEdit()" data-dismiss="modal"
+        <button type="button" #stockModelPopupClose class="btn-close" (click)="onCancelEdit()" data-bs-dismiss="modal"
           aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-        <div class="modal-body">
-          <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
-          <div class="form-row">
-            <div class="form-group col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
+      <div class="modal-body">
+        <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
+          <div class="row">
+            <div class="col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
               <label>Select Size</label>
               <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
                 bindValue="Value" placeholder="Select Size Id"
@@ -349,15 +353,13 @@
                 *ngIf="(stockFormGroup.get('SizeId')?.hasError('required') && stockFormGroup.get('SizeId')?.touched)">
                 Please select <strong>Size Id</strong>...!</div>
             </div>
-            <div class="form-group col-lg-4 mb-3 mb-lg-0 unit-pro-price">
+            <div class="col-lg-4 mb-3 mb-lg-0 unit-pro-price">
               <label>Unit Price</label>
-              <input type="number" [(ngModel)]="stockModel.UnitPrice"
-                (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
-                formControlName="UnitPrice"
+              <input type="number" [(ngModel)]="stockModel.UnitPrice" (keypress)="_commonService.NumberOnly($event)"
+                [minlength]="1" [maxLength]="10" formControlName="UnitPrice"
                 [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}" class="form-control"
                 id="input4" placeholder="Unit Price">
-              <button type="button" *ngIf="this.model?.Price" title="Add Product Price"
-                (click)="applyMainPrice()">₹
+              <button type="button" *ngIf="this.model?.Price" title="Add Product Price" (click)="applyMainPrice()">₹
                 Product Price</button>
 
               <div class="invalid-feedback"
@@ -368,12 +370,12 @@
                 Unit Price length must be 1-10 digit. </div>
             </div>
 
-            <div class="form-group col-lg-4 mb-3 mb-lg-0">
+            <div class="col-lg-4 mb-3 mb-lg-0">
               <label>Quantity</label>
-              <input type="number" [(ngModel)]="stockModel.Quantity"
-                (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
-                formControlName="Quantity" [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}"
-                class="form-control" id="input4" placeholder="Quantity">
+              <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)"
+                [minlength]="1" [maxLength]="10" formControlName="Quantity"
+                [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}" class="form-control" id="input4"
+                placeholder="Quantity">
               <div class="invalid-feedback"
                 *ngIf="(stockFormGroup.get('Quantity')?.hasError('required') && stockFormGroup.get('Quantity')?.touched)">
                 Please enter Quantity...! </div>
@@ -382,15 +384,15 @@
                 Quantity length must be 1-10 digit. </div>
             </div>
           </div>
-              <div class="modal-footer border-0 w-100 p-0 mt-3">
-                <button type="submitt" class="btn btn-success"><i class="fas fa-check mr-1"></i> Save</button>
-                <button type="button" (click)="onCancelEdit()" class="btn btn-outline-danger" data-dismiss="modal"><i
-                    class="fas fa-times mr-1"></i> Cancel</button>
-              </div>
+          <div class="modal-footer border-0 w-100 p-0 mt-3">
+            <button type="submitt" class="btn btn-success"><i class="fas fa-check me-1"></i> Save</button>
+            <button type="button" (click)="onCancelEdit()" class="btn btn-outline-danger" data-bs-dismiss="modal"><i
+                class="fas fa-times me-1"></i> Cancel</button>
+          </div>
 
 
         </form>
-        </div>
+      </div>
 
     </div>
   </div>

@@ -1,25 +1,25 @@
 <div class="custom-modal">
     <div class="modal-content">
 
-        <div class="modal-header p-3">
+        <div class="modal-header">
             <h5 class="modal-title m-0">{{data.Heading | titlecase}}</h5>
-            <button type="button" (click)="onClose()" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" (click)="onClose()" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
         </div>
         <div class="px-3 pt-3 pb-0">
             <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
-                <div class="form-row">
+                <div class="row">
 
 
-                    <div class="form-group col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label>Name</label>
                         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name" [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
                         <div class="invalid-feedback" *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
                             Please Enter <strong>Name</strong>...!</div>
                     </div>
 
-                    <div class="form-group col-md-12" *ngIf="this.iSImageVisible">
+                    <div class="col-md-12 mb-3" *ngIf="this.iSImageVisible">
                         <label>Image <span class="label-info"> (Preferred size: 800*700 ) </span> </label>
 
                         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
@@ -38,17 +38,17 @@
                                     </div>
                                 </div>
                                 <a [href]="model.ImagePath" target="_blank">
-                                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye file-upload-details-remove"></i>
+                                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye file-upload-details-remove"></i>
                                 </a>
 
-                                <i (click)="RemoveDocument(model.ImagePath)" data-toggle="tooltip" data-placement="bottom" title="Remove" class="fas fa-trash-alt text-danger file-upload-details-remove"></i>
+                                <i (click)="RemoveDocument(model.ImagePath)" data-bs-toggle="tooltip" data-placement="bottom" title="Remove" class="fas fa-trash-alt text-danger file-upload-details-remove"></i>
                             </div>
                         </ng-container>
 
 
                     </div>
 
-                    <div class="form-group col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label>Sort Order (1-999999)</label>
 
                         <input type="text" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="6" formControlName="SortedOrder" [ngClass]="{ 'is-invalid': f.SortedOrder.errors && f.SortedOrder.touched}" class="form-control"
@@ -62,10 +62,10 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 pt-0">
-                    <button type="submit" class="btn btn-success"> <i class="fas fa-check mr-1"></i>
+                    <button type="submit" class="btn btn-success"> <i class="fas fa-check me-1"></i>
             Submit</button>
                     <button type="button" (click)="onClose()" class="btn btn-outline-danger" aria-label="Close"><i
-              class="fas fa-times mr-1"></i> Cancel</button>
+              class="fas fa-times me-1"></i> Cancel</button>
                 </div>
             </form>
         </div>

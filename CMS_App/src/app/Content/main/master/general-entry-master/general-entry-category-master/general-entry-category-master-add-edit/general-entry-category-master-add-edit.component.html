@@ -12,9 +12,9 @@
 
 <div class="content-box">
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
-    <div class="form-row">
+    <div class="row">
       <!-- Done -->
-      <div class="form-group col-md-4 mb-2">
+      <div class="col-md-4 mb-2">
         <label>Name</label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
           [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
@@ -23,7 +23,7 @@
           Please enter <strong>Name</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-4 mb-2">
+      <div class="col-md-4 mb-2">
         <label>Content Type</label>
         <ng-select [items]="this.dropDown.ddlContentType" formControlName="ContentType" [searchable]="true"
           bindLabel="Text" bindValue="Value" placeholder="Content Type"
@@ -35,7 +35,7 @@
 
       </div>
 
-      <div class="form-group col-md-4 mb-2">
+      <div class="col-md-4 mb-2">
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -55,7 +55,7 @@
               <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
                   class="bi bi-trash"></i></a>
               <a [href]="model.ImagePath" target="_blank">
-                <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
               </a>
             </div>
           </a>
@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
         <label>Sort Order (1-999999)</label>
 
         <input type="number" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
@@ -81,7 +81,7 @@
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
 
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowThumbnail"
@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
 
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowUrl" formControlName="IsShowUrl"
@@ -104,7 +104,7 @@
       </div>
 
 
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
         <label class="d-none d-md-block"> &nbsp; </label>
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowInMain"
@@ -114,7 +114,7 @@
           </label>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
         <label class="d-none d-md-block"> &nbsp; </label>
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsShowDataInMain"
@@ -124,7 +124,7 @@
           </label>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="col-md-4">
 
         <div class="custom-control custom-checkbox checkbox-card">
           <input class="custom-control-input" type="checkbox" [(ngModel)]="model.IsSingleEntry"
@@ -142,9 +142,9 @@
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
-      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i>
+      <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i>
         {{model.Id > 0 ? 'Save ' : 'Add '}}</button>
-      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times me-1"></i> Cancel</button>
     </div>
   </form>
 </div>
