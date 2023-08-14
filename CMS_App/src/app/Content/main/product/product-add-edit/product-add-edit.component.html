@@ -80,7 +80,7 @@
           *ngIf="(formgrp.get('Category')?.hasError('required') && formgrp.get('Category')?.touched)">
           Please select <strong>Category</strong>...!</div>
       </div>
-      <div class=" col-lg-3 mb-3">
+      <div class="col-md-6 col-lg-3 mb-3">
         <label>Select Sub Category</label>
         <ng-select [items]="dropDown.ddlSublookup" formControlName="SubCategory" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Sub-category"
@@ -103,7 +103,7 @@
           Please select <strong>Home Page Section</strong>...!</div>
       </div>
 
-      <div class="col-md-5 mb-0">
+      <div class="col-md-6 col-lg-5 mb-0">
         <label>Product main image <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -158,7 +158,7 @@
 
       </div>
 
-      <div class="col-md-7 mb-0">
+      <div class="col-md-6 col-lg-7 mb-0">
         <label>Other images <span class="label-info"> (Preferred size: 900*900 ) </span></label>
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
           <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">

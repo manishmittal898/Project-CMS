@@ -611,9 +611,9 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 .btn-upload-border {
   background: transparent;
   border: dotted 2px #dae0ff;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 10px;
+  padding: 6px 20px;
+  font-size: 19px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -721,15 +721,15 @@ form .icon-login-form {
 }
 
 .lsit-category-img {
-  height: 50px;
-  width: 50px;
+  height: 45px;
+  width: 45px;
   background: transparent;
   overflow: hidden;
 }
 
 .lsit-category-img img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 45px;
+  max-height: 45px;
 }
 
 .table>tbody tr:last-child {
@@ -778,14 +778,14 @@ element.style {
 
 .default-section-info h1 {
   text-transform: capitalize;
-  font-size: 38px !important;
+  font-size: 40px;
   color: #f8c300;
 }
 
 .default-section-info p {
   font-size: 16px;
   line-height: 24px;
-  margin: 20px auto !important;
+  margin: 20px auto;
 }
 
 .default-section-info .btn {
@@ -1280,7 +1280,7 @@ body .toast-warning {
 body .toast-title {
   font-weight: 600;
   font-size: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 body .toast-close-button {
@@ -1480,6 +1480,7 @@ body.sidebar-open .container-with-sidebar {
   align-items: center;
   font-size: 16px;
   cursor: pointer;
+  font-weight: 500;
 }
 .sidebar .sidebar-item .sidebar-item-button i {
   margin-right: 8px;
@@ -1549,15 +1550,11 @@ position: relative;
   color: #000;
 }
 .header-dropdown {
-  position: absolute;
-  right: 0;
   background: #fff;
   box-shadow: 0px 2px 6px #00000029;
-  width: 160px;
-  top: 40px;
-}
-.header-dropdown ul {
+  border: none;
   list-style: none;
+  padding: 0px;
 }
 .header-dropdown a {
   padding: 5px 10px;
@@ -1602,8 +1599,11 @@ position: relative;
    body.sidebar-open .sidebar {
     transform: none;
   }
-  body.sidebar-open .container-with-sidebar {
+  body.sidebar-open .container-with-sidebar, body.sidebar-open footer {
     margin-left: 250px;
+}
+footer {
+  margin-left: 0px;
 }
 }
 

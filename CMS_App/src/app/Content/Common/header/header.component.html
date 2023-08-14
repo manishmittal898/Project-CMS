@@ -1,28 +1,27 @@
-
 <header>
   <div class="header-l-side d-flex align-items-center flex-auto ">
-      <a href="javascript:void()" class="sidebar-menu-btn"><i class="bi bi-list"></i></a>
-      <a href="javascript:void()" class="app-logo d-block"> <img src="assets/img/brand-logo.png" alt="" /></a>
+    <a href="javascript:void()" class="sidebar-menu-btn"><i class="bi bi-list"></i></a>
+    <a href="javascript:void()" class="app-logo d-block"> <img src="assets/img/brand-logo.png" alt="" /></a>
   </div>
   <div class="header-r-side d-flex align-items-center justify-content-end flex-auto">
-      <div class="theme-change-btn-grp d-none d-lg-flex align-items-center mr-2">
-          <a href="javascript: void(0);" class="btn-theme-default" (click)="changeTheme('theme-default')"></a>
-          <a href="javascript: void(0);" class="btn-theme-dark" (click)="changeTheme('theme-dark')"></a>
-          <a href="javascript: void(0);" class="btn-theme-primary" (click)="changeTheme('theme-primary')"></a>
-          <a href="javascript: void(0);" class="btn-theme-green" (click)="changeTheme('theme-green')"></a>
-        </div>
-        <div class="header-r-side-btn">
-        <ul>
-          <li> <a href="javascript:void()"><i class="bi bi-bell"></i></a> </li>
-          <li> <a href="javascript:void()" data-bs-toggle="collapse" href="#Profile"><i class="bi bi-person-circle"></i></a>
-            <div class="collapse header-dropdown" id="Profile">
-                <ul>
-                  <li> <a href="javascript:void()" (click)="this._authService.LogOut()"><i class="bi bi-box-arrow-in-right me-1"></i> Sign Out </a> </li>
-                </ul>
-            </div>
-          </li>
-        </ul>
-        </div>
+    <div class="theme-change-btn-grp d-none d-lg-flex align-items-center mr-2">
+      <a href="javascript: void(0);" class="btn-theme-default" (click)="changeTheme('theme-default')"></a>
+      <a href="javascript: void(0);" class="btn-theme-dark" (click)="changeTheme('theme-dark')"></a>
+      <a href="javascript: void(0);" class="btn-theme-primary" (click)="changeTheme('theme-primary')"></a>
+      <a href="javascript: void(0);" class="btn-theme-green" (click)="changeTheme('theme-green')"></a>
+    </div>
+    <div class="header-r-side-btn">
+      <ul>
+        <li> <a href="javascript:void()"><i class="bi bi-bell"></i></a> </li>
+        <li class="dropdown"> <a href="javascript:void()" data-bs-toggle="dropdown" aria-expanded="false"><i
+              class="bi bi-person-circle"></i></a>
+          <ul class="header-dropdown dropdown-menu">
+            <li> <a href="javascript:void()" (click)="this._authService.LogOut()"><i
+                  class="bi bi-box-arrow-in-right me-1"></i> Sign Out </a> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </header>
 
