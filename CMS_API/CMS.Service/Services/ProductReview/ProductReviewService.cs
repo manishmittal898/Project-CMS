@@ -20,12 +20,12 @@ namespace CMS.Service.Services.ProductReview
         }
 
 
-        public ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList()
+        public ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(long Id)
         {
             ServiceResponse<IEnumerable<Data.Models.TblProductReview>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblProductReview>>();
             try
             {
-                var objData = _db.TblProductReviews.ToList();
+                var objData = _db.TblProductReviews.Where(x=> x.ProductId==Id).ToList();
                 objResult = CreateResponse(objData as IEnumerable<Data.Models.TblProductReview>, "Success", true);
             }
             catch (Exception)

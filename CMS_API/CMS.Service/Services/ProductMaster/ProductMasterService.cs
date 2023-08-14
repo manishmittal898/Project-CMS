@@ -255,7 +255,7 @@ namespace CMS.Service.Services.ProductMaster
                     {
                         string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == model.Id).Select(x => x.FilePath).ToArray();
 
-                        model.Files = model.Files.FindAll(x => !existingfilePaths.Contains(x.Replace("\\", "/")));
+                        model.Files = model.Files.FindAll(x => x!=null && !existingfilePaths.Contains(x.Replace("\\", "/")));
 
                         productImages = model.Files.Select(x => new TblProductImage
                         {

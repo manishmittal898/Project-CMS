@@ -10,7 +10,7 @@ namespace CMS.Service.Services.ProductReview
 {
   public interface IProductReviewService
     {
-        ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList();
+        ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(long Id);
         ServiceResponse<TblProductReview> GetById(int id);
 
         Task<ServiceResponse<TblProductReview>> Save(ProductReviewViewModel model);

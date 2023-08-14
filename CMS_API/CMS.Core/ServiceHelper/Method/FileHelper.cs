@@ -1,18 +1,15 @@
 ﻿using HeyRed.Mime;
+using ImageProcessor;
+using ImageProcessor.Plugins.WebP.Imaging.Formats;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Webp;
-using System.Drawing.Drawing2D;
-using SixLabors.ImageSharp.PixelFormats;
 using System.Threading.Tasks;
-using SixLabors.ImageSharp.Processing.Processors.Quantization;
 
 namespace CMS.Core.ServiceHelper.Method
 {
@@ -59,12 +56,12 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             byteArr = Convert.FromBase64String(base64str);
                         }
-                        string[] imageExt = { ".jpg", ".png", ".jpeg",".bmp",".tiff" };
+                        string[] imageExt = { ".jpg", ".png", ".jpeg", ".bmp", ".tiff" };
                         if (imageExt.Contains(GetFileExtension(base64str)))
                         {
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + ".webp" : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + ".webp";
 
-                            var webPBytArr = await ConvertToOptimizedWebPAsync(byteArr);
+                            var webPBytArr = ConvertImageToWebP(byteArr);
                             File.WriteAllBytes(Path.Combine(path, fileName), webPBytArr);
 
                             if (isThumbnail)
@@ -75,7 +72,7 @@ namespace CMS.Core.ServiceHelper.Method
                                     Directory.CreateDirectory(thumbnailPath);
                                 }
 
-                                var webPThumbnailBytArr = await ConvertToOptimizedWebPAsync(byteArr, 100, 100);
+                                var webPThumbnailBytArr = ConvertImageToWebP(byteArr, 100, 100);
                                 File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
                             }
 
@@ -85,17 +82,7 @@ namespace CMS.Core.ServiceHelper.Method
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + GetFileExtension(base64str) : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + GetFileExtension(base64str);
                             File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
 
-                            if (isThumbnail && GetFileExtension(base64str)==".webp")
-                            {
-                                string thumbnailPath = path + "/Thumnail";
-                                if (!Directory.Exists(thumbnailPath))
-                                {
-                                    Directory.CreateDirectory(thumbnailPath);
-                                }
-
-                                var webPThumbnailBytArr = await ConvertToOptimizedWebPAsync(byteArr, 100, 100);
-                                File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
-                            }
+                            File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
 
                         }
                         //  saveFile = filePath;
@@ -274,69 +261,32 @@ namespace CMS.Core.ServiceHelper.Method
 
         }
 
-        private byte[] ConvertToOptimizedWebP(byte[] imageData, int newWidth = 0, int newHeight = 0)
+        
+        private byte[] ConvertImageToWebP(byte[] imageData, int newWidth = 0, int newHeight = 0)
         {
-            // Load the image using ImageSharp
-            using (var image = Image.Load(imageData))
+            using (var imageFactory = new ImageFactory(preserveExifData: true))
             {
-                using (var output = new MemoryStream())
+                using (var inputStream = new MemoryStream(imageData))
                 {
                     if (newWidth > 0 && newHeight > 0)
                     {
-                        image.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = new Size(100, 100),
-                            
-
-                        }));
-                    }
-
-                    // Remove metadata to reduce file size
-                    //image.Metadata.ExifProfile = null;
-                    // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Quality =(int)QualityMode.High, UseAlphaCompression=false, Method=WebpEncodingMethod.BestQuality,SpatialNoiseShaping = 100};
-                    //var webpEncoder = new WebpEncoder();
-                    image.Save(output, webpEncoder);
-                    //image.Save(output, webpEncoder);
-                    return output.ToArray();
-                }
-            }
-        }
-
-        private async Task<byte[]> ConvertToOptimizedWebPAsync(byte[] imageData, int newWidth=0, int newHeight = 0)
-        {
-            using (var input = new MemoryStream(imageData))
-            using (var output = new MemoryStream())
-            {
-                // Load the image using ImageSharp
-                using (var image = await Image.LoadAsync(input))
-                {
-                    if (newWidth > 0 && newHeight > 0)
-                    {
-                        image.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = new Size(100, 100),
-
-                        }));
+                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90).Resize(new Size(newWidth, newHeight));
+                        
                     }
                     else
                     {
-                        image.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = new Size(image.Width, image.Height)
-                        }));
+
+                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90);
                     }
 
-                    // Apply color quantization to reduce the number of colors
-                    image.Mutate(x => x.Quantize(new WebSafePaletteQuantizer()));
 
-                    // Save the image to the output stream in WebP format with custom quality
-                    var webpEncoder = new WebpEncoder { Method = WebpEncodingMethod.BestQuality };
-                    await image.SaveAsync(output, webpEncoder);
+                    using (var outputStream = new MemoryStream())
+                    {
+                        imageFactory.Save(outputStream);
+                        byte[] webpBytes = outputStream.ToArray();
+                        return webpBytes;
+                    }
                 }
-
-                // Return the binary data of the converted, resized, color quantized, and optimized image
-                return output.ToArray();
             }
         }
 

@@ -21,16 +21,16 @@ const routes: Routes = [
       component: ProductListComponent, path: 'store'
     },
     {
-      component: ProductListComponent, path: 'store/:name'
+      component: ProductListComponent, path: 'product/:name'
     },
     {
-      component: ProductDetailComponent, path: 'store/:id'
+      component: ProductDetailComponent, path: 'product/:id'
     },
     {
-      component: ProductDetailComponent, path: 'store/:name/:id'
+      component: ProductDetailComponent, path: 'product/:name/:id'
     },
     {
-      component: ProductDetailComponent, path: 'store/:category/:name/:id'
+      component: ProductDetailComponent, path: 'product/:category/:name/:id'
     },
     {
       component: CMSPageContentComponent, path: 'page/:name'
