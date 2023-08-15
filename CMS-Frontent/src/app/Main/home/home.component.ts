@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { IndexModel } from "src/app/Shared/Helper/Common";
 import { SecurityService } from "src/app/Shared/Services/Core/security.service";
 import { ProductCategoryViewModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
+import { GeneralEntryService, GeneralEntryFilterModel, GeneralEntryEnumValue, GeneralEntryViewModel } from '../../Shared/Services/GeneralEntryService/general-entry.service';
 
 declare var $: any;
 @Component({
@@ -13,7 +14,9 @@ export class HomeComponent implements OnInit {
   indexModel = new IndexModel();
   model: ProductCategoryViewModel[] = [];
   totalRecords: number = 0;
-  constructor(private readonly _productService: ProductService, private readonly _securityService: SecurityService) {
+  BannerImages: GeneralEntryViewModel[] = [];
+  constructor(private readonly _productService: ProductService, private readonly _generalEntryService: GeneralEntryService,
+    private readonly _securityService: SecurityService) {
     if (this._securityService.getStorage('home-page-product')) {
       this.model = JSON.parse(this._securityService.getStorage('home-page-product'));
     }
@@ -21,7 +24,12 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   ngOnInit(): void {
     this.getCategoryList()
-    this.AddSlider()
+    this.getBannerImages().then(res => {
+      setTimeout(() => {
+        this.AddSlider()
+      }, 500);
+    });
+
   }
 
   getCategoryList() {
@@ -45,63 +53,72 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-getUrl(item){
-  return `/store/${item.Name.split(' ').join('_')}?id=${item.Id}`
-}
+  getUrl(item) {
+    return `/store/${item.Name.split(' ').join('_')}?id=${item.Id}`
+  }
+  async getBannerImages() {
+    debugger
+    let model = new GeneralEntryFilterModel();
+    model.EnumValue = GeneralEntryEnumValue.Banner_Image;
+    model.PageSize = 10;
+
+    this._generalEntryService.GetList(model).subscribe(res => {
+      if (res.IsSuccess) {
+        debugger
+        this.BannerImages = res.Data;
+              }
+    })
+  }
+
+
   AddSlider() {
     this.isLoading = false;
-
-    setTimeout(() => {
-
-      $('.slider-items-6')?.slick({
-        dots: true,
-        infinite: true,
-        speed: 1000,
-        slidesToShow: 6,
-        slidesToScroll: 6,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [{
-          breakpoint: 1400,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 1400,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4
-          }
-        },
-        {
-          breakpoint: 900,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        },
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        },
-        {
-          breakpoint: 595,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
+    $('.slider-items-6')?.slick({
+      dots: true,
+      infinite: true,
+      speed: 1000,
+      slidesToShow: 6,
+      slidesToScroll: 6,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      responsive: [{
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true
         }
-        ]
-      });
-
-    }, 100);
-
+      },
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4
+        }
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 595,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+      ]
+    });
   }
 }

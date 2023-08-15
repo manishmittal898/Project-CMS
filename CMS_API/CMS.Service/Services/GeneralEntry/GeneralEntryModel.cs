@@ -91,7 +91,7 @@ namespace CMS.Service.Services.GeneralEntry
         [Display(Name = "Name")]
 
         public string Name { get; set; }
-        public string EnumValue { get; set; }
+
         [Display(Name = "Image")]
 
         public string ImagePath { get; set; }
@@ -114,5 +114,7 @@ namespace CMS.Service.Services.GeneralEntry
     {
         public string Title { get; set; }
         public long? CategoryId { get; set; }
+        public string EnumValue { get; set; }
+
     }
 }

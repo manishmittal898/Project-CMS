@@ -260,9 +260,9 @@ namespace CMS.Service.Services.GeneralEntry
                     {
                         objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == product.Entity.Id);
 
-                        dataItems = model.Data.Select( x => new TblFileDataMaster
+                        dataItems = model.Data.Select(x => new TblFileDataMaster
                         {
-                            Value =   _fileHelper.Save(x, FilePaths.GeneralEntry).Result,
+                            Value = _fileHelper.Save(x, FilePaths.GeneralEntry).Result,
                             DataId = objGeneralEntry.DataId,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -316,15 +316,10 @@ namespace CMS.Service.Services.GeneralEntry
             {
                 var result = (from g in _db.TblGeneralEntries.Include(x => x.Category)
                               where g.IsDeleted == false && g.IsActive == true &&
-                             (string.IsNullOrEmpty(model.Title) ? true : g.Title.Contains(model.Title)) &&
-                             (model.CategoryId == g.CategoryId || (model.CategoryId.HasValue && model.CategoryId == 0))
+(string.IsNullOrEmpty(model.Title) ? true : g.Title.Contains(model.Title)) &&
+((model.CategoryId == 0 || model.CategoryId == null) || (model.CategoryId.HasValue && model.CategoryId == g.CategoryId)) &&
+(string.IsNullOrEmpty(model.EnumValue) ? true : model.EnumValue == g.Category.EnumValue)
                               select g);
-
-
-
-
-
-
 
                 switch (model.OrderBy)
                 {
@@ -344,9 +339,9 @@ namespace CMS.Service.Services.GeneralEntry
 
                 if (result.Count() > 0)
                 {
-                    var imgData = await (from d in _db.TblFileDataMasters where result.Any(y => y.DataId == d.DataId) select d).ToListAsync();
+                    var imgData = (from d in _db.TblFileDataMasters where result.Any(y => y.DataId == d.DataId) select d).ToList();
 
-                    objResult.Data = await result.Select(x => new GeneralEntryViewModel
+                    objResult.Data = result.Select(x => new GeneralEntryViewModel
                     {
 
 
@@ -362,14 +357,22 @@ namespace CMS.Service.Services.GeneralEntry
                         Url = !string.IsNullOrEmpty(x.Url) && x.Category.IsShowUrl ? x.Url : null,
                         IsActive = x.IsActive,
                         IsDeleted = x.IsDeleted,
-                        Data = imgData.Count > 0 ? imgData.Where(y => y.DataId == x.DataId).Select(r => new GeneralEntryDataViewModel
+
+                    }).ToList();
+                    if(imgData.Count > 0)
+                    {
+                        objResult.Data.ForEach(x =>
                         {
-                            GeneralEntryId = x.Id,
-                            Id = r.Id,
-                            Value = !string.IsNullOrEmpty(r.Value) ? r.Value.ToAbsolutePath() : null
-                        }
-                    ).ToList() : null
-                    }).ToListAsync();
+                            x.Data = imgData.Count > 0 ? imgData.Where(y => y.DataId == x.DataId).Select(r => new GeneralEntryDataViewModel
+                            {
+                                GeneralEntryId = x.Id,
+                                Id = r.Id,
+                                Value = !string.IsNullOrEmpty(r.Value) ? r.Value.ToAbsolutePath() : null
+                            }
+                        ).ToList() : null;
+                        });
+                    }
+                  
 
                     return CreateResponse(objResult.Data as List<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }

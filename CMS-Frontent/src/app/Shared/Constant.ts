@@ -73,6 +73,10 @@ export class API_Url {
   public static UserAccount_Save_Api = `${environment.apiEndPoint}customer/customerAccount/Save`;
   //#endregion
 
+  //#region  << User Account  >>
+  public static GeneralEntry_List_Api = `${environment.apiEndPoint}public/GeneralEntryData/GetList/`;
+  //#endregion
+
 }
 
 export class Routing_Url {

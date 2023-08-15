@@ -1,28 +1,51 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true"
-      aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item text-center active">
-      <a href="javascript:void(0)">
-        <img src="assets/images/client/banner-new-1.jpg" class="w-100" alt="...">
-      </a>
+ 
+  <ng-container *ngIf="BannerImages?.length>0;else staticImages">
+    <div class="carousel-indicators">
+
+      <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
+        data-bs-slide-to="{{indx}}" class="active" aria-current="true" aria-label="{{itm.Title}}"></button>
+
     </div>
-    <div class="carousel-item text-center">
-      <a href="javascript:void(0)">
-        <img src="assets/images/client/banner-new-2.jpg" class="w-100" alt="...">
-      </a>
+    <div class="carousel-inner">
+      <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
+        *ngFor="let itm of BannerImages;let indx=index">
+        <a href="javascript:void(0)">
+          <img [src]="itm.Data[0].Value" onerror="this.src='assets/images/client/banner-new-1.jpg'" class="w-100"
+            alt="{{itm.Title}}">
+        </a>
+      </div>
+
     </div>
-    <div class="carousel-item text-center">
-      <a href="javascript:void(0)">
-        <img src="assets/images/client/banner-new-3.jpg" class="w-100" alt="...">
-      </a>
+  </ng-container>
+  <ng-template #staticImages>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-  </div>
+    <div class="carousel-inner">
+      <div class="carousel-item text-center active">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-1.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+      <div class="carousel-item text-center">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-2.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+      <div class="carousel-item text-center">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-3.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+    </div>
+  </ng-template>
+
+
   <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>

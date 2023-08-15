@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 
 @Component({
@@ -9,7 +10,12 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
   isAuth = false;
-  constructor(private readonly _authService: AuthService) { }
+  constructor(private readonly _authService: AuthService, private readonly _route: ActivatedRoute) {
+    this._route.url.subscribe(r => {
+      
+    })
+
+  }
 
   ngOnInit(): void {
     this._authService.IsAuthenticate();

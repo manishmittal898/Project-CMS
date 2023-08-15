@@ -17,7 +17,7 @@ export class ProductFilterComponent implements OnInit {
     return this.dropDown?.ddlSubLookupGroup?.filter(x => this.filterModel.CategoryId.includes(Number(x.CategoryId))) ?? [];
   }
   get maxPrice() {
-    return this.dropDown?.ddlProductPrice?.Value ?? 1000;
+    return this.dropDown?.ddlProductPrice?.Value ?? 10000;
   }
   constructor(private _commonService: CommonService) { }
 
