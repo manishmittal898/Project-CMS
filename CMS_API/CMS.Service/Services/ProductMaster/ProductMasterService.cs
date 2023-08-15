@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -179,7 +180,7 @@ namespace CMS.Service.Services.ProductMaster
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
-                        objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                        objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main,isThumbnail:true);
                     }
                     else
                     {
@@ -259,7 +260,7 @@ namespace CMS.Service.Services.ProductMaster
 
                         productImages = model.Files.Select(x => new TblProductImage
                         {
-                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery,isThumbnail:true).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -280,7 +281,7 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = model.CategoryId;
                     objProduct.SubCategoryId = model.SubCategoryId;
-                    objProduct.ImagePath = await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main);
+                    objProduct.ImagePath = await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main,isThumbnail:true);
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
@@ -301,7 +302,7 @@ namespace CMS.Service.Services.ProductMaster
                     {
                         productImages = model.Files.Select(x => new TblProductImage
                         {
-                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery).Result,
+                            FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery, isThumbnail: true).Result,
                             ProductId = product.Entity.Id,
                             CreatedBy = _loginUserDetail.UserId.Value,
                             ModifiedBy = _loginUserDetail.UserId.Value,
@@ -396,6 +397,7 @@ namespace CMS.Service.Services.ProductMaster
                     objProductFile.ModifiedOn = DateTime.Now;
                     _db.TblProductImages.Remove(objProductFile);
                     _fileHelper.Delete(objProductFile.FilePath);
+                    //add for thumbnail
                     await _db.SaveChangesAsync();
                     return CreateResponse(objProductFile, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
                 }
@@ -425,7 +427,7 @@ namespace CMS.Service.Services.ProductMaster
                     Id = x.Id,
                     ProductId = x.ProductId,
                     FilePath = !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath() : null,
-
+                    
                 }).ToListAsync();
                 objResponse = CreateResponse(objResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }

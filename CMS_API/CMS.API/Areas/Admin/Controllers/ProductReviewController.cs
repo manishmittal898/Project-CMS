@@ -27,7 +27,7 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpGet]
         public object Get()
         {
-            return _productrw.GetList();
+            return _productrw.GetList(0);
         }
 
         // GET api/<ProductReviewController>/5

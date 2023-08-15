@@ -53,7 +53,7 @@ export class ProductDetailComponent implements OnInit {
 
           this.SelectedSizeModel = this.model.Stocks[0];
         }
-        this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/product/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
+        this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/collections/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
          `);
         if (!this._auth.IsAuthentication.value && this._wishListService?.wishListItem?.length > 0) {
           debugger
@@ -98,6 +98,14 @@ export class ProductDetailComponent implements OnInit {
       });
     }, 500);
 
+  }
+
+  getThumbnailPath(filePath) {
+    debugger
+    let image = filePath.split('/');
+    image.splice(image.length - 1, 0, 'Thumbnail');
+    console.log(image.join('/'));
+    return image.join('/');
   }
 
   updateWishlist() {

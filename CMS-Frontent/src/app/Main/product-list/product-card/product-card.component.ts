@@ -22,7 +22,7 @@ export class ProductCardComponent implements OnInit {
     }
   }
   getUrl() {
-    return `/product/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`
+    return `/collections/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`
   }
 
   updateWishlist() {

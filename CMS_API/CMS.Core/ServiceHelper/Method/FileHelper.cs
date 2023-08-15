@@ -66,13 +66,13 @@ namespace CMS.Core.ServiceHelper.Method
 
                             if (isThumbnail)
                             {
-                                string thumbnailPath = path + "/Thumnail";
+                                string thumbnailPath = path + "/Thumbnail";
                                 if (!Directory.Exists(thumbnailPath))
                                 {
                                     Directory.CreateDirectory(thumbnailPath);
                                 }
 
-                                var webPThumbnailBytArr = ConvertImageToWebP(byteArr, 100, 100);
+                                var webPThumbnailBytArr = ConvertImageToWebP(byteArr, 120, 120);
                                 File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
                             }
 
@@ -261,7 +261,6 @@ namespace CMS.Core.ServiceHelper.Method
 
         }
 
-        
         private byte[] ConvertImageToWebP(byte[] imageData, int newWidth = 0, int newHeight = 0)
         {
             using (var imageFactory = new ImageFactory(preserveExifData: true))
@@ -271,11 +270,9 @@ namespace CMS.Core.ServiceHelper.Method
                     if (newWidth > 0 && newHeight > 0)
                     {
                         imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90).Resize(new Size(newWidth, newHeight));
-                        
                     }
                     else
                     {
-
                         imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90);
                     }
 

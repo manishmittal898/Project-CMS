@@ -38,7 +38,8 @@
             <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
           </div>
           <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
-            <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
+           
+            <img [src]="getThumbnailPath(item?.FilePath)" onerror="this.src='assets/images/no-img.png'">
           </div>
         </div>
         <!-- Product Detail Slider End -->
@@ -110,11 +111,11 @@
               </div>
             </div>
             <div class="product-detail-action-btn d-flex align-items-center">
-              <button type="button" [disabled]="this.loading.WishList"
-                (click)="updateWishlist()" class="pro-detail-btn-wishlist me-1 me-lg-2"
+              <button type="button" [disabled]="this.loading.WishList" (click)="updateWishlist()"
+                class="pro-detail-btn-wishlist me-1 me-lg-2"
                 title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
                   [ngClass]="{'bi-heart-fill pro-detail-btn-wishlist-active':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i>
-                </button>
+              </button>
               <button type="button" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
                 [disabled]="this.loading.AddToCart" [routerLink]="['/design/cart']"><i class="bi me-1"
                   [ngClass]="{'bi-cart3':!this.loading.AddToCart,'bi-hourglass-split':this.loading.AddToCart}"></i>

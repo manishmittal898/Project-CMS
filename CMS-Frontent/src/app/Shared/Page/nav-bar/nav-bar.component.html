@@ -87,13 +87,13 @@
                 <li class="nav-item dropdown cat-dropdown-list">
                   <a class="nav-link dropdown-toggle" routerLinkActive="active"
                     data-bs-toggle="dropdown" aria-expanded="false" href="javascript:void()"
-                    [routerLink]="['/product/'+item.Category.split(' ').join('_')]" [queryParams]="{id:item.CategoryId}">
+                    [routerLink]="['/collections/'+item.Category.split(' ').join('_')]" [queryParams]="{id:item.CategoryId}">
                     {{item.Category}} <i *ngIf="item.Data?.length" class="bi bi-chevron-down"></i>
                   </a>
 
                   <ul class="dropdown-menu">
                     <li *ngFor="let sitem of item.Data"><a class="dropdown-item" href="javascript:void()"
-                        [routerLink]="['/product/'+item.Category.split(' ').join('_')]"
+                        [routerLink]="['/collections/'+item.Category.split(' ').join('_')]"
                         [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
 
                   </ul>
@@ -114,14 +114,14 @@
 
                           <button class="accordion-button collapsed" [ngClass]="{'sub-menus':item?.Data?.length>0}"
                             type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collection_'+ind"
-                            [routerLink]="['/product/'+item.Category.split(' ').join('_')]"
+                            [routerLink]="['/collections/'+item.Category.split(' ').join('_')]"
                             [queryParams]="{id:item.CategoryId}" routerLinkActive="router-link-active">
                             {{item.Category}}
                           </button>
                           <ul *ngFor="let sitem of item.Data" class="megamenu-sub-list collapse"
                             [id]="'collection_'+ind" data-bs-parent="#NavCollections">
                             <li><a class="dropdown-item" href="javascript:void()"
-                                [routerLink]="['/product/'+item.Category.split(' ').join('_')]"
+                                [routerLink]="['/collections/'+item.Category.split(' ').join('_')]"
                                 [queryParams]="{id:item.CategoryId, subid: sitem.Value}">{{sitem.Text}}</a></li>
 
                           </ul>

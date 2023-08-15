@@ -56,6 +56,5 @@ const installedModule = [
     component,
     commonModules,
     installedModule],
-    providers:[]
 })
 export class FeatureModule { }

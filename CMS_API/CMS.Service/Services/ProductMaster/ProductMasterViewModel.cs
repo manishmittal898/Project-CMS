@@ -70,6 +70,7 @@ namespace CMS.Service.Services.ProductMaster
     {
         public long Id { get; set; }
         public string FilePath { get; set; }
+        public string Thumbnail { get; set; }
         public long? ProductId { get; set; }
     }
 
