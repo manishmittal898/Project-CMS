@@ -72,7 +72,7 @@ GO
 IF  (SELECT COUNT(*) FROM  [dbo].[tblGECategoryMater] )<1
 
 BEGIN
-INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry],[ContentType],[IsShowThumbnail],[IsShowUrl]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1,1,0,0)
+INSERT INTO [dbo].[tblGECategoryMater] ([Id],[Name],[EnumValue],[ImagePath],[IsShowInMain],[IsShowDataInMain],[IsSingleEntry],[SortedOrder],[CreatedBy],[ModifiedBy],[IsSystemEntry],[ContentType],[IsShowThumbnail],[IsShowUrl]) VALUES (1,'Banner Image','Banner_Image',null,0,0,0,1,1,1,1,0,1,1)
 END
 
 SET IDENTITY_INSERT [dbo].[tblGECategoryMater] OFF 

@@ -1,6 +1,6 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
- 
+  this.BannerImages
   <ng-container *ngIf="BannerImages?.length>0;else staticImages">
     <div class="carousel-indicators">
 
@@ -12,7 +12,7 @@
       <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
         *ngFor="let itm of BannerImages;let indx=index">
         <a href="javascript:void(0)">
-          <img [src]="itm.Data[0].Value" onerror="this.src='assets/images/client/banner-new-1.jpg'" class="w-100"
+          <img [src]="itm.ImagePath" onerror="this.src='assets/images/client/banner-new-1.jpg'" class="w-100"
             alt="{{itm.Title}}">
         </a>
       </div>
