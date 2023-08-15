@@ -6,12 +6,15 @@ import { BaseAPIService } from '../Core/base-api.service';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../UserService/auth.service';
+import { SecurityService } from '../Core/security.service';
 @Injectable({
   providedIn: 'root'
 })
 export class WishListService {
-  wishListItem: ProductMasterViewModel[] = [];
-  constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService) { }
+  wishListItem: any[] = [];
+  constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
+        this.wishListItem = this._securityService.checkStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
+  }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.ProductWishList_Api}`;
@@ -60,13 +63,17 @@ export class WishListService {
           })
       }
     } else {
-      if (this.wishListItem.indexOf(product) == -1) {
-        this.wishListItem.push(product);
+
+      if (this.wishListItem.indexOf(product.Id) == -1) {
+        this.wishListItem.push(product.Id);
         this._toasterService.success("Added Successfully" as string, 'Success');
+
       } else {
-        this.wishListItem.splice(this.wishListItem.indexOf(product), 1);
+        this.wishListItem.splice(this.wishListItem.indexOf(product.Id), 1);
         this._toasterService.success("Removed successfully" as string, 'Success');
       }
+      let data = JSON.stringify(this.wishListItem);
+      this._securityService.setStorage('wishlist', data);
       product.IsWhishList = !product.IsWhishList;
     }
 

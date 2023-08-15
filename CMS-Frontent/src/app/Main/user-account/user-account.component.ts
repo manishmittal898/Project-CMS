@@ -8,6 +8,9 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 })
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
+  get isAuth(){
+    return this._authService.IsAuthentication.value;
+  }
   constructor(private readonly _authService: AuthService) { }
 
   ngOnInit(): void {

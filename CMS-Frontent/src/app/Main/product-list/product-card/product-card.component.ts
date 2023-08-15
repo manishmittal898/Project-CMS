@@ -1,9 +1,6 @@
-import { WishListService } from './../../../Shared/Services/ProductService/wish-list.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductMasterViewModel } from 'src/app/Shared/Services/ProductService/product.service';
-import { WishListPostModel } from '../../../Shared/Services/ProductService/wish-list.service';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { ProductMasterViewModel } from "src/app/Shared/Services/ProductService/product.service";
+import { WishListService } from "src/app/Shared/Services/ProductService/wish-list.service";
 
 @Component({
   selector: 'app-product-card',
@@ -18,7 +15,7 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this._wishListService.wishListItem.length > 0) {
-      this.Product.IsWhishList = this._wishListService.wishListItem.find(x => x.Id == this.Product.Id).IsWhishList ?? this.Product.IsWhishList;
+      this.Product.IsWhishList = this._wishListService.wishListItem?.findIndex(x => x == this.Product.Id) >= 0 ? true : false ?? this.Product.IsWhishList;
     }
   }
   getUrl() {
@@ -29,8 +26,8 @@ export class ProductCardComponent implements OnInit {
     this.loading.WishList = true;
     this._wishListService.SetWishlistProduct(this.Product).then(() => {
       setTimeout(() => {
-        this.loading.WishList = false;
         this.productChange.emit(this.Product);
+        this.loading.WishList = false;
       }, 1000);
     });
   }

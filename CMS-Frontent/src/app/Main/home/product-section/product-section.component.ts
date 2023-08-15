@@ -35,7 +35,7 @@ export class ProductSectionComponent implements OnInit {
   }
 
   loadProductSection() {
-    debugger
+
     this.Subscription = {};
     this.dropDown.ddlProductViewSection.forEach(x => {
       let indexModel = new ProductFilterModel();
@@ -48,7 +48,7 @@ export class ProductSectionComponent implements OnInit {
     //indexModel.ViewSectionId = this.dropDown.ddlProductViewSection.map(x => Number(x.Value));
 
     forkJoin(this.Subscription).subscribe((res) => {
-      debugger
+
       this.dropDown.ddlProductViewSection.forEach(itm => {
         if (res[itm.Value]['IsSuccess']) {
           this.model[itm.Value.toString()] = res[itm.Value]['Data']

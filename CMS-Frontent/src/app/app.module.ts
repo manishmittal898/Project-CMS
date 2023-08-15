@@ -12,6 +12,7 @@ import { LoginComponent } from './Shared/Page/login/login.component';
 import { RegisterComponent } from './Shared/Page/register/register.component';
 import { BaseAPIService } from './Shared/Services/Core/base-api.service';
 import { MainModule } from './Main/main.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { MainModule } from './Main/main.module';
     FeatureModule,
     MainModule
   ],
-  providers: [BaseAPIService,  { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+  providers: [BaseAPIService, CookieService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
 

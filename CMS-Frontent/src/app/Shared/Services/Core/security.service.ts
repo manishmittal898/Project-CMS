@@ -3,31 +3,40 @@ import * as CryptoJS from 'crypto-js';
 import { BaseAPIService } from "./base-api.service";
 import { ApiResponse } from '../../Helper/Common';
 import { environment } from "src/environments/environment";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+
 })
 export class SecurityService {
 
-  constructor(private readonly _baseService: BaseAPIService) { }
+  constructor(private readonly _baseService: BaseAPIService, private readonly _cookie: CookieService) { }
 
   setStorage(key: string, value: string) {
     const encKey = this.getKey(key) ?? this.encrypt(key);
     const encValue = this.encrypt(value);
-
-    localStorage.setItem(encKey, encValue);
+    // localStorage.setItem(encKey, encValue);
+    this._cookie.set(encKey, encValue, 3, '');
     return true;
   }
-
+  checkStorage(key) {
+    const encKey = this.getKey(key) ?? this.encrypt(key);
+    return this._cookie.check(encKey);
+  }
   getStorage(key: string) {
-    const encKey = this.getKey(key) ?? this.encrypt(key)
-    const decValue = localStorage.getItem(encKey)
+
+    const encKey = this.getKey(key) ?? key
+    //  const decValue = localStorage.getItem(encKey);
+    const decValue = this._cookie.get(encKey);
+
     return decValue ? this.decrypt(decValue) : undefined;
   }
 
   removeStorage(key: string) {
     const encKey = this.getKey(key) ?? this.encrypt(key);
-    localStorage.removeItem(encKey);
+    this._cookie.delete(encKey);
+
   }
 
   encrypt(txt: string) {
@@ -49,10 +58,11 @@ export class SecurityService {
   }
   private getKey(key) {
     try {
-      for (let i = 0; i < localStorage?.length; i++) {
+      var keys = Object.keys(this._cookie.getAll());
+      for (let index = 0; index < keys.length; index++) {
 
-        if (this.decrypt(localStorage?.key(i)) === key) {
-          return localStorage.key(i) ?? null;
+        if (this.decrypt(keys[index]) === key) {
+          return keys[index] ?? null;
         }
       }
     } catch (error) {
