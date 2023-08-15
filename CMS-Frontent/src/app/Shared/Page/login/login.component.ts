@@ -6,6 +6,7 @@ import { AuthService, LoginUserDetailModel } from '../../Services/UserService/au
 import { Routing_Url } from '../../Constant';
 import { AccountService } from '../../Services/UserService/account.service';
 import { SecurityService } from '../../Services/Core/security.service';
+import { WishListService } from '../../Services/ProductService/wish-list.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   model: any = {};
   get routing_Url() { return Routing_Url };
 
-  constructor(private readonly _accountService: AccountService, private readonly _authService: AuthService, private readonly _security: SecurityService,
+  constructor(private readonly _accountService: AccountService, private readonly _wishList: WishListService,
+    private readonly _authService: AuthService, private readonly _security: SecurityService,
     private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -47,6 +49,11 @@ export class LoginComponent implements OnInit {
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login');
               this._authService.IsAuthenticate();
+
+              if (this._wishList.wishListItem.length > 0) {
+                this._wishList.syncWishList();
+              }
+
               if (this._activatedRoute.snapshot.queryParams.returnURL) {
                 this._route.navigate([this._activatedRoute.snapshot.queryParams.returnURL]);
 

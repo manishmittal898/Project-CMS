@@ -8,9 +8,7 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 })
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
-  get isAuth(){
-    return this._authService.IsAuthentication.value;
-  }
+  isAuth = false;
   constructor(private readonly _authService: AuthService) { }
 
   ngOnInit(): void {
@@ -20,6 +18,7 @@ export class UserAccountComponent implements OnInit {
       if (x == false) {
         this.logout();
       }
+      this.isAuth = x;
     });
   }
 

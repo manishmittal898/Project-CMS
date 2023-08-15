@@ -33,27 +33,27 @@
       </div>
       <!-- Mobile Drawer Buttons End -->
 
-      <div class="col-md-4 col-lg-4 col-xl-3 pe-5">
+      <div *ngIf="isAuth" class="col-md-4 col-lg-4 col-xl-3 pe-5">
         <div class="my-account-sidebar offcanvas offcanvas-start" tabindex="-1" id="OrderMenu">
           <div class="offcanvas-header d-flex d-md-none pt-0 px-0">
             <h6 class="offcanvas-title"><i class="bi bi-person-circle me-1"></i>My Account</h6>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <ul>
-            <li *ngIf="isAuth"> <a (click)="pageName='My Profile'" routerLink="./profile" routerLinkActive="active"
+            <li> <a (click)="pageName='My Profile'" routerLink="./profile" routerLinkActive="active"
                 href="javascript:void(0)"><i class="bi bi-person-circle me-2"></i>Profile</a> </li>
-            <li *ngIf="isAuth"> <a (click)="pageName='My Orders'" routerLink="./orders" routerLinkActive="active"
+            <li> <a (click)="pageName='My Orders'" routerLink="./orders" routerLinkActive="active"
                 href="javascript:void(0)"><i class="bi bi-handbag me-2"></i>Orders</a> </li>
-            <li *ngIf="isAuth"> <a (click)="pageName='My Address'" routerLink="./address" routerLinkActive="active"
+            <li> <a (click)="pageName='My Address'" routerLink="./address" routerLinkActive="active"
                 href="javascript:void(0)"><i class="bi bi-geo-alt me-2"></i>Address</a> </li>
             <li> <a (click)="pageName='My Wishlist'" routerLink="./wishlist" routerLinkActive="active"
                 href="javascript:void()"><i class="bi bi-heart me-2"></i>Wishlist</a> </li>
-            <li *ngIf="isAuth"> <a href="javascript:void()" (click)=" logout()"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+            <li> <a href="javascript:void()" (click)=" logout()"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-md-8 col-lg-8 col-xl-9">
+      <div [ngClass]="{'col-md-8 col-lg-8 col-xl-9' : isAuth ,'col-md-12 col-lg-12 col-xl-12': !isAuth}">
         <router-outlet></router-outlet>
       </div>
     </div>

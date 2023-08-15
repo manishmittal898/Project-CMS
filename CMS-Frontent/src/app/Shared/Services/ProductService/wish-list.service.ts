@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { IndexModel, ApiResponse } from '../../Helper/Common';
 import { BaseAPIService } from '../Core/base-api.service';
 
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../UserService/auth.service';
 import { SecurityService } from '../Core/security.service';
@@ -13,7 +13,9 @@ import { SecurityService } from '../Core/security.service';
 export class WishListService {
   wishListItem: any[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
-        this.wishListItem = this._securityService.checkStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
+    setTimeout(() => {
+      this.wishListItem = this._securityService.checkStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
+    }, 1000);
   }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
@@ -40,9 +42,13 @@ export class WishListService {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
             this._toasterService.success(x.Message as string, 'Success');
+            this.wishListItem.splice(this.wishListItem.indexOf(product.Id), 1);
+
           } else {
             this._toasterService.error(x.Message as string, 'Faild');
           }
+          let data = JSON.stringify(this.wishListItem);
+          this._securityService.setStorage('wishlist', data);
           return x;
         }, error => {
           this._toasterService.error(error.message as string, 'Failed');
@@ -51,11 +57,14 @@ export class WishListService {
         this.AddProduct(model).subscribe(x => {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
+            this.wishListItem.push(product.Id);
             this._toasterService.success(x.Message as string, 'Success');
           }
           else {
             this._toasterService.error(x.Message as string, 'Faild');
           }
+          let data = JSON.stringify(this.wishListItem);
+          this._securityService.setStorage('wishlist', data);
           return x;
         },
           error => {
@@ -63,11 +72,9 @@ export class WishListService {
           })
       }
     } else {
-
       if (this.wishListItem.indexOf(product.Id) == -1) {
         this.wishListItem.push(product.Id);
         this._toasterService.success("Added Successfully" as string, 'Success');
-
       } else {
         this.wishListItem.splice(this.wishListItem.indexOf(product.Id), 1);
         this._toasterService.success("Removed successfully" as string, 'Success');
@@ -76,7 +83,17 @@ export class WishListService {
       this._securityService.setStorage('wishlist', data);
       product.IsWhishList = !product.IsWhishList;
     }
+  }
 
+  public async syncWishList() {
+    let sub = [];
+    this.wishListItem.forEach(x => {
+      sub.push(this.AddProduct({ ProductId: x }))
+    })
+    forkJoin(sub).subscribe(res => {
+      this.wishListItem = [];
+      this._securityService.deleteStorage('wishlist');
+    })
   }
 
 }

@@ -24,6 +24,10 @@ export class SecurityService {
     const encKey = this.getKey(key) ?? this.encrypt(key);
     return this._cookie.check(encKey);
   }
+  deleteStorage(key) {
+    const encKey = this.getKey(key) ?? this.encrypt(key);
+    return this._cookie.delete(encKey);
+  }
   getStorage(key: string) {
 
     const encKey = this.getKey(key) ?? key
