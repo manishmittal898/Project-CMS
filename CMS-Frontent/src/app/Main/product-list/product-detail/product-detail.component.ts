@@ -56,7 +56,7 @@ export class ProductDetailComponent implements OnInit {
         this.shareLink = this._sainitizer.bypassSecurityTrustResourceUrl(`whatsapp://send?text=${environment.sitePath}/collections/${this.model.Category.split(' ').join('-')}/${this.model.Name.split(' ').join('-')}/${this.recordId}
          `);
         if (!this._auth.IsAuthentication.value && this._wishListService?.wishListItem?.length > 0) {
-          this.model.IsWhishList = this._wishListService?.wishListItem?.some(x => x.Id == this.model.Id);
+          this.model.IsWhishList = this._wishListService?.wishListItem?.some(x => x == this.model.Id);
         }
 
         setTimeout(() => {
@@ -100,10 +100,14 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getThumbnailPath(filePath) {
-    let image = filePath.split('/');
-    image.splice(image.length - 1, 0, 'Thumbnail');
-    console.log(image.join('/'));
-    return image.join('/');
+    if (filePath) {
+      let image = filePath?.split('/');
+      image.splice(image.length - 1, 0, 'Thumbnail');
+      return image.join('/');
+    } else {
+      return null;
+    }
+
   }
 
   updateWishlist() {

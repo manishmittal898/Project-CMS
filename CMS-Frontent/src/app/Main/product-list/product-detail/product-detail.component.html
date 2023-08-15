@@ -38,8 +38,9 @@
             <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
           </div>
           <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
-           
-            <img [src]="getThumbnailPath(item?.FilePath)" onerror="this.src='assets/images/no-img.png'">
+
+            <img [src]="getThumbnailPath(item?.FilePath)" *ngIf="item?.FilePath"
+              onerror="this.src='assets/images/no-img.png'">
           </div>
         </div>
         <!-- Product Detail Slider End -->
