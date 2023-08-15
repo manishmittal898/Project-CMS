@@ -12,9 +12,9 @@
 
 <div class="content-box">
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
-    <div class="form-row">
+    <div class="row">
       <!-- Done -->
-      <div class="form-group col-md-4 mb-2">
+      <div class="col-md-4 mb-3">
         <label>Title</label>
         <input type="text" class="form-control" [(ngModel)]="model.Title" formControlName="Title"
           [ngClass]="{ 'is-invalid': f.Title.errors && f.Title.touched}" placeholder="Title">
@@ -25,7 +25,7 @@
 
 
 
-      <div class="form-group col-md-4 mb-2">
+      <div class="col-md-4 mb-3">
         <label>Category</label>
         <ng-select [items]="this.dropDown!.ddlGeneralEntryCategory" formControlName="Category" [searchable]="true"
           bindLabel="Text" bindValue="Value" placeholder="Category"
@@ -37,7 +37,7 @@
 
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="col-md-4 mb-3">
         <label>Sort Order (1-999999)</label>
 
         <input type="number" [(ngModel)]="model.SortedOrder" (keypress)="_commonService.NumberOnly($event)"
@@ -53,7 +53,7 @@
 
 
       </div>
-      <div *ngIf="selectedCategory?.IsShowThumbnail" class="form-group col-md-6 mb-2">
+      <div *ngIf="selectedCategory?.IsShowThumbnail" class="col-md-6 mb-3">
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
@@ -73,7 +73,7 @@
               <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
                   class="bi bi-trash"></i></a>
               <a [href]="model.ImagePath" target="_blank">
-                <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
               </a>
             </div>
           </a>
@@ -82,7 +82,7 @@
 
       </div>
 
-      <div class="form-group col-md-6 mb-0"
+      <div class="col-md-6 mb-0"
         *ngIf="selectedCategory?.ContentType==(contentTypeEnum.Photo).toString() || selectedCategory?.ContentType==(contentTypeEnum.MultipleImages).toString() ||selectedCategory?.ContentType==(contentTypeEnum.Document).toString() || selectedCategory?.ContentType==(contentTypeEnum.Video).toString()">
         <label>Attachments <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
@@ -109,7 +109,7 @@
                   <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.Value" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -120,7 +120,7 @@
                   <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.Value" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -133,7 +133,7 @@
                   <a href="javascript:void()" (click)="deleteItems(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
                   <a [href]="itm.Value" target="_blank">
-                    <i data-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
+                    <i data-bs-toggle="tooltip" data-placement="bottom" title="View" class="bi bi-eye"></i>
                   </a>
                 </div>
               </a>
@@ -144,7 +144,7 @@
         </div>
       </div>
 
-      <div class="form-group col-md-6 mb-2" *ngIf="selectedCategory?.IsShowUrl">
+      <div class="col-md-6 mb-3" *ngIf="selectedCategory?.IsShowUrl">
         <label>Link</label>
         <input type="text" class="form-control" [(ngModel)]="model.Url" formControlName="Url"
           [ngClass]="{ 'is-invalid': f.Url.errors && f.Url.touched}" placeholder="Link">
@@ -152,7 +152,7 @@
           Please enter <strong>Link</strong>...!</div>
       </div>
 
-      <div class="form-group col-md-12">
+      <div class="col-md-12 mb-3">
         <label>Description</label>
         <angular-editor [(ngModel)]="model.Description" formControlName="Description" [config]="editorConfig"
           placeholder="Description" [ngClass]="{ 'is-invalid': f.Description.errors && f.Description.touched}"
@@ -163,7 +163,7 @@
           *ngIf="(formgrp.get('Description')?.hasError('required') && formgrp.get('Description')?.touched)">
           Please enter Discription</div>
       </div>
-      <div class="form-group col-md-12">
+      <div class="col-md-12 mb-3">
         <label>Keyword</label>
         <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
           [ngClass]="{ 'is-invalid': f.Keyword!.errors && f.Keyword!.touched}" id="Keyword"></textarea>
@@ -174,9 +174,9 @@
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
-      <button type="submit" class="btn btn-success mr-3"> <i class="fas fa-check mr-1"></i>
+      <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i>
         {{model.Id > 0 ? 'Save ' : 'Add '}}</button>
-      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times mr-1"></i> Cancel</button>
+      <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times me-1"></i> Cancel</button>
     </div>
   </form>
 </div>

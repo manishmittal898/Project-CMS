@@ -1,169 +1,42 @@
-/*
-=========================================
-|                                       |
-|           Scroll To Top               |
-|                                       |
-=========================================
-*/
-$(".scrollTop").click(function () {
-  $("html, body").animate({ scrollTop: 0 });
-});
 
-$(
-  ".navbar .dropdown.notification-dropdown > .dropdown-menu, .navbar .dropdown.message-dropdown > .dropdown-menu "
-).click(function (e) {
-  e.stopPropagation();
-});
 
-/*
-=========================================
-|                                       |
-|       Multi-Check checkbox            |
-|                                       |
-=========================================
-*/
 
-function checkall(clickchk, relChkbox) {
-  var checker = $("#" + clickchk);
-  var multichk = $("." + relChkbox);
 
-  checker.click(function () {
-    multichk.prop("checked", $(this).prop("checked"));
-  });
-}
-
-/*
-=========================================
-|                                       |
-|           MultiCheck                  |
-|                                       |
-=========================================
-*/
-
-/*
-    This MultiCheck Function is recommanded for datatable
-*/
-
-function multiCheck(tb_var) {
-  tb_var.on("change", ".chk-parent", function () {
-    var e = $(this).closest("table").find("td:first-child .child-chk"),
-      a = $(this).is(":checked");
-    $(e).each(function () {
-      a
-        ? ($(this).prop("checked", !0),
-          $(this).closest("tr").addClass("active"))
-        : ($(this).prop("checked", !1),
-          $(this).closest("tr").removeClass("active"));
+$(function() {
+  setTimeout(() => {
+    $(".sidebar-menu-btn").click(function () {
+      $("body").toggleClass("sidebar-open");
     });
-  }),
-    tb_var.on("change", "tbody tr .new-control", function () {
-      $(this).parents("tr").toggleClass("active");
-    });
-}
+  }, 10);
+ });
 
-/*
-=========================================
-|                                       |
-|           MultiCheck                  |
-|                                       |
-=========================================
-*/
 
-function checkall(clickchk, relChkbox) {
-  var checker = $("#" + clickchk);
-  var multichk = $("." + relChkbox);
 
-  checker.click(function () {
-    multichk.prop("checked", $(this).prop("checked"));
-  });
-}
 
-/*
-=========================================
-|                                       |
-|               Tooltips                |
-|                                       |
-=========================================
-*/
+$(window).scroll(function() {
+    var scroll = $(window).scrollTop();
 
-$(".bs-tooltip").tooltip();
-
-/*
-=========================================
-|                                       |
-|               Popovers                |
-|                                       |
-=========================================
-*/
-
-$(".bs-popover").popover();
-
-/*
-================================================
-|                                              |
-|               Rounded Tooltip                |
-|                                              |
-================================================
-*/
-
-$(".t-dot").tooltip({
-  template:
-    '<div class="tooltip status rounded-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
-});
-
-/*
-================================================
-|            IE VERSION Dector                 |
-================================================
-*/
-
-function GetIEVersion() {
-  var sAgent = window.navigator.userAgent;
-  var Idx = sAgent.indexOf("MSIE");
-
-  // If IE, return version number.
-  if (Idx > 0)
-    return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf(".", Idx)));
-  // If IE 11 then look for Updated user agent string.
-  else if (!!navigator.userAgent.match(/Trident\/7\./)) return 11;
-  else return 0; //It is not IE
-}
-
-$(document).ready(function () {
-  setInterval(function () {
-    var ele = document.querySelector("app-navigation");
-    if (ele && !ele.classList.contains("nav-bar-activated")) {
-      ele.classList.add("nav-bar-activated");
-      App.init();
+    if (scroll >= 300) {
+        $("header").addClass("header-fix");
+    } else {
+        $("header").removeClass("header-fix");
     }
-  }, 0);
+});
 
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
+    everydropdown.addEventListener('shown.bs.dropdown', function () {
+        el_overlay = document.createElement('span');
+        el_overlay.className = 'screen-darken';
+        document.body.appendChild(el_overlay)
+    });
+
+    everydropdown.addEventListener('hide.bs.dropdown', function () {
+      document.body.removeChild(document.querySelector('.screen-darken'));
+    });
+  });
 
 });
 
-// Tooltip start
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
-$(document).ready(function () {
-  $('[data-toggle="popover"]').popover({
-    trigger: "hover",
-  });
-});
-// Tooltip end
-
-$(document).ready(function () {
-  $(".ad-filter-btn").click(function () {
-    $("body").toggleClass("filter-overlay");
-  });
-  $(".advance-filter-footer-btn-grp .btn").click(function () {
-    $("body").toggleClass("filter-overlay");
-  });
-  $(".open-advance-filter-header a").click(function () {
-    $("body").toggleClass("filter-overlay");
-  });
-});
-
-// $(document).ready(function() {
-//   App.init();
-// });

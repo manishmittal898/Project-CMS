@@ -1,98 +1,100 @@
 <app-no-records *ngIf="totalRecords==0 && (!indexModel.Search || indexModel.Search=='') else ShowRecord"
-  [data]="noRecordData"></app-no-records>
+    [data]="noRecordData"></app-no-records>
 <ng-template #ShowRecord>
-  <!-- Page Header Start-->
-  <div class="page-new-header">
-    <div class="page-new-header-title">
-      Product List
-    </div>
-    <div class="page-new-header-action">
-      <button routerLink="../add" class="page-new-header-action-items" data-title="Add New Product"> <i
-          class="bi bi-plus-lg"></i></button>
-      <div class="page-new-header-action-search">
-        <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="bi bi-search"></i></button>
-        <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()" (keydown.enter)="onSearch()"
-          class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search" />
-        <!-- <a href="javascript:void()" (click)="onClear()" class="btn-search-text-remove"><i
+    <!-- Page Header Start-->
+    <div class="page-new-header">
+        <div class="page-new-header-title">
+            Product List
+        </div>
+        <div class="page-new-header-action">
+            <button routerLink="../add" class="page-new-header-action-items" data-title="Add New Product"> <i
+                    class="bi bi-plus-lg"></i></button>
+            <div class="page-new-header-action-search">
+                <button type="button" (click)="onSearch()" class="btn-filter-search"><i
+                        class="bi bi-search"></i></button>
+                <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()"
+                    (keydown.enter)="onSearch()" class="form-control" placeholder="Search..."
+                    [(ngModel)]="indexModel.Search" />
+                <!-- <a href="javascript:void()" (click)="onClear()" class="btn-search-text-remove"><i
                 class="bi bi-x"></i></a> -->
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- Page Header End-->
+    <!-- Page Header End-->
 
-  <!-- Main Page Content Start -->
-  <div class="table-responsive table-shadow">
+    <!-- Main Page Content Start -->
+    <div class="table-responsive table-shadow">
 
-    <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort role="grid"
-      (matSortChange)="sortData($event)">
-      <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let element; let i = index;">
-          {{(indexModel.Page-1)*indexModel.PageSize +(i+1)}}</td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="ImagePath">
-        <th mat-header-cell *matHeaderCellDef>Image</th>
-        <td mat-cell *matCellDef="let element; let i = index;">
-          <div class="lsit-category-img d-flex align-items-center justify-content-center">
-            <img src="{{element.ImagePath}}" onerror="this.src='assets/img/no-img.svg'">
-          </div>
-        </td>
-      </ng-container>
+        <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort role="grid"
+            (matSortChange)="sortData($event)">
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                    {{(indexModel.Page-1)*indexModel.PageSize +(i+1)}}</td>
+            </ng-container>
 
 
-      <ng-container [matColumnDef]="column!.Value" *ngFor="let column of ViewdisplayedColumns">
+            <ng-container matColumnDef="ImagePath">
+                <th mat-header-cell *matHeaderCellDef>Image</th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                    <div class="lsit-category-img d-flex align-items-center justify-content-center">
+                        <img src="{{element.ImagePath}}" onerror="this.src='assets/img/no-img.svg'">
+                    </div>
+                </td>
+            </ng-container>
 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column!.Text}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column!.Value]}} </td>
-      </ng-container>
 
-      <ng-container matColumnDef="IsActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
-        <td mat-cell *matCellDef="let element" class="table-action-btn">
-          <a (click)="OnActiveStatus(element!.Id)" title="Update Active Status">
-            <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>
-            <i *ngIf="!element!.IsActive" class="fas fa-ban text-danger"></i>
-          </a>
+            <ng-container [matColumnDef]="column!.Value" *ngFor="let column of ViewdisplayedColumns">
 
-        </td>
-      </ng-container>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column!.Text}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column!.Value]}} </td>
+            </ng-container>
 
-      <ng-container matColumnDef="Action">
-        <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let row" class="table-action-btn">
-          <a href="javascript:void(0)" class="table-action-btn-view" routerLink="../detail/{{+row.Id}}"
-            data-title="View Detail"><i class="bi bi-eye"></i>
-          </a>
-          <a href="javascript:void(0)" class="table-action-btn-edit" routerLink="../edit/{{+row.Id}}"
-            data-title="Edit"><i class="bi bi-pencil"></i>
-          </a>
-          <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" data-title="Delete">
-            <i class="bi bi-trash"></i>
-          </a>
-        </td>
+            <ng-container matColumnDef="IsActive">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+                <td mat-cell *matCellDef="let element" class="table-action-btn">
+                    <a (click)="OnActiveStatus(element!.Id)" title="Update Active Status">
+                        <i *ngIf="element!.IsActive" class="fas fa-check-circle text-success"></i>
+                        <i *ngIf="!element!.IsActive" class="fas fa-ban text-danger"></i>
+                    </a>
 
-      </ng-container>
+                </td>
+            </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+            <ng-container matColumnDef="Action">
+                <th style="width:150px;" mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let row" class="table-action-btn">
+                    <a href="javascript:void(0)" class="table-action-btn-view" routerLink="../detail/{{+row.Id}}"
+                        data-title="View Detail"><i class="bi bi-eye"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="table-action-btn-edit" routerLink="../edit/{{+row.Id}}"
+                        data-title="Edit"><i class="bi bi-pencil"></i>
+                    </a>
+                    <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)" data-title="Delete">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
 
-    <div class="no-record-found text-center" *ngIf="totalRecords==0">
-      <img src="assets/img/record-not-found.png" alt="" />
-      <p class="mb-0"> Sorry, No Record Found </p>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="no-record-found text-center" *ngIf="totalRecords==0">
+            <img src="assets/img/record-not-found.png" alt="" />
+            <p class="mb-0"> Sorry, No Record Found </p>
+        </div>
+
     </div>
 
-  </div>
-
-  <ul class="pagination">
+    <ul class="pagination">
 
 
-    <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize" (page)="onPaginateChange($event)"
-      showFirstLastButtons *ngIf="totalRecords!=0">
-    </mat-paginator>
-  </ul>
+        <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize"
+            (page)="onPaginateChange($event)" showFirstLastButtons *ngIf="totalRecords!=0">
+        </mat-paginator>
+    </ul>
 
-  <!-- Main Page Content End -->
+    <!-- Main Page Content End -->
 </ng-template>

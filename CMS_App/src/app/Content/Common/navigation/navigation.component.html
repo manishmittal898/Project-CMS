@@ -1,159 +1,102 @@
-<!--  BEGIN SIDEBAR  -->
-<div class="sidebar-wrapper sidebar-theme">
+<div class="sidebar">
+  <div id="accordionExample">
 
-  <nav id="sidebar">
-    <div class="shadow-bottom"></div>
-    <ul class="list-unstyled menu-categories" id="accordionExample">
-      <li class="menu" routerLinkActive="menu-active" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/admin" aria-expanded="false" class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-house-door"></i>
-            <span>Dashboard</span>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-      </li>
+    <div class="sidebar-item" routerLinkActive="menu-active" [routerLinkActiveOptions]="{exact: true}">
+      <button class="sidebar-item-button arrow-none" routerLink="/admin">
+        <i class="bi bi-speedometer"></i> Dashboard
+      </button>
+    </div>
 
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-2" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-columns-gap"></i>
-            <span>Product</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-2" data-parent="#accordionExample">
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="./product/list"> <i class="bi bi-list-check"></i> List </a>
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem1">
+        <i class="bi bi-columns-gap"></i> Product
+      </button>
+      <div id="SidebarItem1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="./product/list"><i class="bi bi-list-check"></i> List</a>
           </li>
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="./product/add"> <i class="bi bi-plus-circle"></i> Add New </a>
-          </li>
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="./product/add"><i class="bi bi-plus-circle"></i> Add
+              New</a> </li>
         </ul>
-      </li>
+      </div>
+    </div>
 
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-3" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-box-seam"></i>
-            <span>Master</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-3" data-parent="#accordionExample">
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem2">
+        <i class="bi bi-box-seam"></i> Master
+      </button>
+      <div id="SidebarItem2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
           <li *ngFor="let itm of dropDown.ddlLookupTypeMaster" routerLinkActive="sub-menu-active">
-            <a routerLink="./master/{{itm.Text}}/{{itm.Value}}"> <i class="bi bi-bookmarks"></i> {{itm.Text| titlecase}}
+            <a href="javascript:void(0)" routerLink="./master/{{itm.Text}}/{{itm.Value}}"> <i
+                class="bi bi-bookmarks"></i> {{itm.Text| titlecase}}
             </a>
           </li>
-
           <li routerLinkActive="sub-menu-active">
             <a routerLink="./master/general-entry-category"><i class="bi bi-gear-wide-connected"></i> General Entry
               Category
             </a>
           </li>
-
         </ul>
-      </li>
+      </div>
+    </div>
 
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-4" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-person"></i>
-            <span>User</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-4" data-parent="#accordionExample">
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="/admin/user"> <i class="bi bi-list-check"></i> List </a>
-          </li>
-
-        </ul>
-      </li>
-
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-5" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-person-lines-fill"></i>
-            <span>Customers</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-5" data-parent="#accordionExample">
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="/admin/customer"> <i class="bi bi-list-check"></i> List </a>
-          </li>
-
-        </ul>
-      </li>
-
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-6" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-file-earmark-break"></i>
-            <span>CMS Page</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-6" data-parent="#accordionExample">
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="./master/cms-page"> <i class="bi bi-list-check"></i> List </a>
-          </li>
-
-        </ul>
-      </li>
-
-      <li class="menu" routerLinkActive="menu-active">
-        <a href="#Dropdown-menu-7" data-toggle="collapse" data-active="true" aria-expanded="true"
-          class="dropdown-toggle">
-          <div class="">
-            <i class="bi bi-body-text"></i>
-            <span>General Entry</span>
-          </div>
-          <div>
-            <i class="bi bi-chevron-down"></i>
-          </div>
-          <span class="shape1"></span>
-          <span class="shape2"></span>
-        </a>
-        <ul class="collapse submenu list-unstyled" id="Dropdown-menu-7" data-parent="#accordionExample">
-          <li routerLinkActive="sub-menu-active">
-            <a routerLink="./master/general-entry"> <i class="bi bi-view-stacked"></i> List </a>
-          </li>
-          <li routerLinkActive="sub-menu">
-            <a routerLink="./master/general-entry/add"><i class="bi bi-plus-circle"></i> New
-            </a>
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem3">
+        <i class="bi bi-person"></i> User
+      </button>
+      <div id="SidebarItem3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="/admin/user"><i class="bi bi-list-check"></i> List</a>
           </li>
         </ul>
-      </li>
-    </ul>
-  </nav>
+      </div>
+    </div>
 
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem4">
+        <i class="bi bi-person-lines-fill"></i> Customers
+      </button>
+      <div id="SidebarItem4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="/admin/customer"><i class="bi bi-list-check"></i> List</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem5">
+        <i class="bi bi-file-earmark-break"></i> CMS Page
+      </button>
+      <div id="SidebarItem5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="./master/cms-page"><i class="bi bi-list-check"></i> List</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="sidebar-item" routerLinkActive="menu-active">
+      <button class="sidebar-item-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#SidebarItem6">
+        <i class="bi bi-body-text"></i> General Entry
+      </button>
+      <div id="SidebarItem6" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <ul class="sidebar-submenu">
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="./master/general-entry"><i class="bi bi-list-check"></i> List</a>
+          </li>
+          <li routerLinkActive="sub-menu-active"> <a href="javascript:void(0)" routerLink="./master/general-entry/add"><i class="bi bi-plus-circle"></i> Add New</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </div>
-<!--  END SIDEBAR  -->
