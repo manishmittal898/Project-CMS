@@ -1,8 +1,8 @@
-<div class="form-container">
+ <!-- <div class="form-container">
   <div class="form-form">
     <div class="login-logo">
       <a href="javascript:void(0)">
-        <img src="assets/img/brand-logo.png" alt="StoreOne" />
+        <img src="assets/images/brand-logo.png" alt="StoreOne" />
       </a>
     </div>
     <div class="form-form-wrap">
@@ -35,11 +35,47 @@
               </div>
             </div>
           </form>
-          <p class="terms-conditions text-center mb-0 mt-5">© 2023 All Rights Reserved. <a href="javascript:void(0);"> Jaipur Clothing</a> </p>
-
         </div>
       </div>
     </div>
   </div>
 
-</div>
+</div> -->
+
+
+<form class="h-100" (ngSubmit)="onSubmit()">
+  <section class="page-login-register h-100">
+    <div class="container-fluid h-100">
+      <div class="row align-items-center h-100">
+        <div class="col-md-6 page-login-register-left mb-auto">
+          <a href="javascript:void(0)" class="login-register-logo">
+            <img src="assets/images/brand-logo.png" alt="" />
+          </a>
+        </div>
+        <div
+          class="col-md-6 page-login-register-right h-100 d-flex flex-column align-items-center justify-content-center">
+          <div class="page-login-register-right-form">
+            <h2>Login to <span> Seller Portal </span></h2>
+            <div class="mb-4 position-relative">
+              <i class="bi bi-person-circle icon-login-form"></i>
+              <input id="username" name="username" type="text" [(ngModel)]="model.Email" class="form-control"
+              placeholder="Email-Id ">
+            </div>
+            <div class="mb-4 position-relative">
+              <i class="bi bi-shield-lock icon-login-form"></i>
+              <input id="password" name="password" type="{{isShowPass ? 'text':'password'}}"
+              [(ngModel)]="model.Password" class="form-control" placeholder="Password">
+              <div class="pas-eye">
+            <i (click)="isShowPass=!isShowPass" class="fas"
+              [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i>
+            </div>
+            </div>
+            <div class="mt-2">
+              <button type="submit" class="btn theme-btn text-uppercase w-100">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

@@ -1,4 +1,8 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
+body, html {
+  height: 100%;
+}
+
 body
 {
   margin: 0px;
@@ -14,8 +18,8 @@ body
   font-family: 'Cabin', sans-serif !important;
 }
 :root {
-  --primary-color: #1a1870;
-  --secondary-color: #4b49ac;
+  --primary-color: #a10965;
+  --secondary-color: #ffe01b;
 }
 ul {
   margin: 0px;
@@ -35,6 +39,9 @@ a, button {
 }
 p {
   color: #515365;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus, button:focus {
+  box-shadow: none !important;
 }
 textarea.form-control {
   min-height: 80px;
@@ -697,14 +704,6 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
   margin-left: 10px;
 }
 
-form .icon-login-form {
-  position: absolute;
-  top: 53px;
-  left: 14px;
-  margin: 0px !important;
-  font-size: 20px;
-}
-
 .table-responsive {
   box-shadow: 0px 2px 6px #00000029;
   padding: 5px;
@@ -1264,17 +1263,17 @@ body .toast-container .ngx-toastr:hover {
 
 body .toast-success {
   border-color: #51A351 !important;
-  background-image: url(../img//check.svg) !important;
+  background-image: url(../images//check.svg) !important;
 }
 
 body .toast-error {
   border-color: #BD362F !important;
-  background-image: url(../img//error.svg) !important;
+  background-image: url(../images//error.svg) !important;
 }
 
 body .toast-warning {
   border-color: #F89406 !important;
-  background-image: url(../img//warning.svg) !important;
+  background-image: url(../images//warning.svg) !important;
 }
 
 body .toast-title {
@@ -1571,97 +1570,105 @@ position: relative;
   color: #000;
   display: block;
 }
-/* Responsive Start */
-
-@media (max-width: 1392px) {
-  .cmis-page-create-from {
-    flex: 1 1 100%;
-  }
-
-  .cmis-page-preview {
-    flex: 1 1 100%;
-    padding-left: 0px;
-    margin-top: 25px;
-  }
-
-  .cmis-page-preview-body {
-    max-height: initial;
-  }
+.gen-entry-flags span.btn-sm {
+  border-radius: 50px;
+  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.page-login-register-right-form button.btn {
+  font-size: 22px;
+  padding: 6px 12px;
+}
+.theme-btn
+{
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+.theme-btn:hover
+{
+  background: #6c0042;
+  border-color: #6c0042;
+  color: #fff;
 }
 
 
-@media (max-width: 1192px) {
-  .product-detail-img-tab .nav-item {
-    flex: 0 0 70px;
-    max-width: 70px;
-  }
+/* LOGIN START */
 
-  .product-detail-img-tab .nav-item img {
-    max-height: 70px;
-  }
- .sidebar {
-    transform: translatex(-250px);
-  }
-  .container-with-sidebar
-  {
-    margin-left: 0px;
-  }
-   body.sidebar-open .sidebar {
-    transform: none;
-  }
-  body.sidebar-open .container-with-sidebar, body.sidebar-open footer {
-    margin-left: 250px;
-}
-footer {
-  margin-left: 0px;
-}
+section.page-login-register {
+  background: url(../images/login.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-
-@media (max-width: 767px) {
-  .default-section-info h1 {
-    font-size: 30px !important;
-    line-height: 40px !important;
-  }
-
-  .no-record-found p {
-    font-size: 18px;
-  }
-
-  .cdk-overlay-pane {
-    max-width: 95% !important;
-  }
-
-  .product-details-right-info h2 {
-    font-size: 20px !important;
-    margin-bottom: 2px !important;
-  }
-
-  .product-detail-img-tab .nav-item {
-    flex: 0 0 50px;
-    max-width: 50px;
-  }
-
-  .product-detail-img-tab .nav-item img {
-    max-height: 50px;
-  }
-
-  .file-upload-details .dz-details .dz-filename {
-    max-width: 160px;
-  }
-  .page-new-header {
-    display: block;
-    text-align: center;
-}
-.page-new-header-action {
-  margin-top: 10px;
-  justify-content: center;
-}
-.page-new-header-action-search {
-  margin-left: 10px;
-  min-width: 300px;
-}
+.page-login-register-right-form {
+  box-shadow: 0 0 35px #000;
+  padding: 25px;
+  border-radius: 10px;
+  background: #fff;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1;
 }
 
+.page-login-register-right {
+  position: relative;
+}
 
-/* Responsive End */
+.page-login-register-right:before {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  content: "";
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  border-radius: 50% 0 0 0/100% 0 0 0;
+  transform: scaleX(1.5);
+}
+
+.login-register-logo {
+  display: inline-block;
+  padding: 15px 5px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 20px #fff;
+  text-transform: capitalize;
+}
+
+.login-register-logo img {
+  max-height: 60px;
+}
+
+.page-login-register-right-form h2 {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 28px;
+  color: #000;
+}
+.page-login-register-right-form h2 span {
+color: var(--primary-color);
+}
+.page-login-register-right-form .icon-login-form {
+  position: absolute;
+  font-size: 20px;
+  top: 8px;
+  left: 10px;
+}
+.page-login-register-right-form .form-control {
+  padding-left: 38px;
+  font-size: 16px;
+  border-color: #dbdbdb;
+}
+.pas-eye {
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  opacity: 0.5;
+}
+
+/* LOGIN END */
+
+

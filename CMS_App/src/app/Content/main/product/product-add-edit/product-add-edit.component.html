@@ -119,7 +119,7 @@
 
             <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
               <div class="small-media-items-img"> <img [src]="model.ImagePath"
-                  onerror="this.src='assets/img/300x300.jpg'" /> </div>
+                  onerror="this.src='assets/images/300x300.jpg'" /> </div>
               <div class="small-media-items-action">
                 <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
                     class="bi bi-trash"></i></a>
@@ -178,7 +178,7 @@
 
               <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
                 <div class="small-media-items-img"> <img [src]="itm.FilePath"
-                    onerror="this.src='assets/img/300x300.jpg'" /> </div>
+                    onerror="this.src='assets/images/300x300.jpg'" /> </div>
                 <div class="small-media-items-action">
                   <a href="javascript:void()" (click)="deleteProductFile(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>

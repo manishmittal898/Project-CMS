@@ -53,6 +53,7 @@
                             "node_modules/ngx-toastr/toastr.css",
                             "src/assets/css/bootstrap-icons.css",
                             "src/assets/css/custom.css",
+                            "src/assets/css/responsive.css",
                             "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                         ],
                         "scripts": [
@@ -156,6 +157,7 @@
                           "node_modules/ngx-toastr/toastr.css",
                           "src/assets/css/bootstrap-icons.css",
                           "src/assets/css/custom.css",
+                          "src/assets/css/responsive.css",
                           "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                         ],
                         "scripts": [

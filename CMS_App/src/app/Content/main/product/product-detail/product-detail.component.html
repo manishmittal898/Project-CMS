@@ -19,20 +19,20 @@
     <div class="col-lg-5">
       <div class="product-detail-img-tab">
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade text-center show active" id="PD-0"><img onerror="this.src='assets/img/no-img.svg'"
+          <div class="tab-pane fade text-center show active" id="PD-0"><img onerror="this.src='assets/images/no-img.svg'"
               [src]="this.model.ImagePath" /></div>
           <div class="tab-pane fade text-center" id="PD-{{i+1}}" *ngFor="let itm of model.Files; let i=index"><img
-              onerror="this.src='assets/img/no-img.svg'" [src]="itm.FilePath" alt="StoreOne" /></div>
+              onerror="this.src='assets/images/no-img.svg'" [src]="itm.FilePath" alt="StoreOne" /></div>
         </div>
 
         <ul class="nav nav-tabs border-0 mt-3 justify-content-center" id="myTab">
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" href="#PD-0">
-              <img onerror="this.src='assets/img/no-img.svg'" [src]="this.model.ImagePath" alt="StoreOne" />
+              <img onerror="this.src='assets/images/no-img.svg'" [src]="this.model.ImagePath" alt="StoreOne" />
             </a>
           </li>
           <li class="nav-item" *ngFor="let itm of model.Files; let i=index">
-            <a class="nav-link" data-bs-toggle="tab" href="#PD-{{i+1}}"><img onerror="this.src='assets/img/no-img.svg'"
+            <a class="nav-link" data-bs-toggle="tab" href="#PD-{{i+1}}"><img onerror="this.src='assets/images/no-img.svg'"
                 [src]="itm.FilePath" alt="StoreOne" /></a>
           </li>
         </ul>
@@ -132,7 +132,7 @@
         <td colspan="3">
           <div class="d-flex align-items-center">
             <a href="javascript:void()" class="small-media-items big-size-media-items position-relative">
-              <div class="small-media-items-img"> <img onerror="this.src='assets/img/300x300.jpg'"
+              <div class="small-media-items-img"> <img onerror="this.src='assets/images/300x300.jpg'"
                   [src]="this.model.ImagePath" /> </div>
             </a>
 
@@ -165,7 +165,7 @@
           <div class="d-flex align-items-center mt-1 upload-content-list">
 
             <a href="javascript:void()" class="small-media-items position-relative" *ngFor="let itm of model.Files">
-              <div class="small-media-items-img"> <img onerror="this.src='assets/img/300x300.jpg'"
+              <div class="small-media-items-img"> <img onerror="this.src='assets/images/300x300.jpg'"
                   [src]="itm.FilePath" /> </div>
             </a>
 
