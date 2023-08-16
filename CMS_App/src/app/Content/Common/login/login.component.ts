@@ -45,8 +45,9 @@ export class LoginComponent implements OnInit {
               this._authService.SaveUserToken(data.Token);
               this._authService.SaveUserDetail(data);
               this.toast.success(res.Message?.toString(), 'Login Response');
-              this._route.navigate(['/admin']);
-
+              //this._route.navigate(['/admin']);
+              location.href = "/admin"
+              
             } else {
               this.toast.info(res.Message?.toString(), 'Login Response');
             }

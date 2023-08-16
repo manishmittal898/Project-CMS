@@ -1,12 +1,12 @@
 <app-loader></app-loader>
 <div #pageBody>
-    <div class="overlay"></div>
-    <div class="search-overlay"></div>
-    <app-header (SetTheme)="setTheme($event)"></app-header>
-      <!--  START CONTENT AREA  -->
-        <div class="container-with-sidebar">
-            <router-outlet></router-outlet>
-        </div>
-      <!--  END CONTENT AREA  -->
-      <app-footer></app-footer>
+  <div class="overlay"></div>
+  <div class="search-overlay"></div>
+  <app-header (SetTheme)="setTheme($event)"></app-header>
+  <!--  START CONTENT AREA  -->
+  <div class="container-with-sidebar">
+    <router-outlet></router-outlet>
+  </div>
+  <!--  END CONTENT AREA  -->
+  <app-footer></app-footer>
 </div>

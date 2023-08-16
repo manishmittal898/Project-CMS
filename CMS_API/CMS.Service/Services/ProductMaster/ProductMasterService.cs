@@ -258,7 +258,7 @@ namespace CMS.Service.Services.ProductMaster
 
                         model.Files = model.Files.FindAll(x => x != null && !existingfilePaths.Contains(x.Replace("\\", "/")));
 
-                        productImages = model.Files.Select(x => new TblProductImage
+                        productImages = model.Files.Where(x => !string.IsNullOrEmpty(x)).Select(x => new TblProductImage
                         {
                             FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery, isThumbnail: true).Result,
                             ProductId = product.Entity.Id,
@@ -300,7 +300,7 @@ namespace CMS.Service.Services.ProductMaster
 
                     if (model.Files != null && model.Files.Count > 0)
                     {
-                        productImages = model.Files.Select(x => new TblProductImage
+                        productImages = model.Files.Where(x => !string.IsNullOrEmpty(x)).Select(x => new TblProductImage
                         {
                             FilePath = _fileHelper.Save(x, FilePaths.ProductImages_Gallery, isThumbnail: true).Result,
                             ProductId = product.Entity.Id,
@@ -384,26 +384,28 @@ namespace CMS.Service.Services.ProductMaster
             }
         }
 
-        public async Task<ServiceResponse<TblProductImage>> DeleteProductFile(long id)
+        public async Task<ServiceResponse<object>> DeleteProductFile(long id)
         {
             try
             {
-                TblProductImage objProductFile = _db.TblProductImages.FirstOrDefault(r => r.Id == id);
+                List<TblProductImage> objProductFile = _db.TblProductImages.Where(r => r.Id == id || string.IsNullOrEmpty(r.FilePath)).ToList();
 
+                objProductFile.ForEach(x =>
+                {
+                    _fileHelper.Delete(x.FilePath);
+                });
                 if (objProductFile != null)
                 {
-                    objProductFile.IsDeleted = (bool)true;
-                    objProductFile.ModifiedBy = _loginUserDetail.UserId ?? objProductFile.ModifiedBy;
-                    objProductFile.ModifiedOn = DateTime.Now;
-                    _db.TblProductImages.Remove(objProductFile);
-                    _fileHelper.Delete(objProductFile.FilePath);
+
+                    _db.TblProductImages.RemoveRange(objProductFile);
+
                     //add for thumbnail
                     await _db.SaveChangesAsync();
-                    return CreateResponse(objProductFile, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                    return CreateResponse(true as object, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
                 }
                 else
                 {
-                    return CreateResponse<TblProductImage>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+                    return CreateResponse(null as object, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
 
                 }
 
@@ -411,7 +413,7 @@ namespace CMS.Service.Services.ProductMaster
             }
             catch (Exception ex)
             {
-                return CreateResponse<TblProductImage>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse(null as object, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
 
             }
         }
@@ -422,7 +424,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                objResponse.Data = await _db.TblProductImages.Where(x => x.ProductId == productId && !string.IsNullOrEmpty(x.FilePath)).Select(x => new ProductImageViewModel
+                objResponse.Data = await _db.TblProductImages.Where(x => x.ProductId == productId && x.IsActive.Value && !x.IsDeleted && !string.IsNullOrEmpty(x.FilePath)).Select(x => new ProductImageViewModel
                 {
                     Id = x.Id,
                     ProductId = x.ProductId,
