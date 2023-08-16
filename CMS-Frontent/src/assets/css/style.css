@@ -1096,7 +1096,7 @@ input:focus-visible {
 .navbar-user-icons a {
     font-size: 20px;
     color: var(--black);
-    margin: 0px 0px 0px 20px;
+    margin: 0px 0px 0px 15px;
 }
 
 .navbar-user-icons a:first-child {
@@ -1118,7 +1118,7 @@ ul.dropdown-menu {
     -webkit-backdrop-filter: saturate(180%) blur(40px);
     backdrop-filter: saturate(180%) blur(40px);
     background-color: rgba(255, 255, 255, .9);
-    box-shadow: 0 0 10px #dbdbdb;
+    /* box-shadow: 0 0 10px #dbdbdb; */
     transition: all 0.3s;
     animation-duration: 0.3s;
     -webkit-animation-duration: 0.3s;
@@ -1195,6 +1195,8 @@ ul.dropdown-menu a.dropdown-item:active {
     color: #fff;
     font-size: 12px;
     white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 [data-title]:hover::after {
