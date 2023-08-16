@@ -1,7 +1,4 @@
 
-
-
-
 $(function() {
   setTimeout(() => {
     $(".sidebar-menu-btn").click(function () {
@@ -9,20 +6,6 @@ $(function() {
     });
   }, 50);
  });
-
-
-
-
-$(window).scroll(function() {
-    var scroll = $(window).scrollTop();
-
-    if (scroll >= 300) {
-        $("header").addClass("header-fix");
-    } else {
-        $("header").removeClass("header-fix");
-    }
-});
-
 
 
 document.addEventListener("DOMContentLoaded", function(){
