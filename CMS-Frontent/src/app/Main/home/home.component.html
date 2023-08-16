@@ -1,124 +1,123 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
-    <ng-container *ngIf="BannerImages?.length>0;else staticImages">
-        <div class="carousel-indicators">
+  <ng-container *ngIf="BannerImages?.length>0;else staticImages">
+    <!-- <div class="carousel-indicators">
 
-            <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
-                data-bs-slide-to="{{indx}}" class="active" aria-current="true" aria-label="{{itm.Title}}"></button>
+      <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
+        [attr.data-bs-slide-to]="indx" [ngClass]="{'active': indx==0}" aria-label="{{itm.Title}}"></button>
 
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
-                *ngFor="let itm of BannerImages;let indx=index">
-                <a href="javascript:void(0)">
-                    <img [src]="itm.ImagePath" onerror="this.src='assets/images/slider-default.png'" class="w-100"
-                        alt="{{itm.Title}}">
-                </a>
-            </div>
+    </div> -->
+    <div class="carousel-inner">
+      <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
+        *ngFor="let itm of BannerImages;let indx=index">
+        <a href="javascript:void(0)">
+          <img [src]="itm.ImagePath" onerror="this.src='assets/images/slider-default.png'" class="w-100"
+            alt="{{itm.Title}}">
+        </a>
+      </div>
 
-        </div>
-    </ng-container>
-    <ng-template #staticImages>
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item text-center active">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/client/banner-new-1.jpg" class="w-100" alt="...">
-                </a>
-            </div>
-            <div class="carousel-item text-center">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/client/banner-new-2.jpg" class="w-100" alt="...">
-                </a>
-            </div>
-            <div class="carousel-item text-center">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/client/banner-new-3.jpg" class="w-100" alt="...">
-                </a>
-            </div>
-        </div>
-    </ng-template>
+    </div>
+  </ng-container>
+  <ng-template #staticImages>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#HomeSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item text-center active">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-1.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+      <div class="carousel-item text-center">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-2.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+      <div class="carousel-item text-center">
+        <a href="javascript:void(0)">
+          <img src="assets/images/client/banner-new-3.jpg" class="w-100" alt="...">
+        </a>
+      </div>
+    </div>
+  </ng-template>
 
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+  <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 <!-- Banner Slider End -->
 
 
 <!-- Home Deals Start -->
 <section class="deals-opt-d-1 d-none">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center section-title"> Deals & Offers </div>
-            <div class="col-md-4 mb-4 mb-md-0">
-                <a href="javascript:void()" class="card-deals-opt-d-1-items">
-                    <div class="card-deals-opt-d-1-items-img"></div>
-                    <div class="card-deals-opt-d-1-items-info">
-                        <h3>Deal Of The Day</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 mb-4 mb-md-0">
-                <a href="javascript:void()" class="card-deals-opt-d-1-items">
-                    <div class="card-deals-opt-d-1-items-img"></div>
-                    <div class="card-deals-opt-d-1-items-discount">
-                        <strong>20%</strong>
-                        <span>Off</span>
-                    </div>
-                    <div class="card-deals-opt-d-1-items-info">
-                        <h3>Deal Of The Day</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 mb-4 mb-md-0">
-                <a href="javascript:void()" class="card-deals-opt-d-1-items">
-                    <div class="card-deals-opt-d-1-items-img"></div>
-                    <div class="card-deals-opt-d-1-items-info">
-                        <h3>Deal Of The Day</h3>
-                    </div>
-                </a>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center section-title"> Deals & Offers </div>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <a href="javascript:void()" class="card-deals-opt-d-1-items">
+          <div class="card-deals-opt-d-1-items-img"></div>
+          <div class="card-deals-opt-d-1-items-info">
+            <h3>Deal Of The Day</h3>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <a href="javascript:void()" class="card-deals-opt-d-1-items">
+          <div class="card-deals-opt-d-1-items-img"></div>
+          <div class="card-deals-opt-d-1-items-discount">
+            <strong>20%</strong>
+            <span>Off</span>
+          </div>
+          <div class="card-deals-opt-d-1-items-info">
+            <h3>Deal Of The Day</h3>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <a href="javascript:void()" class="card-deals-opt-d-1-items">
+          <div class="card-deals-opt-d-1-items-img"></div>
+          <div class="card-deals-opt-d-1-items-info">
+            <h3>Deal Of The Day</h3>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
 </section>
 <!-- Home Deals End -->
 
 
 <!-- Home Category Start -->
 <Section class="home-category-slider">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12 text-center section-title">Shop by Category</div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center section-title">Shop by Category</div>
 
 
-            <!-- Home Category Start -->
-            <div class="slider-items-6" *ngIf="model.length>0">
-                <ng-container *ngFor="let itm of model">
-                    <a href="javascript:void(0)" [routerLink]="['/collections/'+itm.Name.split(' ').join('_')]"
-                        [queryParams]="{id: itm.Id}" class="home-category-items text-center">
-                        <div class="home-category-items-img d-flex align-items-center">
-                            <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"'
-                                alt="{{itm.Name}}" />
-                        </div>
-                        <div class="home-category-items-caption">{{itm.Name}}</div>
-                    </a>
-                </ng-container>
+      <!-- Home Category Start -->
+      <div class="slider-items-6" *ngIf="model.length>0">
+        <ng-container *ngFor="let itm of model">
+          <a href="javascript:void(0)" [routerLink]="['/collections/'+itm.Name.split(' ').join('_')]"
+            [queryParams]="{id: itm.Id}" class="home-category-items text-center">
+            <div class="home-category-items-img d-flex align-items-center">
+              <img [src]="itm.ImagePath" onerror='this.src="assets/images/no-img.png"' alt="{{itm.Name}}" />
             </div>
-            <!-- Home Category End -->
-        </div>
+            <div class="home-category-items-caption">{{itm.Name}}</div>
+          </a>
+        </ng-container>
+      </div>
+      <!-- Home Category End -->
     </div>
+  </div>
 </Section>
 <!-- Home Category End -->
 

@@ -47,8 +47,10 @@ export class ProductDetailComponent implements OnInit {
     this.isLoading = true;
     this._productService.GetDetail(this.recordId).subscribe(res => {
       if (res.IsSuccess) {
+        debugger
         this.isLoading = false;
         this.model = res.Data;
+
         if (this.model?.Stocks?.length > 0) {
 
           this.SelectedSizeModel = this.model.Stocks[0];

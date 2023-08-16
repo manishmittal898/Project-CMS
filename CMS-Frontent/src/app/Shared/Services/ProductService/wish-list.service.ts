@@ -13,9 +13,7 @@ import { SecurityService } from '../Core/security.service';
 export class WishListService {
   wishListItem: any[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
-    setTimeout(() => {
-      this.wishListItem = this._securityService.checkStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
-    }, 1000);
+    this.wishListItem = this._securityService.checkLocalStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
   }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {

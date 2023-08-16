@@ -16,32 +16,60 @@ export class SecurityService {
   setStorage(key: string, value: string) {
     const encKey = this.getKey(key) ?? this.encrypt(key);
     const encValue = this.encrypt(value);
-    // localStorage.setItem(encKey, encValue);
-    this._cookie.set(encKey, encValue, 3, '');
+   localStorage.setItem(encKey, encValue);
+  
     return true;
   }
-  checkStorage(key) {
-    const encKey = this.getKey(key) ?? this.encrypt(key);
-    return this._cookie.check(encKey);
-  }
+
   deleteStorage(key) {
     const encKey = this.getKey(key) ?? this.encrypt(key);
-    return this._cookie.delete(encKey);
+    return localStorage.delete(encKey);
   }
   getStorage(key: string) {
 
     const encKey = this.getKey(key) ?? key
+    const decValue = localStorage.getItem(encKey);
+
+    return decValue ? this.decrypt(decValue) : undefined;
+  }
+  checkLocalStorage(key) {
+    return this.getKey(key);
+  }
+
+  removeStorage(key: string) {
+    const encKey = this.getKey(key) ?? this.encrypt(key);
+    localStorage.delete(encKey);
+
+  }
+  setCookie(key: string, value: string) {
+    const encKey = this.getCookieKey(key) ?? this.encrypt(key);
+    const encValue = this.encrypt(value);
+    this._cookie.set(encKey, encValue, 3, '');
+    return true;
+  }
+  checkCookie(key) {
+    const encKey = this.getCookieKey(key) ?? this.encrypt(key);
+    return this._cookie.check(encKey);
+  }
+  deleteCookie(key) {
+    const encKey = this.getCookieKey(key) ?? this.encrypt(key);
+    return this._cookie.delete(encKey);
+  }
+  getCookie(key: string) {
+
+    const encKey = this.getCookieKey(key) ?? key
     //  const decValue = localStorage.getItem(encKey);
     const decValue = this._cookie.get(encKey);
 
     return decValue ? this.decrypt(decValue) : undefined;
   }
 
-  removeStorage(key: string) {
-    const encKey = this.getKey(key) ?? this.encrypt(key);
+  removeCookie(key: string) {
+    const encKey = this.getCookieKey(key) ?? this.encrypt(key);
     this._cookie.delete(encKey);
 
   }
+
 
   encrypt(txt: string) {
     try {
@@ -60,7 +88,7 @@ export class SecurityService {
       return null
     }
   }
-  private getKey(key) {
+  private getCookieKey(key) {
     try {
       var keys = Object.keys(this._cookie.getAll());
       for (let index = 0; index < keys.length; index++) {
@@ -69,6 +97,21 @@ export class SecurityService {
           return keys[index] ?? null;
         }
       }
+    } catch (error) {
+      return null;
+    }
+
+
+  }
+
+  private getKey(key) {
+    try {
+      for (var itm in localStorage) {
+        if (this.decrypt(itm) === key) {
+          return itm ?? null;
+        }
+      }
+
     } catch (error) {
       return null;
     }

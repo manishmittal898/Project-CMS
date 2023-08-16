@@ -24,7 +24,7 @@
         <div class="position-relative">
           <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div>
           <div [ngClass]="'product-d-main-slider'">
-            <div class="product-d-main-slider-items">
+            <div class="product-d-main-slider-items" *ngIf="model?.ImagePath">
               <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
             </div>
             <div class="product-d-main-slider-items" *ngFor="let item of model?.Files; let i=index">
@@ -34,7 +34,7 @@
         </div>
 
         <div [ngClass]="'product-d-main-slider-nav'" class="mt-2">
-          <div class="product-d-main-slider-nav-items">
+          <div class="product-d-main-slider-nav-items" *ngIf="model?.ImagePath">
             <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
           </div>
           <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
