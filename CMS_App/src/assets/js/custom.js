@@ -4,7 +4,7 @@ $(function() {
     $(".sidebar-menu-btn").click(function () {
       $("body").toggleClass("sidebar-open");
     });
-  }, 50);
+  }, 10);
  });
 
 
