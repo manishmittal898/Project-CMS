@@ -94,7 +94,7 @@
 
   </div>
 
-  <ul class="pagination">
+   <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
 
 
     <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize" (page)="onPaginateChange($event)"

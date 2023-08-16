@@ -14,7 +14,7 @@
       <div class="page-new-header-action-search">
         <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="bi bi-search"></i></button>
         <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()" (keydown.enter)="onSearch()"
-          class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search"/>
+          class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search" />
       </div>
     </div>
   </div>
@@ -22,8 +22,7 @@
 
   <!-- Main Page Content Start -->
   <div class="table-responsive table-shadow">
-    <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort
-       role="grid"
+    <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort role="grid"
       (matSortChange)="sortData($event)">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef>#</th>
@@ -88,7 +87,7 @@
     </div>
   </div>
 
-  <ul class="pagination">
+  <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
     <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize" (page)="onPaginateChange($event)"
       showFirstLastButtons *ngIf="totalRecords!=0">
     </mat-paginator>
