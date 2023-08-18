@@ -76,7 +76,6 @@ namespace CMS.Service.Services.ProductMaster
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
                                             Keyword = x.Keyword,
-                                            ShippingCharge = x.ShippingCharge ?? null,
                                             IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
 
                                         }).ToListAsync();
@@ -132,8 +131,7 @@ namespace CMS.Service.Services.ProductMaster
                     IsDelete = x.IsDelete,
                     Keyword = x.Keyword,
                     IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
-                    ShippingCharge = x.ShippingCharge ?? null,
-
+                   
                     Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
                     {
                         Id = st.Id,
@@ -194,7 +192,6 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.CaptionTagId = model.CaptionTagId;
                     objProduct.ViewSectionId = model.ViewSectionId;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
-                    objProduct.ShippingCharge = model.ShippingCharge ?? null;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.MetaTitle = model.MetaTitle;
                     objProduct.MetaDesc = model.MetaDesc;
@@ -289,7 +286,6 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.ViewSectionId = model.ViewSectionId;
 
                     objProduct.IsActive = true;
-                    objProduct.ShippingCharge = model.ShippingCharge ?? null;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
@@ -559,7 +555,6 @@ namespace CMS.Service.Services.ProductMaster
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
                                             Keyword = x.Keyword,
-                                            ShippingCharge = x.ShippingCharge ?? null,
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
                                             ViewSectionId = x.ViewSectionId,

@@ -12,6 +12,12 @@ namespace CMS.Data.Models
             TblCmspageContentMasters = new HashSet<TblCmspageContentMaster>();
             TblProductMasterCaptionTags = new HashSet<TblProductMaster>();
             TblProductMasterCategories = new HashSet<TblProductMaster>();
+            TblProductMasterColors = new HashSet<TblProductMaster>();
+            TblProductMasterDiscounts = new HashSet<TblProductMaster>();
+            TblProductMasterFabrics = new HashSet<TblProductMaster>();
+            TblProductMasterLengths = new HashSet<TblProductMaster>();
+            TblProductMasterOccasions = new HashSet<TblProductMaster>();
+            TblProductMasterPatterns = new HashSet<TblProductMaster>();
             TblProductMasterViewSections = new HashSet<TblProductMaster>();
             TblProductStocks = new HashSet<TblProductStock>();
             TblSubLookupMasters = new HashSet<TblSubLookupMaster>();
@@ -38,6 +44,12 @@ namespace CMS.Data.Models
         public virtual ICollection<TblCmspageContentMaster> TblCmspageContentMasters { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCaptionTags { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterCategories { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterColors { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterDiscounts { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterFabrics { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterLengths { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterOccasions { get; set; }
+        public virtual ICollection<TblProductMaster> TblProductMasterPatterns { get; set; }
         public virtual ICollection<TblProductMaster> TblProductMasterViewSections { get; set; }
         public virtual ICollection<TblProductStock> TblProductStocks { get; set; }
         public virtual ICollection<TblSubLookupMaster> TblSubLookupMasters { get; set; }

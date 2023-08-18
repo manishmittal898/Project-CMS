@@ -23,6 +23,13 @@ namespace CMS.Data.Models
         public decimal? Price { get; set; }
         public long? CaptionTagId { get; set; }
         public long? ViewSectionId { get; set; }
+        public long? DiscountId { get; set; }
+        public long? OccasionId { get; set; }
+        public long? FabricId { get; set; }
+        public long? LengthId { get; set; }
+        public long? ColorId { get; set; }
+        public long? PatternId { get; set; }
+        public string UniqueId { get; set; }
         public string Summary { get; set; }
         public string MetaTitle { get; set; }
         public string MetaDesc { get; set; }
@@ -32,13 +39,18 @@ namespace CMS.Data.Models
         public DateTime ModifiedOn { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
-        public decimal? ShippingCharge { get; set; }
         public string Keyword { get; set; }
 
         public virtual TblLookupMaster CaptionTag { get; set; }
         public virtual TblLookupMaster Category { get; set; }
+        public virtual TblLookupMaster Color { get; set; }
         public virtual TblUserMaster CreatedByNavigation { get; set; }
+        public virtual TblLookupMaster Discount { get; set; }
+        public virtual TblLookupMaster Fabric { get; set; }
+        public virtual TblLookupMaster Length { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }
+        public virtual TblLookupMaster Occasion { get; set; }
+        public virtual TblLookupMaster Pattern { get; set; }
         public virtual TblSubLookupMaster SubCategory { get; set; }
         public virtual TblLookupMaster ViewSection { get; set; }
         public virtual ICollection<TblProductReview> TblProductReviews { get; set; }

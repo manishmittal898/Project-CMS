@@ -146,7 +146,6 @@ namespace CMS.Service.Services.WishList
                                             IsActive = x.Product.IsActive.Value,
                                             IsDelete = x.Product.IsDelete,
                                             Keyword = x.Product.Keyword,
-                                            ShippingCharge = x.Product.ShippingCharge ?? null,
                                             IsWhishList = true
 
 

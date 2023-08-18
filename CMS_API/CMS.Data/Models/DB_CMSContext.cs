@@ -342,11 +342,15 @@ namespace CMS.Data.Models
                     .IsRequired()
                     .HasMaxLength(2000);
 
+                entity.Property(e => e.PatternId).HasColumnName("PatternID");
+
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.ShippingCharge).HasColumnType("decimal(18, 0)");
-
                 entity.Property(e => e.Summary).HasColumnType("ntext");
+
+                entity.Property(e => e.UniqueId)
+                    .HasMaxLength(400)
+                    .HasColumnName("UniqueID");
 
                 entity.HasOne(d => d.CaptionTag)
                     .WithMany(p => p.TblProductMasterCaptionTags)
@@ -359,17 +363,47 @@ namespace CMS.Data.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_CategoryId");
 
+                entity.HasOne(d => d.Color)
+                    .WithMany(p => p.TblProductMasterColors)
+                    .HasForeignKey(d => d.ColorId)
+                    .HasConstraintName("FK_tblProductMaster_ColorId");
+
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.TblProductMasterCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_CreatedBy");
 
+                entity.HasOne(d => d.Discount)
+                    .WithMany(p => p.TblProductMasterDiscounts)
+                    .HasForeignKey(d => d.DiscountId)
+                    .HasConstraintName("FK_tblProductMaster_DiscountId");
+
+                entity.HasOne(d => d.Fabric)
+                    .WithMany(p => p.TblProductMasterFabrics)
+                    .HasForeignKey(d => d.FabricId)
+                    .HasConstraintName("FK_tblProductMaster_FabricId");
+
+                entity.HasOne(d => d.Length)
+                    .WithMany(p => p.TblProductMasterLengths)
+                    .HasForeignKey(d => d.LengthId)
+                    .HasConstraintName("FK_tblProductMaster_LengthId");
+
                 entity.HasOne(d => d.ModifiedByNavigation)
                     .WithMany(p => p.TblProductMasterModifiedByNavigations)
                     .HasForeignKey(d => d.ModifiedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_ModifiedBy");
+
+                entity.HasOne(d => d.Occasion)
+                    .WithMany(p => p.TblProductMasterOccasions)
+                    .HasForeignKey(d => d.OccasionId)
+                    .HasConstraintName("FK_tblProductMaster_OccasionId");
+
+                entity.HasOne(d => d.Pattern)
+                    .WithMany(p => p.TblProductMasterPatterns)
+                    .HasForeignKey(d => d.PatternId)
+                    .HasConstraintName("FK_tblProductMaster_PatternId");
 
                 entity.HasOne(d => d.SubCategory)
                     .WithMany(p => p.TblProductMasters)
