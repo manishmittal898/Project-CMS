@@ -848,7 +848,8 @@ font-weight: 600;
 
 .product-list-items-img {
     background: #f8f8f8;
-    height: 325px;
+    height: auto;
+    /* height: 325px; */
     overflow: hidden;
     /* box-shadow: 2px 4px 12px rgb(0 0 0 / 8%); */
     border-radius: 0px;
