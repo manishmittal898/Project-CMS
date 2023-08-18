@@ -22,6 +22,7 @@ export class ProductAddEditComponent implements OnInit {
   model = {} as ProductMasterPostModel;
   isFileAttached = false;
   formgrp = this.fb.group({
+    UniqueID: [undefined, Validators.required],
     Name: [undefined, Validators.required],
     Price: [undefined, Validators.required],
     Caption: [undefined,],
@@ -30,7 +31,7 @@ export class ProductAddEditComponent implements OnInit {
     SubCategory: [undefined],
     Summary: [undefined],
     Description: [undefined],
-    ShippingCharge: [undefined],
+    Discount: [undefined],
     Keyword: [undefined],
     MetaTitle: [undefined],
     MetaDesc: [undefined],

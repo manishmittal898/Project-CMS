@@ -101,16 +101,7 @@ export class ProductDetailComponent implements OnInit {
 
   }
 
-  getThumbnailPath(filePath) {
-    if (filePath) {
-      let image = filePath?.split('/');
-      image.splice(image.length - 1, 0, 'Thumbnail');
-      return image.join('/');
-    } else {
-      return null;
-    }
-
-  }
+ 
 
   updateWishlist() {
     this.loading.WishList = true;

@@ -1,10 +1,13 @@
-﻿using HeyRed.Mime;
+﻿using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.ExtensionMethod;
+using HeyRed.Mime;
 using ImageProcessor;
 using ImageProcessor.Plugins.WebP.Imaging.Formats;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -66,14 +69,21 @@ namespace CMS.Core.ServiceHelper.Method
 
                             if (isThumbnail)
                             {
-                                string thumbnailPath = path + "/Thumbnail";
-                                if (!Directory.Exists(thumbnailPath))
+                                Size[] sizes= { ImageSize.Small ,ImageSize.Medium };
+                                for (int i = 0; i < sizes.Length; i++)
                                 {
-                                    Directory.CreateDirectory(thumbnailPath);
-                                }
+                                     
+                                    string thumbnailPath = string.Concat(path,"\\", ServiceExtension.getSizePath(sizes[i]));
+                                    if (!Directory.Exists(thumbnailPath))
+                                    {
+                                        Directory.CreateDirectory(thumbnailPath);
+                                    }
 
-                                var webPThumbnailBytArr = ConvertImageToWebP(byteArr, 120, 120);
-                                File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
+                                    var webPThumbnailBytArr = ConvertImageToWebP(byteArr, sizes[i].Width, sizes[i].Height);
+                                    File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
+                                }
+                                
+                              
                             }
 
                         }
@@ -288,5 +298,5 @@ namespace CMS.Core.ServiceHelper.Method
         }
 
     }
-
+  
 }

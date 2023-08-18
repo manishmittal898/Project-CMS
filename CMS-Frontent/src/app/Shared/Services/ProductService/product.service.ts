@@ -71,6 +71,7 @@ export interface ProductImageViewModel {
   Id: number;
   FilePath: string;
   ProductId: number | null;
+  ThumbnailPath:string;
 }
 
 

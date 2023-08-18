@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,5 +68,15 @@ namespace CMS.Core.FixedValue
         OtpInvalid = 410,
         OTPVarificationFailed = 411,
         OTPValidityExpire = 412,
+    }
+
+
+    public static class ImageSize
+    {
+        public static Size Small { get; } = new Size(150, 200);
+        public static Size Medium { get; } = new Size(520, 693);
+        public static Size Large { get; } = new Size(1080, 1440);
+
+
     }
 }

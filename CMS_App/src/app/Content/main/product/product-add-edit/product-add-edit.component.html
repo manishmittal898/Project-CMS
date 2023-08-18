@@ -14,28 +14,29 @@
   <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
     <div class="row">
       <!-- Done -->
-      <div class="col-md-2">
-        <label>SKU ID</label>
-        <input type="text" class="form-control" formControlName="Name" placeholder="Enter ID">
+      <div class="col-md-2 mb-3">
+        <label>SKU Number<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" formControlName="UniqueID"
+          [ngClass]="{ 'is-invalid': f.UniqueID.errors && f.UniqueID.touched}" placeholder="SKU Number">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('UniqueID')?.hasError('required') && formgrp.get('UniqueID')?.touched)">
+          Please enter <strong>SKU Number</strong>...!</div>
       </div>
       <div class="col-md-4 mb-3">
-        <label>Name</label>
+        <label>Name<span class="text-danger">*</span></label>
         <input type="text" class="form-control" [(ngModel)]="model.Name" formControlName="Name"
           [ngClass]="{ 'is-invalid': f.Name.errors && f.Name.touched}" placeholder="Name">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Name')?.hasError('required') && formgrp.get('Name')?.touched)">
           Please enter <strong>Name</strong>...!</div>
       </div>
-      <div class="col-md-3 mb-3">
-        <label>Price</label>
-        <input type="text" class="form-control" formControlName="Name" placeholder="Price">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Last Price</label>
 
-        <input type="number" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
+      <div class="col-md-3 mb-3">
+        <label>Price<span class="text-danger">*</span></label>
+
+        <input type="text" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
           [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
-          class="form-control" id="input4" placeholder="Last Price">
+          class="form-control" id="input4" placeholder="Price">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
           Please enter Price...! </div>
@@ -43,35 +44,23 @@
           *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
           Price length must be 1-10 digit. </div>
       </div>
-      <!--
-      <div class="col-md-4">
-        <label>Shipping Charge</label>
 
-        <input type="number" [(ngModel)]="model.ShippingCharge" (keypress)="_commonService.NumberOnly($event)"
-          [minlength]="1" [maxLength]="10" formControlName="ShippingCharge"
-          [ngClass]="{ 'is-invalid': f.ShippingCharge.errors && f.ShippingCharge.touched}" class="form-control"
-          id="input4" placeholder="Enter Charge">
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('ShippingCharge')?.hasError('required') && formgrp.get('ShippingCharge')?.touched)">
-          Please enter Shipping Charge...! </div>
-        <div class="invalid-feedback"
-          *ngIf="!formgrp.get('ShippingCharge')?.hasError('required') && ((formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength')) && formgrp.get('ShippingCharge')?.touched) || (formgrp.get('ShippingCharge')?.hasError('maxlength') || formgrp.get('ShippingCharge')?.hasError('minlength'))">
-          Shipping Charge length must be 1-10 digit. </div>
-      </div> -->
 
       <div class="col-md-6 col-lg-3 mb-3">
-        <label>Tag/Label</label>
+        <label>Discount</label>
 
-        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select Tag" [ngClass]="{ 'is-invalid': f.Caption.errors && f.Caption.touched}"
-          [(ngModel)]="model.CaptionTagId">
+        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Discount" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Discount"
+          [ngClass]="{ 'is-invalid': f.Discount.errors && f.Discount.touched}">
         </ng-select>
         <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
-          Please select <strong>Caption</strong>...!</div>
+          *ngIf="(formgrp.get('Discount')?.hasError('required') && formgrp.get('Discount')?.touched)">
+          Please select <strong>Discount</strong>...!</div>
       </div>
+
+
       <div class="col-md-6 col-lg-3 mb-3">
-        <label>Select Category</label>
+        <label>Select Category<span class="text-danger">*</span></label>
         <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select category" (ngModelChange)="getSubLookUpDropDown($event)"
           [ngClass]="{ 'is-invalid': f.Category.errors && f.Category.touched}" [(ngModel)]="model.CategoryId">
@@ -92,7 +81,18 @@
           Please select <strong>Sub Category</strong>...!</div>
       </div>
       <div class="col-md-6 col-lg-3 mb-3">
-        <label>Home page Section</label>
+        <label>Tag/Label</label>
+
+        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Tag" [ngClass]="{ 'is-invalid': f.Caption.errors && f.Caption.touched}"
+          [(ngModel)]="model.CaptionTagId">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
+          Please select <strong>Caption</strong>...!</div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-3">
+        <label>Home Page Section</label>
 
         <ng-select [items]="dropDown.ddlProductViewSection" formControlName="ViewSection" [searchable]="true"
           bindLabel="Text" bindValue="Value" placeholder="--Select--"
@@ -104,10 +104,11 @@
       </div>
 
       <div class="col-md-6 col-lg-5 mb-0">
-        <label>Product main image <span class="label-info"> (Preferred size: 900*900 ) </span></label>
+        <label>Product main image <span class="text-danger">*</span><span class="label-info"> (Preferred size: 900*900 )
+          </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
-          [CurrentFileLength]="model?.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg'"
+          [CurrentFileLength]="model?.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
           [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
         </app-file-selector>
         <div class="invalid-feedback"
@@ -241,40 +242,10 @@
           *ngIf="(formgrp.get('Summary')?.hasError('required') && formgrp.get('Summary')?.touched)">
           Please enter Summary...!</div>
       </div>
-
-      <div class="col-md-12 mb-3">
-        <label>Keyword</label>
-        <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
-          [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
-          Please enter Keyword</div>
-      </div>
-
-      <div class="col-md-12 col-lg-6 mb-3">
-        <label>Meta Title</label>
-        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="Meta Title"
-          class="form-control" [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}"
-          id="MetaTitle"></textarea>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
-          Please enter Meta Title</div>
-      </div>
-
-      <div class="col-md-12 col-lg-6 mb-3">
-        <label>Meta Discription</label>
-        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="Meta Discription"
-          class="form-control" [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}"
-          id="MetaDesc"></textarea>
-        <div class="invalid-feedback"
-          *ngIf="(formgrp.get('MetaDesc')?.hasError('required') && formgrp.get('MetaDesc')?.touched)">
-          Please enter Meta Discription</div>
-      </div>
-
       <fieldset class="border border-radius p-2 w-100 mx-2 mt-4">
 
         <div class="d-flex align-items-center justify-content-between mb-3 mt--25 pr-0 pr-xl-3 fieldset-header">
-          <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
+          <legend class="w-auto text-black bg-white px-2 m-0">Stock<span class="text-danger">*</span></legend>
 
           <button type="button" (click)="onAddStock()" class="fieldset-header-btn" data-bs-toggle="modal"
             data-bs-target="#stockModelPopup">
@@ -318,6 +289,36 @@
           </div>
         </div>
       </fieldset>
+      <div class="col-md-12 mb-3">
+        <label>Keyword</label>
+        <textarea [(ngModel)]="model.Keyword" formControlName="Keyword" placeholder="Keyword" class="form-control"
+          [ngClass]="{ 'is-invalid': f.Keyword.errors && f.Keyword.touched}" id="Keyword"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Keyword')?.hasError('required') && formgrp.get('Keyword')?.touched)">
+          Please enter Keyword</div>
+      </div>
+
+      <div class="col-md-12 col-lg-6 mb-3">
+        <label>Meta Title</label>
+        <textarea [(ngModel)]="model.MetaTitle" formControlName="MetaTitle" placeholder="Meta Title"
+          class="form-control" [ngClass]="{ 'is-invalid': f.MetaTitle.errors && f.MetaTitle.touched}"
+          id="MetaTitle"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('MetaTitle')?.hasError('required') && formgrp.get('MetaTitle')?.touched)">
+          Please enter Meta Title</div>
+      </div>
+
+      <div class="col-md-12 col-lg-6 mb-3">
+        <label>Meta Discription</label>
+        <textarea [(ngModel)]="model.MetaDesc" formControlName="MetaDesc" placeholder="Meta Discription"
+          class="form-control" [ngClass]="{ 'is-invalid': f.MetaDesc.errors && f.MetaDesc.touched}"
+          id="MetaDesc"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('MetaDesc')?.hasError('required') && formgrp.get('MetaDesc')?.touched)">
+          Please enter Meta Discription</div>
+      </div>
+
+
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
@@ -343,18 +344,18 @@
       <div class="modal-body">
         <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
           <div class="row">
-            <div class="col-lg-4 mb-3 mb-lg-0" *ngIf="ddlAvailableProductSize.length>0">
-              <label>Select Size</label>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+              <label>Select Size<span class="text-danger">*</span></label>
               <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
-                bindValue="Value" placeholder="Select Size Id"
+                bindValue="Value" placeholder="Select Size"
                 [ngClass]="{ 'is-invalid': sf.SizeId.errors && sf.SizeId.touched}" [(ngModel)]="stockModel.SizeId">
               </ng-select>
               <div class="invalid-feedback"
                 *ngIf="(stockFormGroup.get('SizeId')?.hasError('required') && stockFormGroup.get('SizeId')?.touched)">
-                Please select <strong>Size Id</strong>...!</div>
+                Please select <strong>Size</strong>...!</div>
             </div>
             <div class="col-lg-4 mb-3 mb-lg-0 unit-pro-price">
-              <label>Unit Price</label>
+              <label>Unit Price<span class="text-danger">*</span></label>
               <input type="number" [(ngModel)]="stockModel.UnitPrice" (keypress)="_commonService.NumberOnly($event)"
                 [minlength]="1" [maxLength]="10" formControlName="UnitPrice"
                 [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}" class="form-control"
@@ -371,7 +372,7 @@
             </div>
 
             <div class="col-lg-4 mb-3 mb-lg-0">
-              <label>Quantity</label>
+              <label>Quantity<span class="text-danger">*</span></label>
               <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)"
                 [minlength]="1" [maxLength]="10" formControlName="Quantity"
                 [ngClass]="{ 'is-invalid': sf.Quantity.errors && sf.Quantity.touched}" class="form-control" id="input4"

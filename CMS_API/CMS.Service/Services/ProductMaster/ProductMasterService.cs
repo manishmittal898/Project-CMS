@@ -55,7 +55,7 @@ namespace CMS.Service.Services.ProductMaster
                                         {
                                             Id = x.Id,
                                             Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                                             CategoryId = x.CategoryId,
                                             Category = x.Category.Name,
                                             SubCategoryId = x.SubCategoryId,
@@ -429,7 +429,7 @@ namespace CMS.Service.Services.ProductMaster
                     Id = x.Id,
                     ProductId = x.ProductId,
                     FilePath = !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath() : null,
-
+                    ThumbnailPath= !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Small)) : null,
                 }).ToListAsync();
                 objResponse = CreateResponse(objResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
@@ -473,7 +473,7 @@ namespace CMS.Service.Services.ProductMaster
                                         {
                                             Id = x.Id,
                                             Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
 
 
                                         }).ToListAsync();
@@ -542,7 +542,7 @@ namespace CMS.Service.Services.ProductMaster
                                         {
                                             Id = x.Id,
                                             Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                                             CategoryId = x.CategoryId,
                                             Category = x.Category.Name,
                                             SubCategoryId = x.SubCategoryId,

@@ -62,7 +62,7 @@ namespace CMS.Service.Services.LookupMaster
                                         {
                                             Id = x.Id,
                                             Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                                             SortedOrder = x.SortedOrder.Value,
                                             LookUpType = x.LookUpType.Value,
                                             LookUpTypeName = x.LookUpTypeNavigation.Name,
