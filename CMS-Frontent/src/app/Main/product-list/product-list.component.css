@@ -1,0 +1,43 @@
+.view-mode .icon-mode.grid-3 {
+  width: 26px;
+}
+.view-mode .icon-mode.grid-4 {
+  width: 33px;
+}
+.view-mode .icon-mode {
+  min-width: 19px;
+  height: 26px;
+  display: block;
+  border: 1px solid #dcdcdc;
+  margin-left: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.view-mode .icon-mode.grid-3:before {
+  box-shadow: 7px 0 #dcdcdc, 14px 0 #dcdcdc;
+}
+.view-mode .icon-mode.grid-4:before {
+  box-shadow: 7px 0 #dcdcdc, 14px 0 #dcdcdc, 21px 0 #dcdcdc;
+}
+
+.view-mode .icon-mode:before {
+  width: 4px;
+  height: 18px;
+  background: #dcdcdc;
+  content: "";
+  top: 3px;
+  position: absolute;
+  left: 3px;
+}
+.view-mode .icon-mode.active {
+  border-color: #595959;
+}
+.view-mode .icon-mode.grid-3.active::before {
+  box-shadow: 7px 0 #595959, 14px 0 #595959;
+  background: #595959;
+}
+
+.view-mode .icon-mode.grid-4.active::before {
+  box-shadow: 7px 0 #595959, 14px 0 #595959, 21px 0 #595959;
+  background: #595959;
+}

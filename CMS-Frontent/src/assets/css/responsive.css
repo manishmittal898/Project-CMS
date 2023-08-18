@@ -302,12 +302,9 @@
 @media screen and (max-width:992px) {}
 
 @media (max-width: 1024px) {
-    .product-list-items-img {
+    /* .product-list-items-img {
         height: 280px;
-    }
-    .product-list-items-img img {
-      max-height: 280px;
-  }
+    } */
     .product-list-info .product-list-price, .product-list-info .product-list-price-off {
         font-size: 15px;
     }
