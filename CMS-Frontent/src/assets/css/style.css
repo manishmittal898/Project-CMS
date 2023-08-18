@@ -843,15 +843,14 @@ font-weight: 600;
 }
 
 .product-list-items-img img {
-    /* max-height: 245px; */
-    max-height: 325px;
+    height: 100%;
 }
 
 .product-list-items-img {
     background: #f8f8f8;
     height: 325px;
     overflow: hidden;
-    box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+    /* box-shadow: 2px 4px 12px rgb(0 0 0 / 8%); */
     border-radius: 0px;
     position: relative;
 }
@@ -1426,7 +1425,6 @@ ul.megamenu-sub-list {
     color: #000;
     border: solid 1px #000;
     font-weight: 500;
-    box-shadow: 0 0 10px #9d9d9d;
 }
 
 .product-d-main-slider-nav .slick-slide {

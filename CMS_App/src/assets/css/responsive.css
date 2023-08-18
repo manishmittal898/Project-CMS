@@ -1,3 +1,11 @@
+
+/* @media all and (min-width: 992px) {
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+} */
+
+
 @media (max-width: 1392px) {
   .cmis-page-create-from {
     flex: 1 1 100%;
