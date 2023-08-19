@@ -516,6 +516,16 @@ ul.footer-benefits li {
   top: 4px;
   left: -5px;
 }
+.product-d-main-slider-nav .slick-slide
+{
+    height: 80px;
+    max-width: 60px;
+}
+.product-d-main-slider-nav .slick-slide img {
+    max-height: 80px;
+}
+
+
 }
 
 @media screen and (max-width:575px) {
