@@ -869,20 +869,20 @@ font-weight: 600;
 }
 
 .inner-breadcrumb {
-    background: #000;
-    padding: 20px 10px;
+  background: #efefef;
+  padding: 10px 10px;
 }
 
 .inner-breadcrumb a {
-    color: #fff;
+    color: #000;
 }
 .inner-breadcrumb a:hover {
-  color: rgba(255,255,255,0.8);
+  color: rgba(0,0,0,0.8);
 }
 
 .breadcrumb-item.active,
 .breadcrumb-item+.breadcrumb-item::before {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .product-details-big-img img {
@@ -1733,7 +1733,7 @@ body .ui-slider .ui-slider-range {
   border: none;
 }
 section.inner-page-space {
-  padding: 60px 0px 40px 0px;
+  padding: 30px 0px 30px 0px;
 }
 section.cmis-pages .cmis-pages-items-list {
   padding: 18px 0px;
