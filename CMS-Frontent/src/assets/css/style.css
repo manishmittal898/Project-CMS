@@ -875,6 +875,7 @@ font-weight: 600;
 
 .inner-breadcrumb a {
     color: #000;
+    font-weight: 500;
 }
 .inner-breadcrumb a:hover {
   color: rgba(0,0,0,0.8);
