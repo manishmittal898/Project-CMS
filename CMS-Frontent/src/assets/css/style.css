@@ -1433,7 +1433,7 @@ ul.megamenu-sub-list {
     cursor: pointer;
     opacity: 0.6 !important;
     margin: 0px 4px;
-    height: 97px;
+    height: 95px;
     max-width: 73px;
     /* width: 75px !important; */
     background: #fff;
@@ -1441,6 +1441,21 @@ ul.megamenu-sub-list {
     align-items: center;
     justify-content: center;
     border: solid 1px #f1f1f1;
+    cursor: pointer;
+}
+.product-d-main-slider-nav {
+  max-width: 480px;
+  margin: auto;
+}
+@media screen and (max-width:1024px) {
+  .product-d-main-slider-nav {
+    max-width: 397px;
+  }
+}
+@media screen and (max-width:767px) {
+  .product-d-main-slider-nav {
+    max-width: 330px;
+  }
 }
 
 .product-d-main-slider-nav .slick-slide>div {
@@ -2750,7 +2765,5 @@ body .toast-close-button {
   left: 0px;
 }
 /* CUSTOM CSS END */
-
-
 
 

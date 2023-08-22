@@ -22,7 +22,7 @@
       <div class="col-md-6">
         <!-- Product Detail Slider Start -->
         <div class="position-relative">
-          <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div>
+          <!-- <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div> -->
           <div [ngClass]="'product-d-main-slider'">
             <div class="product-d-main-slider-items" *ngIf="model?.ImagePath">
               <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
@@ -31,18 +31,19 @@
               <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
             </div>
           </div>
+          <div [ngClass]="'product-d-main-slider-nav'" class="mt-2">
+            <div class="product-d-main-slider-nav-items" *ngIf="model?.ImagePath">
+              <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
+            </div>
+            <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
+
+              <img [src]="item?.ThumbnailPath" *ngIf="item?.ThumbnailPath"
+                onerror="this.src='assets/images/no-img.png'">
+            </div>
+          </div>
         </div>
 
-        <div [ngClass]="'product-d-main-slider-nav'" class="mt-2">
-          <div class="product-d-main-slider-nav-items" *ngIf="model?.ImagePath">
-            <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
-          </div>
-          <div class="product-d-main-slider-nav-items" *ngFor="let item of model?.Files; let i=index">
 
-            <img [src]="item?.ThumbnailPath" *ngIf="item?.ThumbnailPath"
-              onerror="this.src='assets/images/no-img.png'">
-          </div>
-        </div>
         <!-- Product Detail Slider End -->
       </div>
       <div class="col-md-6 mt-4 mt-lg-0 ps-3 ps-lg-4">
