@@ -598,9 +598,13 @@ ul.footer-benefits li {
   font-size: 14px;
 }
 .order-summary-list-img {
-  height: 80px;
-  width: 80px;
-  flex: 0 0 80px;
+  height: 78px;
+  width: 59px;
+  flex: 0 0 59px;
+  margin-right: 10px;
+}
+.order-summary-list-img img {
+  max-height: 78px;
 }
 .order-summary-list-info h3 {
   font-size: 1rem;
