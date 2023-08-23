@@ -424,12 +424,12 @@
   }
   .cart-list-items-img {
     height: 100px;
-    width: 100px;
-    margin-right: 15px;
-    flex: 0 0 100px;
+    width: 75px;
+    margin-right: 12px;
+    flex: 0 0 75px;
 }
 .cart-list-items-img img {
-  max-height: 98px;
+  max-height: 100px;
 }
 
 .cart-list-items-description h3 {
@@ -577,9 +577,9 @@ ul.footer-benefits li {
       font-size: 13px;
   }
   .cart-list-items-img {
-    height: 80px;
-    width: 80px;
-    flex: 0 0 80px;
+    height: 78px;
+    width: 59px;
+    flex: 0 0 59px;
 }
 .cart-list-items-img img {
   max-height: 78px;
