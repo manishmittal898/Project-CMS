@@ -1,29 +1,28 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
-        [attr.data-bs-slide-to]="indx" [ngClass]="{'active': indx==0}" aria-label="{{itm.Title}}">
-      </button>
-    </div>
-
-    <div class="carousel-inner">
-      <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
-        *ngFor="let itm of BannerImages;let indx=index">
-        <a href="javascript:void(0)">
-          <img [src]="itm.ImagePath" onerror="this.src='assets/images/slider-default.png'" class="w-100"
-            alt="{{itm.Title}}">
-        </a>
-      </div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+  <div class="carousel-indicators">
+    <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
+      [attr.data-bs-slide-to]="indx" [ngClass]="{'active': indx==0}" aria-label="{{itm.Title}}">
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
+      *ngFor="let itm of BannerImages;let indx=index">
+      <a href="javascript:void(0)">
+        <img [src]="itm.Data[0].Value" onerror="this.src='assets/images/slider-default.png'" class="w-100"
+          alt="{{itm.Title}}"> </a>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#HomeSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#HomeSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 <!-- Banner Slider End -->
 

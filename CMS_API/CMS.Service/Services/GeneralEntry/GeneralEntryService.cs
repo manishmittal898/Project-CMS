@@ -361,7 +361,7 @@ namespace CMS.Service.Services.GeneralEntry
                         Keyword = x.Keyword,
                         DataId = x.DataId,
                         SortedOrder = x.SortedOrder,
-                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) && x.Category.IsShowThumbnail ? x.ImagePath.ToAbsolutePath() : null,
+                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
                         Url = !string.IsNullOrEmpty(x.Url) && x.Category.IsShowUrl ? x.Url : null,
                         IsActive = x.IsActive,
                         IsDeleted = x.IsDeleted,
