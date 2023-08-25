@@ -25,9 +25,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getCategoryList()
     this.getBannerImages().then(res => {
-      setTimeout(() => {
-        this.AddSlider()
-      }, 500);
+
     });
 
   }
@@ -48,23 +46,22 @@ export class HomeComponent implements OnInit {
         this.AddSlider();
         setTimeout(() => {
           this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
-        }, 100);
+        }, 500);
 
       }
     })
   }
-  getUrl(item) {
-    return `/store/${item.Name.split(' ').join('_')}?id=${item.Id}`
+  openURL(item) {
+    window.open(item);
   }
   async getBannerImages() {
 
     let model = new GeneralEntryFilterModel();
     model.EnumValue = GeneralEntryEnumValue.Banner_Image;
     model.PageSize = 10;
-
     this._generalEntryService.GetList(model).subscribe(res => {
       if (res.IsSuccess) {
-        debugger
+
         this.BannerImages = res.Data;
       }
     })
