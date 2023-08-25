@@ -27,12 +27,12 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpGet]
         public object Get()
         {
-            return _productrw.GetList(0);
+            return _productrw.GetList(null);
         }
 
         // GET api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public object Get(int id)
+        public object Get(string id)
         {
             return _productrw.GetById(id);
         }
@@ -60,7 +60,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // PUT api/<ProductReviewController>/5
         [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] ProductReviewViewModel model)
+        public async Task<object> Put(string id, [FromBody] ProductReviewViewModel model)
         {
 
 
@@ -91,7 +91,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
 
             _productrw.Delete(id);

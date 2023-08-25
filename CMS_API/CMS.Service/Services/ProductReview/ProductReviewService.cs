@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace CMS.Service.Services.ProductReview
 {
-  public  class ProductReviewService : BaseService, IProductReviewService
+    public class ProductReviewService : BaseService, IProductReviewService
     {
         DB_CMSContext _db;
-        public ProductReviewService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
+        public ProductReviewService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
         }
 
 
-        public ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(long Id)
+        public ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(string Id)
         {
             ServiceResponse<IEnumerable<Data.Models.TblProductReview>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblProductReview>>();
             try
             {
-                var objData = _db.TblProductReviews.Where(x=> x.ProductId==Id).ToList();
+                var objData = _db.TblProductReviews.Where(x => string.IsNullOrEmpty(Id) || x.ProductId == long.Parse(_security.DecryptData(Id))).ToList();
                 objResult = CreateResponse(objData as IEnumerable<Data.Models.TblProductReview>, "Success", true);
             }
             catch (Exception)
@@ -37,13 +37,13 @@ namespace CMS.Service.Services.ProductReview
             }
             return objResult;
         }
-        public ServiceResponse<TblProductReview> GetById(int id)
+        public ServiceResponse<TblProductReview> GetById(string id)
         {
             ServiceResponse<TblProductReview> ObjResponse = new ServiceResponse<TblProductReview>();
             try
             {
 
-                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var detail = _db.TblProductReviews.FirstOrDefault(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
@@ -77,18 +77,18 @@ namespace CMS.Service.Services.ProductReview
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
 
-        public async Task<ServiceResponse<TblProductReview>> Edit(int id, ProductReviewViewModel model)
+        public async Task<ServiceResponse<TblProductReview>> Edit(string id, ProductReviewViewModel model)
         {
             try
             {
                 TblProductReview objRole = new TblProductReview();
 
-                objRole = _db.TblProductReviews.FirstOrDefault(r => r.Id == id);
+                objRole = _db.TblProductReviews.FirstOrDefault(r => r.Id == int.Parse(_security.DecryptData(id)));
 
                 objRole.Title = model.Title;
                 objRole.ShortDescription = model.ShortDescription;
@@ -107,22 +107,22 @@ namespace CMS.Service.Services.ProductReview
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblProductReview>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
 
         }
 
 
-        public async Task<ServiceResponse<TblProductReview>> Delete(int id)
+        public async Task<ServiceResponse<TblProductReview>> Delete(string id)
         {
             try
             {
                 TblProductReview objRole = new TblProductReview();
-                objRole = _db.TblProductReviews.FirstOrDefault(r => r.Id == id);
+                objRole = _db.TblProductReviews.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 var roletype = _db.TblProductReviews.Remove(objRole);
-                _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch (Exception ex)

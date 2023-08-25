@@ -40,10 +40,7 @@ export class CMSPageMasterComponent implements OnInit {
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService,
     public dialog: MatDialog
-  ) {
-    debugger
-
-  }
+  ) { }
 
 
   ngOnInit(): void {
@@ -51,7 +48,6 @@ export class CMSPageMasterComponent implements OnInit {
   }
 
   getList(): void {
-    debugger
     this.indexModel.AdvanceSearchModel = {};
     this._cmsPageService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
@@ -90,7 +86,7 @@ export class CMSPageMasterComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._cmsPageService.ChangeCMSPageActiveStatus(Id).subscribe(
@@ -112,7 +108,7 @@ export class CMSPageMasterComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
@@ -136,9 +132,9 @@ export class CMSPageMasterComponent implements OnInit {
     });
   }
 
-  onAddUpdateLookup(Id: number) {
+  onAddUpdateLookup(Id: string = '') {
     const dialogRef = this.dialog.open(LookupsAddEditComponent, {
-      data: { Id: Id as number, Type: LookupTypeEnum.CMS_Page, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
+      data: { Id: Id, Type: LookupTypeEnum.CMS_Page, Heading: `${Id.length > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });

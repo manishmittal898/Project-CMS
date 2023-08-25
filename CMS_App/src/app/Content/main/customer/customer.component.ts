@@ -51,7 +51,6 @@ export class CustomerComponent implements OnInit {
   getList(): void {
     this._userService.GetCustomerList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        debugger
         this.model = response.Data as UserMasterViewModel[];
         this.dataSource = new MatTableDataSource<UserMasterViewModel>(this.model);
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
@@ -120,7 +119,6 @@ export class CustomerComponent implements OnInit {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              debugger
               const idx = this.model.findIndex(x => x.UserId == id);
               this.model.splice(idx, 1);
               this.totalRecords--;

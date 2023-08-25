@@ -14,7 +14,7 @@ export class LookupService {
     return this._baseService.post(url, model);
   }
 
-  GetLookupMaster(id: number): Observable<ApiResponse<LookupMasterModel>> {
+  GetLookupMaster(id: string): Observable<ApiResponse<LookupMasterModel>> {
     let url = `${this._baseService.API_Url.LookupMasterDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -23,32 +23,32 @@ export class LookupService {
     let url = `${this._baseService.API_Url.LookupMasterAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeLookupMasterActiveStatus(id: number, status?: string): Observable<ApiResponse<LookupMasterModel[]>> {
+  ChangeLookupMasterActiveStatus(id: string, status?: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupMasterChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteLookupMaster(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+  DeleteLookupMaster(id: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupMasterDelete_Api}${id}`;
     return this._baseService.get(url);
   }
 }
 
 export interface LookupMasterPostModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   SortedOrder: number ;
-  LookUpType: number ;
+  LookUpType: string ;
 
 }
 
 export interface LookupMasterModel {
 
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   SortedOrder: number | null;
-  LookUpType: number | null;
+  LookUpType: string | null;
   LookUpTypeName: string;
   IsSubLookup: boolean;
   CreatedBy: number;

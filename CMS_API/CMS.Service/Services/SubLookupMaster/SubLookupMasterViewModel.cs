@@ -9,22 +9,22 @@ namespace CMS.Service.Services.SubLookupMaster
 {
     public class SubLookupMasterPostModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
         public string ImagePath { get; set; }
 
         public int? SortedOrder { get; set; }
-        public int LookUpId { get; set; }
+        public string LookUpId { get; set; }
 
     }
     public class SubLookupMasterViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public int? SortedOrder { get; set; }
-        public long LookUpId { get; set; }
+        public string LookUpId { get; set; }
         public string LookUpName { get; set; }
 
         public DateTime CreatedOn { get; set; }

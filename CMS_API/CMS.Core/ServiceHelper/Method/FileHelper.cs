@@ -92,7 +92,6 @@ namespace CMS.Core.ServiceHelper.Method
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + GetFileExtension(base64str) : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + GetFileExtension(base64str);
                             File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
 
-                            File.WriteAllBytes(Path.Combine(path, fileName), byteArr);
 
                         }
                         //  saveFile = filePath;
@@ -176,13 +175,17 @@ namespace CMS.Core.ServiceHelper.Method
         {
             try
             {
-                filePath = GetPhysicalPath(filePath);
-
-                if (File.Exists(filePath))
+                if (!string.IsNullOrEmpty(filePath))
                 {
-                    File.Delete(filePath);
-                    return true;
+                    filePath = GetPhysicalPath(filePath);
+
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                        return true;
+                    }
                 }
+              
             }
             catch
             {

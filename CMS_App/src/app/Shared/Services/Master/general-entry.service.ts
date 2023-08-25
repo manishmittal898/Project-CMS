@@ -16,7 +16,7 @@ export class GeneralEntryService {
     return this._baseService.post(url, model);
   }
 
-  GetGeneralEntry(id: number, isEdit :boolean=false): Observable<ApiResponse<GeneralEntryViewModel>> {
+  GetGeneralEntry(id: string, isEdit: boolean = false): Observable<ApiResponse<GeneralEntryViewModel>> {
     let url = `${this._baseService.API_Url.GeneralEntryDetail_Api}${id}/${isEdit}`;
     return this._baseService.get(url);
   }
@@ -25,16 +25,16 @@ export class GeneralEntryService {
     let url = `${this._baseService.API_Url.GeneralEntryAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeGeneralEntryActiveStatus(id: number, status?: string): Observable<ApiResponse<GeneralEntryViewModel[]>> {
+  ChangeGeneralEntryActiveStatus(id: string, status?: string): Observable<ApiResponse<GeneralEntryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
 
-  DeleteGeneralEntry(id: number): Observable<ApiResponse<GeneralEntryViewModel[]>> {
+  DeleteGeneralEntry(id: string): Observable<ApiResponse<GeneralEntryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryDelete_Api}${id}/${status}`;
     return this._baseService.get(url);
   }
-  DeleteGeneralEntryItems(id: number): Observable<ApiResponse<GeneralEntryDataViewModel>> {
+  DeleteGeneralEntryItems(id: string): Observable<ApiResponse<GeneralEntryDataViewModel>> {
     let url = `${this._baseService.API_Url.GeneralEntryItems_Delete_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -46,7 +46,7 @@ export class GeneralEntryService {
     return this._baseService.post(url, model);
   }
 
-  GetGeneralEntryCategory(id: number): Observable<ApiResponse<GeneralEntryCategoryViewModel>> {
+  GetGeneralEntryCategory(id: string): Observable<ApiResponse<GeneralEntryCategoryViewModel>> {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -55,26 +55,26 @@ export class GeneralEntryService {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeGeneralEntryCategoryActiveStatus(id: number, status?: string): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
+  ChangeGeneralEntryCategoryActiveStatus(id: string, status?: string): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  ChangeGeneralEntryCategoryFlagStatus(id: number, columnName: string): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
+  ChangeGeneralEntryCategoryFlagStatus(id: string, columnName: string): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryChangeFlagStatus_Api}${id}/${columnName}`;
     return this._baseService.get(url);
   }
-  DeleteGeneralEntryCategory(id: number): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
+  DeleteGeneralEntryCategory(id: string): Observable<ApiResponse<GeneralEntryCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.GeneralEntryCategoryDelete_Api}${id}/${status}`;
     return this._baseService.Delete(url);
   }
 }
 
 export interface GeneralEntryCategoryPostModel {
-  Id: number;
+  Id: string;
   Name: string;
   EnumValue: string;
   ImagePath: string;
-  ContentType: number;
+  ContentType: string;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
   IsSingleEntry: boolean;
@@ -84,11 +84,11 @@ export interface GeneralEntryCategoryPostModel {
 }
 
 export interface GeneralEntryCategoryViewModel {
-  Id: number;
+  Id: string;
   Name: string;
   EnumValue: string;
   ImagePath: string;
-  ContentType: number;
+  ContentType: string;
   ContentTypeText: string;
   IsShowInMain: boolean;
   IsShowDataInMain: boolean;
@@ -107,8 +107,8 @@ export interface GeneralEntryCategoryViewModel {
 
 
 export interface GeneralEntryPostModel {
-  Id: number;
-  CategoryId: number;
+  Id: string;
+  CategoryId: string;
   Title: string;
   Description: string;
   SortedOrder: number | null;
@@ -119,9 +119,9 @@ export interface GeneralEntryPostModel {
 }
 
 export interface GeneralEntryViewModel {
-  Id: number;
+  Id: string;
   Title: string;
-  CategoryId: number;
+  CategoryId: string;
   Category: string;
   ImagePath: string;
   Url: string;
@@ -135,7 +135,7 @@ export interface GeneralEntryViewModel {
 }
 
 export interface GeneralEntryDataViewModel {
-  Id: number;
+  Id: string;
   Value: string;
-  GeneralEntryId: number | null;
+  GeneralEntryId: string;
 }

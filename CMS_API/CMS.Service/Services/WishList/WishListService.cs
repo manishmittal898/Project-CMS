@@ -35,11 +35,11 @@ namespace CMS.Service.Services.WishList
 
             try
             {
-                List<TblUserWishList> objProducts = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                List<TblUserWishList> objProducts = await _db.TblUserWishLists.Where(x => x.ProductId == long.Parse(_security.DecryptData( model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
                 if (objProducts.Count == 0)
                 {
                     TblUserWishList objProduct = new TblUserWishList();
-                    objProduct.ProductId = model.ProductId;
+                    objProduct.ProductId = long.Parse(_security.DecryptData(model.ProductId));
                     objProduct.UserId = _loginUserDetail.UserId.Value;
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserWishLists.AddAsync(objProduct);
@@ -72,7 +72,7 @@ namespace CMS.Service.Services.WishList
             try
             {
 
-                List<TblUserWishList> objProduct = await _db.TblUserWishLists.Where(x => x.ProductId == model.ProductId && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                List<TblUserWishList> objProduct = await _db.TblUserWishLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
                 _db.TblUserWishLists.RemoveRange(objProduct);
                 await _db.SaveChangesAsync();
 
@@ -123,16 +123,16 @@ namespace CMS.Service.Services.WishList
                 objResult.Data = await (from x in result
                                         select new ProductMasterViewModel
                                         {
-                                            Id = x.Product.Id,
+                                            Id = _security.EncryptData(x.Product.Id.ToString()),
                                             Name = x.Product.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
-                                            CategoryId = x.Product.CategoryId,
+                                            CategoryId = _security.EncryptData(x.Product.CategoryId.ToString()),
                                             Category = x.Product.Category.Name,
-                                            SubCategoryId = x.Product.SubCategoryId,
+                                            SubCategoryId = x.Product.SubCategoryId.HasValue ? _security.EncryptData(x.Product.SubCategoryId.ToString()) : null,
                                             SubCategory = x.Product.SubCategory.Name,
-                                            CaptionTagId = x.Product.CaptionTagId,
+                                            CaptionTagId = x.Product.CaptionTagId.HasValue ? _security.EncryptData(x.Product.CaptionTagId.ToString()) : null,
                                             CaptionTag = x.Product.CaptionTag.Name,
-                                            ViewSectionId = x.Product.ViewSectionId,
+                                            ViewSectionId = x.Product.ViewSectionId.HasValue ? _security.EncryptData(x.Product.ViewSectionId.ToString()) : null,
                                             ViewSection = x.Product.ViewSection.Name,
                                             Desc = x.Product.Desc,
                                             Summary = x.Product.Desc,
@@ -147,8 +147,6 @@ namespace CMS.Service.Services.WishList
                                             IsDelete = x.Product.IsDelete,
                                             Keyword = x.Product.Keyword,
                                             IsWhishList = true
-
-
                                         }).ToListAsync();
 
 

@@ -58,11 +58,11 @@ export class AccountService {
 }
 
 export interface UserPostModel {
-    Email: string;
+  Email: string;
   FirstName: string;
   LastName: string;
   Dob: Date;
   Mobile: string;
   ProfilePhoto: string;
-  GenderId: number;
+  GenderId: string;
 }

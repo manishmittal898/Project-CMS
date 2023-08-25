@@ -27,14 +27,14 @@ export class GeneralEntryFilterModel extends IndexModel {
   }
 
   Title: string;
-  CategoryId: number | null;
+  CategoryId: string | null;
   EnumValue: string;
 }
 
 export interface GeneralEntryViewModel {
-  Id: number;
+  Id: string;
   Title: string;
-  CategoryId: number;
+  CategoryId: string;
   Category: string;
   ImagePath: string;
   Url: string;
@@ -48,7 +48,7 @@ export interface GeneralEntryViewModel {
 }
 
 export interface GeneralEntryDataViewModel {
-  Id: number;
+  Id: string;
   Value: string;
-  GeneralEntryId: number | null;
+  GeneralEntryId: string | null;
 }

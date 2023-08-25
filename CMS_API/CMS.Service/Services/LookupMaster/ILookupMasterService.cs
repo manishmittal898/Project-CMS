@@ -11,10 +11,10 @@ namespace CMS.Service.Services.LookupMaster
     public interface ILookupMasterService
     {
         Task<ServiceResponse<IEnumerable<LookupMasterViewModel>>> GetList(IndexModel model);
-        ServiceResponse<LookupMasterViewModel> GetById(long id);
+        ServiceResponse<LookupMasterViewModel> GetById(string id);
         Task<ServiceResponse<TblLookupMaster>> Save(LookupMasterPostModel model);
-        Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(long id);
+        Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(string id);
 
-        Task<ServiceResponse<TblLookupMaster>> Delete(long id);
+        Task<ServiceResponse<TblLookupMaster>> Delete(string id);
     }
 }

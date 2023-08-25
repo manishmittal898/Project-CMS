@@ -53,16 +53,16 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.Data = await (from x in result
                                         select new ProductMasterViewModel
                                         {
-                                            Id = x.Id,
+                                            Id = _security.EncryptData(x.Id),
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
-                                            CategoryId = x.CategoryId,
+                                            CategoryId = _security.EncryptData(x.CategoryId),
                                             Category = x.Category.Name,
-                                            SubCategoryId = x.SubCategoryId,
+                                            SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,
                                             SubCategory = x.SubCategory.Name,
-                                            CaptionTagId = x.CaptionTagId,
+                                            CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
                                             CaptionTag = x.CaptionTag.Name,
-                                            ViewSectionId = x.ViewSectionId,
+                                            ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
                                             ViewSection = x.ViewSection.Name,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
@@ -99,24 +99,24 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
-        public ServiceResponse<ProductMasterViewModel> GetById(long id)
+        public ServiceResponse<ProductMasterViewModel> GetById(string id)
         {
             ServiceResponse<ProductMasterViewModel> ObjResponse = new ServiceResponse<ProductMasterViewModel>();
             try
             {
 
-                var detail = _db.TblProductMasters.Include(x => x.TblProductStocks).Select(x => new ProductMasterViewModel
+                var detail = _db.TblProductMasters.Include(x => x.TblProductStocks).Where(x => x.Id == long.Parse(_security.DecryptData(id)) && !x.IsDelete).Select(x => new ProductMasterViewModel
                 {
-                    Id = x.Id,
+                    Id = _security.EncryptData(x.Id.ToString()),
                     Name = x.Name,
                     ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
-                    CategoryId = x.CategoryId,
+                    CategoryId = _security.EncryptData(x.CategoryId),
                     Category = x.Category.Name,
-                    SubCategoryId = x.SubCategoryId,
+                    SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,
                     SubCategory = x.SubCategory.Name,
-                    CaptionTagId = x.CaptionTagId,
+                    CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
                     CaptionTag = x.CaptionTag.Name,
-                    ViewSectionId = x.ViewSectionId,
+                    ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
                     ViewSection = x.ViewSection.Name,
                     Desc = x.Desc,
                     Summary = x.Summary,
@@ -131,23 +131,27 @@ namespace CMS.Service.Services.ProductMaster
                     IsDelete = x.IsDelete,
                     Keyword = x.Keyword,
                     IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
-                   
+
                     Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
                     {
-                        Id = st.Id,
-                        ProductId = st.ProductId,
-                        SizeId = st.SizeId,
+                        Id = _security.EncryptData(st.Id),
+                        ProductId = _security.EncryptData(x.Id),
+                        SizeId = _security.EncryptData(st.SizeId),
                         Size = st.Size.Name,
                         UnitPrice = st.UnitPrice,
                         Quantity = st.Quantity
 
                     }).ToList() : null
-                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value);
-                var productFiles = GetProductFile(id).Result;
-                if (productFiles.IsSuccess)
+                }).FirstOrDefault();
+                if (detail != null)
                 {
-                    detail.Files = productFiles.Data;
+                    var productFiles = GetProductFile(id).Result;
+                    if (productFiles.IsSuccess)
+                    {
+                        detail.Files = productFiles.Data;
+                    }
                 }
+
 
                 ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
@@ -168,13 +172,16 @@ namespace CMS.Service.Services.ProductMaster
                 List<TblProductImage> productImages = new List<TblProductImage>();
                 List<TblProductStock> productStock = new List<TblProductStock>();
 
-                if (model.Id > 0)
+                if (!string.IsNullOrEmpty(model.Id))
                 {
-                    objProduct = _db.TblProductMasters.Include(x => x.TblProductStocks).FirstOrDefault(r => r.Id == model.Id);
+                    objProduct = _db.TblProductMasters.Include(x => x.TblProductStocks).FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
 
                     objProduct.Name = model.Name;
-                    objProduct.CategoryId = model.CategoryId;
-                    objProduct.SubCategoryId = model.SubCategoryId.HasValue ? model.SubCategoryId : null;
+                    objProduct.CategoryId = long.Parse(_security.DecryptData(model.CategoryId));
+                    objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
+                    objProduct.ViewSectionId = !string.IsNullOrEmpty(model.ViewSectionId) ? long.Parse(_security.DecryptData(model.ViewSectionId)) : null as Nullable<long>;
+                    objProduct.CaptionTagId = !string.IsNullOrEmpty(model.CaptionTagId) ? long.Parse(_security.DecryptData(model.CaptionTagId)) : null as Nullable<long>;
+
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
 
@@ -189,17 +196,18 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
-                    objProduct.CaptionTagId = model.CaptionTagId;
-                    objProduct.ViewSectionId = model.ViewSectionId;
+                 
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.MetaTitle = model.MetaTitle;
                     objProduct.MetaDesc = model.MetaDesc;
+                    objProduct.ModifiedOn = DateTime.Now;
+
                     var product = _db.TblProductMasters.Update(objProduct);
 
                     if (model.Stocks != null && model.Stocks.Count > 0)
                     {
-                        var exIds = model.Stocks.Select(x => x.Id).ToArray();
+                        var exIds = model.Stocks.Select(x => long.Parse(_security.DecryptData(x.Id))).ToArray();
 
                         var deleteStock = objProduct.TblProductStocks.Where(x => !exIds.Contains(x.Id)).ToList();
                         if (deleteStock.Count > 0)
@@ -210,12 +218,12 @@ namespace CMS.Service.Services.ProductMaster
 
 
                         List<TblProductStock> prStocks = new List<TblProductStock>();
-                        model.Stocks.Where(wh => wh.Id > 0).ToList().ForEach(xs =>
+                        model.Stocks.Where(wh => long.Parse(_security.DecryptData(wh.Id)) > 0).ToList().ForEach(xs =>
                         {
-                            TblProductStock prStock = objProduct.TblProductStocks.Where(p => p.Id == xs.Id).FirstOrDefault();
+                            TblProductStock prStock = objProduct.TblProductStocks.Where(p => p.Id == long.Parse(_security.DecryptData(xs.Id))).FirstOrDefault();
                             if (prStock != null)
                             {
-                                prStock.SizeId = xs.SizeId;
+                                prStock.SizeId = long.Parse(_security.DecryptData(xs.SizeId));
                                 prStock.UnitPrice = xs.UnitPrice;
                                 prStock.Quantity = xs.Quantity;
                                 prStocks.Add(prStock);
@@ -230,11 +238,11 @@ namespace CMS.Service.Services.ProductMaster
                         }
 
 
-                        productStock = model.Stocks.Where(x => x.Id == default || x.Id == 0).Select(x => new TblProductStock
+                        productStock = model.Stocks.Where(x => x.Id == default || long.Parse(_security.DecryptData(x.Id)) == 0).Select(x => new TblProductStock
                         {
 
-                            ProductId = model.Id,
-                            SizeId = x.SizeId,
+                            ProductId = long.Parse(_security.DecryptData(model.Id)),
+                            SizeId = long.Parse(_security.DecryptData(x.SizeId)),
                             UnitPrice = x.UnitPrice,
                             Quantity = x.Quantity
 
@@ -251,7 +259,7 @@ namespace CMS.Service.Services.ProductMaster
                     _db.SaveChanges();
                     if (model.Files != null && model.Files.Count > 0)
                     {
-                        string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == model.Id).Select(x => x.FilePath).ToArray();
+                        string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.Id))).Select(x => x.FilePath).ToArray();
 
                         model.Files = model.Files.FindAll(x => x != null && !existingfilePaths.Contains(x.Replace("\\", "/")));
 
@@ -269,21 +277,22 @@ namespace CMS.Service.Services.ProductMaster
                     }
                     objProduct.TblProductStocks = null;
 
-                    return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
 
 
                     objProduct.Name = model.Name;
-                    objProduct.CategoryId = model.CategoryId;
-                    objProduct.SubCategoryId = model.SubCategoryId;
+                    objProduct.CategoryId = long.Parse(_security.DecryptData(model.CategoryId));
+                    objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
+                    objProduct.ViewSectionId = !string.IsNullOrEmpty(model.ViewSectionId) ? long.Parse(_security.DecryptData(model.ViewSectionId)) : null as Nullable<long>;
+                    objProduct.CaptionTagId = !string.IsNullOrEmpty(model.CaptionTagId) ? long.Parse(_security.DecryptData(model.CaptionTagId)) : null as Nullable<long>;
+
                     objProduct.ImagePath = await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main, isThumbnail: true);
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
-                    objProduct.CaptionTagId = model.CaptionTagId;
-                    objProduct.ViewSectionId = model.ViewSectionId;
 
                     objProduct.IsActive = true;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
@@ -316,7 +325,7 @@ namespace CMS.Service.Services.ProductMaster
                         {
 
                             ProductId = product.Entity.Id,
-                            SizeId = x.SizeId,
+                            SizeId = long.Parse(_security.DecryptData(x.SizeId)),
                             UnitPrice = x.UnitPrice,
                             Quantity = x.Quantity
 
@@ -326,7 +335,7 @@ namespace CMS.Service.Services.ProductMaster
 
                     }
                     objProduct.TblProductStocks = null;
-                    return CreateResponse<TblProductMaster>(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse(objProduct, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -339,12 +348,12 @@ namespace CMS.Service.Services.ProductMaster
             }
         }
 
-        public async Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(long id)
+        public async Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(string id)
         {
             try
             {
                 TblProductMaster objProduct = new TblProductMaster();
-                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == id);
+                objProduct = _db.TblProductMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 objProduct.IsActive = !objProduct.IsActive;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
@@ -359,12 +368,12 @@ namespace CMS.Service.Services.ProductMaster
 
             }
         }
-        public async Task<ServiceResponse<TblProductMaster>> Delete(long id)
+        public async Task<ServiceResponse<TblProductMaster>> Delete(string id)
         {
             try
             {
                 TblProductMaster objProduct = new TblProductMaster();
-                objProduct = await _db.TblProductMasters.FirstOrDefaultAsync(r => r.Id == id);
+                objProduct = await _db.TblProductMasters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 objProduct.IsDelete = (bool)true;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
@@ -380,11 +389,11 @@ namespace CMS.Service.Services.ProductMaster
             }
         }
 
-        public async Task<ServiceResponse<object>> DeleteProductFile(long id)
+        public async Task<ServiceResponse<object>> DeleteProductFile(string id)
         {
             try
             {
-                List<TblProductImage> objProductFile = _db.TblProductImages.Where(r => r.Id == id || string.IsNullOrEmpty(r.FilePath)).ToList();
+                List<TblProductImage> objProductFile = _db.TblProductImages.Where(r => r.Id == long.Parse(_security.DecryptData(id)) || string.IsNullOrEmpty(r.FilePath)).ToList();
 
                 objProductFile.ForEach(x =>
                 {
@@ -414,18 +423,18 @@ namespace CMS.Service.Services.ProductMaster
             }
         }
 
-        public async Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(long productId)
+        public async Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(string productId)
         {
             ServiceResponse<List<ProductImageViewModel>> objResponse = new ServiceResponse<List<ProductImageViewModel>>();
             try
             {
 
-                objResponse.Data = await _db.TblProductImages.Where(x => x.ProductId == productId && x.IsActive.Value && !x.IsDeleted && !string.IsNullOrEmpty(x.FilePath)).Select(x => new ProductImageViewModel
+                objResponse.Data = await _db.TblProductImages.Where(x => x.ProductId == long.Parse(_security.DecryptData(productId)) && x.IsActive.Value && !x.IsDeleted && !string.IsNullOrEmpty(x.FilePath)).Select(x => new ProductImageViewModel
                 {
-                    Id = x.Id,
-                    ProductId = x.ProductId,
+                    Id = _security.EncryptData(x.Id),
+                    ProductId = productId,
                     FilePath = !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath() : null,
-                    ThumbnailPath= !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Small)) : null,
+                    ThumbnailPath = !string.IsNullOrEmpty(x.FilePath) ? x.FilePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Small)) : null,
                 }).ToListAsync();
                 objResponse = CreateResponse(objResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
@@ -467,7 +476,7 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.Data = await (from x in result
                                         select new ProductCategoryViewModel
                                         {
-                                            Id = x.Id,
+                                            Id = _security.EncryptData( x.Id),
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
 
@@ -500,22 +509,20 @@ namespace CMS.Service.Services.ProductMaster
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
             {
-
+                List<long> Ids = model.Ids != null && model.Ids.Count > 0 ? model.Ids.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> CategoryIds = model.CategoryId != null && model.CategoryId.Count > 0 ? model.CategoryId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> SubCategoryIds = model.SubCategoryId != null && model.SubCategoryId.Count > 0 ? model.SubCategoryId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> SizeIds = model.SizeId != null && model.SizeId.Count > 0 ? model.SizeId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> ViewSectionIds = model.ViewSectionId != null && model.ViewSectionId.Count > 0 ? model.ViewSectionId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
 
                 var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
-
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
-
-                                && (model.CategoryId == null || model.CategoryId.Count == 0 || model.CategoryId.Contains(prd.CategoryId))
-
-                                 && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || model.SubCategoryId.Contains(prd.SubCategoryId))
-
-                                 && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => model.SizeId.Contains(x.SizeId)))
-
-                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || model.ViewSectionId.Contains(prd.ViewSectionId.Value))
-                                 && (model.Ids == null || model.Ids.Count == 0 || model.Ids.Contains(prd.Id))
-
+                                && (model.CategoryId == null || model.CategoryId.Count == 0 || CategoryIds.Contains(prd.CategoryId))
+                                 && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || SubCategoryIds.Contains(prd.SubCategoryId.Value))
+                                 && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
+                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
+                                 && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
                                 && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
                 switch (model.OrderBy)
@@ -536,14 +543,14 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.Data = await (from x in result.Include(x => x.TblUserWishLists)
                                         select new ProductMasterViewModel
                                         {
-                                            Id = x.Id,
+                                            Id = _security.EncryptData(x.Id),
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
-                                            CategoryId = x.CategoryId,
+                                            CategoryId = _security.EncryptData(x.CategoryId),
                                             Category = x.Category.Name,
-                                            SubCategoryId = x.SubCategoryId,
+                                            SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,
                                             SubCategory = x.SubCategory.Name,
-                                            CaptionTagId = x.CaptionTagId,
+                                            CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
                                             CaptionTag = x.CaptionTag.Name,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
@@ -557,14 +564,13 @@ namespace CMS.Service.Services.ProductMaster
                                             Keyword = x.Keyword,
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
-                                            ViewSectionId = x.ViewSectionId,
+                                            ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
+                                            ViewSection = x.ViewSection.Name,
                                             IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false
                                         }).ToListAsync();
 
-
                 if (result != null)
                 {
-
                     return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
@@ -574,19 +580,14 @@ namespace CMS.Service.Services.ProductMaster
             }
             catch (Exception ex)
             {
-
                 objResult.Data = null;
                 objResult.IsSuccess = false;
                 objResult.Message = ex.Message;
                 objResult.TotalRecord = 0;
-
                 objResult.StatusCode = ((int)ApiStatusCode.InternalServerError);
-
             }
             return objResult;
         }
-
-
 
     }
 }

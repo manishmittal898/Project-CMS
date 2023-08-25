@@ -9,7 +9,7 @@ namespace CMS.Service.Services.LookupTypeMaster
 {
  public  class LookupTypeMasterViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string ImagePath { get; set; }

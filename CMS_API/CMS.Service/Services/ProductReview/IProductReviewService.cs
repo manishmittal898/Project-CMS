@@ -7,11 +7,11 @@ namespace CMS.Service.Services.ProductReview
 {
     public interface IProductReviewService
     {
-        ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(long Id);
-        ServiceResponse<TblProductReview> GetById(int id);
+        ServiceResponse<IEnumerable<Data.Models.TblProductReview>> GetList(string Id);
+        ServiceResponse<TblProductReview> GetById(string id);
 
         Task<ServiceResponse<TblProductReview>> Save(ProductReviewViewModel model);
-        Task<ServiceResponse<TblProductReview>> Edit(int id, ProductReviewViewModel model);
-        Task<ServiceResponse<TblProductReview>> Delete(int id);
+        Task<ServiceResponse<TblProductReview>> Edit(string id, ProductReviewViewModel model);
+        Task<ServiceResponse<TblProductReview>> Delete(string id);
     }
 }

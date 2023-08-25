@@ -10,10 +10,10 @@ namespace CMS.Service.Services.GeneralEntry
    public interface IGECategoryService
     {
         Task<ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>>> GetList(IndexModel model);
-        Task<ServiceResponse<GeneralEntryCategoryViewModel>> GetById(long id);
+        Task<ServiceResponse<GeneralEntryCategoryViewModel>> GetById(string id);
         Task<ServiceResponse<TblGecategoryMater>> Save(GeneralEntryCategoryPostModel model);
-        Task<ServiceResponse<TblGecategoryMater>> ActiveStatusUpdate(long id);
-        Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(long id, string columnName);
-        Task<ServiceResponse<TblGecategoryMater>> Delete(long id);
+        Task<ServiceResponse<TblGecategoryMater>> ActiveStatusUpdate(string id);
+        Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(string id, string columnName);
+        Task<ServiceResponse<TblGecategoryMater>> Delete(string id);
     }
 }

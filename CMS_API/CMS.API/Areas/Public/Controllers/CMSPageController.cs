@@ -23,7 +23,7 @@ namespace CMS.API.Areas.Public.Controllers
        
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(long id)
+        public async Task<object> Get(string id)
         
         {
             return await _service.GetById(id);

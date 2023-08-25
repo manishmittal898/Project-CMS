@@ -83,7 +83,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._generalEntryService.ChangeGeneralEntryCategoryActiveStatus(Id).subscribe(
@@ -106,16 +106,14 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
 
   }
 
-  onFlagStatus(Id: number, columnName: string) {
+  onFlagStatus(Id: string, columnName: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._generalEntryService.ChangeGeneralEntryCategoryFlagStatus(Id, columnName).subscribe(
           data => {
             subscription.unsubscribe();
             if (data.IsSuccess) {
-              debugger
               this.toast.success(data.Message as string, 'Update');
-              //this.getList();
               let idx = this.model.findIndex(x => x.Id == Id);
               switch (columnName) {
                 case 'IsShowInMain':
@@ -129,13 +127,13 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
                   this.model[idx].IsSingleEntry = !this.model[idx].IsSingleEntry;
                   break;
 
-                  case 'IsShowThumbnail':
-                    this.model[idx].IsShowThumbnail = !this.model[idx].IsShowThumbnail;
-                    break;
+                case 'IsShowThumbnail':
+                  this.model[idx].IsShowThumbnail = !this.model[idx].IsShowThumbnail;
+                  break;
 
-                    case 'IsShowUrl':
-                      this.model[idx].IsShowUrl = !this.model[idx].IsShowUrl;
-                      break;
+                case 'IsShowUrl':
+                  this.model[idx].IsShowUrl = !this.model[idx].IsShowUrl;
+                  break;
 
                 default:
                   break;
@@ -154,7 +152,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
   }
 
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {

@@ -113,7 +113,7 @@ export class DropDownModel {
 export class DropDownItem {
   Text: any = "";
   Value: any = "";
-  CategoryId?: number;
+  CategoryId?: any;
   Category?: string;
 }
 
@@ -127,5 +127,5 @@ export class GroupDropDownItem {
 export interface FilterDropDownPostModel {
   Key: string;
   FileterFromKey: string;
-  Values: number[];
+  Values: any[];
 }

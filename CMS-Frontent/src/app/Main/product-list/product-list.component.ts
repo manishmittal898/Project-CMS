@@ -27,15 +27,12 @@ export class ProductListComponent implements OnInit {
     this._router.queryParams.subscribe(p => {
       if (p.id) {
 
-        const id = this._securityService.decrypt(this._router.snapshot.queryParams.id);
-        this.indexModel.CategoryId = [Number(id)];
+        this.indexModel.CategoryId = [this._router.snapshot.queryParams.id];
         this.indexModel.SubCategoryId = [];
       }
 
       if (p.subid) {
-
-        const sid = this._securityService.decrypt(this._router.snapshot.queryParams.subid);
-        this.indexModel.SubCategoryId = [Number(sid)];
+        this.indexModel.SubCategoryId = [this._router.snapshot.queryParams.subid];
       }
 
       if (this._router.snapshot.params?.name) {
@@ -59,7 +56,7 @@ export class ProductListComponent implements OnInit {
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data;
-        this.model = this.model;//.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
+        this.model = this.model; //.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
 
       }

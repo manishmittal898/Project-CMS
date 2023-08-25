@@ -11,7 +11,7 @@ export class CMSPageService {
 
   constructor(private readonly _baseService: BaseAPIService) { }
 
-  GetDetails(id: number): Observable<ApiResponse<CMSPageViewModel[]>> {
+  GetDetails(id: string): Observable<ApiResponse<CMSPageViewModel[]>> {
     let url = `${this._baseService.API_Url.CMSPageDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -21,8 +21,8 @@ export class CMSPageService {
 }
 
 export interface CMSPageViewModel {
-  Id: number;
-  PageId: number;
+  Id: string;
+  PageId: string;
   Heading: string;
   Content: string;
   SortedOrder: number | null;

@@ -80,9 +80,9 @@ export interface UserAddressMasterViewModel {
   PinCode: string;
   Landmark: string;
   City: string;
-  StateId: number | null;
+  StateId: string ;
   State: string;
-  AddressType: number | null;
+  AddressType: string ;
   AddressTypeName: string;
   IsPrimary: boolean;
   IsActive: boolean | null;

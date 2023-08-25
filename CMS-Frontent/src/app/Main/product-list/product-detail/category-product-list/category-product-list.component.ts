@@ -9,9 +9,9 @@ declare var $: any;
   styleUrls: ['./category-product-list.component.css']
 })
 export class CategoryProductListComponent implements OnInit, OnChanges {
-  @Input() CategoryId: number;
-  @Input() SubCategoryId: number;
-  @Input() ExcludeId: number = 0;
+  @Input() CategoryId: string;
+  @Input() SubCategoryId: string;
+  @Input() ExcludeId: string = '';
 
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
@@ -25,7 +25,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   // }
   constructor(private readonly _productService: ProductService, private readonly _securityService: SecurityService) {
-    this.indexModel.CategoryId = [Number(this.CategoryId)];
+    this.indexModel.CategoryId = [this.CategoryId];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -49,13 +49,13 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
   getList() {
     this.isLoading = true;
 
-    if (this.CategoryId > 0) {
-      this.indexModel.CategoryId = [Number(this.CategoryId)];
+    if (this.CategoryId.length > 0) {
+      this.indexModel.CategoryId = [this.CategoryId];
       this._productService.GetList(this.indexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.model = response.Data;
-          this.model = this.model;//.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
-          this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId > 0 ? 1 : 0) : 0) as number;
+          this.model = this.model; //.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
+          this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId.length > 0 ? 1 : 0) : 0) as number;
           this.bindRelatedList();
 
         }
@@ -64,7 +64,7 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   }
   bindRelatedList() {
-    this.productModel = this.model.filter(x => Number(x.Id) !== Number(this.ExcludeId));
+    this.productModel = this.model.filter(x => x.Id !== this.ExcludeId);
     this.isLoading = false;
     this.AddSlider();
 

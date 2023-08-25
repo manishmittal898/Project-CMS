@@ -25,7 +25,6 @@ export class CustomerDetailComponent implements OnInit {
   getDetail(): void {
     this._userService.GetCustomerDetail(this.id).subscribe(response => {
       if (response.IsSuccess) {
-        debugger
         this.model = response.Data as UserMasterViewModel;
 
       } else {

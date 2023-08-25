@@ -35,48 +35,48 @@ export class ProductFilterModel extends IndexModel {
     this.Price = [50, 100000];
     this.ViewSectionId = [];
   }
-  CategoryId!: number[];
-  SubCategoryId!: number[];
-  Price!: number[];
+  CategoryId!: string[];
+  SubCategoryId!: string[];
+  Price!: any[];
   IsAvailableStock!: boolean;
-  SizeId!: number[];
+  SizeId!: string[];
   Keyword!: string;
-  ViewSectionId!: number[];
-  Ids!: number[]
+  ViewSectionId!: string[];
+  Ids!: string[]
 }
 
 
 export interface ProductMasterViewModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
-  CategoryId: number;
-  SubCategoryId: number;
+  CategoryId: string;
+  SubCategoryId: string;
   Desc: string;
   Price: number | null;
-  CaptionTagId: number | null;
+  CaptionTagId: string ;
   Summary: string;
   CaptionTag: string;
   Category: string;
   SubCategory: string;
-  ShippingCharge: number | undefined;
+  ShippingCharge: string;
   IsWhishList: boolean;
-  ViewSectionId: number | null;
+  ViewSectionId: string;
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 
 }
 
 export interface ProductImageViewModel {
-  Id: number;
+  Id: string;
   FilePath: string;
-  ProductId: number | null;
-  ThumbnailPath:string;
+  ProductId: string;
+  ThumbnailPath: string;
 }
 
 
 export interface ProductCategoryViewModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   CreatedBy: number;
@@ -86,9 +86,9 @@ export interface ProductCategoryViewModel {
 
 }
 export interface ProductStockModel {
-  Id: number;
-  ProductId: number;
-  SizeId: number | undefined;
+  Id: string;
+  ProductId: string;
+  SizeId: string | undefined;
   Size: string;
   UnitPrice: number | null;
   Quantity: number | null;

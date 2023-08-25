@@ -47,7 +47,7 @@ namespace CMS.Core.ServiceHelper.Model
     {
         public string Key { get; set; }
         public string FileterFromKey { get; set; }
-        public long[] Values { get; set; }
+        public string[] Values { get; set; }
 
 
     }

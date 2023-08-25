@@ -3,21 +3,21 @@ export enum FixedValueEnum {
 
 }
 
-export enum LookupTypeEnum {
-  GENDER=1,
-  Product_Category=2,
-  Caption_Tag=3,
-  Product_Size=4,
-  CMS_Page=5,
-  Address_Type=6,
-  State=7,
-  Product_View_Section=8,
+export enum LookupTypeEnum  {
+  GENDER = 'eyCvsTeZgGNU6GsQwPbiOw',
+  Product_Category = 'wydhZaqRHY0pD3SH0P0gXA',
+  Caption_Tag = '-g5L1cvimURxdmSkDzl7bA',
+  Product_Size = 'MFxLbqWblnm06s4F5-jiKA',
+  CMS_Page = 'eaZ-SiGWucqTt4KEvYIEtg',
+  Address_Type = 'C1MrmbEnri9rOZ33ZVlhdQ',
+  State = 'GLEG1vbpq0nUPZEYXpUhmA',
+  Product_View_Section = 'ZbsykbzgutUW_nkrF36Wbg',
 }
 export enum ContentTypeEnum {
-  None = 0,
-  Photo = 1,
-  MultipleImages = 2,
-  Video = 3,
-  Document = 4,
+  None = '3cL-jjTIKObYhpYRBcSicQ',
+  Photo = 'eyCvsTeZgGNU6GsQwPbiOw',
+  MultipleImages = 'wydhZaqRHY0pD3SH0P0gXA',
+  Video = '-g5L1cvimURxdmSkDzl7bA',
+  Document = 'MFxLbqWblnm06s4F5-jiKA',
 
 }

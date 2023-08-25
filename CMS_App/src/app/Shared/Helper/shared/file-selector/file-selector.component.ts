@@ -76,7 +76,7 @@ export class FileSelectorComponent {
     this.FilesChanged = new EventEmitter();
     this._files = [];
     this.FileFilter = "image/*,.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt";
-    this._allowFiles = ['.jpeg', '.gif', '.png', '.jpg', '.TIFF', '.PSD', '.EPS', '.RAW', '.INDD', '.AI', '.doc', '.docx', '.ppt', '.pptx', '.pdf', '.txt', '.xlx', '.xlsx', '.BMP', '.SVG', '.mkv'];
+    this._allowFiles = ['.jpeg', '.gif','.webp', '.png', '.jpg', '.TIFF', '.PSD', '.EPS', '.RAW', '.INDD', '.AI', '.doc', '.docx', '.ppt', '.pptx', '.pdf', '.txt', '.xlx', '.xlsx', '.BMP', '.SVG', '.mkv'];
   }
   RemoveFile(file: FileInfo) {
     let index = this._files.indexOf(file);
@@ -148,7 +148,7 @@ export class FileSelectorComponent {
     const ext = fileName?.split('.')[fileName?.split('.').length - 1]?.toLowerCase()??'';
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
-    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg','webp'].some(x => x.toLowerCase() === ext)) {
       return 'image';
     }
     else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {

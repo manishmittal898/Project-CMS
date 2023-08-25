@@ -13,7 +13,7 @@ import { CommonService } from 'src/app/Shared/Services/common.service';
   styleUrls: ['./cmspage-add-update.component.scss']
 })
 export class CMSPageAddUpdateComponent implements OnInit {
-  id: number = 0;
+  id: string = "";
   pageName: string = '';
   model = {} as CMSPagePostModel;
   postModel = [] as CMSPagePostModel[];
@@ -32,7 +32,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
       this.pageName = this._activatedRoute.snapshot.params.name.split('_').join(' ');
     });
     _activatedRoute.queryParamMap.subscribe(x => {
-      this.id = Number(x.get('id'))
+      this.id = x.get('id') as string
     });
 
   }
@@ -44,7 +44,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   AddItem() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      if (this.model.Id < 1 || typeof this.model.Id == undefined) {
+      if (this.model.Id?.length == 0 || typeof this.model?.Id == undefined) {
         this.postModel.push(this.model);
       } else {
         const idx = this.postModel.findIndex(x => x.Id == this.model.Id);
@@ -62,13 +62,13 @@ export class CMSPageAddUpdateComponent implements OnInit {
 
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.Id = this.model.Id > 0 ? this.model.Id : 0;
+      this.model.Id = this.model?.Id?.length > 0 ? this.model?.Id : '';
       this.model.PageId = this.id;
       this.model.SortedOrder = Number(this.model.SortedOrder);
       this._cmsPageService.AddUpdateCMSPage(this.model).subscribe(res => {
 
         if (res.IsSuccess) {
-          this.model.Id = Number(res.Data);
+          this.model.Id = res.Data as string;
           this.postModel.push(this.model);
           this.model = {} as CMSPagePostModel;
           this.formgrp.reset();
@@ -106,7 +106,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   editItem(item: CMSPagePostModel) {
     const idx = this.postModel.findIndex(x => x.Id === item.Id);
     if (idx >= 0) {
-        this.postModel.splice(idx, 1);
+      this.postModel.splice(idx, 1);
     }
     this.model = Object.assign({}, item);
   }

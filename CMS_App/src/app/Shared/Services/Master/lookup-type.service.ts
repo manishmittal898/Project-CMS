@@ -14,7 +14,7 @@ export class LookupTypeService {
     return this._baseService.post(url, model);
   }
 
-  GetLookupTypeMaster(id: number): Observable<ApiResponse<LookupTypeMasterModel>> {
+  GetLookupTypeMaster(id: string): Observable<ApiResponse<LookupTypeMasterModel>> {
     let url = `${this._baseService.API_Url.LookupTypeMasterDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -23,11 +23,11 @@ export class LookupTypeService {
     let url = `${this._baseService.API_Url.LookupTypeMasterAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeLookupTypeMasterActiveStatus(id: number, status?: string): Observable<ApiResponse<LookupTypeMasterModel[]>> {
+  ChangeLookupTypeMasterActiveStatus(id: string, status?: string): Observable<ApiResponse<LookupTypeMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupTypeMasterChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteLookupTypeMaster(id: number): Observable<ApiResponse<LookupTypeMasterModel[]>> {
+  DeleteLookupTypeMaster(id: string): Observable<ApiResponse<LookupTypeMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupTypeMasterDelete_Api}${id}/${status}`;
     return this._baseService.get(url);
   }
@@ -35,7 +35,7 @@ export class LookupTypeService {
 
 
 export interface LookupTypeMasterModel {
-  Id: number;
+  Id: string;
   Name: string;
   EnumValue: string;
   CreatedBy: number;

@@ -107,7 +107,7 @@ export class MyAddressComponent implements OnInit {
   }
 
   onSave(data: UserAddressViewModel) {
-    debugger
+
     if (data.IsPrimary) {
       this.data.forEach(ele => {
         ele.IsPrimary = false;

@@ -4,7 +4,7 @@
     {{pageName | titlecase}}
   </div>
   <div class="page-new-header-action">
-    <button routerLink="{{model.Id > 0 ?'../../' :'../'}}" class="page-new-header-action-items"
+    <button routerLink="{{model.Id.length > 0 ?'../../' :'../'}}" class="page-new-header-action-items"
       data-title="Back to list"> <i class="bi bi-arrow-return-left"></i> </button>
   </div>
 </div>
@@ -57,14 +57,14 @@
         <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
-          [CurrentFileLength]="model!.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg'"
+          [CurrentFileLength]="model!.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
           [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
         </app-file-selector>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
           Please upload image...!</div>
 
-        <span *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+        <span *ngIf="model.ImagePath && !isFileAttached  && model.Id.length>0">
 
           <a href="javascript:void()" class="small-media-items position-relative mb-3">
             <div class="small-media-items-img"> <img [src]="model.ImagePath"
@@ -81,7 +81,7 @@
         </span>
 
       </div>
-
+      {{selectedCategory?.ContentType==(contentTypeEnum.Photo).toString()}}
       <div class="col-md-6 mb-0"
         *ngIf="selectedCategory?.ContentType==(contentTypeEnum.Photo).toString() || selectedCategory?.ContentType==(contentTypeEnum.MultipleImages).toString() ||selectedCategory?.ContentType==(contentTypeEnum.Document).toString() || selectedCategory?.ContentType==(contentTypeEnum.Video).toString()">
         <label>Attachments <span class="label-info"> (Preferred size: 500*500 ) </span></label>
@@ -97,7 +97,6 @@
             *ngIf="(formgrp.get('DataItems')?.hasError('required') && formgrp.get('DataItems')?.touched)">
             Please Add File...!</div>
         </div>
-
         <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="dataItems">
           <ng-container *ngFor="let itm of dataItems">
             <span [ngSwitch]="getFileType(itm.Value)">
@@ -175,7 +174,7 @@
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
       <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i>
-        {{model.Id > 0 ? 'Save ' : 'Add '}}</button>
+        {{model.Id.length > 0 ? 'Save ' : 'Add '}}</button>
       <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times me-1"></i> Cancel</button>
     </div>
   </form>

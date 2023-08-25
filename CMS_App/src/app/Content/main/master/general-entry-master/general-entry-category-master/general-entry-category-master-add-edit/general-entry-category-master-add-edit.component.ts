@@ -38,8 +38,8 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.GetDropDown();
     this._activatedRoute.params.subscribe(x => {
-      this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
-      if (this.model.Id > 0) {
+      this.model.Id = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : '';
+      if (this.model.Id.length>0) {
         this.onGetDetail();
       }
     });

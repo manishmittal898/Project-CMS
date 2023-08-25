@@ -29,10 +29,10 @@ export class LookupsAddEditComponent implements OnInit {
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
   constructor(public dialogRef: MatDialogRef<LookupsAddEditComponent>, private readonly _lookupService: LookupService, private readonly _lookupTypeService: LookupTypeService,
     private readonly fb: FormBuilder, public _commonService: CommonService, private readonly toast: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: { Id: number, Type: number, Heading: string }) {
+    @Inject(MAT_DIALOG_DATA) public data: { Id: string, Type: string, Heading: string }) {
 
     this._lookupTypeService.GetLookupTypeMaster(this.data.Type).subscribe(x => {
-      debugger
+      
       if (x.IsSuccess) {
         if (!x.Data?.IsImage) {
 
@@ -49,7 +49,7 @@ export class LookupsAddEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.data.Id > 0) {
+    if (this.data.Id.length > 0) {
       this.getDetail();
     }
   }
@@ -60,7 +60,7 @@ export class LookupsAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.LookUpType = Number(this.data.Type);
+      this.model.LookUpType = this.data.Type;
       this.model.Id = this.data.Id;
       this.model.SortedOrder = Number(this.model.SortedOrder);
 
@@ -90,7 +90,7 @@ export class LookupsAddEditComponent implements OnInit {
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
           SortedOrder: Number(x.Data?.SortedOrder),
-          LookUpType: Number(x.Data?.LookUpType),
+          LookUpType: x.Data?.LookUpType,
         } as LookupMasterPostModel;
 
         this.isFileAttached = this.model.ImagePath ? false : this.isFileAttached;

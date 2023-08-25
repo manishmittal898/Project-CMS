@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit {
     this.isLoading = true;
     this._productService.GetDetail(this.recordId).subscribe(res => {
       if (res.IsSuccess) {
-        debugger
+
         this.isLoading = false;
         this.model = res.Data;
 
@@ -101,7 +101,7 @@ export class ProductDetailComponent implements OnInit {
 
   }
 
- 
+
 
   updateWishlist() {
     this.loading.WishList = true;

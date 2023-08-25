@@ -14,7 +14,7 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
 
-  GetProductMaster(id: number): Observable<ApiResponse<ProductMasterViewModel>> {
+  GetProductMaster(id: string): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_Detail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -23,29 +23,29 @@ export class ProductService {
     let url = `${this._baseService.API_Url.Product_AddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeProductMasterActiveStatus(id: number): Observable<ApiResponse<ProductMasterViewModel>> {
+  ChangeProductMasterActiveStatus(id: string): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_ActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteProductMaster(id: number): Observable<ApiResponse<ProductMasterViewModel>> {
+  DeleteProductMaster(id: string): Observable<ApiResponse<ProductMasterViewModel>> {
     let url = `${this._baseService.API_Url.Product_Delete_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteProductFile(id: number): Observable<ApiResponse<ProductImageViewModel>> {
+  DeleteProductFile(id: string): Observable<ApiResponse<ProductImageViewModel>> {
     let url = `${this._baseService.API_Url.ProductFile_Delete_Api}${id}`;
     return this._baseService.get(url);
   }
 }
 
 export interface ProductMasterViewModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
-  CategoryId: number;
-  SubCategoryId: number;
+  CategoryId: string;
+  SubCategoryId: string;
   Desc: string;
   Price: number | null;
-  CaptionTagId: number | null;
+  CaptionTagId: string | null;
   Summary: string;
   CreatedBy: number;
   CreatedOn: string;
@@ -61,7 +61,7 @@ export interface ProductMasterViewModel {
   MetaTitle: string;
   MetaDesc: string;
   IsWhishList: boolean;
-  ViewSectionId: number,
+  ViewSectionId: string,
   ViewSection: string,
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
@@ -69,15 +69,15 @@ export interface ProductMasterViewModel {
 }
 
 export interface ProductMasterPostModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   Desc: string;
   Price: number | undefined;
-  CategoryId: number | undefined;
-  SubCategoryId: number | undefined;
-  CaptionTagId: number | undefined;
-  ViewSectionId: number | undefined;
+  CategoryId: string | undefined;
+  SubCategoryId: string | undefined;
+  CaptionTagId: string | undefined;
+  ViewSectionId: string | undefined;
   Summary: string;
   ShippingCharge: number | undefined;
   Keyword: string;
@@ -88,15 +88,15 @@ export interface ProductMasterPostModel {
 }
 
 export interface ProductImageViewModel {
-  Id: number;
+  Id: string;
   FilePath: string;
-  ProductId: number | null;
+  ProductId: string | null;
 }
 
 export interface ProductStockModel {
-  Id: number;
-  ProductId: number;
-  SizeId: number | undefined;
+  Id: string;
+  ProductId: string;
+  SizeId: string | undefined;
   Size: string;
   UnitPrice: number | null;
   Quantity: number | null;

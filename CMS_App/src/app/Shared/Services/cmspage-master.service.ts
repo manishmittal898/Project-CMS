@@ -16,7 +16,7 @@ export class CMSPageMasterService {
     return this._baseService.post(url, model);
   }
 
-  GetDetails(id: number): Observable<ApiResponse<CMSPageViewModel[]>> {
+  GetDetails(id: string): Observable<ApiResponse<CMSPageViewModel[]>> {
     let url = `${this._baseService.API_Url.CMSPageDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -25,27 +25,27 @@ export class CMSPageMasterService {
     let url = `${this._baseService.API_Url.CMSPageAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeCMSPageActiveStatus(id: number, status?: string): Observable<ApiResponse<LookupMasterModel[]>> {
+  ChangeCMSPageActiveStatus(id: string, status?: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupMasterChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteCMSPage(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+  DeleteCMSPage(id: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.LookupMasterDelete_Api}${id}/${status}`;
     return this._baseService.get(url);
   }
 
-  ChangeCMSContentActiveStatus(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+  ChangeCMSContentActiveStatus(id: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.CMSContentChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteCMSContent(id: number): Observable<ApiResponse<LookupMasterModel[]>> {
+  DeleteCMSContent(id: string): Observable<ApiResponse<LookupMasterModel[]>> {
     let url = `${this._baseService.API_Url.CMSContentDelete_Api}${id}`;
     return this._baseService.get(url);
   }
 }
 export interface CMSPageViewModel {
-  Id: number;
-  PageId: number;
+  Id: string;
+  PageId: string;
   Heading: string;
   Content: string;
   SortedOrder: number | null;
@@ -55,7 +55,7 @@ export interface CMSPageViewModel {
 }
 
 export interface CMSPageListViewModel {
-  PageId: number;
+  PageId: string;
   Name: string;
   SortedOrder: number | null;
   IsActive: boolean;
@@ -65,8 +65,8 @@ export interface CMSPageListViewModel {
 
 
 export interface CMSPagePostModel {
-  PageId: number;
-  Id: number;
+  PageId: string;
+  Id: string;
   Heading: string;
   Content: string;
   SortedOrder: number | null;

@@ -9,7 +9,7 @@ namespace CMS.Service.Services.ProductReview
 {
   public  class ProductReviewViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         [Required]
         [StringLength(100)]
         public string Title { get; set; }

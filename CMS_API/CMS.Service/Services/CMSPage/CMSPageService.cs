@@ -58,7 +58,7 @@ namespace CMS.Service.Services.CMSPage
                 objResult.Data = await (from x in result
                                         select new CMSPageListViewModel
                                         {
-                                            PageId = x.Id,
+                                            PageId = _security.EncryptData(x.Id),
                                             Name = x.Name,
                                             SortedOrder = x.SortedOrder,
                                             IsActive = x.IsActive,
@@ -88,15 +88,15 @@ namespace CMS.Service.Services.CMSPage
 
         }
 
-        public async Task<ServiceResponse<List<CMSPageViewModel>>> GetById(long id)
+        public async Task<ServiceResponse<List<CMSPageViewModel>>> GetById(string id)
         {
             ServiceResponse<List<CMSPageViewModel>> ObjResponse = new ServiceResponse<List<CMSPageViewModel>>();
             try
             {
-                var detail = await _db.TblCmspageContentMasters.Where(x => x.PageId == id && x.IsActive.Value && x.IsDeleted == false).Select(X => new CMSPageViewModel
+                var detail = await _db.TblCmspageContentMasters.Where(x => x.PageId == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDeleted == false).Select(X => new CMSPageViewModel
                 {
-                    Id = X.Id,
-                    PageId = X.PageId,
+                    Id = _security.EncryptData(X.Id),
+                    PageId = _security.EncryptData(X.PageId),
                     Page = X.Page.Name,
                     SortedOrder = X.SortedOrder,
                     Heading = X.Heading,
@@ -131,10 +131,10 @@ namespace CMS.Service.Services.CMSPage
             try
             {
 
-                if (model.Id > 0)
+                if (!string.IsNullOrEmpty(model.Id))
                 {
 
-                    TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == model.Id);
+                    TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == long.Parse( _security.DecryptData(model.Id.ToString())));
                     objData.Content = model.Content;
                     objData.SortedOrder = model.SortedOrder;
                     objData.Heading = model.Heading;
@@ -147,7 +147,7 @@ namespace CMS.Service.Services.CMSPage
                 else
                 {
                     TblCmspageContentMaster objData = new TblCmspageContentMaster();
-                    objData.PageId = model.PageId;
+                    objData.PageId = long.Parse(_security.DecryptData(model.PageId.ToString()));
                     objData.Content = model.Content;
                     objData.SortedOrder = model.SortedOrder;
                     objData.Heading = model.Heading;
@@ -158,7 +158,7 @@ namespace CMS.Service.Services.CMSPage
                     var dataResult = await _db.TblCmspageContentMasters.AddAsync(objData);
                     _db.SaveChanges();
 
-                    model.Id = dataResult.Entity.Id;
+                    model.Id = _security.EncryptData(dataResult.Entity.Id.ToString()) ;
 
                 }
 
@@ -173,12 +173,12 @@ namespace CMS.Service.Services.CMSPage
             }
         }
 
-        public async Task<ServiceResponse<string>> ActiveStatusUpdate(long id)
+        public async Task<ServiceResponse<string>> ActiveStatusUpdate(string id)
         {
             try
             {
 
-                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == id);
+                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(id)));
                 objData.IsActive = !objData.IsActive;
                 objData.ModifiedOn = DateTime.Now;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
@@ -193,12 +193,12 @@ namespace CMS.Service.Services.CMSPage
             }
         }
 
-        public async Task<ServiceResponse<string>> Delete(long id)
+        public async Task<ServiceResponse<string>> Delete(string id)
         {
             try
             {
 
-                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == id);
+                TblCmspageContentMaster objData = await _db.TblCmspageContentMasters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(id)));
                 objData.IsDeleted = !objData.IsDeleted;
                 objData.ModifiedOn = DateTime.Now;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;

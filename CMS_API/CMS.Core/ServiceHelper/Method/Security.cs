@@ -73,6 +73,16 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
         public string EncryptData(string strValue)
         {
+            return Encrypt(strValue);
+
+        }
+        public string EncryptData(long strValue)
+        {
+            return Encrypt(strValue.ToString());
+
+        }
+        private string Encrypt(string strValue)
+        {
             byte[] key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("EncryptionKey"));
 
             try
@@ -86,8 +96,8 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
                     {
                         byte[] plaintextBytes = Encoding.UTF8.GetBytes(strValue);
                         byte[] encryptedData = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
-                       return Base64UrlEncoder.Encode(encryptedData);
-                      //  return Convert.ToBase64String(encryptedData);
+                        return Base64UrlEncoder.Encode(encryptedData);
+                        //  return Convert.ToBase64String(encryptedData);
 
                     }
                 }
@@ -97,9 +107,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
                 throw;
             }
-
         }
-
         public string DecryptData(string strValue)
         {
 

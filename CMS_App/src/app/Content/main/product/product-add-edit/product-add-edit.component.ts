@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/Shared/Services/common.service';
 import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
 import { DropDownItem } from '../../../../Shared/Helper/common-model';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-product-add-edit',
@@ -58,8 +59,8 @@ export class ProductAddEditComponent implements OnInit {
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
     this._activatedRoute.params.subscribe(x => {
-      this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
-      if (this.model.Id > 0) {
+      this.model.Id = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : null;
+      if (this.model.Id !== null) {
         this.onGetDetail();
       }
     });
@@ -73,7 +74,7 @@ export class ProductAddEditComponent implements OnInit {
   ddlProductSize(): any {
 
     setTimeout(() => {
-      this.ddlAvailableProductSize = this.dropDown?.ddlProductSize?.filter(x => !(this.model?.Stocks?.map(y => { return y.SizeId }))?.includes(Number(x.Value)));
+      this.ddlAvailableProductSize = this.dropDown?.ddlProductSize?.filter(x => !(this.model?.Stocks?.map(y => { return y.SizeId }))?.includes(x.Value));
       // let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
       return this.model?.Stocks?.length > 0 ? this.ddlAvailableProductSize : this.dropDown?.ddlProductSize;
     }, 100);
@@ -108,9 +109,9 @@ export class ProductAddEditComponent implements OnInit {
         this.model.ImagePath = data.ImagePath;
         this.model.Desc = data.Desc;
         this.model.Price = data.Price ? Number(data.Price) : undefined;
-        this.model.CategoryId = data.CategoryId ? Number(data.CategoryId) : undefined;
-        this.model.SubCategoryId = data.SubCategoryId ? Number(data.SubCategoryId) : undefined;
-        this.model.CaptionTagId = data.CaptionTagId ? Number(data.CaptionTagId) : undefined;
+        this.model.CategoryId = data.CategoryId ? data.CategoryId : undefined;
+        this.model.SubCategoryId = data.SubCategoryId ? data.SubCategoryId : undefined;
+        this.model.CaptionTagId = data.CaptionTagId ? data.CaptionTagId : undefined;
         this.model.Summary = data.Summary;
         this.model.ShippingCharge = data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
         this.model.Keyword = data.Keyword;
@@ -118,7 +119,7 @@ export class ProductAddEditComponent implements OnInit {
         this.model.MetaDesc = data.MetaDesc;
         this.ProductFiles = data.Files;
         this.model.Stocks = data.Stocks;
-        this.model.ViewSectionId = data.ViewSectionId ? Number(data.ViewSectionId) : undefined;;
+        this.model.ViewSectionId = data.ViewSectionId ? data.ViewSectionId : undefined;;
 
       } else {
         this.toast.error(response.Message?.toString(), 'Error');
@@ -141,9 +142,9 @@ export class ProductAddEditComponent implements OnInit {
       }
     });
   }
-  getSubLookUpDropDown(value: number) {
+  getSubLookUpDropDown(value: string) {
 
-    if (value > 0) {
+    if (value.length > 0) {
       const ddlModel = {} as FilterDropDownPostModel;
       ddlModel.FileterFromKey = this.ddlkeys.ddlLookup
       ddlModel.Key = this.ddlkeys.ddlSublookup
@@ -192,7 +193,7 @@ export class ProductAddEditComponent implements OnInit {
     }
 
   }
-  deleteProductFile(id: number) {
+  deleteProductFile(id: string) {
     this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
       if (result) {
         let subscription = this._productService.DeleteProductFile(id).subscribe(
@@ -222,7 +223,7 @@ export class ProductAddEditComponent implements OnInit {
 
   onEditStock(stockItem: ProductStockModel, idx: number) {
     this.ddlProductSize()
-    if (stockItem && stockItem.Id > 0) {
+    if (stockItem && stockItem.Id != null) {
       idx = this.model.Stocks.findIndex(x => x.Id === stockItem.Id);
     }
     this.stockModel = Object.assign({}, this.model.Stocks[idx]);
@@ -261,6 +262,6 @@ export class ProductAddEditComponent implements OnInit {
   }
 
   onGetProductSizeLabel(sizeId: any) {
-    return this.dropDown?.ddlProductSize?.find(x => Number(x.Value) === Number(sizeId))?.Text ?? '';
+    return this.dropDown?.ddlProductSize?.find(x => x.Value === sizeId)?.Text ?? '';
   }
 }

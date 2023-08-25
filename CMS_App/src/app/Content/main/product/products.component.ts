@@ -51,7 +51,6 @@ export class ProductsComponent implements OnInit {
   getList(): void {
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        debugger
         this.model = response.Data as ProductMasterViewModel[];
         this.dataSource = new MatTableDataSource<ProductMasterViewModel>(this.model);
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
@@ -87,7 +86,7 @@ export class ProductsComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._productService.ChangeProductMasterActiveStatus(Id).subscribe(
@@ -111,7 +110,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
@@ -120,7 +119,6 @@ export class ProductsComponent implements OnInit {
             subscription.unsubscribe();
             if (data.IsSuccess) {
               this._commonService.Success(data.Message as string)
-              debugger
               const idx = this.model.findIndex(x => x.Id == id);
               this.model.splice(idx, 1);
               this.totalRecords--;

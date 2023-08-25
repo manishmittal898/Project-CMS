@@ -34,7 +34,7 @@ namespace CMS.Service.Services.LookupMaster
                 if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("typeId"))
                 {
                     model.AdvanceSearchModel.TryGetValue("typeId", out object typeId);
-                    TypeId = Convert.ToInt64(typeId.ToString());
+                    TypeId = Convert.ToInt64(_security.DecryptData(typeId.ToString()));
 
                 }
 
@@ -60,11 +60,11 @@ namespace CMS.Service.Services.LookupMaster
                 objResult.Data = await (from x in result
                                         select new LookupMasterViewModel
                                         {
-                                            Id = x.Id,
+                                            Id = _security.EncryptData(x.Id),
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                                             SortedOrder = x.SortedOrder.Value,
-                                            LookUpType = x.LookUpType.Value,
+                                            LookUpType = x.LookUpType.HasValue ? _security.EncryptData(x.LookUpType.Value) : null,
                                             LookUpTypeName = x.LookUpTypeNavigation.Name,
                                             IsSubLookup = x.LookUpTypeNavigation.IsSubLookup,
                                             CreatedBy = x.CreatedBy,
@@ -95,18 +95,18 @@ namespace CMS.Service.Services.LookupMaster
             }
             return objResult;
         }
-        public ServiceResponse<LookupMasterViewModel> GetById(long id)
+        public ServiceResponse<LookupMasterViewModel> GetById(string id)
         {
             ServiceResponse<LookupMasterViewModel> ObjResponse = new ServiceResponse<LookupMasterViewModel>();
             try
             {
-                var detail = _db.TblLookupMasters.Select(X => new LookupMasterViewModel
+                var detail = _db.TblLookupMasters.Where(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDelete == false).Select(X => new LookupMasterViewModel
                 {
-                    Id = X.Id,
+                    Id = _security.EncryptData(X.Id),
                     Name = X.Name,
                     ImagePath = !string.IsNullOrEmpty(X.ImagePath) ? X.ImagePath.ToAbsolutePath() : null,
                     SortedOrder = X.SortedOrder,
-                    LookUpType = X.LookUpType,
+                    LookUpType = X.LookUpType.HasValue ? _security.EncryptData(X.LookUpType.Value) : null,
                     LookUpTypeName = X.LookUpTypeNavigation.Name,
                     IsSubLookup = X.LookUpTypeNavigation.IsSubLookup,
                     CreatedBy = X.CreatedBy,
@@ -116,12 +116,12 @@ namespace CMS.Service.Services.LookupMaster
                     IsActive = X.IsActive,
                     IsDelete = X.IsDelete,
 
-                }).FirstOrDefault(x => x.Id == id && x.IsActive.Value && x.IsDelete == false);
+                }).FirstOrDefault();
 
                 if (detail != null)
                 {
                     ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
-                                    }
+                }
                 else
                 {
                     ObjResponse = CreateResponse<LookupMasterViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
@@ -139,18 +139,18 @@ namespace CMS.Service.Services.LookupMaster
         {
             try
             {
-                if (model.Id > 0)
+                if (!string.IsNullOrEmpty(model.Id))
                 {
 
-                    TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == model.Id);
+                    TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.LookUpType = model.LookUpType;
+                    objData.LookUpType = model.LookUpType != null ? long.Parse(_security.DecryptData(model.LookUpType)) : null as Nullable<long>;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
-                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath :await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                        objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
                     }
-                    else
+                    else 
                     {
                         _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
@@ -168,8 +168,8 @@ namespace CMS.Service.Services.LookupMaster
                     TblLookupMaster objData = new TblLookupMaster();
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.LookUpType = model.LookUpType;
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null :await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
+                    objData.LookUpType = model.LookUpType != null ? long.Parse(_security.DecryptData(model.LookUpType.ToString())) : null as Nullable<long>;
+                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
 
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
@@ -188,12 +188,12 @@ namespace CMS.Service.Services.LookupMaster
         }
 
 
-        public async Task<ServiceResponse<TblLookupMaster>> Delete(long id)
+        public async Task<ServiceResponse<TblLookupMaster>> Delete(string id)
         {
             try
             {
                 TblLookupMaster objData = new TblLookupMaster();
-                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
                 objData.IsDelete = true;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
                 objData.ModifiedOn = DateTime.Now;
@@ -207,12 +207,12 @@ namespace CMS.Service.Services.LookupMaster
             }
         }
 
-        public async Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(long id)
+        public async Task<ServiceResponse<TblLookupMaster>> ActiveStatusUpdate(string id)
         {
             try
             {
                 TblLookupMaster objData = new TblLookupMaster();
-                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == id);
+                objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 objData.IsActive = !objData.IsActive;
                 await _db.SaveChangesAsync();

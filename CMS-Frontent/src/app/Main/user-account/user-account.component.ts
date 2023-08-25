@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 
 @Component({
@@ -10,10 +10,14 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
   isAuth = false;
-  constructor(private readonly _authService: AuthService, private readonly _route: ActivatedRoute) {
-    this._route.url.subscribe(r => {
-      
-    })
+  constructor(private readonly _authService: AuthService, private readonly _route: Router) {
+
+    if (_route.url.includes('wishlist')) {
+      this.pageName = "Wishlist"
+    }
+   else if (_route.url.includes('address')) {
+      this.pageName = "Address"
+    }
 
   }
 

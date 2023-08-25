@@ -12,12 +12,12 @@ namespace CMS.Service.Services.ProductMaster
     {
         Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model);
 
-        ServiceResponse<ProductMasterViewModel> GetById(long id);
+        ServiceResponse<ProductMasterViewModel> GetById(string id);
         Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model);
-        Task<ServiceResponse<TblProductMaster>> Delete(long id);
-        Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(long id);
-        Task<ServiceResponse<object>> DeleteProductFile(long id);
-        Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(long productId);
+        Task<ServiceResponse<TblProductMaster>> Delete(string id);
+        Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(string id);
+        Task<ServiceResponse<object>> DeleteProductFile(string id);
+        Task<ServiceResponse<List<ProductImageViewModel>>> GetProductFile(string productId);
 
         Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model);
         Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFilterModel model);

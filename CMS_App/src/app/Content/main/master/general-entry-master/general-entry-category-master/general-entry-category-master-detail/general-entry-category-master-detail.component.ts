@@ -10,7 +10,7 @@ import { GeneralEntryService, GeneralEntryCategoryViewModel } from 'src/app/Shar
   styleUrls: ['./general-entry-category-master-detail.component.scss']
 })
 export class GeneralEntryCategoryMasterDetailComponent implements OnInit {
-  recordId = 0;
+  recordId = '';
   model = {} as GeneralEntryCategoryViewModel;
   constructor(private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
@@ -18,8 +18,8 @@ export class GeneralEntryCategoryMasterDetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(x => {
-      this.recordId = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
-      if (this.recordId > 0) {
+      this.recordId = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : 0;
+      if (this.recordId.length) {
         this.onGetDetail();
       }
     });

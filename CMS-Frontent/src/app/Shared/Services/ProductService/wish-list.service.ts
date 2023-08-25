@@ -31,7 +31,6 @@ export class WishListService {
     return this._baseService.post(url, model);
   }
 
-
   public async SetWishlistProduct(product: ProductMasterViewModel) {
     let model = { ProductId: product.Id } as WishListPostModel;
     if (this._auth.IsAuthentication.value) {
@@ -97,12 +96,12 @@ export class WishListService {
 }
 
 export interface WishListViewModel {
-  Id: number;
-  ProductId: number;
+  Id: string;
+  ProductId: string;
   AddedOn: string;
   Product: ProductMasterViewModel;
 }
 
 export interface WishListPostModel {
-  ProductId: number;
+  ProductId: string;
 }

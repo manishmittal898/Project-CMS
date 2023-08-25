@@ -1,5 +1,5 @@
 <app-no-records *ngIf="totalRecords==0 && !indexModel.Search else ShowRecord" [data]="noRecordData"
-  (onClick)="onAddUpdateLookup(0)">
+  (onClick)="onAddUpdateLookup('')">
 </app-no-records>
 <ng-template #ShowRecord>
 
@@ -9,7 +9,7 @@
       {{pageName}}
     </div>
     <div class="page-new-header-action">
-      <button (click)="onAddUpdateLookup(0)" class="page-new-header-action-items" data-title="Add"> <i
+      <button (click)="onAddUpdateLookup('')" class="page-new-header-action-items" data-title="Add"> <i
           class="bi bi-plus-lg"></i></button>
       <div class="page-new-header-action-search">
         <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="bi bi-search"></i></button>

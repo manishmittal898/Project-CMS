@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     return `/store/${item.Name.split(' ').join('_')}?id=${item.Id}`
   }
   async getBannerImages() {
-    debugger
+
     let model = new GeneralEntryFilterModel();
     model.EnumValue = GeneralEntryEnumValue.Banner_Image;
     model.PageSize = 10;
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
       if (res.IsSuccess) {
         debugger
         this.BannerImages = res.Data;
-              }
+      }
     })
   }
 

@@ -30,7 +30,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<LookupTypeMasterController>/5
         [HttpGet("{id}")]
-        public object Get(int id)
+        public object Get(string id)
         {
             return _lookuptypemstr.GetById(id);
         }
@@ -58,7 +58,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // PUT api/<LookupTypeMasterController>/5
         [HttpPut("{id}")]
-        public async Task<object> Put(int id, [FromBody] LookupTypeMasterViewModel model)
+        public async Task<object> Put(string id, [FromBody] LookupTypeMasterViewModel model)
         {
 
 
@@ -89,7 +89,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<LookupTypeMasterController>/5
         [HttpGet("{id}")]
-        public void Delete(long id)
+        public void Delete(string id)
         {
 
             _lookuptypemstr.Delete(id);

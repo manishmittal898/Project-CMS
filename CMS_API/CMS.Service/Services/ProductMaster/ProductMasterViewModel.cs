@@ -10,7 +10,7 @@ namespace CMS.Service.Services.ProductMaster
 {
     public class ProductMasterPostModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         [Required]
         public string Name { get; set; }
 
@@ -22,10 +22,10 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? Price { get; set; }
 
         [Required]
-        public long CategoryId { get; set; }
-        public long? SubCategoryId { get; set; }
-        public long? CaptionTagId { get; set; }
-        public long? ViewSectionId { get; set; }
+        public string CategoryId { get; set; }
+        public string SubCategoryId { get; set; }
+        public string CaptionTagId { get; set; }
+        public string ViewSectionId { get; set; }
         public string Summary { get; set; }
         public decimal? ShippingCharge { get; set; }
         public string Keyword { get; set; }
@@ -37,15 +37,15 @@ namespace CMS.Service.Services.ProductMaster
 
     public class ProductMasterViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
-        public long CategoryId { get; set; }
-        public long? SubCategoryId { get; set; }
+        public string CategoryId { get; set; }
+        public string? SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
-        public long? CaptionTagId { get; set; }
-        public long? ViewSectionId { get; set; }
+        public string? CaptionTagId { get; set; }
+        public string? ViewSectionId { get; set; }
         public string Summary { get; set; }
         public string MetaTitle { get; set; }
         public string MetaDesc { get; set; }
@@ -68,15 +68,15 @@ namespace CMS.Service.Services.ProductMaster
     }
     public class ProductImageViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string FilePath { get; set; }
         public string ThumbnailPath { get; set; }
-        public long? ProductId { get; set; }
+        public string? ProductId { get; set; }
     }
 
     public class ProductCategoryViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
 
@@ -86,9 +86,9 @@ namespace CMS.Service.Services.ProductMaster
 
     public class ProductStockModel
     {
-        public long Id { get; set; }
-        public long ProductId { get; set; }
-        public long SizeId { get; set; }
+        public string Id { get; set; }
+        public string ProductId { get; set; }
+        public string SizeId { get; set; }
         public string Size { get; set; }
         public decimal? UnitPrice { get; set; }
         public int? Quantity { get; set; }
@@ -98,14 +98,14 @@ namespace CMS.Service.Services.ProductMaster
 
     public class ProductFilterModel : IndexModel
     {
-        public List<long?> CategoryId { get; set; }
-        public List<long?> SubCategoryId { get; set; }
+        public List<string> CategoryId { get; set; }
+        public List<string> SubCategoryId { get; set; }
         public List<long?> Price { get; set; }
         public bool IsAvailableStock { get; set; }
-        public List<long> SizeId { get; set; }
-        public List<long> ViewSectionId { get; set; }
+        public List<string> SizeId { get; set; }
+        public List<string> ViewSectionId { get; set; }
         public string Keyword { get; set; }
-        public List<long>? Ids { get; set; }
+        public List<string> Ids { get; set; }
 
     }
 

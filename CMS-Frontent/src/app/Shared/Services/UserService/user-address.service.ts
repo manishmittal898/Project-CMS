@@ -49,8 +49,8 @@ export interface UserAddressPostModel {
   PinCode: string;
   Landmark: string;
   City: string;
-  StateId: number | null;
-  AddressType: number | null;
+  StateId: string;
+  AddressType: string;
   IsPrimary: boolean;
 }
 
@@ -64,8 +64,8 @@ export interface UserAddressViewModel {
   PinCode: string;
   Landmark: string;
   City: string;
-  StateId: number | null;
-  AddressType: number | null;
+  StateId: string;
+  AddressType: string;
   IsPrimary: boolean;
   AddressTypeName: string;
   State: string;

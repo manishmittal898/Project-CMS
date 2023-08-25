@@ -29,7 +29,7 @@ export class CMSPageContentComponent implements OnInit {
   }
 
   getDetails() {
-    this._cmsPageService.GetDetails(Number(this._securityService.decrypt(this.recordId))).subscribe(res => {
+    this._cmsPageService.GetDetails(this.recordId).subscribe(res => {
       if (res.IsSuccess) {
         const data = res.Data;
         this.model = data.sort(x => x.SortedOrder);

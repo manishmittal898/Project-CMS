@@ -55,13 +55,13 @@ namespace CMS.Service.Services.LookupTypeMaster
             }
             return objResult;
         }
-        public ServiceResponse<TblLookupTypeMaster> GetById(int id)
+        public ServiceResponse<TblLookupTypeMaster> GetById(string id)
         {
             ServiceResponse<TblLookupTypeMaster> ObjResponse = new ServiceResponse<TblLookupTypeMaster>();
             try
             {
 
-                var result = _db.TblLookupTypeMasters.FirstOrDefault(x => x.Id == id && x.IsActive.Value);
+                var result = _db.TblLookupTypeMasters.FirstOrDefault(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value);
                 if (result != null)
                 {
 
@@ -106,13 +106,13 @@ namespace CMS.Service.Services.LookupTypeMaster
             }
         }
 
-        public async Task<ServiceResponse<TblLookupTypeMaster>> Edit(int id, LookupTypeMasterViewModel model)
+        public async Task<ServiceResponse<TblLookupTypeMaster>> Edit(string id, LookupTypeMasterViewModel model)
         {
             try
             {
                 TblLookupTypeMaster objRole = new TblLookupTypeMaster();
 
-                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == id);
+                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 objRole.Name = model.Name;
                 objRole.ModifiedBy = _loginUserDetail.UserId.Value;
@@ -132,12 +132,12 @@ namespace CMS.Service.Services.LookupTypeMaster
 
         }
 
-        public async Task<ServiceResponse<TblLookupTypeMaster>> Delete(long id)
+        public async Task<ServiceResponse<TblLookupTypeMaster>> Delete(string id)
         {
             try
             {
                 TblLookupTypeMaster objRole = new TblLookupTypeMaster();
-                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == id);
+                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse( _security.DecryptData(id)));
 
                 var roletype = _db.TblLookupTypeMasters.Remove(objRole);
                 await _db.SaveChangesAsync();

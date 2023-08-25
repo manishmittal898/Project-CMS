@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
 {
- 
+
     [Area("Admin")]
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
@@ -31,7 +31,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(long id)
+        public async Task<object> Get(string id)
 
         {
             return await _service.GetById(id);
@@ -57,22 +57,22 @@ namespace CMS.API.Areas.Admin.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(long id)
+        public async Task<object> ChangeActiveStatus(string id)
         {
             return await _service.ActiveStatusUpdate(id);
         }
 
         [HttpGet("{id}/{columnName}")]
-        public async Task<object> ChangeFlagStatusUpdate(long id, string columnName)
+        public async Task<object> ChangeFlagStatusUpdate(string id, string columnName)
         {
-            return await _service.FlagStatusUpdate(id,columnName);
+            return await _service.FlagStatusUpdate(id, columnName);
         }
 
- 
+
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(long id)
+        public async Task<object> Delete(string id)
         {
             return await _service.Delete(id);
         }

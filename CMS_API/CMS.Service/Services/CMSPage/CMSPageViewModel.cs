@@ -8,8 +8,8 @@ namespace CMS.Service.Services.CMSPage
 {
     public class CMSPageViewModel
     {
-        public long Id { get; set; }
-        public long PageId { get; set; }
+        public string Id { get; set; }
+        public string PageId { get; set; }
         [DataType(DataType.Html)]
 
         public string Heading { get; set; }
@@ -23,7 +23,7 @@ namespace CMS.Service.Services.CMSPage
 
     public class CMSPageListViewModel
     {
-        public long PageId { get; set; }
+        public string PageId { get; set; }
         public string Name { get; set; }
         public int? SortedOrder { get; set; }
         public bool? IsActive { get; set; }
@@ -32,9 +32,9 @@ namespace CMS.Service.Services.CMSPage
  
     public class CMSPagePostModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         [Required]
-        public long PageId { get; set; }
+        public string PageId { get; set; }
                 
         [Display(Name = "Heading*")]
         //[StringLength(2000, ErrorMessage = "The {0} char length smaller than {1}.")]

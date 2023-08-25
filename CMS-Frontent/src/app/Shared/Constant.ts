@@ -74,7 +74,7 @@ export class API_Url {
   //#endregion
 
   //#region  << User Account  >>
-  public static GeneralEntry_List_Api = `${environment.apiEndPoint}public/GeneralEntryData/GetList/`;
+  public static GeneralEntry_List_Api = `${environment.apiEndPoint}public/GeneralEntryData/GetList`;
   //#endregion
 
 }

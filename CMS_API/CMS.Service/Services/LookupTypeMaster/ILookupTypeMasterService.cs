@@ -11,9 +11,9 @@ namespace CMS.Service.Services.LookupTypeMaster
    public interface ILookupTypeMasterService
     {
         Task<ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>>> GetListAsync(IndexModel model);
-        ServiceResponse<TblLookupTypeMaster> GetById(int id);
+        ServiceResponse<TblLookupTypeMaster> GetById(string id);
         Task<ServiceResponse<TblLookupTypeMaster>> Save(LookupTypeMasterViewModel model);
-        Task<ServiceResponse<TblLookupTypeMaster>> Edit(int id, LookupTypeMasterViewModel model);
-        Task<ServiceResponse<TblLookupTypeMaster>> Delete(long id);
+        Task<ServiceResponse<TblLookupTypeMaster>> Edit(string id, LookupTypeMasterViewModel model);
+        Task<ServiceResponse<TblLookupTypeMaster>> Delete(string id);
     }
 }

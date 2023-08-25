@@ -125,7 +125,7 @@ export class GECategoryDropDownItem {
 export interface FilterDropDownPostModel {
   Key: string;
   FileterFromKey: string;
-  Values: number[];
+  Values: string[];
 }
 export interface MenuModel {
   Name: string;

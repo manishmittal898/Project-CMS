@@ -18,7 +18,7 @@ namespace CMS.Service.Services.Common
     public class CommonService : BaseService, ICommonService
     {
         private readonly DB_CMSContext _db;
-        public CommonService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
+        public CommonService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
 
             _db = db;
@@ -211,16 +211,17 @@ namespace CMS.Service.Services.Common
                     {
                         data = data.Where(x => x.TblCmspageContentMasters.Any(y => y.PageId == x.Id && y.IsDeleted == false && y.IsActive == true));
 
-                    }else if(lktype == LookupTypeEnum.Product_View_Section.GetStringValue())
+                    }
+                    else if (lktype == LookupTypeEnum.Product_View_Section.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId == x.Id && y.IsDelete==false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
 
                 }
 
                 return await data.OrderBy(x => x.SortedOrder)
-                    .Select(r => new { Text = r.Name, Value = r.Id })
+                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id) })
                     .ToListAsync();
 
             }
@@ -232,11 +233,12 @@ namespace CMS.Service.Services.Common
         }
 
 
-        private async Task<object> GetSubLookupMasters(long[] lookupId = null, string lktype = null)
+        private async Task<object> GetSubLookupMasters(string[] lookupId = null, string lktype = null)
         {
             try
             {
-                return await (from type in _db.TblSubLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && (lookupId.Length == 0 || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = r.Id, CategoryId = r.LookUpId, Category = r.LookUp.Name })
+                long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
+                return await (from type in _db.TblSubLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && (ids.Length == 0 || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), CategoryId = _security.EncryptData(r.LookUpId), Category = r.LookUp.Name })
                      .ToListAsync();
 
             }
@@ -247,13 +249,14 @@ namespace CMS.Service.Services.Common
             }
         }
 
-        private object GetGroupLookupMasters(long[] lookupId = null, string lktype = null, bool isTransactionData = false)
+        private object GetGroupLookupMasters(string[] lookupId = null, string lktype = null, bool isTransactionData = false)
         {
             try
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
+                long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
 
-                var data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId == null || lookupId.Contains(type.Id)) &&
+                var data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.Id)) &&
                   (!isTransactionData || (type.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
 
                 ).ToList();
@@ -261,11 +264,10 @@ namespace CMS.Service.Services.Common
                 return data.GroupBy(x => x.Id)
                       .Select(y => new
                       {
-                          CategoryId = y.Key,
+                          CategoryId = _security.EncryptData(y.Key.ToString()),
                           Category = y.FirstOrDefault().Name,
-                          Data = y.FirstOrDefault().TblSubLookupMasters.Where(x => x.IsActive == true && !x.IsDeleted && (!isTransactionData || (x.TblProductMasters.Any(yz => !yz.IsDelete && yz.IsActive == true
-                          && x.Id == yz.SubCategoryId))))
-                          .Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                          Data = y.FirstOrDefault().TblSubLookupMasters.Where(x => x.IsActive == true && !x.IsDeleted && (!isTransactionData || (x.TblProductMasters.Any(yz => !yz.IsDelete && yz.IsActive == true && x.Id == yz.SubCategoryId))))
+                          .Select(x => new { Text = x.Name, Value = _security.EncryptData(x.Id) }).ToList()
                       }).ToList();
             }
             catch (Exception ex)
@@ -281,13 +283,14 @@ namespace CMS.Service.Services.Common
         }
 
 
-        private object GetGroupSubLookupMasters(long[] lookupId = null, string lktype = null, bool isTransactionData = false)
+        private object GetGroupSubLookupMasters(string[] lookupId = null, string lktype = null, bool isTransactionData = false)
         {
             try
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
+                long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
 
-                var data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (lookupId == null || lookupId.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
+                var data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
                  (!isTransactionData || (type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
 
                 ).ToList();
@@ -299,9 +302,9 @@ namespace CMS.Service.Services.Common
                 return data.GroupBy(x => x.LookUpId)
                       .Select(y => new
                       {
-                          CategoryId = y.Key,
+                          CategoryId = _security.EncryptData(y.Key),
                           Category = y.FirstOrDefault().LookUp.Name,
-                          Data = y.Select(x => new { Text = x.Name, Value = x.Id }).ToList()
+                          Data = y.Select(x => new { Text = x.Name, Value = _security.EncryptData(x.Id) }).ToList()
                       }).ToList();
             }
             catch (Exception ex)
@@ -320,7 +323,7 @@ namespace CMS.Service.Services.Common
             try
             {
                 return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type).OrderBy(x => x.Name)
-                     .Select(r => new { Text = r.Name, Value = r.Id })
+                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id) })
                      .ToListAsync();
             }
             catch
@@ -347,7 +350,7 @@ namespace CMS.Service.Services.Common
 
         private object GetContentTypeEnum()
         {
-            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Value = r, Text = r.GetStringValue() }).ToList();
+            return Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Select(r => new { Value = _security.EncryptData((long)r), Text = r.GetStringValue() }).ToList();
         }
 
         private async Task<object> GetGeneralEntryCategory(bool isTransactionData = false)
@@ -358,7 +361,7 @@ namespace CMS.Service.Services.Common
                               where type.IsActive == true && !type.IsDelete
                               && (isTransactionData ? type.TblGeneralEntries.Any(g => g.CategoryId == type.Id) : true)
                               select type).OrderBy(x => x.Name)
-                     .Select(r => new { Text = r.Name, Value = r.Id, ContentType = r.ContentType, IsShowThumbnail = r.IsShowThumbnail, IsShowUrl = r.IsShowUrl })
+                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), ContentType = _security.EncryptData(r.ContentType), IsShowThumbnail = r.IsShowThumbnail, IsShowUrl = r.IsShowUrl })
                      .ToListAsync();
             }
             catch

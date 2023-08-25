@@ -29,7 +29,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(long id)
+        public async Task<object> Get(string id)
         
         {
             return await _service.GetById(id);
@@ -55,14 +55,14 @@ namespace CMS.API.Areas.Admin.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(long id)
+        public async Task<object> ChangeActiveStatus(string id)
         {
             return await _service.ActiveStatusUpdate(id);
         }
 
         // DELETE api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(long id)
+        public async Task<object> Delete(string id)
         {
             return await _service.Delete(id);
         }

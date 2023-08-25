@@ -78,7 +78,7 @@ export class GeneralEntryMasterComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._generalEntryService.ChangeGeneralEntryActiveStatus(Id).subscribe(
@@ -102,7 +102,7 @@ export class GeneralEntryMasterComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
         const subscription = this._generalEntryService.DeleteGeneralEntry(id).subscribe(

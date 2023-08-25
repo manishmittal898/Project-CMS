@@ -73,7 +73,7 @@ export class LookupTypeComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._lookupTypeService.ChangeLookupTypeMasterActiveStatus(Id).subscribe(
@@ -95,7 +95,7 @@ export class LookupTypeComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {

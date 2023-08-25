@@ -32,8 +32,6 @@ namespace CMS.Service.Services.CustomerAddress
             ServiceResponse<IEnumerable<CustomerAddressViewModel>> ObjResponse = new ServiceResponse<IEnumerable<CustomerAddressViewModel>>();
             try
             {
-
-
                 long userId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : 0;
                 if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId") && userId == 0)
                 {
@@ -41,8 +39,6 @@ namespace CMS.Service.Services.CustomerAddress
                     userId = Convert.ToInt64(CustomerId.ToString());
 
                 }
-
-
                 var result = (from addrs in _db.TblUserAddressMasters
                               where (userId == 0 || addrs.UserId == userId) && !addrs.IsDelete && (string.IsNullOrEmpty(model.Search) || addrs.Address.Contains(model.Search))
                               select addrs);
@@ -67,22 +63,20 @@ namespace CMS.Service.Services.CustomerAddress
                     ObjResponse.Data = await (from x in result
                                               select new CustomerAddressViewModel()
                                               {
-
                                                   Address = x.Address,
-                                                  AddressType = x.AddressType,
+                                                  AddressType = x.AddressType.HasValue ? _security.EncryptData(x.AddressType.Value) : null,
                                                   AddressTypeName = x.AddressTypeNavigation.Name,
                                                   BuildingNumber = x.BuildingNumber,
                                                   City = x.City,
                                                   FullName = x.FullName,
                                                   IsPrimary = x.IsPrimary,
-                                                  Id = _security.EncryptData(x.Id.ToString()),
+                                                  Id = _security.EncryptData(x.Id),
                                                   Landmark = x.Landmark,
                                                   Mobile = x.Mobile,
                                                   PinCode = x.PinCode,
                                                   State = x.State.Name,
-                                                  StateId = x.StateId,
+                                                  StateId = x.StateId.HasValue ? _security.EncryptData(x.StateId.Value) : null,
                                                   UserId = x.UserId,
-
                                               }).ToListAsync();
 
                     return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: ObjResponse.TotalRecord);
@@ -95,11 +89,8 @@ namespace CMS.Service.Services.CustomerAddress
 
             catch (Exception ex)
             {
-
                 return CreateResponse<IEnumerable<CustomerAddressViewModel>>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
-
         }
 
         public ServiceResponse<CustomerAddressViewModel> GetById(string id)
@@ -113,22 +104,20 @@ namespace CMS.Service.Services.CustomerAddress
                 {
                     ObjResponse.Data = new CustomerAddressViewModel()
                     {
-
                         Address = result.Address,
-                        AddressType = result.AddressType,
+                        AddressType = result.AddressType.HasValue ? _security.EncryptData(result.AddressType.Value) : null,
                         AddressTypeName = result.AddressTypeNavigation.Name,
                         BuildingNumber = result.BuildingNumber,
                         City = result.City,
                         FullName = result.FullName,
                         IsPrimary = result.IsPrimary,
-                        Id = _security.EncryptData(result.Id.ToString()),
+                        Id = _security.EncryptData(result.Id),
                         Landmark = result.Landmark,
                         Mobile = result.Mobile,
                         PinCode = result.PinCode,
                         State = result.State.Name,
-                        StateId = result.StateId,
+                        StateId = result.StateId.HasValue ? _security.EncryptData(result.StateId.Value) : null,
                         UserId = result.UserId,
-
                     };
                     return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
                 }
@@ -140,9 +129,7 @@ namespace CMS.Service.Services.CustomerAddress
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<CustomerAddressViewModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
         }
 
@@ -162,7 +149,7 @@ namespace CMS.Service.Services.CustomerAddress
                 {
                     objData = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(model.Id).ToLongValue());
                     objData.Address = model.Address;
-                    objData.AddressType = model.AddressType;
+                    objData.AddressType = !string.IsNullOrEmpty(model.AddressType) ? long.Parse(_security.DecryptData(model.AddressType)) : null as Nullable<long>;
                     objData.BuildingNumber = model.BuildingNumber;
                     objData.City = model.City;
                     objData.FullName = model.FullName;
@@ -171,8 +158,7 @@ namespace CMS.Service.Services.CustomerAddress
                     objData.Landmark = model.Landmark;
                     objData.Mobile = model.Mobile;
                     objData.PinCode = model.PinCode;
-                    objData.StateId = model.StateId;
-
+                    objData.StateId = !string.IsNullOrEmpty(model.StateId) ? long.Parse(_security.DecryptData(model.StateId)) : null as Nullable<long>; ;
                     var data = _db.TblUserAddressMasters.Update(objData);
                     await _db.SaveChangesAsync();
                     isAdd = false;
@@ -181,9 +167,8 @@ namespace CMS.Service.Services.CustomerAddress
                 {
                     objData = new TblUserAddressMaster()
                     {
-
                         Address = model.Address,
-                        AddressType = model.AddressType,
+                        AddressType = !string.IsNullOrEmpty(model.AddressType) ? long.Parse(_security.DecryptData(model.AddressType)) : null as Nullable<long>,
                         BuildingNumber = model.BuildingNumber,
                         City = model.City,
                         FullName = model.FullName,
@@ -197,15 +182,14 @@ namespace CMS.Service.Services.CustomerAddress
                         Landmark = model.Landmark,
                         Mobile = model.Mobile,
                         PinCode = model.PinCode,
-                        StateId = model.StateId,
+                        StateId = !string.IsNullOrEmpty(model.StateId) ? long.Parse(_security.DecryptData(model.StateId)) : null as Nullable<long>,
                         UserId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId
 
                     };
                     var resultData = await _db.TblUserAddressMasters.AddAsync(objData);
-
                     await _db.SaveChangesAsync();
                     objData = resultData.Entity;
-                    model.Id = _security.EncryptData(objData.Id.ToString());
+                    model.Id = _security.EncryptData(objData.Id);
                 }
 
                 //if set primary then remove primary for old record
@@ -223,9 +207,7 @@ namespace CMS.Service.Services.CustomerAddress
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<CustomerAddressPostModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
         }
 
@@ -255,9 +237,7 @@ namespace CMS.Service.Services.CustomerAddress
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
         }
 
@@ -274,9 +254,7 @@ namespace CMS.Service.Services.CustomerAddress
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
         }
 
@@ -292,22 +270,19 @@ namespace CMS.Service.Services.CustomerAddress
                     var roletype = _db.TblUserAddressMasters.Update(objAddress);
                     await _db.SaveChangesAsync();
                     return CreateResponse(objAddress, ResponseMessage.Delete, true);
-
                 }
-                else if (objAddress != null && objAddress.IsPrimary) {
+                else if (objAddress != null && objAddress.IsPrimary)
+                {
                     return CreateResponse(objAddress, ResponseMessage.DeleteDenied, false);
                 }
                 else
                 {
                     return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, false);
-
                 }
-
             }
             catch (Exception ex)
             {
                 return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
         }
     }

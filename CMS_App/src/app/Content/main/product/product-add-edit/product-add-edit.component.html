@@ -1,7 +1,7 @@
 <!-- Page Header Start-->
 <div class="page-new-header">
   <div class="page-new-header-title">
-    {{model.Id > 0 ? 'Update Product':'Add New Product'}}
+    {{model.Id !=null ? 'Update Product':'Add New Product'}}
   </div>
   <div class="page-new-header-action">
     <button routerLink="/admin/product" class="page-new-header-action-items" data-title="Back to list"> <i
@@ -108,19 +108,19 @@
           </span></label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
-          [CurrentFileLength]="model?.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
+          [CurrentFileLength]="model.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
           [ngClass]="{ 'is-invalid': f.ImagePath.errors && f.ImagePath.touched}">
         </app-file-selector>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
           Please Product main image...!</div>
 
-        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id!=null">
           <span [ngSwitch]="getFileType(model.ImagePath)">
 
             <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
               <div class="small-media-items-img"> <img [src]="model.ImagePath"
-                  onerror="this.src='assets/images/300x300.jpg'" /> </div>
+                  onerror="this.src='assets/images/no-img.svg'" /> </div>
               <div class="small-media-items-action">
                 <a href="javascript:void()" (click)="RemoveDocument(model.ImagePath)" title="Delete"><i
                     class="bi bi-trash"></i></a>
@@ -164,7 +164,7 @@
         <div class="dropzone dropzone-light upload-btn-wrapper w-100">
           <input type="hidden" name="productFile" [(ngModel)]="productFile" formControlName="productFile">
           <app-file-selector [MaxFileLength]="10" (FilesChanged)="onProductFileAttach($event)"
-            [FileFilter]="'.jpeg,.gif,.png,.jpg'"
+            [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
             [CurrentFileLength]="(this.ProductFiles.length +(this.model.Files?.length??0))"
             [ngClass]="{ 'is-invalid': f.productFile.errors && f.productFile.touched}">
           </app-file-selector>
@@ -179,7 +179,7 @@
 
               <a *ngSwitchCase="'image'" href="javascript:void()" class="small-media-items position-relative mb-3">
                 <div class="small-media-items-img"> <img [src]="itm.FilePath"
-                    onerror="this.src='assets/images/300x300.jpg'" /> </div>
+                    onerror="this.src='assets/images/no-img.svg'" /> </div>
                 <div class="small-media-items-action">
                   <a href="javascript:void()" (click)="deleteProductFile(itm.Id)" title="Delete"><i
                       class="bi bi-trash"></i></a>
@@ -322,7 +322,7 @@
     </div>
 
     <div class="form-footer-btn-grp widget-content widget-content pt-4 text-center">
-      <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i> {{model.Id > 0 ? 'Save
+      <button type="submit" class="btn btn-success me-3"> <i class="fas fa-check me-1"></i> {{model.Id !=null ? 'Save
         Product' : 'Add Product'}}</button>
       <button type="button" class="btn btn-outline-danger"> <i class="fas fa-times me-1"></i> Cancel</button>
     </div>

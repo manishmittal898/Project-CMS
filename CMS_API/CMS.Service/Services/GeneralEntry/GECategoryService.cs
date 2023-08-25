@@ -56,14 +56,14 @@ namespace CMS.Service.Services.GeneralEntry
                 {
                     objResult.Data = result.ToList().Select(x => new GeneralEntryCategoryViewModel
                     {
-                        Id = x.Id,
+                        Id = _security.EncryptData(x.Id),
                         Name = x.Name,
-                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                        ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                         SortedOrder = x.SortedOrder.Value,
                         EnumValue = x.EnumValue,
                         IsShowDataInMain = x.IsShowDataInMain,
                         IsShowUrl = x.IsShowUrl,
-                        ContentType = x.ContentType,
+                        ContentType = _security.EncryptData(x.ContentType),
                         IsShowThumbnail = x.IsShowThumbnail,
                         IsShowInMain = x.IsShowInMain,
                         IsSingleEntry = x.IsSingleEntry,
@@ -76,7 +76,7 @@ namespace CMS.Service.Services.GeneralEntry
                         IsDelete = x.IsDelete,
                         ContentTypeText = Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => x.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault()
                     });
-                     
+
                     return CreateResponse(objResult.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
@@ -93,23 +93,23 @@ namespace CMS.Service.Services.GeneralEntry
             }
             return objResult;
         }
-        public async Task<ServiceResponse<GeneralEntryCategoryViewModel>> GetById(long id)
+        public async Task<ServiceResponse<GeneralEntryCategoryViewModel>> GetById(string id)
         {
             ServiceResponse<GeneralEntryCategoryViewModel> ObjResponse = new ServiceResponse<GeneralEntryCategoryViewModel>();
             try
             {
-                TblGecategoryMater detail = await _db.TblGecategoryMaters.Where(x => x.Id == id && x.IsActive.Value && x.IsDelete == false).FirstOrDefaultAsync();
+                TblGecategoryMater detail = await _db.TblGecategoryMaters.Where(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDelete == false).FirstOrDefaultAsync();
                 if (detail != null)
                 {
 
                     ObjResponse.Data = new GeneralEntryCategoryViewModel
                     {
-                        Id = detail.Id,
+                        Id = id,
                         Name = detail.Name,
                         ImagePath = !string.IsNullOrEmpty(detail.ImagePath) ? detail.ImagePath.ToAbsolutePath() : null,
                         SortedOrder = detail.SortedOrder.Value,
                         EnumValue = detail.EnumValue,
-                        ContentType = detail.ContentType,
+                        ContentType = _security.EncryptData(detail.ContentType),
                         IsShowUrl = detail.IsShowUrl,
                         IsShowDataInMain = detail.IsShowDataInMain,
                         IsShowInMain = detail.IsShowInMain,
@@ -147,16 +147,16 @@ namespace CMS.Service.Services.GeneralEntry
             try
             {
 
-                if (model.Id > 0)
+                if (!string.IsNullOrEmpty(model.Id))
                 {
 
-                    TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == model.Id);
+                    TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
 
 
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.ContentType = model.ContentType;
+                    objData.ContentType = int.Parse(_security.DecryptData(model.ContentType));
                     objData.IsSingleEntry = objData.IsSingleEntry ? objData.IsSingleEntry : model.IsSingleEntry;
                     objData.IsShowInMain = objData.IsShowInMain ? objData.IsShowInMain : model.IsShowInMain;
                     objData.IsShowThumbnail = objData.IsShowThumbnail ? objData.IsShowThumbnail : model.IsShowThumbnail;
@@ -190,7 +190,7 @@ namespace CMS.Service.Services.GeneralEntry
 
                     objData.Name = model.Name;
                     objData.SortedOrder = model.SortedOrder;
-                    objData.ContentType = model.ContentType;
+                    objData.ContentType = int.Parse(_security.DecryptData(model.ContentType));
                     objData.EnumValue = model.Name.Replace(' ', '_');
                     objData.IsSingleEntry = model.IsSingleEntry;
                     objData.IsShowInMain = model.IsShowInMain;
@@ -221,11 +221,11 @@ namespace CMS.Service.Services.GeneralEntry
         }
 
 
-        public async Task<ServiceResponse<TblGecategoryMater>> Delete(long id)
+        public async Task<ServiceResponse<TblGecategoryMater>> Delete(string id)
         {
             try
             {
-                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 if (objData.IsSystemEntry)
                 {
@@ -250,11 +250,11 @@ namespace CMS.Service.Services.GeneralEntry
 
         }
 
-        public async Task<ServiceResponse<TblGecategoryMater>> ActiveStatusUpdate(long id)
+        public async Task<ServiceResponse<TblGecategoryMater>> ActiveStatusUpdate(string id)
         {
             try
             {
-                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+                TblGecategoryMater objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
                 if (objData.IsSystemEntry)
                 {
                     return CreateResponse(objData, ResponseMessage.RestrictedRecord, true, (int)ApiStatusCode.Ok);
@@ -276,12 +276,12 @@ namespace CMS.Service.Services.GeneralEntry
             }
         }
 
-        public async Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(long id, string columnName)
+        public async Task<ServiceResponse<TblGecategoryMater>> FlagStatusUpdate(string id, string columnName)
         {
             try
             {
                 TblGecategoryMater objData = new TblGecategoryMater();
-                objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == id);
+                objData = _db.TblGecategoryMaters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 switch (columnName)
                 {

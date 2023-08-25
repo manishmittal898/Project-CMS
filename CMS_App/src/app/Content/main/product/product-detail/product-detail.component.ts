@@ -10,7 +10,7 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
 })
 export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
-  id: number = 0;
+  id: string = "";
   constructor(private _activatedRoute: ActivatedRoute, private _productService: ProductService, private readonly toast: ToastrService,) {
     this._activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.id;

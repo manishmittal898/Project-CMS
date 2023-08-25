@@ -14,7 +14,7 @@ export class ProductFilterComponent implements OnInit {
   @Output() onFilterChange = new EventEmitter<ProductFilterModel>();
   dropDown = new DropDownModel();
   get subCategory() {
-    return this.dropDown?.ddlSubLookupGroup?.filter(x => this.filterModel.CategoryId.includes(Number(x.CategoryId))) ?? [];
+    return this.dropDown?.ddlSubLookupGroup?.filter(x => this.filterModel.CategoryId.includes(x.CategoryId)) ?? [];
   }
   get maxPrice() {
     return this.dropDown?.ddlProductPrice?.Value ?? 10000;
@@ -35,8 +35,9 @@ export class ProductFilterComponent implements OnInit {
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
         this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
         this.dropDown.ddlProductPrice = ddls.ddlProductPrice
+
         if (this.dropDown.ddlProductPrice.Value > 1) {
-          this.filterModel.Price[1] = this.dropDown.ddlProductPrice.Value;
+          this.filterModel.Price[1] = Object.assign(this.dropDown.ddlProductPrice.Value)
         }
         //  this.getSubLookUpDropDown();
         this.applyFilter();

@@ -23,7 +23,7 @@ export class LookupsComponent implements OnInit {
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  id!: number;
+  id!: string;
   displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
@@ -106,7 +106,7 @@ export class LookupsComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._lookupService.ChangeLookupMasterActiveStatus(Id).subscribe(
@@ -128,7 +128,7 @@ export class LookupsComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
@@ -152,9 +152,9 @@ export class LookupsComponent implements OnInit {
     });
   }
 
-  onAddUpdateLookup(Id: number) {
+  onAddUpdateLookup(Id: string) {
     const dialogRef = this.dialog.open(LookupsAddEditComponent, {
-      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
+      data: { Id: Id, Type: this.id, Heading: `${Id.length > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });

@@ -45,11 +45,11 @@ export class NavBarComponent implements OnInit {
         const ddls = res?.Data as DropDownModel;
         this.menuModel = ddls.ddlLookupGroup.map(x => {
           return {
-            Category: x.Category, CategoryId: this._securityService.encrypt(String(x.CategoryId)),
-            Data: x.Data.map(sd => { return { Text: sd.Text, Value: this._securityService.encrypt(String(sd.Value)), Category: sd.Category, CategoryId: this._securityService.encrypt(String(sd.CategoryId)) } })
+            Category: x.Category, CategoryId: String(x.CategoryId),
+            Data: x.Data.map(sd => { return { Text: sd.Text, Value: sd.Value, Category: sd.Category, CategoryId: sd.CategoryId } })
           } as any
         });
-        this.cmsPageMenu = ddls?.ddlCMSPage?.map(x => { return { Text: x.Text, Value: this._securityService.encrypt(String(x.Value)) } as DropDownItem });
+        this.cmsPageMenu = ddls?.ddlCMSPage?.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
         this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel));
         this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu));
       }

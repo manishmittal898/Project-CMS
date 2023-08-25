@@ -30,7 +30,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(long id)
+        public object Get(string id)
         {
             return _sublookmstr.GetById(id);
         }
@@ -55,14 +55,14 @@ namespace CMS.API.Areas.Admin.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(long id)
+        public async Task<object> ChangeActiveStatus(string id)
         {
             return await _sublookmstr.ActiveStatusUpdate(id);
         }
 
         // DELETE api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(long id)
+        public async Task<object> Delete(string id)
         {
             return await _sublookmstr.Delete(id);
         }

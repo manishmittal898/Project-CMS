@@ -17,8 +17,8 @@ namespace CMS.Service.Services.CustomerAddress
         public string PinCode { get; set; }
         public string Landmark { get; set; }
         public string City { get; set; }
-        public long? StateId { get; set; }
-        public long? AddressType { get; set; }
+        public string StateId { get; set; }
+        public string AddressType { get; set; }
         public bool IsPrimary { get; set; }
       
       
@@ -38,8 +38,8 @@ namespace CMS.Service.Services.CustomerAddress
         public string PinCode { get; set; }
         public string Landmark { get; set; }
         public string City { get; set; }
-        public long? StateId { get; set; }
-        public long? AddressType { get; set; }
+        public string StateId { get; set; }
+        public string AddressType { get; set; }
         public bool IsPrimary { get; set; }
 
     }

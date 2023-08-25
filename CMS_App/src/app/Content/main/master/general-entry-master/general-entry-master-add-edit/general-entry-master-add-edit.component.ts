@@ -36,13 +36,13 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   isFileAttached = false;
   contentTypeEnum = ContentTypeEnum;
   get f() { return this.formgrp.controls; }
-  get selectedCategory() { return this.model.CategoryId > 0 ? this.dropDown.ddlGeneralEntryCategory.find(x => x.Value == this.model.CategoryId.toString()) : undefined }
+  get selectedCategory() { return this.model?.CategoryId?.length > 0 ? this.dropDown.ddlGeneralEntryCategory.find(x => x.Value == this.model.CategoryId.toString()) : undefined }
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
   }
   get acceptedFiles() {
-    return this.selectedCategory?.ContentType == (this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType == (this.contentTypeEnum.MultipleImages).toString() ? '.jpeg,.gif,.png,.jpg' :
+    return this.selectedCategory?.ContentType == (this.contentTypeEnum.Photo).toString() || this.selectedCategory?.ContentType == (this.contentTypeEnum.MultipleImages).toString() ? '.jpeg,.gif,.png,.jpg,.webp' :
       this.selectedCategory?.ContentType == (this.contentTypeEnum.Document).toString() ? '.doc,.docx,.ppt,.pptx,.pdf,.xlx,.xlsx,.txt' :
         this.selectedCategory?.ContentType == (this.contentTypeEnum.Video).toString() ? '.mp4,.mkv,.avi' : ''
   }
@@ -51,8 +51,8 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.GetDropDown();
     this._activatedRoute.params.subscribe(x => {
-      this.model.Id = this._activatedRoute.snapshot.params.id ? Number(this._activatedRoute.snapshot.params.id) : 0;
-      if (this.model.Id > 0) {
+      this.model.Id = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : '';
+      if (this.model.Id.length > 0) {
         this.onGetDetail();
       }
     });
@@ -71,14 +71,14 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlGeneralEntryCategory], false).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-        const ddls = res?.Data as DropDownModel;
+                const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlGeneralEntryCategory = ddls?.ddlGeneralEntryCategory;
 
       }
     });
   }
 
-  deleteItems(id: number) {
+  deleteItems(id: string) {
     this._commonService.Question(Message.DeleteConfirmation as string).then(result => {
       if (result) {
         let subscription = this._generalEntryService.DeleteGeneralEntryItems(id).subscribe(
@@ -100,10 +100,11 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   }
 
   getFileType(fileName: string) {
+
     const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
-    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg'].some(x => x.toLowerCase() === ext)) {
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg','webp'].some(x => x.toLowerCase() === ext)) {
       return 'image';
     }
     else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
@@ -142,8 +143,9 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   }
 
   onGetDetail() {
-    this._generalEntryService.GetGeneralEntry(this.model.Id,true).subscribe(response => {
+    this._generalEntryService.GetGeneralEntry(this.model.Id, true).subscribe(response => {
       if (response.IsSuccess) {
+        
         const data = response.Data as GeneralEntryViewModel;
         this.model.Id = data.Id;
         this.model.CategoryId = data.CategoryId;

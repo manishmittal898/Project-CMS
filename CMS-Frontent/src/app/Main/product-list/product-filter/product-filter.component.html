@@ -79,7 +79,8 @@
           [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
           bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Find Size">
           <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" /> {{item.Text}}
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
           </ng-template>
           <ng-template ng-multi-label-tmp let-items="items">
             <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
@@ -105,9 +106,10 @@
         <label class="form-label mb-0">Rs. {{this.filterModel?.Price[1]}}</label>
       </div>
 
-      <p-slider (onChange)="applyFilter()" [min]="50" [max]="maxPrice"
-        [(ngModel)]="this.filterModel.Price" [step]="100" [range]="true"></p-slider>
+      <p-slider *ngIf="this.dropDown.ddlProductPrice" (onChange)="applyFilter()" [min]="50" [max]="maxPrice" [(ngModel)]="this.filterModel.Price" [step]="500"
+        [range]="true"></p-slider>
     </div>
+
     <!-- Filter Price End -->
 
 

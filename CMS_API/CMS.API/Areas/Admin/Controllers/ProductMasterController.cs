@@ -35,7 +35,7 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // GET api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public object Get(long id)
+        public object Get(string id)
         {
             return _productmstr.GetById(id);
         }
@@ -62,20 +62,20 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(long id)
+        public async Task<object> ChangeActiveStatus(string id)
         {
             return await _productmstr.ActiveStatusUpdate(id);
         }
 
         // DELETE api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(long id)
+        public async Task<object> Delete(string id)
         {
             return await _productmstr.Delete(id);
         }
         // DELETE api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public async Task<object> DeleteProductFile(long id)
+        public async Task<object> DeleteProductFile(string id)
         {
             return await _productmstr.DeleteProductFile(id);
         }

@@ -61,9 +61,10 @@ export class NavigationComponent implements OnInit {
   getLookupTypes() {
     this._commonService.GetDropDown([DropDown_key.ddlLookupTypeMasters]).subscribe(res => {
       if (res.IsSuccess) {
-
+        let emus = [LookupTypeEnum.CMS_Page, LookupTypeEnum.State, LookupTypeEnum.Address_Type] as string[];
         let ddls = res.Data as DropDownModel;
-        this.dropDown.ddlLookupTypeMaster = ddls.ddlLookupTypeMaster.filter(x => ![LookupTypeEnum.CMS_Page, LookupTypeEnum.State, LookupTypeEnum.Address_Type].includes(Number(x.Value)));
+        this.dropDown.ddlLookupTypeMaster = ddls.ddlLookupTypeMaster
+          .filter(x => !emus.includes(x.Value));
         let idx = this.menuModel.findIndex(x => x.Name === 'Master');
         this.dropDown.ddlLookupTypeMaster.forEach(element => {
           this.menuModel[idx].children?.push({ Name: element.Text, Icon: "bi bi-house-door", Url: `./master/${element.Text}/${element.Value}` });

@@ -35,7 +35,7 @@ namespace CMS.API.Areas.Public.Controllers
 
         // GET api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public object Get(long id)
+        public object Get(string id)
         {
             return _productmstr.GetById(id);
         }
