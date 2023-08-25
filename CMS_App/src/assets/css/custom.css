@@ -805,6 +805,9 @@ app-header {
   position: relative;
 }
 
+table tr:last-child td [data-title]:hover::before {
+  bottom: -20px;
+}
 [data-title]:hover::before {
   content: attr(data-title);
   left: 50%;
@@ -1417,7 +1420,7 @@ body.sidebar-open .container-with-sidebar {
 }
 .sidebar-menu-btn {
   font-size: 32px;
-  margin-right: 15px;
+  margin-right: 8px;
   color: #000;
 }
 .sidebar .sidebar-item .sidebar-item-button {

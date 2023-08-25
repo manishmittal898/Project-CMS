@@ -851,7 +851,7 @@ font-weight: 600;
     height: auto;
     /* height: 325px; */
     overflow: hidden;
-    /* box-shadow: 2px 4px 12px rgb(0 0 0 / 8%); */
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
     border-radius: 0px;
     position: relative;
 }
@@ -869,20 +869,21 @@ font-weight: 600;
 }
 
 .inner-breadcrumb {
-    background: #000;
-    padding: 20px 10px;
+  background: #efefef;
+  padding: 10px 10px;
 }
 
 .inner-breadcrumb a {
-    color: #fff;
+    color: #000;
+    font-weight: 500;
 }
 .inner-breadcrumb a:hover {
-  color: rgba(255,255,255,0.8);
+  color: rgba(0,0,0,0.8);
 }
 
 .breadcrumb-item.active,
 .breadcrumb-item+.breadcrumb-item::before {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .product-details-big-img img {
@@ -1432,14 +1433,29 @@ ul.megamenu-sub-list {
     cursor: pointer;
     opacity: 0.6 !important;
     margin: 0px 4px;
-    height: 75px;
-    max-width: 75px;
+    height: 95px;
+    max-width: 73px;
     /* width: 75px !important; */
     background: #fff;
     display: flex !important;
     align-items: center;
     justify-content: center;
     border: solid 1px #f1f1f1;
+    cursor: pointer;
+}
+.product-d-main-slider-nav {
+  max-width: 480px;
+  margin: auto;
+}
+@media screen and (max-width:1024px) {
+  .product-d-main-slider-nav {
+    max-width: 397px;
+  }
+}
+@media screen and (max-width:767px) {
+  .product-d-main-slider-nav {
+    max-width: 330px;
+  }
 }
 
 .product-d-main-slider-nav .slick-slide>div {
@@ -1449,7 +1465,7 @@ ul.megamenu-sub-list {
 }
 
 .product-d-main-slider-nav .slick-slide img {
-    max-height: 72px;
+    max-height: 97px;
 }
 
 .product-d-main-slider-nav .slick-slide.slick-current {
@@ -1464,6 +1480,7 @@ ul.megamenu-sub-list {
 
 .product-d-main-slider img {
     max-height: 800px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 }
 
 /* .product-d-main-slider {
@@ -1732,7 +1749,7 @@ body .ui-slider .ui-slider-range {
   border: none;
 }
 section.inner-page-space {
-  padding: 60px 0px 40px 0px;
+  padding: 30px 0px 30px 0px;
 }
 section.cmis-pages .cmis-pages-items-list {
   padding: 18px 0px;
@@ -1764,18 +1781,18 @@ section.cmis-pages .cmis-pages-items-list h3 {
 }
 .cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img {
   height: 80px;
-  width: 80px;
-  flex: 0 0 80px;
-  min-width: 80px;
-  background: #f7f7f7;
-  border-radius: 5px;
+  width: 60px;
+  flex: 0 0 60px;
+  min-width: 60px;
+  background: #ffffff;
+  border-radius: 4px;
   margin-right: 15px;
   overflow: hidden;
+  box-shadow: 1px 2px 6px rgb(0 0 0 / 4%);
 }
-.cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img img
-{
-  max-width: 79px;
-  max-height: 79px;
+.cart-sidebar-body-cart-items .cart-sidebar-body-cart-items-img img {
+  max-width: 60px;
+  max-height: 80px;
 }
 .cart-sidebar-body-cart-items-info {
   flex: auto;
@@ -1855,24 +1872,22 @@ table tr td {
 
 
 .cart-list-items-img {
-  height: 160px;
-  width: 160px;
+  height: 149px;
+  width: 112px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff;
   border-radius: 4px;
-  margin-right: 20px;
-  flex: 0 0 150px;
+  margin-right: 15px;
+  flex: 0 0 112px;
   overflow: hidden;
-  box-shadow: 0 0 10px #f3f3f3;
+  box-shadow: 1px 2px 6px rgb(0 0 0 / 4%);
 }
-
 .cart-list-items-img img {
-  max-height: 158px;
+  max-height: 150px;
   margin: auto;
 }
-
 .cart-list-items-description {
   flex: auto;
   width: 100%;
@@ -2225,17 +2240,22 @@ section.deals-opt-d-1 {
 .my-account-sidebar ul li a i {
   font-size: 20px;
 }
+
 .order-summary-list-img {
-  height: 150px;
-  width: 150px;
+  height: 145px;
+  width: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 20px;
-  margin-right: 20px;
-  flex: 0 0 150px;
+  border-radius: 5px;
+  margin-right: 15px;
+  flex: 0 0 110px;
   overflow: hidden;
+  box-shadow: 1px 2px 6px rgb(0 0 0 / 4%);
+}
+.order-summary-list-img img {
+  max-height: 148px;
 }
 .order-summary-list-info {
   flex: auto;
@@ -2748,7 +2768,5 @@ body .toast-close-button {
   left: 0px;
 }
 /* CUSTOM CSS END */
-
-
 
 

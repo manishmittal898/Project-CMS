@@ -424,12 +424,12 @@
   }
   .cart-list-items-img {
     height: 100px;
-    width: 100px;
-    margin-right: 15px;
-    flex: 0 0 100px;
+    width: 75px;
+    margin-right: 12px;
+    flex: 0 0 75px;
 }
 .cart-list-items-img img {
-  max-height: 98px;
+  max-height: 100px;
 }
 
 .cart-list-items-description h3 {
@@ -516,6 +516,15 @@ ul.footer-benefits li {
   top: 4px;
   left: -5px;
 }
+.product-d-main-slider-nav .slick-slide
+{
+    height: 80px;
+    max-width: 60px;
+}
+.product-d-main-slider-nav .slick-slide img {
+    max-height: 80px;
+}
+
 }
 
 @media screen and (max-width:575px) {
@@ -568,9 +577,9 @@ ul.footer-benefits li {
       font-size: 13px;
   }
   .cart-list-items-img {
-    height: 80px;
-    width: 80px;
-    flex: 0 0 80px;
+    height: 78px;
+    width: 59px;
+    flex: 0 0 59px;
 }
 .cart-list-items-img img {
   max-height: 78px;
@@ -589,9 +598,13 @@ ul.footer-benefits li {
   font-size: 14px;
 }
 .order-summary-list-img {
-  height: 80px;
-  width: 80px;
-  flex: 0 0 80px;
+  height: 78px;
+  width: 59px;
+  flex: 0 0 59px;
+  margin-right: 10px;
+}
+.order-summary-list-img img {
+  max-height: 78px;
 }
 .order-summary-list-info h3 {
   font-size: 1rem;
