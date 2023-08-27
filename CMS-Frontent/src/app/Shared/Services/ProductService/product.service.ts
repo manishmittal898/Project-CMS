@@ -43,6 +43,13 @@ export class ProductFilterModel extends IndexModel {
   Keyword!: string;
   ViewSectionId!: string[];
   Ids!: string[]
+  DiscountId!: string[]
+  OccasionId!: string[]
+  FabricId!: string[]
+  LengthId!: string[]
+  ColorId!: string[]
+  PatternId!: string[]
+
 }
 
 
@@ -54,7 +61,8 @@ export interface ProductMasterViewModel {
   SubCategoryId: string;
   Desc: string;
   Price: number | null;
-  CaptionTagId: string ;
+  SellingPrice: number;
+  CaptionTagId: string;
   Summary: string;
   CaptionTag: string;
   Category: string;
@@ -62,6 +70,19 @@ export interface ProductMasterViewModel {
   ShippingCharge: string;
   IsWhishList: boolean;
   ViewSectionId: string;
+  DiscountId: string;
+  Discount: string;
+  OccasionId: string;
+  Occasion: string;
+  FabricId: string;
+  Fabric: string;
+  LengthId: string;
+  Length: string;
+  ColorId: string;
+  Color: string;
+  PatternId: string;
+  Pattern: string;
+  UniqueId: string;
   Files: ProductImageViewModel[];
   Stocks: ProductStockModel[];
 
@@ -91,5 +112,6 @@ export interface ProductStockModel {
   SizeId: string | undefined;
   Size: string;
   UnitPrice: number | null;
+  SellingPrice : number ;
   Quantity: number | null;
 }

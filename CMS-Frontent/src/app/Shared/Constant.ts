@@ -19,6 +19,12 @@ export class DropDown_key {
   static ddlProductPrice = "ddlProductPrice";
   static ddlGender = "ddlGender";
   static ddlProductViewSection = "ddlProductViewSection";
+  static ddlProductDiscount = "ddlProductDiscount";
+  static ddlProductOccasion = "ddlProductOccasion";
+  static ddlProductFabric = "ddlProductFabric";
+  static ddlProductLength = "ddlProductLength";
+  static ddlProductColor = "ddlProductColor";
+  static ddlProductPattern = "ddlProductPattern";
 
 }
 

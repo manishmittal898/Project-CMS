@@ -26,7 +26,10 @@ export class ProductFilterComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup, DropDown_key.ddlProductPrice], true).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag,
+    DropDown_key.ddlProductSize, DropDown_key.ddlSubLookupGroup, DropDown_key.ddlProductPrice,
+    DropDown_key.ddlProductDiscount, DropDown_key.ddlProductOccasion, DropDown_key.ddlProductFabric,
+    DropDown_key.ddlProductLength, DropDown_key.ddlProductColor, DropDown_key.ddlProductPattern], true).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
@@ -35,7 +38,12 @@ export class ProductFilterComponent implements OnInit {
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
         this.dropDown.ddlSubLookupGroup = ddls.ddlSubLookupGroup
         this.dropDown.ddlProductPrice = ddls.ddlProductPrice
-
+        this.dropDown.ddlProductDiscount = ddls?.ddlProductDiscount;
+        this.dropDown.ddlProductOccasion = ddls?.ddlProductOccasion;
+        this.dropDown.ddlProductFabric = ddls?.ddlProductFabric;
+        this.dropDown.ddlProductLength = ddls?.ddlProductLength;
+        this.dropDown.ddlProductColor = ddls?.ddlProductColor;
+        this.dropDown.ddlProductPattern = ddls?.ddlProductPattern;
         if (this.dropDown.ddlProductPrice.Value > 1) {
           this.filterModel.Price[1] = Object.assign(this.dropDown.ddlProductPrice.Value)
         }

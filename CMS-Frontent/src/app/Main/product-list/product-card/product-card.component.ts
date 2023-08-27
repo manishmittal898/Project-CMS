@@ -11,6 +11,10 @@ export class ProductCardComponent implements OnInit {
   @Input() Product = {} as ProductMasterViewModel;
   @Output() productChange = new EventEmitter<ProductMasterViewModel>();
   loading = new Loading();
+  get getDiscount() {
+    return (Math.round(((this.Product?.SellingPrice as number - this.Product?.Price )/this.Product?.Price)*100))?.toString()+'%';
+
+   }
   constructor(private readonly _wishListService: WishListService) { }
 
   ngOnInit(): void {
@@ -21,6 +25,7 @@ export class ProductCardComponent implements OnInit {
   getUrl() {
     return `/collections/${this.Product.Category?.replace('/', '-').split(' ').join('-')}/${this.Product.Name.replace('/', '-').split(' ').join('-')}/${this.Product.Id}`
   }
+
 
   updateWishlist() {
     this.loading.WishList = true;

@@ -80,6 +80,7 @@ namespace CMS.Service.Services.ProductMaster
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
+                                            SellingPrice = x.DiscountId.HasValue ? (x.Price - (x.Price * decimal.Parse(x.Discount.Value)) / 100) : x.Price,
                                             MetaTitle = x.MetaTitle,
                                             MetaDesc = x.MetaDesc,
                                             CreatedBy = x.CreatedBy,
@@ -623,6 +624,8 @@ namespace CMS.Service.Services.ProductMaster
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
+                                            SellingPrice = x.DiscountId.HasValue ? (x.Price - (x.Price * decimal.Parse(x.Discount.Value)) / 100) : x.Price,
+
                                             CreatedBy = x.CreatedBy,
                                             CreatedOn = x.CreatedOn,
                                             ModifiedBy = x.ModifiedBy,

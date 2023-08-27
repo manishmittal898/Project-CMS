@@ -28,7 +28,10 @@ export class ProductDetailComponent implements OnInit {
     return stockCount;
   }
   SelectedSizeModel: ProductStockModel;
+  get DiscountValue() {
+    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100))?.toString()+'%';
 
+   }
   shareLink: SafeUrl;
   constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute,
     private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService,

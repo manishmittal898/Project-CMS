@@ -49,10 +49,10 @@
       <div class="col-md-6 mt-4 mt-lg-0 ps-3 ps-lg-4">
         <div class="product-details-info">
           <h2>{{model.Name}}</h2>
-          <div class="product-details-price"> ₹ {{this.SelectedSizeModel?.UnitPrice
-            ?this.SelectedSizeModel?.UnitPrice: model.Price}}
-            <span class="product-details-cutting-price">₹ 6,499.00</span>
-            <span class="product-details-price-off">40% Off</span>
+          <div class="product-details-price"> ₹ {{this.SelectedSizeModel?.SellingPrice
+            ?this.SelectedSizeModel?.SellingPrice: model.SellingPrice}}
+            <span class="product-details-cutting-price">₹ {{SelectedSizeModel.UnitPrice}}</span>
+            <span class="product-details-price-off">{{DiscountValue}} Off</span>
           </div>
 
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">

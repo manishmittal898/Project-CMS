@@ -106,7 +106,12 @@ export class DropDownModel {
   ddlCMSPage!: DropDownItem[];
   ddlAddressType!: DropDownItem[];
   ddlProductViewSection!: DropDownItem[];
-
+  ddlProductDiscount!: DropDownItem[];
+  ddlProductOccasion!: DropDownItem[];
+  ddlProductFabric!: DropDownItem[];
+  ddlProductLength!: DropDownItem[];
+  ddlProductColor!: DropDownItem[];
+  ddlProductPattern!: DropDownItem[];
 
 }
 

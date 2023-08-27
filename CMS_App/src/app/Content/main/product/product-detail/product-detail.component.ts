@@ -11,6 +11,10 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
 export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
   id: string = "";
+ get DiscountValue() {
+    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100)).toString()+'%';
+
+   }
   constructor(private _activatedRoute: ActivatedRoute, private _productService: ProductService, private readonly toast: ToastrService,) {
     this._activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.id;
@@ -35,8 +39,5 @@ export class ProductDetailComponent implements OnInit {
       error => {
       });
   }
-  getDiscount() {
-   return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100)).toString()+'%';
 
-  }
 }
