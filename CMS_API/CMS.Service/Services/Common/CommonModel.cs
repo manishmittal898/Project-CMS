@@ -33,8 +33,6 @@ namespace CMS.Service.Services.Common
             public const string ddlProductColor = "ddlproductcolor";
             public const string ddlProductPattern = "ddlproductpattern";
 
-
-
             public const string ddlGender = "ddlgender";
             public const string ddlAddressType = "ddladdresstype";
             public const string ddlCMSPage = "ddlcmspage";
