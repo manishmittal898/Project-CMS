@@ -150,7 +150,7 @@ namespace CMS.Service.Services.WishList
                                             Desc = x.Product.Desc,
                                             Summary = x.Product.Desc,
                                             Price = x.Product.Price,
-                                            SellingPrice = x.Product.DiscountId.HasValue ? (x.Product.Price - (x.Product.Price * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
+                                            SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
 
                                             MetaTitle = x.Product.MetaTitle,
                                             MetaDesc = x.Product.MetaDesc,

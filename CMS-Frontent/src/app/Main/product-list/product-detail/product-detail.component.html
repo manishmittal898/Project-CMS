@@ -51,8 +51,10 @@
           <h2>{{model.Name}}</h2>
           <div class="product-details-price"> ₹ {{this.SelectedSizeModel?.SellingPrice
             ?this.SelectedSizeModel?.SellingPrice: model.SellingPrice}}
-            <span class="product-details-cutting-price">₹ {{SelectedSizeModel.UnitPrice}}</span>
-            <span class="product-details-price-off">{{DiscountValue}} Off</span>
+            <span class="product-details-cutting-price" *ngIf="SelectedSizeModel.UnitPrice!=(this.SelectedSizeModel?.SellingPrice
+            ?this.SelectedSizeModel?.SellingPrice: model.SellingPrice)">₹ {{SelectedSizeModel.UnitPrice}}</span>
+            <span class="product-details-price-off" *ngIf="SelectedSizeModel.UnitPrice!=(this.SelectedSizeModel?.SellingPrice
+            ?this.SelectedSizeModel?.SellingPrice: model.SellingPrice)">{{DiscountValue}} Off</span>
           </div>
 
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
