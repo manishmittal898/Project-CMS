@@ -78,6 +78,31 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetProductMaxPrice());
                             break;
 
+                        case DropDownKey.ddlProductDiscount:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Discount.GetStringValue()));
+                            break;
+                        case DropDownKey.ddlProductOccasion:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Occasion.GetStringValue()));
+                            break;
+                        case DropDownKey.ddlProductFabric:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Fabric.GetStringValue()));
+                            break;
+                        case DropDownKey.ddlProductLength:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Length.GetStringValue()));
+                            break;
+                        case DropDownKey.ddlProductColor:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Color.GetStringValue()));
+                            break;
+                        case DropDownKey.ddlProductPattern:
+
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Pattern.GetStringValue()));
+                            break;
+
 
                         case DropDownKey.ddlSubCategory:
 
@@ -202,7 +227,6 @@ namespace CMS.Service.Services.Common
                 var data = (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type);
                 if (isTransactionData)
                 {
-
                     if (lktype == LookupTypeEnum.Product_Category.GetStringValue())
                     {
                         data = data.Where(x => x.TblProductMasterCategories.Any(y => y.Category.Id == x.Id));
@@ -217,22 +241,44 @@ namespace CMS.Service.Services.Common
                         data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
+                    else if (lktype == LookupTypeEnum.Product_Discount.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterDiscounts.Any(y => y.DiscountId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+
+                    }
+                    else if (lktype == LookupTypeEnum.Product_Occasion.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterOccasions.Any(y => y.OccasionId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                    }
+                    else if (lktype == LookupTypeEnum.Product_Fabric.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterFabrics.Any(y => y.FabricId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                    }
+                    else if (lktype == LookupTypeEnum.Product_Length.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.LengthId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                    }
+                    else if (lktype == LookupTypeEnum.Product_Color.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.ColorId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                    }
+                    else if (lktype == LookupTypeEnum.Product_Pattern.GetStringValue())
+                    {
+                        data = data.Where(x => x.TblProductMasterPatterns.Any(y => y.PatternId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                    }
+
 
                 }
 
                 return await data.OrderBy(x => x.SortedOrder)
                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id) })
-                    .ToListAsync();
-
+                   .ToListAsync();
             }
             catch
             {
-
                 return null;
             }
         }
-
-
         private async Task<object> GetSubLookupMasters(string[] lookupId = null, string lktype = null)
         {
             try
@@ -240,11 +286,9 @@ namespace CMS.Service.Services.Common
                 long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
                 return await (from type in _db.TblSubLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && (ids.Length == 0 || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted select type).OrderBy(x => x.SortedOrder).Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), CategoryId = _security.EncryptData(r.LookUpId), Category = r.LookUp.Name })
                      .ToListAsync();
-
             }
             catch
             {
-
                 return null;
             }
         }
@@ -255,11 +299,10 @@ namespace CMS.Service.Services.Common
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
                 long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
-
                 var data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.Id)) &&
-                  (!isTransactionData || (type.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
+  (!isTransactionData || (type.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
 
-                ).ToList();
+).ToList();
 
                 return data.GroupBy(x => x.Id)
                       .Select(y => new
@@ -272,14 +315,8 @@ namespace CMS.Service.Services.Common
             }
             catch (Exception ex)
             {
-
                 return null;
             }
-
-
-
-
-
         }
 
 
@@ -289,15 +326,8 @@ namespace CMS.Service.Services.Common
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
                 long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
-
                 var data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
-                 (!isTransactionData || (type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
-
-                ).ToList();
-
-
-
-
+ (!isTransactionData || (type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))).ToList();
 
                 return data.GroupBy(x => x.LookUpId)
                       .Select(y => new
@@ -309,14 +339,8 @@ namespace CMS.Service.Services.Common
             }
             catch (Exception ex)
             {
-
                 return null;
             }
-
-
-
-
-
         }
         private async Task<object> GetLookupTypeMasters()
         {
@@ -328,7 +352,6 @@ namespace CMS.Service.Services.Common
             }
             catch
             {
-
                 return null;
             }
         }
@@ -339,11 +362,9 @@ namespace CMS.Service.Services.Common
             {
                 return await (from type in _db.TblProductMasters where type.IsActive == true && !type.IsDelete select type).OrderByDescending(x => x.Price)
                      .Select(r => new { Text = r.Price, Value = r.Price }).FirstAsync();
-
             }
             catch
             {
-
                 return null;
             }
         }

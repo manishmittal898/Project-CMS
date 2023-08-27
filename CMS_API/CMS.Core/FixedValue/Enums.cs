@@ -26,6 +26,18 @@ namespace CMS.Core.FixedValue
             State,
             [StringValue("Product_View_Section")]
             Product_View_Section,
+            [StringValue("Product_Discount")]
+            Product_Discount,
+            [StringValue("Product_Occasion")]
+            Product_Occasion,
+            [StringValue("Product_Fabric")]
+            Product_Fabric,
+            [StringValue("Product_Length")]
+            Product_Length,
+            [StringValue("Product_Color")]
+            Product_Color,
+            [StringValue("Product_Pattern")]
+            Product_Pattern,
         }
 
         public enum ContentTypeEnum

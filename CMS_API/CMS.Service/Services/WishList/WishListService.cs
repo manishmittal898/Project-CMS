@@ -35,7 +35,7 @@ namespace CMS.Service.Services.WishList
 
             try
             {
-                List<TblUserWishList> objProducts = await _db.TblUserWishLists.Where(x => x.ProductId == long.Parse(_security.DecryptData( model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                List<TblUserWishList> objProducts = await _db.TblUserWishLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
                 if (objProducts.Count == 0)
                 {
                     TblUserWishList objProduct = new TblUserWishList();
@@ -134,6 +134,19 @@ namespace CMS.Service.Services.WishList
                                             CaptionTag = x.Product.CaptionTag.Name,
                                             ViewSectionId = x.Product.ViewSectionId.HasValue ? _security.EncryptData(x.Product.ViewSectionId.ToString()) : null,
                                             ViewSection = x.Product.ViewSection.Name,
+                                            DiscountId = x.Product.DiscountId.HasValue ? _security.EncryptData(x.Product.DiscountId.Value) : null,
+                                            Discount = x.Product.Discount.Name,
+                                            OccasionId = x.Product.OccasionId.HasValue ? _security.EncryptData(x.Product.OccasionId.Value) : null,
+                                            Occasion = x.Product.Occasion.Name,
+                                            FabricId = x.Product.FabricId.HasValue ? _security.EncryptData(x.Product.FabricId.Value) : null,
+                                            Fabric = x.Product.Fabric.Name,
+                                            LengthId = x.Product.LengthId.HasValue ? _security.EncryptData(x.Product.LengthId.Value) : null,
+                                            Length = x.Product.Length.Name,
+                                            ColorId = x.Product.ColorId.HasValue ? _security.EncryptData(x.Product.ColorId.Value) : null,
+                                            Color = x.Product.Color.Name,
+                                            PatternId = x.Product.PatternId.HasValue ? _security.EncryptData(x.Product.PatternId.Value) : null,
+                                            Pattern = x.Product.Pattern.Name,
+                                            UniqueId = x.Product.UniqueId,
                                             Desc = x.Product.Desc,
                                             Summary = x.Product.Desc,
                                             Price = x.Product.Price,

@@ -26,6 +26,13 @@ namespace CMS.Service.Services.Common
             public const string ddlProductSize = "ddlproductsize";
             public const string ddlProductPrice = "ddlproductprice";
             public const string ddlProductViewSection = "ddlproductviewsection";
+            public const string ddlProductDiscount = "ddlproductdiscount";
+            public const string ddlProductOccasion = "ddlproductoccasion";
+            public const string ddlProductFabric = "ddlproductfabric";
+            public const string ddlProductLength = "ddlproductlength";
+            public const string ddlProductColor = "ddlproductcolor";
+            public const string ddlProductPattern = "ddlproductpattern";
+
 
 
             public const string ddlGender = "ddlgender";

@@ -64,6 +64,19 @@ namespace CMS.Service.Services.ProductMaster
                                             CaptionTag = x.CaptionTag.Name,
                                             ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
                                             ViewSection = x.ViewSection.Name,
+                                            DiscountId = x.DiscountId.HasValue ? _security.EncryptData(x.DiscountId.Value) : null,
+                                            Discount = x.Discount.Name,
+                                            OccasionId = x.OccasionId.HasValue ? _security.EncryptData(x.OccasionId.Value) : null,
+                                            Occasion = x.Occasion.Name,
+                                            FabricId = x.FabricId.HasValue ? _security.EncryptData(x.FabricId.Value) : null,
+                                            Fabric = x.Fabric.Name,
+                                            LengthId = x.LengthId.HasValue ? _security.EncryptData(x.LengthId.Value) : null,
+                                            Length = x.Length.Name,
+                                            ColorId = x.ColorId.HasValue ? _security.EncryptData(x.ColorId.Value) : null,
+                                            Color = x.Color.Name,
+                                            PatternId = x.PatternId.HasValue ? _security.EncryptData(x.PatternId.Value) : null,
+                                            Pattern = x.Pattern.Name,
+                                            UniqueId = x.UniqueId,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
@@ -118,6 +131,19 @@ namespace CMS.Service.Services.ProductMaster
                     CaptionTag = x.CaptionTag.Name,
                     ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
                     ViewSection = x.ViewSection.Name,
+                    DiscountId = x.DiscountId.HasValue ? _security.EncryptData(x.DiscountId.Value) : null,
+                    Discount = x.Discount.Name,
+                    OccasionId = x.OccasionId.HasValue ? _security.EncryptData(x.OccasionId.Value) : null,
+                    Occasion = x.Occasion.Name,
+                    FabricId = x.FabricId.HasValue ? _security.EncryptData(x.FabricId.Value) : null,
+                    Fabric = x.Fabric.Name,
+                    LengthId = x.LengthId.HasValue ? _security.EncryptData(x.LengthId.Value) : null,
+                    Length = x.Length.Name,
+                    ColorId = x.ColorId.HasValue ? _security.EncryptData(x.ColorId.Value) : null,
+                    Color = x.Color.Name,
+                    PatternId = x.PatternId.HasValue ? _security.EncryptData(x.PatternId.Value) : null,
+                    Pattern = x.Pattern.Name,
+                    UniqueId = x.UniqueId,
                     Desc = x.Desc,
                     Summary = x.Summary,
                     Price = x.Price,
@@ -181,6 +207,17 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
                     objProduct.ViewSectionId = !string.IsNullOrEmpty(model.ViewSectionId) ? long.Parse(_security.DecryptData(model.ViewSectionId)) : null as Nullable<long>;
                     objProduct.CaptionTagId = !string.IsNullOrEmpty(model.CaptionTagId) ? long.Parse(_security.DecryptData(model.CaptionTagId)) : null as Nullable<long>;
+                    objProduct.DiscountId = !string.IsNullOrEmpty(model.DiscountId) ? long.Parse(_security.DecryptData(model.DiscountId)) : null as Nullable<long>;
+                    objProduct.OccasionId = !string.IsNullOrEmpty(model.OccasionId) ? long.Parse(_security.DecryptData(model.OccasionId)) : null as Nullable<long>;
+                    objProduct.FabricId = !string.IsNullOrEmpty(model.FabricId) ? long.Parse(_security.DecryptData(model.FabricId)) : null as Nullable<long>;
+                    objProduct.LengthId = !string.IsNullOrEmpty(model.LengthId) ? long.Parse(_security.DecryptData(model.LengthId)) : null as Nullable<long>;
+                    objProduct.ColorId = !string.IsNullOrEmpty(model.ColorId) ? long.Parse(_security.DecryptData(model.ColorId)) : null as Nullable<long>;
+                    objProduct.PatternId = !string.IsNullOrEmpty(model.PatternId) ? long.Parse(_security.DecryptData(model.PatternId)) : null as Nullable<long>;
+                    objProduct.UniqueId = model.UniqueId;
+
+                    objProduct.Desc = model.Desc;
+                    objProduct.Price = model.Price;
+                    objProduct.Summary = model.Summary;
 
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
@@ -192,11 +229,6 @@ namespace CMS.Service.Services.ProductMaster
                         _fileHelper.Delete(objProduct.ImagePath);
                         objProduct.ImagePath = null;
                     }
-
-                    objProduct.Desc = model.Desc;
-                    objProduct.Price = model.Price;
-                    objProduct.Summary = model.Summary;
-                 
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.MetaTitle = model.MetaTitle;
@@ -288,12 +320,17 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
                     objProduct.ViewSectionId = !string.IsNullOrEmpty(model.ViewSectionId) ? long.Parse(_security.DecryptData(model.ViewSectionId)) : null as Nullable<long>;
                     objProduct.CaptionTagId = !string.IsNullOrEmpty(model.CaptionTagId) ? long.Parse(_security.DecryptData(model.CaptionTagId)) : null as Nullable<long>;
-
-                    objProduct.ImagePath = await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main, isThumbnail: true);
+                    objProduct.DiscountId = !string.IsNullOrEmpty(model.DiscountId) ? long.Parse(_security.DecryptData(model.DiscountId)) : null as Nullable<long>;
+                    objProduct.OccasionId = !string.IsNullOrEmpty(model.OccasionId) ? long.Parse(_security.DecryptData(model.OccasionId)) : null as Nullable<long>;
+                    objProduct.FabricId = !string.IsNullOrEmpty(model.FabricId) ? long.Parse(_security.DecryptData(model.FabricId)) : null as Nullable<long>;
+                    objProduct.LengthId = !string.IsNullOrEmpty(model.LengthId) ? long.Parse(_security.DecryptData(model.LengthId)) : null as Nullable<long>;
+                    objProduct.ColorId = !string.IsNullOrEmpty(model.ColorId) ? long.Parse(_security.DecryptData(model.ColorId)) : null as Nullable<long>;
+                    objProduct.PatternId = !string.IsNullOrEmpty(model.PatternId) ? long.Parse(_security.DecryptData(model.PatternId)) : null as Nullable<long>;
+                    objProduct.UniqueId = model.UniqueId;
+                    objProduct.ImagePath = !string.IsNullOrEmpty(model.ImagePath) ? await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main, isThumbnail: true) : null;
                     objProduct.Desc = model.Desc;
                     objProduct.Price = model.Price;
                     objProduct.Summary = model.Summary;
-
                     objProduct.IsActive = true;
                     objProduct.Keyword = !string.IsNullOrEmpty(model.Keyword) ? model.Keyword : model.Name;
                     objProduct.CreatedBy = _loginUserDetail.UserId.Value;
@@ -476,7 +513,7 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.Data = await (from x in result
                                         select new ProductCategoryViewModel
                                         {
-                                            Id = _security.EncryptData( x.Id),
+                                            Id = _security.EncryptData(x.Id),
                                             Name = x.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
 
@@ -514,6 +551,14 @@ namespace CMS.Service.Services.ProductMaster
                 List<long> SubCategoryIds = model.SubCategoryId != null && model.SubCategoryId.Count > 0 ? model.SubCategoryId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> SizeIds = model.SizeId != null && model.SizeId.Count > 0 ? model.SizeId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> ViewSectionIds = model.ViewSectionId != null && model.ViewSectionId.Count > 0 ? model.ViewSectionId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> CaptionTagIds = model.CaptionTagId != null && model.CaptionTagId.Count > 0 ? model.CaptionTagId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> DiscountIds = model.DiscountId != null && model.DiscountId.Count > 0 ? model.DiscountId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> OccasionIds = model.OccasionId != null && model.OccasionId.Count > 0 ? model.OccasionId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> FabricIds = model.FabricId != null && model.FabricId.Count > 0 ? model.FabricId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> LengthIds = model.LengthId != null && model.LengthId.Count > 0 ? model.LengthId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> ColorIds = model.ColorId != null && model.ColorId.Count > 0 ? model.ColorId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                List<long> PatternIds = model.PatternId != null && model.PatternId.Count > 0 ? model.PatternId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+
 
                 var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
@@ -522,6 +567,14 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || SubCategoryIds.Contains(prd.SubCategoryId.Value))
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
                                  && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
+                                 && (model.CaptionTagId == null || model.CaptionTagId.Count == 0 || CaptionTagIds.Contains(prd.CaptionTagId.Value))
+                                 && (model.DiscountId == null || model.DiscountId.Count == 0 || DiscountIds.Contains(prd.DiscountId.Value))
+                                 && (model.OccasionId == null || model.OccasionId.Count == 0 || OccasionIds.Contains(prd.OccasionId.Value))
+                                 && (model.FabricId == null || model.FabricId.Count == 0 || FabricIds.Contains(prd.FabricId.Value))
+                                 && (model.LengthId == null || model.LengthId.Count == 0 || LengthIds.Contains(prd.LengthId.Value))
+                                 && (model.ColorId == null || model.ColorId.Count == 0 || ColorIds.Contains(prd.ColorId.Value))
+                                 && (model.PatternId == null || model.PatternId.Count == 0 || PatternIds.Contains(prd.PatternId.Value))
+                                 && (string.IsNullOrEmpty(model.UniqueId) || prd.UniqueId.Contains(model.UniqueId))
                                  && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
                                 && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
                               select prd);
@@ -552,6 +605,19 @@ namespace CMS.Service.Services.ProductMaster
                                             SubCategory = x.SubCategory.Name,
                                             CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
                                             CaptionTag = x.CaptionTag.Name,
+                                            DiscountId = x.DiscountId.HasValue ? _security.EncryptData(x.DiscountId.Value) : null,
+                                            Discount = x.Discount.Name,
+                                            OccasionId = x.OccasionId.HasValue ? _security.EncryptData(x.OccasionId.Value) : null,
+                                            Occasion = x.Occasion.Name,
+                                            FabricId = x.FabricId.HasValue ? _security.EncryptData(x.FabricId.Value) : null,
+                                            Fabric = x.Fabric.Name,
+                                            LengthId = x.LengthId.HasValue ? _security.EncryptData(x.LengthId.Value) : null,
+                                            Length = x.Length.Name,
+                                            ColorId = x.ColorId.HasValue ? _security.EncryptData(x.ColorId.Value) : null,
+                                            Color = x.Color.Name,
+                                            PatternId = x.PatternId.HasValue ? _security.EncryptData(x.PatternId.Value) : null,
+                                            Pattern = x.Pattern.Name,
+                                            UniqueId = x.UniqueId,
                                             Desc = x.Desc,
                                             Summary = x.Desc,
                                             Price = x.Price,
