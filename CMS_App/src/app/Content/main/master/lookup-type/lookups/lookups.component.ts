@@ -24,12 +24,13 @@ export class LookupsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   id!: string;
-  displayedColumns: string[] = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
+  displayedColumns: string[] = ['index', 'Name', 'Value', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
   ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
   { Value: 'SortedOrder', Text: 'Sorted Order' }];
   indexModel = new IndexModel();
   totalRecords = 0;
   iSImageVisible = false;
+  isValueVisible = false;
   noRecordData = {
     subject: 'Can you please add your first record.',
     Description: undefined,
@@ -51,13 +52,17 @@ export class LookupsComponent implements OnInit {
   checkColumn() {
     this._lookupTypeService.GetLookupTypeMaster(this.id).subscribe(x => {
       if (x.IsSuccess) {
-        if (!x.Data?.IsImage) {
-          this.displayedColumns = ['index', 'Name', 'SortedOrder', 'IsActive', 'Action'];
-          this.iSImageVisible = false;
-        } else {
-          this.displayedColumns = ['index', 'Name', 'ImagePath', 'SortedOrder', 'IsActive', 'Action'];
-          this.iSImageVisible = true;
+        this.displayedColumns = ['index', 'Name',];
+        this.iSImageVisible = x.Data?.IsImage as boolean;
+        this.isValueVisible = x.Data?.IsValue as boolean;
+        if (this.iSImageVisible) {
+          this.displayedColumns.push('ImagePath');
         }
+        if (this.isValueVisible) {
+          this.displayedColumns.push('Value')
+        }
+
+        this.displayedColumns.push('SortedOrder', 'IsActive', 'Action');
       }
     })
   }
@@ -154,7 +159,7 @@ export class LookupsComponent implements OnInit {
 
   onAddUpdateLookup(Id: string) {
     const dialogRef = this.dialog.open(LookupsAddEditComponent, {
-      data: { Id: Id, Type: this.id, Heading: `${Id.length > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
+      data: { Id: Id, Type: this.id, lookupTypeConfig: { isImage: this.iSImageVisible, isValue: this.isValueVisible }, Heading: `${Id.length > 0 ? 'Update ' : 'Add '} ${this.pageName}` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });

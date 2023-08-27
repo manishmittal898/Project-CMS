@@ -35,4 +35,8 @@ export class ProductDetailComponent implements OnInit {
       error => {
       });
   }
+  getDiscount() {
+   return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100)).toString()+'%';
+
+  }
 }

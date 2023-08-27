@@ -30,9 +30,14 @@ export class ProductAddEditComponent implements OnInit {
     ViewSection: [undefined,],
     Category: [undefined, Validators.required],
     SubCategory: [undefined],
+    Discount: [undefined],
+    Occasion: [undefined],
+    Fabric: [undefined],
+    Length: [undefined],
+    Color: [undefined],
+    Pattern: [undefined],
     Summary: [undefined],
     Description: [undefined],
-    Discount: [undefined],
     Keyword: [undefined],
     MetaTitle: [undefined],
     MetaDesc: [undefined],
@@ -113,7 +118,13 @@ export class ProductAddEditComponent implements OnInit {
         this.model.SubCategoryId = data.SubCategoryId ? data.SubCategoryId : undefined;
         this.model.CaptionTagId = data.CaptionTagId ? data.CaptionTagId : undefined;
         this.model.Summary = data.Summary;
-        this.model.ShippingCharge = data.ShippingCharge ? Number(data.ShippingCharge) : undefined;
+        this.model.DiscountId = data.DiscountId;
+        this.model.OccasionId = data.OccasionId;
+        this.model.FabricId = data.FabricId;
+        this.model.LengthId = data.LengthId;
+        this.model.ColorId = data.ColorId;
+        this.model.PatternId = data.PatternId;
+        this.model.UniqueId = data.UniqueId;
         this.model.Keyword = data.Keyword;
         this.model.MetaTitle = data.MetaTitle;
         this.model.MetaDesc = data.MetaDesc;
@@ -129,7 +140,10 @@ export class ProductAddEditComponent implements OnInit {
       });
   }
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag, DropDown_key.ddlProductViewSection, DropDown_key.ddlProductSize]).subscribe(res => {
+    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCaptionTag,
+    DropDown_key.ddlProductViewSection, DropDown_key.ddlProductSize, DropDown_key.ddlProductDiscount,
+    DropDown_key.ddlProductOccasion, DropDown_key.ddlProductFabric, DropDown_key.ddlProductLength,
+    DropDown_key.ddlProductColor, DropDown_key.ddlProductPattern]).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
@@ -137,14 +151,19 @@ export class ProductAddEditComponent implements OnInit {
         this.dropDown.ddlCategory = ddls?.ddlCategory;
         this.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
         this.dropDown.ddlProductSize = ddls?.ddlProductSize;
-
+        this.dropDown.ddlProductDiscount = ddls?.ddlProductDiscount;
+        this.dropDown.ddlProductOccasion = ddls?.ddlProductOccasion;
+        this.dropDown.ddlProductFabric = ddls?.ddlProductFabric;
+        this.dropDown.ddlProductLength = ddls?.ddlProductLength;
+        this.dropDown.ddlProductColor = ddls?.ddlProductColor;
+        this.dropDown.ddlProductPattern = ddls?.ddlProductPattern;
         this.ddlProductSize();
       }
     });
   }
   getSubLookUpDropDown(value: string) {
 
-    if (value.length > 0) {
+    if (value?.length > 0) {
       const ddlModel = {} as FilterDropDownPostModel;
       ddlModel.FileterFromKey = this.ddlkeys.ddlLookup
       ddlModel.Key = this.ddlkeys.ddlSublookup

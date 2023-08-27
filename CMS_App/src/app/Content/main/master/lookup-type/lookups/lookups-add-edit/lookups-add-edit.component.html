@@ -48,6 +48,19 @@
 
                     </div>
 
+                    <div class="col-md-12 mb-3" *ngIf="isValueFieldVisible">
+                      <label>Value</label>
+
+                      <input type="text" [(ngModel)]="model.Value" (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="6" formControlName="Value" [ngClass]="{ 'is-invalid': f.Value.errors && f.Value.touched}" class="form-control"
+                          id="input4" placeholder="Value">
+                      <div class="invalid-feedback" *ngIf="(formgrp.get('Value')?.hasError('required') && formgrp.get('Value')?.touched)">
+                          Enter Value </div>
+                      <div class="invalid-feedback" *ngIf="!formgrp.get('Value')?.hasError('required') && ((formgrp.get('Value')?.hasError('maxlength') || formgrp.get('Value')?.hasError('minlength')) && formgrp.get('Value')?.touched) || (formgrp.get('Value')?.hasError('maxlength') || formgrp.get('Value')?.hasError('minlength'))">
+                          Value length must be 1-6 digit. </div>
+
+
+                  </div>
+
                     <div class="col-md-12 mb-3">
                         <label>Sort Order (1-999999)</label>
 

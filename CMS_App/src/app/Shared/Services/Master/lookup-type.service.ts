@@ -44,4 +44,5 @@ export interface LookupTypeMasterModel {
   ModifiedOn: Date;
   IsActive: boolean;
   IsImage: boolean;
+  IsValue: boolean;
 }

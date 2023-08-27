@@ -49,7 +49,7 @@ GO
 SET IDENTITY_INSERT [dbo].[tblLookupTypeMaster] ON 
 GO
 
-IF  (SELECT COUNT(*) FROM  [dbo].[tblLookupTypeMaster] )<8
+IF  (SELECT COUNT(*) FROM  [dbo].[tblLookupTypeMaster] )<15
 
 BEGIN
 
@@ -61,7 +61,7 @@ INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[Cr
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (6, N'Address Type', N'Address_Type',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (7, N'State', N'State',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (8, N'Home Page Product Section', N'Product_View_Section',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
-INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (9, N'Discount', N'Product_Discount',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)
+INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage],[IsValue]) VALUES (9, N'Discount', N'Product_Discount',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0,1)
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (10, N'Occasion', N'Product_Occasion',0, 1, GETDATE(), 1,GETDATE(), 1, 0,1)
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (11, N'Fabric', N'Product_Fabric',0, 1, GETDATE(), 1,GETDATE(), 1, 0,1)
 INSERT [dbo].[tblLookupTypeMaster] ([Id], [Name], [EnumValue], [IsSubLookup],[CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDelete],[IsImage]) VALUES (12, N'Cloth Length', N'Product_Length',0, 1, GETDATE(), 1,GETDATE(), 1, 0,0)

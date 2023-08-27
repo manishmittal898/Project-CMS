@@ -7,6 +7,7 @@ using CMS.Service.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,7 @@ namespace CMS.Service.Services.LookupMaster
                                             LookUpType = x.LookUpType.HasValue ? _security.EncryptData(x.LookUpType.Value) : null,
                                             LookUpTypeName = x.LookUpTypeNavigation.Name,
                                             IsSubLookup = x.LookUpTypeNavigation.IsSubLookup,
+                                            Value = x.Value,
                                             CreatedBy = x.CreatedBy,
                                             CreatedOn = x.CreatedOn,
                                             ModifiedBy = x.ModifiedBy,
@@ -109,6 +111,7 @@ namespace CMS.Service.Services.LookupMaster
                     LookUpType = X.LookUpType.HasValue ? _security.EncryptData(X.LookUpType.Value) : null,
                     LookUpTypeName = X.LookUpTypeNavigation.Name,
                     IsSubLookup = X.LookUpTypeNavigation.IsSubLookup,
+                    Value = X.Value,
                     CreatedBy = X.CreatedBy,
                     CreatedOn = X.CreatedOn,
                     ModifiedBy = X.ModifiedBy,
@@ -144,18 +147,19 @@ namespace CMS.Service.Services.LookupMaster
 
                     TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
                     objData.Name = model.Name;
+                    objData.Value = !string.IsNullOrEmpty(model.Value.Trim()) ? model.Value.Trim() : null;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType != null ? long.Parse(_security.DecryptData(model.LookUpType)) : null as Nullable<long>;
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
                         objData.ImagePath = !string.IsNullOrEmpty(objData.ImagePath) && model.ImagePath.Contains(objData.ImagePath.Replace("\\", "/")) ? objData.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
                     }
-                    else 
+                    else
                     {
                         _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
-
                     }
+
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     var roletype = _db.TblLookupMasters.Update(objData);
                     _db.SaveChanges();
@@ -167,6 +171,7 @@ namespace CMS.Service.Services.LookupMaster
 
                     TblLookupMaster objData = new TblLookupMaster();
                     objData.Name = model.Name;
+                    objData.Value = !string.IsNullOrEmpty(model.Value) && model.Value.Trim().Length > 0 ? model.Value.Trim() : null;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType != null ? long.Parse(_security.DecryptData(model.LookUpType.ToString())) : null as Nullable<long>;
                     objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);

@@ -16,7 +16,7 @@
       <!-- Done -->
       <div class="col-md-2 mb-3">
         <label>SKU Number<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" formControlName="UniqueID"
+        <input type="text" class="form-control" formControlName="UniqueID" [(ngModel)]="model.UniqueId"
           [ngClass]="{ 'is-invalid': f.UniqueID.errors && f.UniqueID.touched}" placeholder="SKU Number">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('UniqueID')?.hasError('required') && formgrp.get('UniqueID')?.touched)">
@@ -46,19 +46,18 @@
       </div>
 
 
-      <div class="col-md-6 col-lg-3 mb-3">
+
+      <div class="col-md-2 mb-3">
         <label>Discount</label>
 
-        <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Discount" [searchable]="true" bindLabel="Text"
-          bindValue="Value" placeholder="Select Discount"
+        <ng-select [items]="dropDown.ddlProductDiscount" formControlName="Discount" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Discount" [(ngModel)]="model.DiscountId"
           [ngClass]="{ 'is-invalid': f.Discount.errors && f.Discount.touched}">
         </ng-select>
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Discount')?.hasError('required') && formgrp.get('Discount')?.touched)">
           Please select <strong>Discount</strong>...!</div>
       </div>
-
-
       <div class="col-md-6 col-lg-3 mb-3">
         <label>Select Category<span class="text-danger">*</span></label>
         <ng-select [items]="dropDown.ddlCategory" formControlName="Category" [searchable]="true" bindLabel="Text"
@@ -80,7 +79,66 @@
           *ngIf="(formgrp.get('SubCategory')?.hasError('required') && formgrp.get('SubCategory')?.touched)">
           Please select <strong>Sub Category</strong>...!</div>
       </div>
-      <div class="col-md-6 col-lg-3 mb-3">
+
+
+
+      <div class="col-md-2 mb-3">
+        <label>Occasion</label>
+
+        <ng-select [items]="dropDown.ddlProductOccasion" formControlName="Occasion" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Occasion" [(ngModel)]="model.OccasionId"
+          [ngClass]="{ 'is-invalid': f.Occasion.errors && f.Occasion.touched}">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Occasion')?.hasError('required') && formgrp.get('Occasion')?.touched)">
+          Please select <strong>Occasion</strong>...!</div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label>Fabric</label>
+
+        <ng-select [items]="dropDown.ddlProductFabric" formControlName="Fabric" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Fabric" [(ngModel)]="model.FabricId"
+          [ngClass]="{ 'is-invalid': f.Fabric.errors && f.Fabric.touched}">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Fabric')?.hasError('required') && formgrp.get('Fabric')?.touched)">
+          Please select <strong>Fabric</strong>...!</div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label>Length</label>
+
+        <ng-select [items]="dropDown.ddlProductLength" formControlName="Length" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Length" [(ngModel)]="model.LengthId"
+          [ngClass]="{ 'is-invalid': f.Length.errors && f.Length.touched}">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Length')?.hasError('required') && formgrp.get('Length')?.touched)">
+          Please select <strong>Length</strong>...!</div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label>Color</label>
+
+        <ng-select [items]="dropDown.ddlProductColor" formControlName="Color" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Color" [(ngModel)]="model.ColorId"
+          [ngClass]="{ 'is-invalid': f.Color.errors && f.Color.touched}">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Color')?.hasError('required') && formgrp.get('Color')?.touched)">
+          Please select <strong>Color</strong>...!</div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label>Pattern</label>
+
+        <ng-select [items]="dropDown.ddlProductPattern" formControlName="Pattern" [searchable]="true" bindLabel="Text"
+          bindValue="Value" placeholder="Select Pattern" [(ngModel)]="model.PatternId"
+          [ngClass]="{ 'is-invalid': f.Pattern.errors && f.Pattern.touched}">
+        </ng-select>
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('Pattern')?.hasError('required') && formgrp.get('Pattern')?.touched)">
+          Please select <strong>Pattern</strong>...!</div>
+      </div>
+
+      <div class="col-md-2 mb-3">
         <label>Tag/Label</label>
 
         <ng-select [items]="dropDown.ddlCaptionTag" formControlName="Caption" [searchable]="true" bindLabel="Text"
@@ -91,7 +149,7 @@
           *ngIf="(formgrp.get('Caption')?.hasError('required') && formgrp.get('Caption')?.touched)">
           Please select <strong>Caption</strong>...!</div>
       </div>
-      <div class="col-md-6 col-lg-3 mb-3">
+      <div class="col-md-2 mb-3">
         <label>Home Page Section</label>
 
         <ng-select [items]="dropDown.ddlProductViewSection" formControlName="ViewSection" [searchable]="true"
@@ -152,11 +210,7 @@
 
             </p>
           </span>
-
-
         </ng-container>
-
-
       </div>
 
       <div class="col-md-6 col-lg-7 mb-0">

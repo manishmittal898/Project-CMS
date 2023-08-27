@@ -108,6 +108,13 @@ export class DropDownModel {
   ddlGeneralEntryCategory!: GECategoryDropDownItem[];
   ddlProductViewSection!: DropDownItem[];
   ddlAddressType!: DropDownItem[];
+  ddlProductDiscount!: DropDownItem[];
+  ddlProductOccasion!: DropDownItem[];
+  ddlProductFabric!: DropDownItem[];
+  ddlProductLength!: DropDownItem[];
+  ddlProductColor!: DropDownItem[];
+  ddlProductPattern!: DropDownItem[];
+
 }
 
 export class DropDownItem {

@@ -44,7 +44,8 @@ export interface ProductMasterViewModel {
   CategoryId: string;
   SubCategoryId: string;
   Desc: string;
-  Price: number | null;
+  Price: number ;
+  SellingPrice : number ;
   CaptionTagId: string | null;
   Summary: string;
   CreatedBy: number;
@@ -56,7 +57,19 @@ export interface ProductMasterViewModel {
   CaptionTag: string;
   Category: string;
   SubCategory: string;
-  ShippingCharge: number | undefined;
+  DiscountId: string;
+  Discount: string;
+  OccasionId: string;
+  Occasion: string;
+  FabricId: string;
+  Fabric: string;
+  LengthId: string;
+  Length: string;
+  ColorId: string;
+  Color: string;
+  PatternId: string;
+  Pattern: string;
+  UniqueId: string;
   Keyword: string;
   MetaTitle: string;
   MetaDesc: string;
@@ -78,6 +91,13 @@ export interface ProductMasterPostModel {
   SubCategoryId: string | undefined;
   CaptionTagId: string | undefined;
   ViewSectionId: string | undefined;
+  DiscountId: string;
+  OccasionId: string;
+  FabricId: string;
+  LengthId: string;
+  ColorId: string;
+  PatternId: string;
+  UniqueId: string;
   Summary: string;
   ShippingCharge: number | undefined;
   Keyword: string;
@@ -99,5 +119,6 @@ export interface ProductStockModel {
   SizeId: string | undefined;
   Size: string;
   UnitPrice: number | null;
+  SellingPrice: number | null
   Quantity: number | null;
 }

@@ -36,9 +36,10 @@ export class LookupService {
 export interface LookupMasterPostModel {
   Id: string;
   Name: string;
+  Value: string;
   ImagePath: string;
-  SortedOrder: number ;
-  LookUpType: string ;
+  SortedOrder: number;
+  LookUpType: string;
 
 }
 
@@ -46,6 +47,7 @@ export interface LookupMasterModel {
 
   Id: string;
   Name: string;
+  Value:string;
   ImagePath: string;
   SortedOrder: number | null;
   LookUpType: string | null;

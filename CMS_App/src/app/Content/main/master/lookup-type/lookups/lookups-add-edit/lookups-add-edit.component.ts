@@ -21,33 +21,52 @@ export class LookupsAddEditComponent implements OnInit {
   formgrp = this.fb.group({
     Name: [undefined, Validators.required],
     SortedOrder: [undefined, Validators.required],
-    ImagePath: [undefined, Validators.required],
+    ImagePath: [undefined],
+    Value: [undefined],
+
   });
   iSImageVisible = false;
+  isValueFieldVisible = false;
   get ddlkeys() { return DropDown_key };
   get f() { return this.formgrp.controls; }
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
   constructor(public dialogRef: MatDialogRef<LookupsAddEditComponent>, private readonly _lookupService: LookupService, private readonly _lookupTypeService: LookupTypeService,
     private readonly fb: FormBuilder, public _commonService: CommonService, private readonly toast: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: { Id: string, Type: string, Heading: string }) {
+    @Inject(MAT_DIALOG_DATA) public data: { Id: string, Type: string, lookupTypeConfig: { isImage: boolean, isValue: boolean }, Heading: string }) {
 
+    this.setLookupTypeConfig();
     this._lookupTypeService.GetLookupTypeMaster(this.data.Type).subscribe(x => {
-      
-      if (x.IsSuccess) {
-        if (!x.Data?.IsImage) {
 
-          this.formgrp.get('ImagePath')?.clearValidators();
-          this.formgrp.get('ImagePath')?.updateValueAndValidity();
-          this.iSImageVisible = false;
-        } else {
-          this.iSImageVisible = true;
-          this.formgrp.get('ImagePath')?.setValidators([Validators.required]);
-          this.formgrp.get('ImagePath')?.updateValueAndValidity();
-        }
+      if (x.IsSuccess) {
+        debugger
+
       }
     })
   }
 
+  setLookupTypeConfig() {
+    debugger
+    if (!this.data.lookupTypeConfig.isImage) {
+
+      this.formgrp.get('ImagePath')?.clearValidators();
+      this.formgrp.get('ImagePath')?.updateValueAndValidity();
+      this.iSImageVisible = false;
+    } else {
+      this.iSImageVisible = true;
+      this.formgrp.get('ImagePath')?.setValidators([Validators.required]);
+      this.formgrp.get('ImagePath')?.updateValueAndValidity();
+    }
+    if (!this.data.lookupTypeConfig.isValue) {
+
+      this.formgrp.get('Value')?.clearValidators();
+      this.formgrp.get('Value')?.updateValueAndValidity();
+      this.isValueFieldVisible = false;
+    } else {
+      this.isValueFieldVisible = true;
+      this.formgrp.get('Value')?.setValidators([Validators.required]);
+      this.formgrp.get('Value')?.updateValueAndValidity();
+    }
+  }
   ngOnInit(): void {
     if (this.data.Id.length > 0) {
       this.getDetail();
@@ -89,6 +108,7 @@ export class LookupsAddEditComponent implements OnInit {
           Id: this.data.Id,
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
+          Value: x.Data?.Value,
           SortedOrder: Number(x.Data?.SortedOrder),
           LookUpType: x.Data?.LookUpType,
         } as LookupMasterPostModel;

@@ -28,6 +28,7 @@ namespace CMS.Data.Models
 
         public long Id { get; set; }
         public string Name { get; set; }
+        public string Value { get; set; }
         public string ImagePath { get; set; }
         public int? SortedOrder { get; set; }
         public long? LookUpType { get; set; }

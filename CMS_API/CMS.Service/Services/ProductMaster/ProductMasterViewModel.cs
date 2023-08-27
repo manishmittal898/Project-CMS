@@ -49,7 +49,9 @@ namespace CMS.Service.Services.ProductMaster
         public string CategoryId { get; set; }
         public string SubCategoryId { get; set; }
         public string Desc { get; set; }
+
         public decimal? Price { get; set; }
+        public decimal? SellingPrice { get; set; }
         public string CaptionTagId { get; set; }
         public string ViewSectionId { get; set; }
         public string DiscountId { get; set; }
@@ -107,6 +109,7 @@ namespace CMS.Service.Services.ProductMaster
         public string SizeId { get; set; }
         public string Size { get; set; }
         public decimal? UnitPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
         public int? Quantity { get; set; }
 
     }

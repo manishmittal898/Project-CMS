@@ -89,15 +89,15 @@ export class API_Url {
 
   //#endregion
 
-    //#region  << Customer  >>
-    public static Customer_List_Api = `${environment.apiEndPoint}admin/Customer/Get`;
-    public static Customer_Detail_Api = `${environment.apiEndPoint}admin/Customer/Get/`;
-    public static Customer_AddUpdate_Api = `${environment.apiEndPoint}admin/Customer/Post`;
-    public static Customer_Delete_Api = `${environment.apiEndPoint}admin/Customer/Delete/`;
-    public static Customer_ActiveStatus_Api = `${environment.apiEndPoint}admin/Customer/ChangeActiveStatus/`;
+  //#region  << Customer  >>
+  public static Customer_List_Api = `${environment.apiEndPoint}admin/Customer/Get`;
+  public static Customer_Detail_Api = `${environment.apiEndPoint}admin/Customer/Get/`;
+  public static Customer_AddUpdate_Api = `${environment.apiEndPoint}admin/Customer/Post`;
+  public static Customer_Delete_Api = `${environment.apiEndPoint}admin/Customer/Delete/`;
+  public static Customer_ActiveStatus_Api = `${environment.apiEndPoint}admin/Customer/ChangeActiveStatus/`;
 
 
-    //#endregion
+  //#endregion
 
 
   //#region <<CMSPage>>
@@ -187,9 +187,16 @@ export class DropDown_key {
   static ddlSublookup = "ddlSublookup";
   static ddlSubLookupGroup = "ddlSubLookupGroup";
   static ddlContentType = "ddlContentType";
-  static ddlGeneralEntryCategory= "ddlGeneralEntryCategory";
-  static ddlProductViewSection="ddlProductViewSection"
-  static ddlAddressType="ddlAddressType"
+  static ddlGeneralEntryCategory = "ddlGeneralEntryCategory";
+  static ddlProductViewSection = "ddlProductViewSection"
+  static ddlAddressType = "ddlAddressType"
+  static ddlProductDiscount = "ddlProductDiscount";
+  static ddlProductOccasion = "ddlProductOccasion";
+  static ddlProductFabric = "ddlProductFabric";
+  static ddlProductLength = "ddlProductLength";
+  static ddlProductColor = "ddlProductColor";
+  static ddlProductPattern = "ddlProductPattern";
+
 
 
 }

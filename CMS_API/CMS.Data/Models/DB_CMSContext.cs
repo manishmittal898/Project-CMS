@@ -228,6 +228,8 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Name).HasMaxLength(500);
 
+                entity.Property(e => e.Value).HasMaxLength(50);
+
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.TblLookupMasterCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
@@ -646,7 +648,7 @@ namespace CMS.Data.Models
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.TblUserMasters)
                     .HasForeignKey(d => d.GenderId)
-                    .HasConstraintName("FK__tblUserMa__Gende__5CA1C101");
+                    .HasConstraintName("FK__tblUserMa__Gende__1C873BEC");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.TblUserMasters)
