@@ -934,7 +934,7 @@ i.fas.fa-times {
 }
 
 .product-detail-img-tab .tab-content .tab-pane img {
-  max-height: 700px;
+  max-height: 750px;
 }
 
 .product-details-right-info .table-responsive {
@@ -1007,7 +1007,9 @@ td.mat-footer-cell:last-of-type {
   background: #fff;
   color: #000;
 }
-
+.angular-editor ul {
+  padding-left: 15px;
+}
 .angular-editor-textarea {
   white-space: normal;
   word-break: break-all;
@@ -1314,7 +1316,6 @@ input[type="search"]:focus {
 fieldset.border {
   background: #fff;
 }
-
 .pagination {
   justify-content: end;
   margin-top: 5px;
@@ -1638,5 +1639,14 @@ color: var(--primary-color);
   background: #795548;
 }
 /* Theme End */
+fieldset legend {
+  font-size: 22px;
+}
 
-
+.static-form-control {
+  border: 1px solid #e2e2e2;
+  height: 46px;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 18px;
+}

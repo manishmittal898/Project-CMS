@@ -842,10 +842,6 @@ font-weight: 600;
   text-decoration: line-through;
 }
 
-.product-list-items-img img {
-    height: 100%;
-}
-
 .product-list-items-img {
     background: #f8f8f8;
     height: auto;
