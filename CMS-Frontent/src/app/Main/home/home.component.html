@@ -10,7 +10,7 @@
     <div class="carousel-item text-center" [ngClass]="{'active': indx==0}"
       *ngFor="let itm of BannerImages;let indx=index">
       <a href="javascript:void(0)" (click)="openURL(itm.Url)">
-        *<ng-container *ngIf="itm?.Data?.length>0; else elseTemplate">
+        <ng-container *ngIf="itm?.Data?.length>0; else elseTemplate">
           <img [src]="itm?.Data[0]?.Value" onerror="this.src='assets/images/slider-default.png'" class="w-100"
             alt="{{itm.Title}}">
         </ng-container>

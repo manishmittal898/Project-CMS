@@ -42,9 +42,11 @@
     <div class="col-lg-7 mt-4 mt-lg-0">
       <div class="product-details-right-info">
         <h2>{{this.model.Name | titlecase}}</h2>
+        <div class="d-flex align-items-center">
         <h3 class="m-0">₹ {{model.SellingPrice}} </h3>
-        <h5 class="m-0"><s>₹ {{model.Price}}</s></h5>
-        <span>{{DiscountValue}}</span>
+        <h5 class="mb-0 mx-2"><s>₹ {{model.Price}}</s></h5>
+        <p class="m-0 text-danger">{{DiscountValue}}</p>
+      </div>
         <div class="table-responsive mt-2">
           <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">
             <tbody>
@@ -94,9 +96,11 @@
           <p class="m-0" [innerHTML]="model?.Keyword"></p>
         </div>
 
-        <div class="mt-3" *ngIf="this.model.Stocks">
+        <div class="mt-4" *ngIf="this.model.Stocks">
           <fieldset class="border border-radius p-2 w-100">
-            <legend class="w-auto text-black">Stock</legend>
+            <div class="d-flex mb-1 mt--25 fieldset-header">
+            <legend class="w-auto text-black bg-white px-2 m-0">Stock</legend>
+          </div>
             <div class="table-responsive">
               <table class="custom-mat-table table-header-light">
                 <thead>

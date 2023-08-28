@@ -65,7 +65,7 @@
       </ng-container>
 
       <ng-container matColumnDef="Action">
-        <th width="150" mat-header-cell *matHeaderCellDef> Action </th>
+        <th width="100" mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let row" class="table-action-btn">
           <a class="table-action-btn-edit"
             routerLink="../../{{this.pageName+'/'+row.Name.slice(0,15).toLowerCase()+'/'+row.Id}}"
