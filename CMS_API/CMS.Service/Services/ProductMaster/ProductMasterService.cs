@@ -586,6 +586,9 @@ namespace CMS.Service.Services.ProductMaster
                     case "Name":
                         result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
                         break;
+                    case "Price":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Price.Value ascending select orderData) : (from orderData in result orderby orderData.Price.Value descending select orderData);
+                        break;
                     case "CreatedOn":
                         result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
                         break;

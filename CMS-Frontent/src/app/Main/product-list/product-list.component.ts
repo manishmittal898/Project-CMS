@@ -16,6 +16,8 @@ export class ProductListComponent implements OnInit {
   indexModel = new ProductFilterModel();
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
+  sortValue: string = "CreatedOn_false";
+
   constructor(private readonly _productService: ProductService,
     private readonly _router: ActivatedRoute, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
 
@@ -53,6 +55,10 @@ export class ProductListComponent implements OnInit {
   }
 
   getList() {
+    let sModel = this.sortValue.split('_');//as { column: string, OrderByAsc: boolean }
+    this.indexModel.OrderBy = sModel[0];
+    this.indexModel.OrderByAsc = sModel[1] == 'true' ? true : false;
+
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data;

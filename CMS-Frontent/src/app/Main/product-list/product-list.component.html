@@ -38,10 +38,15 @@
                   <span class="icon-mode grid-4 active"></span>
                 </div>
                 <div class="product-sortby-filter me-3">
-                  <select class="select-sm">
-                    <option>Sort by:</option>
-                    <option>Price (L to H)</option>
-                    <option>Price (H to L)</option>
+                  <div class="ms-1">Sort By</div>
+                  <select class="select-sm" (change)="getList()" [(ngModel)]="sortValue">
+
+                    <option [value]="'Name_true'">Name (A to Z)</option>
+                    <option [value]="'Name_false'">Name (Z to A)</option>
+                    <option [value]="'Price_true'">Price (L to H)</option>
+                    <option [value]="'Price_false'">Price (H to L)</option>
+                    <option [value]="'CreatedOn_false'">Newest (New to Old)</option>
+                    <option [value]="'CreatedOn_true'">Oldest (Old to New)</option>
                   </select>
                 </div>
               </div>
