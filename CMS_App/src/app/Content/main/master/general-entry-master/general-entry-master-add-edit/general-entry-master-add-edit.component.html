@@ -54,7 +54,7 @@
 
       </div>
       <div *ngIf="selectedCategory?.IsShowThumbnail" class="col-md-6 mb-3">
-        <label> Image <span class="label-info"> (Preferred size: 500*500 ) </span></label>
+        <label> Image</label>
         <input type="hidden" name="ImagePath" [(ngModel)]="model.ImagePath" formControlName="ImagePath">
         <app-file-selector [MaxFileLength]="1" (FilesChanged)="onDocumentAttach($event)"
           [CurrentFileLength]="model!.ImagePath ? 1: 0" [FileFilter]="'.jpeg,.gif,.png,.jpg,.webp'"
@@ -81,7 +81,7 @@
         </span>
 
       </div>
-      {{selectedCategory?.ContentType==(contentTypeEnum.Photo).toString()}}
+
       <div class="col-md-6 mb-0"
         *ngIf="selectedCategory?.ContentType==(contentTypeEnum.Photo).toString() || selectedCategory?.ContentType==(contentTypeEnum.MultipleImages).toString() ||selectedCategory?.ContentType==(contentTypeEnum.Document).toString() || selectedCategory?.ContentType==(contentTypeEnum.Video).toString()">
         <label>Attachments <span class="label-info"> (Preferred size: 500*500 ) </span></label>
@@ -144,7 +144,7 @@
       </div>
 
       <div class="col-md-6 mb-3" *ngIf="selectedCategory?.IsShowUrl">
-        <label>Link</label>
+        <label>Link </label>
         <input type="text" class="form-control" [(ngModel)]="model.Url" formControlName="Url"
           [ngClass]="{ 'is-invalid': f.Url.errors && f.Url.touched}" placeholder="Link">
         <div class="invalid-feedback" *ngIf="(formgrp.get('Url')?.hasError('required') && formgrp.get('Url')?.touched)">

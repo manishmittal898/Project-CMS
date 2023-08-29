@@ -30,8 +30,8 @@
       <div id="SidebarItem2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
         <ul class="sidebar-submenu">
           <li *ngFor="let itm of dropDown.ddlLookupTypeMaster" routerLinkActive="sub-menu-active">
-            <a href="javascript:void(0)" routerLink="./master/{{itm.Text}}/{{itm.Value}}"> <i
-                class="bi bi-bookmarks"></i> {{itm.Text| titlecase}}
+            <a href="javascript:void(0)" routerLink="./master/{{itm.Text}}/{{itm.Value}}">
+              <i class="bi bi-window"></i> {{itm.Text| titlecase}}
             </a>
           </li>
           <li routerLinkActive="sub-menu-active">
