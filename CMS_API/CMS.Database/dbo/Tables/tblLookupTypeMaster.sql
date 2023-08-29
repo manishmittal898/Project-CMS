@@ -4,6 +4,7 @@
     [EnumValue]  VARCHAR(20) NOT NULL,
     [IsValue] BIT NOT NULL DEFAULT 0, 
     [IsSubLookup] BIT NOT NULL DEFAULT 0, 
+    [SortOrder] INT NULL, 
     [CreatedBy]  BIGINT NOT NULL,
     [CreatedOn]  DATETIME       NOT NULL DEFAULT getdate(),
     [ModifiedBy] BIGINT NOT NULL,
@@ -11,6 +12,7 @@
     [IsActive]   BIT            NOT NULL DEFAULT 1,
     [IsDelete] BIT NOT NULL DEFAULT 0,
     [IsImage]   BIT  NOT NULL DEFAULT 0 ,
+   
     CONSTRAINT [PK_tblLookupMaster] PRIMARY KEY CLUSTERED ([Id] ASC), 
     CONSTRAINT [FK_tblLookupTypeMaster_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [tblUserMaster]([UserId]),
     CONSTRAINT [FK_tblLookupTypeMaster_ModifiedBy] FOREIGN KEY ([ModifiedBy]) REFERENCES [tblUserMaster]([UserId])

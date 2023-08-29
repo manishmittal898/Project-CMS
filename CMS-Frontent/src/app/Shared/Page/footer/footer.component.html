@@ -36,7 +36,7 @@
           Top Categories
         </button>
         <ul class="footer-link collapse mt-2 mt-md-0" id="Footer1" data-bs-parent="#Footer">
-          <li *ngFor="let itms of this.ddlCategory"> <a routerLink="./store/{{itms.Text.split(' ').join('_')}}"
+          <li *ngFor="let itms of this.ddlCategory"> <a routerLink="./collections/{{itms.Text.split(' ').join('_')}}"
               href="javascript:void(0)" [queryParams]="{id : itms.Value}">{{itms.Text |titlecase}}</a></li>
 
         </ul>
