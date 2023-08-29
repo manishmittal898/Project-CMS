@@ -1664,7 +1664,7 @@ pre p {
     opacity: 1 !important;
 }
 .ng-select-open .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-    padding: 4px 5px;
+    padding: 3px 5px;
     display: inline-flex;
     align-items: center;
     color: #000;
