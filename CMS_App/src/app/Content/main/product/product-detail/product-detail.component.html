@@ -58,6 +58,10 @@
                 <td><strong> Sub Category: </strong></td>
                 <td>{{model.SubCategory | titlecase}}</td>
               </tr>
+              <tr *ngIf="model?.UniqueId">
+                <td><strong> SKU ID: </strong></td>
+                <td>{{model.UniqueId | titlecase}}</td>
+              </tr>
               <tr *ngIf="model?.Occasion">
                 <td><strong> Occasion: </strong></td>
                 <td>{{model.Occasion | titlecase}}</td>
