@@ -52,7 +52,7 @@ Text Domain:  StoreOne
 }
 body {
     margin: 0px;
-    padding: 0px;
+    padding: 0px !important;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -107,11 +107,6 @@ outline: none;
 
 img {
     max-width: 100%;
-}
-
-* {
-    min-height: 0;
-    min-width: 0;
 }
 
 *,
@@ -268,7 +263,7 @@ color: #000;
     background: var(--primary-color) ;
     color: var(--white);
     border-radius: 5px;
-    box-shadow: 0 0 20px #e3e3e3;
+    box-shadow: 0 0 15px #e3e3e3;
     font-weight: 500;
 }
 
@@ -766,8 +761,20 @@ section.header-logo {
   box-shadow: 0 0 20px #dbdbdb;
   border: solid 1px var(--primary-color) !important;
   border-radius: 20px;
+  overflow: auto;
+  height: 100vh;
 }
 
+.product-filter::-webkit-scrollbar {
+  width: 2px;
+  margin-top: 50px;
+}
+.product-filter::-webkit-scrollbar-track {
+  margin: 15px 0px;
+}
+.product-filter::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
 
 /*
 .product-filter a {
@@ -1287,7 +1294,7 @@ select:focus-visible {
 }
 
 .cart-sidebar-empty .cart-sidebar-empty-icon i {
-    font-size: 3rem;
+    font-size: 4rem;
 }
 
 .product-list-items-tag {
@@ -1657,7 +1664,7 @@ pre p {
     opacity: 1 !important;
 }
 .ng-select-open .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-    padding: 4px 5px;
+    padding: 3px 5px;
     display: inline-flex;
     align-items: center;
     color: #000;
@@ -1767,7 +1774,9 @@ section.cmis-pages .cmis-pages-items-list h3 {
   color: #000;
   font-weight: 600;
 }
-
+.cart-sidebar {
+  overflow: auto;
+}
 .cart-sidebar-body-cart .cart-sidebar-body-cart-items {
   border-bottom: solid 1px #f1f1f1;
 }

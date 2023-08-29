@@ -139,10 +139,10 @@
                   </div>
                 </ul>
               </li> -->
-              <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
+              <!-- <li *ngFor="let itm of cmsPageMenu" class="nav-item"> <a class="nav-link" aria-current="page"
                   href="javascript:void()" routerLinkActive="active" [routerLink]="['/page/'+itm.Text.split(' ').join('_')]"
                   [queryParams]="{id :  itm.Value }" routerLinkActive="router-link-active">
-                  {{itm.Text | titlecase}} </a> </li>
+                  {{itm.Text | titlecase}} </a> </li> -->
             </ul>
           </div>
         </div>
@@ -181,8 +181,8 @@
       <div class="cart-sidebar-empty-icon">
         <i class="bi bi-bag-x"></i>
       </div>
-      <p class="my-3">Your basket is currently empty.</p>
-      <a _ngcontent-mkt-c20="" href="javascript:void()" class="btn btn-default px-4 text-uppercase btn-border">Continue
+      <p class="mt-0 mb-4">Your basket is currently empty.</p>
+      <a href="javascript:void()" routerLink="/store"  class="btn btn-default px-4 text-uppercase btn-border">Continue
         Shopping <i class="bi bi-arrow-right ms-1"></i></a>
     </div>
     <div class="cart-sidebar-body-cart">

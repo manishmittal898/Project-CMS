@@ -14,12 +14,12 @@
     <div class="row">
         <!-- Done -->
         <div class="col-md-2 mb-3">
-            <label>SKU Number<span class="text-danger">*</span></label>
+            <label>SKU ID<span class="text-danger">*</span></label>
             <input type="text" class="form-control" formControlName="UniqueID" [(ngModel)]="model.UniqueId"
-            [ngClass]="{ 'is-invalid': f.UniqueID.errors && f.UniqueID.touched}" placeholder="SKU Number">
+            [ngClass]="{ 'is-invalid': f.UniqueID.errors && f.UniqueID.touched}" placeholder="SKU ID">
             <div class="invalid-feedback"
                 *ngIf="(formgrp.get('UniqueID')?.hasError('required') && formgrp.get('UniqueID')?.touched)">
-                Please enter <strong>SKU Number</strong>...!
+                Please enter <strong>SKU ID</strong>...!
             </div>
         </div>
         <div class="col-md-4 mb-3">

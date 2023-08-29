@@ -58,11 +58,30 @@
                 <td><strong> Sub Category: </strong></td>
                 <td>{{model.SubCategory | titlecase}}</td>
               </tr>
+              <tr *ngIf="model?.Occasion">
+                <td><strong> Occasion: </strong></td>
+                <td>{{model.Occasion | titlecase}}</td>
+              </tr>
+              <tr *ngIf="model?.Fabric">
+                <td><strong> Fabric: </strong></td>
+                <td>{{model.Fabric | titlecase}}</td>
+              </tr>
+              <tr *ngIf="model?.Length">
+                <td><strong> Length: </strong></td>
+                <td>{{model.Length | titlecase}}</td>
+              </tr>
+              <tr *ngIf="model?.Color">
+                <td><strong> Color: </strong></td>
+                <td>{{model.Color | titlecase}}</td>
+              </tr>
+              <tr *ngIf="model?.Pattern">
+                <td><strong> Pattern: </strong></td>
+                <td>{{model.Pattern | titlecase}}</td>
+              </tr>
               <tr *ngIf="model?.CaptionTag">
                 <td><strong> Tag/Label: </strong></td>
                 <td>{{model.CaptionTag | titlecase}}</td>
               </tr>
-
               <!-- <tr *ngIf="model?.ShippingCharge">
                 <td><strong> Shipping Charge: </strong></td>
                 <td>₹ {{model.ShippingCharge }}</td>

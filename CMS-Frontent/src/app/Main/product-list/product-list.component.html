@@ -29,7 +29,7 @@
                 indexModel.Page==1 ?indexModel.PageSize*indexModel.Page:
                 totalRecords-(indexModel.PageSize*indexModel.Page)}} of <strong>{{ totalRecords}}</strong> results</div>-->
               <div>
-                <h4 class="m-0 font-w-500 product-collection-header-title">Products</h4>
+                <h4 class="m-0 font-w-500 product-collection-header-title">{{this.pageName }}</h4>
               </div>
               <div class="d-flex align-items-center">
                 <div class="view-mode d-none d-xl-flex align-items-center me-3">
@@ -38,7 +38,7 @@
                   <span class="icon-mode grid-4 active"></span>
                 </div>
                 <div class="product-sortby-filter me-3">
-                  <div class="ms-1">Sort By</div>
+                  <!-- <div class="ms-1">Sort By</div> -->
                   <select class="select-sm" (change)="getList()" [(ngModel)]="sortValue">
 
                     <option [value]="'Name_true'">Name (A to Z)</option>
