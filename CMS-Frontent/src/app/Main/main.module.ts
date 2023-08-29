@@ -9,8 +9,9 @@ import { NgModule } from '@angular/core';
 import { FeatureModule } from '../Shared/Module/feature/feature.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryProductListComponent } from './product-list/product-detail/category-product-list/category-product-list.component';
-import { ProductDetailComponent } from './product-list/product-detail/product-detail.component'; 
+import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { ProductSectionComponent } from './home/product-section/product-section.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProductSectionComponent } from './home/product-section/product-section.
     CommonModule,
     MainRoutingModule,
     UserAccountModule,
-    FeatureModule
+    FeatureModule,
+    FormsModule
   ],
   exports: []
 })

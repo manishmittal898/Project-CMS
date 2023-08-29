@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.LookupTypeMaster
@@ -15,11 +14,10 @@ namespace CMS.Service.Services.LookupTypeMaster
     public class LookupTypeMasterService : BaseService, ILookupTypeMasterService
     {
         DB_CMSContext _db;
-        public LookupTypeMasterService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
+        public LookupTypeMasterService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
         }
-
 
         public async Task<ServiceResponse<IEnumerable<TblLookupTypeMaster>>> GetListAsync(IndexModel model)
         {
@@ -75,9 +73,7 @@ namespace CMS.Service.Services.LookupTypeMaster
             }
             catch (Exception ex)
             {
-
                 ObjResponse = CreateResponse<TblLookupTypeMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
             return ObjResponse;
         }
@@ -86,16 +82,14 @@ namespace CMS.Service.Services.LookupTypeMaster
         {
             try
             {
-                TblLookupTypeMaster objRole = new TblLookupTypeMaster();
-
-                objRole.Name = model.Name;
-
-                objRole.IsActive = true;
-                objRole.CreatedBy = _loginUserDetail.UserId.Value;
-                var roletype = await _db.TblLookupTypeMasters.AddAsync(objRole);
+                TblLookupTypeMaster objData = new TblLookupTypeMaster();
+                objData.Name = model.Name;
+                objData.SortOrder = model.SortOrder;
+                objData.IsActive = true;
+                objData.CreatedBy = _loginUserDetail.UserId.Value;
+                var roletype = await _db.TblLookupTypeMasters.AddAsync(objData);
                 _db.SaveChanges();
-                return CreateResponse(objRole, "Added", true);
-
+                return CreateResponse(objData, "Added", true);
 
             }
             catch (Exception ex)
@@ -110,24 +104,20 @@ namespace CMS.Service.Services.LookupTypeMaster
         {
             try
             {
-                TblLookupTypeMaster objRole = new TblLookupTypeMaster();
+                TblLookupTypeMaster objData = new TblLookupTypeMaster();
 
-                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
-
-                objRole.Name = model.Name;
-                objRole.ModifiedBy = _loginUserDetail.UserId.Value;
-                var roletype = _db.TblLookupTypeMasters.Update(objRole);
+                objData = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
+                objData.Name = model.Name;
+                objData.SortOrder = model.SortOrder;
+                objData.ModifiedBy = _loginUserDetail.UserId.Value;
+                var roletype = _db.TblLookupTypeMasters.Update(objData);
                 _db.SaveChanges();
-
-
-                return CreateResponse(objRole, "Updated", true);
+                return CreateResponse(objData, "Updated", true);
 
             }
             catch (Exception ex)
             {
-
                 return CreateResponse<TblLookupTypeMaster>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
 
         }
@@ -136,24 +126,17 @@ namespace CMS.Service.Services.LookupTypeMaster
         {
             try
             {
-                TblLookupTypeMaster objRole = new TblLookupTypeMaster();
-                objRole = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse( _security.DecryptData(id)));
+                TblLookupTypeMaster objData = new TblLookupTypeMaster();
+                objData = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
-                var roletype = _db.TblLookupTypeMasters.Remove(objRole);
+                var roletype = _db.TblLookupTypeMasters.Remove(objData);
                 await _db.SaveChangesAsync();
-                return CreateResponse(objRole, "Deleted", true);
+                return CreateResponse(objData, "Deleted", true);
             }
             catch (Exception ex)
             {
-
                 return null;
-
             }
-
-
         }
-
-
-
     }
 }

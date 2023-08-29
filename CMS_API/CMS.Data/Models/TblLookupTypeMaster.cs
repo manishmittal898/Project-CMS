@@ -17,6 +17,7 @@ namespace CMS.Data.Models
         public string EnumValue { get; set; }
         public bool IsValue { get; set; }
         public bool IsSubLookup { get; set; }
+        public int? SortOrder { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public long ModifiedBy { get; set; }

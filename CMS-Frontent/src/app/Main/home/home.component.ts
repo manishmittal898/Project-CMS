@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       if (response.IsSuccess) {
         this.model = response.Data.map(x => {
           return {
-            Id: this._securityService.encrypt(String(x.Id)),
+            Id: x.Id,
             Name: x.Name,
             ImagePath: x.ImagePath,
           } as any

@@ -15,6 +15,7 @@ namespace CMS.Service.Services.LookupTypeMaster
         public string ImagePath { get; set; }
         public bool IsValue { get; set; }
         public bool IsImage { get; set; }
+        public int? SortOrder { get; set; }
         public long CreatedBy { get; set; }
      
         public long ModifiedBy { get; set; }

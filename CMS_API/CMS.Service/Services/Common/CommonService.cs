@@ -346,7 +346,7 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type).OrderBy(x => x.Name)
+                return await (from type in _db.TblLookupTypeMasters where type.IsActive == true && !type.IsDelete select type).OrderBy(x => x.SortOrder)
                      .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id) })
                      .ToListAsync();
             }
