@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { IndexModel } from "src/app/Shared/Helper/Common";
 import { SecurityService } from "src/app/Shared/Services/Core/security.service";
 import { ProductCategoryViewModel, ProductService } from "src/app/Shared/Services/ProductService/product.service";
@@ -15,13 +15,14 @@ export class HomeComponent implements OnInit {
   model: ProductCategoryViewModel[] = [];
   totalRecords: number = 0;
   BannerImages: GeneralEntryViewModel[] = [];
+  showProductSection = false;
+  isLoading = false;
   constructor(private readonly _productService: ProductService, private readonly _generalEntryService: GeneralEntryService,
     private readonly _securityService: SecurityService) {
     if (this._securityService.getStorage('home-page-product')) {
       this.model = JSON.parse(this._securityService.getStorage('home-page-product'));
     }
   }
-  isLoading = false;
   ngOnInit(): void {
     this.getCategoryList()
     this.getBannerImages().then(res => {
@@ -29,7 +30,12 @@ export class HomeComponent implements OnInit {
     });
 
   }
-
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    if (!this.showProductSection) {
+      this.showProductSection = true;
+    }
+  }
   getCategoryList() {
     this._productService.GetCategoryProduct(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
