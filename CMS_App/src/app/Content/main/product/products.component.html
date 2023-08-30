@@ -33,7 +33,7 @@
       <ng-container matColumnDef="SKU">
         <th mat-header-cell *matHeaderCellDef>SKU ID</th>
         <td mat-cell *matCellDef="let element; let i = index;">
-          1234</td>
+          {{element.UniqueId??'N/A'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="ImagePath">
