@@ -761,9 +761,13 @@ section.header-logo {
   box-shadow: 0 0 20px #dbdbdb;
   border: solid 1px var(--primary-color) !important;
   border-radius: 20px;
-  overflow: auto;
+  overflow: hidden;
   height: 100vh;
 }
+.product-filter:hover {
+  overflow: auto;
+}
+
 
 .product-filter::-webkit-scrollbar {
   width: 2px;
@@ -2581,6 +2585,9 @@ ul.footer-benefits li p {
 .p-slider .p-slider-range
 {
   background: var(--primary-color) !important;
+}
+.p-slider.p-slider-horizontal {
+  height: 2px !important;
 }
 .p-calendar, .p-inputtext {
   width: 100% !important;
