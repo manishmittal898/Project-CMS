@@ -111,6 +111,8 @@ export interface ProductImageViewModel {
   Id: string;
   FilePath: string;
   ProductId: string | null;
+  ThumbnailPath: string;
+
 }
 
 export interface ProductStockModel {
