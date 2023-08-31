@@ -761,19 +761,23 @@ section.header-logo {
   box-shadow: 0 0 20px #dbdbdb;
   border: solid 1px var(--primary-color) !important;
   border-radius: 20px;
-  overflow: auto;
+  overflow: hidden;
   height: 100vh;
 }
+.product-filter:hover {
+  overflow: auto;
+}
+
 
 .product-filter::-webkit-scrollbar {
   width: 2px;
-  margin-top: 50px;
 }
 .product-filter::-webkit-scrollbar-track {
   margin: 15px 0px;
 }
 .product-filter::-webkit-scrollbar-thumb {
   background: var(--primary-color);
+  height: 50px;
 }
 
 /*
@@ -824,6 +828,11 @@ font-weight: 600;
     cursor: pointer;
     display: block;
     line-height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .product-list-info h3:hover, .product-list-info  a:hover {
@@ -2577,6 +2586,9 @@ ul.footer-benefits li p {
 {
   background: var(--primary-color) !important;
 }
+.p-slider.p-slider-horizontal {
+  height: 2px !important;
+}
 .p-calendar, .p-inputtext {
   width: 100% !important;
   flex: 1 1 100% !important;
@@ -2771,6 +2783,9 @@ body .toast-close-button {
   text-shadow: none;
   top: -10px;
   left: 0px;
+}
+.product-filter .product-filterItems:last-child {
+  margin: 0px !important;
 }
 /* CUSTOM CSS END */
 

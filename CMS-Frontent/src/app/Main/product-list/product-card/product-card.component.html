@@ -14,7 +14,7 @@
     <!-- #Hover items End-->
   </div>
   <div class="product-list-info">
-    <a href="javascript:void(0)" routerLink="{{getUrl()}}">
+    <a href="javascript:void(0)" title="{{Product.Name}}" routerLink="{{getUrl()}}">
       {{Product.Name}} </a>
     <div class="product-list-price">₹ {{Product.SellingPrice}} <span *ngIf="Product.SellingPrice!=Product.Price" class="product-list-cutting-price">₹
         {{Product.Price}}</span></div>

@@ -21,7 +21,7 @@
     <div class="row">
 
       <!-- Mobile Drawer Buttons Start -->
-      <div class="mobile-drawer-btn-grp-card d-flex d-md-none justify-content-between mb-4">
+      <div class="mobile-drawer-btn-grp-card d-flex d-lg-none justify-content-between mb-4">
         <a class="my-account-sidebar-btn" data-bs-toggle="offcanvas" href="#OrderMenu">
           <i class="bi bi-person-circle me-1"></i>
           <span> My Account</span>
@@ -33,9 +33,9 @@
       </div>
       <!-- Mobile Drawer Buttons End -->
 
-      <div *ngIf="isAuth" class="col-md-4 col-lg-4 col-xl-3 pe-4">
+      <div *ngIf="isAuth" class="col-md-12 col-lg-4 col-xl-3 pe-4">
         <div class="my-account-sidebar offcanvas offcanvas-start" tabindex="-1" id="OrderMenu">
-          <div class="offcanvas-header d-flex d-md-none pt-0 px-0">
+          <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
             <h6 class="offcanvas-title"><i class="bi bi-person-circle me-1"></i>My Account</h6>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
@@ -53,7 +53,7 @@
           </ul>
         </div>
       </div>
-      <div [ngClass]="{'col-md-8 col-lg-8 col-xl-9' : isAuth ,'col-md-12 col-lg-12 col-xl-12': !isAuth}">
+      <div [ngClass]="{'col-md-12 col-lg-8 col-xl-9' : isAuth ,'col-md-12 col-lg-12 col-xl-12': !isAuth}">
         <router-outlet></router-outlet>
       </div>
     </div>
