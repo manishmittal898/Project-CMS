@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     private readonly _securityService: SecurityService) {
     if (this._securityService.getStorage('home-page-product')) {
       this.model = JSON.parse(this._securityService.getStorage('home-page-product'));
+      this.AddSlider();
     }
   }
   ngOnInit(): void {
@@ -39,19 +40,10 @@ export class HomeComponent implements OnInit {
   getCategoryList() {
     this._productService.GetCategoryProduct(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
-        this.model = response.Data.map(x => {
-          return {
-            Id: x.Id,
-            Name: x.Name,
-            ImagePath: x.ImagePath,
-          } as any
-
-        });
-        this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
-
-        this.AddSlider();
+        this.model = response.Data.map(x => { return { Id: x.Id, Name: x.Name, ImagePath: x.ImagePath } as any });
+        this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
         setTimeout(() => {
-          this._securityService?.setStorage('home-page-product', JSON.stringify(this.model))
+          this.AddSlider();
         }, 500);
 
       }

@@ -33,6 +33,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
         public virtual DbSet<TblUserMasterLog> TblUserMasterLogs { get; set; }
         public virtual DbSet<TblUserWishList> TblUserWishLists { get; set; }
+        public virtual DbSet<VwProductMaster> VwProductMasters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -700,6 +701,43 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblUserWishList_UserId");
+            });
+
+            modelBuilder.Entity<VwProductMaster>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_ProductMaster");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Desc).HasColumnType("ntext");
+
+                entity.Property(e => e.ImagePath).HasMaxLength(1000);
+
+                entity.Property(e => e.Keyword).HasMaxLength(4000);
+
+                entity.Property(e => e.MetaDesc).HasMaxLength(4000);
+
+                entity.Property(e => e.MetaTitle).HasMaxLength(1000);
+
+                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(2000);
+
+                entity.Property(e => e.PatternId).HasColumnName("PatternID");
+
+                entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.SellingPrice).HasColumnType("decimal(38, 0)");
+
+                entity.Property(e => e.Summary).HasColumnType("ntext");
+
+                entity.Property(e => e.UniqueId)
+                    .HasMaxLength(400)
+                    .HasColumnName("UniqueID");
             });
 
             OnModelCreatingPartial(modelBuilder);

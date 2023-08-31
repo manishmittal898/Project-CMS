@@ -32,19 +32,21 @@ namespace CMS.Service.Services.ProductMaster
             {
 
 
-                var result = (from lkType in _db.TblProductMasters
-                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
-                              select lkType);
+                var result = (from pdct in _db.TblProductMasters
+                              join prd in _db.VwProductMasters.DefaultIfEmpty() on pdct.Id equals prd.Id
+                              where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search))
+                              select new { pdct  = pdct, selling =prd.SellingPrice});
                 switch (model.OrderBy)
                 {
                     case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.pdct.Name ascending select orderData) : (from orderData in result orderby orderData.pdct.Name descending select orderData);
                         break;
+
                     case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.pdct.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.pdct.CreatedOn descending select orderData);
                         break;
                     default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.pdct.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.pdct.ModifiedOn descending select orderData);
                         break;
                 }
                 objResult.TotalRecord = result.Count();
@@ -53,44 +55,44 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.Data = await (from x in result
                                         select new ProductMasterViewModel
                                         {
-                                            Id = _security.EncryptData(x.Id),
-                                            Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
-                                            CategoryId = _security.EncryptData(x.CategoryId),
-                                            Category = x.Category.Name,
-                                            SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,
-                                            SubCategory = x.SubCategory.Name,
-                                            CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
-                                            CaptionTag = x.CaptionTag.Name,
-                                            ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
-                                            ViewSection = x.ViewSection.Name,
-                                            DiscountId = x.DiscountId.HasValue ? _security.EncryptData(x.DiscountId.Value) : null,
-                                            Discount = x.Discount.Name,
-                                            OccasionId = x.OccasionId.HasValue ? _security.EncryptData(x.OccasionId.Value) : null,
-                                            Occasion = x.Occasion.Name,
-                                            FabricId = x.FabricId.HasValue ? _security.EncryptData(x.FabricId.Value) : null,
-                                            Fabric = x.Fabric.Name,
-                                            LengthId = x.LengthId.HasValue ? _security.EncryptData(x.LengthId.Value) : null,
-                                            Length = x.Length.Name,
-                                            ColorId = x.ColorId.HasValue ? _security.EncryptData(x.ColorId.Value) : null,
-                                            Color = x.Color.Name,
-                                            PatternId = x.PatternId.HasValue ? _security.EncryptData(x.PatternId.Value) : null,
-                                            Pattern = x.Pattern.Name,
-                                            UniqueId = x.UniqueId,
-                                            Desc = x.Desc,
-                                            Summary = x.Desc,
-                                            Price = x.Price,
-                                            SellingPrice = x.DiscountId.HasValue ?Math.Round(x.Price.Value - (x.Price.Value * decimal.Parse(x.Discount.Value)) / 100) : x.Price,
-                                            MetaTitle = x.MetaTitle,
-                                            MetaDesc = x.MetaDesc,
-                                            CreatedBy = x.CreatedBy,
-                                            CreatedOn = x.CreatedOn,
-                                            ModifiedBy = x.ModifiedBy,
-                                            ModifiedOn = x.ModifiedOn,
-                                            IsActive = x.IsActive.Value,
-                                            IsDelete = x.IsDelete,
-                                            Keyword = x.Keyword,
-                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
+                                            Id = _security.EncryptData(x.pdct.Id),
+                                            Name = x.pdct.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.pdct.ImagePath) ? x.pdct.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
+                                            CategoryId = _security.EncryptData(x.pdct.CategoryId),
+                                            Category = x.pdct.Category.Name,
+                                            SubCategoryId = x.pdct.SubCategoryId.HasValue ? _security.EncryptData(x.pdct.SubCategoryId.Value) : null,
+                                            SubCategory = x.pdct.SubCategory.Name,
+                                            CaptionTagId = x.pdct.CaptionTagId.HasValue ? _security.EncryptData(x.pdct.CaptionTagId.Value) : null,
+                                            CaptionTag = x.pdct.CaptionTag.Name,
+                                            ViewSectionId = x.pdct.ViewSectionId.HasValue ? _security.EncryptData(x.pdct.ViewSectionId.Value) : null,
+                                            ViewSection = x.pdct.ViewSection.Name,
+                                            DiscountId = x.pdct.DiscountId.HasValue ? _security.EncryptData(x.pdct.DiscountId.Value) : null,
+                                            Discount = x.pdct.Discount.Name,
+                                            OccasionId = x.pdct.OccasionId.HasValue ? _security.EncryptData(x.pdct.OccasionId.Value) : null,
+                                            Occasion = x.pdct.Occasion.Name,
+                                            FabricId = x.pdct.FabricId.HasValue ? _security.EncryptData(x.pdct.FabricId.Value) : null,
+                                            Fabric = x.pdct.Fabric.Name,
+                                            LengthId = x.pdct.LengthId.HasValue ? _security.EncryptData(x.pdct.LengthId.Value) : null,
+                                            Length = x.pdct.Length.Name,
+                                            ColorId = x.pdct.ColorId.HasValue ? _security.EncryptData(x.pdct.ColorId.Value) : null,
+                                            Color = x.pdct.Color.Name,
+                                            PatternId = x.pdct.PatternId.HasValue ? _security.EncryptData(x.pdct.PatternId.Value) : null,
+                                            Pattern = x.pdct.Pattern.Name,
+                                            UniqueId = x.pdct.UniqueId,
+                                            Desc = x.pdct.Desc,
+                                            Summary = x.pdct.Desc,
+                                            Price = x.pdct.Price,
+                                            SellingPrice =x.selling,
+                                            MetaTitle = x.pdct.MetaTitle,
+                                            MetaDesc = x.pdct.MetaDesc,
+                                            CreatedBy = x.pdct.CreatedBy,
+                                            CreatedOn = x.pdct.CreatedOn,
+                                            ModifiedBy = x.pdct.ModifiedBy,
+                                            ModifiedOn = x.pdct.ModifiedOn,
+                                            IsActive = x.pdct.IsActive.Value,
+                                            IsDelete = x.pdct.IsDelete,
+                                            Keyword = x.pdct.Keyword,
+                                            IsWhishList = (_loginUserDetail != null && x.pdct.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
 
                                         }).ToListAsync();
 
@@ -564,6 +566,8 @@ namespace CMS.Service.Services.ProductMaster
 
 
                 var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
+                              join pt in _db.VwProductMasters.DefaultIfEmpty() on prd.Id equals pt.Id
+
                               where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
                                 && (model.CategoryId == null || model.CategoryId.Count == 0 || CategoryIds.Contains(prd.CategoryId))
@@ -580,67 +584,69 @@ namespace CMS.Service.Services.ProductMaster
                                  && (string.IsNullOrEmpty(model.UniqueId) || prd.UniqueId.Contains(model.UniqueId))
                                  && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
                                 && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
-                              select prd);
+                              select new { prd = prd,selling =pt.SellingPrice });
                 switch (model.OrderBy)
                 {
                     case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.Name ascending select orderData) : (from orderData in result orderby orderData.prd.Name descending select orderData);
                         break;
                     case "Price":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Price.Value ascending select orderData) : (from orderData in result orderby orderData.Price.Value descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby (orderData.selling) ascending select orderData) : (from orderData in result orderby orderData.selling  descending select orderData);
                         break;
                     case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.prd.CreatedOn descending select orderData);
+                        break;
+                    case "Discount":
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.Discount.Value ascending select orderData) : (from orderData in result orderby orderData.prd.Discount.Value descending select orderData);
                         break;
                     default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.prd.ModifiedOn descending select orderData);
                         break;
                 }
                 objResult.TotalRecord = result.Count();
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
-                objResult.Data = await (from x in result.Include(x => x.TblUserWishLists)
+                objResult.Data = await (from x in result
                                         select new ProductMasterViewModel
                                         {
-                                            Id = _security.EncryptData(x.Id),
-                                            Name = x.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
-                                            CategoryId = _security.EncryptData(x.CategoryId),
-                                            Category = x.Category.Name,
-                                            SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,
-                                            SubCategory = x.SubCategory.Name,
-                                            CaptionTagId = x.CaptionTagId.HasValue ? _security.EncryptData(x.CaptionTagId.Value) : null,
-                                            CaptionTag = x.CaptionTag.Name,
-                                            DiscountId = x.DiscountId.HasValue ? _security.EncryptData(x.DiscountId.Value) : null,
-                                            Discount = x.Discount.Name,
-                                            OccasionId = x.OccasionId.HasValue ? _security.EncryptData(x.OccasionId.Value) : null,
-                                            Occasion = x.Occasion.Name,
-                                            FabricId = x.FabricId.HasValue ? _security.EncryptData(x.FabricId.Value) : null,
-                                            Fabric = x.Fabric.Name,
-                                            LengthId = x.LengthId.HasValue ? _security.EncryptData(x.LengthId.Value) : null,
-                                            Length = x.Length.Name,
-                                            ColorId = x.ColorId.HasValue ? _security.EncryptData(x.ColorId.Value) : null,
-                                            Color = x.Color.Name,
-                                            PatternId = x.PatternId.HasValue ? _security.EncryptData(x.PatternId.Value) : null,
-                                            Pattern = x.Pattern.Name,
-                                            UniqueId = x.UniqueId,
-                                            Desc = x.Desc,
-                                            Summary = x.Desc,
-                                            Price = x.Price,
-                                            SellingPrice = x.DiscountId.HasValue ? Math.Round(((x.Price.Value - (x.Price.Value * decimal.Parse(x.Discount.Value)) / 100))) : x.Price,
-
-                                            CreatedBy = x.CreatedBy,
-                                            CreatedOn = x.CreatedOn,
-                                            ModifiedBy = x.ModifiedBy,
-                                            ModifiedOn = x.ModifiedOn,
-                                            IsActive = x.IsActive.Value,
-                                            IsDelete = x.IsDelete,
-                                            Keyword = x.Keyword,
-                                            MetaTitle = x.MetaTitle,
-                                            MetaDesc = x.MetaDesc,
-                                            ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
-                                            ViewSection = x.ViewSection.Name,
-                                            IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false
+                                            Id = _security.EncryptData(x.prd.Id),
+                                            Name = x.prd.Name,
+                                            ImagePath = !string.IsNullOrEmpty(x.prd.ImagePath) ? x.prd.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
+                                            CategoryId = _security.EncryptData(x.prd.CategoryId),
+                                            Category = x.prd.Category.Name,
+                                            SubCategoryId = x.prd.SubCategoryId.HasValue ? _security.EncryptData(x.prd.SubCategoryId.Value) : null,
+                                            SubCategory = x.prd.SubCategory.Name,
+                                            CaptionTagId = x.prd.CaptionTagId.HasValue ? _security.EncryptData(x.prd.CaptionTagId.Value) : null,
+                                            CaptionTag = x.prd.CaptionTag.Name,
+                                            DiscountId = x.prd.DiscountId.HasValue ? _security.EncryptData(x.prd.DiscountId.Value) : null,
+                                            Discount = x.prd.Discount.Name,
+                                            OccasionId = x.prd.OccasionId.HasValue ? _security.EncryptData(x.prd.OccasionId.Value) : null,
+                                            Occasion = x.prd.Occasion.Name,
+                                            FabricId = x.prd.FabricId.HasValue ? _security.EncryptData(x.prd.FabricId.Value) : null,
+                                            Fabric = x.prd.Fabric.Name,
+                                            LengthId = x.prd.LengthId.HasValue ? _security.EncryptData(x.prd.LengthId.Value) : null,
+                                            Length = x.prd.Length.Name,
+                                            ColorId = x.prd.ColorId.HasValue ? _security.EncryptData(x.prd.ColorId.Value) : null,
+                                            Color = x.prd.Color.Name,
+                                            PatternId = x.prd.PatternId.HasValue ? _security.EncryptData(x.prd.PatternId.Value) : null,
+                                            Pattern = x.prd.Pattern.Name,
+                                            UniqueId = x.prd.UniqueId,
+                                            Desc = x.prd.Desc,
+                                            Summary = x.prd.Desc,
+                                            Price = x.prd.Price,
+                                            SellingPrice = x.selling,
+                                            CreatedBy = x.prd.CreatedBy,
+                                            CreatedOn = x.prd.CreatedOn,
+                                            ModifiedBy = x.prd.ModifiedBy,
+                                            ModifiedOn = x.prd.ModifiedOn,
+                                            IsActive = x.prd.IsActive.Value,
+                                            IsDelete = x.prd.IsDelete,
+                                            Keyword = x.prd.Keyword,
+                                            MetaTitle = x.prd.MetaTitle,
+                                            MetaDesc = x.prd.MetaDesc,
+                                            ViewSectionId = x.prd.ViewSectionId.HasValue ? _security.EncryptData(x.prd.ViewSectionId.Value) : null,
+                                            ViewSection = x.prd.ViewSection.Name,
+                                            IsWhishList = x.prd.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.prd.TblUserWishLists.Any(y => y.ProductId == x.prd.Id && y.UserId == _loginUserDetail.UserId) : false
                                         }).ToListAsync();
 
                 if (result != null)

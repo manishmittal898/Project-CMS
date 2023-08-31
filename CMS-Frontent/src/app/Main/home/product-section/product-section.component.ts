@@ -17,32 +17,42 @@ export class ProductSectionComponent implements OnInit {
   model = {} as IDictionary<ProductMasterViewModel[]>;
   Subscription = {};
   constructor(private _commonService: CommonService, private readonly _productService: ProductService, private _securityService: SecurityService) {
-
   }
 
   ngOnInit(): void {
     this.GetDropDown();
-
   }
+
   GetDropDown() {
+    let that = this;
     if (this._securityService.checkLocalStorage('ddlProductViewSection')) {
       this.dropDown.ddlProductViewSection = JSON.parse(this._securityService.getStorage('ddlProductViewSection'));
       this.loadProductSection();
+      if (sessionStorage.getItem("isProductViewSection") == undefined) {
+        getProductSection();
+      }
     } else {
-      let serve = this._commonService.GetDropDown([DropDown_key.ddlProductViewSection], true).subscribe(res => {
+      getProductSection();
+    }
+
+    function getProductSection() {
+
+      let serve = that._commonService.GetDropDown([DropDown_key.ddlProductViewSection], true).subscribe(res => {
         serve.unsubscribe();
         if (res.IsSuccess) {
+          sessionStorage.setItem("isProductViewSection", "true");
           const ddls = res?.Data as DropDownModel;
-          this.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
-          this._securityService.setStorage('ddlProductViewSection', JSON.stringify(this.dropDown.ddlProductViewSection))
-          this.loadProductSection();
+          that.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
+          that._securityService.setStorage('ddlProductViewSection', JSON.stringify(that.dropDown.ddlProductViewSection));
+          that.loadProductSection();
         }
       });
     }
-
   }
 
   loadProductSection() {
+    let that = this;
+
     if (this._securityService.checkLocalStorage('loadProductSection')) {
       let data = JSON.parse(this._securityService.getStorage('loadProductSection'));
       this.dropDown.ddlProductViewSection.forEach(itm => {
@@ -50,31 +60,38 @@ export class ProductSectionComponent implements OnInit {
           this.model[itm.Value.toString()] = data[itm.Value]['Data']
         }
       })
-      setTimeout(() => {
+    //  setTimeout(() => {
         this.AddSlider();
-      }, 100);
+    //  }, 100);
+      if (sessionStorage.getItem("isLoadedProductSectionData") == undefined) {
+        getProductSectionData();
+      }
     }
     else {
-      this.Subscription = {};
-      this.dropDown.ddlProductViewSection.forEach(x => {
+      getProductSectionData();
+    }
+
+    function getProductSectionData() {
+      that.Subscription = {};
+      that.dropDown.ddlProductViewSection.forEach(x => {
         let indexModel = new ProductFilterModel();
         indexModel.PageSize = 50;
         indexModel.ViewSectionId = [x.Value];
-        this.Subscription[x.Value] = this._productService.GetList(indexModel)
-      })
-      forkJoin(this.Subscription).subscribe((res) => {
-        this._securityService.setStorage('loadProductSection', JSON.stringify(res));
-
-        this.dropDown.ddlProductViewSection.forEach(itm => {
+        that.Subscription[x.Value] = that._productService.GetList(indexModel);
+      });
+      forkJoin(that.Subscription).subscribe((res) => {
+        that._securityService.setStorage('loadProductSection', JSON.stringify(res));
+        sessionStorage.setItem("isLoadedProductSectionData", "true");
+        that.dropDown.ddlProductViewSection.forEach(itm => {
           if (res[itm.Value]['IsSuccess']) {
-            this.model[itm.Value.toString()] = res[itm.Value]['Data']
+            that.model[itm.Value.toString()] = res[itm.Value]['Data'];
           }
 
-        })
+        });
         setTimeout(() => {
-          this.AddSlider();
+          that.AddSlider();
         }, 100);
-      })
+      });
     }
   };
 

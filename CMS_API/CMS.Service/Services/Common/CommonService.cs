@@ -238,33 +238,33 @@ namespace CMS.Service.Services.Common
                     }
                     else if (lktype == LookupTypeEnum.Product_View_Section.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId.HasValue && y.ViewSectionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
                     else if (lktype == LookupTypeEnum.Product_Discount.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterDiscounts.Any(y => y.DiscountId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterDiscounts.Any(y => y.DiscountId.HasValue && y.Discount.Id == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
                     else if (lktype == LookupTypeEnum.Product_Occasion.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterOccasions.Any(y => y.OccasionId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterOccasions.Any(y => y.OccasionId.HasValue && y.OccasionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
                     }
                     else if (lktype == LookupTypeEnum.Product_Fabric.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterFabrics.Any(y => y.FabricId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterFabrics.Any(y => y.FabricId.HasValue && y.FabricId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
                     }
                     else if (lktype == LookupTypeEnum.Product_Length.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.LengthId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.LengthId.HasValue && y.LengthId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
                     }
                     else if (lktype == LookupTypeEnum.Product_Color.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.ColorId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterLengths.Any(y => y.ColorId.HasValue && y.ColorId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
                     }
                     else if (lktype == LookupTypeEnum.Product_Pattern.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterPatterns.Any(y => y.PatternId == x.Id && y.IsDelete == false && y.IsActive.Value == true));
+                        data = data.Where(x => x.TblProductMasterPatterns.Any(y => y.PatternId.HasValue && y.PatternId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
                     }
 
 

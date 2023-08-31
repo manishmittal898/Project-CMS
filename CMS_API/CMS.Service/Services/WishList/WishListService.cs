@@ -104,7 +104,7 @@ namespace CMS.Service.Services.WishList
 
 
                 var result = (from data in _db.TblUserWishLists.Include(x => x.Product)
-
+                              
                               where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);
                 switch (model.OrderBy)

@@ -62,7 +62,7 @@ export class ProductListComponent implements OnInit {
     this._productService.GetList(this.indexModel).subscribe(response => {
       if (response.IsSuccess) {
         this.model = response.Data;
-        this.model = this.model; //.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
+       // this.model = this.model; //.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
 
       }

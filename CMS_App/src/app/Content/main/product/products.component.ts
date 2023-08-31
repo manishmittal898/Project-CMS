@@ -24,7 +24,8 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   displayedColumns: string[] = ['index', 'SKU', 'Name', 'ImagePath', 'Category', 'SubCategory', 'IsActive', 'Action'];
-  ViewdisplayedColumns = [{ Value: 'Name', Text: 'Name' },
+  ViewdisplayedColumns = [
+    { Value: 'Name', Text: 'Name' },
   { Value: 'Category', Text: 'Category' },
   { Value: 'SubCategory', Text: 'Sub Category' },
   { Value: 'CaptionTag', Text: 'Caption Tag' }];
