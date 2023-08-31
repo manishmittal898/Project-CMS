@@ -767,13 +767,13 @@ section.header-logo {
 
 .product-filter::-webkit-scrollbar {
   width: 2px;
-  margin-top: 50px;
 }
 .product-filter::-webkit-scrollbar-track {
   margin: 15px 0px;
 }
 .product-filter::-webkit-scrollbar-thumb {
   background: var(--primary-color);
+  height: 50px;
 }
 
 /*
@@ -824,6 +824,11 @@ font-weight: 600;
     cursor: pointer;
     display: block;
     line-height: 20px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .product-list-info h3:hover, .product-list-info  a:hover {
@@ -2771,6 +2776,9 @@ body .toast-close-button {
   text-shadow: none;
   top: -10px;
   left: 0px;
+}
+.product-filter .product-filterItems:last-child {
+  margin: 0px !important;
 }
 /* CUSTOM CSS END */
 

@@ -44,7 +44,9 @@
       position: sticky;
       top: 55px;
   }
-
+  .product-filter {
+    height: 93vh;
+}
 }
 @media all and (min-width: 575px)
 {
