@@ -97,7 +97,7 @@
             *ngIf="(formgrp.get('DataItems')?.hasError('required') && formgrp.get('DataItems')?.touched)">
             Please Add File...!</div>
         </div>
-        <div class="d-flex align-items-center mt-1 upload-content-list" *ngIf="dataItems">
+        <div class="d-flex flex-wrap align-items-center mt-1 upload-content-list" *ngIf="dataItems">
           <ng-container *ngFor="let itm of dataItems">
             <span [ngSwitch]="getFileType(itm.Value)">
 

@@ -113,3 +113,9 @@ section.page-login-register {
   max-height: 50px;
 }
 }
+
+@media (max-width: 595px) {
+  .page-new-header-action-search {
+    min-width: 240px;
+}
+}
