@@ -52,17 +52,21 @@
         <td mat-cell *matCellDef="let element"> {{element[column!.Value]}} </td>
       </ng-container>
       <ng-container matColumnDef="Price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let element; let i = index;" width="100px">
-          <span *ngIf="element.Price!=element.SellingPrice">
-             <i title="Selling Price" class="fas fa-gift"></i> : {{element.SellingPrice??'N/A'}} <br>
+        <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">Price</th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+          <div class="prolist-price">
+            <div class="d-flex flex-wrap">
+          <span *ngIf="element.Price!=element.SellingPrice" title="Selling Price">
+            <strong>₹</strong> {{element.SellingPrice??'N/A'}}
           </span>
-          <span>
-            <i title="Price" class="fas fa-rupee-sign"></i> : {{element.Price??'N/A'}}
+          <span *ngIf="element.Discount" class="prolist-discount ms-1" title="Discount">
+            - {{element.Discount??'N/A'}}
           </span>
-          <span *ngIf="element.Discount">
-            <br><i title="Discount" class="fa fa-percent"></i> : {{element.Discount??'N/A'}}
+        </div>
+          <span title="Price">
+            <strong>₹</strong> {{element.Price??'N/A'}}
           </span>
+        </div>
         </td>
       </ng-container>
       <ng-container matColumnDef="IsActive">

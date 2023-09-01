@@ -1379,9 +1379,10 @@ table.custom-mat-table.table-header-light th {
 }
 footer {
   text-align: center;
-  margin-left: 300px;
+  margin-left: 265px;
   font-size: 12px;
   padding: 15px 10px;
+  transition: .6s;
 }
 header {
   background: #fff;
@@ -1421,6 +1422,9 @@ body.sidebar-open .sidebar {
   transition: .6s;
 }
 body.sidebar-open .container-with-sidebar {
+  margin-left: 0px;
+}
+body.sidebar-open footer {
   margin-left: 0px;
 }
 .sidebar-menu-btn {
@@ -1653,4 +1657,13 @@ fieldset legend {
   border-radius: 6px;
   padding: 10px;
   font-size: 18px;
+}
+
+.prolist-discount {
+  font-size: 12px;
+  color: #ff0a0a;
+  font-weight: 600;
+}
+.prolist-price {
+  line-height: 16px;
 }

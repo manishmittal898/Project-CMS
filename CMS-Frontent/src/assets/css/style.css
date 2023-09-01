@@ -655,10 +655,6 @@ section.header-logo {
     padding: 50px 0px 50px 0px;
 }
 
-.font-fam-newsreader {
-    font-family: 'Newsreader', serif;
-}
-
 .home-category-d-1 .home-category-items-img {
     height: 100%;
     overflow: hidden;
@@ -1629,7 +1625,7 @@ ul.megamenu-sub-list {
   padding: 3px 7px;
 }
 pre {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 94%;
   text-align: left;
   word-break: break-all;
