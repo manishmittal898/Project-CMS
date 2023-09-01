@@ -1305,7 +1305,7 @@ select:focus-visible {
 .product-list-items-tag {
     position: absolute;
     background: #c50d00;
-    top: 12px;
+    top: 6px;
     left: -9px;
     z-index: 9;
     padding: 1px 6px;
