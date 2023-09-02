@@ -147,7 +147,7 @@ namespace CMS.Service.Services.LookupMaster
 
                     TblLookupMaster objData = _db.TblLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
                     objData.Name = model.Name;
-                    objData.Value = !string.IsNullOrEmpty(model.Value.Trim()) ? model.Value.Trim() : null;
+                    objData.Value = !string.IsNullOrEmpty(model.Value) ? model.Value.Trim() : null;
                     objData.SortedOrder = model.SortedOrder;
                     objData.LookUpType = model.LookUpType != null ? long.Parse(_security.DecryptData(model.LookUpType)) : null as Nullable<long>;
                     if (!string.IsNullOrEmpty(model.ImagePath))
