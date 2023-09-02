@@ -120,6 +120,7 @@ export class DropDownModel {
 export class DropDownItem {
   Text: string = "";
   Value: string = "";
+  DataValue: any;
 }
 export class GECategoryDropDownItem {
   Text: string = "";

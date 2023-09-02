@@ -82,7 +82,7 @@ export class ProductAddEditComponent implements OnInit {
       this.ddlAvailableProductSize = this.dropDown?.ddlProductSize?.filter(x => !(this.model?.Stocks?.map(y => { return y.SizeId }))?.includes(x.Value));
       // let filter = this.dropDown?.ddlProductSize?.filter(x => !(this.model.Stocks.map(y => { return y.SizeId })).includes(Number(x.Value)));
       return this.model?.Stocks?.length > 0 ? this.ddlAvailableProductSize : this.dropDown?.ddlProductSize;
-    }, 100);
+    }, 10);
 
   }
   onSubmit() {
@@ -232,11 +232,16 @@ export class ProductAddEditComponent implements OnInit {
       }
     });
   }
+  getDiscountValue(price: any) {
+    let Value = this.dropDown.ddlProductDiscount.find(x => x.Value == this.model.DiscountId);
+    return (price - (price * Value?.DataValue / 100))
+  }
 
 
   onAddStock() {
     this.stockModel = {} as ProductStockModel;
     this.tempStock = undefined;
+    this.stockModel.UnitPrice = this.model.Price as number;
     this.ddlProductSize();
   }
 

@@ -271,7 +271,7 @@ namespace CMS.Service.Services.Common
                 }
 
                 return await data.OrderBy(x => x.SortedOrder)
-                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id) })
+                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id),DataValue = r.Value})
                    .ToListAsync();
             }
             catch

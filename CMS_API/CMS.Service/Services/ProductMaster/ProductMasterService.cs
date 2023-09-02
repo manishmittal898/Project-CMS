@@ -35,7 +35,7 @@ namespace CMS.Service.Services.ProductMaster
                 var result = (from pdct in _db.TblProductMasters
                               join prd in _db.VwProductMasters.DefaultIfEmpty() on pdct.Id equals prd.Id
                               where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search))
-                              select new { pdct  = pdct, selling =prd.SellingPrice});
+                              select new { pdct = pdct, selling = prd.SellingPrice });
                 switch (model.OrderBy)
                 {
                     case "Name":
@@ -82,7 +82,7 @@ namespace CMS.Service.Services.ProductMaster
                                             Desc = x.pdct.Desc,
                                             Summary = x.pdct.Desc,
                                             Price = x.pdct.Price,
-                                            SellingPrice =x.selling,
+                                            SellingPrice = x.selling,
                                             MetaTitle = x.pdct.MetaTitle,
                                             MetaDesc = x.pdct.MetaDesc,
                                             CreatedBy = x.pdct.CreatedBy,
@@ -244,7 +244,7 @@ namespace CMS.Service.Services.ProductMaster
 
                     if (model.Stocks != null && model.Stocks.Count > 0)
                     {
-                        var exIds = model.Stocks.Select(x => long.Parse(_security.DecryptData(x.Id))).ToArray();
+                        var exIds = model.Stocks.Where(x => !string.IsNullOrEmpty(x.Id)).Select(x => long.Parse(_security.DecryptData(x.Id))).ToArray();
 
                         var deleteStock = objProduct.TblProductStocks.Where(x => !exIds.Contains(x.Id)).ToList();
                         if (deleteStock.Count > 0)
@@ -255,7 +255,7 @@ namespace CMS.Service.Services.ProductMaster
 
 
                         List<TblProductStock> prStocks = new List<TblProductStock>();
-                        model.Stocks.Where(wh => long.Parse(_security.DecryptData(wh.Id)) > 0).ToList().ForEach(xs =>
+                        model.Stocks.Where(wh => !string.IsNullOrEmpty(wh.Id) && long.Parse(_security.DecryptData(wh.Id)) > 0).ToList().ForEach(xs =>
                         {
                             TblProductStock prStock = objProduct.TblProductStocks.Where(p => p.Id == long.Parse(_security.DecryptData(xs.Id))).FirstOrDefault();
                             if (prStock != null)
@@ -584,14 +584,14 @@ namespace CMS.Service.Services.ProductMaster
                                  && (string.IsNullOrEmpty(model.UniqueId) || prd.UniqueId.Contains(model.UniqueId))
                                  && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
                                 && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
-                              select new { prd = prd,selling =pt.SellingPrice });
+                              select new { prd = prd, selling = pt.SellingPrice });
                 switch (model.OrderBy)
                 {
                     case "Name":
                         result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.Name ascending select orderData) : (from orderData in result orderby orderData.prd.Name descending select orderData);
                         break;
                     case "Price":
-                        result = model.OrderByAsc ? (from orderData in result orderby (orderData.selling) ascending select orderData) : (from orderData in result orderby orderData.selling  descending select orderData);
+                        result = model.OrderByAsc ? (from orderData in result orderby (orderData.selling) ascending select orderData) : (from orderData in result orderby orderData.selling descending select orderData);
                         break;
                     case "CreatedOn":
                         result = model.OrderByAsc ? (from orderData in result orderby orderData.prd.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.prd.CreatedOn descending select orderData);
