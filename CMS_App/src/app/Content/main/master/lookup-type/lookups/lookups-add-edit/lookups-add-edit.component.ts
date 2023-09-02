@@ -45,16 +45,16 @@ export class LookupsAddEditComponent implements OnInit {
   }
 
   setLookupTypeConfig() {
-    debugger
+
     if (!this.data.lookupTypeConfig.isImage) {
 
-      this.formgrp.get('ImagePath')?.clearValidators();
-      this.formgrp.get('ImagePath')?.updateValueAndValidity();
+      // this.formgrp.get('ImagePath')?.clearValidators();
+      // this.formgrp.get('ImagePath')?.updateValueAndValidity();
       this.iSImageVisible = false;
     } else {
       this.iSImageVisible = true;
-      this.formgrp.get('ImagePath')?.setValidators([Validators.required]);
-      this.formgrp.get('ImagePath')?.updateValueAndValidity();
+      // this.formgrp.get('ImagePath')?.setValidators([Validators.required]);
+      // this.formgrp.get('ImagePath')?.updateValueAndValidity();
     }
     if (!this.data.lookupTypeConfig.isValue) {
 

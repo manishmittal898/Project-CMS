@@ -7,7 +7,7 @@
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "Build Prod": "ng b --configuration production --baseHref=/",
+        "Build Prod": "ng b --configuration production",
         "Build Stage": "ng b --configuration stage --baseHref=http://localhost:4200/"
     },
     "private": true,
