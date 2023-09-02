@@ -655,10 +655,6 @@ section.header-logo {
     padding: 50px 0px 50px 0px;
 }
 
-.font-fam-newsreader {
-    font-family: 'Newsreader', serif;
-}
-
 .home-category-d-1 .home-category-items-img {
     height: 100%;
     overflow: hidden;
@@ -1309,7 +1305,7 @@ select:focus-visible {
 .product-list-items-tag {
     position: absolute;
     background: #c50d00;
-    top: 12px;
+    top: 6px;
     left: -9px;
     z-index: 9;
     padding: 1px 6px;
@@ -1629,7 +1625,7 @@ ul.megamenu-sub-list {
   padding: 3px 7px;
 }
 pre {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 94%;
   text-align: left;
   word-break: break-all;
