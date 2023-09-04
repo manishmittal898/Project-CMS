@@ -1680,6 +1680,24 @@ pre p {
   margin-right: 8px;
   margin-top: 0px;
 }
+
+.product-filterItems-body .ng-dropdown-panel .ng-dropdown-panel-items
+{
+  max-height: 180px;
+  overflow: hidden;
+}
+.product-filterItems-body .ng-dropdown-panel .ng-dropdown-panel-items:hover
+{
+  overflow: auto;
+}
+.product-filterItems-body .ng-dropdown-panel .ng-dropdown-panel-items::-webkit-scrollbar {
+  width: 2px;
+}
+.product-filterItems-body .ng-dropdown-panel .ng-dropdown-panel-items::-webkit-scrollbar-thumb {
+  background: #b8b8b8;
+}
+
+
 .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon.left {
     border: none;
     padding-right: 0px;
