@@ -1,300 +1,288 @@
 <div class="product-filter-sidebar">
-    <a class="d-inline-flex align-items-center d-lg-none product-filter-btn text-center" data-bs-toggle="offcanvas"
-        href="#Btn-Toogle1">
-        <i class="bi bi-funnel me-1"></i>
-        <span>Show Filter</span>
-    </a>
-    <div class="product-filter  offcanvas offcanvas-start" tabindex="-1" id="Btn-Toogle1">
-        <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
-            <h6 class="offcanvas-title"><i class="bi bi-funnel me-1"></i> Filter</h6>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-
-        <!-- Filter Search Start -->
-        <div class="product-filterItems product-list-search position-relative mb-3">
-            <input type="search" [(ngModel)]="this.filterModel.Keyword" placeholder="Search.." class="w-100">
-            <button type="submit"><i class="bi bi-search" (click)="applyFilter()"></i></button>
-        </div>
-        <!-- Filter Search End -->
-
-        <!-- Filter Category and sub Category Start -->
-        <div class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Categories </h6>
-            </div>
-            <div class="product-filterItems-body">
-
-
-                <ng-select (change)="updateSubCategoryData();applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
-                            class="form-check-input" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
-                            {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-                <div class="product-filterItems-header mb-2 mt-4" *ngIf="subCategory?.length>0">
-                    <h6 class="m-0 text-uppercase">Sub Category</h6>
-                </div>
-                <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
-                    <div class="accordion-item border-0" *ngFor="let category Of subCategory;let idx=index">
-                        <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed"
-                            type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_'+idx">
-                            {{category.Category}}
-                        </button>
-                        <div id="collapse_{{idx}}" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body pt-1 px-0 pb-0">
-                                <div class="form-check">
-                                    <div *ngFor="let item of category.Data" class="p-field-checkbox mb-1">
-                                        <p-checkbox (change)="applyFilter();" class="form-check-input" name="group2"
-                                            value="item.Value" [value]="item.Value"
-                                            [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
-                                        </p-checkbox>
-                                        <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <!-- Filter Category os sub Category End -->
-
-
-        <!-- Filter Price Start -->
-        <div class="product-filterItems mb-4">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Price</h6>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-                <label class="form-label mb-0"><strong>Rs.</strong> {{this.filterModel?.Price[0]}}</label>
-                <label class="form-label mb-0"><strong>Rs.</strong> {{this.filterModel?.Price[1]}}</label>
-            </div>
-
-            <p-slider *ngIf="this.dropDown.ddlProductPrice" (onChange)="applyFilter()" [min]="50" [max]="maxPrice"
-                [(ngModel)]="this.filterModel.Price" [step]="500" [range]="true"></p-slider>
-        </div>
-        <!-- Filter Price End -->
-
-
-
-        <!-- Filter Size Start -->
-        <div *ngIf="this.dropDown?.ddlProductSize?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Size</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Find Size">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Size End -->
-
-        <!-- Filter Discount Start -->
-        <div *ngIf="this.dropDown?.ddlProductDiscount?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Discount</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductDiscount" [multiple]="true" bindLabel="Text"
-                    [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.DiscountId"
-                    placeholder="Find Discount">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Discount End -->
-
-        <!-- Filter Occasion Start -->
-        <div *ngIf="this.dropDown?.ddlProductOccasion?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Occasion</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductOccasion" [multiple]="true" bindLabel="Text"
-                    [closeOnSelect]="false" bindValue="Value" [(ngModel)]="this.filterModel.OccasionId"
-                    placeholder="Find Occasion">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Occasion End -->
-
-        <!-- Filter Fabric Start -->
-        <div *ngIf="this.dropDown?.ddlProductFabric?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Fabric</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductFabric" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.FabricId" placeholder="Find Fabric">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Fabric End -->
-
-        <!-- Filter Length Start -->
-        <div *ngIf="this.dropDown?.ddlProductLength?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Length</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductLength" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.LengthId" placeholder="Find Length">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Length End -->
-
-
-        <!-- Filter Color Start -->
-        <div *ngIf="this.dropDown?.ddlProductColor?.length>0"
-            class="product-filterItems product-filterItems-w-checkbox mb-3">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Color</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductColor" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.ColorId" placeholder="Find Color">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Color End -->
-
-        <!-- Filter Pattern Start -->
-        <div class="product-filterItems product-filterItems-w-checkbox mb-3"
-            *ngIf="this.dropDown?.ddlProductPattern?.length>0">
-            <div class="product-filterItems-header mb-2">
-                <h6 class="m-0 text-uppercase">Pattern</h6>
-            </div>
-            <div class="product-filterItems-body">
-                <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-                    [items]="this.dropDown.ddlProductPattern" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-                    bindValue="Value" [(ngModel)]="this.filterModel.PatternId" placeholder="Find Pattern">
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}" type="checkbox" class="form-check-input"
-                            [ngModel]="item$.selected" />
-                        {{item.Text}}
-                    </ng-template>
-                    <ng-template ng-multi-label-tmp let-items="items">
-                        <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-                            {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 2">
-                            <span class="ng-value-label">{{items.length - 2}} more...</span>
-                        </div>
-                    </ng-template>
-                </ng-select>
-
-            </div>
-        </div>
-        <!-- Filter Pattern End -->
-
+  <a class="d-inline-flex align-items-center d-lg-none product-filter-btn text-center" data-bs-toggle="offcanvas"
+    href="#Btn-Toogle1">
+    <i class="bi bi-funnel me-1"></i>
+    <span>Show Filter</span>
+  </a>
+  <div class="product-filter  offcanvas offcanvas-start" tabindex="-1" id="Btn-Toogle1">
+    <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
+      <h6 class="offcanvas-title"><i class="bi bi-funnel me-1"></i> Filter</h6>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+
+    <!-- Filter Search Start -->
+    <div class="product-filterItems product-list-search position-relative mb-3">
+      <input type="search" [(ngModel)]="this.filterModel.Keyword" placeholder="Search.." class="w-100">
+      <button type="submit"><i class="bi bi-search" (click)="applyFilter()"></i></button>
+    </div>
+    <!-- Filter Search End -->
+
+    <!-- Filter Category and sub Category Start -->
+    <div class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Categories </h6>
+      </div>
+      <div class="product-filterItems-body">
+
+
+        <ng-select (change)="updateSubCategoryData();applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" class="form-check-input" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2;">
+              {{item['Text'] }}{{ (items.length-2) >= index ?',':''}} </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+        <div class="product-filterItems-header mb-2 mt-4" *ngIf="subCategory?.length>0">
+          <h6 class="m-0 text-uppercase">Sub Category</h6>
+        </div>
+        <div class="accordion accordion-w-0-border product-list-accordion-filter" id="accordionExample">
+          <div class="accordion-item border-0" *ngFor="let category Of subCategory;let idx=index">
+            <button class="accordion-button p-0 bg-transparent font-14 font-w-500 text-dark collapsed" type="button"
+              data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_'+idx">
+              {{category.Category}}
+            </button>
+            <div id="collapse_{{idx}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body pt-1 px-0 pb-0">
+                <div class="form-check">
+                  <div *ngFor="let item of category.Data" class="p-field-checkbox mb-1">
+                    <p-checkbox (change)="applyFilter();" class="form-check-input" name="group2" value="item.Value"
+                      [value]="item.Value" [(ngModel)]="this.filterModel.SubCategoryId" [inputId]="item.Value">
+                    </p-checkbox>
+                    <label class="form-check-label" [for]="item.Value">{{item.Text}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <!-- Filter Category os sub Category End -->
+
+
+    <!-- Filter Price Start -->
+    <div class="product-filterItems mb-4">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Price</h6>
+      </div>
+      <div class="d-flex justify-content-between mb-2">
+        <label class="form-label mb-0"><strong>Rs.</strong> {{this.filterModel?.Price[0]}}</label>
+        <label class="form-label mb-0"><strong>Rs.</strong> {{this.filterModel?.Price[1]}}</label>
+      </div>
+
+      <p-slider *ngIf="this.dropDown.ddlProductPrice" (onSlideEnd)="applyFilter()" [min]="50" [max]="maxPrice"
+        [(ngModel)]="this.filterModel.Price" [step]="500" [range]="true"></p-slider>
+    </div>
+    <!-- Filter Price End -->
+
+
+
+    <!-- Filter Size Start -->
+    <div *ngIf="this.dropDown?.ddlProductSize?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Size</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductSize" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.SizeId" placeholder="Find Size">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Size End -->
+
+    <!-- Filter Discount Start -->
+    <div *ngIf="this.dropDown?.ddlProductDiscount?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Discount</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductDiscount" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.DiscountId" placeholder="Find Discount">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Discount End -->
+
+    <!-- Filter Occasion Start -->
+    <div *ngIf="this.dropDown?.ddlProductOccasion?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Occasion</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductOccasion" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.OccasionId" placeholder="Find Occasion">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Occasion End -->
+
+    <!-- Filter Fabric Start -->
+    <div *ngIf="this.dropDown?.ddlProductFabric?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Fabric</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductFabric" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.FabricId" placeholder="Find Fabric">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Fabric End -->
+
+    <!-- Filter Length Start -->
+    <div *ngIf="this.dropDown?.ddlProductLength?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Length</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductLength" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.LengthId" placeholder="Find Length">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Length End -->
+
+
+    <!-- Filter Color Start -->
+    <div *ngIf="this.dropDown?.ddlProductColor?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Color</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductColor" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.ColorId" placeholder="Find Color">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Color End -->
+
+    <!-- Filter Pattern Start -->
+    <div class="product-filterItems product-filterItems-w-checkbox mb-3"
+      *ngIf="this.dropDown?.ddlProductPattern?.length>0">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Pattern</h6>
+      </div>
+      <div class="product-filterItems-body">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductPattern" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.PatternId" placeholder="Find Pattern">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
+
+      </div>
+    </div>
+    <!-- Filter Pattern End -->
+
+  </div>
 </div>

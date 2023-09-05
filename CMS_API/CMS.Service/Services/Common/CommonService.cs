@@ -229,7 +229,7 @@ namespace CMS.Service.Services.Common
                 {
                     if (lktype == LookupTypeEnum.Product_Category.GetStringValue())
                     {
-                        data = data.Where(x => x.TblProductMasterCategories.Any(y => y.Category.Id == x.Id));
+                        data = data.Where(x => (x.TblProductMasterCategories.Any(y => y.CategoryId == x.Id)) );
                     }
                     else if (lktype == LookupTypeEnum.CMS_Page.GetStringValue())
                     {
@@ -271,7 +271,7 @@ namespace CMS.Service.Services.Common
                 }
 
                 return await data.OrderBy(x => x.SortedOrder)
-                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id),DataValue = r.Value})
+                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), DataValue = r.Value })
                    .ToListAsync();
             }
             catch
