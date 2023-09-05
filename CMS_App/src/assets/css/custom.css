@@ -279,6 +279,10 @@ tr.mat-header-row {
   font-weight: 800;
 }
 
+.font-w-200 {
+  font-weight: 200;
+}
+
 .p-10 {
   padding: 10px;
 }
