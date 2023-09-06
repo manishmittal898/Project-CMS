@@ -1,5 +1,6 @@
 
 using CMS.Core.FixedValue;
+using CMS.Core.ServiceHelper.Cache;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Data.Models;
 using CMS.Service.Services.Account;
@@ -172,6 +173,7 @@ namespace CMS.API
             services.AddScoped<IGeneralEntryService, GeneralEntryService>();
             services.AddScoped<ICustomerAddressService, CustomerAddressService>();
             services.AddScoped<IWishListService, WishListService>();
+            services.AddScoped<ICacheService, CacheService>();
 
         }
     }

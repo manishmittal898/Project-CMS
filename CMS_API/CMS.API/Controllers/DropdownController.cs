@@ -1,7 +1,10 @@
-﻿using CMS.Core.ServiceHelper.Model;
+﻿using CMS.Core.ServiceHelper.Cache;
+using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +18,12 @@ namespace CMS.API.Controllers
     {
 
         private readonly ICommonService _common;
-        public DropdownController(ICommonService common)
+        private readonly ICacheService _cacheService;
+
+        public DropdownController(ICommonService common, ICacheService cacheService)
         {
             _common = common;
+            _cacheService = cacheService;
         }
 
         /// <summary>
@@ -27,20 +33,54 @@ namespace CMS.API.Controllers
         [HttpPost("{isTransactionData}")]
         public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key, bool isTransactionData = false)
         {
-            return await _common.GetDropDown(key, isTransactionData);
+            string keyData = "GetDropDown" + string.Join("-", key);
+            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>(keyData);
+            if (cacheData != null)
+            {
+                return cacheData;
+            }
+            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            cacheData = await _common.GetDropDown(key, isTransactionData);
+
+            _cacheService.SetData(keyData, cacheData, expirationTime);
+            return cacheData;
+
+            // return await _common.GetDropDown(key, isTransactionData);
         }
 
         [HttpPost]
         public async Task<ServiceResponse<Dictionary<string, object>>> GetMultipleFilterDropDown(FilterDropDownPostModel[] model)
         {
-            return await _common.GetFilterDropDown(model);
+
+            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetMultipleFilterDropDown");
+            if (cacheData != null)
+            {
+                return cacheData;
+            }
+            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            cacheData = await _common.GetFilterDropDown(model);
+
+            _cacheService.SetData("GetMultipleFilterDropDown", cacheData, expirationTime);
+            return cacheData;
+
         }
-     
+
         [HttpPost]
         public async Task<ServiceResponse<Dictionary<string, object>>> GetFilterDropDown(FilterDropDownPostModel model)
         {
             FilterDropDownPostModel[] obj = { model != null ? model : new FilterDropDownPostModel() };
-            return await _common.GetFilterDropDown(obj);
+
+
+            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetFilterDropDown");
+            if (cacheData != null)
+            {
+                return cacheData;
+            }
+            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            cacheData = await _common.GetFilterDropDown(obj);
+
+            _cacheService.SetData("GetFilterDropDown", cacheData, expirationTime);
+            return cacheData;
         }
     }
 }

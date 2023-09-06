@@ -13,6 +13,7 @@
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
 
 </Project>
