@@ -31,46 +31,33 @@ export class ProductListComponent implements OnInit {
         this.indexModel.CategoryId = this._router.snapshot.queryParams.id.split(',');
         this.indexModel.SubCategoryId = [];
       }
-
       if (p.subid) {
         this.indexModel.SubCategoryId = this._router.snapshot.queryParams.subid.split(',');
       }
       if (p.prc) {
         this.indexModel.Price = this._router.snapshot.queryParams.prc.split(',').map(x => Number(x));
       }
-
       if (p.clr) {
-
         this.indexModel.ColorId = p.clr.split(',');
       }
-
       if (p.dscnt) {
-
         this.indexModel.DiscountId = p.dscnt.split(',');
       }
-
       if (p.ocsn) {
-
         this.indexModel.OccasionId = p.ocsn.split(',');
       }
       if (p.ptrn) {
-
         this.indexModel.PatternId = p.ptrn.split(',');
       }
       if (p.lngth) {
-
         this.indexModel.LengthId = p.lngth.split(',');
       }
       if (p.fbrc) {
-
         this.indexModel.FabricId = p.fbrc.split(',');
       }
       if (p.sz) {
-
         this.indexModel.SizeId = p.sz.split(',');
       }
-
-
       if (this._router.snapshot.params?.name) {
         this.pageName = this._router.snapshot.params?.name.split('_').join(' ');
       }
@@ -93,17 +80,14 @@ export class ProductListComponent implements OnInit {
 
       query['subid'] = this.indexModel.SubCategoryId.join(',');
     }
-
     if (this.indexModel?.ColorId?.length > 0) {
 
       query['clr'] = this.indexModel.ColorId.join(',');
     }
-
     if (this.indexModel?.DiscountId?.length > 0) {
 
       query['dscnt'] = this.indexModel.DiscountId.join(',');
     }
-
     if (this.indexModel?.OccasionId?.length > 0) {
 
       query['ocsn'] = this.indexModel.OccasionId.join(',');
@@ -125,7 +109,6 @@ export class ProductListComponent implements OnInit {
       query['sz'] = this.indexModel.SizeId.join(',');
     }
     if (this.indexModel?.Price?.length > 0) {
-
       query['prc'] = this.indexModel.Price.join(',');
     }
     this._route.navigate(
