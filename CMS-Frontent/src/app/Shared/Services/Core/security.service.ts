@@ -13,32 +13,32 @@ export class SecurityService {
 
   constructor(private readonly _baseService: BaseAPIService, private readonly _cookie: CookieService) { }
 
-  setStorage(key: string, value: string) {
-    const encKey = this.getKey(key) ?? this.encrypt(key);
+  setStorage(key: string, value: string, storeInSession = false) {
+    const encKey = this.getKey(key, storeInSession) ?? this.encrypt(key);
     const encValue = this.encrypt(value);
-   localStorage.setItem(encKey, encValue);
-  
+    storeInSession ? sessionStorage.setItem(encKey, encValue) : localStorage.setItem(encKey, encValue);
     return true;
   }
 
-  deleteStorage(key) {
-    const encKey = this.getKey(key) ?? this.encrypt(key);
-    return localStorage.delete(encKey);
+  deleteStorage(key, storeInSession = false) {
+    const encKey = this.getKey(key, storeInSession) ?? this.encrypt(key);
+    return storeInSession ? sessionStorage.delete(encKey) : localStorage.delete(encKey);
   }
-  getStorage(key: string) {
+  getStorage(key: string, storeInSession = false) {
 
-    const encKey = this.getKey(key) ?? key
-    const decValue = localStorage.getItem(encKey);
+    const encKey = this.getKey(key, storeInSession) ?? key
+    let decValue = storeInSession ? sessionStorage.getItem(encKey) : localStorage.getItem(encKey);
 
     return decValue ? this.decrypt(decValue) : undefined;
   }
-  checkLocalStorage(key) {
-    return this.getKey(key);
+  checkLocalStorage(key, storeInSession = false) {
+    return this.getKey(key, storeInSession);
   }
 
-  removeStorage(key: string) {
-    const encKey = this.getKey(key) ?? this.encrypt(key);
-    localStorage.delete(encKey);
+  removeStorage(key: string, storeInSession = false) {
+    const encKey = this.getKey(key, storeInSession) ?? this.encrypt(key);
+
+    let decValue = storeInSession ? sessionStorage.delete(encKey) : localStorage.delete(encKey);
 
   }
   setCookie(key: string, value: string) {
@@ -104,13 +104,22 @@ export class SecurityService {
 
   }
 
-  private getKey(key) {
+  private getKey(key, storeInSession = false) {
     try {
-      for (var itm in localStorage) {
-        if (this.decrypt(itm) === key) {
-          return itm ?? null;
+      if (storeInSession) {
+        for (var itm in sessionStorage) {
+          if (this.decrypt(itm) === key) {
+            return itm ?? null;
+          }
+        }
+      } else {
+        for (var itm in localStorage) {
+          if (this.decrypt(itm) === key) {
+            return itm ?? null;
+          }
         }
       }
+
 
     } catch (error) {
       return null;

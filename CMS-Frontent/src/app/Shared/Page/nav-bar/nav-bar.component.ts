@@ -13,8 +13,8 @@ import { DropDown_key } from '../../Constant';
 
 export class NavBarComponent implements OnInit {
   isLoggedIn = false;
-  menuModel: GroupDropDownItem[];
-  cmsPageMenu: DropDownItem[];
+  menuModel: GroupDropDownItem[]=[];
+  cmsPageMenu: DropDownItem[]=[];
   constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService, private readonly _authService: AuthService,) {
     if (this._securityService.getStorage('nav-collections-menu')) {
       this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
@@ -39,21 +39,31 @@ export class NavBarComponent implements OnInit {
   }
 
   GetDropDown() {
-    const serve = this._commonService.GetDropDown([DropDown_key.ddlLookupGroup, DropDown_key.ddlCMSPage], true).subscribe(res => {
-      serve.unsubscribe();
-      if (res.IsSuccess) {
-        const ddls = res?.Data as DropDownModel;
-        this.menuModel = ddls.ddlLookupGroup.map(x => {
-          return {
-            Category: x.Category, CategoryId: String(x.CategoryId),
-            Data: x.Data.map(sd => { return { Text: sd.Text, Value: sd.Value, Category: sd.Category, CategoryId: sd.CategoryId } })
-          } as any
-        });
-        this.cmsPageMenu = ddls?.ddlCMSPage?.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
-        this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel));
-        this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu));
-      }
-    });
+    let itms = [];
+    if (this.menuModel.length == 0) {
+      itms.push(DropDown_key.ddlLookupGroup)
+    }
+    if (this.cmsPageMenu.length == 0) {
+      itms.push(DropDown_key.ddlCMSPage)
+    }
+    if (itms.length > 0) {
+
+      const serve = this._commonService.GetDropDown(itms, true).subscribe(res => {
+        serve.unsubscribe();
+        if (res.IsSuccess) {
+          const ddls = res?.Data as DropDownModel;
+          this.menuModel = ddls.ddlLookupGroup.map(x => {
+            return {
+              Category: x.Category, CategoryId: String(x.CategoryId),
+              Data: x.Data.map(sd => { return { Text: sd.Text, Value: sd.Value, Category: sd.Category, CategoryId: sd.CategoryId } })
+            } as any
+          });
+          this.cmsPageMenu = ddls?.ddlCMSPage?.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
+          this._securityService.setStorage('nav-collections-menu', JSON.stringify(this.menuModel));
+          this._securityService.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu));
+        }
+      });
+    }
   }
 
 

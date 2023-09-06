@@ -9,8 +9,8 @@ import { SecurityService } from '../../Services/Core/security.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  cmsPageMenu: DropDownItem[];
-  ddlCategory: DropDownItem[];
+  cmsPageMenu: DropDownItem[] = [];
+  ddlCategory: DropDownItem[] = [];
 
   constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService) {
 
@@ -27,18 +27,27 @@ export class FooterComponent implements OnInit {
   }
 
   GetDropDown() {
-    let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCMSPage], true).subscribe(res => {
-      serve.unsubscribe();
-      if (res.IsSuccess) {
-        const ddls = res?.Data as DropDownModel;
-        this.cmsPageMenu = ddls.ddlCMSPage.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
-        this.ddlCategory = ddls.ddlCategory.slice(0, 6).map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
-        setTimeout(() => {
-          this._securityService?.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
-          this._securityService?.setStorage('nav-Category', JSON.stringify(this.ddlCategory))
-        }, 10);
-      }
-    });
+    let itms = [];
+    if (this.ddlCategory.length == 0) {
+      itms.push(DropDown_key.ddlLookupGroup)
+    }
+    if (this.cmsPageMenu.length == 0) {
+      itms.push(DropDown_key.ddlCMSPage)
+    }
+    if (itms.length > 0) {
+      let serve = this._commonService.GetDropDown([DropDown_key.ddlCategory, DropDown_key.ddlCMSPage], true).subscribe(res => {
+        serve.unsubscribe();
+        if (res.IsSuccess) {
+          const ddls = res?.Data as DropDownModel;
+          this.cmsPageMenu = ddls.ddlCMSPage.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
+          this.ddlCategory = ddls.ddlCategory.slice(0, 6).map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
+          setTimeout(() => {
+            this._securityService?.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
+            this._securityService?.setStorage('nav-Category', JSON.stringify(this.ddlCategory))
+          }, 10);
+        }
+      });
+    }
   }
 
 }
