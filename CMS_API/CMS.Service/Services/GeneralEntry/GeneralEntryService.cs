@@ -69,7 +69,6 @@ namespace CMS.Service.Services.GeneralEntry
             }
         }
 
-
         public async Task<ServiceResponse<GeneralEntryViewModel>> GetById(string id, bool isEdit = false)
         {
             ServiceResponse<GeneralEntryViewModel> ObjResponse = new ServiceResponse<GeneralEntryViewModel>();
@@ -105,15 +104,11 @@ namespace CMS.Service.Services.GeneralEntry
                                          GeneralEntryId = result.Id
                                      }).ToListAsync();
 
-
-
                 ObjResponse = CreateResponse(result, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
-
                 ObjResponse = CreateResponse<GeneralEntryViewModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
-
             }
             return ObjResponse;
         }

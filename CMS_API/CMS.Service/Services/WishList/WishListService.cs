@@ -26,7 +26,6 @@ namespace CMS.Service.Services.WishList
         public WishListService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
-
         }
 
         public async Task<ServiceResponse<WishListViewModel>> AddProduct(WishListPostModel model)
@@ -87,8 +86,7 @@ namespace CMS.Service.Services.WishList
                 throw;
             }
         }
-
-
+        
         public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model)
         {
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
@@ -185,7 +183,6 @@ namespace CMS.Service.Services.WishList
             }
             return objResult;
         }
-
 
     }
 }

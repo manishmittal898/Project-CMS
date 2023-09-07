@@ -545,7 +545,6 @@ namespace CMS.Service.Services.ProductMaster
             return objResult;
         }
 
-
         public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFilterModel model)
         {
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
