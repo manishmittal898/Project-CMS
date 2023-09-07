@@ -32,7 +32,8 @@
               "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/fontawesome.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
@@ -112,7 +113,8 @@
               "src/assets/css/slick.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/fontawesome.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
