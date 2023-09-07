@@ -54,7 +54,8 @@
                             "src/assets/css/bootstrap-icons.css",
                             "src/assets/css/custom.css",
                             "src/assets/css/responsive.css",
-                            "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+                            "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                            "src/assets/css/fontawesome.min.css"
                         ],
                         "scripts": [
                           "src/assets/js/jquery.min.js",
@@ -161,7 +162,8 @@
                           "src/assets/css/bootstrap-icons.css",
                           "src/assets/css/custom.css",
                           "src/assets/css/responsive.css",
-                          "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+                          "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                          "src/assets/css/fontawesome.min.css"
                         ],
                         "scripts": [
                           "src/assets/js/jquery.min.js",
