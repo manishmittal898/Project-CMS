@@ -2803,4 +2803,9 @@ body .toast-close-button {
 }
 /* CUSTOM CSS END */
 
-
+#lens,
+#result {
+  position: absolute;
+  display: none;
+  z-index: 1;
+}
