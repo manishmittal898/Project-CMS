@@ -15,6 +15,7 @@ using CMS.Service.Services.ProductReview;
 using CMS.Service.Services.RoleType;
 using CMS.Service.Services.SubLookupMaster;
 using CMS.Service.Services.User;
+using CMS.Service.Services.UserCartProduct;
 using CMS.Service.Services.WishList;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -173,6 +174,8 @@ namespace CMS.API
             services.AddScoped<IGeneralEntryService, GeneralEntryService>();
             services.AddScoped<ICustomerAddressService, CustomerAddressService>();
             services.AddScoped<IWishListService, WishListService>();
+            services.AddScoped<IUserCartProductService, UserCartProductService>();
+
             services.AddScoped<ICacheService, CacheService>();
 
         }

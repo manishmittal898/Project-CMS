@@ -30,6 +30,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblRoleType> TblRoleTypes { get; set; }
         public virtual DbSet<TblSubLookupMaster> TblSubLookupMasters { get; set; }
         public virtual DbSet<TblUserAddressMaster> TblUserAddressMasters { get; set; }
+        public virtual DbSet<TblUserCartList> TblUserCartLists { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
         public virtual DbSet<TblUserMasterLog> TblUserMasterLogs { get; set; }
         public virtual DbSet<TblUserWishList> TblUserWishLists { get; set; }
@@ -607,6 +608,27 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblUserAddressMaster_UserId");
+            });
+
+            modelBuilder.Entity<TblUserCartList>(entity =>
+            {
+                entity.ToTable("tblUserCartList");
+
+                entity.Property(e => e.AddedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.TblUserCartLists)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserCartList_ProductId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblUserCartLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserCartList_UserId");
             });
 
             modelBuilder.Entity<TblUserMaster>(entity =>

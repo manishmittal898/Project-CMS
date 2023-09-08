@@ -11,6 +11,7 @@ namespace CMS.Data.Models
         {
             TblProductReviews = new HashSet<TblProductReview>();
             TblProductStocks = new HashSet<TblProductStock>();
+            TblUserCartLists = new HashSet<TblUserCartList>();
             TblUserWishLists = new HashSet<TblUserWishList>();
         }
 
@@ -55,6 +56,7 @@ namespace CMS.Data.Models
         public virtual TblLookupMaster ViewSection { get; set; }
         public virtual ICollection<TblProductReview> TblProductReviews { get; set; }
         public virtual ICollection<TblProductStock> TblProductStocks { get; set; }
+        public virtual ICollection<TblUserCartList> TblUserCartLists { get; set; }
         public virtual ICollection<TblUserWishList> TblUserWishLists { get; set; }
     }
 }

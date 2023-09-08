@@ -33,6 +33,7 @@ namespace CMS.Data.Models
             TblUserAddressMasterCreatedByNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterModifiedByNavigations = new HashSet<TblUserAddressMaster>();
             TblUserAddressMasterUsers = new HashSet<TblUserAddressMaster>();
+            TblUserCartLists = new HashSet<TblUserCartList>();
             TblUserMasterLogs = new HashSet<TblUserMasterLog>();
             TblUserWishLists = new HashSet<TblUserWishList>();
         }
@@ -81,6 +82,7 @@ namespace CMS.Data.Models
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterCreatedByNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterModifiedByNavigations { get; set; }
         public virtual ICollection<TblUserAddressMaster> TblUserAddressMasterUsers { get; set; }
+        public virtual ICollection<TblUserCartList> TblUserCartLists { get; set; }
         public virtual ICollection<TblUserMasterLog> TblUserMasterLogs { get; set; }
         public virtual ICollection<TblUserWishList> TblUserWishLists { get; set; }
     }
