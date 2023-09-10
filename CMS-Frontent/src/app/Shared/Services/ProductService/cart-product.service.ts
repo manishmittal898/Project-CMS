@@ -1,50 +1,51 @@
 import { ProductMasterViewModel } from './product.service';
-import { Injectable } from '@angular/core';
-import { IndexModel, ApiResponse } from '../../Helper/Common';
-import { BaseAPIService } from '../Core/base-api.service';
-
-import { Observable, forkJoin } from 'rxjs';
+import { AuthService } from './../UserService/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../UserService/auth.service';
+import { BaseAPIService } from './../Core/base-api.service';
+import { Injectable } from '@angular/core';
+import { Observable, forkJoin } from 'rxjs';
+import { IndexModel, ApiResponse } from '../../Helper/Common';
 import { SecurityService } from '../Core/security.service';
+
 @Injectable({
   providedIn: 'root'
 })
-export class WishListService {
-  wishListItem: any[] = [];
+export class CartProductService {
+
+  cartProductItem: any[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
-    this.wishListItem = this._securityService.checkLocalStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
+    this.cartProductItem = this._securityService.checkLocalStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
   }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
-    let url = `${this._baseService.API_Url.ProductWishList_Api}`;
+    let url = `${this._baseService.API_Url.UserCartProduct_Api}`;
     return this._baseService.post(url, model);
   }
 
-  private AddProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
-    let url = `${this._baseService.API_Url.ProductWishList_Add_Api}`;
+  private AddProduct(model: CartProductPostModel): Observable<ApiResponse<CartProductViewModel>> {
+    let url = `${this._baseService.API_Url.UserCartProduct_Add_Api}`;
     return this._baseService.post(url, model);
   }
 
-  private RemoveProduct(model: WishListPostModel): Observable<ApiResponse<WishListViewModel>> {
-    let url = `${this._baseService.API_Url.ProductWishList_Remove_Api}`;
+  private RemoveProduct(model: CartProductPostModel): Observable<ApiResponse<CartProductViewModel>> {
+    let url = `${this._baseService.API_Url.UserCartProduct_Remove_Api}`;
     return this._baseService.post(url, model);
   }
 
-  public async SetWishlistProduct(product: ProductMasterViewModel) {
-    let model = { ProductId: product.Id } as WishListPostModel;
+  public async SetCartProduct(product: ProductMasterViewModel) {
+    let model = { ProductId: product.Id } as CartProductPostModel;
     if (this._auth.IsAuthentication.value) {
       if (product.IsWhishList) {
         this.RemoveProduct(model).subscribe(x => {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
             this._toasterService.success(x.Message as string, 'Success');
-            this.wishListItem.splice(this.wishListItem.indexOf(product.Id), 1);
+            this.cartProductItem.splice(this.cartProductItem.indexOf(product.Id), 1);
 
           } else {
             this._toasterService.error(x.Message as string, 'Faild');
           }
-          let data = JSON.stringify(this.wishListItem);
+          let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('wishlist', data);
           return x;
         }, error => {
@@ -54,13 +55,13 @@ export class WishListService {
         this.AddProduct(model).subscribe(x => {
           if (x.IsSuccess) {
             product.IsWhishList = !product.IsWhishList;
-            this.wishListItem.push(product.Id);
+            this.cartProductItem.push(product.Id);
             this._toasterService.success(x.Message as string, 'Success');
           }
           else {
             this._toasterService.error(x.Message as string, 'Faild');
           }
-          let data = JSON.stringify(this.wishListItem);
+          let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('wishlist', data);
           return x;
         },
@@ -69,39 +70,41 @@ export class WishListService {
           })
       }
     } else {
-      if (this.wishListItem.indexOf(product.Id) == -1) {
-        this.wishListItem.push(product.Id);
+      if (this.cartProductItem.indexOf(product.Id) == -1) {
+        this.cartProductItem.push(product.Id);
         this._toasterService.success("Added Successfully" as string, 'Success');
       } else {
-        this.wishListItem.splice(this.wishListItem.indexOf(product.Id), 1);
+        this.cartProductItem.splice(this.cartProductItem.indexOf(product.Id), 1);
         this._toasterService.success("Removed successfully" as string, 'Success');
       }
-      let data = JSON.stringify(this.wishListItem);
-      this._securityService.setStorage('wishlist', data);
+      let data = JSON.stringify(this.cartProductItem);
+      this._securityService.setStorage('cart-product', data);
       product.IsWhishList = !product.IsWhishList;
     }
   }
 
-  public async syncWishList() {
-    let sub = [];
-    this.wishListItem.forEach(x => {
+
+  public async syncCartProduct() {
+    let sub = [] as any[];
+    this.cartProductItem.forEach(x => {
       sub.push(this.AddProduct({ ProductId: x }))
     })
     forkJoin(sub).subscribe(res => {
-      this.wishListItem = [];
-      this._securityService.deleteStorage('wishlist');
+      this.cartProductItem = [];
+      this._securityService.deleteStorage('cart-product');
     })
   }
 
+
 }
 
-export interface WishListViewModel {
+export interface CartProductViewModel {
   Id: string;
   ProductId: string;
   AddedOn: string;
   Product: ProductMasterViewModel;
 }
 
-export interface WishListPostModel {
+export interface CartProductPostModel {
   ProductId: string;
 }

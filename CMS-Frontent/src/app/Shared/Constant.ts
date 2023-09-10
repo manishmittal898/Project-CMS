@@ -46,11 +46,19 @@ export class API_Url {
 
   //#region  << ProductWishList  >>
   public static ProductWishList_Api = `${environment.apiEndPoint}customer/ProductWishList/Get`;
-  public static ProductWishList_Add_Apo = `${environment.apiEndPoint}customer/ProductWishList/AddWishListProduct`;
-  public static ProductWishList_Remove_Apo = `${environment.apiEndPoint}customer/ProductWishList/RemoveWishListProduct/`;
+  public static ProductWishList_Add_Api = `${environment.apiEndPoint}customer/ProductWishList/AddWishListProduct`;
+  public static ProductWishList_Remove_Api = `${environment.apiEndPoint}customer/ProductWishList/RemoveWishListProduct/`;
 
 
   //#endregion
+
+ //#region  << UserCartProduct  >>
+ public static UserCartProduct_Api = `${environment.apiEndPoint}customer/UserCartProduct/Get`;
+ public static UserCartProduct_Add_Api = `${environment.apiEndPoint}customer/UserCartProduct/AddWishListProduct`;
+ public static UserCartProduct_Remove_Api = `${environment.apiEndPoint}customer/UserCartProduct/RemoveWishListProduct/`;
+
+
+ //#endregion
 
   //#region  << CMS Page  >>
   public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;

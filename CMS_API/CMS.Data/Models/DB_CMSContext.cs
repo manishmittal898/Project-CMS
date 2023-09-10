@@ -624,6 +624,12 @@ namespace CMS.Data.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblUserCartList_ProductId");
 
+                entity.HasOne(d => d.Size)
+                    .WithMany(p => p.TblUserCartLists)
+                    .HasForeignKey(d => d.SizeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tblUserCartList_SizeId");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.TblUserCartLists)
                     .HasForeignKey(d => d.UserId)

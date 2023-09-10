@@ -8,7 +8,7 @@ namespace CMS.Service.Services.UserCartProduct
 {
     public interface IUserCartProductService
     {
-        Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model);
+        Task<ServiceResponse<IEnumerable<UserCartProductViewModel>>> GetList(IndexModel model);
         Task<ServiceResponse<UserCartProductViewModel>> AddProduct(UserCartProductPostModel model);
         Task<ServiceResponse<UserCartProductViewModel>> RemoveProduct(UserCartProductPostModel model);
 

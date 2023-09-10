@@ -36,6 +36,8 @@ namespace CMS.Service.Services.UserCartProduct
                 {
                     TblUserCartList objProduct = new TblUserCartList();
                     objProduct.ProductId = long.Parse(_security.DecryptData(model.ProductId));
+                    objProduct.SizeId = long.Parse(_security.DecryptData(model.SizeId));
+                    objProduct.Quantity = model.Quantity;
                     objProduct.UserId = _loginUserDetail.UserId.Value;
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserCartLists.AddAsync(objProduct);
@@ -84,9 +86,9 @@ namespace CMS.Service.Services.UserCartProduct
             }
         }
 
-        public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model)
+        public async Task<ServiceResponse<IEnumerable<UserCartProductViewModel>>> GetList(IndexModel model)
         {
-            ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
+            ServiceResponse<IEnumerable<UserCartProductViewModel>> objResult = new ServiceResponse<IEnumerable<UserCartProductViewModel>>();
             try
             {
                 long userId = 0;
@@ -116,47 +118,27 @@ namespace CMS.Service.Services.UserCartProduct
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
                 objResult.Data = await (from x in result
-                                        select new ProductMasterViewModel
+                                        select new UserCartProductViewModel
                                         {
-                                            Id = _security.EncryptData(x.Product.Id.ToString()),
+                                            Id = _security.EncryptData(x.Id.ToString()),
+                                            ProductId = _security.EncryptData(x.Product.Id.ToString()),
                                             Name = x.Product.Name,
                                             ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
                                             CategoryId = _security.EncryptData(x.Product.CategoryId.ToString()),
                                             Category = x.Product.Category.Name,
                                             SubCategoryId = x.Product.SubCategoryId.HasValue ? _security.EncryptData(x.Product.SubCategoryId.ToString()) : null,
                                             SubCategory = x.Product.SubCategory.Name,
-                                            CaptionTagId = x.Product.CaptionTagId.HasValue ? _security.EncryptData(x.Product.CaptionTagId.ToString()) : null,
                                             CaptionTag = x.Product.CaptionTag.Name,
-                                            ViewSectionId = x.Product.ViewSectionId.HasValue ? _security.EncryptData(x.Product.ViewSectionId.ToString()) : null,
-                                            ViewSection = x.Product.ViewSection.Name,
                                             DiscountId = x.Product.DiscountId.HasValue ? _security.EncryptData(x.Product.DiscountId.Value) : null,
                                             Discount = x.Product.Discount.Name,
-                                            OccasionId = x.Product.OccasionId.HasValue ? _security.EncryptData(x.Product.OccasionId.Value) : null,
-                                            Occasion = x.Product.Occasion.Name,
-                                            FabricId = x.Product.FabricId.HasValue ? _security.EncryptData(x.Product.FabricId.Value) : null,
-                                            Fabric = x.Product.Fabric.Name,
-                                            LengthId = x.Product.LengthId.HasValue ? _security.EncryptData(x.Product.LengthId.Value) : null,
-                                            Length = x.Product.Length.Name,
-                                            ColorId = x.Product.ColorId.HasValue ? _security.EncryptData(x.Product.ColorId.Value) : null,
-                                            Color = x.Product.Color.Name,
-                                            PatternId = x.Product.PatternId.HasValue ? _security.EncryptData(x.Product.PatternId.Value) : null,
-                                            Pattern = x.Product.Pattern.Name,
                                             UniqueId = x.Product.UniqueId,
-                                            Desc = x.Product.Desc,
-                                            Summary = x.Product.Desc,
                                             Price = x.Product.Price,
                                             SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
+                                            Quantity = x.Quantity,
+                                            SizeId = _security.EncryptData(x.SizeId),
+                                            Size = x.Size.Name,
+                                            AddedOn = x.AddedOn
 
-                                            MetaTitle = x.Product.MetaTitle,
-                                            MetaDesc = x.Product.MetaDesc,
-                                            CreatedBy = x.Product.CreatedBy,
-                                            CreatedOn = x.Product.CreatedOn,
-                                            ModifiedBy = x.Product.ModifiedBy,
-                                            ModifiedOn = x.Product.ModifiedOn,
-                                            IsActive = x.Product.IsActive.Value,
-                                            IsDelete = x.Product.IsDelete,
-                                            Keyword = x.Product.Keyword,
-                                            IsWhishList = true
                                         }).ToListAsync();
 
 
@@ -164,11 +146,11 @@ namespace CMS.Service.Services.UserCartProduct
                 if (result != null)
                 {
 
-                    return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data as IEnumerable<UserCartProductViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<IEnumerable<UserCartProductViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
             catch (Exception ex)
