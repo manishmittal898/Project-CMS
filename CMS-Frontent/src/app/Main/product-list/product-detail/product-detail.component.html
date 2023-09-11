@@ -15,8 +15,6 @@
 
 <!-- Breadcrum End -->
 
-<div id='lens'></div>
-<div id='result'></div>
 
 <!-- Product Details Start -->
 <Section class="product-details py-4">
@@ -29,10 +27,10 @@
           <div id="main-p-slider" [ngClass]="'product-d-main-slider'">
 
             <div class="product-d-main-slider-items" *ngIf="model?.ImagePath">
-              <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'" class="slideshow-items">
+              <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
             </div>
             <div class="product-d-main-slider-items" *ngFor="let item of model?.Files; let i=index">
-              <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'" class="slideshow-items">
+              <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
             </div>
 
           </div>
