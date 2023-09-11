@@ -8,11 +8,11 @@ import { IndexModel, ApiResponse } from '../../Helper/Common';
 import { SecurityService } from '../Core/security.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class CartProductService {
 
-  cartProductItem: any[] = [];
+  cartProductItem: CartProductPostModel[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
     this.cartProductItem = this._securityService.checkLocalStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
   }
@@ -32,54 +32,36 @@ export class CartProductService {
     return this._baseService.post(url, model);
   }
 
-  public async SetCartProduct(product: ProductMasterViewModel) {
-    let model = { ProductId: product.Id } as CartProductPostModel;
+  public async SetCartProduct(product: CartProductPostModel) {
+  //  let model = { ProductId: product.Id } as CartProductPostModel;
     if (this._auth.IsAuthentication.value) {
-      if (product.IsWhishList) {
-        this.RemoveProduct(model).subscribe(x => {
-          if (x.IsSuccess) {
-            product.IsWhishList = !product.IsWhishList;
-            this._toasterService.success(x.Message as string, 'Success');
-            this.cartProductItem.splice(this.cartProductItem.indexOf(product.Id), 1);
 
-          } else {
-            this._toasterService.error(x.Message as string, 'Faild');
-          }
-          let data = JSON.stringify(this.cartProductItem);
-          this._securityService.setStorage('wishlist', data);
-          return x;
-        }, error => {
-          this._toasterService.error(error.message as string, 'Failed');
-        })
-      } else {
-        this.AddProduct(model).subscribe(x => {
+        this.AddProduct(product).subscribe(x => {
           if (x.IsSuccess) {
-            product.IsWhishList = !product.IsWhishList;
-            this.cartProductItem.push(product.Id);
+            this.cartProductItem.push(product);
             this._toasterService.success(x.Message as string, 'Success');
           }
           else {
             this._toasterService.error(x.Message as string, 'Faild');
           }
           let data = JSON.stringify(this.cartProductItem);
-          this._securityService.setStorage('wishlist', data);
+          this._securityService.setStorage('cart-product', data);
           return x;
         },
           error => {
             this._toasterService.error(error.message as string, 'Failed');
           })
-      }
+
     } else {
-      if (this.cartProductItem.indexOf(product.Id) == -1) {
-        this.cartProductItem.push(product.Id);
+      if (this.cartProductItem.findIndex(x => x.ProductId == product.ProductId) == -1) {
+        this.cartProductItem.push(product);
         this._toasterService.success("Added Successfully" as string, 'Success');
       } else {
-        this.cartProductItem.splice(this.cartProductItem.indexOf(product.Id), 1);
+        this.cartProductItem.splice(this.cartProductItem.findIndex(x => x.ProductId == product.ProductId), 1);
         this._toasterService.success("Removed successfully" as string, 'Success');
       }
       let data = JSON.stringify(this.cartProductItem);
       this._securityService.setStorage('cart-product', data);
-      product.IsWhishList = !product.IsWhishList;
     }
   }
 
@@ -87,7 +69,7 @@ export class CartProductService {
   public async syncCartProduct() {
     let sub = [] as any[];
     this.cartProductItem.forEach(x => {
-      sub.push(this.AddProduct({ ProductId: x }))
+      sub.push(this.AddProduct({ ProductId: x.ProductId, SizeId: x.SizeId, Quantity: x.Quantity }))
     })
     forkJoin(sub).subscribe(res => {
       this.cartProductItem = [];
@@ -101,10 +83,17 @@ export class CartProductService {
 export interface CartProductViewModel {
   Id: string;
   ProductId: string;
+  SizeId: string;
+  Size: string;
+  Quantity: number;
   AddedOn: string;
   Product: ProductMasterViewModel;
 }
 
 export interface CartProductPostModel {
   ProductId: string;
+  SizeId: string;
+  Quantity: number;
+
+
 }

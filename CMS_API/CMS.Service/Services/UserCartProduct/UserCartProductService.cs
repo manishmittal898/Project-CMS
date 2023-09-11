@@ -38,6 +38,7 @@ namespace CMS.Service.Services.UserCartProduct
                     objProduct.ProductId = long.Parse(_security.DecryptData(model.ProductId));
                     objProduct.SizeId = long.Parse(_security.DecryptData(model.SizeId));
                     objProduct.Quantity = model.Quantity;
+
                     objProduct.UserId = _loginUserDetail.UserId.Value;
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserCartLists.AddAsync(objProduct);
@@ -121,24 +122,44 @@ namespace CMS.Service.Services.UserCartProduct
                                         select new UserCartProductViewModel
                                         {
                                             Id = _security.EncryptData(x.Id.ToString()),
-                                            ProductId = _security.EncryptData(x.Product.Id.ToString()),
-                                            Name = x.Product.Name,
-                                            ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
-                                            CategoryId = _security.EncryptData(x.Product.CategoryId.ToString()),
-                                            Category = x.Product.Category.Name,
-                                            SubCategoryId = x.Product.SubCategoryId.HasValue ? _security.EncryptData(x.Product.SubCategoryId.ToString()) : null,
-                                            SubCategory = x.Product.SubCategory.Name,
-                                            CaptionTag = x.Product.CaptionTag.Name,
-                                            DiscountId = x.Product.DiscountId.HasValue ? _security.EncryptData(x.Product.DiscountId.Value) : null,
-                                            Discount = x.Product.Discount.Name,
-                                            UniqueId = x.Product.UniqueId,
-                                            Price = x.Product.Price,
-                                            SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
-                                            Quantity = x.Quantity,
+                                            ProductId = _security.EncryptData(x.ProductId),
                                             SizeId = _security.EncryptData(x.SizeId),
                                             Size = x.Size.Name,
-                                            AddedOn = x.AddedOn
+                                            Quantity = x.Quantity,
+                                            AddedOn = x.AddedOn,
+                                            Product = new ProductMasterViewModel
+                                            {
+                                                Id = _security.EncryptData(x.Product.Id.ToString()),
+                                                Name = x.Product.Name,
+                                                ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
+                                                CategoryId = _security.EncryptData(x.Product.CategoryId.ToString()),
+                                                Category = x.Product.Category.Name,
+                                                SubCategoryId = x.Product.SubCategoryId.HasValue ? _security.EncryptData(x.Product.SubCategoryId.ToString()) : null,
+                                                SubCategory = x.Product.SubCategory.Name,
+                                                CaptionTagId = x.Product.CaptionTagId.HasValue ? _security.EncryptData(x.Product.CaptionTagId.ToString()) : null,
+                                                CaptionTag = x.Product.CaptionTag.Name,
+                                                ViewSectionId = x.Product.ViewSectionId.HasValue ? _security.EncryptData(x.Product.ViewSectionId.ToString()) : null,
+                                                ViewSection = x.Product.ViewSection.Name,
+                                                DiscountId = x.Product.DiscountId.HasValue ? _security.EncryptData(x.Product.DiscountId.Value) : null,
+                                                Discount = x.Product.Discount.Name,
+                                                OccasionId = x.Product.OccasionId.HasValue ? _security.EncryptData(x.Product.OccasionId.Value) : null,
+                                                Occasion = x.Product.Occasion.Name,
+                                                FabricId = x.Product.FabricId.HasValue ? _security.EncryptData(x.Product.FabricId.Value) : null,
+                                                Fabric = x.Product.Fabric.Name,
+                                                LengthId = x.Product.LengthId.HasValue ? _security.EncryptData(x.Product.LengthId.Value) : null,
+                                                Length = x.Product.Length.Name,
+                                                ColorId = x.Product.ColorId.HasValue ? _security.EncryptData(x.Product.ColorId.Value) : null,
+                                                Color = x.Product.Color.Name,
+                                                PatternId = x.Product.PatternId.HasValue ? _security.EncryptData(x.Product.PatternId.Value) : null,
+                                                Pattern = x.Product.Pattern.Name,
+                                                UniqueId = x.Product.UniqueId,
+                                                Desc = x.Product.Desc,
+                                                Summary = x.Product.Desc,
+                                                Price = x.Product.Price,
+                                                SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
 
+
+                                            }
                                         }).ToListAsync();
 
 

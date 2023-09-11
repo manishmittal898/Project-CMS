@@ -13,21 +13,8 @@ namespace CMS.Service.Services.UserCartProduct
         public string Size { get; set; }
 
         public long Quantity { get; set; }
-        public string Name { get; set; }
-        public string ImagePath { get; set; }
-        public string CategoryId { get; set; }
-        public string SubCategoryId { get; set; }
-
-        public decimal? Price { get; set; }
-        public decimal? SellingPrice { get; set; }
-
-        public string DiscountId { get; set; }
-        public string Discount { get; set; }
-        public string UniqueId { get; set; }
-        public string CaptionTag { get; set; }
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
         public DateTime AddedOn { get; set; }
+        public ProductMasterViewModel Product { get; set; }
 
     }
 
