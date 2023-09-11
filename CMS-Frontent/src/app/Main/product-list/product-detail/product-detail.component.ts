@@ -7,6 +7,7 @@ import { ProductMasterViewModel, ProductStockModel, ProductService } from "src/a
 import { WishListService, WishListPostModel } from "src/app/Shared/Services/ProductService/wish-list.service";
 import { AuthService } from "src/app/Shared/Services/UserService/auth.service";
 import { environment } from "src/environments/environment";
+import { CartProductPostModel, CartProductService } from '../../../Shared/Services/ProductService/cart-product.service';
 
 declare var $: any;
 @Component({
@@ -29,12 +30,12 @@ export class ProductDetailComponent implements OnInit {
   }
   SelectedSizeModel: ProductStockModel;
   get DiscountValue() {
-    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100))?.toString()+'%';
+    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price) / this.model?.Price) * 100))?.toString() + '%';
 
-   }
+  }
   shareLink: SafeUrl;
   constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute,
-    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService,
+    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService, private readonly _cartService: CartProductService,
     private readonly _wishListService: WishListService, private _toasterService: ToastrService, private _auth: AuthService) {
   }
 
@@ -101,19 +102,19 @@ export class ProductDetailComponent implements OnInit {
         focusOnSelect: true,
         responsive: [
           {
-          breakpoint: 1400,
-          settings: {
-            slidesToShow: 6,
-          }
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 5,
-            arrows: false,
-          }
-        },
-      ]
+            breakpoint: 1400,
+            settings: {
+              slidesToShow: 6,
+            }
+          },
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 5,
+              arrows: false,
+            }
+          },
+        ]
       });
     }, 500);
 
@@ -130,6 +131,15 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  onAddtoCart() {
+    this.loading.AddToCart = true;
+    this._cartService.SetCartProduct({ ProductId: this.model.Id, SizeId: this.SelectedSizeModel.SizeId, Quantity: 1 } as CartProductPostModel).then(() => {
+      setTimeout(() => {
+        this.loading.AddToCart = false;
+      }, 1000);
+    });
+
+  }
 
 }
 export class Loading {

@@ -27,7 +27,6 @@ export class ProductFilterComponent implements OnInit {
   }
 
   GetDropDown() {
-    debugger
     if (this._security.checkLocalStorage('product-filters', true)) {
       let ddls = JSON.parse(this._security.getStorage('product-filters', true));
       this.bindDropdowns(ddls);

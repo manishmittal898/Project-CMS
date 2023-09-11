@@ -28,7 +28,7 @@ export class ProductSectionComponent implements OnInit {
     if (this._securityService.checkLocalStorage('ddlProductViewSection')) {
       this.dropDown.ddlProductViewSection = JSON.parse(this._securityService.getStorage('ddlProductViewSection'));
       this.loadProductSection();
-      if (sessionStorage.getItem("isProductViewSection") == undefined) {
+      if (this._securityService.getStorage("isProductViewSection", true) == undefined) {
         getProductSection();
       }
     } else {
@@ -40,7 +40,7 @@ export class ProductSectionComponent implements OnInit {
       let serve = that._commonService.GetDropDown([DropDown_key.ddlProductViewSection], true).subscribe(res => {
         serve.unsubscribe();
         if (res.IsSuccess) {
-          sessionStorage.setItem("isProductViewSection", "true");
+          that._securityService.setStorage("isProductViewSection", "true", true);
           const ddls = res?.Data as DropDownModel;
           that.dropDown.ddlProductViewSection = ddls?.ddlProductViewSection;
           that._securityService.setStorage('ddlProductViewSection', JSON.stringify(that.dropDown.ddlProductViewSection));
@@ -60,10 +60,10 @@ export class ProductSectionComponent implements OnInit {
           this.model[itm.Value.toString()] = data[itm.Value]['Data']
         }
       })
-    //  setTimeout(() => {
-        this.AddSlider();
-    //  }, 100);
-      if (sessionStorage.getItem("isLoadedProductSectionData") == undefined) {
+      //  setTimeout(() => {
+      this.AddSlider();
+      //  }, 100);
+      if (this._securityService.getStorage("isLoadedProductSectionData", true) == undefined) {
         getProductSectionData();
       }
     }
@@ -81,7 +81,7 @@ export class ProductSectionComponent implements OnInit {
       });
       forkJoin(that.Subscription).subscribe((res) => {
         that._securityService.setStorage('loadProductSection', JSON.stringify(res));
-        sessionStorage.setItem("isLoadedProductSectionData", "true");
+        that._securityService.setStorage("isLoadedProductSectionData", "true", true);
         that.dropDown.ddlProductViewSection.forEach(itm => {
           if (res[itm.Value]['IsSuccess']) {
             that.model[itm.Value.toString()] = res[itm.Value]['Data'];

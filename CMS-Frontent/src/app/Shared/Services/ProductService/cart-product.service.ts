@@ -33,33 +33,42 @@ export class CartProductService {
   }
 
   public async SetCartProduct(product: CartProductPostModel) {
-  //  let model = { ProductId: product.Id } as CartProductPostModel;
+    //  let model = { ProductId: product.Id } as CartProductPostModel;
+    debugger
+    var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
+    if (indx >= 0) {
+      product = Object.assign([], this.cartProductItem[indx]);
+      product.Quantity++;
+    }
     if (this._auth.IsAuthentication.value) {
 
-        this.AddProduct(product).subscribe(x => {
-          if (x.IsSuccess) {
+      this.AddProduct(product).subscribe(x => {
+        if (x.IsSuccess) {
+          if (indx >= 0) {
+            this.cartProductItem[indx] = product;
+          } else {
             this.cartProductItem.push(product);
-            this._toasterService.success(x.Message as string, 'Success');
           }
-          else {
-            this._toasterService.error(x.Message as string, 'Faild');
-          }
-          let data = JSON.stringify(this.cartProductItem);
-          this._securityService.setStorage('cart-product', data);
-          return x;
-        },
-          error => {
-            this._toasterService.error(error.message as string, 'Failed');
-          })
+          this._toasterService.success(x.Message as string, 'Success');
+        }
+        else {
+          this._toasterService.error(x.Message as string, 'Faild');
+        }
+        let data = JSON.stringify(this.cartProductItem);
+        this._securityService.setStorage('cart-product', data);
+        return x;
+      },
+        error => {
+          this._toasterService.error(error.message as string, 'Failed');
+        })
 
     } else {
-      if (this.cartProductItem.findIndex(x => x.ProductId == product.ProductId) == -1) {
-        this.cartProductItem.push(product);
-        this._toasterService.success("Added Successfully" as string, 'Success');
+      if (indx >= 0) {
+        this.cartProductItem[indx] = product;
       } else {
-        this.cartProductItem.splice(this.cartProductItem.findIndex(x => x.ProductId == product.ProductId), 1);
-        this._toasterService.success("Removed successfully" as string, 'Success');
+        this.cartProductItem.push(product);
       }
+      this._toasterService.success("Added Successfully" as string, 'Success');
       let data = JSON.stringify(this.cartProductItem);
       this._securityService.setStorage('cart-product', data);
     }
@@ -69,7 +78,7 @@ export class CartProductService {
   public async syncCartProduct() {
     let sub = [] as any[];
     this.cartProductItem.forEach(x => {
-      sub.push(this.AddProduct({ ProductId: x.ProductId, SizeId: x.SizeId, Quantity: x.Quantity }))
+      sub.push(this.AddProduct(x))
     })
     forkJoin(sub).subscribe(res => {
       this.cartProductItem = [];
