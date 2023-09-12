@@ -30,7 +30,7 @@
                         <div class="invalid-feedback" *ngIf="(formgrp.get('ImagePath')?.hasError('required') && formgrp.get('ImagePath')?.touched)">
                             Please Add Photo </div>
 
-                        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id>0">
+                        <ng-container *ngIf="model.ImagePath && !isFileAttached  && model.Id.length">
 
                             <div class="dropzone dropzone-light file-upload-details">
                                 <div class="dz-details">

@@ -38,8 +38,7 @@ export class LookupsAddEditComponent implements OnInit {
     this._lookupTypeService.GetLookupTypeMaster(this.data.Type).subscribe(x => {
 
       if (x.IsSuccess) {
-        debugger
-
+        
       }
     })
   }

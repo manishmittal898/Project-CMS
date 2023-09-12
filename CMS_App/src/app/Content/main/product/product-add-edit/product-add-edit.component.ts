@@ -233,16 +233,11 @@ export class ProductAddEditComponent implements OnInit {
     });
   }
   getDiscountValue(price: any = 0) {
-    debugger
-    var k = this.model.DiscountId ?? 0
-    if (this.dropDown.ddlProductDiscount) {
-
+    if (this.dropDown?.ddlProductDiscount && this.model?.DiscountId.length > 0) {
       let Value = this.dropDown.ddlProductDiscount.find(x => x.Value == (this.model?.DiscountId ?? 0));
       return Math.round(price - (price * Value?.DataValue / 100))
-
-    } else {
-
     }
+    return price;
   }
 
 

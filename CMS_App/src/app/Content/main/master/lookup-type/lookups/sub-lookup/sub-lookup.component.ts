@@ -61,7 +61,7 @@ export class SubLookupComponent implements OnInit {
         this.model = response.Data as SubLookupMasterViewModel[];
         this.dataSource = new MatTableDataSource<SubLookupMasterViewModel>(this.model);
         this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord : 0) as number;
-          if (!this.indexModel.IsPostBack) {
+        if (!this.indexModel.IsPostBack) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
@@ -93,7 +93,7 @@ export class SubLookupComponent implements OnInit {
     this.getList();
   }
 
-  OnActiveStatus(Id: number) {
+  OnActiveStatus(Id: string) {
     this._commonService.Question(Message.ConfirmUpdate as string).then(isTrue => {
       if (isTrue) {
         let subscription = this._sublookupService.ChangeLookupMasterActiveStatus(Id).subscribe(
@@ -115,7 +115,7 @@ export class SubLookupComponent implements OnInit {
 
   }
 
-  updateDeleteStatus(id: number) {
+  updateDeleteStatus(id: string) {
 
     this._commonService.Question(Message.ConfirmUpdate as string).then(result => {
       if (result) {
@@ -139,9 +139,9 @@ export class SubLookupComponent implements OnInit {
     });
   }
 
-  onAddUpdateLookup(Id: number) {
+  onAddUpdateLookup(Id: string) {
     const dialogRef = this.dialog.open(SubLookupAddEditComponent, {
-      data: { Id: Id as number, Type: this.id, Heading: `${Id > 0 ? 'Update ' : 'Add '} ${this.pageName.SubName} category` },
+      data: { Id: Id, Type: this.id, Heading: `${Id.length > 0 ? 'Update ' : 'Add '} ${this.pageName.SubName} category` },
       width: '500px',
       panelClass: 'mat-custom-modal'
     });

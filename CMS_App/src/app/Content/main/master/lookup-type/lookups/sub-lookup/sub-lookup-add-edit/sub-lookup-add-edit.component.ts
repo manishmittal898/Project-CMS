@@ -14,8 +14,6 @@ import { SubLookupMasterPostModel, SubLookupService } from "src/app/Shared/Servi
   styleUrls: ['./sub-lookup-add-edit.component.scss']
 })
 export class SubLookupAddEditComponent implements OnInit {
-
-
   model = {} as SubLookupMasterPostModel;
   isFileAttached=false;
   formgrp = this.fb.group({
@@ -28,10 +26,10 @@ export class SubLookupAddEditComponent implements OnInit {
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' }
   constructor(public dialogRef: MatDialogRef<SubLookupAddEditComponent>, private readonly _lookupService: SubLookupService,
     private readonly fb: FormBuilder, public _commonService: CommonService, private readonly toast: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: { Id: number, Type: number, Heading: string }) { }
+    @Inject(MAT_DIALOG_DATA) public data: { Id: string, Type: string, Heading: string }) { }
 
   ngOnInit(): void {
-    if (this.data.Id > 0) {
+    if (this.data.Id.length > 0) {
       this.getDetail();
     }
   }
@@ -42,7 +40,7 @@ export class SubLookupAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this.model.LookUpId = Number(this.data.Type);
+      this.model.LookUpId = this.data.Type;
       this.model.Id = this.data.Id;
       this.model.SortedOrder= Number(this.model.SortedOrder),
       this._lookupService.AddUpdateLookupMaster(this.model).subscribe(x => {
@@ -71,7 +69,7 @@ export class SubLookupAddEditComponent implements OnInit {
           Name: x.Data?.Name,
           ImagePath: x.Data?.ImagePath,
           SortedOrder: Number(x.Data?.SortedOrder),
-          LookUpId: Number(x.Data?.LookUpId),
+          LookUpId: x.Data?.LookUpId,
         } as SubLookupMasterPostModel;
 
         this.isFileAttached=this.model.ImagePath?false:this.isFileAttached;

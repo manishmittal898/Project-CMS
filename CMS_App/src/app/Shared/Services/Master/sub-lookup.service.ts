@@ -13,7 +13,7 @@ export class SubLookupService {
     return this._baseService.post(url, model);
   }
 
-  GetLookupMaster(id: number): Observable<ApiResponse<SubLookupMasterViewModel>> {
+  GetLookupMaster(id: string): Observable<ApiResponse<SubLookupMasterViewModel>> {
     let url = `${this._baseService.API_Url.SubLookupMasterDetail_Api}${id}`;
     return this._baseService.get(url);
   }
@@ -22,34 +22,30 @@ export class SubLookupService {
     let url = `${this._baseService.API_Url.SubLookupMasterAddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
-  ChangeLookupMasterActiveStatus(id: number, status?: string): Observable<ApiResponse<SubLookupMasterViewModel[]>> {
+  ChangeLookupMasterActiveStatus(id: string, status?: string): Observable<ApiResponse<SubLookupMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.SubLookupMasterChangeActiveStatus_Api}${id}`;
     return this._baseService.get(url);
   }
-  DeleteLookupMaster(id: number): Observable<ApiResponse<SubLookupMasterViewModel[]>> {
+  DeleteLookupMaster(id: string): Observable<ApiResponse<SubLookupMasterViewModel[]>> {
     let url = `${this._baseService.API_Url.SubLookupMasterDelete_Api}${id}/${status}`;
     return this._baseService.get(url);
   }
 }
 export interface SubLookupMasterPostModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   SortedOrder: number | null;
-  LookUpId: number;
+  LookUpId: string;
 }
 
 export interface SubLookupMasterViewModel {
-  Id: number;
+  Id: string;
   Name: string;
   ImagePath: string;
   SortedOrder: number | null;
-  LookUpId: number;
+  LookUpId: string;
   LookUpName: string;
-  CreatedOn: string;
-  CreatedBy: number | null;
-  ModifiedOn: string;
-  ModifiedBy: number | null;
   IsActive: boolean | null;
   IsDeleted: boolean;
 }
