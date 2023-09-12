@@ -8,7 +8,8 @@
         line-height: 40px;
     }
     li.nav-item.dropdown {
-        position: static;
+        /* position: static; */
+        position: relative;
     }
     ul.dropdown-menu.megamenu {
         width: 100%;

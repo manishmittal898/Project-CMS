@@ -1671,3 +1671,30 @@ fieldset legend {
 .prolist-price {
   line-height: 16px;
 }
+.dashboard-card-items:hover {
+  color: #3936a9;
+  box-shadow: 0 4px 6px #c6cded;
+}
+.dashboard-card-items {
+  background: #fff;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px #d9dff7;
+  color: #3936a9;
+}
+.dashboard-card-items .dashboard-card-items-icon {
+  font-size: 45px;
+  width: 45px;
+  margin-right: 10px;
+  line-height: 0;
+}
+.dashboard-card-items .dashboard-card-items-info {
+  flex: auto;
+}
+.dashboard-card-items .dashboard-card-items-info h1 {
+  font-size: 40px;
+  font-weight: 700;
+}
+.dashboard-card-items .dashboard-card-items-info p {
+  font-size: 15px;
+}
