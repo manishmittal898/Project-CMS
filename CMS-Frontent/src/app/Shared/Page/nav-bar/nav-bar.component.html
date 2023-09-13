@@ -17,15 +17,15 @@
             <span>Bootstrap V5</span>
           </a> -->
           <div class="navbar-user-icons d-flex align-items-center">
-            <a href="javascript:void()" data-title="Search" data-bs-toggle="offcanvas" data-bs-target="#GlobalSearch"><i
-                class="bi bi-search"></i></a>
+            <a href="javascript:void()" data-title="Search" data-bs-toggle="offcanvas" data-bs-target="#GlobalSearch">
+              <i class="fa-light fa-magnifying-glass"></i>
+            </a>
 
             <a *ngIf="!isLoggedIn;else autherized" [routerLink]="['/login']" href="javascript:void()"
-              data-title="Account"><i class="bi bi-person-circle"></i></a>
+              data-title="Account"><i class="fa-light fa-user"></i></a>
 
 
-            <a *ngIf="!isLoggedIn" [routerLink]="['/user/wishlist']" href="javascript:void()" data-title="Wishlist"><i
-                class="bi bi-heart"></i></a>
+            <a *ngIf="!isLoggedIn" [routerLink]="['/user/wishlist']" href="javascript:void()" data-title="Wishlist"><i class="fa-light fa-heart"></i></a>
 
             <!-- <ng-template #autherized>
               <a [routerLink]="['/user/profile']" href="javascript:void()" data-title="Profile"><i class="bi bi-box-arrow-left"></i></a>
@@ -61,7 +61,7 @@
             </ng-template>
 
             <a href="javascript:void()" data-title="Cart" data-bs-toggle="offcanvas" data-bs-target="#CartSideBar"><i
-                class="bi bi-cart3"></i>
+                class="fa-light fa-cart-shopping"></i>
               <div class="Cart-count">0</div>
             </a>
           </div>
@@ -85,7 +85,9 @@
               <a class="d-block d-lg-none mobile-nav-close" href="javascript:void()" data-bs-toggle="collapse"
                 data-bs-target="#MenuNavbar"> <i class="bi bi-x"></i></a>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()" routerLink="/home"
-                  routerLinkActive="active"> <i class="bi bi-house-door"></i> </a>
+                  routerLinkActive="active">
+                  <i class="fa-regular fa-house" style="font-size: 18px;"></i>
+                 </a>
               </li>
               <li class="nav-item"> <a class="nav-link" aria-current="page" href="javascript:void()" routerLink="/store"
                   routerLinkActive="active"> Store </a> </li>
@@ -333,7 +335,7 @@
         [routerLink]="['/design/checkout']"><i class="fa-light fa-credit-card me-1"></i>
         checkout</button>
       <button data-bs-dismiss="offcanvas" aria-label="Close" type="button" [routerLink]="['/design/cart']"
-        class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="bi bi-eye me-1"></i>
+        class="btn btn-default btn-border px-1 text-uppercase ms-3"><i class="fa-light fa-cart-shopping me-1"></i>
         Shopping Bag</button>
     </div>
   </div>
