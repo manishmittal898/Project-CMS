@@ -3,6 +3,7 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using CMS.Service.Services.OTP;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +22,11 @@ namespace CMS.Service.Services.Account
     {
 
         DB_CMSContext _db;
-        public AccountService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
+        IOTPService _otpService;
+        public AccountService(DB_CMSContext db, IConfiguration _configuration, IOTPService otpService) : base(_configuration)
         {
             _db = db;
+            _otpService = otpService;
         }
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
         {
@@ -31,8 +34,9 @@ namespace CMS.Service.Services.Account
             LoginResponseModel response = new LoginResponseModel();
             try
             {
-           
+
                 var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email.Trim()) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                _otpService.GenerateOTP(user.Email);
 
                 if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
@@ -49,7 +53,7 @@ namespace CMS.Service.Services.Account
 
                     await SaveUserLog(user.UserId, response);
                 }
-                else if (user!=null&&!user.Password.Equals(model.Password))
+                else if (user != null && !user.Password.Equals(model.Password))
                 {
                     return CreateResponse<LoginResponseModel>(null, "Incorrect Username or Password...", false, ((int)ApiStatusCode.RecordNotFound));
 
@@ -63,7 +67,6 @@ namespace CMS.Service.Services.Account
                 {
                     return CreateResponse<LoginResponseModel>(null, "You have not register with us,Please Signup", false, ((int)ApiStatusCode.RecordNotFound));
                 }
-
                 return CreateResponse<LoginResponseModel>(response, "Login Successful", true, ((int)ApiStatusCode.Ok));
             }
             catch (Exception ex)
@@ -192,5 +195,8 @@ namespace CMS.Service.Services.Account
 
             }
         }
+
+
+
     }
 }

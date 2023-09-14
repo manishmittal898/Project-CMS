@@ -10,6 +10,7 @@ using CMS.Service.Services.CustomerAddress;
 using CMS.Service.Services.GeneralEntry;
 using CMS.Service.Services.LookupMaster;
 using CMS.Service.Services.LookupTypeMaster;
+using CMS.Service.Services.OTP;
 using CMS.Service.Services.ProductMaster;
 using CMS.Service.Services.ProductReview;
 using CMS.Service.Services.RoleType;
@@ -51,6 +52,7 @@ namespace CMS.API
         {
 
             services.AddControllers();
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
@@ -175,6 +177,8 @@ namespace CMS.API
             services.AddScoped<ICustomerAddressService, CustomerAddressService>();
             services.AddScoped<IWishListService, WishListService>();
             services.AddScoped<IUserCartProductService, UserCartProductService>();
+            services.AddScoped<IOTPService, OTPService>();
+            services.AddTransient<EmailHelper>();
 
             services.AddScoped<ICacheService, CacheService>();
 
