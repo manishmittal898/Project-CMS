@@ -40,12 +40,12 @@ export class NavBarComponent implements OnInit {
 
   GetDropDown() {
     let itms = [];
-    if (this.menuModel.length == 0) {
+    // if (this.menuModel.length == 0) {
       itms.push(DropDown_key.ddlLookupGroup)
-    }
-    if (this.cmsPageMenu.length == 0) {
+    // }
+    // if (this.cmsPageMenu.length == 0) {
       itms.push(DropDown_key.ddlCMSPage)
-    }
+    // }
     if (itms.length > 0) {
 
       const serve = this._commonService.GetDropDown(itms, true).subscribe(res => {
