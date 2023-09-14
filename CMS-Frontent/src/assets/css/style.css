@@ -2801,4 +2801,9 @@ body .toast-close-button {
 .product-filter .product-filterItems:last-child {
   margin: 0px !important;
 }
+.product-detail-action-btn .btn-default {
+  font-size: 20px;
+  text-transform: capitalize;
+  padding: 6px 28px;
+}
 /* CUSTOM CSS END */

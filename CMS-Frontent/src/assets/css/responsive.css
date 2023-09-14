@@ -597,8 +597,9 @@ ul.footer-benefits li {
 .login-with-social-acc button.login-with-social-acc-btn {
   font-size: 15px;
 }
-.product-detail-action-btn .btn {
-  font-size: 14px;
+.product-detail-action-btn .btn-default {
+  font-size: 16px;
+  padding: 5px 15px;
 }
 .order-summary-list-img {
   height: 78px;

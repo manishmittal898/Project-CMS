@@ -123,11 +123,11 @@
                 title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
                   [ngClass]="{'bi-heart-fill pro-detail-btn-wishlist-active':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i>
               </button>
-              <button type="button" (click)="onAddtoCart()" class="btn btn-default py-2 px-3 px-lg-5 text-uppercase"
-                [disabled]="this.loading.AddToCart" ><i class="bi me-1"
-                  [ngClass]="{'bi-cart3':!this.loading.AddToCart,'bi-hourglass-split':this.loading.AddToCart}"></i>
+              <button type="button" (click)="onAddtoCart()" class="btn btn-default"
+                [disabled]="this.loading.AddToCart" ><i class="me-1"
+                  [ngClass]="{'fa-light fa-cart-circle-plus':!this.loading.AddToCart,'bi bi-hourglass-split':this.loading.AddToCart}"></i>
                 Add to cart</button>
-              <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="bi bi-credit-card-2-front me-1"></i>
+              <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="fa-light fa-credit-card me-1"></i>
               checkout</button> -->
             </div>
           </div>

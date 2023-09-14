@@ -1683,10 +1683,11 @@ fieldset legend {
   color: #3936a9;
 }
 .dashboard-card-items .dashboard-card-items-icon {
-  font-size: 45px;
-  width: 45px;
   margin-right: 10px;
   line-height: 0;
+}
+.dashboard-card-items .dashboard-card-items-icon i {
+  font-size: 35px;
 }
 .dashboard-card-items .dashboard-card-items-info {
   flex: auto;
@@ -1694,6 +1695,7 @@ fieldset legend {
 .dashboard-card-items .dashboard-card-items-info h1 {
   font-size: 40px;
   font-weight: 700;
+  line-height: 35px;
 }
 .dashboard-card-items .dashboard-card-items-info p {
   font-size: 15px;
