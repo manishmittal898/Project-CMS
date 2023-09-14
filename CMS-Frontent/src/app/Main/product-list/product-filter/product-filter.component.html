@@ -1,19 +1,19 @@
 <div class="product-filter-sidebar">
   <a class="d-inline-flex align-items-center d-lg-none product-filter-btn text-center" data-bs-toggle="offcanvas"
     href="#Btn-Toogle1">
-    <i class="bi bi-funnel me-1"></i>
+    <i class="fa-light fa-filter-list me-1"></i>
     <span>Show Filter</span>
   </a>
   <div class="product-filter  offcanvas offcanvas-start" tabindex="-1" id="Btn-Toogle1">
     <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
-      <h6 class="offcanvas-title"><i class="bi bi-funnel me-1"></i> Filter</h6>
+      <h6 class="offcanvas-title"><i class="fa-light fa-filter-list me-1"></i> Filter</h6>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
     <!-- Filter Search Start -->
     <div class="product-filterItems product-list-search position-relative mb-3">
       <input type="search" [(ngModel)]="this.filterModel.Keyword" placeholder="Search.." class="w-100">
-      <button type="submit"><i class="bi bi-search" (click)="applyFilter()"></i></button>
+      <button type="submit"><i class="fa-light fa-magnifying-glass" (click)="applyFilter()"></i></button>
     </div>
     <!-- Filter Search End -->
 

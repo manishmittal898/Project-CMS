@@ -1452,6 +1452,7 @@ body.sidebar-open footer {
 }
 .sidebar .sidebar-item .sidebar-item-button i {
   margin-right: 8px;
+  font-size: 20px;
 }
 .sidebar .sidebar-item.menu-active .sidebar-item-button {
   background: rgba(255,255,255,0.2);

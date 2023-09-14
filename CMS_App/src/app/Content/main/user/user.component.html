@@ -11,7 +11,7 @@
       <button routerLink="../add" class="page-new-header-action-items" data-title="Add New User"> <i
           class="bi bi-plus-lg"></i></button>
       <div class="page-new-header-action-search">
-        <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="bi bi-search"></i></button>
+        <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="fa-light fa-magnifying-glass"></i></button>
         <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()" (keydown.enter)="onSearch()"
           class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search"/>
       </div>
