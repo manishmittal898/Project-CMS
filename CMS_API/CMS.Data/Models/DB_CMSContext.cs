@@ -33,6 +33,7 @@ namespace CMS.Data.Models
         public virtual DbSet<TblUserCartList> TblUserCartLists { get; set; }
         public virtual DbSet<TblUserMaster> TblUserMasters { get; set; }
         public virtual DbSet<TblUserMasterLog> TblUserMasterLogs { get; set; }
+        public virtual DbSet<TblUserOtpdatum> TblUserOtpdata { get; set; }
         public virtual DbSet<TblUserWishList> TblUserWishLists { get; set; }
         public virtual DbSet<VwProductMaster> VwProductMasters { get; set; }
 
@@ -708,6 +709,27 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblUserMasterLog_UserId");
+            });
+
+            modelBuilder.Entity<TblUserOtpdatum>(entity =>
+            {
+                entity.HasKey(e => e.SessionId)
+                    .HasName("PK__tblUserO__C9F4929058425ED0");
+
+                entity.ToTable("tblUserOTPData");
+
+                entity.Property(e => e.SessionId).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Otp)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("OTP");
+
+                entity.Property(e => e.SendOn).HasMaxLength(500);
+
+                entity.Property(e => e.SentAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<TblUserWishList>(entity =>

@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[tblUserOTPData]
+(
+	[SessionId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
+	[SendOn] NVARCHAR (500),
+	[OTP] VARCHAR(100),
+	[SentAt] Datetime  NOT NULL  DEFAULT (getdate()),
+	[Attempt] INT  NOT NULL DEFAULT 0,
+	[IsVerified] BIT NOT NULL DEFAULT 0,
+)
