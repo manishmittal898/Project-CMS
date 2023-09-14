@@ -173,6 +173,9 @@ export class ProductAddEditComponent implements OnInit {
           const ddls = x?.Data as DropDownModel;
           this.dropDown.ddlSublookup = ddls.ddlSublookup
         }
+        if (this.dropDown.ddlSublookup.findIndex(x => x.Value == this.model.SubCategoryId) ==-1){
+          this.model.SubCategoryId=undefined;
+        }
 
       });
     } else {
@@ -233,7 +236,7 @@ export class ProductAddEditComponent implements OnInit {
     });
   }
   getDiscountValue(price: any = 0) {
-    if (this.dropDown?.ddlProductDiscount && this.model?.DiscountId.length > 0) {
+    if (this.dropDown?.ddlProductDiscount && this.model?.DiscountId?.length > 0) {
       let Value = this.dropDown.ddlProductDiscount.find(x => x.Value == (this.model?.DiscountId ?? 0));
       return Math.round(price - (price * Value?.DataValue / 100))
     }

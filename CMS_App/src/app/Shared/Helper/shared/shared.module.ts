@@ -67,7 +67,6 @@ const sharedComponent = [
   ],
   imports: [
     CommonModule,
-
     commonModules,
     installedModule,
   ],
