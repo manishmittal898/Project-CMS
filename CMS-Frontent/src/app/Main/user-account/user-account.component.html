@@ -23,11 +23,11 @@
       <!-- Mobile Drawer Buttons Start -->
       <div class="mobile-drawer-btn-grp-card d-flex d-lg-none justify-content-between mb-4">
         <a class="my-account-sidebar-btn" data-bs-toggle="offcanvas" href="#OrderMenu">
-          <i class="bi bi-person-circle me-1"></i>
+          <i class="fa-light fa-user me-1"></i>
           <span> My Account</span>
         </a>
         <a class="my-account-sidebar-btn" data-bs-toggle="offcanvas" href="#PageFilter">
-          <i class="bi bi-funnel me-1"></i>
+          <i class="fa-light fa-filter-list me-1"></i>
           <span>Show Filter</span>
         </a>
       </div>
@@ -36,19 +36,19 @@
       <div *ngIf="isAuth" class="col-md-12 col-lg-4 col-xl-3 pe-4">
         <div class="my-account-sidebar offcanvas offcanvas-start" tabindex="-1" id="OrderMenu">
           <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
-            <h6 class="offcanvas-title"><i class="bi bi-person-circle me-1"></i>My Account</h6>
+            <h6 class="offcanvas-title"><i class="fa-light fa-user me-1"></i>My Account</h6>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <ul>
             <li> <a (click)="pageName='My Profile'" routerLink="./profile" routerLinkActive="active"
-                href="javascript:void(0)"><i class="bi bi-person-circle me-2"></i>Profile</a> </li>
+                href="javascript:void(0)"><i class="fa-light fa-user me-2"></i>Profile</a> </li>
             <li> <a (click)="pageName='My Orders'" routerLink="./orders" routerLinkActive="active"
-                href="javascript:void(0)"><i class="bi bi-handbag me-2"></i>Orders</a> </li>
+                href="javascript:void(0)"><i class="fa-light fa-bag-shopping me-2"></i>Orders</a> </li>
             <li> <a (click)="pageName='My Address'" routerLink="./address" routerLinkActive="active"
-                href="javascript:void(0)"><i class="bi bi-geo-alt me-2"></i>Address</a> </li>
+                href="javascript:void(0)"><i class="fa-light fa-location-dot  me-2"></i>Address</a> </li>
             <li> <a (click)="pageName='My Wishlist'" routerLink="./wishlist" routerLinkActive="active"
                 href="javascript:void()"><i class="fa-light fa-heart me-2"></i>Wishlist</a> </li>
-            <li> <a href="javascript:void()" (click)=" logout()"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+            <li> <a href="javascript:void()" (click)=" logout()"><i class="fa-light fa-right-from-bracket me-2"></i>Logout</a>
             </li>
           </ul>
         </div>

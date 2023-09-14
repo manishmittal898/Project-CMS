@@ -37,7 +37,7 @@
               <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <i class="bi bi-person-circle d-block d-sm-none"></i>
+                  <i class="fa-light fa-user d-block d-sm-none"></i>
                   <span class="login-user-name d-none d-sm-flex align-items-center">
                     <div class="user-img d-flex align-items-center justify-content-center me-2"><img
                         [src]="_authService.GetUserDetail()?.ProfilePhoto" onerror="this.src='assets/images/avatar.png'"
@@ -47,15 +47,15 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" routerLink="./user/profile" href="javascript:void(0)"><i
-                        class="bi bi-person-circle me-2"></i> Profile</a></li>
+                        class="fa-light fa-user me-2"></i> Profile</a></li>
                   <li><a class="dropdown-item" routerLink="./user/orders" href="javascript:void(0)"><i
-                        class="bi bi-handbag me-2"></i> My Orders</a></li>
+                        class="fa-light fa-bag-shopping me-2"></i> My Orders</a></li>
                   <li><a class="dropdown-item" routerLink="./user/address" href="javascript:void(0)"><i
-                        class="bi bi-geo-alt me-2"></i> Address</a></li>
+                        class="fa-light fa-location-dot  me-2"></i> Address</a></li>
                   <li><a class="dropdown-item" routerLink="./user/wishlist" href="javascript:void(0)"><i
-                        class="bi bi-heart me-2"></i> Wishlist</a></li>
+                        class="fa-light fa-heart me-2"></i> Wishlist</a></li>
                   <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i
-                        class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                        class="fa-light fa-right-from-bracket me-2"></i> Logout</a></li>
                 </ul>
               </div>
             </ng-template>
@@ -164,7 +164,7 @@
       <div class="col-lg-12">
         <div class="global-search-bar position-relative d-flex mb-2">
           <input type="text" class="form-control global-search-control" placeholder="WHAT ARE YOU LOOKING FOR?" />
-          <button type="submit"><i class="bi bi-search"></i></button>
+          <button type="submit"><i class="fa-light fa-magnifying-glass"></i></button>
         </div>
       </div>
     </div>
