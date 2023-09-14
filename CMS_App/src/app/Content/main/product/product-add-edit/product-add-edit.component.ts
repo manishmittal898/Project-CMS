@@ -173,8 +173,8 @@ export class ProductAddEditComponent implements OnInit {
           const ddls = x?.Data as DropDownModel;
           this.dropDown.ddlSublookup = ddls.ddlSublookup
         }
-        if (this.dropDown.ddlSublookup.findIndex(x => x.Value == this.model.SubCategoryId) ==-1){
-          this.model.SubCategoryId=undefined;
+        if (this.dropDown.ddlSublookup.findIndex(x => x.Value == this.model.SubCategoryId) == -1) {
+          this.model.SubCategoryId = undefined;
         }
 
       });
@@ -247,7 +247,7 @@ export class ProductAddEditComponent implements OnInit {
   onAddStock() {
     this.stockModel = {} as ProductStockModel;
     this.tempStock = undefined;
-    this.stockModel.UnitPrice = this.model.Price as number;
+    this.stockModel.UnitPrice = Number(this.model.Price);
     this.ddlProductSize();
   }
 
