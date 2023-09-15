@@ -33,7 +33,7 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     subject: 'Could you please add your first record.',
     Description: 'No Record Found, please add new record!',
     url: './add',
-    urlLable: 'Create'
+    urlLabel: 'Create'
   };
   constructor(private _router: Router, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService,

@@ -27,34 +27,41 @@ namespace CMS.Core.ServiceHelper.Method
         {
             try
             {
-                var email = new MimeMessage();
-                email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-                email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
-                email.Subject = mailRequest.Subject;
-                var builder = new BodyBuilder();
+
+                MimeMessage emailMessage = new MimeMessage();
+                MailboxAddress emailFrom = new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail);
+                emailMessage.From.Add(emailFrom);
+                MailboxAddress emailTo = new MailboxAddress(mailRequest.ToEmail, mailRequest.ToEmail);
+                emailMessage.To.Add(emailTo);
+                emailMessage.Subject = mailRequest.Subject;
+                BodyBuilder emailBodyBuilder = new BodyBuilder();
+                emailBodyBuilder.TextBody = mailRequest.Body;
+                emailMessage.Body = emailBodyBuilder.ToMessageBody();
+
                 if (mailRequest.Attachments != null)
                 {
-                    byte[] fileBytes;
-                    foreach (var file in mailRequest.Attachments)
+                    byte[] attachmentFileByteArray;
+                    foreach (IFormFile attachmentFile in mailRequest.Attachments)
                     {
-                        if (file.Length > 0)
+                        if (attachmentFile.Length > 0)
                         {
-                            using (var ms = new MemoryStream())
+                            using (MemoryStream memoryStream = new MemoryStream())
                             {
-                                file.CopyTo(ms);
-                                fileBytes = ms.ToArray();
+                                attachmentFile.CopyTo(memoryStream);
+                                attachmentFileByteArray = memoryStream.ToArray();
                             }
-                            builder.Attachments.Add(file.FileName, fileBytes, MimeKit.ContentType.Parse(file.ContentType));
+                            emailBodyBuilder.Attachments.Add(attachmentFile.FileName, attachmentFileByteArray, MimeKit.ContentType.Parse(attachmentFile.ContentType));
                         }
                     }
                 }
-                builder.HtmlBody = mailRequest.Body;
-                email.Body = builder.ToMessageBody();
-                using var smtp = new MailKit.Net.Smtp.SmtpClient();
-                smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-                smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-                await smtp.SendAsync(email);
-                smtp.Disconnect(true);
+
+                MailKit.Net.Smtp.SmtpClient emailClient = new MailKit.Net.Smtp.SmtpClient();
+
+                emailClient.Connect(_mailSettings.Host, _mailSettings.Port, true);
+                emailClient.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                var str =await emailClient.SendAsync(emailMessage);
+                emailClient.Disconnect(true);
+                emailClient.Dispose();
             }
             catch (System.Exception ex)
             {

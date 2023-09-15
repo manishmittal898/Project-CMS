@@ -32,6 +32,9 @@ namespace CMS.Service.Services.Account
         {
             public string Email { get; set; }
             public string Password { get; set; }
+
+            public string SessionID { get; set;}
+            public string OTP { get; set; }
         }
     }
 }

@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
     subject: 'Can you please add your first product.',
     Description: "You haven't added product yet. please add your new products",
     url: '../add',
-    urlLable: 'Add New Product'
+    urlLabel: 'Add New Product'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _productService: ProductService) {

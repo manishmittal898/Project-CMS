@@ -28,7 +28,7 @@ export class GeneralEntryMasterComponent implements OnInit {
     subject: 'Can you please add your first general Entry.',
     Description: "You haven't added general Entry yet. please add your new general Entrys",
     url: './add',
-    urlLable: 'Add New general Entry'
+    urlLabel: 'Add New general Entry'
   };
   constructor(private readonly _activatedRoute: ActivatedRoute,
     private readonly _commonService: CommonService,

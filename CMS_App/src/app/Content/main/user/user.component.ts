@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
     subject: 'Can you please add your first User.',
     Description: "You haven't added User yet. please add your new Users",
     url: '../add',
-    urlLable: 'Add New User'
+    urlLabel: 'Add New User'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _userService: UserService) {

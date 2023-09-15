@@ -32,7 +32,7 @@ export class SubLookupComponent implements OnInit {
     subject: 'Can you please add your first record.',
     Description: undefined,
     url: undefined,
-    urlLable: 'Create'
+    urlLabel: 'Create'
   };
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _sublookupService: SubLookupService,

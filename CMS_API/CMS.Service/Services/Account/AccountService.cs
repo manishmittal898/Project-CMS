@@ -36,7 +36,6 @@ namespace CMS.Service.Services.Account
             {
 
                 var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email.Trim()) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
-                _otpService.GenerateOTP(user.Email);
 
                 if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
@@ -101,7 +100,12 @@ namespace CMS.Service.Services.Account
             {
                 var encrptPassword = _security.EncryptData(model.Password);
                 var user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
-                if (user != null)
+                if (!_otpService.VerifyOTP(model.SessionID, model.OTP))
+                {
+                    return CreateResponse<string>(null, ResponseMessage.OTPMissMatch, false, ((int)ApiStatusCode.OTPVarificationFailed));
+
+                }
+                else if (user != null)
                 {
                     user.Password = encrptPassword;
                     await _db.SaveChangesAsync();

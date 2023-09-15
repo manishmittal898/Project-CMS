@@ -1,5 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Account;
+using CMS.Service.Services.OTP;
 using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,15 @@ namespace CMS.API.Controllers
         private IConfiguration _config;
         private IAccountService _accountService;
         private readonly IUserMasterService _user;
+        private IOTPService _oTPService;
 
         public AccountController(IConfiguration config, IAccountService
-        accountService, IUserMasterService user)
+        accountService, IUserMasterService user, IOTPService oTPService)
         {
             _accountService = accountService;
             _config = config;
             _user = user;
+            _oTPService = oTPService;
         }
 
         [HttpPost]
@@ -85,6 +88,12 @@ namespace CMS.API.Controllers
         public async Task<ServiceResponse<object>> Logout(long id)
         {
             return await _accountService.LogoutUser(id);
+        }
+
+        [HttpGet]
+        public async Task<ServiceResponse<string>> RequestOTP(string emailId)
+        {
+            return await _oTPService.GenerateOTP(emailId);
         }
 
 

@@ -39,5 +39,8 @@ export class ProductDetailComponent implements OnInit {
       error => {
       });
   }
+  backToPrevious(){
+    history.back()
+  }
 
 }

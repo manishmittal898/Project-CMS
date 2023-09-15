@@ -265,7 +265,9 @@ export class ProductAddEditComponent implements OnInit {
       this.model.Stocks.push(this.tempStock)
     }
   }
-
+  backToPrevious(){
+    history.back()
+  }
   onSaveStock() {
 
     if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {

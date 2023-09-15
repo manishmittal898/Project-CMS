@@ -36,6 +36,7 @@ namespace CMS.Core.ServiceHelper.Model
         public const string UserExist = "User already mapped with mobile or email.";
         public const string Fail = "Operation Faild.";
         public const string RestrictedRecord = "Operation Faild due to Restricted Record.";
+        public const string OTPMissMatch = "OTP not matched.";
 
         public const string RecordAlreadyExist = "Record already exist, Please try with other !";
         public const string FileUpdated = "File sucessfully uploaded.";

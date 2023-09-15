@@ -11,7 +11,7 @@
         </p>
         <ng-container *ngIf="data.url; else elseTemplate">
           <button [routerLink]="data.url" class="btn btn-dark mt-2 mt-sm-0"> <i class="bi bi-plus-lg"></i>
-            {{data.urlLable}}</button>
+            {{data.urlLabel}}</button>
         </ng-container>
         <ng-template #elseTemplate>
           <button (click)="onButtonClick()"  class="btn btn-dark mt-2 mt-sm-0"> <i class="bi bi-plus-lg"></i>
