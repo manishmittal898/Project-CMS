@@ -15,7 +15,7 @@ export class UserAccountComponent implements OnInit {
     if (_route.url.includes('wishlist')) {
       this.pageName = "Wishlist"
     }
-   else if (_route.url.includes('address')) {
+    else if (_route.url.includes('address')) {
       this.pageName = "Address"
     }
 
@@ -26,7 +26,7 @@ export class UserAccountComponent implements OnInit {
 
     this._authService.IsAuthentication.subscribe(x => {
       if (x == false) {
-        this.logout();
+        //  this.logout();
       }
       this.isAuth = x;
     });

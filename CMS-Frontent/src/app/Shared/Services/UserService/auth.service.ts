@@ -69,6 +69,8 @@ export class AuthService {
         this.removeLocalData();
       });
     }
+    debugger
+    if (this._router.url) { }
 
   }
   private removeLocalData() {

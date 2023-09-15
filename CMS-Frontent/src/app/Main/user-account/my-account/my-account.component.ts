@@ -28,7 +28,7 @@ export class MyAccountComponent implements OnInit {
   get ddlkeys() { return DropDown_key };
   dropDown = new DropDownModel();
   get f() { return this.formgrp.controls; }
-  constructor(private _accounntService: AccountService, private _authService: AuthService, private _toasterService: ToastrService,
+  constructor(private _accountService: AccountService, private _authService: AuthService, private _toasterService: ToastrService,
     private readonly fb: FormBuilder, public _commonService: CommonService,) { }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   getProfileDetail() {
-    this._accounntService.GetUserDetail().subscribe(res => {
+    this._accountService.GetUserDetail().subscribe(res => {
       if (res.IsSuccess) {
         let data = res.Data as UserPostModel;
         this.model.Email = data.Email;
@@ -67,7 +67,7 @@ export class MyAccountComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      this._accounntService.UpdateProfile(this.model).subscribe(res => {
+      this._accountService.UpdateProfile(this.model).subscribe(res => {
         if (res.IsSuccess) {
           this._toasterService.success(res.Message as string, 'Success');
 
