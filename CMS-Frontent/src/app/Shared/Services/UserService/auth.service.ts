@@ -69,8 +69,7 @@ export class AuthService {
         this.removeLocalData();
       });
     }
-    debugger
-    if (this._router.url) { }
+
 
   }
   private removeLocalData() {
@@ -80,7 +79,11 @@ export class AuthService {
     this._securityService.removeStorage('userDetail');
 
     setTimeout(() => {
-      if (this._router.url !== this._baseService.Routing_Url.LoginUrl) {
+      debugger
+      if (this._router.url.includes('/user')) {
+        this._router.navigate([this._baseService.Routing_Url.storeUrl]);
+      }
+      else if (this._router.url !== this._baseService.Routing_Url.LoginUrl  && !this._router.url.includes(this._baseService.Routing_Url.storeUrl)) {
         this._router.navigate([this._baseService.Routing_Url.LoginUrl]);
       }
     }, 10);
@@ -90,7 +93,7 @@ export interface LoginUserDetailModel {
   UserId: number;
   FullName: string;
   RoleId: number;
-  RoleLeve: number;
+  RoleLevel: number;
   Token: string;
   UserName: string;
   RoleName: string;

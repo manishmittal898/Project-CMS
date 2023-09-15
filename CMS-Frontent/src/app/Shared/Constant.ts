@@ -105,6 +105,7 @@ export class Routing_Url {
   public static LoginUrl = 'login';
 
   //#endregion
+  public static storeUrl = 'store';
 
 }
 

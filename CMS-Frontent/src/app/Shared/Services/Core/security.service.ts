@@ -37,8 +37,7 @@ export class SecurityService {
 
   removeStorage(key: string, storeInSession = false) {
     const encKey = this.getKey(key, storeInSession) ?? this.encrypt(key);
-
-    let decValue = storeInSession ? sessionStorage.delete(encKey) : localStorage.delete(encKey);
+    storeInSession ? sessionStorage.removeItem(encKey) : localStorage.removeItem(encKey);
 
   }
   setCookie(key: string, value: string) {

@@ -13,8 +13,8 @@ import { DropDown_key } from '../../Constant';
 
 export class NavBarComponent implements OnInit {
   isLoggedIn = false;
-  menuModel: GroupDropDownItem[]=[];
-  cmsPageMenu: DropDownItem[]=[];
+  menuModel: GroupDropDownItem[] = [];
+  cmsPageMenu: DropDownItem[] = [];
   constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService, private readonly _authService: AuthService,) {
     if (this._securityService.getStorage('nav-collections-menu')) {
       this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
@@ -30,10 +30,11 @@ export class NavBarComponent implements OnInit {
     this.GetDropDown();
     setTimeout(() => {
       this._authService.IsAuthentication.subscribe(x => {
-        this.isLoggedIn = x as boolean ?? false;
-        if (!this.isLoggedIn) {
+        if (!x && this.isLoggedIn) {
           this.logout();
         }
+        this.isLoggedIn = x as boolean ?? false;
+
       });
     }, 100);
   }
@@ -41,10 +42,10 @@ export class NavBarComponent implements OnInit {
   GetDropDown() {
     let itms = [];
     // if (this.menuModel.length == 0) {
-      itms.push(DropDown_key.ddlLookupGroup)
+    itms.push(DropDown_key.ddlLookupGroup)
     // }
     // if (this.cmsPageMenu.length == 0) {
-      itms.push(DropDown_key.ddlCMSPage)
+    itms.push(DropDown_key.ddlCMSPage)
     // }
     if (itms.length > 0) {
 
