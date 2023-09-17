@@ -53,7 +53,13 @@ namespace CMS.API
 
             services.AddControllers();
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-
+            services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
+                     builder =>
+                     {
+                         builder.AllowAnyOrigin()
+                                 .AllowAnyMethod()
+                                 .AllowAnyHeader();
+                     }));
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
             {
@@ -148,7 +154,8 @@ namespace CMS.API
                 RequestPath = "/Content",
                 EnableDirectoryBrowsing = true
             });
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            // app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
