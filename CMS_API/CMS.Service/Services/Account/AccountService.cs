@@ -100,7 +100,8 @@ namespace CMS.Service.Services.Account
             {
                 var encrptPassword = _security.EncryptData(model.Password);
                 var user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
-                if (!_otpService.VerifyOTP(model.SessionID, model.OTP))
+                var otp = _otpService.VerifyOTP(new OTPVerifyModel { SessionId = model.SessionID, OTP = model.OTP });
+                if (otp.IsSuccess && !(bool)otp.Data)
                 {
                     return CreateResponse<string>(null, ResponseMessage.OTPMissMatch, false, ((int)ApiStatusCode.OTPVarificationFailed));
 
