@@ -52,14 +52,6 @@ namespace CMS.API
         {
 
             services.AddControllers();
-            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-            services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
-                     builder =>
-                     {
-                         builder.AllowAnyOrigin()
-                                 .AllowAnyMethod()
-                                 .AllowAnyHeader();
-                     }));
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
             {
@@ -107,6 +99,14 @@ namespace CMS.API
             });
 
             services.AddDbContext<DB_CMSContext>(options => options.UseSqlServer(Configuration[CONNECTION_STRING]));
+            //services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            //services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
+            //         builder =>
+            //         {
+            //             builder.AllowAnyOrigin()
+            //                     .AllowAnyMethod()
+            //                     .AllowAnyHeader();
+            //         }));
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -154,8 +154,8 @@ namespace CMS.API
                 RequestPath = "/Content",
                 EnableDirectoryBrowsing = true
             });
-            // app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseCors("AllowAnyOrigin");
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            // app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -185,8 +185,6 @@ namespace CMS.API
             services.AddScoped<IWishListService, WishListService>();
             services.AddScoped<IUserCartProductService, UserCartProductService>();
             services.AddScoped<IOTPService, OTPService>();
-            services.AddTransient<EmailHelper>();
-
             services.AddScoped<ICacheService, CacheService>();
 
         }

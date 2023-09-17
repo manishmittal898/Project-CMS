@@ -11,11 +11,14 @@ namespace CMS.Core.ServiceHelper.Method
     public class BaseService
     {
         public readonly LoginUserViewModel _loginUserDetail;
-        public Security _security;
+        public readonly Security _security;
+        public readonly EmailHelper _emailHelper;
+
         public BaseService(IConfiguration _configuration)
         {
             _loginUserDetail = SetLoginUserDetail();
             _security = new Security(_configuration);
+            _emailHelper = new EmailHelper(_configuration);
         }
 
         public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode = (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "", long? TotalRecord = null) where T : class

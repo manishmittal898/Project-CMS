@@ -12,12 +12,9 @@ namespace CMS.Service.Services.OTP
     public class OTPService : BaseService, IOTPService
     {
         DB_CMSContext _db;
-        private readonly EmailHelper _emailHelper;
-
-        public OTPService(DB_CMSContext db, EmailHelper emailHelper, IConfiguration _configuration) : base(_configuration)
+        public OTPService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
-            _emailHelper = emailHelper;
         }
         public async Task<ServiceResponse<string>> GenerateOTP(string SendOn)
         {

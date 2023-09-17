@@ -1,30 +1,33 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
+﻿using CMS.Core.FixedValue;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+
 namespace CMS.Core.ServiceHelper.Method
 {
     public class EmailHelper
     {
         // static IHostingEnvironment _env;
-        private readonly MailSettings _mailSettings;
+        private MailSettings _mailSettings;
+        IConfiguration _configuration;
 
-        public EmailHelper(IOptions<MailSettings> mailSettings)
+        public EmailHelper(IConfiguration configuration)
         {
-
-            // _env = environment;
-            _mailSettings = mailSettings.Value;
+            _configuration = configuration;
+            _mailSettings = _configuration.GetSection(Constants.SMTP_SERVER).Get<MailSettings>();
 
         }
+
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
             try
             {
 
                 MimeMessage emailMessage = new MimeMessage();
-                MailboxAddress emailFrom = new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail);
+                MailboxAddress emailFrom = new MailboxAddress(_mailSettings.DisplayName, _mailSettings.UserName);
                 emailMessage.From.Add(emailFrom);
                 MailboxAddress emailTo = new MailboxAddress(mailRequest.ToEmail, mailRequest.ToEmail);
                 emailMessage.To.Add(emailTo);
@@ -53,7 +56,7 @@ namespace CMS.Core.ServiceHelper.Method
                 MailKit.Net.Smtp.SmtpClient emailClient = new MailKit.Net.Smtp.SmtpClient();
 
                 emailClient.Connect(_mailSettings.Host, _mailSettings.Port, true);
-                emailClient.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                emailClient.Authenticate(_mailSettings.UserName, _mailSettings.Password);
                 var str = await emailClient.SendAsync(emailMessage);
                 emailClient.Disconnect(true);
                 emailClient.Dispose();
@@ -64,6 +67,63 @@ namespace CMS.Core.ServiceHelper.Method
                 throw;
             }
         }
+
+        //public async Task SendEmailAsync(MailRequest mailRequest)
+        //{
+        //    try
+        //    {
+
+        //        MailMessage message = new MailMessage
+        //        {
+        //            From = new MailAddress(_mailSettings.UserName, _mailSettings.DisplayName),
+        //            Subject = mailRequest.Subject,
+        //            Body = mailRequest.Body,
+                    
+        //        };
+        //        message.IsBodyHtml = false;
+        //        // Add recipients
+        //        message.To.Add(mailRequest.ToEmail);
+        //        if (mailRequest.Attachments != null && mailRequest.Attachments.Count > 0)
+        //        {
+        //            foreach (IFormFile attachmentFile in mailRequest.Attachments)
+        //            {
+        //                if (attachmentFile.Length > 0)
+        //                {
+        //                    using (MemoryStream memoryStream = new MemoryStream())
+        //                    {
+        //                        attachmentFile.CopyTo(memoryStream);
+        //                        Attachment attachment = new Attachment(memoryStream, MediaTypeNames.Application.Pdf);
+        //                        message.Attachments.Add(attachment);
+
+        //                    }
+
+        //                }
+
+        //            }
+
+        //        }
+
+        //        // Create an instance of the SmtpClient
+        //        using (SmtpClient client = new SmtpClient())
+        //        {
+        //            client.Host = _mailSettings.Host;
+        //            client.Timeout = 60000;
+        //              client.EnableSsl = false;
+        //            client.Port = 25;
+        //            client.Credentials = new NetworkCredential(_mailSettings.UserName, _mailSettings.Password);
+        //            //  client.UseDefaultCredentials = true;
+                
+
+        //            client.Send(message);
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
     }
     public class MailRequest
     {
@@ -74,7 +134,7 @@ namespace CMS.Core.ServiceHelper.Method
     }
     public class MailSettings
     {
-        public string Mail { get; set; }
+        public string UserName { get; set; }
         public string DisplayName { get; set; }
         public string Password { get; set; }
         public string Host { get; set; }
