@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Caching;
-using System.Text;
 
 namespace CMS.Core.ServiceHelper.Cache
 {
@@ -15,7 +13,7 @@ namespace CMS.Core.ServiceHelper.Cache
                 T item = (T)_memoryCache.Get(key);
                 return item;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -30,7 +28,7 @@ namespace CMS.Core.ServiceHelper.Cache
                     _memoryCache.Set(key, value, expirationTime);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -45,7 +43,7 @@ namespace CMS.Core.ServiceHelper.Cache
                     return _memoryCache.Remove(key);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

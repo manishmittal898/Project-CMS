@@ -3,7 +3,6 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
-using CMS.Service.Services.ProductMaster;
 using CMS.Service.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using static CMS.Core.FixedValue.Enums;
 
@@ -98,7 +94,7 @@ namespace CMS.Service.Services.User
                     return CreateResponse<IEnumerable<UserMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
@@ -108,7 +104,7 @@ namespace CMS.Service.Services.User
             return objResult;
         }
 
-        public async Task<ServiceResponse<UserMasterViewModel>> GetById(long? id= null)
+        public async Task<ServiceResponse<UserMasterViewModel>> GetById(long? id = null)
         {
             ServiceResponse<UserMasterViewModel> ObjResponse = new ServiceResponse<UserMasterViewModel>();
             try
@@ -194,7 +190,7 @@ namespace CMS.Service.Services.User
                             objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                         }
                         objUser.GenderId = model.GenderId;
-                       
+
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
                         _db.SaveChanges();
@@ -259,7 +255,7 @@ namespace CMS.Service.Services.User
                 await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
 
@@ -281,7 +277,7 @@ namespace CMS.Service.Services.User
 
                 return CreateResponse(objUser, ResponseMessage.Save, true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
 
@@ -292,7 +288,7 @@ namespace CMS.Service.Services.User
 
         public async Task<ServiceResponse<TblUserMaster>> updateProfileDetail(UserDetailPostModel model)
         {
-            var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && x.UserId !=_loginUserDetail.UserId && !x.IsDeleted).FirstOrDefaultAsync();
+            var user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && x.UserId != _loginUserDetail.UserId && !x.IsDeleted).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -307,7 +303,7 @@ namespace CMS.Service.Services.User
                     objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                 }
                 objUser.GenderId = model.GenderId;
-                
+
                 var roletype = _db.TblUserMasters.Update(objUser);
                 _db.SaveChanges();
                 objUser.ProfilePhoto = !string.IsNullOrEmpty(objUser.ProfilePhoto) ? objUser.ProfilePhoto.ToAbsolutePath() : null;

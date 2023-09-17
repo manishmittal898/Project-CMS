@@ -1,14 +1,11 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.LookupTypeMaster
 {
-   public interface ILookupTypeMasterService
+    public interface ILookupTypeMasterService
     {
         Task<ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>>> GetListAsync(IndexModel model);
         ServiceResponse<TblLookupTypeMaster> GetById(string id);

@@ -1,10 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.ProductMaster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Public.Controllers
@@ -25,7 +21,7 @@ namespace CMS.API.Areas.Public.Controllers
         public async Task<object> GetList(ProductFilterModel model)
         {
             return await _productmstr.GetFilterList(model);
-        } 
+        }
 
         [HttpPost]
         public async Task<object> GetProductCategory(IndexModel model)

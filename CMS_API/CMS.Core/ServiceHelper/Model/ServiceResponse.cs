@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CMS.Core.ServiceHelper.Model
+﻿namespace CMS.Core.ServiceHelper.Model
 {
-  
+
     public class ServiceResponse<T> where T : class
     {
         public bool IsSuccess { get; set; }
@@ -18,7 +12,7 @@ namespace CMS.Core.ServiceHelper.Model
 
         public long? TotalRecord { get; set; }
 
-       
+
     }
 
     public static class ResponseMessage

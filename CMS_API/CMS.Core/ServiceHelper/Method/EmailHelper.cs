@@ -1,13 +1,8 @@
-﻿using MailKit.Security;
-using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Mail;
-using System.Net.Mime;
 using System.Threading.Tasks;
 namespace CMS.Core.ServiceHelper.Method
 {
@@ -59,11 +54,11 @@ namespace CMS.Core.ServiceHelper.Method
 
                 emailClient.Connect(_mailSettings.Host, _mailSettings.Port, true);
                 emailClient.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-                var str =await emailClient.SendAsync(emailMessage);
+                var str = await emailClient.SendAsync(emailMessage);
                 emailClient.Disconnect(true);
                 emailClient.Dispose();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
                 throw;

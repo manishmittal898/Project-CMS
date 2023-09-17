@@ -1,8 +1,7 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.UserCartProduct; 
-using Microsoft.AspNetCore.Authorization; 
+using CMS.Service.Services.UserCartProduct;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Customer.Controllers

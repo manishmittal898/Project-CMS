@@ -30,7 +30,7 @@ namespace CMS.API.Areas.Admin.Controllers
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
         public async Task<object> Get(string id)
-        
+
         {
             return await _service.GetById(id);
         }

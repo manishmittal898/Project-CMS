@@ -1,9 +1,7 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.ProductMaster;
 using CMS.Service.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static CMS.Core.FixedValue.Enums;

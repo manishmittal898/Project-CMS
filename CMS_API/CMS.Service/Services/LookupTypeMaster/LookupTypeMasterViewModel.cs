@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Service.Services.LookupTypeMaster
 {
- public  class LookupTypeMasterViewModel
+    public class LookupTypeMasterViewModel
     {
         public string Id { get; set; }
         [Required]
@@ -17,8 +12,8 @@ namespace CMS.Service.Services.LookupTypeMaster
         public bool IsImage { get; set; }
         public int? SortOrder { get; set; }
         public long CreatedBy { get; set; }
-     
+
         public long ModifiedBy { get; set; }
-       
+
     }
 }

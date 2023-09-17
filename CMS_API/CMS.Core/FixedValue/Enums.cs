@@ -1,7 +1,4 @@
 ﻿using CMS.Core.Attribute;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CMS.Core.FixedValue
 {
@@ -58,9 +55,9 @@ namespace CMS.Core.FixedValue
 
         public enum RoleEnum
         {
-            SuperAdmin=1,
-            Admin=2,
-            Customer=3
+            SuperAdmin = 1,
+            Admin = 2,
+            Customer = 3
         }
 
         public enum PlatformEnum

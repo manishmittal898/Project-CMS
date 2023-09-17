@@ -1,6 +1,4 @@
-﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.CMSPage;
-using Microsoft.AspNetCore.Authorization;
+﻿using CMS.Service.Services.CMSPage;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Threading.Tasks;
@@ -20,15 +18,15 @@ namespace CMS.API.Areas.Public.Controllers
             _service = Iservice;
         }
         // GET: api/<LookupMaster>
-       
+
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
         public async Task<object> Get(string id)
-        
+
         {
             return await _service.GetById(id);
         }
 
-      
+
     }
 }

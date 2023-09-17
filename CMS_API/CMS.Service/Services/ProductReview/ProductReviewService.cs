@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.ProductReview
@@ -125,7 +124,7 @@ namespace CMS.Service.Services.ProductReview
                 await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return null;

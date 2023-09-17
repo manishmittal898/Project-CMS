@@ -90,7 +90,7 @@ namespace CMS.API.Areas.Admin.Controllers
         public void Delete(int id)
         {
 
-              _roleType.Delete(id);
+            _roleType.Delete(id);
 
 
 

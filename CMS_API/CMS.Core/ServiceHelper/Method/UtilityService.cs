@@ -1,27 +1,14 @@
-﻿using CMS.Core.Attribute;
-using HeyRed.Mime;
-using Microsoft.AspNetCore.Hosting;
+﻿using HeyRed.Mime;
 using Microsoft.AspNetCore.Hosting.Internal;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMS.Core.ServiceHelper.Method
 {
     public static class UtilityService
     {
         private static HostingEnvironment _env = new HostingEnvironment();
-       
+
         /// <summary>
         /// Save File from base64 string
         /// </summary>
@@ -68,7 +55,7 @@ namespace CMS.Core.ServiceHelper.Method
                 if (File.Exists(filePath))
                 {
                     base64 = "Data:" + GetMimeType(filePath) + ";base64,";
-                   ;
+                    ;
                     byte[] bytarr = File.ReadAllBytes(Path.Combine(_env.ContentRootPath, filePath));
                     base64 += Convert.ToBase64String(bytarr);
                 }
@@ -80,7 +67,7 @@ namespace CMS.Core.ServiceHelper.Method
             return base64;
         }
 
-      
+
         private static string GetFileExtension(this string base64String)
         {
             string ext = string.Empty;
@@ -105,9 +92,9 @@ namespace CMS.Core.ServiceHelper.Method
             try
             {
 
-                    return Path.Combine(_env.ContentRootPath, path.Replace("~",""));
+                return Path.Combine(_env.ContentRootPath, path.Replace("~", ""));
 
-               
+
             }
             catch (Exception)
             {
@@ -133,7 +120,7 @@ namespace CMS.Core.ServiceHelper.Method
         }
 
 
-       
+
 
     }
 }

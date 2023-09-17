@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -106,7 +105,7 @@ namespace CMS.Service.Services.ProductMaster
                     return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
@@ -535,7 +534,7 @@ namespace CMS.Service.Services.ProductMaster
                     return CreateResponse<IEnumerable<ProductCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;

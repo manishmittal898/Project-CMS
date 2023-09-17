@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.SubLookupMaster
@@ -87,7 +86,7 @@ namespace CMS.Service.Services.SubLookupMaster
                     return CreateResponse<IEnumerable<SubLookupMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
@@ -229,7 +228,7 @@ namespace CMS.Service.Services.SubLookupMaster
                 await _db.SaveChangesAsync();
                 return CreateResponse(objData as TblSubLookupMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return null;

@@ -1,9 +1,7 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.CustomerAddress;
-using CMS.Service.Services.User;
 using CMS.Service.Services.WishList;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore  .Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Customer.Controllers
@@ -18,7 +16,7 @@ namespace CMS.API.Areas.Customer.Controllers
         private readonly IWishListService _wishList;
         public ProductWishListController(IWishListService wishList)
         {
-            _wishList=wishList;
+            _wishList = wishList;
         }
 
         [HttpPost]

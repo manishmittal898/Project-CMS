@@ -72,9 +72,9 @@ namespace CMS.API.Controllers
         [HttpGet]
         [AllowAnonymous]
         //Get api/Account/ValidateUserWithMobileNumber
-        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile,long userId)
+        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long userId)
         {
-            return await _accountService.CheckUserExist(loginId,  isMobile, userId);
+            return await _accountService.CheckUserExist(loginId, isMobile, userId);
         }
 
         [HttpGet]

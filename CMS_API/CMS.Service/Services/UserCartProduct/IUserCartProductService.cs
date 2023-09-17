@@ -1,7 +1,5 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.ProductMaster;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.UserCartProduct

@@ -12,7 +12,7 @@ namespace CMS.Service.Services.WishList
         Task<ServiceResponse<WishListViewModel>> AddProduct(WishListPostModel model);
         Task<ServiceResponse<WishListViewModel>> RemoveProduct(WishListPostModel model);
 
-        
+
 
 
     }

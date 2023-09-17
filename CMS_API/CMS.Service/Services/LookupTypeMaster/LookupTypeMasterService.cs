@@ -133,7 +133,7 @@ namespace CMS.Service.Services.LookupTypeMaster
                 await _db.SaveChangesAsync();
                 return CreateResponse(objData, "Deleted", true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

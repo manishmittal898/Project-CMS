@@ -4,17 +4,12 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.ProductMaster;
-using CMS.Service.Utility;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.WishList
@@ -86,7 +81,7 @@ namespace CMS.Service.Services.WishList
                 throw;
             }
         }
-        
+
         public async Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model)
         {
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
@@ -102,7 +97,7 @@ namespace CMS.Service.Services.WishList
 
 
                 var result = (from data in _db.TblUserWishLists.Include(x => x.Product)
-                              
+
                               where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);
                 switch (model.OrderBy)
@@ -174,7 +169,7 @@ namespace CMS.Service.Services.WishList
                     return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;

@@ -4,13 +4,11 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.ProductMaster;
-using CMS.Service.Services.UserCartProduct;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.UserCartProduct
@@ -174,7 +172,7 @@ namespace CMS.Service.Services.UserCartProduct
                     return CreateResponse<IEnumerable<UserCartProductViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;

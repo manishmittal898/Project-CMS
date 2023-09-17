@@ -3,7 +3,6 @@ using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
-using CMS.Service.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -76,7 +75,7 @@ namespace CMS.Service.Services.CMSPage
                     return CreateResponse<IEnumerable<CMSPageListViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
@@ -134,7 +133,7 @@ namespace CMS.Service.Services.CMSPage
                 if (!string.IsNullOrEmpty(model.Id))
                 {
 
-                    TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == long.Parse( _security.DecryptData(model.Id.ToString())));
+                    TblCmspageContentMaster objData = _db.TblCmspageContentMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id.ToString())));
                     objData.Content = model.Content;
                     objData.SortedOrder = model.SortedOrder;
                     objData.Heading = model.Heading;
@@ -158,7 +157,7 @@ namespace CMS.Service.Services.CMSPage
                     var dataResult = await _db.TblCmspageContentMasters.AddAsync(objData);
                     _db.SaveChanges();
 
-                    model.Id = _security.EncryptData(dataResult.Entity.Id.ToString()) ;
+                    model.Id = _security.EncryptData(dataResult.Entity.Id.ToString());
 
                 }
 

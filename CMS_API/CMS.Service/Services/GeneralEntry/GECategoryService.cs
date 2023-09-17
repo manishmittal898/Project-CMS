@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static CMS.Core.FixedValue.Enums;
 
@@ -84,7 +83,7 @@ namespace CMS.Service.Services.GeneralEntry
                     return CreateResponse<IEnumerable<GeneralEntryCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
@@ -241,7 +240,7 @@ namespace CMS.Service.Services.GeneralEntry
                     return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return CreateResponse<TblGecategoryMater>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError));
@@ -268,7 +267,7 @@ namespace CMS.Service.Services.GeneralEntry
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return null;
@@ -312,7 +311,7 @@ namespace CMS.Service.Services.GeneralEntry
                 await _db.SaveChangesAsync();
                 return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return null;

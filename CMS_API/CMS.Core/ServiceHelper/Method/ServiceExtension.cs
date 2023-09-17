@@ -1,11 +1,9 @@
 ﻿using CMS.Core.FixedValue;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace CMS.Core.ServiceHelper.ExtensionMethod
 {
@@ -76,7 +74,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
 
             }
-            else 
+            else
             {
                 return string.Concat("Small_Thumbnail");
 

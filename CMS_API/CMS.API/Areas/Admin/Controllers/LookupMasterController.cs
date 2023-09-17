@@ -2,9 +2,6 @@
 using CMS.Service.Services.LookupMaster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -66,7 +63,7 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpGet("{id}")]
         public async Task<object> Delete(string id)
         {
-        return  await  _lookupmstr.Delete(id);
+            return await _lookupmstr.Delete(id);
         }
     }
 }

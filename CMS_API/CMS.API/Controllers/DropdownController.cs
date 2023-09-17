@@ -1,13 +1,9 @@
 ﻿using CMS.Core.ServiceHelper.Cache;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Common;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CMS.API.Controllers

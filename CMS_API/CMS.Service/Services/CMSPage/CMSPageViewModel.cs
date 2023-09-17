@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Service.Services.CMSPage
 {
@@ -29,17 +25,17 @@ namespace CMS.Service.Services.CMSPage
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
     }
- 
+
     public class CMSPagePostModel
     {
         public string Id { get; set; }
         [Required]
         public string PageId { get; set; }
-                
+
         [Display(Name = "Heading*")]
         //[StringLength(2000, ErrorMessage = "The {0} char length smaller than {1}.")]
         public string Heading { get; set; }
-       
+
         [Required]
         [Display(Name = "Content*")]
         //[StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]

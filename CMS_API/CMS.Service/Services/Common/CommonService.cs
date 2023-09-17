@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static CMS.Core.FixedValue.Enums;
 using static CMS.Service.Services.Common.CommonModel;
@@ -61,7 +60,7 @@ namespace CMS.Service.Services.Common
 
                         case DropDownKey.ddlGender:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.GENDER.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.GENDER.GetStringValue(), isTransactionData));
                             break;
 
                         case DropDownKey.ddlProductViewSection:
@@ -70,7 +69,7 @@ namespace CMS.Service.Services.Common
                             break;
                         case DropDownKey.ddlAddressType:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Address_Type.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Address_Type.GetStringValue(), isTransactionData));
                             break;
 
                         case DropDownKey.ddlProductPrice:
@@ -80,27 +79,27 @@ namespace CMS.Service.Services.Common
 
                         case DropDownKey.ddlProductDiscount:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Discount.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Discount.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlProductOccasion:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Occasion.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Occasion.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlProductFabric:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Fabric.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Fabric.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlProductLength:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Length.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Length.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlProductColor:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Color.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Color.GetStringValue(), isTransactionData));
                             break;
                         case DropDownKey.ddlProductPattern:
 
-                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Pattern.GetStringValue(),isTransactionData));
+                            objData.Add(item, await GetLookupMasters(LookupTypeEnum.Product_Pattern.GetStringValue(), isTransactionData));
                             break;
 
 
@@ -225,7 +224,7 @@ namespace CMS.Service.Services.Common
             try
             {
                 var data = (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type);
-                
+
                 if (isTransactionData)
                 {
 
@@ -245,7 +244,7 @@ namespace CMS.Service.Services.Common
                     }
                     else if (lktype == LookupTypeEnum.Product_Discount.GetStringValue())
                     {
-                         data = data.Where(x => x.IsActive.Value && x.IsDelete == false && x.TblProductMasterDiscounts.Any(s => s.DiscountId.Value == x.Id));
+                        data = data.Where(x => x.IsActive.Value && x.IsDelete == false && x.TblProductMasterDiscounts.Any(s => s.DiscountId.Value == x.Id));
 
                     }
                     else if (lktype == LookupTypeEnum.Product_Occasion.GetStringValue())
@@ -271,10 +270,10 @@ namespace CMS.Service.Services.Common
 
 
                 }
-               return await data.OrderBy(x => x.SortedOrder)
-                    .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), DataValue = r.Value })
-                   .ToListAsync();
-               
+                return await data.OrderBy(x => x.SortedOrder)
+                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), DataValue = r.Value })
+                    .ToListAsync();
+
             }
             catch
             {
@@ -315,7 +314,7 @@ namespace CMS.Service.Services.Common
                           .Select(x => new { Text = x.Name, Value = _security.EncryptData(x.Id) }).ToList()
                       }).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -339,7 +338,7 @@ namespace CMS.Service.Services.Common
                           Data = y.Select(x => new { Text = x.Name, Value = _security.EncryptData(x.Id) }).ToList()
                       }).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

@@ -1,11 +1,7 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.GeneralEntry;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CMS.API.Areas.Admin.Controllers
@@ -58,7 +54,7 @@ namespace CMS.API.Areas.Admin.Controllers
         public async Task<object> ChangeActiveStatus(string id)
         {
             return await _service.ActiveStatusUpdate(id);
-        } 
+        }
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]

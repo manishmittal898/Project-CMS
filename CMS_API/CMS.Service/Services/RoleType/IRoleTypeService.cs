@@ -1,14 +1,11 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.RoleType
 {
-  public  interface IRoleTypeService
+    public interface IRoleTypeService
     {
         ServiceResponse<IEnumerable<Data.Models.TblRoleType>> GetList();
         ServiceResponse<Data.Models.TblRoleType> GetById(int id);

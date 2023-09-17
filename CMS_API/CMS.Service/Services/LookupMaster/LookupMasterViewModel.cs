@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMS.Service.Services.LookupMaster
 {
@@ -16,7 +12,7 @@ namespace CMS.Service.Services.LookupMaster
         public int? SortedOrder { get; set; }
         [Required]
         public string LookUpType { get; set; }
-        [MaxLength(50,ErrorMessage ="Maximum 50 char allowed!")]
+        [MaxLength(50, ErrorMessage = "Maximum 50 char allowed!")]
         public string Value { get; set; }
 
 

@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.RoleType
@@ -15,7 +13,7 @@ namespace CMS.Service.Services.RoleType
     public class RoleTypeService : BaseService, IRoleTypeService
     {
         DB_CMSContext _db;
-        public RoleTypeService(DB_CMSContext db , IConfiguration _configuration) : base(_configuration)
+        public RoleTypeService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
         }
@@ -68,7 +66,7 @@ namespace CMS.Service.Services.RoleType
                 objRole.IsDeleted = false;
                 objRole.IsActive = true;
                 objRole.CreatedBy = model.CreatedBy;
-                 await _db.TblRoleTypes.AddAsync(objRole);
+                await _db.TblRoleTypes.AddAsync(objRole);
                 _db.SaveChanges();
                 return CreateResponse(objRole, "Added", true);
 
@@ -77,7 +75,7 @@ namespace CMS.Service.Services.RoleType
             catch (Exception ex)
             {
 
-                return CreateResponse<TblRoleType>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblRoleType>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -94,8 +92,8 @@ namespace CMS.Service.Services.RoleType
                 objRole.RoleLevel = model.RoleLevel;
 
                 objRole.ModifiedBy = model.ModifiedBy;
-                var roletype =  _db.TblRoleTypes.Update(objRole);
-              await  _db.SaveChangesAsync();
+                var roletype = _db.TblRoleTypes.Update(objRole);
+                await _db.SaveChangesAsync();
 
 
                 return CreateResponse(objRole, "Updated", true);
@@ -104,7 +102,7 @@ namespace CMS.Service.Services.RoleType
             catch (Exception ex)
             {
 
-                return CreateResponse<TblRoleType>(null, "Fail", false, (int)ApiStatusCode.InternalServerError , ex.Message.ToString());
+                return CreateResponse<TblRoleType>(null, "Fail", false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
 
@@ -116,18 +114,18 @@ namespace CMS.Service.Services.RoleType
             try
             {
                 TblRoleType objRole = new TblRoleType();
-                objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id); 
-                var roletype =  _db.TblRoleTypes.Remove(objRole);
-              await  _db.SaveChangesAsync();
+                objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id);
+                var roletype = _db.TblRoleTypes.Remove(objRole);
+                await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 return null;
 
             }
 
-           
+
         }
     }
 }

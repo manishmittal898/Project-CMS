@@ -1,15 +1,13 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.Method;
-using CMS.Core.ServiceHelper.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using static CMS.Core.FixedValue.Enums;
-using System.Linq;
 
 namespace CMS.Core.ServiceHelper.ExtensionMethod
 {
@@ -112,8 +110,8 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
         {
 
             byte[] key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("EncryptionKey"));
-              byte[] encryptedData = Base64UrlEncoder.DecodeBytes(strValue);
-           // byte[] encryptedData = Convert.FromBase64String(strValue);
+            byte[] encryptedData = Base64UrlEncoder.DecodeBytes(strValue);
+            // byte[] encryptedData = Convert.FromBase64String(strValue);
 
 
             try

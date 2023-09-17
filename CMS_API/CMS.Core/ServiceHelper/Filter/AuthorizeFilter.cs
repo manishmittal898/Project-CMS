@@ -11,7 +11,7 @@
 
 //namespace CMS.Core.ServiceHelper.Filter
 //{
-   
+
 //    public class AuthorizeFilter : IAuthorizationFilter
 //    {
 //        readonly string[] _claim;
@@ -27,6 +27,6 @@
 //        {
 //            throw new NotImplementedException();
 //        }
-         
+
 //    }
 //}

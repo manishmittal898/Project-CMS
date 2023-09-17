@@ -1,8 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMS.Service.Services.GeneralEntry

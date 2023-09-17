@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CMS.Service.Services.Account
+﻿namespace CMS.Service.Services.Account
 {
-   public class AccountViewModel
+    public class AccountViewModel
     {
         public class LoginModel
         {
@@ -33,7 +27,7 @@ namespace CMS.Service.Services.Account
             public string Email { get; set; }
             public string Password { get; set; }
 
-            public string SessionID { get; set;}
+            public string SessionID { get; set; }
             public string OTP { get; set; }
         }
     }

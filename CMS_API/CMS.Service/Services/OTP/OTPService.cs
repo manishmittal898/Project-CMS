@@ -4,11 +4,8 @@ using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http.Results;
 
 namespace CMS.Service.Services.OTP
 {
@@ -47,15 +44,13 @@ namespace CMS.Service.Services.OTP
                 return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError);
 
             }
-
-
         }
 
         public ServiceResponse<object> VerifyOTP(OTPVerifyModel model)
         {
             bool IsSuccess = false;
-            TblUserOtpdatum otpdatum = _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId&& !x.IsVerified).FirstOrDefault();
-            if (otpdatum != null &&model.OTP == _security.DecryptData(otpdatum.Otp))
+            TblUserOtpdatum otpdatum = _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId && !x.IsVerified).FirstOrDefault();
+            if (otpdatum != null && model.OTP == _security.DecryptData(otpdatum.Otp))
             {
                 otpdatum.Attempt = otpdatum.Attempt + 1;
                 otpdatum.IsVerified = true;
@@ -76,6 +71,6 @@ namespace CMS.Service.Services.OTP
     {
         public string SessionId { get; set; }
         public string OTP { get; set; }
-        
+
     }
 }

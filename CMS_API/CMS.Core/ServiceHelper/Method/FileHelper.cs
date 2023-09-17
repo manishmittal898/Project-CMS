@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -69,11 +68,11 @@ namespace CMS.Core.ServiceHelper.Method
 
                             if (isThumbnail)
                             {
-                                Size[] sizes= { ImageSize.Small ,ImageSize.Medium };
+                                Size[] sizes = { ImageSize.Small, ImageSize.Medium };
                                 for (int i = 0; i < sizes.Length; i++)
                                 {
-                                     
-                                    string thumbnailPath = string.Concat(path,"\\", ServiceExtension.getSizePath(sizes[i]));
+
+                                    string thumbnailPath = string.Concat(path, "\\", ServiceExtension.getSizePath(sizes[i]));
                                     if (!Directory.Exists(thumbnailPath))
                                     {
                                         Directory.CreateDirectory(thumbnailPath);
@@ -82,8 +81,8 @@ namespace CMS.Core.ServiceHelper.Method
                                     var webPThumbnailBytArr = ConvertImageToWebP(byteArr, sizes[i].Width, sizes[i].Height);
                                     File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
                                 }
-                                
-                              
+
+
                             }
 
                         }
@@ -185,7 +184,7 @@ namespace CMS.Core.ServiceHelper.Method
                         return true;
                     }
                 }
-              
+
             }
             catch
             {
@@ -301,5 +300,5 @@ namespace CMS.Core.ServiceHelper.Method
         }
 
     }
-  
+
 }

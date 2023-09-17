@@ -9,9 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static CMS.Core.FixedValue.Enums;
 
@@ -40,7 +38,7 @@ namespace CMS.Service.Services.GeneralEntry
                 await _db.SaveChangesAsync();
                 return CreateResponse(objProduct as TblGeneralEntry, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return null;
@@ -167,7 +165,7 @@ namespace CMS.Service.Services.GeneralEntry
                     return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 objResult.Data = null;
