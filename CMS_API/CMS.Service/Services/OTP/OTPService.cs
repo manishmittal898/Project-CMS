@@ -31,9 +31,9 @@ namespace CMS.Service.Services.OTP
 
                 var result = _db.TblUserOtpdata.Add(otpdatum);
                 _db.SaveChanges();
-                await _emailHelper.SendEmailAsync(new MailRequest { ToEmail = "sandeep.suthar08@yopmail.com", Body = $"your OTP is {r}", Subject = "OTP Verification" });
+                await _emailHelper.SendEmailAsync(new MailRequest { ToEmail = SendOn, Body = $"your OTP is {r}", Subject = "OTP Verification" });
 
-                return CreateResponse(result.Entity.SessionId.ToString(), ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+                return CreateResponse(result.Entity.SessionId.ToString(), ResponseMessage.OTPSent, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception)
             {
