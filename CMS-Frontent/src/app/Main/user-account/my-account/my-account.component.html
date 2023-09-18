@@ -10,7 +10,7 @@
             <input type="file" (change)="onImageChages($event)" style="display: none;"
               [ngClass]="{ 'is-invalid': f.ProfilePhoto.errors && f.ProfilePhoto.touched}" class="form-control" />
           </label>
-          <div class="invalid-feedback"
+          <div class="invalid-feedback text-center"
             *ngIf="(formgrp.get('ProfilePhoto')?.hasError('required') && formgrp.get('ProfilePhoto')?.touched)">
             Please Upload <strong>Profile Photo</strong>...!</div>
           </div>
