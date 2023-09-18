@@ -527,7 +527,9 @@ ul.footer-benefits li {
 .product-d-main-slider-nav .slick-slide img {
     max-height: 80px;
 }
-
+.pro-detail-btn-wishlist {
+  right: 25px;
+}
 }
 
 @media screen and (max-width:575px) {
@@ -587,19 +589,19 @@ ul.footer-benefits li {
 .cart-list-items-img img {
   max-height: 78px;
 }
-.cart-list-qty-btn {
+.product-list-qty-btn {
   height: 30px;
   width: 30px;
 }
-.cart-list-qty input {
+.product-list-qty input {
   max-width: 35px;
 }
 .login-with-social-acc button.login-with-social-acc-btn {
   font-size: 15px;
 }
 .product-detail-action-btn .btn-default {
-  font-size: 16px;
-  padding: 5px 15px;
+  font-size: 15px;
+  padding: 5px 10px;
 }
 .order-summary-list-img {
   height: 78px;
