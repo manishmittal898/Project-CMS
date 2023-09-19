@@ -50,7 +50,6 @@ namespace CMS.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDirectoryBrowser();
             services.AddSwaggerGen(c =>
@@ -97,16 +96,14 @@ namespace CMS.API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
                 };
             });
-
             services.AddDbContext<DB_CMSContext>(options => options.UseSqlServer(Configuration[CONNECTION_STRING]));
-            //services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-            //services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
-            //         builder =>
-            //         {
-            //             builder.AllowAnyOrigin()
-            //                     .AllowAnyMethod()
-            //                     .AllowAnyHeader();
-            //         }));
+            services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
+                     builder =>
+                     {
+                         builder.AllowAnyOrigin()
+                                 .AllowAnyMethod()
+                                 .AllowAnyHeader();
+                     }));
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -155,7 +152,6 @@ namespace CMS.API
                 EnableDirectoryBrowsing = true
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            // app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

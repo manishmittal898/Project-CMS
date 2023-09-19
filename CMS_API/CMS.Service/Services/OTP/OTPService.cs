@@ -23,8 +23,6 @@ namespace CMS.Service.Services.OTP
                 Random generator = new Random();
                 String r = generator.Next(0, 1000000).ToString("D6");
                 TblUserOtpdatum otpdatum = new TblUserOtpdatum();
-
-
                 otpdatum.SendOn = SendOn;
                 otpdatum.Otp = _security.EncryptData(r);
                 otpdatum.Attempt = 1;
@@ -35,10 +33,10 @@ namespace CMS.Service.Services.OTP
 
                 return CreateResponse(result.Entity.SessionId.ToString(), ResponseMessage.OTPSent, true, (int)ApiStatusCode.Ok);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError);
+                return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, exception : ex.InnerException!=null ? ex.InnerException.Message : ex.Message);
 
             }
         }

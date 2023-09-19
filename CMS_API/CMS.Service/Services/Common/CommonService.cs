@@ -140,12 +140,7 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetGeneralEntryCategory(isTransactionData));
 
 
-                            break;
-
-
-
-
-
+                            break; 
 
                         default:
                             break;

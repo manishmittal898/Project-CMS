@@ -18,12 +18,11 @@ namespace CMS.Core.FixedValue
 
 #if DEBUG
         public const string ALLOWED_HOSTS_KEY = "AllowedHost:Development";
-
         public const string CONNECTION_STRING = "ConnectionStrings:Development";
 #else
-        public const string CONNECTION_STRING = "ConnectionStrings:Production"; 
+        public const string CONNECTION_STRING = "ConnectionStrings:Production";
         public const string ALLOWED_HOSTS_KEY = "AllowedHost:Production";
-        
+
 #endif
 
     }

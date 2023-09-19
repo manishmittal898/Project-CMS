@@ -12,7 +12,7 @@ namespace CMS.Core.ServiceHelper.Method
     {
         public readonly LoginUserViewModel _loginUserDetail;
         public readonly Security _security;
-        public readonly EmailHelper _emailHelper;
+         public readonly EmailHelper _emailHelper;
 
         public BaseService(IConfiguration _configuration)
         {
