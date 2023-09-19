@@ -213,6 +213,15 @@ tr.mat-header-row {
   font-size: 12px;
 }
 
+.ng-select .ng-clear-wrapper {
+  width: auto !important;
+}
+.ng-select .ng-clear-wrapper .ng-clear {
+  font-size: 28px !important;
+  position: relative;
+  top: 2px;
+}
+
 .ng-select-container {
   height: calc(1.4em + 1.4rem + 2px) !important;
   padding: .75rem 0.0rem .75rem 0.4rem;

@@ -24,6 +24,11 @@
         <!-- Product Detail Slider Start -->
         <div class="position-relative">
           <!-- <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div> -->
+          <button type="button" [disabled]="this.loading.WishList" (click)="updateWishlist()"
+            class="pro-detail-btn-wishlist" title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i
+              class="bi "
+              [ngClass]="{'bi-heart-fill pro-detail-btn-wishlist-active':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i>
+          </button>
           <div id="main-p-slider" [ngClass]="'product-d-main-slider'">
 
             <div class="product-d-main-slider-items" *ngIf="model?.ImagePath">
@@ -118,13 +123,13 @@
               </div>
             </div>
             <div class="product-detail-action-btn d-flex align-items-center">
-              <button type="button" [disabled]="this.loading.WishList" (click)="updateWishlist()"
-                class="pro-detail-btn-wishlist me-1 me-lg-2"
-                title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i class="bi "
-                  [ngClass]="{'bi-heart-fill pro-detail-btn-wishlist-active':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i>
-              </button>
+              <div class="product-list-qty d-flex me-2 me-md-3">
+                <button type="button" class="product-list-qty-btn">-</button>
+                <input type="number" placeholder="1">
+                <button type="button" class="product-list-qty-btn">+</button>
+              </div>
               <button type="button" (click)="onAddtoCart()" class="btn btn-default"
-                [disabled]="this.loading.AddToCart" ><i class="me-1"
+                [disabled]="this.loading.AddToCart"><i class="me-1"
                   [ngClass]="{'fa-light fa-cart-circle-plus':!this.loading.AddToCart,'bi bi-hourglass-split':this.loading.AddToCart}"></i>
                 Add to cart</button>
               <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="fa-light fa-credit-card me-1"></i>
