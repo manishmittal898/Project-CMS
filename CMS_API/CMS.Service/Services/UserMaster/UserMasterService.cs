@@ -69,7 +69,7 @@ namespace CMS.Service.Services.User
                                             Mobile = x.Mobile,
                                             Dob = x.Dob,
                                             Address = x.Address,
-                                            GenderId = x.GenderId ?? null,
+                                            GenderId = x.GenderId.HasValue ? _security.EncryptData(x.GenderId.Value) : null,
                                             Gender = x.Gender.Name ?? null,
                                             RoleId = x.RoleId,
                                             Role = x.Role.RoleName,
@@ -125,7 +125,7 @@ namespace CMS.Service.Services.User
                                Mobile = x.Mobile ?? "N/A",
                                Dob = x.Dob ?? null,
                                Address = x.Address ?? "N/A",
-                               GenderId = x.GenderId ?? null,
+                               GenderId = x.GenderId.HasValue ? _security.EncryptData(x.GenderId.Value) : null,
                                Gender = x.Gender.Name ?? null,
                                RoleId = x.RoleId,
                                Role = x.Role.RoleName,
@@ -189,7 +189,7 @@ namespace CMS.Service.Services.User
                         {
                             objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                         }
-                        objUser.GenderId = model.GenderId;
+                        objUser.GenderId = !string.IsNullOrEmpty(model.GenderId) ? long.Parse(_security.DecryptData(model.GenderId)) : null as Nullable<long>;
 
                         objUser.ModifiedBy = model.ModifiedBy;
                         var roletype = _db.TblUserMasters.Update(objUser);
@@ -217,7 +217,7 @@ namespace CMS.Service.Services.User
                         objUser.LastName = model.LastName;
                         objUser.Email = model.Email;
                         objUser.Dob = model.Dob;
-                        objUser.GenderId = model.GenderId;
+                        objUser.GenderId = !string.IsNullOrEmpty(model.GenderId) ? long.Parse(_security.DecryptData(model.GenderId)) : null as Nullable<long>;
                         objUser.Mobile = model.Mobile;
                         objUser.Password = _security.EncryptData(model.Password);
                         objUser.ProfilePhoto = model.ProfilePhoto;
@@ -302,7 +302,7 @@ namespace CMS.Service.Services.User
                 {
                     objUser.ProfilePhoto = await _fileHelper.Save(model.ProfilePhoto, FilePaths.UserProfile);
                 }
-                objUser.GenderId = model.GenderId;
+                objUser.GenderId = !string.IsNullOrEmpty(model.GenderId) ? long.Parse(_security.DecryptData(model.GenderId)) : null as Nullable<long>;
 
                 var roletype = _db.TblUserMasters.Update(objUser);
                 _db.SaveChanges();

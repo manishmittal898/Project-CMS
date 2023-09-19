@@ -59,7 +59,6 @@ export class MyAccountComponent implements OnInit {
       if (res.IsSuccess) {
         const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlGender = ddls?.ddlGender;
-
       }
     });
   }
@@ -86,7 +85,7 @@ export class MyAccountComponent implements OnInit {
 
 
   }
-  onImageChages(event: any) {
+  onImageChanges(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);

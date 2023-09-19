@@ -7,7 +7,7 @@
           <label>
             <i data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Profile" class="fa-light fa-pen"></i>
             <input type="hidden" [(ngModel)]="model.ProfilePhoto" formControlName="ProfilePhoto" name="ProfilePhoto">
-            <input type="file" (change)="onImageChages($event)" style="display: none;"
+            <input type="file" (change)="onImageChanges($event)" style="display: none;"
               [ngClass]="{ 'is-invalid': f.ProfilePhoto.errors && f.ProfilePhoto.touched}" class="form-control" />
           </label>
           <div class="invalid-feedback text-center"
