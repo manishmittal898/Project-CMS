@@ -36,8 +36,8 @@ namespace CMS.API.Areas.Customer.Controllers
 
 
         // POST api/<CustomerAccount>
-        [HttpPut]
-        public async Task<object> Save([FromBody] UserDetailPostModel model)
+        [HttpPost]
+        public async Task<object> Save(UserDetailPostModel model)
         {
             if (ModelState.IsValid)
             {

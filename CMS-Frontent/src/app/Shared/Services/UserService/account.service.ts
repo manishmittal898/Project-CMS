@@ -48,7 +48,7 @@ export class AccountService {
 
   UpdateProfile(model: UserPostModel): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.UserAccount_Save_Api}`;
-    return this._baseService.put(url, model);
+    return this._baseService.post(url, model);
   }
   GetUserDetail(): Observable<ApiResponse<UserPostModel>> {
     let url = `${this._baseService.API_Url.UserAccount_Detail_Api}`;
