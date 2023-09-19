@@ -149,7 +149,7 @@ namespace CMS.Service.Services.ProductMaster
                     Desc = x.Desc,
                     Summary = x.Summary,
                     Price = x.Price,
-                    SellingPrice = x.DiscountId.HasValue ? Math.Round(((x.Price.Value - (x.Price.Value * decimal.Parse(x.Discount.Value)) / 100))) : x.Price,
+                    SellingPrice = x.DiscountId.HasValue ? Math.Floor(x.Price.Value - (x.Price.Value * decimal.Parse(x.Discount.Value)) / 100) : x.Price,
                     MetaTitle = x.MetaTitle,
                     MetaDesc = x.MetaDesc,
                     CreatedBy = x.CreatedBy,
@@ -168,7 +168,7 @@ namespace CMS.Service.Services.ProductMaster
                         SizeId = _security.EncryptData(st.SizeId),
                         Size = st.Size.Name,
                         UnitPrice = st.UnitPrice,
-                        SellingPrice = st.Product.DiscountId.HasValue ? Math.Round(st.UnitPrice.Value - (st.UnitPrice.Value * decimal.Parse(st.Product.Discount.Value)) / 100) : st.UnitPrice,
+                        SellingPrice = st.Product.DiscountId.HasValue ? Math.Floor(st.UnitPrice.Value - (st.UnitPrice.Value * decimal.Parse(st.Product.Discount.Value)) / 100) : st.UnitPrice,
                         Quantity = st.Quantity
 
                     }).ToList() : null
