@@ -34,7 +34,6 @@ export class CartProductService {
 
   public async SetCartProduct(product: CartProductPostModel) {
     //  let model = { ProductId: product.Id } as CartProductPostModel;
-    debugger
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
     if (indx >= 0) {
       product = Object.assign([], this.cartProductItem[indx]);

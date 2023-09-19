@@ -21,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
   recordId: string;
   isLoading = false;
   loading = new Loading();
+  Quantity=1;
   get totalStock() {
     let stockCount = 0;
     this.model?.Stocks?.forEach(x => {

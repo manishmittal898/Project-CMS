@@ -79,11 +79,10 @@ export class AuthService {
     this._securityService.removeStorage('userDetail');
 
     setTimeout(() => {
-      debugger
       if (this._router.url.includes('/user')) {
         this._router.navigate([this._baseService.Routing_Url.storeUrl]);
       }
-      else if (this._router.url !== this._baseService.Routing_Url.LoginUrl  && !this._router.url.includes(this._baseService.Routing_Url.storeUrl)) {
+      else if (this._router.url !== this._baseService.Routing_Url.LoginUrl && !this._router.url.includes(this._baseService.Routing_Url.storeUrl)) {
         this._router.navigate([this._baseService.Routing_Url.LoginUrl]);
       }
     }, 10);
