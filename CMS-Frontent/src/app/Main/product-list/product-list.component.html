@@ -62,7 +62,7 @@
             </div>
           </div>
           <!-- Product End -->
-          <div class="col-lg-12 mt-4">
+          <div class="col-lg-12 mt-4" *ngIf="indexModel.PageSize<totalRecords">
             <nav>
               <pagination-controls class="pagination justify-content-center"
                 (pageChange)="indexModel.Page= $event;getList()">

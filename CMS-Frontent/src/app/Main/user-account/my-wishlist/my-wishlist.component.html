@@ -8,7 +8,7 @@
           <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
         </div>
 
-        <div class="col-lg-12 mt-4">
+        <div class="col-lg-12 mt-4" *ngIf="unIndexModel.PageSize<totalRecords">
           <nav>
             <pagination-controls class="pagination justify-content-center"
               (pageChange)="unIndexModel.Page= $event;getList()">
@@ -25,7 +25,7 @@
           <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
         </div>
 
-        <div class="col-lg-12 mt-4">
+        <div class="col-lg-12 mt-4" *ngIf="authIndexModel.PageSize<totalRecords">
           <nav>
             <pagination-controls class="pagination justify-content-center"
               (pageChange)="authIndexModel.Page=$event;getList()">
