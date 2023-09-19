@@ -34,8 +34,8 @@
               <div class="d-flex align-items-center">
                 <div class="view-mode d-none d-xl-flex align-items-center me-3">
                   <div class="me-2">View as</div>
-                  <span class="icon-mode grid-3"></span>
-                  <span class="icon-mode grid-4 active"></span>
+                  <span class="icon-mode grid-3" [ngClass]="{'active': !isGrid4}" (click)="isGrid4=false"></span>
+                  <span class="icon-mode grid-4 " [ngClass]="{'active': isGrid4}" (click)="isGrid4=true"></span>
                 </div>
                 <div class="product-sortby-filter me-3">
                   <!-- <div class="ms-1">Sort By</div> -->
@@ -55,7 +55,7 @@
             </div>
           </div>
           <!-- Product Start -->
-          <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6 mb-4"
+          <div class=" col-lg-4 col-md-4 col-sm-4 col-6 mb-4" [ngClass]="{'col-xl-3':isGrid4 ,'col-xl-4':!isGrid4 }"
             *ngFor="let item of model  | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords };let index=index">
             <div class="position-relative product-list-hover-items-outside">
               <app-product-card [(Product)]="model[index]"></app-product-card>

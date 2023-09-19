@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
   model: ProductMasterViewModel[] = [];
   totalRecords: number = 0;
   sortValue: string = "CreatedOn_false";
-
+  isGrid4 = true;
   constructor(private readonly _productService: ProductService,
     private readonly _router: ActivatedRoute, private _route: Router, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
 
