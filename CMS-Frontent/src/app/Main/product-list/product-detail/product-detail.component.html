@@ -102,7 +102,7 @@
             <p class="mb-2" *ngIf="SelectedSizeModel"> Size: <strong>{{SelectedSizeModel.Size}}</strong> </p>
             <ul class="d-flex flex-wrap">
               <ng-container *ngFor="let item of model.Stocks">
-                <li><a class="product-detail-size-btn" (click)="this.SelectedSizeModel = item;"
+                <li><a class="product-detail-size-btn" (click)="this.SelectedSizeModel = item;Quantity = 1;"
                     [ngClass]="[item.Quantity===0|| !item.Quantity ? 'pds-stock-0' : '',item.SizeId==SelectedSizeModel?.SizeId?'active':'']"
                     href="javascript:void()">{{item.Size}}</a> <span class="pds-left"> {{item.Quantity}} left</span>
                 </li>
@@ -124,9 +124,11 @@
             </div>
             <div class="product-detail-action-btn d-flex align-items-center">
               <div class="product-list-qty d-flex me-2 me-md-3">
-                <button type="button" class="product-list-qty-btn" [disabled]="Quantity==0" (click)="Quantity=Quantity-1" >-</button>
-                <input type="number" placeholder="Quantity" [ngModel]="Quantity">
-                <button type="button" class="product-list-qty-btn" [disabled]="Quantity==10" (click)="Quantity=Quantity+1">+</button>
+                <button type="button" class="product-list-qty-btn" [disabled]="Quantity==0"
+                  (click)="Quantity=Quantity-1">-</button>
+                <input type="number"  placeholder="Quantity" (keypress)="_commonService.NumberOnly($event)" [ngModel]="Quantity">
+                <button type="button" class="product-list-qty-btn" [disabled]="Quantity==10"
+                  (click)="Quantity=Quantity+1">+</button>
               </div>
               <button type="button" (click)="onAddtoCart()" class="btn btn-default"
                 [disabled]="this.loading.AddToCart"><i class="me-1"

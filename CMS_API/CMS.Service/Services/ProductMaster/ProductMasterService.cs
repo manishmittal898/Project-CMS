@@ -561,12 +561,10 @@ namespace CMS.Service.Services.ProductMaster
                 List<long> LengthIds = model.LengthId != null && model.LengthId.Count > 0 ? model.LengthId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> ColorIds = model.ColorId != null && model.ColorId.Count > 0 ? model.ColorId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> PatternIds = model.PatternId != null && model.PatternId.Count > 0 ? model.PatternId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
-
-
                 var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               join pt in _db.VwProductMasters.DefaultIfEmpty() on prd.Id equals pt.Id
 
-                              where !prd.IsDelete && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
+                              where !prd.IsDelete && prd.IsActive.Value && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
                                 && (model.CategoryId == null || model.CategoryId.Count == 0 || CategoryIds.Contains(prd.CategoryId))
                                  && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || SubCategoryIds.Contains(prd.SubCategoryId.Value))
@@ -666,6 +664,5 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
-
     }
 }

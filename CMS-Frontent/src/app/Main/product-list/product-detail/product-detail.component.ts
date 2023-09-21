@@ -8,6 +8,7 @@ import { WishListService, WishListPostModel } from "src/app/Shared/Services/Prod
 import { AuthService } from "src/app/Shared/Services/UserService/auth.service";
 import { environment } from "src/environments/environment";
 import { CartProductPostModel, CartProductService } from '../../../Shared/Services/ProductService/cart-product.service';
+import { CommonService } from "src/app/Shared/Services/Core/common.service";
 
 declare var $: any;
 @Component({
@@ -21,7 +22,7 @@ export class ProductDetailComponent implements OnInit {
   recordId: string;
   isLoading = false;
   loading = new Loading();
-  Quantity=1;
+  Quantity = 1;
   get totalStock() {
     let stockCount = 0;
     this.model?.Stocks?.forEach(x => {
@@ -36,8 +37,8 @@ export class ProductDetailComponent implements OnInit {
   }
   shareLink: SafeUrl;
   constructor(private readonly _productService: ProductService, private readonly _route: ActivatedRoute,
-    private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService, private readonly _cartService: CartProductService,
-    private readonly _wishListService: WishListService, private _toasterService: ToastrService, private _auth: AuthService) {
+    private readonly _sainitizer: DomSanitizer, private readonly _cartService: CartProductService,
+    private readonly _wishListService: WishListService, readonly _commonService: CommonService, private _auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class ProductDetailComponent implements OnInit {
       this.recordId = x.id as string;
       this.getDetailData();
     });
+
 
   }
 
@@ -134,9 +136,16 @@ export class ProductDetailComponent implements OnInit {
 
   onAddtoCart() {
     this.loading.AddToCart = true;
-    this._cartService.SetCartProduct({ ProductId: this.model.Id, SizeId: this.SelectedSizeModel.SizeId, Quantity: 1 } as CartProductPostModel).then(() => {
+    let model = {
+      ProductId: this.model.Id as string,
+      SizeId: this.SelectedSizeModel.SizeId as string,
+      Quantity: this.Quantity
+    } as CartProductPostModel;
+
+    this._cartService.SetCartProduct(model).then(() => {
       setTimeout(() => {
         this.loading.AddToCart = false;
+        this.Quantity = 1;
       }, 1000);
     });
 

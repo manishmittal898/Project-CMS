@@ -19,7 +19,6 @@ namespace CMS.Service.Services.UserCartProduct
     public class UserCartProductPostModel
     {
         public string ProductId { get; set; }
-
         public string SizeId { get; set; }
         public long Quantity { get; set; }
 

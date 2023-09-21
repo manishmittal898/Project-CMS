@@ -39,8 +39,8 @@ export class FooterComponent implements OnInit {
         serve.unsubscribe();
         if (res.IsSuccess) {
           const ddls = res?.Data as DropDownModel;
-          this.cmsPageMenu = ddls.ddlCMSPage.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
-          this.ddlCategory = ddls.ddlCategory.slice(0, 6).map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
+          this.cmsPageMenu = ddls.ddlCMSPage?.map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
+          this.ddlCategory = ddls.ddlCategory?.slice(0, 6).map(x => { return { Text: x.Text, Value: x.Value } as DropDownItem });
           setTimeout(() => {
             this._securityService?.setStorage('nav-cms-page-menu', JSON.stringify(this.cmsPageMenu))
             this._securityService?.setStorage('nav-Category', JSON.stringify(this.ddlCategory))

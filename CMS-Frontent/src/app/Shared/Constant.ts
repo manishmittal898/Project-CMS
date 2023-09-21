@@ -54,8 +54,8 @@ export class API_Url {
 
  //#region  << UserCartProduct  >>
  public static UserCartProduct_Api = `${environment.apiEndPoint}customer/UserCartProduct/Get`;
- public static UserCartProduct_Add_Api = `${environment.apiEndPoint}customer/UserCartProduct/AddWishListProduct`;
- public static UserCartProduct_Remove_Api = `${environment.apiEndPoint}customer/UserCartProduct/RemoveWishListProduct/`;
+ public static UserCartProduct_Add_Api = `${environment.apiEndPoint}customer/UserCartProduct/AddCartProduct`;
+ public static UserCartProduct_Remove_Api = `${environment.apiEndPoint}customer/UserCartProduct/RemoveCartProduct/`;
 
 
  //#endregion
