@@ -35,7 +35,7 @@ namespace CMS.API.Controllers
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetDropDown(key, isTransactionData);
 
             _cacheService.SetData(keyData, cacheData, expirationTime);
@@ -53,7 +53,7 @@ namespace CMS.API.Controllers
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetFilterDropDown(model);
 
             _cacheService.SetData("GetMultipleFilterDropDown", cacheData, expirationTime);
@@ -72,7 +72,7 @@ namespace CMS.API.Controllers
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetFilterDropDown(obj);
 
             _cacheService.SetData("GetFilterDropDown", cacheData, expirationTime);

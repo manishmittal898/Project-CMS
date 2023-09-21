@@ -4,10 +4,12 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.ProductMaster;
+using ImageProcessor.Processors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,30 +31,36 @@ namespace CMS.Service.Services.UserCartProduct
 
             try
             {
-                List<TblUserCartList> objProducts = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
-                if (objProducts.Count == 0)
+                TblUserCartList objProducts = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.SizeId == long.Parse(_security.DecryptData(model.SizeId)) && x.UserId == _loginUserDetail.UserId).FirstOrDefaultAsync();
+                if (objProducts == null)
                 {
                     TblUserCartList objProduct = new TblUserCartList();
                     objProduct.ProductId = long.Parse(_security.DecryptData(model.ProductId));
                     objProduct.SizeId = long.Parse(_security.DecryptData(model.SizeId));
                     objProduct.Quantity = model.Quantity;
-
                     objProduct.UserId = _loginUserDetail.UserId.Value;
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserCartLists.AddAsync(objProduct);
                     await _db.SaveChangesAsync();
+                    objProducts.Id = product.Entity.Id;
                 }
-                else if (objProducts.Count > 1)
+                else if (objProducts != null)
                 {
-
-                    _db.TblUserCartLists.RemoveRange(objProducts.SkipLast(1));
+                    objProducts.Quantity += model.Quantity;
+                    _db.TblUserCartLists.Update(objProducts);
                     await _db.SaveChangesAsync();
                 }
+                objResult.Data = new UserCartProductViewModel
+                {
+                    Id = _security.EncryptData(objProducts.Id),
+                    AddedOn = objProducts.AddedOn,
+                    ProductId = _security.EncryptData(objProducts.ProductId),
+                    Quantity = objProducts.Quantity,
+                    SizeId = _security.EncryptData(objProducts.SizeId)
 
+                };
 
-
-
-                return CreateResponse<UserCartProductViewModel>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                return CreateResponse<UserCartProductViewModel>(objResult.Data, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception)

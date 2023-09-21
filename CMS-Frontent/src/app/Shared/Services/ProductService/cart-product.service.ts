@@ -36,16 +36,14 @@ export class CartProductService {
     //  let model = { ProductId: product.Id } as CartProductPostModel;
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
     if (indx >= 0) {
-      product = Object.assign([], this.cartProductItem[indx]);
-      product.Quantity++;
+      let productItem = Object.assign({}, this.cartProductItem[indx]);
+      productItem.Quantity += product.Quantity;
+      // product = productItem;
     }
     if (this._auth.IsAuthentication.value) {
-
       this.AddProduct(product).subscribe(x => {
         if (x.IsSuccess) {
-          if (indx >= 0) {
-            this.cartProductItem[indx] = product;
-          } else {
+          if (indx == -1) {
             this.cartProductItem.push(product);
           }
           this._toasterService.success(x.Message as string, 'Success');
@@ -62,9 +60,7 @@ export class CartProductService {
         })
 
     } else {
-      if (indx >= 0) {
-        this.cartProductItem[indx] = product;
-      } else {
+      if (indx == -1) {
         this.cartProductItem.push(product);
       }
       this._toasterService.success("Added Successfully" as string, 'Success');

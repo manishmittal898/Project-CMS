@@ -57,7 +57,7 @@ export class ProductFilterComponent implements OnInit {
     this.dropDown.ddlProductLength = ddls?.ddlProductLength;
     this.dropDown.ddlProductColor = ddls?.ddlProductColor;
     this.dropDown.ddlProductPattern = ddls?.ddlProductPattern;
-    if (this.dropDown.ddlProductPrice.Value > 1) {
+    if (this.dropDown.ddlProductPrice?.Value > 1) {
       this.filterModel.Price[1] = Object.assign(this.dropDown.ddlProductPrice.Value);
     }
     //  this.getSubLookUpDropDown();

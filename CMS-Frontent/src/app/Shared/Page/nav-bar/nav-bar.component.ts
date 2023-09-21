@@ -53,7 +53,7 @@ export class NavBarComponent implements OnInit {
         serve.unsubscribe();
         if (res.IsSuccess) {
           const ddls = res?.Data as DropDownModel;
-          this.menuModel = ddls.ddlLookupGroup.map(x => {
+          this.menuModel = ddls.ddlLookupGroup?.map(x => {
             return {
               Category: x.Category, CategoryId: String(x.CategoryId),
               Data: x.Data.map(sd => { return { Text: sd.Text, Value: sd.Value, Category: sd.Category, CategoryId: sd.CategoryId } })
