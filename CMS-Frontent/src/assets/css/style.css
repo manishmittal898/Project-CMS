@@ -1660,6 +1660,10 @@ pre p {
   position: relative;
   top: 4px;
 }
+.product-filter .product-filterItems .product-filterItems-body .ng-select .ng-clear-wrapper .ng-clear {
+  top: 0px;
+  right: 5px;
+}
 .ng-select-open .ng-select-container {
     border: solid 1px #dcdcdc !important;
     border-radius: 8px !important;
@@ -2244,7 +2248,8 @@ section.deals-opt-d-1 {
   margin: 0px;
 }
 .my-account-sidebar ul li a.active, .my-account-sidebar ul li a:hover {
-  background: #fffbe2;
+  color: var(--primary-color);
+  font-weight: 500;
 }
 .my-account-sidebar ul li a {
   color: #000;
