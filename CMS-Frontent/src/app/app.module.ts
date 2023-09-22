@@ -13,13 +13,14 @@ import { RegisterComponent } from './Shared/Page/register/register.component';
 import { BaseAPIService } from './Shared/Services/Core/base-api.service';
 import { MainModule } from './Main/main.module';
 import { CookieService } from 'ngx-cookie-service';
+import { CartSidebarComponent } from './Shared/Page/nav-bar/cart-sidebar/cart-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HtmlComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -29,9 +30,9 @@ import { CookieService } from 'ngx-cookie-service';
     FeatureModule,
     MainModule
   ],
-  providers: [BaseAPIService, CookieService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+  providers: [BaseAPIService, CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
-
 })
 export class AppModule { }

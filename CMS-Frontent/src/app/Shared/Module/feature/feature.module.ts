@@ -13,6 +13,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
 import { CalendarModule } from 'primeng/calendar';
 import { ProductCardComponent } from '../../../Main/product-list/product-card/product-card.component';
+import { CartSidebarComponent } from '../../Page/nav-bar/cart-sidebar/cart-sidebar.component';
 
 
 
@@ -27,6 +28,7 @@ const component = [
   HeaderComponent,
   FooterComponent,
   NavBarComponent,
+  CartSidebarComponent,
   ProductCardComponent
 ];
 

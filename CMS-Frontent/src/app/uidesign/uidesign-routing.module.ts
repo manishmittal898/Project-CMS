@@ -2,9 +2,9 @@ import { UIDesignComponent } from './uidesign.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../Shared/Page/login/login.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
- 
+import { CartComponent } from '../Main/shop/cart/cart.component';
+import { CheckoutComponent } from '../Main/shop/checkout/checkout.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -14,15 +14,7 @@ const routes: Routes = [
 
     },
 
-    {
-      component: CartComponent, path: 'cart',
-
-    },
-
-    {
-      component: CheckoutComponent, path: 'checkout',
-
-    }
+   
     ]
   }
 ];

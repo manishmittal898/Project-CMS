@@ -5,11 +5,8 @@ import { UIDesignRoutingModule } from './uidesign-routing.module';
 import { UIDesignComponent } from './uidesign.component';
 import { FeatureModule } from '../Shared/Module/feature/feature.module';
 
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-
 @NgModule({
-  declarations: [UIDesignComponent,  CartComponent, CheckoutComponent],
+  declarations: [UIDesignComponent],
   imports: [
     CommonModule,
     UIDesignRoutingModule,

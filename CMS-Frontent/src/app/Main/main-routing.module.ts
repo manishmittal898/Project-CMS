@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './product-list/product-detail/product-de
 import { MainComponent } from './main.component';
 import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
 import { UserAccountModule } from './user-account/user-account.module';
+import { ShopModule } from './shop/shop.module';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
       path: "user",
       loadChildren: () => import("./user-account/user-account.module").then(m => m.UserAccountModule)
+    },
+    {
+      path: "shop",
+      loadChildren: () => import("./shop/shop.module").then(m => m.ShopModule)
     },
 
     ]

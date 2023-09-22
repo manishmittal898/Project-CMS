@@ -12,6 +12,7 @@ import { CategoryProductListComponent } from './product-list/product-detail/cate
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { ProductSectionComponent } from './home/product-section/product-section.component';
 import { FormsModule } from '@angular/forms';
+import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MainRoutingModule,
     UserAccountModule,
+    ShopModule,
     FeatureModule,
     FormsModule
   ],
