@@ -101,7 +101,9 @@ export class CartProductService {
             return;
           }
         })
-      };
+      } else {
+        this.CartProductModel = [];
+      }
 
     } else {
       let indexModel = new IndexModel();
@@ -114,7 +116,6 @@ export class CartProductService {
     }
   }
 
-
   public async syncCartProduct() {
     let sub = [] as any[];
     this.cartProductItem.forEach(x => {
@@ -126,6 +127,30 @@ export class CartProductService {
     })
   }
 
+  public async deleteProduct(productId, sizeId) {
+    if (this._auth.IsAuthentication.value) {
+      let indx = this.cartProductItem.findIndex(x => x.ProductId == productId && x.SizeId == sizeId)
+      this.RemoveProduct(this.cartProductItem[indx]).toPromise().then(x => {
+        if (x.IsSuccess) {
+          this.cartProductItem.splice(indx, 1);
+          let data = JSON.stringify(this.cartProductItem);
+          this._securityService.setStorage('cart-product', data);
+          this.GetCartList();
+        }
+        return x.IsSuccess;
+      })
+
+
+    } else {
+      let indx = this.cartProductItem.findIndex(x => x.ProductId == productId && x.SizeId == sizeId)
+      this.cartProductItem.splice(indx, 1);
+      let data = JSON.stringify(this.cartProductItem);
+      this._securityService.setStorage('cart-product', data);
+      this.GetCartList();
+      return true;
+    }
+
+  }
 
 }
 

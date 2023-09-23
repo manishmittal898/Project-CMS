@@ -122,6 +122,6 @@ export class Message {
   static DeleteConfirmation = 'Are you want to delete record ?';
   static VerifyInput = 'Please Verify input data?';
 
-
+static DeleteCartItem ='Are you sure want to delete this cart items from the shopping cart?';
   //#endregion
 }
