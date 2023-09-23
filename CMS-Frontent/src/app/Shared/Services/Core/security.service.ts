@@ -127,8 +127,8 @@ export class SecurityService {
 
   }
 
-  GetEncrptedText(value: string): Promise<ApiResponse<string>> {
-    let url = `${this._baseService.API_Url.GetEncrptedText_Api}?value=${value}`;
+  GetEncryptedText(value: string): Promise<ApiResponse<string>> {
+    let url = `${this._baseService.API_Url.GetEncryptedText_Api}?value=${value}`;
     return this._baseService.get(url).toPromise();
   }
 

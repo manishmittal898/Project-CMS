@@ -140,7 +140,7 @@ namespace CMS.Service.Services.Account
                 return CreateResponse<object>(false, ex.Message ?? ex.InnerException.ToString(), false, ((int)ApiStatusCode.ServerException));
             }
         }
-        public ServiceResponse<string> GetEncrptedPassword(string value)
+        public ServiceResponse<string> GetEncryptedPassword(string value)
         {
             ServiceResponse<string> objModel = new ServiceResponse<string>();
             try

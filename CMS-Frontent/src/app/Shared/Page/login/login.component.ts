@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     if (!environment.IsAutoLogin) {
-      this._security.GetEncrptedText(this.model.Password).then(x => {
+      this._security.GetEncryptedText(this.model.Password).then(x => {
         if (x.IsSuccess) {
           const encPass = x.Data;
           const postModel = {
@@ -53,7 +53,9 @@ export class LoginComponent implements OnInit {
               if (this._wishList.wishListItem.length > 0) {
                 this._wishList.syncWishList();
               }
-
+              if (this._wishList.wishListItem.length > 0) {
+                this._wishList.syncWishList();
+              }
               if (this._activatedRoute.snapshot.queryParams.returnURL) {
                 this._route.navigate([this._activatedRoute.snapshot.queryParams.returnURL]);
 

@@ -79,9 +79,9 @@ namespace CMS.API.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ServiceResponse<string> GetEncrptedText(string value)
+        public ServiceResponse<string> GetEncryptedText(string value)
         {
-            return _accountService.GetEncrptedPassword(value);
+            return _accountService.GetEncryptedPassword(value);
         }
         //Get api/Account/Logout
         [HttpGet]
