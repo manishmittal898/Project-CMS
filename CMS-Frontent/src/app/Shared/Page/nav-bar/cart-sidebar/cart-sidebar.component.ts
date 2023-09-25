@@ -53,10 +53,11 @@ export class CartSidebarComponent implements OnInit {
     }
   }
 
-  getSizeItem(sizeId, productId): DropDownItem[] {
+  checkSizeExist(sizeId, productId, itm): boolean {
     let allSize = this.cartModel.filter(x => x.ProductId == productId).map(x => x.SizeId);
-    return this.sizeModel.filter(x => x.Value == sizeId || !allSize.includes(x.Value))
+    return this.sizeModel.filter(x => x.Value == itm && (x.Value == sizeId || !allSize.includes(x.Value))).length > 0;
   }
+
   deleteCartItem(item: CartProductViewModel) {
     this._commonService.Question(Message.DeleteCartItem).then(result => {
       if (result) {

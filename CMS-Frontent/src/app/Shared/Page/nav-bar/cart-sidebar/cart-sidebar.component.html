@@ -1,7 +1,8 @@
 <!-- Cart SideBar Start -->
 <div class="cart-item p-3">
-  <div class="d-flex justify-content-between align-items-center mb-3" >
-    <h5 class="font-w-400 m-0"><i class="bi bi-cart3 me-1"></i> MY Cart <strong *ngIf="cartModel.length>0"> {{cartModel.length}} </strong></h5>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="font-w-400 m-0"><i class="bi bi-cart3 me-1"></i> MY Cart <strong *ngIf="cartModel.length>0">
+        {{cartModel.length}} </strong></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
 
@@ -14,25 +15,29 @@
                 [src]="item.Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" /></div>
             <div class="cart-sidebar-body-cart-items-info">
               <!-- <a href="javascript:void()"> -->
-                <h1>{{item.Product.Name}}</h1>
-                <div class="d-flex justify-content-between text-muted font-13">
-                  <div> <strong>Size:</strong>
-                    <ng-select style="width:5rem;" [clearable]="false" [items]="getSizeItem(item.SizeId,item.ProductId)"
-                      placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="{{'Size_'+indx}}"
-                      [(ngModel)]="item.SizeId">
-                    </ng-select>
+              <h1>{{item.Product.Name}}</h1>
+              <div class="d-flex justify-content-between text-muted font-13">
+                <div> <strong>Size:</strong>
+                  <ng-select style="width:5rem;" [clearable]="false" placeholder="Size" [searchable]="true"
+                    id="{{'Size_'}}" [(ngModel)]="item.SizeId">
+                    <ng-container *ngFor="let itm of sizeModel">
+                      <ng-option *ngIf="checkSizeExist(item.SizeId,item.ProductId,itm.Value)" [value]="itm.Value">{{itm.Text}}</ng-option>
+                    </ng-container>
 
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <strong>Qty:</strong>
-                    <div class="product-list-qty d-flex ms-2">
-                      <button type="button"  [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1" class="product-list-qty-btn">-</button>
-                      <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
-                      <button type="button" [disabled]="item.Quantity==10"  (click)="item.Quantity=item.Quantity+1" class="product-list-qty-btn">+</button>
-                    </div>
+                  </ng-select>
+                </div>
+                <div class="d-flex align-items-center">
+                  <strong>Qty:</strong>
+                  <div class="product-list-qty d-flex ms-2">
+                    <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1"
+                      class="product-list-qty-btn">-</button>
+                    <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
+                    <button type="button" [disabled]="item.Quantity==10" (click)="item.Quantity=item.Quantity+1"
+                      class="product-list-qty-btn">+</button>
                   </div>
                 </div>
-                <h2>₹ {{item.Product.SellingPrice}}</h2>
+              </div>
+              <h2>₹ {{item.Product.SellingPrice}}</h2>
               <!-- </a> -->
               <div class="cart-sidebar-body-cart-items-action text-end">
                 <a href="javascript:void()" (click)="deleteCartItem(item)" class="text-danger">
