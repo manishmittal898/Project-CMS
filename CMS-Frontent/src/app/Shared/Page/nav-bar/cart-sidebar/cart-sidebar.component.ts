@@ -6,6 +6,7 @@ import { DropDownModel } from 'src/app/Shared/Helper/Common';
 import { DropDownItem } from '../../../Helper/Common';
 import { CartProductService, CartProductViewModel } from 'src/app/Shared/Services/ProductService/cart-product.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/Shared/Services/ProductService/product.service';
 
 @Component({
   selector: 'app-cart-sidebar',
@@ -25,7 +26,7 @@ export class CartSidebarComponent implements OnInit {
     return amt;
   }
   constructor(private readonly _security: SecurityService, private _toasterService: ToastrService,
-    private readonly _commonService: CommonService, private _cartService: CartProductService) {
+    private readonly _commonService: CommonService, public _cartService: CartProductService, private readonly _productService: ProductService) {
     this._cartService.GetCartList();
     // this.cartModel[0].ProductId
 
@@ -69,6 +70,15 @@ export class CartSidebarComponent implements OnInit {
     }, err => {
       this._toasterService.error(err.message as string, 'Oops');
 
+    })
+  }
+  getUpdatedPrice(SizeId, ProductId) {
+    this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
+      if (res.IsSuccess) {
+        let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+        this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
+        this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
+      }
     })
   }
 }

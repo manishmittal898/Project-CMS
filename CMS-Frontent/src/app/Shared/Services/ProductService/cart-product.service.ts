@@ -98,6 +98,7 @@ export class CartProductService {
               itm.Product = model.find(x => x.Id == rs.ProductId);
               this.CartProductModel.push(itm);
             });
+            this.getUpdatedPrice();
             return;
           }
         })
@@ -111,9 +112,20 @@ export class CartProductService {
       this.GetList(indexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.CartProductModel = response.Data;
+          this.getUpdatedPrice();
         }
       })
     }
+  }
+  getUpdatedPrice() {
+    this.CartProductModel.forEach(rs => {
+      this._productService.GetStockDetail(rs.ProductId, rs.SizeId).subscribe(res => {
+        if (res.IsSuccess) {
+          rs.Product.SellingPrice = res.Data.SellingPrice;
+          rs.Product.Price = res.Data.UnitPrice;
+        }
+      })
+    });
   }
 
   public async syncCartProduct() {
@@ -135,7 +147,9 @@ export class CartProductService {
           this.cartProductItem.splice(indx, 1);
           let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('cart-product', data);
-          this.GetCartList();
+         // this.GetCartList();
+          let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
+          this.CartProductModel.splice(idx, 1);
         }
         return x.IsSuccess;
       })

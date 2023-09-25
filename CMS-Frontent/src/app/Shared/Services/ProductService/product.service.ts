@@ -24,7 +24,7 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
   GetStockDetail(id:string,sizeId):  Observable<ApiResponse<ProductStockModel>>{
-    let url = `${this._baseService.API_Url.Product_Stock_Detail_Api}?id=${id}&sizeId=${sizeId}`;
+    let url = `${this._baseService.API_Url.Product_Stock_Detail_Api}/${id}/${sizeId}`;
     return this._baseService.get(url);
   }
 }

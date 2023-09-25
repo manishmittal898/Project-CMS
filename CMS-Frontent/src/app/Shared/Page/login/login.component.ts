@@ -7,6 +7,7 @@ import { Routing_Url } from '../../Constant';
 import { AccountService } from '../../Services/UserService/account.service';
 import { SecurityService } from '../../Services/Core/security.service';
 import { WishListService } from '../../Services/ProductService/wish-list.service';
+import { CartProductService } from '../../Services/ProductService/cart-product.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   get routing_Url() { return Routing_Url };
 
   constructor(private readonly _accountService: AccountService, private readonly _wishList: WishListService,
-    private readonly _authService: AuthService, private readonly _security: SecurityService,
+    private readonly _authService: AuthService, private readonly _security: SecurityService,private readonly _cartService : CartProductService,
     private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
                 this._wishList.syncWishList();
               }
               if (this._wishList.wishListItem.length > 0) {
-                this._wishList.syncWishList();
+                this._cartService.syncCartProduct();
               }
               if (this._activatedRoute.snapshot.queryParams.returnURL) {
                 this._route.navigate([this._activatedRoute.snapshot.queryParams.returnURL]);

@@ -18,7 +18,7 @@
               <h1>{{item.Product.Name}}</h1>
               <div class="d-flex justify-content-between text-muted font-13">
                 <div> <strong>Size:</strong>
-                  <ng-select style="width:5rem;" [clearable]="false" placeholder="Size" [searchable]="true"
+                  <ng-select style="width:5rem;" [clearable]="false" (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size" [searchable]="true"
                     id="{{'Size_'}}" [(ngModel)]="item.SizeId">
                     <ng-container *ngFor="let itm of sizeModel">
                       <ng-option *ngIf="checkSizeExist(item.SizeId,item.ProductId,itm.Value)" [value]="itm.Value">{{itm.Text}}</ng-option>
