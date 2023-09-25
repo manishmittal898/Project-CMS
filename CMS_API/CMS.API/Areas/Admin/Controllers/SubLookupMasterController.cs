@@ -15,22 +15,14 @@ namespace CMS.API.Areas.Admin.Controllers
         // GET: api/<SubLookupMasterController>
         private readonly ISubLookupMasterService _sublookmstr;
         public SubLookupMasterController(ISubLookupMasterService sublookmstr)
-        {
-            _sublookmstr = sublookmstr;
-        }
+        => _sublookmstr = sublookmstr;
         // GET: api/<SubLookupMasterController>
         [HttpPost]
-        public async Task<object> GetAsync(IndexModel model)
-        {
-            return await _sublookmstr.GetList(model);
-        }
+        public async Task<object> GetAsync(IndexModel model) => await _sublookmstr.GetList(model);
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(string id)
-        {
-            return _sublookmstr.GetById(id);
-        }
+        public object Get(string id) => _sublookmstr.GetById(id);
 
         // POST api/<LookupMaster>
         [HttpPost]
@@ -52,16 +44,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id)
-        {
-            return await _sublookmstr.ActiveStatusUpdate(id);
-        }
+        public async Task<object> ChangeActiveStatus(string id) => await _sublookmstr.ActiveStatusUpdate(id);
+
 
         // DELETE api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id)
-        {
-            return await _sublookmstr.Delete(id);
-        }
+        public async Task<object> Delete(string id) => _sublookmstr.Delete(id);
+
     }
 }

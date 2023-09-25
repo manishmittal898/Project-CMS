@@ -1,40 +1,46 @@
 <!-- Cart SideBar Start -->
 <div class="cart-item p-3">
-  <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="cartModel.length>0">
-    <h5 class="font-w-400 m-0"><i class="bi bi-cart3 me-1"></i> MY Cart <strong> {{cartModel.length}} </strong></h5>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="font-w-400 m-0"><i class="bi bi-cart3 me-1"></i> MY Cart <strong *ngIf="cartModel.length>0">
+        {{cartModel.length}} </strong></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+
   <div class="cart-sidebar-body">
     <ng-container *ngIf="cartModel.length>0;else noItem;">
       <div class="cart-sidebar-body-cart">
-        <ng-container *ngFor="let item of cartModel ">
+        <ng-container *ngFor="let item of cartModel;let indx=index ">
           <div class="cart-sidebar-body-cart-items d-flex py-2">
             <div class="cart-sidebar-body-cart-items-img d-flex align-items-center justify-content-center"> <img
                 [src]="item.Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" /></div>
             <div class="cart-sidebar-body-cart-items-info">
-              <a href="javascript:void()">
-                <h1>{{item.Product.Name}}</h1>
-                <div class="d-flex justify-content-between text-muted font-13">
-                  <div> <strong>Size:</strong>
-                    <ng-select style="width:5rem;" [items]="getSizeItem(item.SizeId,item.ProductId)" placeholder="Size" [searchable]="true"
-                      bindLabel="Text" bindValue="Value" id="Size" [(ngModel)]="item.SizeId">
-                    </ng-select>
-                    <!-- -->
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <strong>Qty:</strong>
-                    <div class="product-list-qty d-flex ms-2">
-                      <button type="button" class="product-list-qty-btn">-</button>
-                      <input type="text" placeholder="" [(ngModel)]="item.Quantity">
-                      <button type="button" class="product-list-qty-btn">+</button>
-                    </div>
+              <!-- <a href="javascript:void()"> -->
+              <h1>{{item.Product.Name}}</h1>
+              <div class="d-flex justify-content-between text-muted font-13">
+                <div> <strong>Size:</strong>
+                  <ng-select style="width:5rem;" [clearable]="false" (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size" [searchable]="true"
+                    id="{{'Size_'}}" [(ngModel)]="item.SizeId">
+                    <ng-container *ngFor="let itm of sizeModel">
+                      <ng-option *ngIf="checkSizeExist(item.SizeId,item.ProductId,itm.Value)" [value]="itm.Value">{{itm.Text}}</ng-option>
+                    </ng-container>
+
+                  </ng-select>
+                </div>
+                <div class="d-flex align-items-center">
+                  <strong>Qty:</strong>
+                  <div class="product-list-qty d-flex ms-2">
+                    <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1"
+                      class="product-list-qty-btn">-</button>
+                    <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
+                    <button type="button" [disabled]="item.Quantity==10" (click)="item.Quantity=item.Quantity+1"
+                      class="product-list-qty-btn">+</button>
                   </div>
                 </div>
-                <h2>₹ {{item.Product.SellingPrice}}</h2>
-              </a>
+              </div>
+              <h2>₹ {{item.Product.SellingPrice}}</h2>
+              <!-- </a> -->
               <div class="cart-sidebar-body-cart-items-action text-end">
-                <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#DeleteCartItems"
-                  class="text-danger">
+                <a href="javascript:void()" (click)="deleteCartItem(item)" class="text-danger">
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" class="bi bi-trash"></i> </a>
               </div>
             </div>
@@ -46,7 +52,8 @@
       </div>
       <div class="cart-sidebar-body-cart-items-final-info my-4 mt-4">
         <div class="cart-sidebar-body-cart-items-final-info-item">
-          <h5 class=" d-flex justify-content-between"> <strong>Subtotal : </strong> <span> ₹ 2,846 </span> </h5>
+          <h5 class=" d-flex justify-content-between"> <strong>Subtotal : </strong> <span> ₹ {{TotalAmount}} </span>
+          </h5>
         </div>
       </div>
       <div class="cart-sidebar-body-cart-items-final-action d-flex">
@@ -58,14 +65,17 @@
           Shopping Bag</button>
       </div>
     </ng-container>
-    <div class="cart-sidebar-empty text-center " #noItem>
-      <div class="cart-sidebar-empty-icon">
-        <i class="bi bi-bag-x"></i>
+    <ng-template #noItem>
+      <div class="cart-sidebar-empty text-center ">
+        <div class="cart-sidebar-empty-icon">
+          <i class="bi bi-bag-x"></i>
+        </div>
+        <p class="mt-0 mb-4">Your basket is currently empty.</p>
+        <a href="javascript:void()" routerLink="/store" class="btn btn-default px-4 text-uppercase btn-border">Continue
+          Shopping <i class="bi bi-arrow-right ms-1"></i></a>
       </div>
-      <p class="mt-0 mb-4">Your basket is currently empty.</p>
-      <a href="javascript:void()" routerLink="/store" class="btn btn-default px-4 text-uppercase btn-border">Continue
-        Shopping <i class="bi bi-arrow-right ms-1"></i></a>
-    </div>
+    </ng-template>
+
   </div>
 </div>
 

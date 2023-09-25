@@ -42,6 +42,7 @@ export class API_Url {
   public static Product_List_Api = `${environment.apiEndPoint}public/Product/GetList`;
   public static Product_Category_Api = `${environment.apiEndPoint}public/Product/GetProductCategory`;
   public static Product_Detail_Api = `${environment.apiEndPoint}public/Product/Get/`;
+  public static Product_Stock_Detail_Api = `${environment.apiEndPoint}public/Product/GetStockDetail`;
   //#endregion
 
   //#region  << ProductWishList  >>
@@ -122,6 +123,6 @@ export class Message {
   static DeleteConfirmation = 'Are you want to delete record ?';
   static VerifyInput = 'Please Verify input data?';
 
-
+static DeleteCartItem ='Are you sure want to delete this cart items from the shopping cart?';
   //#endregion
 }

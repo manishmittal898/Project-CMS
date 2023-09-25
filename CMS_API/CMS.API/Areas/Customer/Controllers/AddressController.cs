@@ -13,23 +13,15 @@ namespace CMS.API.Areas.Customer.Controllers
     public class AddressController : ControllerBase
     {
         private readonly ICustomerAddressService _address;
-        public AddressController(ICustomerAddressService address)
-        {
-            _address = address;
-        }
+        public AddressController(ICustomerAddressService address) => _address = address;
 
         [HttpPost]
-        public async Task<object> Get(IndexModel model)
-        {
-            return await _address.GetList(model);
-        }
+        public async Task<object> Get(IndexModel model) => await _address.GetList(model);
+
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(string id)
-        {
-            return _address.GetById(id);
-        }
+        public object Get(string id) => _address.GetById(id);
 
         // POST api/<LookupMaster>
         [HttpPost]
@@ -55,26 +47,18 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> SetPrimary(string id)
-        {
-            return await _address.PrimaryStatusUpdate(id);
-        }
+        public async Task<object> SetPrimary(string id) => await _address.PrimaryStatusUpdate(id);
+
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id)
-        {
-            return await _address.ActiveStatusUpdate(id);
-        }
+        public async Task<object> ChangeActiveStatus(string id) => await _address.ActiveStatusUpdate(id);
 
 
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id)
-        {
-            return await _address.Delete(id);
-        }
+        public async Task<object> Delete(string id) => await _address.Delete(id);
 
     }
 }

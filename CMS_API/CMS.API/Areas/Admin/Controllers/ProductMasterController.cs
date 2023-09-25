@@ -16,24 +16,17 @@ namespace CMS.API.Areas.Admin.Controllers
     {
         // GET: api/<ProductMasterController>
         private readonly IProductMasterService _productmstr;
-        public ProductMasterController(IProductMasterService productmstr)
-        {
-            _productmstr = productmstr;
-        }
+        public ProductMasterController(IProductMasterService productmstr) => _productmstr = productmstr;
         // GET: api/<ProductMasterController>
         // GET: api/<LookupMaster>
         [HttpPost]
-        public async Task<object> GetList(IndexModel model)
-        {
-            return await _productmstr.GetList(model);
-        }
+        public async Task<object> GetList(IndexModel model) => await _productmstr.GetList(model);
+
 
         // GET api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public object Get(string id)
-        {
-            return _productmstr.GetById(id);
-        }
+        public object Get(string id) => _productmstr.GetById(id);
+
 
         // POST api/<ProductMasterController>
         [HttpPost]
@@ -57,23 +50,15 @@ namespace CMS.API.Areas.Admin.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id)
-        {
-            return await _productmstr.ActiveStatusUpdate(id);
-        }
+        public async Task<object> ChangeActiveStatus(string id) => await _productmstr.ActiveStatusUpdate(id);
+
 
         // DELETE api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id)
-        {
-            return await _productmstr.Delete(id);
-        }
+        public async Task<object> Delete(string id) => await _productmstr.Delete(id);
         // DELETE api/<ProductMasterController>/5
         [HttpGet("{id}")]
-        public async Task<object> DeleteProductFile(string id)
-        {
-            return await _productmstr.DeleteProductFile(id);
-        }
+        public async Task<object> DeleteProductFile(string id) => await _productmstr.DeleteProductFile(id);
 
     }
 }

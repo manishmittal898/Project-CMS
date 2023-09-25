@@ -17,10 +17,8 @@ namespace CMS.API.Areas.Admin.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IUserMasterService _user;
-        public CustomerController(IUserMasterService user)
-        {
-            _user = user;
-        }
+        public CustomerController(IUserMasterService user) => _user = user;
+
 
         [HttpPost]
         public async Task<object> Get(IndexModel model)
@@ -34,12 +32,7 @@ namespace CMS.API.Areas.Admin.Controllers
         }
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(long id)
-
-        {
-            return await _user.GetById(id);
-
-        }
+        public async Task<object> Get(long id)        => await _user.GetById(id);
 
 
         // POST api/<CustomerAccount>

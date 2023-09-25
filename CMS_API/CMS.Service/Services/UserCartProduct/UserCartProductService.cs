@@ -77,12 +77,9 @@ namespace CMS.Service.Services.UserCartProduct
             try
             {
 
-                List<TblUserCartList> objProduct = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId).ToListAsync();
+                List<TblUserCartList> objProduct = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId && x.SizeId == long.Parse(_security.DecryptData(model.SizeId))).ToListAsync();
                 _db.TblUserCartLists.RemoveRange(objProduct);
                 await _db.SaveChangesAsync();
-
-
-
                 return CreateResponse<UserCartProductViewModel>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
