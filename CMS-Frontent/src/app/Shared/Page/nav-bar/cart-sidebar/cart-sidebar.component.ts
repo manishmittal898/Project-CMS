@@ -53,7 +53,7 @@ export class CartSidebarComponent implements OnInit {
     }
   }
 
-  getSizeItem(sizeId, productId) {
+  getSizeItem(sizeId, productId): DropDownItem[] {
     let allSize = this.cartModel.filter(x => x.ProductId == productId).map(x => x.SizeId);
     return this.sizeModel.filter(x => x.Value == sizeId || !allSize.includes(x.Value))
   }
