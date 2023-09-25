@@ -2091,7 +2091,7 @@ table tr td {
 
 }
 .card-deals-opt-d-1-items-img {
-  background: url(https://cdn.shopify.com/s/files/1/0081/3305/0458/files/banner-1-compressor_1880x.jpg?v=1632456769);
+  background: url();
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -2542,7 +2542,29 @@ opacity: 10;
 }
 .home-product {
   margin-bottom: 50px;
+  position: relative;
 }
+app-product-section .home-product:nth-child(3) {
+  background: url(../images//pattern2.png);
+  padding: 25px 0px;
+  background-attachment: fixed;
+}
+.home-product .container {
+  position: relative;
+}
+app-product-section .home-product:nth-child(3):before {
+  position: absolute;
+  content: "";
+  background: rgba(255,255,255,0.5);
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+app-product-section .home-product:nth-child(3) .section-title
+{
+  margin-bottom: 15px;
+}
+
 #HomeSlider {
   margin-bottom: 60px;
 }
