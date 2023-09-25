@@ -16,23 +16,16 @@ namespace CMS.API.Areas.Admin.Controllers
     {
 
         private readonly ILookupMasterService _lookupmstr;
-        public LookupMasterController(ILookupMasterService lookupmstr)
-        {
-            _lookupmstr = lookupmstr;
-        }
+        public LookupMasterController(ILookupMasterService lookupmstr) => _lookupmstr = lookupmstr;
         // GET: api/<LookupMaster>
         [HttpPost]
-        public async Task<object> GetAsync(IndexModel model)
-        {
-            return await _lookupmstr.GetList(model);
-        }
+        public async Task<object> GetAsync(IndexModel model) => await _lookupmstr.GetList(model);
+
 
         // GET api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public object Get(string id)
-        {
-            return _lookupmstr.GetById(id);
-        }
+        public object Get(string id) => _lookupmstr.GetById(id);
+
 
         // POST api/<LookupMaster>
         [HttpPost]
@@ -53,17 +46,14 @@ namespace CMS.API.Areas.Admin.Controllers
                 return objReturn;
             }
         }
+
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id)
-        {
-            return await _lookupmstr.ActiveStatusUpdate(id);
-        }
+        public async Task<object> ChangeActiveStatus(string id) => await _lookupmstr.ActiveStatusUpdate(id);
+
 
         // DELETE api/<LookupMaster>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id)
-        {
-            return await _lookupmstr.Delete(id);
-        }
+        public async Task<object> Delete(string id) => await _lookupmstr.Delete(id);
+
     }
 }

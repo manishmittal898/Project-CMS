@@ -12,17 +12,12 @@ namespace CMS.API.Areas.Public.Controllers
     public class GeneralEntryDataController : ControllerBase
     {
         private readonly IGeneralEntryService _service;
-        public GeneralEntryDataController(IGeneralEntryService Iservice)
-        {
-            _service = Iservice;
-        }
+        public GeneralEntryDataController(IGeneralEntryService Iservice) => _service = Iservice;
+
         // GET: api/<GeneralEntryController>
         // GET: api/<UserController>
         [HttpPost]
-        public async Task<object> GetList(GeneralEntryFilterModel model)
-        {
-            return await _service.GetDataList(model);
-        }
+        public async Task<object> GetList(GeneralEntryFilterModel model) => await _service.GetDataList(model);
 
     }
 }

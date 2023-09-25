@@ -27,12 +27,8 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // GET api/<CustomerAccount>/5
         [HttpGet]
-        public async Task<object> Get()
+        public async Task<object> Get() => await _user.GetById();
 
-        {
-            return await _user.GetById();
-
-        }
 
 
         // POST api/<CustomerAccount>
@@ -62,9 +58,7 @@ namespace CMS.API.Areas.Customer.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 return await _user.UpdateProfilePic(model);
-
             }
             else
             {
@@ -72,17 +66,9 @@ namespace CMS.API.Areas.Customer.Controllers
                 objReturn.Message = "Invalid";
                 objReturn.IsSuccess = false;
                 objReturn.Data = null;
-
                 return objReturn;
             }
 
         }
-
-
-
-
-
-
-
     }
 }

@@ -14,23 +14,17 @@ namespace CMS.API.Areas.Admin.Controllers
     {
         // GET: api/<ProductReviewController>
         private readonly IProductReviewService _productrw;
-        public ProductReviewController(IProductReviewService productrw)
-        {
-            _productrw = productrw;
-        }
+        public ProductReviewController(IProductReviewService productrw) => _productrw = productrw;
+
         // GET: api/<ProductReviewController>
         [HttpGet]
-        public object Get()
-        {
-            return _productrw.GetList(null);
-        }
+        public object Get() => _productrw.GetList(null);
+
 
         // GET api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public object Get(string id)
-        {
-            return _productrw.GetById(id);
-        }
+        public object Get(string id) => _productrw.GetById(id);
+
 
         // POST api/<ProductReviewController>
         [HttpPost]
@@ -57,14 +51,9 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpPut("{id}")]
         public async Task<object> Put(string id, [FromBody] ProductReviewViewModel model)
         {
-
-
             if (ModelState.IsValid)
             {
-
-
                 return await _productrw.Edit(id, model);
-
             }
             else
             {
@@ -75,24 +64,11 @@ namespace CMS.API.Areas.Admin.Controllers
 
                 return objReturn;
             }
-
-
-
-
-
-
-
         }
 
         // DELETE api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public void Delete(string id)
-        {
+        public void Delete(string id) => _productrw.Delete(id);
 
-            _productrw.Delete(id);
-
-
-
-        }
     }
 }

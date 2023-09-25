@@ -14,24 +14,15 @@ namespace CMS.API.Areas.Admin.Controllers
     public class UserMasterController : ControllerBase
     {
         private readonly IUserMasterService _user;
-        public UserMasterController(IUserMasterService user)
-        {
-            _user = user;
-        }
+        public UserMasterController(IUserMasterService user) => _user = user;
 
         [HttpPost]
-        public async Task<object> Get(IndexModel model)
-        {
-            return await _user.GetList(model);
-        }
+        public async Task<object> Get(IndexModel model) => await _user.GetList(model);
+
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public object Get(int id)
-        {
-            return _user.GetById(id);
-        }
-
+        public object Get(int id) => _user.GetById(id);
         // POST api/<UserController>
         [HttpPost]
         public async Task<object> Post([FromBody] UserMasterPostModel model)
@@ -56,10 +47,8 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<UserController>/5
         [HttpGet("{id}")]
-        public void Delete(int id)
-        {
-            _user.Delete(id);
-        }
+        public void Delete(int id) => _user.Delete(id);
+
 
     }
 }

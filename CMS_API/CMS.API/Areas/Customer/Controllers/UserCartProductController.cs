@@ -14,32 +14,15 @@ namespace CMS.API.Areas.Customer.Controllers
     {
 
         private readonly IUserCartProductService _cartList;
-        public UserCartProductController(IUserCartProductService cartList)
-        {
-            _cartList = cartList;
-        }
+        public UserCartProductController(IUserCartProductService cartList) => _cartList = cartList;
 
         [HttpPost]
-        public async Task<object> Get(IndexModel model)
-
-        {
-            return await _cartList.GetList(model);
-
-        }
+        public async Task<object> Get(IndexModel model) => await _cartList.GetList(model);
 
         [HttpPost]
         public async Task<object> AddCartProduct(UserCartProductPostModel model)
-
-        {
-            return await _cartList.AddProduct(model);
-
-        }
+        => await _cartList.AddProduct(model);
         [HttpPost]
-        public async Task<object> RemoveCartProduct(UserCartProductPostModel model)
-
-        {
-            return await _cartList.RemoveProduct(model);
-
-        }
+        public async Task<object> RemoveCartProduct(UserCartProductPostModel model) => await _cartList.RemoveProduct(model);
     }
 }

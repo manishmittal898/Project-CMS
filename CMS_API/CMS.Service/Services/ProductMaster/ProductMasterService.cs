@@ -194,6 +194,32 @@ namespace CMS.Service.Services.ProductMaster
             return ObjResponse;
         }
 
+        public ServiceResponse<ProductStockModel> GetStockDetail(string productId, string sizeId)
+        {
+            ServiceResponse<ProductStockModel> ObjResponse = new ServiceResponse<ProductStockModel>();
+            try
+            {
+
+                var detail = _db.TblProductStocks.Where(x => x.Id == long.Parse(_security.DecryptData(productId)) && x.SizeId == long.Parse(_security.DecryptData(sizeId))).Select(st => new ProductStockModel
+                {
+                    Id = _security.EncryptData(st.Id),
+                    ProductId = _security.EncryptData(st.ProductId),
+                    SizeId = _security.EncryptData(st.SizeId),
+                    Size = st.Size.Name,
+                    UnitPrice = st.UnitPrice,
+                    SellingPrice = st.Product.DiscountId.HasValue ? Math.Floor(st.UnitPrice.Value - (st.UnitPrice.Value * decimal.Parse(st.Product.Discount.Value)) / 100) : st.UnitPrice,
+                    Quantity = st.Quantity
+                }).FirstOrDefault();
+                ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
+            }
+            catch (Exception ex)
+            {
+
+                ObjResponse = CreateResponse<ProductStockModel>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+            }
+            return ObjResponse;
+        }
+
         public async Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model)
         {
             try
@@ -643,7 +669,7 @@ namespace CMS.Service.Services.ProductMaster
                                             ViewSectionId = x.prd.ViewSectionId.HasValue ? _security.EncryptData(x.prd.ViewSectionId.Value) : null,
                                             ViewSection = x.prd.ViewSection.Name,
                                             IsWhishList = x.prd.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.prd.TblUserWishLists.Any(y => y.ProductId == x.prd.Id && y.UserId == _loginUserDetail.UserId) : false,
-                                            
+
                                         }).ToListAsync();
 
                 if (result != null)
