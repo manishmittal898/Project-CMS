@@ -4,6 +4,10 @@
     <h5 class="font-w-400 m-0"><i class="bi bi-cart3 me-1"></i> MY Cart <strong *ngIf="cartModel.length>0"> {{cartModel.length}} </strong></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <ng-select style="width:5rem;" [clearable]="false" [items]="getSizeItem(cartModel[0].SizeId,cartModel[0].ProductId)"
+  placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="{{'Size_'+0}}"
+  [(ngModel)]="cartModel[0].SizeId">
+</ng-select>
   <div class="cart-sidebar-body">
     <ng-container *ngIf="cartModel.length>0;else noItem;">
       <div class="cart-sidebar-body-cart">
@@ -20,7 +24,7 @@
                       placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="{{'Size_'+indx}}"
                       [(ngModel)]="item.SizeId">
                     </ng-select>
-                    <!-- -->
+
                   </div>
                   <div class="d-flex align-items-center">
                     <strong>Qty:</strong>
