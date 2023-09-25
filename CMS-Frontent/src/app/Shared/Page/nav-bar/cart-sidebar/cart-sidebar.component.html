@@ -25,9 +25,9 @@
                   <div class="d-flex align-items-center">
                     <strong>Qty:</strong>
                     <div class="product-list-qty d-flex ms-2">
-                      <button type="button"  [disabled]="Quantity==1" (click)="Quantity=Quantity-1" class="product-list-qty-btn">-</button>
+                      <button type="button"  [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1" class="product-list-qty-btn">-</button>
                       <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
-                      <button type="button" [disabled]="Quantity==10"  (click)="Quantity=Quantity+1" class="product-list-qty-btn">+</button>
+                      <button type="button" [disabled]="item.Quantity==10"  (click)="item.Quantity=item.Quantity+1" class="product-list-qty-btn">+</button>
                     </div>
                   </div>
                 </div>
