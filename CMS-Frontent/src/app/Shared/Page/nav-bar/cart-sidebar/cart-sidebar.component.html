@@ -16,7 +16,7 @@
                 <h1>{{item.Product.Name}}</h1>
                 <div class="d-flex justify-content-between text-muted font-13">
                   <div> <strong>Size:</strong>
-                    <ng-select style="width:5rem;" [clearable]="false" [items]="getSizeItem(item.SizeId,item.ProductId)"
+                    <ng-select style="width:5rem;"  [items]="getSizeItem(item.SizeId,item.ProductId)"
                       placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="{{'Size_'+indx}}"
                       [(ngModel)]="item.SizeId">
                     </ng-select>
