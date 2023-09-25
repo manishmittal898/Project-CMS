@@ -7,7 +7,7 @@
   <div class="cart-sidebar-body">
     <ng-container *ngIf="cartModel.length>0;else noItem;">
       <div class="cart-sidebar-body-cart">
-        <ng-container *ngFor="let item of cartModel ">
+        <ng-container *ngFor="let item of cartModel;let indx=index ">
           <div class="cart-sidebar-body-cart-items d-flex py-2">
             <div class="cart-sidebar-body-cart-items-img d-flex align-items-center justify-content-center"> <img
                 [src]="item.Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" /></div>
@@ -17,7 +17,7 @@
                 <div class="d-flex justify-content-between text-muted font-13">
                   <div> <strong>Size:</strong>
                     <ng-select style="width:5rem;" [clearable]="false" [items]="getSizeItem(item.SizeId,item.ProductId)"
-                      placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="Size"
+                      placeholder="Size" [searchable]="true" bindLabel="Text" bindValue="Value" id="{{'Size_'+indx}}"
                       [(ngModel)]="item.SizeId">
                     </ng-select>
                     <!-- -->
