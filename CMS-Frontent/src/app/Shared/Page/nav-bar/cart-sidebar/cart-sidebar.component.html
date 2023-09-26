@@ -15,9 +15,11 @@
                             <img [src]="item.Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
                         </div>
                         <div class="cart-sidebar-body-cart-items-info">
-                            <a href="javascript:void(0)" class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
+                            <a href="javascript:void(0)"
+                                class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
                             <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex align-items-center product-list-select-control"> <strong class="me-1 text-muted">Size:</strong>
+                                <div class="d-flex align-items-center product-list-select-control"> <strong
+                                        class="me-1 text-muted">Size:</strong>
                                     <ng-select [clearable]="false"
                                         (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size"
                                         [searchable]="true" id="{{'Size_'}}" [(ngModel)]="item.SizeId">
@@ -42,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-2">
-                                <h2>₹ {{item.Product.SellingPrice}}</h2>
+                                <h2>₹ {{item.Product.SellingPrice}} <span>₹ 4399</span></h2>
                                 <a href="javascript:void()" (click)="deleteCartItem(item)" class="text-danger">
                                     <i data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                         class="fa-regular fa-trash"></i> </a>
@@ -54,9 +56,17 @@
 
 
             </div>
-            <div class="cart-sidebar-body-cart-items-final-info my-4 mt-4">
+            <div class="cart-sidebar-body-cart-items-final-info my-4">
                 <div class="cart-sidebar-body-cart-items-final-info-item">
-                    <h5 class=" d-flex justify-content-between"> <strong>Subtotal : </strong> <span> ₹ {{TotalAmount}}
+                    <h5 class=" d-flex justify-content-between"> <strong>MRP : </strong> <span> ₹ {{TotalAmount}}
+                        </span>
+                    </h5>
+                    <h5 class=" d-flex justify-content-between"> <strong>Discount on MRP : </strong> <span> ₹
+                            {{TotalAmount}}
+                        </span>
+                    </h5>
+                    <h5 class=" d-flex justify-content-between"> <strong>Total Amount : </strong> <span> ₹
+                            {{TotalAmount}}
                         </span>
                     </h5>
                 </div>
