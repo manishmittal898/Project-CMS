@@ -1936,7 +1936,7 @@ section.cmis-pages .cmis-pages-items-list h3 {
   min-width: 60px;
   background: #ffffff;
   border-radius: 4px;
-  margin-right: 15px;
+  margin-right: 10px;
   overflow: hidden;
   box-shadow: 1px 2px 6px rgb(0 0 0 / 4%);
 }
@@ -1951,28 +1951,30 @@ section.cmis-pages .cmis-pages-items-list h3 {
 }
 
 .cart-sidebar-body-cart-items-info a {
-  color: #000;
+  line-height: normal;
 }
 
 .cart-sidebar-body-cart-items-info a:hover {
   color: #303030;
 }
 
-.cart-sidebar-body-cart-items-info h1 {
+.cart-sidebar-body-cart-items-info h1, .cart-sidebar-body-cart-items-info .cart-sidebar-body-cart-items-info-title {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 5px;
-  line-height: 20px;
+  line-height: 19px;
+  display: block;
+  color: #000;
+}
+.cart-sidebar-body-cart-items-info strong {
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .cart-sidebar-body-cart-items-info h2 {
-  font-size: 15px;
+  font-size: 16px;
   color: black;
-  margin: 5px 0px 0px 0px;
-}
-
-.cart-sidebar-body-cart-items-action {
-  font-size: 15px;
+  margin: 0px;
 }
 
 .cart-sidebar-body-cart-items-final-info-item h5 {
@@ -2094,7 +2096,7 @@ table tr td {
 .product-list-qty-btn {
   border: solid 1px #ccc;
   background: #fff;
-  font-size: 25px;
+  font-size: 13px;
   height: 30px;
   width: 30px;
   display: flex;
@@ -2104,26 +2106,25 @@ table tr td {
 }
 
 .product-list-qty-btn:hover {
-  box-shadow: 0 0 15px #d7d7d7;
-  border-color: #d5d5d5;
+  border-color: #878787;
+  color: #000;
 }
 
 .cart-sidebar-body-cart-items-info .product-list-qty-btn {
-  height: 23px;
-  width: 23px;
-  border-radius: 5px;
-  border: none;
+  height: 22px;
+  width: 22px;
+  font-size: 12px;
 }
 
 .cart-sidebar-body-cart-items-info .product-list-qty input {
-  border-radius: 4px;
-  max-width: 35px;
+  max-width: 25px;
+  height: 22px;
 }
 
 .product-list-qty input {
   border-radius: 5px;
   margin: 0px 4px;
-  max-width: 40px;
+  max-width: 35px;
   text-align: center;
   border: solid 1px #ccc;
 }
@@ -3167,6 +3168,27 @@ body .toast-close-button {
   min-width: 140px;
   font-weight: 600;
   font-size: 15px;
+}
+
+.product-list-select-control .ng-select.ng-select-single .ng-select-container {
+  height: 23px;
+  line-height: 14px;
+  min-height: 23px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  width: 48px;
+  font-size: 12px;
+}
+.product-list-select-control .ng-select .ng-arrow-wrapper {
+  width: 19px;
+  padding-right: 0px;
+}
+.product-list-select-control .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 2px 5px;
+  font-size: 12px;
+}
+.product-list-select-control .ng-select .ng-select-container .ng-value-container {
+  padding-left: 4px;
 }
 
 /* CUSTOM CSS END */

@@ -125,11 +125,11 @@
             <div class="product-detail-action-btn d-flex align-items-center">
               <div class="product-list-qty d-flex me-2 me-md-3">
                 <button type="button" class="product-list-qty-btn" [disabled]="Quantity==1"
-                  (click)="Quantity=Quantity-1">-</button>
-                <input type="number" placeholder="Quantity" readonly (keypress)="_commonService.NumberOnly($event)"
+                  (click)="Quantity=Quantity-1"> <i class="fa-sharp fa-light fa-minus"></i> </button>
+                <input type="text" placeholder="Quantity" readonly (keypress)="_commonService.NumberOnly($event)"
                   [ngModel]="Quantity">
                 <button type="button" class="product-list-qty-btn" [disabled]="Quantity==10"
-                  (click)="Quantity=Quantity+1">+</button>
+                  (click)="Quantity=Quantity+1"> <i class="fa-sharp fa-light fa-plus"></i> </button>
               </div>
               <button type="button" (click)="onAddtoCart()" class="btn btn-default"
                 [disabled]="this.loading.AddToCart"><i class="me-1"
