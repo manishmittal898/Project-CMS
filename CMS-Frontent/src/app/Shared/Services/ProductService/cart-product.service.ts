@@ -136,20 +136,25 @@ export class CartProductService {
     forkJoin(sub).subscribe(res => {
       this.cartProductItem = [];
       this._securityService.deleteStorage('cart-product');
+      this.GetCartList();
     })
   }
 
   public async deleteProduct(productId, sizeId) {
     if (this._auth.IsAuthentication.value) {
-      let indx = this.cartProductItem.findIndex(x => x.ProductId == productId && x.SizeId == sizeId)
-      this.RemoveProduct(this.cartProductItem[indx]).toPromise().then(x => {
+      let indx = this.CartProductModel.findIndex(x => x.ProductId == productId && x.SizeId == sizeId)
+      let model = {} as CartProductPostModel;
+      model.ProductId = this.CartProductModel[indx].ProductId;
+      model.SizeId = this.CartProductModel[indx].SizeId;
+      model.Quantity = this.CartProductModel[indx].Quantity;
+      this.RemoveProduct(model).toPromise().then(x => {
         if (x.IsSuccess) {
-          this.cartProductItem.splice(indx, 1);
+          // this.cartProductItem.splice(indx, 1);
           let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('cart-product', data);
-         // this.GetCartList();
-          let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
-          this.CartProductModel.splice(idx, 1);
+          // this.GetCartList();
+          //let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
+          this.CartProductModel.splice(indx, 1);
         }
         return x.IsSuccess;
       })
@@ -160,7 +165,9 @@ export class CartProductService {
       this.cartProductItem.splice(indx, 1);
       let data = JSON.stringify(this.cartProductItem);
       this._securityService.setStorage('cart-product', data);
-      this.GetCartList();
+      let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
+      this.CartProductModel.splice(idx, 1);
+      // this.GetCartList();
       return true;
     }
 
