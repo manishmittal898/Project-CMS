@@ -2079,19 +2079,18 @@ table tr td {
 
 .cart-list-items-action {
   margin-left: 12px;
-  color: #a1a1a1;
   display: block;
-  min-width: 25px;
+  min-width: 20px;
+  line-height: 0;
+  font-size: 18px;
+  text-align: center;
+  color: #dc3545;
 }
 
 .cart-list-items-action:hover {
   color: #000;
 }
 
-.cart-list-items-action i {
-  font-size: 30px;
-  line-height: 0;
-}
 
 .product-list-qty-btn {
   border: solid 1px #ccc;
@@ -2115,7 +2114,19 @@ table tr td {
   width: 22px;
   font-size: 12px;
 }
-
+.cart-list-items-description .product-list-qty-btn {
+  height: 24px;
+  width: 24px;
+  font-size: 12px;
+}
+.cart-list-items-description .product-list-select-control .ng-select.ng-select-single .ng-select-container {
+  height: 25px;
+  min-height: 25px;
+}
+.cart-list-items-description .product-list-qty input {
+  height: 23px;
+  width: 30px;
+}
 .cart-sidebar-body-cart-items-info .product-list-qty input {
   max-width: 25px;
   height: 22px;
@@ -2135,7 +2146,7 @@ table tr td {
 }
 
 .cart-page-list .cart-list-items {
-  padding: 20px 0px;
+  padding: 15px 0px;
   border-bottom: solid 1px #f1f1f1;
 }
 
@@ -2655,9 +2666,9 @@ section.deals-opt-d-1 {
 .custom-card {
   box-shadow: 0 0 30px #e7e9f5;
   border-radius: 30px;
-  padding: 30px;
+  padding: 20px;
   background: #fff;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .custom-card-address-list label {

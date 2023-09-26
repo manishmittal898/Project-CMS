@@ -440,7 +440,7 @@
   .cart-list-items-img {
     height: 100px;
     width: 75px;
-    margin-right: 12px;
+    margin-right: 10px;
     flex: 0 0 75px;
 }
 .cart-list-items-img img {
@@ -448,8 +448,8 @@
 }
 
 .cart-list-items-description h3 {
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .cart-list-items-price {

@@ -16,8 +16,8 @@
                         </div>
                         <div class="cart-sidebar-body-cart-items-info">
                             <a href="javascript:void(0)" class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
-                            <div class="d-flex justify-content-between text-muted mt-2">
-                                <div class="d-flex align-items-center product-list-select-control"> <strong class="me-1">Size:</strong>
+                            <div class="d-flex justify-content-between mt-2">
+                                <div class="d-flex align-items-center product-list-select-control"> <strong class="me-1 text-muted">Size:</strong>
                                     <ng-select [clearable]="false"
                                         (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size"
                                         [searchable]="true" id="{{'Size_'}}" [(ngModel)]="item.SizeId">
@@ -29,7 +29,7 @@
                                     </ng-select>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <strong>Qty:</strong>
+                                    <strong class="text-muted">Qty:</strong>
                                     <div class="product-list-qty d-flex ms-1">
                                         <button type="button" [disabled]="item.Quantity==1"
                                             (click)="item.Quantity=item.Quantity-1" class="product-list-qty-btn"> <i
@@ -106,7 +106,7 @@
             </div>
             <div class="modal-footer pt-0">
                 <button type="button" class="btn btn-default px-3 py-1 me-2" data-bs-dismiss="modal"><i
-                        class="bi bi-trash me-1"></i> Delete</button>
+                        class="fa-regular fa-trash me-1"></i> Delete</button>
                 <button type="button" class="btn btn-default btn-border btn-cancel px-3 py-1"
                     data-bs-dismiss="modal">Cancel</button>
             </div>
