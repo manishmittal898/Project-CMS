@@ -5,7 +5,6 @@
                 {{cartModel.length}} </strong></h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-
     <div class="cart-sidebar-body">
         <ng-container *ngIf="cartModel.length>0;else noItem;">
             <div class="cart-sidebar-body-cart">
@@ -52,9 +51,6 @@
                         </div>
                     </div>
                 </ng-container>
-
-
-
             </div>
             <div class="cart-sidebar-body-cart-items-final-info my-4">
                 <div class="cart-sidebar-body-cart-items-final-info-item">
@@ -105,8 +101,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header pb-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i
-                        class="bi bi-x"></i>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> 
+                    <i class="fa-sharp fa-light fa-xmark"></i>
                 </button>
             </div>
             <div class="modal-body p-4 modal-alert">

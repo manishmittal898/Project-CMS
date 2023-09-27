@@ -1015,9 +1015,9 @@ input:focus-visible {
 
 .mobile-nav-close {
   color: #fff;
-  font-size: 40px;
+  font-size: 30px;
   text-align: right;
-  padding: 5px 10px 0px 20px;
+  padding: 10px 15px 0px 20px;
   line-height: 0;
 }
 
@@ -1863,8 +1863,8 @@ body .ui-slider .ui-slider-range {
 }
 
 .modal-custom-design .modal-content .modal-header i {
-  font-size: 40px;
-  line-height: 0;
+  font-size: 28px;
+  line-height: normal;
   opacity: 0.3;
 }
 
@@ -1877,10 +1877,10 @@ body .ui-slider .ui-slider-range {
   background: transparent;
   opacity: 9;
   padding: 0px;
-  font-size: 20px;
   display: block;
   height: auto;
   width: auto;
+  line-height: 0;
 }
 
 .modal-footer {
@@ -2684,7 +2684,7 @@ section.deals-opt-d-1 {
 .custom-card {
   box-shadow: 0 0 30px #e7e9f5;
   border-radius: 30px;
-  padding: 20px;
+  padding: 15px 20px;
   background: #fff;
   margin-bottom: 25px;
 }
@@ -3169,8 +3169,10 @@ body .toast-title {
 body .toast-close-button {
   color: #000;
   text-shadow: none;
-  top: -10px;
+  top: -15px;
   left: 0px;
+  font-size: 30px;
+  font-weight: 500;
 }
 
 .product-filter .product-filterItems:last-child {
