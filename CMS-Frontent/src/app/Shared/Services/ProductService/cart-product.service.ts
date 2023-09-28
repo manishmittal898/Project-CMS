@@ -17,7 +17,10 @@ export class CartProductService {
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService,
     private _auth: AuthService, private _securityService: SecurityService, private readonly _productService: ProductService) {
     this.cartProductItem = this._securityService.checkStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
-    this.GetCartList();
+    _auth.IsAuthentication.subscribe(res => {
+
+      this.GetCartList();
+    })
 
   }
 
@@ -156,10 +159,11 @@ export class CartProductService {
     } else {
       let indx = this.cartProductItem.findIndex(x => x.ProductId == productId && x.SizeId == sizeId)
       this.cartProductItem.splice(indx, 1);
-      let data = JSON.stringify(this.cartProductItem);
-      this._securityService.setStorage('cart-product', data);
       let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
       this.CartProductModel.splice(idx, 1);
+      let data = JSON.stringify(this.cartProductItem);
+      this._securityService.setStorage('cart-product', data);
+
       // this.GetCartList();
       return true;
     }

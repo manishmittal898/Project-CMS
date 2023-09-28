@@ -12,7 +12,7 @@ export class AuthService {
   public IsAuthentication = new BehaviorSubject<boolean>(null);
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
-    // this.IsAuthenticate();
+     this.IsAuthenticate();
   }
 
   IsAccessibleUrl(requestedUrl: string): boolean {
