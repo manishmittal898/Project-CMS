@@ -104,7 +104,7 @@ namespace CMS.Service.Services.UserCartProduct
                 }
 
 
-                var result = (from data in _db.TblUserCartLists.Include(x => x.Product)
+                var result = (from data in _db.TblUserCartLists.Include(x => x.Product).ThenInclude(x=> x.TblProductStocks)
 
                               where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);

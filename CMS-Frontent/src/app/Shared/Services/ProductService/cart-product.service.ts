@@ -83,6 +83,8 @@ export class CartProductService {
       indexModel.Ids = data;
       indexModel.PageSize = 101;
       if (data?.length > 0) {
+
+        //call detail api
         this._productService.GetList(indexModel).subscribe(response => {
           if (response.IsSuccess) {
             this.CartProductModel = [];
