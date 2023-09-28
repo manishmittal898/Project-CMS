@@ -2476,18 +2476,6 @@ section.deals-opt-d-1 {
   border-radius: 5px;
   position: relative;
 }
-
-.my-account-sidebar ul li a.active:after {
-  background: #fffbe2;
-  position: absolute;
-  content: "";
-  height: 15px;
-  width: 15px;
-  right: -6px;
-  transform: rotate(45deg);
-  top: 16px;
-}
-
 .my-account-sidebar ul li {
   list-style: none;
 }
@@ -2539,7 +2527,7 @@ section.deals-opt-d-1 {
 }
 
 .order-summary-list-items {
-  /* box-shadow: 0 0 30px #e7e9f5; */
+  box-shadow: 0 0 15px #f4f5fb;
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
@@ -2548,13 +2536,23 @@ section.deals-opt-d-1 {
 }
 
 .order-summary-list-items-header {
-  padding: 10px 20px;
-  background: #f1f3ff;
+  padding: 5px 15px 0px 15px;
+  background: transparent;
   font-weight: 600;
 }
 
+.order-summary-list-items-body {
+  padding: 15px;
+}
+.order-summary-list-items-order-id {
+  font-size: 18px;
+  font-weight: 400;
+  margin-right: 20px;
+  margin-left: auto;
+  color: var(--primary-color)
+}
 .order-summary-list-items-status {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -2563,7 +2561,7 @@ section.deals-opt-d-1 {
 }
 
 .order-summary-list-items-footer {
-  padding: 0px 20px 10px 20px;
+  padding: 0px 15px 10px 15px;
 }
 
 .order-summary-list .order-summary-list-items:last-child {
@@ -2574,25 +2572,25 @@ section.deals-opt-d-1 {
   border-color: #198754;
 }
 
-.order-summary-list-items-delivered .order-summary-list-items-header {
+/* .order-summary-list-items-delivered .order-summary-list-items-header {
   background: #eeffee;
-}
+} */
 
 .order-summary-list-items-pending {
   border-color: #ffc107;
 }
 
-.order-summary-list-items-pending .order-summary-list-items-header {
+/* .order-summary-list-items-pending .order-summary-list-items-header {
   background: #fffbee;
-}
+} */
 
 .order-summary-list-items-cancel {
   border-color: #dc3545;
 }
 
-.order-summary-list-items-cancel .order-summary-list-items-header {
+/* .order-summary-list-items-cancel .order-summary-list-items-header {
   background: #fff4f5;
-}
+} */
 
 .page-fliter-items.page-filter-search a {
   color: #000;
