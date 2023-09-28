@@ -104,7 +104,7 @@ namespace CMS.Service.Services.UserCartProduct
                 }
 
 
-                var result = (from data in _db.TblUserCartLists.Include(x => x.Product).ThenInclude(x=> x.TblProductStocks)
+                var result = (from data in _db.TblUserCartLists.Include(x => x.Product).ThenInclude(x => x.TblProductStocks)
 
                               where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
                               select data);
@@ -161,6 +161,17 @@ namespace CMS.Service.Services.UserCartProduct
                                                 Price = x.Product.Price,
                                                 SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
 
+                                                Stocks = x.Product.TblProductStocks.Count > 0 ? x.Product.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
+                                                {
+                                                    Id = _security.EncryptData(st.Id),
+                                                    ProductId = _security.EncryptData(x.Id),
+                                                    SizeId = _security.EncryptData(st.SizeId),
+                                                    Size = st.Size.Name,
+                                                    UnitPrice = st.UnitPrice,
+                                                    SellingPrice = st.Product.DiscountId.HasValue ? Math.Floor(st.UnitPrice.Value - (st.UnitPrice.Value * decimal.Parse(st.Product.Discount.Value)) / 100) : st.UnitPrice,
+                                                    Quantity = st.Quantity
+
+                                                }).ToList() : null
 
                                             }
                                         }).ToListAsync();

@@ -13,7 +13,7 @@ import { SecurityService } from '../Core/security.service';
 export class CartProductService {
 
   private cartProductItem: CartProductPostModel[] = [];
-  CartProductModel: CartProductViewModel[] = [];
+  CartProductModel?: CartProductViewModel[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService,
     private _auth: AuthService, private _securityService: SecurityService, private readonly _productService: ProductService) {
     this.cartProductItem = this._securityService.checkLocalStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
@@ -83,27 +83,53 @@ export class CartProductService {
       indexModel.Ids = data;
       indexModel.PageSize = 101;
       if (data?.length > 0) {
-
-        //call detail api
-        this._productService.GetList(indexModel).subscribe(response => {
-          if (response.IsSuccess) {
-            this.CartProductModel = [];
-
-            let model = response.Data as ProductMasterViewModel[];
-            let cartModel = [] as CartProductViewModel[];
-            this.cartProductItem.forEach(rs => {
-              let itm = {} as CartProductViewModel;
-              itm.Id = '';
-              itm.Quantity = rs.Quantity;
-              itm.SizeId = rs.SizeId;
-              itm.ProductId = rs.ProductId;
-              itm.Product = model.find(x => x.Id == rs.ProductId);
-              this.CartProductModel.push(itm);
-            });
-            this.getUpdatedPrice();
-            return;
-          }
+        let calls: any = {};
+        this.cartProductItem.forEach(x => {
+          calls[x.ProductId] = this._productService.GetDetail(x.ProductId);
         })
+
+
+        forkJoin(calls).subscribe(res => {
+
+          this.CartProductModel = [];
+          this.cartProductItem.forEach(element => {
+            let response = res[element.ProductId] as ApiResponse<ProductMasterViewModel>
+            if (response.IsSuccess) {
+              let itm = {} as CartProductViewModel;
+              itm.Product = response.Data;
+              itm.Id = '';
+              itm.Quantity = element.Quantity;
+              itm.SizeId = element.SizeId;
+              itm.ProductId = element.ProductId;
+              this.CartProductModel.push(itm);
+            }
+          });
+
+
+        })
+
+
+
+        // //call detail api
+        // this._productService.GetList(indexModel).subscribe(response => {
+        //   if (response.IsSuccess) {
+        //     this.CartProductModel = [];
+
+        //     let model = response.Data as ProductMasterViewModel[];
+        //     //let cartModel = [] as CartProductViewModel[];
+        //     this.cartProductItem.forEach(rs => {
+        //       let itm = {} as CartProductViewModel;
+        //       itm.Id = '';
+        //       itm.Quantity = rs.Quantity;
+        //       itm.SizeId = rs.SizeId;
+        //       itm.ProductId = rs.ProductId;
+        //       itm.Product = model.find(x => x.Id == rs.ProductId);
+        //       this.CartProductModel.push(itm);
+        //     });
+        //     this.getUpdatedPrice();
+        //     return;
+        //   }
+        // })
       } else {
         this.CartProductModel = [];
       }

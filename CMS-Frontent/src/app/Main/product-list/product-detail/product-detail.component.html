@@ -128,11 +128,12 @@
                   (click)="Quantity=Quantity-1"> <i class="fa-sharp fa-light fa-minus"></i> </button>
                 <input type="text" placeholder="Quantity" readonly (keypress)="_commonService.NumberOnly($event)"
                   [ngModel]="Quantity">
-                <button type="button" class="product-list-qty-btn" [disabled]="Quantity==10"
-                  (click)="Quantity=Quantity+1"> <i class="fa-sharp fa-light fa-plus"></i> </button>
+                <button type="button" class="product-list-qty-btn"
+                  [disabled]="Quantity==10 || Quantity==this.SelectedSizeModel.Quantity" (click)="Quantity=Quantity+1">
+                  <i class="fa-sharp fa-light fa-plus"></i> </button>
               </div>
-              <button type="button" (click)="onAddtoCart()" class="btn btn-default"
-                [disabled]="this.loading.AddToCart"><i class="me-1"
+              <button type="button" *ngIf="this.SelectedSizeModel.Quantity>0" (click)="onAddtoCart()"
+                class="btn btn-default" [disabled]="this.loading.AddToCart"><i class="me-1"
                   [ngClass]="{'fa-light fa-cart-circle-plus':!this.loading.AddToCart,'bi bi-hourglass-split':this.loading.AddToCart}"></i>
                 Add to cart</button>
               <!-- <button type="button" class="btn btn-default btn-border px-3 px-lg-4 text-uppercase ms-2 ms-lg-3"><i class="fa-light fa-credit-card me-1"></i>

@@ -16,13 +16,16 @@ import { ProductService } from 'src/app/Shared/Services/ProductService/product.s
 export class CartSidebarComponent implements OnInit {
   sizeModel: DropDownItem[];
   get cartModel(): CartProductViewModel[] {
-    return this._cartService.CartProductModel;
+    return this._cartService.CartProductModel ?? [];
   }
   get TotalAmount() {
     let amt = 0;
-    this.cartModel.forEach(x => {
-      amt += x.Quantity * x.Product.SellingPrice
-    })
+    if (this.cartModel.length > 0) {
+      this.cartModel?.forEach(x => {
+        amt += (x.Quantity ?? 0) * (x.Product?.SellingPrice ?? 0)
+      });
+    }
+
     return amt;
   }
   constructor(private readonly _security: SecurityService, private _toasterService: ToastrService,
@@ -58,27 +61,40 @@ export class CartSidebarComponent implements OnInit {
     let allSize = this.cartModel.filter(x => x.ProductId == productId).map(x => x.SizeId);
     return this.sizeModel.filter(x => x.Value == itm && (x.Value == sizeId || !allSize.includes(x.Value))).length > 0;
   }
-
-  deleteCartItem(item: CartProductViewModel) {
-    this._commonService.Question(Message.DeleteCartItem).then(result => {
-      if (result) {
-        this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
-          this._toasterService.success("Cart item removed..!" as string, 'Removed');
-
-        })
-      }
-    }, err => {
-      this._toasterService.error(err.message as string, 'Oops');
-
-    })
+  getSellingPrice(SizeId, ProductId) {
+    let product = this.cartModel.find(x => x.ProductId == ProductId)
+    return product.Product.Stocks.find(x => x.SizeId == SizeId).SellingPrice;
   }
-  getUpdatedPrice(SizeId, ProductId) {
-    this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
-      if (res.IsSuccess) {
-        let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
-        this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
-        this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
-      }
-    })
+  getMRPrice(SizeId, ProductId) {
+    let product = this.cartModel.find(x => x.ProductId == ProductId)
+    return product.Product.Stocks.find(x => x.SizeId == SizeId).UnitPrice;
   }
+  isAvailableInStock(SizeId, ProductId) {
+    let product = this.cartModel.find(x => x.ProductId == ProductId)
+    return product.Product.Stocks.find(x => x.SizeId == SizeId).Quantity <= product.Quantity;
+
+}
+
+deleteCartItem(item: CartProductViewModel) {
+  this._commonService.Question(Message.DeleteCartItem).then(result => {
+    if (result) {
+      this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
+        this._toasterService.success("Cart item removed..!" as string, 'Removed');
+
+      })
+    }
+  }, err => {
+    this._toasterService.error(err.message as string, 'Oops');
+
+  })
+}
+getUpdatedPrice(SizeId, ProductId) {
+  this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
+    if (res.IsSuccess) {
+      let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+      this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
+      this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
+    }
+  })
+}
 }
