@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
               if (this._wishList.wishListItem.length > 0) {
                 this._wishList.syncWishList();
               }
-              if (this._wishList.wishListItem.length > 0) {
+              if (this._cartService.CartProductModel.length > 0) {
                 this._cartService.syncCartProduct();
               }
               if (this._activatedRoute.snapshot.queryParams.returnURL) {

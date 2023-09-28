@@ -25,7 +25,7 @@ export class ProductSectionComponent implements OnInit {
 
   GetDropDown() {
     let that = this;
-    if (this._securityService.checkLocalStorage('ddlProductViewSection')) {
+    if (this._securityService.checkStorage('ddlProductViewSection')) {
       this.dropDown.ddlProductViewSection = JSON.parse(this._securityService.getStorage('ddlProductViewSection'));
       this.loadProductSection();
       if (this._securityService.getStorage("isProductViewSection", true) == undefined) {
@@ -53,7 +53,7 @@ export class ProductSectionComponent implements OnInit {
   loadProductSection() {
     let that = this;
 
-    if (this._securityService.checkLocalStorage('loadProductSection')) {
+    if (this._securityService.checkStorage('loadProductSection')) {
       let data = JSON.parse(this._securityService.getStorage('loadProductSection'));
       this.dropDown.ddlProductViewSection.forEach(itm => {
         if (data[itm.Value]['IsSuccess']) {

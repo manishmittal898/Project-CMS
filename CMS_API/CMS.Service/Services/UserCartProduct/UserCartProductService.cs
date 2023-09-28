@@ -42,7 +42,11 @@ namespace CMS.Service.Services.UserCartProduct
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserCartLists.AddAsync(objProduct);
                     await _db.SaveChangesAsync();
-                    objProducts.Id = product.Entity.Id;
+                    if (objProducts==null)
+                    {
+                        objProducts = new TblUserCartList();
+                    }
+                    objProducts = product.Entity;
                 }
                 else if (objProducts != null)
                 {

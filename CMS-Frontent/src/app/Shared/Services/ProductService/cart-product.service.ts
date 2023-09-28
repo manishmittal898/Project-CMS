@@ -16,7 +16,7 @@ export class CartProductService {
   CartProductModel?: CartProductViewModel[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService,
     private _auth: AuthService, private _securityService: SecurityService, private readonly _productService: ProductService) {
-    this.cartProductItem = this._securityService.checkLocalStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
+    this.cartProductItem = this._securityService.checkStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];
     this.GetCartList();
 
   }
@@ -87,10 +87,7 @@ export class CartProductService {
         this.cartProductItem.forEach(x => {
           calls[x.ProductId] = this._productService.GetDetail(x.ProductId);
         })
-
-
         forkJoin(calls).subscribe(res => {
-
           this.CartProductModel = [];
           this.cartProductItem.forEach(element => {
             let response = res[element.ProductId] as ApiResponse<ProductMasterViewModel>
@@ -104,32 +101,8 @@ export class CartProductService {
               this.CartProductModel.push(itm);
             }
           });
-
-
         })
 
-
-
-        // //call detail api
-        // this._productService.GetList(indexModel).subscribe(response => {
-        //   if (response.IsSuccess) {
-        //     this.CartProductModel = [];
-
-        //     let model = response.Data as ProductMasterViewModel[];
-        //     //let cartModel = [] as CartProductViewModel[];
-        //     this.cartProductItem.forEach(rs => {
-        //       let itm = {} as CartProductViewModel;
-        //       itm.Id = '';
-        //       itm.Quantity = rs.Quantity;
-        //       itm.SizeId = rs.SizeId;
-        //       itm.ProductId = rs.ProductId;
-        //       itm.Product = model.find(x => x.Id == rs.ProductId);
-        //       this.CartProductModel.push(itm);
-        //     });
-        //     this.getUpdatedPrice();
-        //     return;
-        //   }
-        // })
       } else {
         this.CartProductModel = [];
       }
@@ -140,30 +113,21 @@ export class CartProductService {
       this.GetList(indexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.CartProductModel = response.Data;
-          this.getUpdatedPrice();
+
         }
       })
     }
   }
-  getUpdatedPrice() {
-    this.CartProductModel.forEach(rs => {
-      this._productService.GetStockDetail(rs.ProductId, rs.SizeId).subscribe(res => {
-        if (res.IsSuccess) {
-          rs.Product.SellingPrice = res.Data.SellingPrice;
-          rs.Product.Price = res.Data.UnitPrice;
-        }
-      })
-    });
-  }
 
   public async syncCartProduct() {
+    debugger
     let sub = [] as any[];
     this.cartProductItem.forEach(x => {
       sub.push(this.AddProduct(x))
     })
     forkJoin(sub).subscribe(res => {
       this.cartProductItem = [];
-      this._securityService.deleteStorage('cart-product');
+      this._securityService.removeStorage('cart-product');
       this.GetCartList();
     })
   }
@@ -177,12 +141,13 @@ export class CartProductService {
       model.Quantity = this.CartProductModel[indx].Quantity;
       this.RemoveProduct(model).toPromise().then(x => {
         if (x.IsSuccess) {
-          // this.cartProductItem.splice(indx, 1);
+          let idx = this.cartProductItem.findIndex(x => x.ProductId == productId);
+          this.cartProductItem.splice(idx, 1);
+          this.CartProductModel.splice(indx, 1);
           let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('cart-product', data);
           // this.GetCartList();
           //let idx = this.CartProductModel.findIndex(s => s.ProductId == productId && s.SizeId == sizeId);
-          this.CartProductModel.splice(indx, 1);
         }
         return x.IsSuccess;
       })

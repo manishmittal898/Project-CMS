@@ -20,10 +20,7 @@ export class SecurityService {
     return true;
   }
 
-  deleteStorage(key, storeInSession = false) {
-    const encKey = this.getKey(key, storeInSession) ?? this.encrypt(key);
-    return storeInSession ? sessionStorage.delete(encKey) : localStorage.delete(encKey);
-  }
+
   getStorage(key: string, storeInSession = false) {
 
     const encKey = this.getKey(key, storeInSession) ?? key
@@ -31,7 +28,7 @@ export class SecurityService {
 
     return decValue ? this.decrypt(decValue) : undefined;
   }
-  checkLocalStorage(key, storeInSession = false) {
+  checkStorage(key, storeInSession = false) {
     return this.getKey(key, storeInSession);
   }
 
@@ -40,6 +37,7 @@ export class SecurityService {
     storeInSession ? sessionStorage.removeItem(encKey) : localStorage.removeItem(encKey);
 
   }
+
   setCookie(key: string, value: string) {
     const encKey = this.getCookieKey(key) ?? this.encrypt(key);
     const encValue = this.encrypt(value);
@@ -50,10 +48,7 @@ export class SecurityService {
     const encKey = this.getCookieKey(key) ?? this.encrypt(key);
     return this._cookie.check(encKey);
   }
-  deleteCookie(key) {
-    const encKey = this.getCookieKey(key) ?? this.encrypt(key);
-    return this._cookie.delete(encKey);
-  }
+
   getCookie(key: string) {
 
     const encKey = this.getCookieKey(key) ?? key

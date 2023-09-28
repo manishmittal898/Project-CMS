@@ -13,7 +13,7 @@ import { SecurityService } from '../Core/security.service';
 export class WishListService {
   wishListItem: any[] = [];
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService, private _auth: AuthService, private _securityService: SecurityService) {
-    this.wishListItem = this._securityService.checkLocalStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
+    this.wishListItem = this._securityService.checkStorage('wishlist') ? JSON.parse(this._securityService.getStorage('wishlist')) as any[] : [];
   }
 
   GetList(model: IndexModel): Observable<ApiResponse<ProductMasterViewModel[]>> {
@@ -89,7 +89,7 @@ export class WishListService {
     })
     forkJoin(sub).subscribe(res => {
       this.wishListItem = [];
-      this._securityService.deleteStorage('wishlist');
+      this._securityService.removeStorage('wishlist');
     })
   }
 

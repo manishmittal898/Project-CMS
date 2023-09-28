@@ -41,7 +41,7 @@ export class CartSidebarComponent implements OnInit {
   }
 
   GetDropDown() {
-    if (this._security.checkLocalStorage('cart-ddl-size', true)) {
+    if (this._security.checkStorage('cart-ddl-size', true)) {
       this.sizeModel = JSON.parse(this._security.getStorage('cart-ddl-size', true));
 
     } else {
