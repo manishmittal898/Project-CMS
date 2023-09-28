@@ -11,7 +11,7 @@
         <div class="col-xl-12">
           <div class="custom-card-address-list">
             <div class="custom-card-address-list-header mb-2 d-flex align-items-center justify-content-between">
-              <h5 class="m-0">{{address.FullName}}</h5>
+              <h5 class="mb-1">{{address.FullName}}</h5>
               <div class="custom-card-address-list-action d-flex align-items-center">
                 <ng-container *ngIf="!address.IsPrimary; else primaryAddress">
                   <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
@@ -55,10 +55,11 @@
       <div class="modal-content">
         <div class="modal-header pb-0">
           <h5 class="m-0">{{selectedData.Id?.length>0? 'Update':'Add new'}} address</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="bi bi-x"></i>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> 
+            <i class="fa-sharp fa-light fa-xmark"></i>
           </button>
         </div>
-        <div class="modal-body p-4 pb-2 modal-form-update">
+        <div class="modal-body px-4 pb-1 modal-form-update">
           <app-save-address [(model)]="selectedData" *ngIf="this.showSavePopup" (onCancel)="closePopup()"
             (onSave)="selectedData=$event;onSave($event)"></app-save-address>
         </div>

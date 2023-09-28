@@ -587,7 +587,7 @@ namespace CMS.Service.Services.ProductMaster
                 List<long> LengthIds = model.LengthId != null && model.LengthId.Count > 0 ? model.LengthId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> ColorIds = model.ColorId != null && model.ColorId.Count > 0 ? model.ColorId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> PatternIds = model.PatternId != null && model.PatternId.Count > 0 ? model.PatternId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
-                var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists).Include(x => x.TblProductStocks)
+                var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               join pt in _db.VwProductMasters.DefaultIfEmpty() on prd.Id equals pt.Id
 
                               where !prd.IsDelete && prd.IsActive.Value && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
@@ -669,6 +669,7 @@ namespace CMS.Service.Services.ProductMaster
                                             ViewSectionId = x.prd.ViewSectionId.HasValue ? _security.EncryptData(x.prd.ViewSectionId.Value) : null,
                                             ViewSection = x.prd.ViewSection.Name,
                                             IsWhishList = x.prd.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.prd.TblUserWishLists.Any(y => y.ProductId == x.prd.Id && y.UserId == _loginUserDetail.UserId) : false,
+
 
                                         }).ToListAsync();
 
