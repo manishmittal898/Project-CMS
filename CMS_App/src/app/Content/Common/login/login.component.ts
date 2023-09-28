@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     }
     if (!environment.IsAutoLogin) {
 
-      this._security.GetEncrptedText(this.model.Password).then(x => {
+      this._security.GetEncryptedText(this.model.Password).then(x => {
         if (x.IsSuccess) {
           const encPass = x.Data;
           const postModel = {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
               this.toast.success(res.Message?.toString(), 'Login Response');
               //this._route.navigate(['/admin']);
               location.href = "/admin"
-              
+
             } else {
               this.toast.info(res.Message?.toString(), 'Login Response');
             }
