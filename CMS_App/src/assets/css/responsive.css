@@ -116,6 +116,7 @@ section.page-login-register {
 
 @media (max-width: 595px) {
   .page-new-header-action-search {
-    min-width: 240px;
+    min-width: 90%;
+    margin: 0px;
 }
 }
