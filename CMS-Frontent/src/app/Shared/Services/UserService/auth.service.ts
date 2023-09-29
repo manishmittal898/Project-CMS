@@ -77,6 +77,9 @@ export class AuthService {
     this._securityService.removeStorage('authToken');
     this._securityService.removeStorage('sessionTime');
     this._securityService.removeStorage('userDetail');
+   // this._securityService.removeStorage('userDetail');
+
+    this._securityService.removeStorage('cart-product');
 
     setTimeout(() => {
       if (this._router.url.includes('/user')) {
