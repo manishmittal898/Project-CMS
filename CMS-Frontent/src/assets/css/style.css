@@ -58,6 +58,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   overflow-x: hidden;
+ 
 }
 
 body a:hover {
@@ -1392,6 +1393,8 @@ select:focus-visible {
 .navbar {
   position: relative;
   z-index: 15;
+  background: url(../images//pattern3.png);
+  background-size: auto;
 }
 
 ul.dropdown-menu.megamenu .accordion-button,
