@@ -28,7 +28,8 @@ export class ProductDetailComponent implements OnInit {
     this.model?.Stocks?.forEach(x => {
       stockCount += x.Quantity;
     });
-    return stockCount;
+
+    return   this.SelectedSizeModel?.Quantity ??stockCount;
   }
   SelectedSizeModel: ProductStockModel;
   get DiscountValue() {

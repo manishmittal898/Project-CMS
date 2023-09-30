@@ -5,6 +5,7 @@ import { x64 } from 'crypto-js';
 import { AuthService } from '../../Services/UserService/auth.service';
 import { SecurityService } from '../../Services/Core/security.service';
 import { DropDown_key } from '../../Constant';
+import { CartProductService } from '../../Services/ProductService/cart-product.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -15,7 +16,14 @@ export class NavBarComponent implements OnInit {
   isLoggedIn = false;
   menuModel: GroupDropDownItem[] = [];
   cmsPageMenu: DropDownItem[] = [];
-  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService, private readonly _authService: AuthService,) {
+  get cartCount() {
+    return this._cartService?.CartProductModel?.length > 0 ? this._cartService?.CartProductModel?.length : 0;
+  }
+  // get wishListCount() {
+  //   return this._cartService?.CartProductModel?.length > 0 ? this._cartService?.CartProductModel?.length : 0;
+  // }
+  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService,
+    private readonly _authService: AuthService, private readonly _cartService: CartProductService) {
     if (this._securityService.getStorage('nav-collections-menu')) {
       this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
     }
