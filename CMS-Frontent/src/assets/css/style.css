@@ -992,7 +992,12 @@ input:focus-visible {
   position: absolute;
   right: 10px;
   top: 4px;
-  padding: 0px;
+  padding: 0;
+  color: #000;
+}
+
+.product-list-search button i {
+  color: #000;
 }
 
 .product-filter-btn {
