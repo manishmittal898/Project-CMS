@@ -40,13 +40,8 @@ export class CartProductService {
   }
 
   public async SetCartProduct(product: CartProductPostModel) {
-    //  let model = { ProductId: product.Id } as CartProductPostModel;
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
-    if (indx >= 0) {
-      let productItem = Object.assign({}, this.cartProductItem[indx]);
-      productItem.Quantity += product.Quantity;
-      // product = productItem;
-    }
+
     if (this._auth.IsAuthentication.value) {
       this.AddProduct(product).subscribe(x => {
         if (x.IsSuccess) {
@@ -68,12 +63,26 @@ export class CartProductService {
         })
 
     } else {
+      let showAddMessage = true
       if (indx == -1) {
         this.cartProductItem.push(product);
       } else {
-        this.cartProductItem[indx].Quantity += product.Quantity;
+        let tempProduct = this.CartProductModel.find(x => x.ProductId == product.ProductId);
+        let tempSize = tempProduct.Product.Stocks.find(s => s.SizeId == product.SizeId)
+        if (tempSize.Quantity < (this.cartProductItem[indx].Quantity + product.Quantity)) {
+          this.cartProductItem[indx].Quantity = tempSize.Quantity;
+          this._toasterService.warning("Maximum cart limit exceeded!" as string, 'info');
+          showAddMessage = false;
+        }
+        else {
+          this.cartProductItem[indx].Quantity += product.Quantity;
+
+        }
       }
-      this._toasterService.success("Added Successfully" as string, 'Success');
+      if (showAddMessage) {
+
+        this._toasterService.success("Added Successfully" as string, 'Success');
+      }
       let data = JSON.stringify(this.cartProductItem);
       this._securityService.setStorage('cart-product', data);
       this.GetCartList();

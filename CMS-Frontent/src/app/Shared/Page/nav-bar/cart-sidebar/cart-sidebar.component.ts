@@ -73,28 +73,32 @@ export class CartSidebarComponent implements OnInit {
     let product = this.cartModel.find(x => x.ProductId == ProductId)
     return product.Product.Stocks.find(x => x.SizeId == SizeId).Quantity <= product.Quantity;
 
-}
+  }
+  getMaxCartQuantity(SizeId, ProductId) {
+    let product = this.cartModel.find(x => x.ProductId == ProductId)
+    return product.Product.Stocks.find(x => x.SizeId == SizeId).Quantity ?? 20;
+  }
 
-deleteCartItem(item: CartProductViewModel) {
-  this._commonService.Question(Message.DeleteCartItem).then(result => {
-    if (result) {
-      this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
-        this._toasterService.success("Cart item removed..!" as string, 'Removed');
+  deleteCartItem(item: CartProductViewModel) {
+    this._commonService.Question(Message.DeleteCartItem).then(result => {
+      if (result) {
+        this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
+          this._toasterService.success("Cart item removed..!" as string, 'Removed');
 
-      })
-    }
-  }, err => {
-    this._toasterService.error(err.message as string, 'Oops');
+        })
+      }
+    }, err => {
+      this._toasterService.error(err.message as string, 'Oops');
 
-  })
-}
-getUpdatedPrice(SizeId, ProductId) {
-  this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
-    if (res.IsSuccess) {
-      let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
-      this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
-      this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
-    }
-  })
-}
+    })
+  }
+  getUpdatedPrice(SizeId, ProductId) {
+    this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
+      if (res.IsSuccess) {
+        let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+        this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
+        this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
+      }
+    })
+  }
 }
