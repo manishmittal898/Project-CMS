@@ -2120,7 +2120,16 @@ table tr td {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border-radius: 100px;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #000;
+}
+
+button:disabled
+{
+opacity: 0.5;
 }
 
 .product-list-qty-btn:hover {
@@ -2814,7 +2823,7 @@ section.deals-opt-d-1 {
 }
 
 .home-product {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   position: relative;
 }
 
@@ -2831,7 +2840,7 @@ app-product-section .home-product:nth-child(3) {
 app-product-section .home-product:nth-child(3):before {
   position: absolute;
   content: "";
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.4);
   height: 100%;
   width: 100%;
   top: 0;
@@ -3188,7 +3197,7 @@ body .toast-close-button {
 .product-detail-action-btn .btn-default {
   font-size: 20px;
   text-transform: capitalize;
-  padding: 6px 28px;
+  padding: 6px 30px;
 }
 
 .product-discount-label {
