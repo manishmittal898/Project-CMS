@@ -2,7 +2,7 @@
   <span *ngIf="Product.SellingPrice!=Product.Price" class="product-discount-label d-none d-md-block">{{getDiscount}} Off</span>
    <div class="product-list-items-tag" *ngIf="Product.CaptionTag">{{Product.CaptionTag}}</div>
   <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
-    <a href="javascript:void(0)" routerLink="{{getUrl()}}" target="_blank">
+    <a href="javascript:void(0)" routerLink="{{getUrl()}}">
       <img [src]="Product.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
     </a>
     <!-- #Hover items start-->
@@ -15,7 +15,7 @@
     <!-- #Hover items End-->
   </div>
   <div class="product-list-info">
-    <a href="javascript:void(0)" target="_blank" title="{{Product.Name}}" routerLink="{{getUrl()}}">
+    <a href="javascript:void(0)" title="{{Product.Name}}" routerLink="{{getUrl()}}">
       {{Product.Name}} </a>
     <div class="product-list-price">₹ {{Product.SellingPrice}} <span *ngIf="Product.SellingPrice!=Product.Price"
         class="product-list-cutting-price">₹

@@ -602,8 +602,14 @@ ul.footer-benefits li {
   font-size: 15px;
 }
 .product-detail-action-btn .btn-default {
-  font-size: 15px;
-  padding: 5px 10px;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  right: 0;
+  box-shadow: none;
+  border-radius: 0px;
+  width: 100%;
+  font-size: 18px;
 }
 .order-summary-list-img {
   height: 78px;
