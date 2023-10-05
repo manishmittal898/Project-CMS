@@ -134,8 +134,13 @@ export class CartProductService {
   public async syncCartProduct() {
     debugger
     let sub = [] as any[];
-    this.cartProductItem.forEach(x => {
-      sub.push(this.AddProduct(x))
+
+    this.CartProductModel.forEach(x => {
+      sub.push(this.AddProduct({
+        ProductId: x.ProductId,
+        Quantity: x.Quantity,
+        SizeId: x.SizeId
+      } as CartProductPostModel))
     })
     forkJoin(sub).subscribe(res => {
       this.cartProductItem = [];
