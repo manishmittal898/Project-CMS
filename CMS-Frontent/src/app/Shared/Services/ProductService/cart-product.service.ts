@@ -158,9 +158,12 @@ export class CartProductService {
       model.Quantity = this.CartProductModel[indx].Quantity;
       this.RemoveProduct(model).toPromise().then(x => {
         if (x.IsSuccess) {
-          let idx = this.cartProductItem.findIndex(x => x.ProductId == productId);
-          this.cartProductItem.splice(idx, 1);
+
           this.CartProductModel.splice(indx, 1);
+          let idx = this.cartProductItem?.findIndex(x => x.ProductId == productId);
+          if (idx != -1) {
+            this.cartProductItem.splice(idx, 1);
+          }
           let data = JSON.stringify(this.cartProductItem);
           this._securityService.setStorage('cart-product', data);
           // this.GetCartList();
