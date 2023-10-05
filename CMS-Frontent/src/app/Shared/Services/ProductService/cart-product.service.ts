@@ -45,9 +45,9 @@ export class CartProductService {
     if (this._auth.IsAuthentication.value) {
       this.AddProduct(product).subscribe(x => {
         if (x.IsSuccess) {
-          if (indx == -1) {
-            this.cartProductItem.push(product);
-          }
+          // if (indx == -1) {
+          //   this.cartProductItem.push(product);
+          // }
           this._toasterService.success(x.Message as string, 'Success');
         }
         else {
