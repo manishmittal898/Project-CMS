@@ -3281,6 +3281,7 @@ body .toast-close-button {
   font-weight: 600;
   top: -8px;
   border: solid 1px #000;
+  margin: 3px;
 }
 .mobile-footer-menu a i {
   display: block;
