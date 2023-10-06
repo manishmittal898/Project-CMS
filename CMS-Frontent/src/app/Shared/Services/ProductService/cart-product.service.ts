@@ -132,9 +132,7 @@ export class CartProductService {
   }
 
   public async syncCartProduct() {
-    debugger
     let sub = [] as any[];
-
     this.CartProductModel.forEach(x => {
       sub.push(this.AddProduct({
         ProductId: x.ProductId,
@@ -186,6 +184,8 @@ export class CartProductService {
     }
 
   }
+
+  
 
 }
 
