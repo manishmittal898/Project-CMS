@@ -34,7 +34,7 @@
                       class="product-list-qty-btn"> <i class="fa-sharp fa-light fa-minus"></i> </button>
                     <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
                     <button type="button"
-                      [disabled]="item.Quantity==10 || getMaxCartQuantity(item.SizeId,item.ProductId)"
+                      [disabled]="item.Quantity==10 || item.Quantity==getMaxCartQuantity(item.SizeId,item.ProductId)"
                       (click)="item.Quantity=item.Quantity+1" class="product-list-qty-btn"> <i
                         class="fa-sharp fa-light fa-plus"></i> </button>
                   </div>
