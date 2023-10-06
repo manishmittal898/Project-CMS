@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-lg-12">
         <ol class="breadcrumb m-0">
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/home">Home</a></li>
-          <li class="breadcrumb-item"><a href="javascript:void()" routerLink="/store">{{model?.Category}}</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)" routerLink="/home">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)" routerLink="/store">{{model?.Category}}</a></li>
           <li class="breadcrumb-item active" aria-current="page">{{model?.Name}}</li>
         </ol>
       </div>
@@ -104,7 +104,7 @@
               <ng-container *ngFor="let item of model.Stocks">
                 <li><a class="product-detail-size-btn" (click)="this.SelectedSizeModel = item;Quantity = 1;"
                     [ngClass]="[item.Quantity===0|| !item.Quantity ? 'pds-stock-0' : '',item.SizeId==SelectedSizeModel?.SizeId?'active':'']"
-                    href="javascript:void()">{{item.Size}}</a> <span class="pds-left"> {{item.Quantity}} left</span>
+                    href="javascript:void(0)">{{item.Size}}</a> <span class="pds-left"> {{item.Quantity}} left</span>
                 </li>
               </ng-container>
             </ul>

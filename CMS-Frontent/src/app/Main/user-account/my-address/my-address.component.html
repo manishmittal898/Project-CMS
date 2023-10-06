@@ -1,7 +1,7 @@
 <div class="my-account-content my-account-address ">
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h4 class="mb-0">Saved Addresses</h4>
-    <a class="btn-add-new-address" href="javascript:void()" (click)="addAddress()"><i
+    <a class="btn-add-new-address" href="javascript:void(0)" (click)="addAddress()"><i
         class="bi bi-plus-circle me-2"></i> Add new address</a>
   </div>
 
@@ -14,19 +14,19 @@
               <h5 class="mb-1">{{address.FullName}}</h5>
               <div class="custom-card-address-list-action d-flex align-items-center">
                 <ng-container *ngIf="!address.IsPrimary; else primaryAddress">
-                  <a href="javascript:void()" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
+                  <a href="javascript:void(0)" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set primary address"
                       class="bi bi-star"></i> </a>
                 </ng-container>
                 <ng-template #primaryAddress>
-                  <a href="javascript:void()"  class="text-theme-primary ms-2"> <i
+                  <a href="javascript:void(0)"  class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Primary address"
                       class="bi bi-star-fill"></i> </a>
                 </ng-template>
-                <a href="javascript:void()" (click)="editAddress(address)" class="text-success ms-2"
+                <a href="javascript:void(0)" (click)="editAddress(address)" class="text-success ms-2"
                   data-bs-toggle="modal" data-bs-target="#addressPopup"> <i data-bs-toggle="tooltip"
                     data-bs-placement="bottom" title="Edit" class="fa-light fa-pen"></i> </a>
-                <a href="javascript:void()"*ngIf="!address.IsPrimary" (click)="deleteAddress(address)" class="text-danger ms-2"> <i
+                <a href="javascript:void(0)"*ngIf="!address.IsPrimary" (click)="deleteAddress(address)" class="text-danger ms-2"> <i
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="fa-regular fa-trash"></i> </a>
               </div>
             </div>
@@ -55,7 +55,7 @@
       <div class="modal-content">
         <div class="modal-header pb-0">
           <h5 class="m-0">{{selectedData.Id?.length>0? 'Update':'Add new'}} address</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> 
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <i class="fa-sharp fa-light fa-xmark"></i>
           </button>
         </div>
