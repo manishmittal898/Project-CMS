@@ -28,6 +28,16 @@ export class CartSidebarComponent implements OnInit {
 
     return amt;
   }
+  get TotalMRP() {
+    let amt = 0;
+    if (this.cartModel.length > 0) {
+      this.cartModel?.forEach(x => {
+        amt += (x.Quantity ?? 0) * (x.Product?.Price ?? 0)
+      });
+    }
+
+    return amt;
+  }
   constructor(private readonly _security: SecurityService, private _toasterService: ToastrService,
     private readonly _commonService: CommonService, public _cartService: CartProductService, private readonly _productService: ProductService) {
     this._cartService.GetCartList();

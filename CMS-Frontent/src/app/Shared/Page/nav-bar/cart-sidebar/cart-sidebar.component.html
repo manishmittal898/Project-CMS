@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="d-flex align-items-center justify-content-between mt-2">
-                <h2>₹ {{getSellingPrice(item.SizeId,item.ProductId)}} <span>₹
+                <h2>₹ {{getSellingPrice(item.SizeId,item.ProductId)}} <span *ngIf="getSellingPrice(item.SizeId,item.ProductId)!=getMRPrice(item.SizeId,item.ProductId)">₹
                     {{getMRPrice(item.SizeId,item.ProductId)}}</span></h2>
                 <a href="javascript:void()" (click)="deleteCartItem(item)" class="text-danger">
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="fa-regular fa-trash"></i>
@@ -53,11 +53,11 @@
       </div>
       <div class="cart-sidebar-body-cart-items-final-info my-4">
         <div class="cart-sidebar-body-cart-items-final-info-item">
-          <h5 class=" d-flex justify-content-between"> <strong>MRP : </strong> <span> ₹ {{TotalAmount}}
+          <h5 class=" d-flex justify-content-between"> <strong>MRP : </strong> <span> ₹ {{TotalMRP}}
             </span>
           </h5>
           <h5 class=" d-flex justify-content-between"> <strong>Discount on MRP : </strong> <span> ₹
-              {{TotalAmount}}
+              -{{TotalMRP-TotalAmount}}
             </span>
           </h5>
           <h5 class=" d-flex justify-content-between"> <strong>Total Amount : </strong> <span> ₹
