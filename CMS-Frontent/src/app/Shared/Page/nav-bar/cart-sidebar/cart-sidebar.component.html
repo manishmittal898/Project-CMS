@@ -43,7 +43,7 @@
               <div class="d-flex align-items-center justify-content-between mt-2">
                 <h2>₹ {{getSellingPrice(item.SizeId,item.ProductId)}} <span *ngIf="getSellingPrice(item.SizeId,item.ProductId)!=getMRPrice(item.SizeId,item.ProductId)">₹
                     {{getMRPrice(item.SizeId,item.ProductId)}}</span></h2>
-                <a href="javascript:void()" (click)="deleteCartItem(item)" class="text-danger">
+                <a href="javascript:void(0)" (click)="deleteCartItem(item)" class="text-danger">
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="fa-regular fa-trash"></i>
                 </a>
               </div>
@@ -82,7 +82,7 @@
                     <i class="bi bi-bag-x"></i>
                 </div>
                 <p class="mt-0 mb-4">Your basket is currently empty.</p>
-                <a href="javascript:void()"
+                <a href="javascript:void(0)"
                     class="btn btn-default px-4 text-uppercase btn-border" data-bs-dismiss="offcanvas" aria-label="Close">Continue
                     Shopping <i class="bi bi-arrow-right ms-1"></i></a>
             </div>

@@ -58,7 +58,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   overflow-x: hidden;
- 
+
 }
 
 body a:hover {
@@ -81,7 +81,8 @@ ul {
 
 html,
 body {
-  height: calc(100% - 35px);
+  /* height: calc(100% - 35px); */
+  height: 100%;
 }
 
 a:hover {
@@ -1020,7 +1021,7 @@ input:focus-visible {
 }
 
 .mobile-nav-close {
-  color: #fff;
+  color: #000;
   font-size: 30px;
   text-align: right;
   padding: 10px 15px 0px 20px;
@@ -1029,7 +1030,7 @@ input:focus-visible {
 
 
 .mobile-nav-close:hover {
-  color: #ffff;
+  color: #000;
 }
 
 .pagination .page-link {
@@ -2366,6 +2367,7 @@ section.deals-opt-d-1 {
   padding: 6px 12px;
   border-radius: 0px;
   border: solid 1px #c6c6c6;
+  min-height: 36px;
 }
 
 .footer-newsletter .btn {
@@ -3237,4 +3239,58 @@ body .toast-close-button {
   padding-left: 4px;
 }
 
+.mobile-footer-menu {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  background: #fff;
+  z-index: 97;
+  box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.14);
+  display: flex;
+}
+.mobile-footer-menu a {
+  flex: 1;
+  text-align: center;
+  padding: 6px;
+  line-height: 1;
+  color: #000;
+  position: relative;
+}
+.mobile-footer-menu a.active, .mobile-footer-menu a.active span {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.mobile-footer-menu  .footer-cart {
+  position: relative;
+  max-width: 32px;
+  margin: auto;
+}
+.mobile-footer-menu  .mobile-cart-count {
+  position: absolute;
+  background: #ffe01b;
+  height: 16px;
+  width: 16px;
+  right: -2px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  top: -8px;
+  border: solid 1px #000;
+}
+.mobile-footer-menu a i {
+  display: block;
+  font-size: 16px;
+}
+.mobile-footer-menu a span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+  color: #7b7b7b;
+  text-transform: capitalize;
+}
 /* CUSTOM CSS END */
