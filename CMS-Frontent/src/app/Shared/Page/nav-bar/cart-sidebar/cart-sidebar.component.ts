@@ -102,12 +102,30 @@ export class CartSidebarComponent implements OnInit {
 
     })
   }
+  UpdateCartProduct(id, quantity) {
+    this._cartService.UpdateCartProduct(id, quantity).then(x => {
+
+    })
+  }
   getUpdatedPrice(SizeId, ProductId) {
+
+    // let productItem = this._cartService.CartProductModel.find(x => x.ProductId == ProductId);
+    // let stockDetail = productItem.Product.Stocks.find(x => x.SizeId == SizeId);
+
+    // let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+
+    // this._cartService.CartProductModel[indx].Product.SellingPrice = stockDetail.SellingPrice
+    // this._cartService.CartProductModel[indx].Product.Price = stockDetail.SellingPrice;
     this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
       if (res.IsSuccess) {
-        let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
-        this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
-        this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
+        let itmIndex = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+        let sizeIndex = this._cartService.CartProductModel[itmIndex].Product.Stocks.findIndex(x => x.SizeId == SizeId);
+        this._cartService.CartProductModel[itmIndex].Product.Stocks[sizeIndex].SellingPrice = res.Data.SellingPrice;
+        this._cartService.CartProductModel[itmIndex].Product.Stocks[sizeIndex].UnitPrice = res.Data.UnitPrice;
+        this._cartService.CartProductModel[itmIndex].Quantity =
+          this._cartService.CartProductModel[itmIndex].Quantity > res.Data.Quantity ?
+            res.Data.Quantity : this._cartService.CartProductModel[itmIndex].Quantity;
+
       }
     })
   }

@@ -200,7 +200,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductStocks.Where(x => x.Id == long.Parse(_security.DecryptData(productId)) && x.SizeId == long.Parse(_security.DecryptData(sizeId))).Select(st => new ProductStockModel
+                var detail = _db.TblProductStocks.Where(x => x.ProductId == long.Parse(_security.DecryptData(productId)) && x.SizeId == long.Parse(_security.DecryptData(sizeId))).Select(st => new ProductStockModel
                 {
                     Id = _security.EncryptData(st.Id),
                     ProductId = _security.EncryptData(st.ProductId),

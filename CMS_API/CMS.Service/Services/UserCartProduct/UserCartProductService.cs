@@ -42,7 +42,7 @@ namespace CMS.Service.Services.UserCartProduct
                     objProduct.AddedOn = DateTime.Now;
                     var product = await _db.TblUserCartLists.AddAsync(objProduct);
                     await _db.SaveChangesAsync();
-                    if (objProducts==null)
+                    if (objProducts == null)
                     {
                         objProducts = new TblUserCartList();
                     }
@@ -65,6 +65,45 @@ namespace CMS.Service.Services.UserCartProduct
                 };
 
                 return CreateResponse<UserCartProductViewModel>(objResult.Data, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<ServiceResponse<UserCartProductViewModel>> UpdateCartQuantity(UpdateCartItemPostModel model)
+        {
+            ServiceResponse<UserCartProductViewModel> objResult = new ServiceResponse<UserCartProductViewModel>();
+
+            try
+            {
+                TblUserCartList objProducts = await _db.TblUserCartLists.Where(x => x.Id == long.Parse(_security.DecryptData(model.Id)) && x.UserId == _loginUserDetail.UserId).FirstOrDefaultAsync();
+                if (objProducts != null)
+                {
+                    objProducts.Quantity = model.Quantity;
+                    _db.TblUserCartLists.Update(objProducts);
+                    await _db.SaveChangesAsync();
+                    objResult.Data = new UserCartProductViewModel
+                    {
+                        Id = _security.EncryptData(objProducts.Id),
+                        AddedOn = objProducts.AddedOn,
+                        ProductId = _security.EncryptData(objProducts.ProductId),
+                        Quantity = objProducts.Quantity,
+                        SizeId = _security.EncryptData(objProducts.SizeId)
+
+                    };
+                    return CreateResponse(objResult.Data, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+
+                }
+                else
+                {
+                    return CreateResponse<UserCartProductViewModel>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.NotFound);
+
+                }
+
 
             }
             catch (Exception)

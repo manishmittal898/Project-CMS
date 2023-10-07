@@ -20,9 +20,14 @@ namespace CMS.API.Areas.Customer.Controllers
         public async Task<object> Get(IndexModel model) => await _cartList.GetList(model);
 
         [HttpPost]
-        public async Task<object> AddCartProduct(UserCartProductPostModel model)
-        => await _cartList.AddProduct(model);
+        public async Task<object> AddCartProduct(UserCartProductPostModel model) => await _cartList.AddProduct(model);
         [HttpPost]
         public async Task<object> RemoveCartProduct(UserCartProductPostModel model) => await _cartList.RemoveProduct(model);
+
+        [HttpPost]
+        public async Task<ServiceResponse<UserCartProductViewModel>> UpdateCartQuantity(UpdateCartItemPostModel model) => await _cartList.UpdateCartQuantity(model);
+
+
+
     }
 }

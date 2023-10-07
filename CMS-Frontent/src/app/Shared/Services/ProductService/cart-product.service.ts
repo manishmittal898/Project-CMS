@@ -39,6 +39,10 @@ export class CartProductService {
     return this._baseService.post(url, model);
   }
 
+  private UpdateCartQuantity(model: UpdateCartItemPostModel) {
+    let url = `${this._baseService.API_Url.UserCartProduct_Update_Api}`;
+    return this._baseService.post(url, model);
+  }
   public async SetCartProduct(product: CartProductPostModel) {
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
 
@@ -87,6 +91,18 @@ export class CartProductService {
       this._securityService.setStorage('cart-product', data);
       this.GetCartList();
     }
+  }
+
+  public async UpdateCartProduct(id: string, quantity: number) {
+    if (this._auth.IsAuthentication.value) {
+      let model = {} as UpdateCartItemPostModel;
+      model.Id = id;
+      model.Quantity = quantity;
+      this.UpdateCartQuantity(model).toPromise().then(x => {
+        return x.IsSuccess;
+      })
+    }
+
   }
   public async GetCartList() {
     if (!this._auth.IsAuthentication.value) {
@@ -185,7 +201,7 @@ export class CartProductService {
 
   }
 
-  
+
 
 }
 
@@ -205,4 +221,9 @@ export interface CartProductPostModel {
   Quantity: number;
 
 
+}
+
+export interface UpdateCartItemPostModel {
+  Id: string;
+  Quantity: number;
 }

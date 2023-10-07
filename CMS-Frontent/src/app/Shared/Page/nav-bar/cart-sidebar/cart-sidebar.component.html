@@ -30,18 +30,20 @@
                 <div class="d-flex align-items-center">
                   <strong class="text-muted">Qty:</strong>
                   <div class="product-list-qty d-flex ms-1">
-                    <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1"
-                      class="product-list-qty-btn"> <i class="fa-sharp fa-light fa-minus"></i> </button>
+                    <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1;"
+                      (blur)="UpdateCartProduct(item.Id, item.Quantity)" class="product-list-qty-btn"> <i
+                        class="fa-sharp fa-light fa-minus"></i> </button>
                     <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
                     <button type="button"
                       [disabled]="item.Quantity==10 || item.Quantity==getMaxCartQuantity(item.SizeId,item.ProductId)"
-                      (click)="item.Quantity=item.Quantity+1" class="product-list-qty-btn"> <i
-                        class="fa-sharp fa-light fa-plus"></i> </button>
+                      (click)="item.Quantity=item.Quantity+1" (blur)="UpdateCartProduct(item.Id, item.Quantity)"
+                      class="product-list-qty-btn"> <i class="fa-sharp fa-light fa-plus"></i> </button>
                   </div>
                 </div>
               </div>
               <div class="d-flex align-items-center justify-content-between mt-2">
-                <h2>₹ {{getSellingPrice(item.SizeId,item.ProductId)}} <span *ngIf="getSellingPrice(item.SizeId,item.ProductId)!=getMRPrice(item.SizeId,item.ProductId)">₹
+                <h2>₹ {{getSellingPrice(item.SizeId,item.ProductId)}} <span
+                    *ngIf="getSellingPrice(item.SizeId,item.ProductId)!=getMRPrice(item.SizeId,item.ProductId)">₹
                     {{getMRPrice(item.SizeId,item.ProductId)}}</span></h2>
                 <a href="javascript:void(0)" (click)="deleteCartItem(item)" class="text-danger">
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="fa-regular fa-trash"></i>
@@ -74,23 +76,21 @@
                     class="btn btn-default btn-border px-1 text-uppercase ms-3"><i
                         class="fa-light fa-cart-shopping me-1"></i>
                     Shopping Bag</button> -->
-            </div>
-        </ng-container>
-        <ng-template #noItem>
-            <div class="cart-sidebar-empty text-center ">
-                <div class="cart-sidebar-empty-icon">
-                    <i class="bi bi-bag-x"></i>
-                </div>
-                <p class="mt-0 mb-4">Your basket is currently empty.</p>
-                <a href="javascript:void(0)"
-                    class="btn btn-default px-4 text-uppercase btn-border" data-bs-dismiss="offcanvas" aria-label="Close">Continue
-                    Shopping <i class="bi bi-arrow-right ms-1"></i></a>
-            </div>
-        </ng-template>
+      </div>
+    </ng-container>
+    <ng-template #noItem>
+      <div class="cart-sidebar-empty text-center ">
+        <div class="cart-sidebar-empty-icon">
+          <i class="bi bi-bag-x"></i>
+        </div>
+        <p class="mt-0 mb-4">Your basket is currently empty.</p>
+        <a href="javascript:void(0)" class="btn btn-default px-4 text-uppercase btn-border" data-bs-dismiss="offcanvas"
+          aria-label="Close">Continue
+          Shopping <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+    </ng-template>
 
   </div>
 </div>
 
 <!-- Cart SideBar End -->
-
-

@@ -10,6 +10,7 @@ namespace CMS.Service.Services.UserCartProduct
         Task<ServiceResponse<UserCartProductViewModel>> AddProduct(UserCartProductPostModel model);
         Task<ServiceResponse<UserCartProductViewModel>> RemoveProduct(UserCartProductPostModel model);
 
+        Task<ServiceResponse<UserCartProductViewModel>> UpdateCartQuantity(UpdateCartItemPostModel model);
 
     }
 }

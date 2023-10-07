@@ -23,4 +23,10 @@ namespace CMS.Service.Services.UserCartProduct
         public long Quantity { get; set; }
 
     }
+
+    public class UpdateCartItemPostModel
+    {
+        public string Id { get; set; }
+       public long Quantity { get; set; }
+    }
 }
