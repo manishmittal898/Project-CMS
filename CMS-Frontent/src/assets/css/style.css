@@ -2065,8 +2065,12 @@ table tr td {
   line-height: 25px;
   margin: 0px;
   flex: 1 auto;
-  color: #444444;
+  color: #000;
 }
+.cart-list-items-description h3 a {
+  color: #000;
+}
+
 
 .cart-list-items-action {
   margin-left: 12px;
