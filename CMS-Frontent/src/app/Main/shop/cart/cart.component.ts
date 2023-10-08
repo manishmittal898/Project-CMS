@@ -69,8 +69,9 @@ export class CartComponent implements OnInit {
   }
 
   checkSizeExist(sizeId, productId, itm): boolean {
-    let allSize = this.cartModel.filter(x => x.ProductId == productId).map(x => x.SizeId);
-    return this.sizeModel.filter(x => x.Value == itm && (x.Value == sizeId || !allSize.includes(x.Value))).length > 0;
+    let prdSize = this.cartModel?.find(x => x.ProductId == productId)?.Product?.Stocks?.map(x => x.SizeId) ?? [];
+    let allSize = this.cartModel?.filter(x => x.ProductId == productId)?.map(x => x.SizeId);
+    return this.sizeModel?.filter(x => x.Value == itm && prdSize?.includes(x.Value) && (x.Value == sizeId || !allSize?.includes(x.Value))).length > 0;
   }
   getSellingPrice(SizeId, ProductId) {
     let product = this.cartModel.find(x => x.ProductId == ProductId)
@@ -87,7 +88,7 @@ export class CartComponent implements OnInit {
   }
   getMaxCartQuantity(SizeId, ProductId) {
     let product = this.cartModel.find(x => x.ProductId == ProductId)
-    return product.Product.Stocks.find(x => x.SizeId == SizeId).Quantity ?? 20;
+    return product?.Product?.Stocks?.find(x => x.SizeId == SizeId)?.Quantity ?? 20;
   }
 
   deleteCartItem(item: CartProductViewModel) {
