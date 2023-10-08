@@ -113,4 +113,9 @@ export class CartComponent implements OnInit {
     })
   }
 
+  getDetailUrl(Product) {
+    return `/collections/${Product.Category?.replace('/', '-').split(' ').join('-')}/${Product.Name.replace('/', '-').split(' ').join('-')}/${Product.Id}`
+  }
+
+
 }

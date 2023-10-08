@@ -14,7 +14,7 @@
               <img [src]="item?.Product?.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
             </div>
             <div class="cart-sidebar-body-cart-items-info">
-              <a href="javascript:void(0)" class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
+              <a href="javascript:void(0)" [routerLink]="getDetailUrl(item?.Product)" class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
               <div class="d-flex justify-content-between mt-2">
                 <div class="d-flex align-items-center product-list-select-control"> <strong
                     class="me-1 text-muted">Size:</strong>

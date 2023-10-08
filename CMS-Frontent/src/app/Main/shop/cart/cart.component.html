@@ -27,7 +27,8 @@
                     onerror="this.src='assets/images/no-img.png'" alt="" /></div>
                 <div class="cart-list-items-description">
                   <div class="d-flex align-items-start justify-content-between">
-                    <h3> {{item.Product.Name}} </h3>
+                    <h3><a href="javascript:void(0)" [routerLink]="getDetailUrl(item?.Product)"
+                        class="cart-sidebar-body-cart-items-info-title"> {{item.Product.Name}}</a> </h3>
                     <a class="cart-list-items-action" (click)="deleteCartItem(item)" href="javascript:void(0)"><i
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                         class="fa-regular fa-trash"></i></a>
@@ -117,5 +118,3 @@
     </div>
   </div>
 </section>
-
-
