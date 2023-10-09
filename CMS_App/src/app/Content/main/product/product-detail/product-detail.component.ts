@@ -11,9 +11,9 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
 export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
   id: string = "";
+  
   @Input() set Id(value: string) {
     this.id = value;
-
     this.getDetail();
   }
 
