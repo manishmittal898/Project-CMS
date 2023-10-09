@@ -7,6 +7,9 @@
       Product List
     </div>
     <div class="page-new-header-action">
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#PageSidebar">
+        Link with href
+      </a>
       <button routerLink="../add" class="page-new-header-action-items" data-title="Add New Product"> <i
           class="bi bi-plus-lg"></i></button>
       <div class="page-new-header-action-search">
@@ -116,4 +119,14 @@
   </ul>
 
   <!-- Main Page Content End -->
+
+  <div class="offcanvas offcanvas-end pagesidebar-content" tabindex="-1" id="PageSidebar">
+    <div class="offcanvas-header py-2">
+      <h5 class="offcanvas-title">Page Title</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body pt-0 pagesidebar-content-body">
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    </div>
+  </div>
 </ng-template>

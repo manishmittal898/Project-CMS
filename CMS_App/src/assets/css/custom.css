@@ -412,7 +412,7 @@ table tbody tr:nth-of-type(odd) .table-data-name span {
 }
 
 .modal-backdrop.show {
-  z-index: 999999;
+  z-index: 999;
   -webkit-backdrop-filter: saturate(180%) blur(5px);
   backdrop-filter: saturate(180%) blur(5px);
   background-color: #000;
@@ -1500,10 +1500,10 @@ ul.sidebar-submenu a i {
 {
   box-shadow: none;
 }
-.btn-close
+/* .btn-close
 {
   background: transparent;
-}
+} */
 .btn-close span {
   color: #fff;
   font-size: 40px;
@@ -1716,3 +1716,15 @@ fieldset legend {
 .swal2-container {
   z-index: 999 !important;
 } */
+
+.pagesidebar-content {
+  width: 87%;
+}
+.pagesidebar-content .offcanvas-title {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.pagesidebar-content .offcanvas-header .btn-close {
+  background-size: 18px;
+}
