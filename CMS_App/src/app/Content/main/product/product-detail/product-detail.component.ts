@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
@@ -31,12 +31,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getDetail();
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes["id"]?.currentValue) {
-      this.getDetail()
-    }
 
-  }
   getDetail(): void {
     if (this.id?.length > 0) {
 

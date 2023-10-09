@@ -1,7 +1,7 @@
 import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DropDownModel, FilterDropDownPostModel } from 'src/app/Shared/Helper/common-model';
 import { DropDown_key } from 'src/app/Shared/Helper/constants';
@@ -10,7 +10,6 @@ import { CommonService } from 'src/app/Shared/Services/common.service';
 import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
 import { DropDownItem } from '../../../../Shared/Helper/common-model';
-import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-product-add-edit',
@@ -75,14 +74,26 @@ export class ProductAddEditComponent implements OnInit {
 
   @Input() set Id(value: string) {
     this.model.Id = value;
-    if (this.model.Id !== null) {
+    if (this.model !== null && this.model.Id.length > 0) {
       this.onGetDetail();
+    } else {
+      this.reset()
     }
   }
 
+
   ngOnInit(): void {
     this.GetDropDown();
+  }
 
+  reset() {
+    this.model = {} as ProductMasterPostModel;
+    this.isFileAttached = false;
+    this.productFile = undefined
+    this.ProductFiles = [];
+    this.stockModel = {} as ProductStockModel;
+    this.formgrp.reset();
+    this.stockFormGroup.reset()
   }
   ddlProductSize(): any {
 
