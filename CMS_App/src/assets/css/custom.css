@@ -1719,12 +1719,18 @@ fieldset legend {
 
 .pagesidebar-content {
   width: 87%;
+  overflow: auto;
 }
-.pagesidebar-content .offcanvas-title {
+.pagesidebar-content .offcanvas-title, .pagesidebar-content .offcanvas-title p {
   font-size: 25px;
   font-weight: 600;
+  color: #000;
 }
 
 .pagesidebar-content .offcanvas-header .btn-close {
   background-size: 18px;
+}
+
+.pagesidebar-content .offcanvas-body {
+  overflow-y: initial;
 }
