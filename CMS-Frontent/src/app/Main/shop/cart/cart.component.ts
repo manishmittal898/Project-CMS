@@ -20,29 +20,16 @@ export class CartComponent implements OnInit {
     return this._cartService.CartProductModel ?? [];
   }
   get TotalAmount() {
-    let amt = 0;
-    if (this.cartModel.length > 0) {
-      this.cartModel?.forEach(x => {
-        amt += (x.Quantity ?? 0) * (x.Product?.SellingPrice ?? 0)
-      });
-    }
-
-    return amt;
+    return this._cartService.TotalAmount;
   }
   get TotalMRP() {
-    let amt = 0;
-    if (this.cartModel.length > 0) {
-      this.cartModel?.forEach(x => {
-        amt += (x.Quantity ?? 0) * (x.Product?.Price ?? 0)
-      });
-    }
-
-    return amt;
+    return this._cartService.TotalMRP;
   }
   constructor(private readonly _security: SecurityService, private _toasterService: ToastrService,
     private readonly _commonService: CommonService, public _cartService: CartProductService, private readonly _productService: ProductService) {
     this._cartService.GetCartList();
     // this.cartModel[0].ProductId
+
 
   }
 

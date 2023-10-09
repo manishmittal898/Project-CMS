@@ -14,6 +14,27 @@ export class CartProductService {
 
   private cartProductItem: CartProductPostModel[] = [];
   CartProductModel?: CartProductViewModel[] = [];
+  get TotalAmount() {
+    let amt = 0;
+    if (this.CartProductModel.length > 0) {
+      this.CartProductModel?.forEach(x => {
+        amt += (x.Quantity ?? 0) * (x.Product?.SellingPrice ?? 0)
+      });
+    }
+
+    return amt;
+  }
+  get TotalMRP() {
+    let amt = 0;
+    if (this.CartProductModel.length > 0) {
+      this.CartProductModel?.forEach(x => {
+        amt += (x.Quantity ?? 0) * (x.Product?.Price ?? 0)
+      });
+    }
+
+    return amt;
+  }
+
   constructor(private readonly _baseService: BaseAPIService, private _toasterService: ToastrService,
     private _auth: AuthService, private _securityService: SecurityService, private readonly _productService: ProductService) {
     this.cartProductItem = this._securityService.checkStorage('cart-product') ? JSON.parse(this._securityService.getStorage('cart-product') as string) as any[] : [];

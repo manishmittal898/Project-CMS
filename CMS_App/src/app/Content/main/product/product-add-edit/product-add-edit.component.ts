@@ -1,5 +1,5 @@
 import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -59,7 +59,17 @@ export class ProductAddEditComponent implements OnInit {
 
   get sf() { return this.stockFormGroup.controls; }
   tempStock: ProductStockModel | undefined;
-  ddlAvailableProductSize: DropDownItem[] = []
+  ddlAvailableProductSize: DropDownItem[] = [];
+  @Input() set Id(value: string) {
+    this.model.Id = value;
+    if (this.model !== null && this.model.Id.length > 0) {
+      this.onGetDetail();
+    } else {
+      this.reset();
+    }
+  }
+
+  @Output() OnSave=new EventEmitter<boolean>();
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -72,14 +82,6 @@ export class ProductAddEditComponent implements OnInit {
 
   }
 
-  @Input() set Id(value: string) {
-    this.model.Id = value;
-    if (this.model !== null && this.model.Id.length > 0) {
-      this.onGetDetail();
-    } else {
-      this.reset()
-    }
-  }
 
 
   ngOnInit(): void {
