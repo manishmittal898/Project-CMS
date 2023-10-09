@@ -122,22 +122,24 @@
   <!-- Main Page Content End -->
 
   <div class="offcanvas offcanvas-end pagesidebar-content" tabindex="-1" id="PageSidebar">
-    <div class="offcanvas-header py-2">
+    <div class="offcanvas-header pt-2 pb-3">
       <h5 class="offcanvas-title"><span [ngSwitch]="ViewMode">
-          <p *ngSwitchCase="'Add'">
+          <p *ngSwitchCase="'Add'" class="m-0">
             Add Product
           </p>
-          <p *ngSwitchCase="'Edit'">
+          <p *ngSwitchCase="'Edit'" class="m-0">
             Edit Product
           </p>
-          <p *ngSwitchDefault>
+          <p *ngSwitchDefault  class="m-0">
             Product Detail
           </p>
         </span></h5>
-      <button *ngIf=" ViewMode!='Add'" (click)="changeViewMode()" class="page-new-header-action-items"
+        <div class="d-flex align-items-center">
+      <button *ngIf=" ViewMode!='Add'" (click)="changeViewMode()" class="page-new-header-action-items ms-0 me-2"
         data-title="{{ViewMode}}"> <i class=""
           [ngClass]="{'bi bi-eye':ViewMode=='Edit' ,'bi bi-pencil':ViewMode=='Detail' }"></i></button>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
     </div>
     <div class="offcanvas-body pt-0 pagesidebar-content-body">
       <ng-container *ngIf="ViewMode=='Edit'|| ViewMode=='Add'; else DetailView">
