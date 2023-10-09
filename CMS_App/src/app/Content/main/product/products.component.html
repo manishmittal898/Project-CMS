@@ -130,24 +130,25 @@
           <p *ngSwitchCase="'Edit'" class="m-0">
             Edit Product
           </p>
-          <p *ngSwitchDefault  class="m-0">
+          <p *ngSwitchDefault class="m-0">
             Product Detail
           </p>
         </span></h5>
-        <div class="d-flex align-items-center">
-      <button *ngIf=" ViewMode!='Add'" (click)="changeViewMode()" class="page-new-header-action-items ms-0 me-2"
-        data-title="{{ViewMode}}"> <i class=""
-          [ngClass]="{'bi bi-eye':ViewMode=='Edit' ,'bi bi-pencil':ViewMode=='Detail' }"></i></button>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
+      <div class="d-flex align-items-center">
+        <button *ngIf=" ViewMode!='Add'" (click)="changeViewMode()" class="page-new-header-action-items ms-0 me-2"
+          data-title="{{ViewMode}}"> <i class=""
+            [ngClass]="{'bi bi-eye':ViewMode=='Edit' ,'bi bi-pencil':ViewMode=='Detail' }"></i></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
     </div>
     <div class="offcanvas-body pt-0 pagesidebar-content-body">
-      <ng-container *ngIf="ViewMode=='Edit'|| ViewMode=='Add'; else DetailView">
-        <app-product-add-edit [Id]="selectedRecord"></app-product-add-edit>
-      </ng-container>
-      <ng-template #DetailView>
-        <app-product-detail [Id]="selectedRecord"></app-product-detail>
-      </ng-template>
+      <!-- <ng-container *ngIf="ViewMode=='Edit'|| ViewMode=='Add'; else DetailView"> -->
+      <app-product-add-edit [ngClass]="{'d-none':  ViewMode=='Detail'}" [Id]="selectedRecord"></app-product-add-edit>
+      <!-- </ng-container>
+      <ng-template #DetailView> -->
+      <app-product-detail [ngClass]="{'d-none': ViewMode=='Edit'|| ViewMode=='Add'}"
+        [Id]="selectedRecord"></app-product-detail>
+      <!-- </ng-template> -->
 
     </div>
   </div>

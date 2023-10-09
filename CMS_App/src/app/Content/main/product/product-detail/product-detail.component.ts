@@ -13,6 +13,7 @@ export class ProductDetailComponent implements OnInit {
   id: string = "";
   @Input() set Id(value: string) {
     this.id = value;
+
     this.getDetail();
   }
 
@@ -23,18 +24,18 @@ export class ProductDetailComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute, private _productService: ProductService, private readonly toast: ToastrService,) {
     this._activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.id;
-
+      this.getDetail();
     });
 
   }
 
   ngOnInit(): void {
-    this.getDetail();
+    //  this.getDetail();
   }
 
   getDetail(): void {
     if (this.id?.length > 0) {
-
+      this.model = {} as ProductMasterViewModel;
       this._productService.GetProductMaster(this.id).subscribe(response => {
         if (response.IsSuccess) {
           this.model = response.Data as ProductMasterViewModel;
