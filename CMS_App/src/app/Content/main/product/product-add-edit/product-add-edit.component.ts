@@ -1,5 +1,5 @@
 import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -57,6 +57,7 @@ export class ProductAddEditComponent implements OnInit {
     UnitPrice: [undefined, Validators.required],
     Quantity: [undefined, Validators.required],
   });
+
   get sf() { return this.stockFormGroup.controls; }
   tempStock: ProductStockModel | undefined;
   ddlAvailableProductSize: DropDownItem[] = []
@@ -70,6 +71,13 @@ export class ProductAddEditComponent implements OnInit {
       }
     });
 
+  }
+
+  @Input() set Id(value: string) {
+    this.model.Id = value;
+    if (this.model.Id !== null) {
+      this.onGetDetail();
+    }
   }
 
   ngOnInit(): void {
@@ -265,7 +273,7 @@ export class ProductAddEditComponent implements OnInit {
       this.model.Stocks.push(this.tempStock)
     }
   }
-  backToPrevious(){
+  backToPrevious() {
     history.back()
   }
   onSaveStock() {

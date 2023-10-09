@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/product.service';
@@ -11,10 +11,15 @@ import { ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/
 export class ProductDetailComponent implements OnInit {
   model = {} as ProductMasterViewModel;
   id: string = "";
- get DiscountValue() {
-    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price )/this.model?.Price)*100)).toString()+'%';
+  @Input() set Id(value: string) {
+    this.id = value;
+    this.getDetail();
+  }
 
-   }
+  get DiscountValue() {
+    return (Math.round(((this.model?.SellingPrice as number - this.model?.Price) / this.model?.Price) * 100)).toString() + '%';
+
+  }
   constructor(private _activatedRoute: ActivatedRoute, private _productService: ProductService, private readonly toast: ToastrService,) {
     this._activatedRoute.params.subscribe(x => {
       this.id = this._activatedRoute.snapshot.params.id;
@@ -26,20 +31,30 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getDetail();
   }
-  getDetail(): void {
-    this._productService.GetProductMaster(this.id).subscribe(response => {
-      if (response.IsSuccess) {
-        this.model = response.Data as ProductMasterViewModel;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["id"]?.currentValue) {
+      this.getDetail()
+    }
 
-      } else {
-
-        this.toast.error(response.Message?.toString(), 'Error');
-      }
-    },
-      error => {
-      });
   }
-  backToPrevious(){
+  getDetail(): void {
+    if (this.id?.length > 0) {
+
+      this._productService.GetProductMaster(this.id).subscribe(response => {
+        if (response.IsSuccess) {
+          this.model = response.Data as ProductMasterViewModel;
+
+        } else {
+
+          this.toast.error(response.Message?.toString(), 'Error');
+        }
+      },
+        error => {
+        });
+    }
+  }
+
+  backToPrevious() {
     history.back()
   }
 

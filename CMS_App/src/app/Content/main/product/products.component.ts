@@ -22,13 +22,14 @@ export class ProductsComponent implements OnInit {
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-
-  displayedColumns: string[] = ['index', 'SKU', 'Name', 'ImagePath', 'Category', 'SubCategory','Price', 'IsActive', 'Action'];
+  selectedRecord = "";
+  ViewMode = "Detail"
+  displayedColumns: string[] = ['index', 'SKU', 'Name', 'ImagePath', 'Category', 'SubCategory', 'Price', 'IsActive', 'Action'];
   ViewdisplayedColumns = [
     { Value: 'Name', Text: 'Name' },
-  { Value: 'Category', Text: 'Category' },
-  { Value: 'SubCategory', Text: 'Sub Category' },
-  { Value: 'CaptionTag', Text: 'Caption Tag' }];
+    { Value: 'Category', Text: 'Category' },
+    { Value: 'SubCategory', Text: 'Sub Category' },
+    { Value: 'CaptionTag', Text: 'Caption Tag' }];
   indexModel = new IndexModel();
   totalRecords: number = 0;
   noRecordData = {
@@ -138,5 +139,8 @@ export class ProductsComponent implements OnInit {
     this.indexModel.Search = '';
     this.indexModel.Page = 1;
     this.getList();
+  }
+  changeViewMode() {
+    this.ViewMode = (this.ViewMode == 'Edit' ? 'Detail' : 'Edit');
   }
 }
