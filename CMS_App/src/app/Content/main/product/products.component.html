@@ -142,13 +142,10 @@
       </div>
     </div>
     <div class="offcanvas-body pagesidebar-content-body">
-      <!-- <ng-container *ngIf="ViewMode=='Edit'|| ViewMode=='Add'; else DetailView"> -->
-      <app-product-add-edit [ngClass]="{'d-none':  ViewMode=='Detail'}" [Id]="selectedRecord"></app-product-add-edit>
-      <!-- </ng-container>
-      <ng-template #DetailView> -->
-      <app-product-detail [ngClass]="{'d-none': ViewMode=='Edit'|| ViewMode=='Add'}"
+      <app-product-add-edit [ngClass]="{'d-none':  ViewMode=='Detail'}" (OnSave)="reloadData($event)"
+        [Id]="selectedRecord"></app-product-add-edit>
+      <app-product-detail [refreshData]="isDataRefresh" [ngClass]="{'d-none': ViewMode=='Edit'|| ViewMode=='Add'}"
         [Id]="selectedRecord"></app-product-detail>
-      <!-- </ng-template> -->
 
     </div>
   </div>

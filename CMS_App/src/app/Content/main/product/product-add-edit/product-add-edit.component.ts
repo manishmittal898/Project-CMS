@@ -106,6 +106,7 @@ export class ProductAddEditComponent implements OnInit {
     }, 10);
 
   }
+
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
@@ -118,10 +119,12 @@ export class ProductAddEditComponent implements OnInit {
 
       this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
         if (x.IsSuccess) {
-          this.toast.success("Product added sucessfully...", "Saved");
+          this.toast.success("Product added successfully...", "Saved");
           this._route.navigate(['./admin/product']);
+          this.OnSave.emit(true);
         } else {
-          this.toast.error(x.Message as string, "Faild");
+          this.OnSave.emit(false);
+          this.toast.error(x.Message as string, "Failed");
         }
       })
 
@@ -286,18 +289,18 @@ export class ProductAddEditComponent implements OnInit {
       this.model.Stocks.push(this.tempStock)
     }
   }
-  backToPrevious() {
-    history.back()
-  }
-  onSaveStock() {
 
+  backToPrevious() {
+    history.back();
+  }
+
+  onSaveStock() {
     if (this.model.Stocks && this.model.Stocks.some(x => x.SizeId === this.stockModel.SizeId)) {
       this.stockModel.SizeId = undefined;
-      this.toast.warning("Size Already exist, Please Select diffrent size...", "Oops");
+      this.toast.warning("Size Already exist, Please Select different size...", "Oops");
       return
     }
     this.stockFormGroup.markAllAsTouched();
-
     if (this.stockFormGroup.valid) {
       if (!this.model.Stocks) {
         this.model.Stocks = [];
@@ -310,7 +313,6 @@ export class ProductAddEditComponent implements OnInit {
   }
 
   applyMainPrice() {
-
     this.stockModel.UnitPrice = Number(this.model.Price);
   }
 
