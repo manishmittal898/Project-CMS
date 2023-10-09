@@ -18,7 +18,7 @@ export class CartProductService {
     let amt = 0;
     if (this.CartProductModel.length > 0) {
       this.CartProductModel?.forEach(x => {
-        amt += (x.Quantity ?? 0) * (x.Product?.SellingPrice ?? 0)
+        amt += (x.Quantity ?? 0) * (x.Product?.Stocks?.find(c => c.SizeId == x.SizeId)?.SellingPrice ?? 0)
       });
     }
 
@@ -28,7 +28,7 @@ export class CartProductService {
     let amt = 0;
     if (this.CartProductModel.length > 0) {
       this.CartProductModel?.forEach(x => {
-        amt += (x.Quantity ?? 0) * (x.Product?.Price ?? 0)
+        amt += (x.Quantity ?? 0) * (x.Product?.Stocks?.find(c => c.SizeId == x.SizeId)?.UnitPrice ?? 0)
       });
     }
 
@@ -114,16 +114,21 @@ export class CartProductService {
     }
   }
 
-  public async UpdateCartProduct(id: string, quantity: number) {
+  public async UpdateCartProduct(product: CartProductViewModel) {
     if (this._auth.IsAuthentication.value) {
       let model = {} as UpdateCartItemPostModel;
-      model.Id = id;
-      model.Quantity = quantity;
+      model.Id = product.Id;
+      model.Quantity = product.Quantity;
       this.UpdateCartQuantity(model).toPromise().then(x => {
         return x.IsSuccess;
       })
     }
-
+    else {
+      let ItemData = this.CartProductModel.map(x => { return { ProductId: x.ProductId, Quantity: x.Quantity, SizeId: x.SizeId } as CartProductPostModel })
+      this.cartProductItem = ItemData;
+      let data = JSON.stringify(this.cartProductItem);
+      this._securityService.setStorage('cart-product', data);
+    }
   }
   public async GetCartList() {
     if (!this._auth.IsAuthentication.value) {

@@ -14,12 +14,14 @@
               <img [src]="item?.Product?.ImagePath" onerror="this.src='assets/images/no-img.png'" alt="" />
             </div>
             <div class="cart-sidebar-body-cart-items-info">
-              <a href="javascript:void(0)" [routerLink]="getDetailUrl(item?.Product)" class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
+              <a href="javascript:void(0)" [routerLink]="getDetailUrl(item?.Product)"
+                class="cart-sidebar-body-cart-items-info-title">{{item.Product.Name}}</a>
               <div class="d-flex justify-content-between mt-2">
                 <div class="d-flex align-items-center product-list-select-control"> <strong
                     class="me-1 text-muted">Size:</strong>
-                  <ng-select [clearable]="false" (change)="getUpdatedPrice(item.SizeId,item.ProductId)"
-                    placeholder="Size" [searchable]="true" id="{{'Size_'}}" [(ngModel)]="item.SizeId">
+                  <ng-select [clearable]="false" (blur)="UpdateCartProduct(item)"
+                    (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size" [searchable]="true"
+                    id="{{'Size_'}}" [(ngModel)]="item.SizeId">
                     <ng-container *ngFor="let itm of sizeModel">
                       <ng-option *ngIf="checkSizeExist(item.SizeId,item.ProductId,itm.Value)"
                         [value]="itm.Value">{{itm.Text}}</ng-option>
@@ -31,12 +33,12 @@
                   <strong class="text-muted">Qty:</strong>
                   <div class="product-list-qty d-flex ms-1">
                     <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1;"
-                      (blur)="UpdateCartProduct(item.Id, item.Quantity)" class="product-list-qty-btn"> <i
+                      (blur)="UpdateCartProduct(item)" class="product-list-qty-btn"> <i
                         class="fa-sharp fa-light fa-minus"></i> </button>
                     <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
                     <button type="button"
                       [disabled]="item.Quantity==10 || item.Quantity==getMaxCartQuantity(item.SizeId,item.ProductId)"
-                      (click)="item.Quantity=item.Quantity+1" (blur)="UpdateCartProduct(item.Id, item.Quantity)"
+                      (click)="item.Quantity=item.Quantity+1" (blur)="UpdateCartProduct(item)"
                       class="product-list-qty-btn"> <i class="fa-sharp fa-light fa-plus"></i> </button>
                   </div>
                 </div>
