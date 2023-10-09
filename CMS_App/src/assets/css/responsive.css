@@ -112,6 +112,9 @@ section.page-login-register {
 .login-register-logo img {
   max-height: 50px;
 }
+.pagesidebar-content {
+  width: 100%;
+}
 }
 
 @media (max-width: 595px) {
