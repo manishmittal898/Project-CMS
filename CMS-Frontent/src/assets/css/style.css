@@ -3234,7 +3234,7 @@ body .toast-close-button {
 .mobile-footer-menu a {
   flex: 1;
   text-align: center;
-  padding: 6px;
+  padding: 8px 6px;
   line-height: 1;
   color: #000;
   position: relative;
@@ -3267,7 +3267,7 @@ body .toast-close-button {
 }
 .mobile-footer-menu a i {
   display: block;
-  font-size: 16px;
+  font-size: 20px;
 }
 .mobile-footer-menu a span {
   font-size: 12px;
@@ -3275,5 +3275,6 @@ body .toast-close-button {
   margin-top: 5px;
   color: #7b7b7b;
   text-transform: capitalize;
+  display: none;
 }
 /* CUSTOM CSS END */
