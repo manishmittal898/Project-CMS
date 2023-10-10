@@ -292,7 +292,7 @@ img {
 
 .btn-border {
   border: none;
-  outline: solid 1px #000;
+  outline: solid 1px var(--primary-color);
   background: #fff;
   color: var(--black);
   outline-offset: -1px;
@@ -308,7 +308,7 @@ img {
 .btn-border:active,
 .btn-border:focus:not(:focus-visible) {
   color: #000;
-  outline: solid 1px var(--primary-color);
+  outline: solid 1px #000;
 }
 
 .bg-light-custom {
@@ -3276,5 +3276,16 @@ body .toast-close-button {
   color: #7b7b7b;
   text-transform: capitalize;
   display: none;
+}
+.cart-page-empty {
+  padding: 50px 0px 20px 0px;
+  text-align: center;
+}
+.cart-page-empty > i {
+  font-size: 120px;
+}
+.cart-page-empty p {
+  font-size: 22px;
+  margin: 30px 0px;
 }
 /* CUSTOM CSS END */

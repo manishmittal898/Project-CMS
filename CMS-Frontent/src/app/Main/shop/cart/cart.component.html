@@ -16,6 +16,13 @@
 <section class="inner-page-space cart-page">
   <div class="container">
     <div class="row">
+		<!-- Empty Cart Page Start -->
+      <div class="cart-page-empty d-none">
+        <i class="fa-thin fa-cart-circle-plus text-success"></i>
+            <p>Your basket is currently empty.</p>
+            <a href="javascript:void(0)" class="btn btn-default px-4 text-uppercase btn-border">Continue Shopping <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+		<!-- Empty Cart Page End -->
       <div class="col-xl-9 col-lg-8 pe-2 pe-lg-5">
         <div class="cart-page-list">
           <h5 class="mb-2"><i class="bi bi-cart3 me-1"></i> MY Cart : <strong *ngIf="cartModel.length>0">
