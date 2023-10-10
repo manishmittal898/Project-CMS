@@ -1742,9 +1742,6 @@ fieldset legend {
   z-index: 9999;
   box-shadow: 0 0 20px #e7e7e7;
 }
-
-
-
 body.modal-open .pagesidebar-content:before {
   background: rgba(0,0,0,0.7);
   content: "";
