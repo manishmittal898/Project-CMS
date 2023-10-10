@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from 'src/app/Shared/Services/common.service';
@@ -12,10 +12,24 @@ import { GeneralEntryService, GeneralEntryCategoryViewModel } from 'src/app/Shar
 export class GeneralEntryCategoryMasterDetailComponent implements OnInit {
   recordId = '';
   model = {} as GeneralEntryCategoryViewModel;
+  @Input() set Id(value: string) {
+    this.recordId = value;
+    this.onGetDetail();
+  }
+  @Input() refreshData: boolean = false;
   constructor(private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['refreshData']?.currentValue) {
+      this.onGetDetail();
+      this.refreshData = false;
+    }
+
+  }
+
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(x => {
       this.recordId = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : 0;

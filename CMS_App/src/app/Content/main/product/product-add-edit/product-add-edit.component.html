@@ -410,10 +410,10 @@
                   title="Add Product Price" (click)="applyMainPrice()">₹
                   Product Price <i class="bi bi-chevron-right"></i></a>
               </label>
-              <input type="number" [(ngModel)]="stockModel.UnitPrice" (keypress)="_commonService.NumberOnly($event)"
-                [minlength]="1" [maxLength]="10" formControlName="UnitPrice"
-                [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}" class="form-control"
-                id="input4" placeholder="Unit Price">
+              <input type="number" readOnly [(ngModel)]="stockModel.UnitPrice"
+                (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
+                formControlName="UnitPrice" [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}"
+                class="form-control" id="input4" placeholder="Unit Price">
               <!-- <button type="button" *ngIf="this.model?.Price" title="Add Product Price" (click)="applyMainPrice()">₹ Product Price</button> -->
               <div class="invalid-feedback"
                 *ngIf="(stockFormGroup.get('UnitPrice')?.hasError('required') && stockFormGroup.get('UnitPrice')?.touched)">

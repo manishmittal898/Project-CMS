@@ -35,6 +35,11 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     url: './add',
     urlLabel: 'Create'
   };
+  selectedRecord = "";
+  ViewMode = "Detail"
+  get IsSystemEntry() {
+    return this.model?.find(x => x.Id == this.selectedRecord)?.IsSystemEntry ?? true;
+  }
   constructor(private _router: Router, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService,
     public dialog: MatDialog) {
@@ -182,6 +187,19 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     this.indexModel.Page = 1;
     this.getList();
   }
+  changeViewMode() {
+    this.ViewMode = (this.ViewMode == 'Edit' ? 'Detail' : 'Edit');
+  }
+  isDataRefresh: boolean = false;
+  reloadData(status: boolean) {
+    this.isDataRefresh = status;
+    if (status) {
+      this.getList();
+      setTimeout(() => {
+        this.isDataRefresh = !status;
+      }, 15);
 
+    }
+  }
 
 }
