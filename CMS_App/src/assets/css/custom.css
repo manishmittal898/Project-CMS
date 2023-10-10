@@ -1566,7 +1566,7 @@ position: relative;
 /* LOGIN START */
 
 section.page-login-register {
-  background: url(../images/login.jpg);
+  background: url(../images/login_bg1.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1588,7 +1588,7 @@ section.page-login-register {
 
 .page-login-register-right:before {
   position: absolute;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   content: "";
   height: 100%;
   width: 100%;

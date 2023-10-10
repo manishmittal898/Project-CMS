@@ -115,6 +115,10 @@ section.page-login-register {
 .pagesidebar-content {
   width: 100%;
 }
+.login-register-logo {
+  display: block;
+  text-align: center;
+}
 }
 
 @media (max-width: 595px) {
