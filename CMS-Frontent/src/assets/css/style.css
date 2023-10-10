@@ -2804,11 +2804,18 @@ section.deals-opt-d-1 {
   position: relative;
 }
 
+app-product-section .home-product:nth-child(3) .product-list-items
+{
+  padding: 6px;
+  border: solid 1px #ffe7f5;
+}
+
 app-product-section .home-product:nth-child(3) {
-  background: url(../images//pattern2.png);
+  background: url(../images//pattern3.webp);
   padding: 25px 0px;
   background-attachment: fixed;
 }
+
 
 .home-product .container {
   position: relative;
@@ -2817,7 +2824,7 @@ app-product-section .home-product:nth-child(3) {
 app-product-section .home-product:nth-child(3):before {
   position: absolute;
   content: "";
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.8);
   height: 100%;
   width: 100%;
   top: 0;
