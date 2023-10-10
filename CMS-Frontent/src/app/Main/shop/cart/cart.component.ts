@@ -83,7 +83,7 @@ export class CartComponent implements OnInit {
       if (result) {
         this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
           this._toasterService.success("Cart item removed..!" as string, 'Removed');
-
+          this.UpdateCartProduct(item);
         })
       }
     }, err => {
@@ -101,6 +101,10 @@ export class CartComponent implements OnInit {
     })
   }
 
+  UpdateCartProduct(product: CartProductViewModel) {
+    this._cartService.UpdateCartProduct(product).then(x => {
+    })
+  }
   getDetailUrl(Product) {
     return `/collections/${Product.Category?.replace('/', '-').split(' ').join('-')}/${Product.Name.replace('/', '-').split(' ').join('-')}/${Product.Id}`
   }

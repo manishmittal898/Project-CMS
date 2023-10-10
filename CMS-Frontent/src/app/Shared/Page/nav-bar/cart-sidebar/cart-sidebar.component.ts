@@ -4,7 +4,7 @@ import { CommonService } from 'src/app/Shared/Services/Core/common.service';
 import { DropDown_key, Message } from 'src/app/Shared/Constant';
 import { DropDownModel } from 'src/app/Shared/Helper/Common';
 import { DropDownItem } from '../../../Helper/Common';
-import { CartProductService, CartProductViewModel } from 'src/app/Shared/Services/ProductService/cart-product.service';
+import { CartProductPostModel, CartProductService, CartProductViewModel } from 'src/app/Shared/Services/ProductService/cart-product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/Shared/Services/ProductService/product.service';
 
@@ -81,7 +81,7 @@ export class CartSidebarComponent implements OnInit {
       if (result) {
         this._cartService.deleteProduct(item.ProductId, item.SizeId).then(x => {
           this._toasterService.success("Cart item removed..!" as string, 'Removed');
-
+          this.UpdateCartProduct(item);
         })
       }
     }, err => {
@@ -89,20 +89,13 @@ export class CartSidebarComponent implements OnInit {
 
     })
   }
-  UpdateCartProduct(id, quantity) {
-    this._cartService.UpdateCartProduct(id, quantity).then(x => {
+  UpdateCartProduct(product: CartProductViewModel) {
+    this._cartService.UpdateCartProduct(product).then(x => {
 
     })
   }
   getUpdatedPrice(SizeId, ProductId) {
 
-    // let productItem = this._cartService.CartProductModel.find(x => x.ProductId == ProductId);
-    // let stockDetail = productItem.Product.Stocks.find(x => x.SizeId == SizeId);
-
-    // let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
-
-    // this._cartService.CartProductModel[indx].Product.SellingPrice = stockDetail.SellingPrice
-    // this._cartService.CartProductModel[indx].Product.Price = stockDetail.SellingPrice;
     this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
       if (res.IsSuccess) {
         let itmIndex = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);

@@ -143,4 +143,15 @@ export class ProductsComponent implements OnInit {
   changeViewMode() {
     this.ViewMode = (this.ViewMode == 'Edit' ? 'Detail' : 'Edit');
   }
+  isDataRefresh: boolean = false;
+  reloadData(status: boolean) {
+    this.isDataRefresh = status;
+    if (status) {
+      this.getList();
+      setTimeout(() => {
+        this.isDataRefresh = !status;
+      }, 15);
+
+    }
+  }
 }

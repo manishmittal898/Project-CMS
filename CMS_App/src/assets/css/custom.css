@@ -1720,6 +1720,7 @@ fieldset legend {
 .pagesidebar-content {
   width: 87%;
   overflow: auto;
+  background: #f5f7ff;
 }
 .pagesidebar-content .offcanvas-title, .pagesidebar-content .offcanvas-title p {
   font-size: 25px;
@@ -1733,5 +1734,12 @@ fieldset legend {
 
 .pagesidebar-content .offcanvas-body {
   overflow-y: initial;
+}
+.pagesidebar-content .offcanvas-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 9999;
+  box-shadow: 0 0 20px #e7e7e7;
 }
 
