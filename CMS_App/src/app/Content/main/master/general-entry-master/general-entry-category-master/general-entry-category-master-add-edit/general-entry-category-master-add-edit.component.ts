@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -30,6 +30,16 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
   });
   isFileAttached = false;
   get f() { return this.formgrp.controls; }
+  @Input() set Id(value: string) {
+    this.model.Id = value;
+    if (this.model !== null && this.model.Id.length > 0) {
+      this.onGetDetail();
+    } else {
+      this.reset();
+    }
+  }
+
+  @Output() OnSave = new EventEmitter<boolean>();
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
@@ -39,7 +49,7 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
     this.GetDropDown();
     this._activatedRoute.params.subscribe(x => {
       this.model.Id = this._activatedRoute.snapshot.params.id ? this._activatedRoute.snapshot.params.id : '';
-      if (this.model.Id.length>0) {
+      if (this.model.Id.length > 0) {
         this.onGetDetail();
       }
     });
@@ -72,7 +82,9 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
         if (x.IsSuccess) {
           this.toast.success("General Entry Category added sucessfully...", "Saved");
           this._route.navigate(['./admin/master/general-entry-category']);
+          this.OnSave.emit(true);
         } else {
+          this.OnSave.emit(false);
           this.toast.error(x.Message as string, "Faild");
         }
       })
@@ -99,6 +111,11 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
     },
       error => {
       });
+  }
+  reset() {
+    this.model = {} as GeneralEntryCategoryPostModel;
+    this.isFileAttached = false;
+    this.formgrp.reset();
   }
 
 }

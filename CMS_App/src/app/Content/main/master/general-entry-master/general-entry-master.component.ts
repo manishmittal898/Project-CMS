@@ -26,7 +26,7 @@ export class GeneralEntryMasterComponent implements OnInit {
   totalRecords: number = 0;
   noRecordData = {
     subject: 'Can you please add your first general Entry.',
-    Description: "You haven't added general Entry yet. please add your new general Entrys",
+    Description: "You haven't added general Entry yet. please add your new general Entry",
     url: './add',
     urlLabel: 'Add New general Entry'
   };

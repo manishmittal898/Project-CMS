@@ -9,10 +9,11 @@
         {{pageName}}
       </div>
       <div class="page-new-header-action">
-        <button routerLink="./add" class="page-new-header-action-items" data-title="Add"> <i
-            class="bi bi-plus-lg"></i></button>
+        <button (click)="selectedRecord=''; ViewMode='Add'" data-bs-toggle="offcanvas" href="#PageSidebar"
+          data-title="Add" class="page-new-header-action-items"> <i class="bi bi-plus-lg"></i></button>
         <div class="page-new-header-action-search">
-          <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="fa-light fa-magnifying-glass"></i></button>
+          <button type="button" (click)="onSearch()" class="btn-filter-search"><i
+              class="fa-light fa-magnifying-glass"></i></button>
           <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()" (keydown.enter)="onSearch()"
             class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search" />
         </div>
@@ -49,7 +50,8 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Flags </th>
           <td mat-cell *matCellDef="let element" class="gen-entry-flags">
             <ng-container *ngIf="!element.IsSystemEntry; else viewFlagOnly">
-              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowInMain')" title="Update Status">
+              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowInMain')"
+                title="Update Status">
                 <span *ngIf="element!.IsShowInMain" class="d-inline-block btn btn-sm btn-warning">
                   <i class="bi bi-check-circle"></i>&nbsp;Show In Home
                 </span>
@@ -57,21 +59,24 @@
                     class="bi bi-check-circle "></i>&nbsp;Show In Home</span>
               </a>
 
-              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowDataInMain')" title="Update Status">
+              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowDataInMain')"
+                title="Update Status">
                 <span *ngIf="element!.IsShowDataInMain" class="d-inline-block btn btn-sm btn-success"><i
                     class="bi bi-check-circle"></i>&nbsp;Show data in Main</span>
                 <span *ngIf="!element!.IsShowDataInMain" class="d-inline-block btn btn-sm btn-outline-success"><i
                     class="bi bi-check-circle "></i>&nbsp;Show data in Main</span>
               </a>
 
-              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsSingleEntry')" title="Update Status">
+              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsSingleEntry')"
+                title="Update Status">
                 <span *ngIf="element!.IsSingleEntry" class="d-inline-block btn btn-sm btn-primary"><i
                     class="bi bi-check-circle"></i>&nbsp;Single Entry</span>
                 <span *ngIf="!element!.IsSingleEntry" class="d-inline-block btn btn-sm btn-outline-primary"><i
                     class="bi bi-check-circle "></i>&nbsp;Single Entry</span>
               </a>
 
-              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')" title="Update Status">
+              <a class="d-inline-block mb-2 me-2" (click)="onFlagStatus(element!.Id,'IsShowThumbnail')"
+                title="Update Status">
                 <span *ngIf="element!.IsShowThumbnail" class="d-inline-block btn btn-sm btn-info"><i
                     class="bi bi-check-circle"></i>&nbsp;Show Thumbnail</span>
                 <span *ngIf="!element!.IsShowThumbnail" class="d-inline-block btn btn-sm btn-outline-info"><i
@@ -151,11 +156,11 @@
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef style="width: 120px;"> Action </th>
           <td mat-cell *matCellDef="let row" class="table-action-btn">
-            <a href="javascript:void(0)" class="table-action-btn-view" routerLink="./detail/{{row.Id}}"
-              data-title="View Detail"><i class="bi bi-eye"></i>
+            <a href="javascript:void(0)" class="table-action-btn-view" (click)="selectedRecord=row.Id;ViewMode='Detail'"
+              data-bs-toggle="offcanvas" href="#PageSidebar" data-title="View Detail"><i class="bi bi-eye"></i>
             </a>
-            <a href="javascript:void(0)" *ngIf="!row.IsSystemEntry" class="table-action-btn-edit"
-              routerLink="./edit/{{row.Id}}" data-title="Edit"><i class="bi bi-pencil"></i>
+            <a *ngIf="!row.IsSystemEntry" (click)="selectedRecord=row.Id; ViewMode='Edit'" data-title="Edit"
+              data-bs-toggle="offcanvas" href="#PageSidebar" class="table-action-btn-edit"><i class="bi bi-pencil"></i>
             </a>
 
             <a *ngIf="!row.IsSystemEntry" class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)"
@@ -172,7 +177,7 @@
       </div>
     </div>
 
-     <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
+    <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
       <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize"
         (page)="onPaginateChange($event)" showFirstLastButtons *ngIf="totalRecords!=0">
       </mat-paginator>
@@ -181,4 +186,33 @@
 
   <!-- Main Page Content End -->
 
+  <div class="offcanvas offcanvas-end pagesidebar-content" tabindex="-1" id="PageSidebar" data-bs-keyboard="false">
+    <div class="offcanvas-header pt-2 pb-2 pe-3 pe-sm-4">
+      <h5 class="offcanvas-title"><span [ngSwitch]="ViewMode">
+          <p *ngSwitchCase="'Add'" class="m-0">
+            Add General Entry Category
+          </p>
+          <p *ngSwitchCase="'Edit'" class="m-0">
+            Edit General Entry Category
+          </p>
+          <p *ngSwitchDefault class="m-0">
+            General Entry Category Detail
+          </p>
+        </span></h5>
+      <div class="d-flex align-items-center">
+        <button *ngIf="!IsSystemEntry && ViewMode!='Add'" (click)="changeViewMode()"
+          class="page-new-header-action-items ms-0 me-2" data-title="{{ViewMode}}"> <i class=""
+            [ngClass]="{'bi bi-eye':ViewMode=='Edit' ,'bi bi-pencil':ViewMode=='Detail' }"></i></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="offcanvas-body pagesidebar-content-body">
+      <app-general-entry-category-master-add-edit [ngClass]="{'d-none':  ViewMode=='Detail'}"
+        (OnSave)="reloadData($event)" [Id]="selectedRecord"></app-general-entry-category-master-add-edit>
+      <app-general-entry-category-master-detail [refreshData]="isDataRefresh"
+        [ngClass]="{'d-none': ViewMode=='Edit'|| ViewMode=='Add'}"
+        [Id]="selectedRecord"></app-general-entry-category-master-detail>
+
+    </div>
+  </div>
 </ng-template>
