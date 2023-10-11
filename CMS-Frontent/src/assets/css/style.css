@@ -1468,7 +1468,9 @@ ul.megamenu-sub-list {
   border: solid 1px #000;
   font-weight: 500;
 }
-
+.product-d-main-slider .slick-slide {
+  margin: 0px;
+}
 .product-d-main-slider-nav .slick-slide {
   cursor: pointer;
   opacity: 0.6 !important;
@@ -2466,7 +2468,7 @@ section.deals-opt-d-1 {
   color: #000;
   font-size: 18px;
   display: block;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border-radius: 5px;
   position: relative;
 }
@@ -3092,7 +3094,7 @@ ul.footer-benefits li p {
   right: 50px;
   top: 10px;
   z-index: 9;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   padding: 0px;
   border-radius: 100%;
 }
@@ -3100,16 +3102,17 @@ ul.footer-benefits li p {
 .pro-detail-btn-wishlist i {
   font-size: 22px;
   border-radius: 100%;
-  border: solid 1px #c9c9c9;
+  border: solid 1px #000;
   height: 40px;
   width: 40px;
   display: inline-block;
   line-height: 44px;
-  color: #747474;
+  color: #000;
 }
 
 .pro-detail-btn-wishlist i:hover {
   border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .pro-detail-btn-wishlist .pro-detail-btn-wishlist-active {
