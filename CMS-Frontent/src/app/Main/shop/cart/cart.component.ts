@@ -68,6 +68,7 @@ export class CartComponent implements OnInit {
     let product = this.cartModel.find(x => x.ProductId == ProductId)
     return product.Product.Stocks.find(x => x.SizeId == SizeId).UnitPrice;
   }
+
   isAvailableInStock(SizeId, ProductId) {
     let product = this.cartModel.find(x => x.ProductId == ProductId)
     return product.Product.Stocks.find(x => x.SizeId == SizeId).Quantity <= product.Quantity;
@@ -91,23 +92,31 @@ export class CartComponent implements OnInit {
 
     })
   }
-  getUpdatedPrice(SizeId, ProductId) {
-    this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
-      if (res.IsSuccess) {
-        let indx = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
-        this._cartService.CartProductModel[indx].Product.SellingPrice = res.Data.SellingPrice;
-        this._cartService.CartProductModel[indx].Product.Price = res.Data.UnitPrice;
-      }
-    })
-  }
-
   UpdateCartProduct(product: CartProductViewModel) {
     this._cartService.UpdateCartProduct(product).then(x => {
+
+    })
+  }
+  getUpdatedPrice(SizeId, ProductId) {
+
+    this._productService.GetStockDetail(ProductId, SizeId).subscribe(res => {
+      if (res.IsSuccess) {
+        let itmIndex = this._cartService.CartProductModel.findIndex(x => x.ProductId == ProductId && x.SizeId == SizeId);
+        let sizeIndex = this._cartService.CartProductModel[itmIndex].Product.Stocks.findIndex(x => x.SizeId == SizeId);
+        this._cartService.CartProductModel[itmIndex].Product.Stocks[sizeIndex].SellingPrice = res.Data.SellingPrice;
+        this._cartService.CartProductModel[itmIndex].Product.Stocks[sizeIndex].UnitPrice = res.Data.UnitPrice;
+        this._cartService.CartProductModel[itmIndex].Quantity =
+          this._cartService.CartProductModel[itmIndex].Quantity > res.Data.Quantity ?
+            res.Data.Quantity : this._cartService.CartProductModel[itmIndex].Quantity;
+
+      }
     })
   }
   getDetailUrl(Product) {
     return `/collections/${Product.Category?.replace('/', '-').split(' ').join('-')}/${Product.Name.replace('/', '-').split(' ').join('-')}/${Product.Id}`
   }
 
-
+  redirectToPage() {
+    history.back();
+  }
 }

@@ -41,9 +41,9 @@
                       <div class="d-flex align-items-center flex-wrap">
                         <div class="d-flex align-items-center product-list-select-control">
                           <strong class="me-1 d-none d-sm-block text-muted font-w-500">Size :</strong>
-                          <ng-select [clearable]="false" (change)="getUpdatedPrice(item.SizeId,item.ProductId)"
-                            placeholder="Size" [searchable]="true" id="{{'Size_'}}" [(ngModel)]="item.SizeId"
-                            (blur)="UpdateCartProduct(item)">
+                          <ng-select [clearable]="false" (blur)="UpdateCartProduct(item)"
+                            (change)="getUpdatedPrice(item.SizeId,item.ProductId)" placeholder="Size"
+                            [searchable]="true" id="{{'Size_'}}" [(ngModel)]="item.SizeId">
                             <ng-container *ngFor="let itm of sizeModel">
                               <ng-option *ngIf="checkSizeExist(item.SizeId,item.ProductId,itm.Value)"
                                 [value]="itm.Value">{{itm.Text}}</ng-option>
@@ -127,7 +127,8 @@
         <div class="cart-page-empty ">
           <i class="fa-thin fa-cart-circle-plus text-success"></i>
           <p>Your basket is currently empty.</p>
-          <a href="javascript:void(0)" class="btn btn-default px-4 text-uppercase btn-border">Continue Shopping <i
+          <a href="javascript:void(0)" (click)="redirectToPage()"
+            class="btn btn-default px-4 text-uppercase btn-border">Continue Shopping <i
               class="bi bi-arrow-right ms-1"></i></a>
         </div>
         <!-- Empty Cart Page End -->
