@@ -12,9 +12,10 @@
       <button (click)="onAddUpdateLookup()" class="page-new-header-action-items" data-title="Add New"> <i
           class="bi bi-plus-lg"></i></button>
       <div class="page-new-header-action-search">
-        <button type="button" (click)="onSearch()" class="btn-filter-search"><i class="fa-light fa-magnifying-glass"></i></button>
+        <button type="button" (click)="onSearch()" class="btn-filter-search"><i
+            class="fa-light fa-magnifying-glass"></i></button>
         <input type="search" (keydown.backspace)="onClear()" (keydown.delete)="onClear()" (keydown.enter)="onSearch()"
-          class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search"/>
+          class="form-control" placeholder="Search..." [(ngModel)]="indexModel.Search" />
       </div>
     </div>
   </div>
@@ -25,8 +26,7 @@
 
 
   <div class="table-responsive table-shadow">
-    <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort
-       role="grid"
+    <table class="custom-mat-table" mat-table [dataSource]="dataSource" matSort role="grid"
       (matSortChange)="sortData($event)">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef>#</th>
@@ -57,8 +57,8 @@
             <i class="bi bi-pencil"></i>
           </a>
 
-          <a class="table-action-btn-edit" routerLink="./{{row.Name.split(' ').join('_')}}"
-            [queryParams]="{id: row.PageId}" data-title="Change Content">
+          <a class="table-action-btn-edit" data-bs-toggle="offcanvas" href="#PageSidebar"
+            (click)="setSelectedRecord(row)" data-title="Change Content">
             <i class="bi bi-file-earmark-richtext"></i>
           </a>
           <a class="table-action-btn-delete" (click)="updateDeleteStatus(row.PageId)" data-title="Delete"> <i
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-   <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
+  <ul class="pagination" *ngIf="indexModel.PageSize<totalRecords">
     <mat-paginator #paginator [length]="totalRecords" [pageSize]="indexModel.PageSize" (page)="onPaginateChange($event)"
       showFirstLastButtons *ngIf="totalRecords!=0">
     </mat-paginator>
@@ -84,4 +84,18 @@
 
   <!-- Main Page Content End -->
 
+
+  <div class="offcanvas offcanvas-end pagesidebar-content" tabindex="-1" id="PageSidebar" data-bs-keyboard="false">
+    <div class="offcanvas-header pt-2 pb-2 pe-3 pe-sm-4">
+      <h5 class="offcanvas-title"><span> Product Detail </span></h5>
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="offcanvas-body pagesidebar-content-body">
+      <app-cmspage-add-update (OnSave)="reloadData($event)" [selectedRecord]="selectedRecord"></app-cmspage-add-update>
+
+
+    </div>
+  </div>
 </ng-template>
