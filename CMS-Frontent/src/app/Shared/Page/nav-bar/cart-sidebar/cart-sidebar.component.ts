@@ -7,7 +7,7 @@ import { DropDownItem } from '../../../Helper/Common';
 import { CartProductPostModel, CartProductService, CartProductViewModel } from 'src/app/Shared/Services/ProductService/cart-product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/Shared/Services/ProductService/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-sidebar',
@@ -25,7 +25,7 @@ export class CartSidebarComponent implements OnInit {
   get TotalMRP() {
     return this._cartService.TotalMRP;
   }
-  constructor(private readonly _security: SecurityService, private _toasterService: ToastrService, private _activeRoute: ActivatedRoute,
+  constructor(private readonly _security: SecurityService, private _toasterService: ToastrService, private _route: Router,
     private readonly _commonService: CommonService, public _cartService: CartProductService, private readonly _productService: ProductService) {
     this._cartService.GetCartList();
     // this.cartModel[0].ProductId
@@ -115,8 +115,8 @@ export class CartSidebarComponent implements OnInit {
   }
   redirectToPage() {
     debugger
-    if (this._activeRoute.url) {
-
+    if (this._route.url.includes('/shop/cart')) {
+      history.back();
     }
   }
 }
