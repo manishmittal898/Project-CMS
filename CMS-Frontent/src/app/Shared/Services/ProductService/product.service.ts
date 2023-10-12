@@ -14,16 +14,16 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
 
-  GetDetail(Id: string): Observable<ApiResponse<ProductMasterViewModel>> {
-    let url = `${this._baseService.API_Url.Product_Detail_Api}`;
-    return this._baseService.get(`${url + Id}`);
+  GetDetail(Id: string, isThumbnail: boolean = false): Observable<ApiResponse<ProductMasterViewModel>> {
+    let url = `${this._baseService.API_Url.Product_Detail_Api}${Id}/${isThumbnail}`;
+    return this._baseService.get(`${url} `);
   }
 
   GetCategoryProduct(model: IndexModel): Observable<ApiResponse<ProductCategoryViewModel[]>> {
     let url = `${this._baseService.API_Url.Product_Category_Api}`;
     return this._baseService.post(url, model);
   }
-  GetStockDetail(id:string,sizeId):  Observable<ApiResponse<ProductStockModel>>{
+  GetStockDetail(id: string, sizeId): Observable<ApiResponse<ProductStockModel>> {
     let url = `${this._baseService.API_Url.Product_Stock_Detail_Api}/${id}/${sizeId}`;
     return this._baseService.get(url);
   }

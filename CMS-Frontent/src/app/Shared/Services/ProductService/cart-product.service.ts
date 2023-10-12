@@ -139,7 +139,7 @@ export class CartProductService {
       if (data?.length > 0) {
         let calls: any = {};
         this.cartProductItem.forEach(x => {
-          calls[x.ProductId] = this._productService.GetDetail(x.ProductId);
+          calls[x.ProductId] = this._productService.GetDetail(x.ProductId,true);
         })
         forkJoin(calls).subscribe(res => {
           this.CartProductModel = [];

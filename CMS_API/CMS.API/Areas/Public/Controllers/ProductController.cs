@@ -21,8 +21,8 @@ namespace CMS.API.Areas.Public.Controllers
         public async Task<object> GetProductCategory(IndexModel model) => await _productmstr.GetProductCategory(model);
 
         // GET api/<ProductMasterController>/5
-        [HttpGet("{id}")]
-        public object Get(string id) => _productmstr.GetById(id);
+        [HttpGet("{id}/{isThumbnail}")]
+        public object Get(string id, bool isThumbnail = false) => _productmstr.GetById(id, isThumbnail);
 
 
         // GET api/<ProductMasterController>/5
