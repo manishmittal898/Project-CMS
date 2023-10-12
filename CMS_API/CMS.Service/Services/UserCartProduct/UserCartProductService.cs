@@ -177,7 +177,7 @@ namespace CMS.Service.Services.UserCartProduct
                                             {
                                                 Id = _security.EncryptData(x.Product.Id.ToString()),
                                                 Name = x.Product.Name,
-                                                ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath() : null,
+                                                ImagePath = !string.IsNullOrEmpty(x.Product.ImagePath) ? x.Product.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                                                 CategoryId = _security.EncryptData(x.Product.CategoryId.ToString()),
                                                 Category = x.Product.Category.Name,
                                                 SubCategoryId = x.Product.SubCategoryId.HasValue ? _security.EncryptData(x.Product.SubCategoryId.ToString()) : null,

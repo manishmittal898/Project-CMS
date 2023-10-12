@@ -114,7 +114,7 @@ namespace CMS.Service.Services.ProductMaster
             }
             return objResult;
         }
-        public ServiceResponse<ProductMasterViewModel> GetById(string id)
+        public ServiceResponse<ProductMasterViewModel> GetById(string id, bool isThumbnail = false)
         {
             ServiceResponse<ProductMasterViewModel> ObjResponse = new ServiceResponse<ProductMasterViewModel>();
             try
@@ -124,7 +124,7 @@ namespace CMS.Service.Services.ProductMaster
                 {
                     Id = _security.EncryptData(x.Id.ToString()),
                     Name = x.Name,
-                    ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? x.ImagePath.ToAbsolutePath() : null,
+                    ImagePath = !string.IsNullOrEmpty(x.ImagePath) ? !isThumbnail ? x.ImagePath.ToAbsolutePath() : x.ImagePath.ToAbsolutePath(ServiceExtension.getSizePath(ImageSize.Medium)) : null,
                     CategoryId = _security.EncryptData(x.CategoryId),
                     Category = x.Category.Name,
                     SubCategoryId = x.SubCategoryId.HasValue ? _security.EncryptData(x.SubCategoryId.Value) : null,

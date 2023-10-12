@@ -9,7 +9,7 @@ namespace CMS.Service.Services.ProductMaster
     {
         Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetList(IndexModel model);
 
-        ServiceResponse<ProductMasterViewModel> GetById(string id);
+        ServiceResponse<ProductMasterViewModel> GetById(string id, bool isThumbnail = false);
         ServiceResponse<ProductStockModel> GetStockDetail(string productId, string sizeId);
         Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model);
         Task<ServiceResponse<TblProductMaster>> Delete(string id);
