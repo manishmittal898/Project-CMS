@@ -55,8 +55,8 @@ export class CartSidebarComponent implements OnInit {
   }
 
   checkSizeExist(sizeId, productId, itm): boolean {
-    let prdSize = this.cartModel?.find(x => x.ProductId == productId)?.Product?.Stocks?.map(x => x.SizeId) ?? [];
-    let allSize = this.cartModel?.filter(x => x.ProductId == productId)?.map(x => x.SizeId);
+    const prdSize = this.cartModel?.find(x => x.ProductId == productId)?.Product?.Stocks.filter(x => x.Quantity > 0)?.map(x => x.SizeId) ?? [];
+    const allSize = this.cartModel?.filter(x => x.ProductId == productId)?.map(x => x.SizeId);
     return this.sizeModel?.filter(x => x.Value == itm && prdSize?.includes(x.Value) && (x.Value == sizeId || !allSize?.includes(x.Value))).length > 0;
   }
   getSellingPrice(SizeId, ProductId) {
@@ -73,8 +73,9 @@ export class CartSidebarComponent implements OnInit {
 
   }
   getMaxCartQuantity(SizeId, ProductId) {
-    let product = this.cartModel.find(x => x.ProductId == ProductId)
-    return product?.Product?.Stocks?.find(x => x.SizeId == SizeId)?.Quantity ?? 20;
+    const product = this.cartModel.find(x => x.ProductId == ProductId)
+    const qty = product?.Product?.Stocks?.find(x => x.SizeId == SizeId)?.Quantity ?? 20;
+    return qty;
   }
 
   deleteCartItem(item: CartProductViewModel) {
@@ -114,7 +115,6 @@ export class CartSidebarComponent implements OnInit {
     return `/collections/${Product.Category?.replace('/', '-').split(' ').join('-')}/${Product.Name.replace('/', '-').split(' ').join('-')}/${Product.Id}`
   }
   redirectToPage() {
-    debugger
     if (this._route.url.includes('/shop/cart')) {
       history.back();
     }

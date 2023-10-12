@@ -56,8 +56,8 @@ export class CartComponent implements OnInit {
   }
 
   checkSizeExist(sizeId, productId, itm): boolean {
-    let prdSize = this.cartModel?.find(x => x.ProductId == productId)?.Product?.Stocks?.map(x => x.SizeId) ?? [];
-    let allSize = this.cartModel?.filter(x => x.ProductId == productId)?.map(x => x.SizeId);
+    const prdSize = this.cartModel?.find(x => x.ProductId == productId)?.Product?.Stocks.filter(x => x.Quantity > 0)?.map(x => x.SizeId) ?? [];
+    const allSize = this.cartModel?.filter(x => x.ProductId == productId)?.map(x => x.SizeId);
     return this.sizeModel?.filter(x => x.Value == itm && prdSize?.includes(x.Value) && (x.Value == sizeId || !allSize?.includes(x.Value))).length > 0;
   }
   getSellingPrice(SizeId, ProductId) {

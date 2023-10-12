@@ -32,7 +32,7 @@
                 <div class="d-flex align-items-center">
                   <strong class="text-muted">Qty:</strong>
                   <div class="product-list-qty d-flex ms-1">
-                    <button type="button" [disabled]="item.Quantity==1" (click)="item.Quantity=item.Quantity-1;"
+                    <button type="button" [disabled]="item.Quantity<2" (click)="item.Quantity=item.Quantity-1;"
                       (blur)="UpdateCartProduct(item)" class="product-list-qty-btn"> <i
                         class="fa-sharp fa-light fa-minus"></i> </button>
                     <input type="text" readonly placeholder="Quantity" [(ngModel)]="item.Quantity">
