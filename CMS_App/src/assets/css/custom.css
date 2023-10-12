@@ -1282,6 +1282,7 @@ body .toast-close-button {
   font-size: 22px;
   margin-left: 10px;
   cursor: pointer;
+  color: #000;
 }
 .page-new-header-action-items .bi-plus-lg {
   border: solid 1px #1a1870;
