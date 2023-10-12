@@ -37,6 +37,7 @@ export class CMSPageMasterComponent implements OnInit {
     url: undefined,
     urlLabel: 'Create'
   };
+  selectedRecord = {} as any;
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService,
     public dialog: MatDialog
@@ -145,6 +146,13 @@ export class CMSPageMasterComponent implements OnInit {
     });
   }
 
+  setSelectedRecord(item: CMSPageListViewModel) {
+    debugger
+    this.selectedRecord = {
+      Id: item.PageId,
+      PageName: item?.Name?.split(' ')?.join('_') ?? ''
+    }
+  }
   onClear() {
     this.indexModel.Search = '';
     this.indexModel.Page = 1;
@@ -152,5 +160,16 @@ export class CMSPageMasterComponent implements OnInit {
   }
 
 
+  isDataRefresh: boolean = false;
+  reloadData(status: boolean) {
+    this.isDataRefresh = status;
+    if (status) {
+      this.getList();
+      setTimeout(() => {
+        this.isDataRefresh = !status;
+      }, 15);
+
+    }
+  }
 
 }

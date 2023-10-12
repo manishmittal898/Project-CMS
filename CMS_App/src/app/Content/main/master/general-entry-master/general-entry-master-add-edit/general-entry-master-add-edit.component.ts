@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Validators, FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -47,6 +47,16 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
         this.selectedCategory?.ContentType == (this.contentTypeEnum.Video).toString() ? '.mp4,.mkv,.avi' : ''
   }
 
+  @Input() set Id(value: string) {
+    this.model.Id = value;
+    if (this.model !== null && this.model.Id.length > 0) {
+      this.onGetDetail();
+    } else {
+      this.reset();
+    }
+  }
+
+  @Output() OnSave = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.GetDropDown();
@@ -71,7 +81,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     let serve = this._commonService.GetDropDown([DropDown_key.ddlGeneralEntryCategory], false).subscribe(res => {
       serve.unsubscribe();
       if (res.IsSuccess) {
-                const ddls = res?.Data as DropDownModel;
+        const ddls = res?.Data as DropDownModel;
         this.dropDown.ddlGeneralEntryCategory = ddls?.ddlGeneralEntryCategory;
 
       }
@@ -104,7 +114,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     const ext = fileName.split('.')[fileName.split('.').length - 1].toLowerCase();
     if (['doc', 'docx', 'ppt', 'pptx', 'pdf', 'txt', 'xlx', 'xlsx'].some(x => x.toLowerCase() === ext)) {
       return 'doc';
-    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg','webp'].some(x => x.toLowerCase() === ext)) {
+    } else if (['jpeg', 'gif', 'png', 'jpg', 'svg', 'webp'].some(x => x.toLowerCase() === ext)) {
       return 'image';
     }
     else if (['mp4', 'mkv', 'avi',].some(x => x.toLowerCase() === ext)) {
@@ -145,7 +155,7 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
   onGetDetail() {
     this._generalEntryService.GetGeneralEntry(this.model.Id, true).subscribe(response => {
       if (response.IsSuccess) {
-        
+
         const data = response.Data as GeneralEntryViewModel;
         this.model.Id = data.Id;
         this.model.CategoryId = data.CategoryId;
@@ -162,6 +172,10 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     },
       error => {
       });
+  }
+  reset() {
+    this.model = {} as GeneralEntryPostModel;
+    this.formgrp.reset();
   }
 
 }

@@ -63,7 +63,7 @@
   <div class="cmis-page-preview" *ngIf="postModel?.length">
     <div class="cmis-page-preview-header"> <i class="bi bi-eye"></i> Preview </div>
     <div class="cmis-page-preview-body">
-      <ng-container *ngFor="let item of postModel">
+      <ng-container *ngFor="let item of getList">
         <div class="cmis-page-preview-items">
           <ng-container *ngIf="item.Id!==model.Id">
             <div class="cmis-page-preview-items-action-info">

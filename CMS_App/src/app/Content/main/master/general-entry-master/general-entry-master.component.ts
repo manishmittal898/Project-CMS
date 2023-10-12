@@ -30,6 +30,8 @@ export class GeneralEntryMasterComponent implements OnInit {
     url: './add',
     urlLabel: 'Add New general Entry'
   };
+  selectedRecord = "";
+  ViewMode = "Detail"
   constructor(private readonly _activatedRoute: ActivatedRoute,
     private readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _generalEntryService: GeneralEntryService) { }
@@ -129,4 +131,18 @@ export class GeneralEntryMasterComponent implements OnInit {
     this.getList();
   }
 
+  changeViewMode() {
+    this.ViewMode = (this.ViewMode == 'Edit' ? 'Detail' : 'Edit');
+  }
+  isDataRefresh: boolean = false;
+  reloadData(status: boolean) {
+    this.isDataRefresh = status;
+    if (status) {
+      this.getList();
+      setTimeout(() => {
+        this.isDataRefresh = !status;
+      }, 15);
+
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { CMSPagePostModel } from './../../../../../Shared/Services/cmspage-master.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -25,11 +25,24 @@ export class CMSPageAddUpdateComponent implements OnInit {
 
   });
   get f() { return this.formgrp.controls; }
+  @Input() set selectedRecord(value: any) {
+    debugger
+    if (Object.keys(value)?.length > 0) {
+      this.id = value.Id;
+      this.pageName = value.PageName.split('_').join(' ');
+      this.getDetails();
+    }
 
+  }
+  @Output() OnSave = new EventEmitter<boolean>();
+
+  get getList() {
+    return this.postModel.sort((a, b) => parseInt(a.SortedOrder as any) - parseInt(b.SortedOrder as any));
+  }
   constructor(private readonly fb: FormBuilder, private _router: Router, private _activatedRoute: ActivatedRoute, readonly _commonService: CommonService,
     private readonly toast: ToastrService, private _cmsPageService: CMSPageMasterService) {
     _activatedRoute.params.subscribe(x => {
-      this.pageName = this._activatedRoute.snapshot.params.name.split('_').join(' ');
+      this.pageName = this._activatedRoute.snapshot?.params?.name?.split('_')?.join(' ') ?? '';
     });
     _activatedRoute.queryParamMap.subscribe(x => {
       this.id = x.get('id') as string
@@ -73,9 +86,10 @@ export class CMSPageAddUpdateComponent implements OnInit {
           this.model = {} as CMSPagePostModel;
           this.formgrp.reset();
           this.toast.success(res.Message as string);
+          this.OnSave.emit(true);
         } else {
           this.toast.error(res.Message as string);
-
+          this.OnSave.emit(false);
         }
       })
     }
