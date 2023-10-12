@@ -29,7 +29,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
     debugger
     if (Object.keys(value)?.length > 0) {
       this.id = value.Id;
-      this.pageName = value.PageName.split('_').join(' ');
+      this.pageName = value.PageName;
       this.getDetails();
     }
 

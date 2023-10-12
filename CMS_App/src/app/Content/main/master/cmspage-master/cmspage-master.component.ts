@@ -150,7 +150,7 @@ export class CMSPageMasterComponent implements OnInit {
     debugger
     this.selectedRecord = {
       Id: item.PageId,
-      PageName: item?.Name?.split(' ')?.join('_') ?? ''
+      PageName: item?.Name
     }
   }
   onClear() {

@@ -1467,9 +1467,9 @@ body.sidebar-open footer {
 .sidebar .sidebar-item.menu-active .sidebar-item-button {
   background: rgba(255,255,255,0.2);
 }
-.sub-menu-active a {
-  opacity: 0.5;
+ul.sidebar-submenu .sub-menu-active a {
   font-weight: 800;
+  color: #f7b900;
 }
 .arrow-none::after { display: none !important;}
 .sidebar-item-button::after {
