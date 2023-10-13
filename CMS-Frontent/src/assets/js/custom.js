@@ -70,6 +70,11 @@ $(window).scroll(function() {
 });
 
 
+// $(function() {
+//     $(".navbar-toggler").click(function() {
+//         $(".navbar-collapse").addClass("manish");
+//     });
+// });
 
 // document.addEventListener("DOMContentLoaded", function(){
 // document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){

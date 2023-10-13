@@ -950,6 +950,7 @@ input:focus-visible {
   padding-right: 35px;
   transition: 0.3s;
   border-radius: 8px;
+  background: #fff;
 }
 
 .product-list-search input:focus {
@@ -2550,6 +2551,12 @@ section.deals-opt-d-1 {
 .order-summary-list-items-status {
   font-size: 20px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.order-summary-list-items-status i {
+  font-size: 30px;
+  margin-right: 5px;
 }
 
 .order-summary-list-items-footer p {
@@ -3237,7 +3244,7 @@ body .toast-close-button {
 .mobile-footer-menu a {
   flex: 1;
   text-align: center;
-  padding: 8px 6px;
+  padding: 9px 6px;
   line-height: 1;
   color: #000;
   position: relative;
@@ -3281,8 +3288,11 @@ body .toast-close-button {
   display: none;
 }
 .cart-page-empty {
-  padding: 50px 0px 20px 0px;
+  padding: 30px 0px 20px 0px;
   text-align: center;
+}
+.cart-page-empty img {
+  max-width: 375px;
 }
 .cart-page-empty > i {
   font-size: 120px;
@@ -3290,5 +3300,20 @@ body .toast-close-button {
 .cart-page-empty p {
   font-size: 22px;
   margin: 30px 0px;
+  font-weight: 500;
+}
+.cart-sidebar-empty p {
+  font-size: 16px;
+  font-weight: 500;
+}
+.cart-sidebar-empty .cart-sidebar-empty-icon {
+  margin-bottom: 20px;
+}
+.cart-sidebar-empty .cart-sidebar-empty-icon img {
+  max-width: 260px;
+}
+.product-sortby-filter select {
+  background: transparent;
+  color: #000;
 }
 /* CUSTOM CSS END */

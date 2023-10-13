@@ -165,7 +165,9 @@
     font-size: 18px;
     font-weight: 400;
   }
-
+  .navbar-expand-lg .navbar-nav li:last-child .nav-link {
+    border: none;
+}
   .dropdown-toggle.show .bi-chevron-down {
     transform: rotate(180deg);
   }
@@ -210,6 +212,9 @@
   }
 
   .navbar-toggler.collapsed~.navbar-collapse {
+    transition: right 500ms ease-in-out;
+  }
+  .manish {
     transition: right 500ms ease-in-out;
   }
 
@@ -536,8 +541,6 @@
     max-width: 20px;
   }
 
-
-
   .home-category-d-1 .home-category-items-caption {
     font-size: 13px;
     white-space: nowrap;
@@ -692,8 +695,14 @@
 
   section.footer-copyright {
     font-size: 10px;
-    padding: 10px 0px 55px 0px;
+    padding: 10px 0px 48px 0px;
   }
+  .cart-page-empty img {
+    max-width: 80%;
+}
+.order-summary-list-items-status i {
+  font-size: 20px;
+}
 }
 
 /* RESPONSIVE END */
