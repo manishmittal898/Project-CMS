@@ -338,9 +338,9 @@
   }
 
   .section-title {
-    font-size: 26px;
+    font-size: 25px;
     line-height: 35px;
-    margin-bottom: 25px !important;
+    margin-bottom: 15px;
   }
 
   footer h4 {
@@ -348,7 +348,7 @@
   }
 
   footer .container {
-    padding: 25px 20px;
+    padding: 20px 15px;
   }
 
   footer h4,
@@ -457,7 +457,11 @@
   }
 
   .home-category-slider .home-category-items-caption {
-    font-size: 16px;
+    font-size: 15px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   ul.footer-benefits li {
@@ -473,11 +477,11 @@
   }
 
   .home-product {
-    margin-bottom: 35px;
+    margin-bottom: 15px;
   }
 
   #HomeSlider {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .section-related {
@@ -485,7 +489,7 @@
   }
 
   .home-category-slider {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 
   .product-list-items-hover-action a i {
@@ -612,8 +616,12 @@
     box-shadow: none;
     border-radius: 0px;
     width: 100%;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 400;
+    opacity: 10;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
   }
 
   .order-summary-list-img {
@@ -695,13 +703,18 @@
 
   section.footer-copyright {
     font-size: 10px;
-    padding: 10px 0px 48px 0px;
+    padding: 10px 0px 60px 0px;
   }
   .cart-page-empty img {
     max-width: 80%;
 }
 .order-summary-list-items-status i {
   font-size: 20px;
+}
+.home-category-items .home-category-items-img
+{
+  height: 95px;
+  width: 95px;
 }
 }
 

@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
   AddSlider() {
     this.isLoading = false;
     $('.slider-items-6')?.slick({
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 1000,
       slidesToShow: 6,
@@ -109,8 +109,8 @@ export class HomeComponent implements OnInit {
       {
         breakpoint: 595,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 3,
+          slidesToScroll: 3
         }
       }
       ]
