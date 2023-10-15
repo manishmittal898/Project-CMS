@@ -70,11 +70,14 @@ $(window).scroll(function() {
 });
 
 
-// $(function() {
-//     $(".navbar-toggler").click(function() {
-//         $(".navbar-collapse").addClass("manish");
-//     });
-// });
+$(function() {
+    $("#ChangeToggle").click(function() {
+        $("#MenuNavbar").addClass("menushowing");
+    });
+    $(".mobile-nav-close").click(function() {
+        $("#MenuNavbar").removeClass("menushowing");
+    });
+});
 
 // document.addEventListener("DOMContentLoaded", function(){
 // document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
