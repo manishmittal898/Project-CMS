@@ -14,8 +14,8 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
 
-  GetProductMaster(id: string): Observable<ApiResponse<ProductMasterViewModel>> {
-    let url = `${this._baseService.API_Url.Product_Detail_Api}${id}/false`;
+  GetProductMaster(id: string, isThumbnail: boolean = false): Observable<ApiResponse<ProductMasterViewModel>> {
+    let url = `${this._baseService.API_Url.Product_Detail_Api}/${id}/${isThumbnail}`;
     return this._baseService.get(url);
   }
 
@@ -44,8 +44,8 @@ export interface ProductMasterViewModel {
   CategoryId: string;
   SubCategoryId: string;
   Desc: string;
-  Price: number ;
-  SellingPrice : number ;
+  Price: number;
+  SellingPrice: number;
   CaptionTagId: string | null;
   Summary: string;
   CreatedBy: number;
