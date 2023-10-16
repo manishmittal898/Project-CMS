@@ -1249,8 +1249,10 @@ body .toast-title {
 body .toast-close-button {
   color: #000;
   text-shadow: none;
-  top: -5px;
+  top: -15px;
   left: 0px;
+  font-size: 30px;
+  font-weight: 500;
 }
 
 .sidebarCollapse {
@@ -1629,7 +1631,7 @@ color: var(--primary-color);
 .page-login-register-right-form .icon-login-form {
   position: absolute;
   font-size: 20px;
-  top: 8px;
+  top: 12px;
   left: 10px;
 }
 .page-login-register-right-form .form-control {
