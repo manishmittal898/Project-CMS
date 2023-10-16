@@ -29,7 +29,7 @@
           <div class="form-floating mb-3 position-relative">
             <input class="form-control" id="Password" placeholder="Password" name="Password" type="{{isShowPass ? 'text':'password'}}"
               [(ngModel)]="model.Password">
-              <a href="javascript:void" class="pas-check-icon" (click)="isShowPass=!isShowPass"> <i class="fas" [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i></a>
+              <a href="javascript:void" class="pas-check-icon" (click)="isShowPass=!isShowPass"> <i class="fa-regular " [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i></a>
             <label for="Password">Password</label>
           </div>
 
