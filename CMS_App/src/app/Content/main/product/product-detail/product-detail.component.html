@@ -46,7 +46,7 @@
           <h3 class="m-0">₹ {{model.SellingPrice}} </h3>
           <h5 class="mb-0 mx-2 " *ngIf="model.Discount>0"><s>₹ {{model.Price-model.SellingPrice}}</s>
           </h5>
-          <p class="m-0 text-danger" *ngIf="model.Discount>0">{{model.Discount}}</p>
+          <p class="m-0 text-danger" *ngIf="model.Discount>0">{{model.Discount}}% off</p>
         </div>
         <div class="table-responsive mt-2">
           <table class="table table-borderless table-data-info table-font-15 table-v-align-top m-0">

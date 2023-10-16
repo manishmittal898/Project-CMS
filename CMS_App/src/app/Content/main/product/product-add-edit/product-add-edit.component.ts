@@ -159,7 +159,14 @@ export class ProductAddEditComponent implements OnInit {
         return;
       }
       this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
-      this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
+      this.model.SellingPrice = this.model.SellingPrice && this.model.SellingPrice > 0 ? Number(this.model.SellingPrice) : 0;
+
+      this.model.Stocks.forEach(x => {
+        x.Discount = x.Discount && x.Discount > 0 ? Number(x.Discount) : 0;
+        x.UnitPrice = x.UnitPrice && x.UnitPrice > 0 ? Number(x.UnitPrice) : 0;
+        x.SellingPrice = x.SellingPrice && x.SellingPrice > 0 ? Number(x.SellingPrice) : 0;
+      })
+      // this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
 
       this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
         if (x.IsSuccess) {
@@ -311,8 +318,8 @@ export class ProductAddEditComponent implements OnInit {
     } else if (sellingPrice == 0) {
       return 100;
     }
-    return Math.floor(price - (sellingPrice ?? 0) / price * 100)
-
+    var ddValue = ((price - sellingPrice) / price) * 100;
+    return Math.floor(ddValue);
   }
 
 

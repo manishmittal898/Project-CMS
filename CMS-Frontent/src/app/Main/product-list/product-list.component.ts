@@ -19,11 +19,9 @@ export class ProductListComponent implements OnInit {
   sortValue: string = "CreatedOn_false";
   isGrid4 = true;
   constructor(private readonly _productService: ProductService,
-    private readonly _router: ActivatedRoute, private _route: Router, private readonly _sainitizer: DomSanitizer, private readonly _securityService: SecurityService) {
-
-
-
-  }
+    private readonly _router: ActivatedRoute, private _route: Router, private readonly _sainitizer: DomSanitizer,
+     private readonly _securityService: SecurityService) {
+ }
 
   ngOnInit(): void {
     this._router.queryParams.subscribe(p => {

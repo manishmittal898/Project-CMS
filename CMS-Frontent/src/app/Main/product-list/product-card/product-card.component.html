@@ -1,5 +1,5 @@
 <div class="product-list-items">
-  <span *ngIf="Product.SellingPrice!=Product.Price" class="product-discount-label d-none d-md-block">{{getDiscount}} Off</span>
+  <span *ngIf="Product.SellingPrice!=Product.Price" class="product-discount-label d-none d-md-block">{{Product.Discount}}% Off</span>
    <div class="product-list-items-tag" *ngIf="Product.CaptionTag">{{Product.CaptionTag}}</div>
   <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
     <a href="javascript:void(0)" routerLink="{{getUrl()}}">
@@ -17,9 +17,9 @@
   <div class="product-list-info">
     <a href="javascript:void(0)" title="{{Product.Name}}" routerLink="{{getUrl()}}">
       {{Product.Name}} </a>
-    <div class="product-list-price">₹ {{Product.SellingPrice}} <span *ngIf="Product.SellingPrice!=Product.Price"
+    <div class="product-list-price">₹ {{Product.SellingPrice}} <span *ngIf="Product.Discount>0"
         class="product-list-cutting-price">₹
         {{Product.Price}}</span></div>
-    <div *ngIf="Product.SellingPrice!=Product.Price" class="product-list-price-off d-block d-md-none">{{getDiscount}} Off</div>
+    <div *ngIf="Product.Discount>0" class="product-list-price-off d-block d-md-none">{{Product.Discount}}% Off</div>
   </div>
 </div>

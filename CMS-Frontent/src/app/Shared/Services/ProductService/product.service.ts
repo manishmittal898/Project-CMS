@@ -73,8 +73,7 @@ export interface ProductMasterViewModel {
   SubCategory: string;
   IsWhishList: boolean;
   ViewSectionId: string;
-  DiscountId: string;
-  Discount: string;
+  Discount: number;
   OccasionId: string;
   Occasion: string;
   FabricId: string;
@@ -116,5 +115,6 @@ export interface ProductStockModel {
   Size: string;
   UnitPrice: number | null;
   SellingPrice: number;
+  Discount: number;
   Quantity: number | null;
 }
