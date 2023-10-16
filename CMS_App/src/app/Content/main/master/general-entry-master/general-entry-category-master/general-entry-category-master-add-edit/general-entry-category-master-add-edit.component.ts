@@ -38,8 +38,8 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
       this.reset();
     }
   }
+  @Output() OnSave = new EventEmitter<{ status: boolean, recordId: string }>();
 
-  @Output() OnSave = new EventEmitter<boolean>();
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService, private readonly _generalEntryService: GeneralEntryService) {
 
@@ -82,9 +82,10 @@ export class GeneralEntryCategoryMasterAddEditComponent implements OnInit {
         if (x.IsSuccess) {
           this.toast.success("General Entry Category added sucessfully...", "Saved");
           this._route.navigate(['./admin/master/general-entry-category']);
-          this.OnSave.emit(true);
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
         } else {
-          this.OnSave.emit(false);
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
+
           this.toast.error(x.Message as string, "Faild");
         }
       })

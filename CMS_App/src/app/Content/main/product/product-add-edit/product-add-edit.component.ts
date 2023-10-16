@@ -1,6 +1,6 @@
 import { EditorConfig, Message } from './../../../../Shared/Helper/constants';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DropDownModel, FilterDropDownPostModel } from 'src/app/Shared/Helper/common-model';
@@ -24,12 +24,12 @@ export class ProductAddEditComponent implements OnInit {
   formgrp = this.fb.group({
     UniqueID: [undefined, Validators.required],
     Name: [undefined, Validators.required],
-    Price: [undefined, Validators.required],
+    Price: [undefined, [Validators.required, this.minValueValidator.bind(this)]],
+    SellingPrice: [undefined, this.minValueValidator.bind(this)],
     Caption: [undefined,],
     ViewSection: [undefined,],
     Category: [undefined, Validators.required],
     SubCategory: [undefined],
-    Discount: [undefined],
     Occasion: [undefined],
     Fabric: [undefined],
     Length: [undefined],
@@ -45,7 +45,7 @@ export class ProductAddEditComponent implements OnInit {
 
   });
   get ddlkeys() { return DropDown_key };
-  get f() { return this.formgrp.controls; }
+  get f() { return this.formgrp?.controls; }
   get getFileName() { return this.model.ImagePath ? this.model.ImagePath.split('/')[this.model.ImagePath.split('/').length - 1] : '' };
   editorConfig = EditorConfig.Config;
   productFile: any;
@@ -53,11 +53,12 @@ export class ProductAddEditComponent implements OnInit {
   stockModel = {} as ProductStockModel;
   stockFormGroup = this.fb.group({
     SizeId: [undefined, Validators.required],
-    UnitPrice: [undefined, Validators.required],
+    UnitPrice: [undefined, [Validators.required, this.minStockValueValidator.bind(this)]],
+    SellingPrice: [undefined, [Validators.required, this.minStockValueValidator.bind(this)]],
     Quantity: [undefined, Validators.required],
   });
 
-  get sf() { return this.stockFormGroup.controls; }
+  get sf() { return this.stockFormGroup?.controls; }
   tempStock: ProductStockModel | undefined;
   ddlAvailableProductSize: DropDownItem[] = [];
   @Input() set Id(value: string) {
@@ -69,7 +70,7 @@ export class ProductAddEditComponent implements OnInit {
     }
   }
 
-  @Output() OnSave=new EventEmitter<boolean>();
+  @Output() OnSave = new EventEmitter<{ status: boolean, recordId: string }>();
   constructor(private readonly fb: FormBuilder, private _route: Router, private _activatedRoute: ActivatedRoute,
     public _commonService: CommonService, private readonly toast: ToastrService,
     private readonly _productService: ProductService) {
@@ -82,8 +83,51 @@ export class ProductAddEditComponent implements OnInit {
 
   }
 
+  minValueValidator(ctrl: AbstractControl): ValidationErrors | null {
+    const val = this?.f != null && this?.f.SellingPrice?.value != undefined ? Number(this?.f?.SellingPrice?.value) : 0;
+    const price = this?.f != null && this?.f.Price?.value != undefined ? Number(this?.f?.Price?.value) : 0;
 
+    if (Number(price) < Number(val)) {
+      return {
+        minValue: true
+      }
+    }
+    return null;
+  }
+  checkSellingPrice() {
+    const val = this?.f != null && this?.f.SellingPrice?.value != undefined ? Number(this?.f?.SellingPrice?.value) : 0;
+    const price = this?.f != null && this?.f.Price?.value != undefined ? Number(this?.f?.Price?.value) : 0;
 
+    if (val > price) {
+      this.f.SellingPrice.setValue(price);
+    }
+    else if (price > 0 && val == 0) {
+      this.f.SellingPrice.setValue(price);
+    }
+  }
+  minStockValueValidator(ctrl: AbstractControl): ValidationErrors | null {
+    const val = this?.sf != null && this?.sf.SellingPrice?.value != undefined ? Number(this?.sf?.SellingPrice?.value) : 0;
+    const price = this?.sf != null && this?.sf?.UnitPrice?.value != undefined ? Number(this?.sf?.UnitPrice?.value) : 0;
+    if (val > price) {
+      this?.sf?.SellingPrice?.setValue(price);
+      return null;
+    }
+    if (Number(price) < Number(val)) {
+      return {
+        minValue: true
+      }
+    }
+    return null;
+  }
+  checkStockSellingPrice() {
+    const val = this?.sf != null && this?.sf.SellingPrice?.value != undefined ? Number(this?.sf?.SellingPrice?.value) : 0;
+    const price = this?.sf != null && this?.sf.UnitPrice?.value != undefined ? Number(this?.sf?.UnitPrice?.value) : 0;
+    if (val > price) {
+      this?.sf?.SellingPrice?.setValue(price);
+    } else if (price > 0 && val == 0) {
+      this?.sf?.SellingPrice?.setValue(price);
+    }
+  }
   ngOnInit(): void {
     this.GetDropDown();
   }
@@ -121,9 +165,9 @@ export class ProductAddEditComponent implements OnInit {
         if (x.IsSuccess) {
           this.toast.success("Product added successfully...", "Saved");
           this._route.navigate(['./admin/product']);
-          this.OnSave.emit(true);
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
         } else {
-          this.OnSave.emit(false);
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
           this.toast.error(x.Message as string, "Failed");
         }
       })
@@ -138,11 +182,12 @@ export class ProductAddEditComponent implements OnInit {
         this.model.ImagePath = data.ImagePath;
         this.model.Desc = data.Desc;
         this.model.Price = data.Price ? Number(data.Price) : undefined;
+        this.model.SellingPrice = Object.assign((data.SellingPrice ? Number(data.SellingPrice) : data.Price), 0);
         this.model.CategoryId = data.CategoryId ? data.CategoryId : undefined;
         this.model.SubCategoryId = data.SubCategoryId ? data.SubCategoryId : undefined;
         this.model.CaptionTagId = data.CaptionTagId ? data.CaptionTagId : undefined;
         this.model.Summary = data.Summary;
-        this.model.DiscountId = data.DiscountId;
+        this.model.Discount = data.Discount;
         this.model.OccasionId = data.OccasionId;
         this.model.FabricId = data.FabricId;
         this.model.LengthId = data.LengthId;
@@ -259,12 +304,15 @@ export class ProductAddEditComponent implements OnInit {
       }
     });
   }
-  getDiscountValue(price: any = 0) {
-    if (this.dropDown?.ddlProductDiscount && this.model?.DiscountId?.length > 0) {
-      let Value = this.dropDown.ddlProductDiscount.find(x => x.Value == (this.model?.DiscountId ?? 0));
-      return Math.round(price - (price * Value?.DataValue / 100))
+  getDiscountValue(price = 0, sellingPrice = 0) {
+
+    if (price == sellingPrice) {
+      return 0;
+    } else if (sellingPrice == 0) {
+      return 100;
     }
-    return price;
+    return Math.floor(price - (sellingPrice ?? 0) / price * 100)
+
   }
 
 
@@ -272,6 +320,8 @@ export class ProductAddEditComponent implements OnInit {
     this.stockModel = {} as ProductStockModel;
     this.tempStock = undefined;
     this.stockModel.UnitPrice = Number(this.model.Price);
+    this.stockModel.SellingPrice = Number(this.model.SellingPrice);
+
     this.ddlProductSize();
   }
 
@@ -314,6 +364,10 @@ export class ProductAddEditComponent implements OnInit {
 
   applyMainPrice() {
     this.stockModel.UnitPrice = Number(this.model.Price);
+  }
+  applySellingPrice() {
+    this.stockModel.SellingPrice = Number(this.model.SellingPrice);
+
   }
 
   onGetProductSizeLabel(sizeId: any) {

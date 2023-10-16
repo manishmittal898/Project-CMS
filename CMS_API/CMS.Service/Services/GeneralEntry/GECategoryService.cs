@@ -141,7 +141,7 @@ namespace CMS.Service.Services.GeneralEntry
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<TblGecategoryMater>> Save(GeneralEntryCategoryPostModel model)
+        public async Task<ServiceResponse<object>> Save(GeneralEntryCategoryPostModel model)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace CMS.Service.Services.GeneralEntry
                     }
                     var roletype = _db.TblGecategoryMaters.Update(objData);
                     _db.SaveChanges();
-                    return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)_security.EncryptData(objData.Id), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
                 }
                 else
@@ -203,9 +203,9 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsActive = true;
                     objData.CreatedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var roletype = await _db.TblGecategoryMaters.AddAsync(objData);
+                    var objCateGoryData = await _db.TblGecategoryMaters.AddAsync(objData);
                     _db.SaveChanges();
-                    return CreateResponse(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)_security.EncryptData(objCateGoryData.Entity.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -214,7 +214,7 @@ namespace CMS.Service.Services.GeneralEntry
             catch (Exception ex)
             {
 
-                return CreateResponse<TblGecategoryMater>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
+                return CreateResponse<object>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }

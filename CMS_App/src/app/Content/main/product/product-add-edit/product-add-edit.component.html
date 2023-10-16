@@ -33,9 +33,10 @@
       </div>
       <div class="col-md-2 mb-3">
         <label>Price<span class="text-danger">*</span></label>
-        <input type="text" [(ngModel)]="model.Price" (keypress)="_commonService.NumberOnly($event)" [minlength]="1"
-          [maxLength]="10" formControlName="Price" [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}"
-          class="form-control" id="input4" placeholder="Price">
+        <input type="text" [(ngModel)]="model.Price" (blur)="checkSellingPrice();"
+          (keypress)="_commonService.NumberOnly($event);" [minlength]="1" [maxLength]="10" formControlName="Price"
+          [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}" class="form-control" id="input4"
+          placeholder="Price">
         <div class="invalid-feedback"
           *ngIf="(formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched)">
           Please enter Price...!
@@ -44,8 +45,34 @@
           *ngIf="!formgrp.get('Price')?.hasError('required') && ((formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength')) && formgrp.get('Price')?.touched) || (formgrp.get('Price')?.hasError('maxlength') || formgrp.get('Price')?.hasError('minlength'))">
           Price length must be 1-10 digit.
         </div>
+        <div class="invalid-feedback"
+          *ngIf="(!formgrp.get('Price')?.hasError('required') && formgrp.get('Price')?.touched) &&formgrp.get('Price')?.hasError('minValue')">
+          price must be equals or greater then {{model.SellingPrice??0}}
+        </div>
+
       </div>
       <div class="col-md-2 mb-3">
+        <label>SellingPrice<span class="text-danger">*</span></label>
+        <input type="text" [(ngModel)]="model.SellingPrice" (blur)="checkSellingPrice();"
+          (keypress)="_commonService.NumberOnly($event);" [minlength]="1" [maxLength]="10" [min]="model.Price"
+          formControlName="SellingPrice" [ngClass]="{ 'is-invalid': f.SellingPrice.errors && f.SellingPrice.touched}"
+          class="form-control" id="input4" placeholder="SellingPrice">
+        <div class="invalid-feedback"
+          *ngIf="(formgrp.get('SellingPrice')?.hasError('required') && formgrp.get('SellingPrice')?.touched)">
+          Please enter Selling Price...!
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="!formgrp.get('SellingPrice')?.hasError('required') && ((formgrp.get('SellingPrice')?.hasError('maxlength') || formgrp.get('SellingPrice')?.hasError('minlength')) && formgrp.get('SellingPrice')?.touched) || (formgrp.get('SellingPrice')?.hasError('maxlength') || formgrp.get('SellingPrice')?.hasError('minlength'))">
+          Selling Price length must be 1-10 digit.
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="(!formgrp.get('SellingPrice')?.hasError('required') && formgrp.get('SellingPrice')?.touched) &&formgrp.get('SellingPrice')?.hasError('minValue')">
+          Selling price must be equals or less then {{model.Price??0}}
+        </div>
+
+
+      </div>
+      <!-- <div class="col-md-2 mb-3">
         <label>Discount</label>
         <ng-select [items]="dropDown.ddlProductDiscount" formControlName="Discount" [searchable]="true" bindLabel="Text"
           bindValue="Value" placeholder="Select Discount" [(ngModel)]="model.DiscountId"
@@ -55,11 +82,11 @@
           *ngIf="(formgrp.get('Discount')?.hasError('required') && formgrp.get('Discount')?.touched)">
           Please select <strong>Discount</strong>...!
         </div>
-      </div>
+      </div> -->
       <div class="col-md-2 mb-3" *ngIf="model.Price">
-        <label>Selling price</label>
+        <label>Discount</label>
         <div class="static-form-control">
-          ₹{{getDiscountValue(model.Price)}}
+          {{getDiscountValue(model?.Price??0,model?.SellingPrice??0)}}%
         </div>
       </div>
       <div class="col-md-6 col-lg-4 mb-3">
@@ -323,7 +350,7 @@
                     <td scope="row">{{index+1}}</td>
                     <td> <strong> {{onGetProductSizeLabel(item.SizeId)}} </strong></td>
                     <td>{{item.UnitPrice}}</td>
-                    <td>{{getDiscountValue(item.UnitPrice)}}</td>
+                    <td>{{item.SellingPrice}}</td>
                     <td>{{item.Quantity}}</td>
                     <td class="table-action-btn">
                       <a href="javascript:void(0)" class="table-action-btn-edit" (click)="onEditStock(item,index)"
@@ -410,7 +437,7 @@
                   title="Add Product Price" (click)="applyMainPrice()">₹
                   Product Price <i class="bi bi-chevron-right"></i></a>
               </label>
-              <input type="number" readOnly [(ngModel)]="stockModel.UnitPrice"
+              <input type="number" readOnly [(ngModel)]="stockModel.UnitPrice" (blur)="checkStockSellingPrice()"
                 (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
                 formControlName="UnitPrice" [ngClass]="{ 'is-invalid': sf.UnitPrice.errors && sf.UnitPrice.touched}"
                 class="form-control" id="input4" placeholder="Unit Price">
@@ -422,6 +449,36 @@
               <div class="invalid-feedback"
                 *ngIf="!stockFormGroup.get('UnitPrice')?.hasError('required') && ((stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength')) && stockFormGroup.get('UnitPrice')?.touched) || (stockFormGroup.get('UnitPrice')?.hasError('maxlength') || stockFormGroup.get('UnitPrice')?.hasError('minlength'))">
                 Unit Price length must be 1-10 digit.
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="(!stockFormGroup.get('UnitPrice')?.hasError('required') && stockFormGroup.get('UnitPrice')?.touched) &&stockFormGroup.get('UnitPrice')?.hasError('minValue')">
+                Selling price must be equals or less then {{stockModel.SellingPrice??0}}
+              </div>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0 unit-pro-price">
+              <label class="d-flex justify-content-between">
+                <div> Selling Price<span class="text-danger">*</span> </div>
+                <a href="javascript:void(0)" class="text-muted font-w-200" *ngIf="this.model?.Price"
+                  title="Add Product Price" (click)="applySellingPrice()">₹
+                  selling Product Price <i class="bi bi-chevron-right"></i></a>
+              </label>
+              <input type="number" readOnly [(ngModel)]="stockModel.SellingPrice" (blur)="checkStockSellingPrice()"
+                (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
+                formControlName="SellingPrice"
+                [ngClass]="{ 'is-invalid': sf.SellingPrice.errors && sf.SellingPrice.touched}" class="form-control"
+                id="input4" placeholder="Selling Price">
+              <!-- <button type="button" *ngIf="this.model?.Price" title="Add Product Price" (click)="applyMainPrice()">₹ Product Price</button> -->
+              <div class="invalid-feedback"
+                *ngIf="(stockFormGroup.get('SellingPrice')?.hasError('required') && stockFormGroup.get('SellingPrice')?.touched)">
+                Please enter Selling Price...!
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="!stockFormGroup.get('SellingPrice')?.hasError('required') && ((stockFormGroup.get('SellingPrice')?.hasError('maxlength') || stockFormGroup.get('SellingPrice')?.hasError('minlength')) && stockFormGroup.get('SellingPrice')?.touched) || (stockFormGroup.get('SellingPrice')?.hasError('maxlength') || stockFormGroup.get('SellingPrice')?.hasError('minlength'))">
+                Selling Price length must be 1-10 digit.
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="(!stockFormGroup.get('SellingPrice')?.hasError('required') && stockFormGroup.get('SellingPrice')?.touched) &&stockFormGroup.get('SellingPrice')?.hasError('minValue')">
+                Selling price must be equals or less then {{stockModel.UnitPrice??0}}
               </div>
             </div>
             <div class="col-lg-4 mb-3 mb-lg-0">

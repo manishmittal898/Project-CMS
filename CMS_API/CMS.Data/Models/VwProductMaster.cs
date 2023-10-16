@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -13,9 +14,10 @@ namespace CMS.Data.Models
         public long? SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
+        public decimal? SellingPrice { get; set; }
         public long? CaptionTagId { get; set; }
         public long? ViewSectionId { get; set; }
-        public long? DiscountId { get; set; }
+        public long? Discount { get; set; }
         public long? OccasionId { get; set; }
         public long? FabricId { get; set; }
         public long? LengthId { get; set; }
@@ -32,6 +34,5 @@ namespace CMS.Data.Models
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
         public string Keyword { get; set; }
-        public decimal SellingPrice { get; set; }
     }
 }

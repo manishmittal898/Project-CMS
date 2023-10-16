@@ -191,12 +191,14 @@ export class GeneralEntryCategoryMasterComponent implements OnInit {
     this.ViewMode = (this.ViewMode == 'Edit' ? 'Detail' : 'Edit');
   }
   isDataRefresh: boolean = false;
-  reloadData(status: boolean) {
-    this.isDataRefresh = status;
-    if (status) {
+  reloadData(value: { status: boolean, recordId: string }) {
+    this.isDataRefresh = value.status;
+    if (value.status) {
       this.getList();
       setTimeout(() => {
-        this.isDataRefresh = !status;
+        this.selectedRecord = value.recordId
+        this.isDataRefresh = !value.status;
+        this.ViewMode = 'Detail';
       }, 15);
 
     }

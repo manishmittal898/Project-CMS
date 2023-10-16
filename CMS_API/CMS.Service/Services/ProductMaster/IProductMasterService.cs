@@ -11,7 +11,7 @@ namespace CMS.Service.Services.ProductMaster
 
         ServiceResponse<ProductMasterViewModel> GetById(string id, bool isThumbnail = false);
         ServiceResponse<ProductStockModel> GetStockDetail(string productId, string sizeId);
-        Task<ServiceResponse<TblProductMaster>> Save(ProductMasterPostModel model);
+        Task<ServiceResponse<object>> Save(ProductMasterPostModel model);
         Task<ServiceResponse<TblProductMaster>> Delete(string id);
         Task<ServiceResponse<TblProductMaster>> ActiveStatusUpdate(string id);
         Task<ServiceResponse<object>> DeleteProductFile(string id);

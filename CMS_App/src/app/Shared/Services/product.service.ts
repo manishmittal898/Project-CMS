@@ -14,12 +14,12 @@ export class ProductService {
     return this._baseService.post(url, model);
   }
 
-  GetProductMaster(id: string, isThumbnail: boolean = false): Observable<ApiResponse<ProductMasterViewModel>> {
-    let url = `${this._baseService.API_Url.Product_Detail_Api}/${id}/${isThumbnail}`;
+  GetProductMaster(id: string): Observable<ApiResponse<ProductMasterViewModel>> {
+    let url = `${this._baseService.API_Url.Product_Detail_Api}/${id}`;
     return this._baseService.get(url);
   }
 
-  AddUpdateProductMaster(model: ProductMasterPostModel): Observable<ApiResponse<string>> {
+  AddUpdateProductMaster(model: ProductMasterPostModel): Observable<ApiResponse<any>> {
     let url = `${this._baseService.API_Url.Product_AddUpdate_Api}`;
     return this._baseService.post(url, model);
   }
@@ -57,8 +57,7 @@ export interface ProductMasterViewModel {
   CaptionTag: string;
   Category: string;
   SubCategory: string;
-  DiscountId: string;
-  Discount: string;
+  Discount: number;
   OccasionId: string;
   Occasion: string;
   FabricId: string;
@@ -87,11 +86,12 @@ export interface ProductMasterPostModel {
   ImagePath: string;
   Desc: string;
   Price: number | undefined;
+  SellingPrice: number | undefined;
   CategoryId: string | undefined;
   SubCategoryId: string | undefined;
   CaptionTagId: string | undefined;
   ViewSectionId: string | undefined;
-  DiscountId: string;
+  Discount: number;
   OccasionId: string;
   FabricId: string;
   LengthId: string;
@@ -122,5 +122,6 @@ export interface ProductStockModel {
   Size: string;
   UnitPrice: number | null;
   SellingPrice: number | null
+  Discount: number | null
   Quantity: number | null;
 }

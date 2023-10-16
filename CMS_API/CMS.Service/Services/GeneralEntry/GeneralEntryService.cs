@@ -233,7 +233,7 @@ namespace CMS.Service.Services.GeneralEntry
                         await _db.SaveChangesAsync();
                     }
 
-                    return CreateResponse((object)objGeneralEntry.Id, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)_security.EncryptData(objGeneralEntry.Id), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
@@ -276,7 +276,7 @@ namespace CMS.Service.Services.GeneralEntry
                         await _db.SaveChangesAsync();
 
                     }
-                    return CreateResponse((object)objGeneralEntry.Id, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)_security.EncryptData( objGeneralEntry.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
