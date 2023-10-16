@@ -1,6 +1,6 @@
 <!-- Banner Slider Start -->
 <div id="HomeSlider" class="carousel slide header-fix-space" data-bs-ride="carousel">
-  <div class="carousel-indicators">
+  <div class="carousel-indicators d-none d-md-flex">
     <button *ngFor="let itm of BannerImages;let indx=index" type="button" data-bs-target="#HomeSlider"
       [attr.data-bs-slide-to]="indx" [ngClass]="{'active': indx==0}" aria-label="{{itm.Title}}">
     </button>

@@ -71,8 +71,11 @@ $(window).scroll(function() {
 
 
 // $(function() {
-//     $(".navbar-toggler").click(function() {
-//         $(".navbar-collapse").addClass("manish");
+//     $("#ChangeToggle").click(function() {
+//         $("#MenuNavbar").addClass("menushowing");
+//     });
+//     $(".mobile-nav-close").click(function() {
+//         $("#MenuNavbar").removeClass("menushowing");
 //     });
 // });
 

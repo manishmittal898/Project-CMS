@@ -14,17 +14,17 @@
 <!-- Breadcrum End -->
 
 <!-- Product List Start -->
-<Section class="product-page mt-4 mt-md-4">
+<Section class="product-page mt-3 mt-md-4">
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
         <app-product-filter (onFilterChange)="onSearch($event)" [(filterModel)]="indexModel"></app-product-filter>
       </div>
       <div class="col-lg-9 mt-3 mt-lg-0">
-        <div class="row ms-0">
+        <div class="row">
           <div class="col-lg-12">
             <div
-              class="product-collection-header-filter d-flex align-items-center justify-content-between mb-3 font-13">
+              class="product-collection-header-filter d-flex flex-wrap align-items-center justify-content-between mb-3 font-13">
               <!-- <div class="d-none d-md-block">Showing {{indexModel.Page==1?1 : indexModel.Page*indexModel.PageSize}}–{{
                 indexModel.Page==1 ?indexModel.PageSize*indexModel.Page:
                 totalRecords-(indexModel.PageSize*indexModel.Page)}} of <strong>{{ totalRecords}}</strong> results</div>-->
@@ -37,7 +37,7 @@
                   <span class="icon-mode grid-3" [ngClass]="{'active': !isGrid4}" (click)="isGrid4=false"></span>
                   <span class="icon-mode grid-4 " [ngClass]="{'active': isGrid4}" (click)="isGrid4=true"></span>
                 </div>
-                <div class="product-sortby-filter me-3">
+                <div class="product-sortby-filter">
                   <!-- <div class="ms-1">Sort By</div> -->
                   <select class="select-sm" (change)="getList()" [(ngModel)]="sortValue">
 
