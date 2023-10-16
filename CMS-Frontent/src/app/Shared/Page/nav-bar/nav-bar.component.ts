@@ -6,6 +6,7 @@ import { AuthService } from '../../Services/UserService/auth.service';
 import { SecurityService } from '../../Services/Core/security.service';
 import { DropDown_key } from '../../Constant';
 import { CartProductService } from '../../Services/ProductService/cart-product.service';
+declare var $: any;
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -44,6 +45,7 @@ export class NavBarComponent implements OnInit {
         this.isLoggedIn = x as boolean ?? false;
 
       });
+      this.MobileMenuToogle()
     }, 100);
   }
 
@@ -80,4 +82,13 @@ export class NavBarComponent implements OnInit {
     this._authService.LogOut();
   }
 
+  MobileMenuToogle()
+  {
+    $("#ChangeToggle").click(function() {
+      $("#MenuNavbar").addClass("menushowing");
+  });
+  $(".mobile-nav-close").click(function() {
+      $("#MenuNavbar").removeClass("menushowing");
+  });
+  }
 }

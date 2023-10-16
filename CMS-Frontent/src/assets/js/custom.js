@@ -70,14 +70,14 @@ $(window).scroll(function() {
 });
 
 
-$(function() {
-    $("#ChangeToggle").click(function() {
-        $("#MenuNavbar").addClass("menushowing");
-    });
-    $(".mobile-nav-close").click(function() {
-        $("#MenuNavbar").removeClass("menushowing");
-    });
-});
+// $(function() {
+//     $("#ChangeToggle").click(function() {
+//         $("#MenuNavbar").addClass("menushowing");
+//     });
+//     $(".mobile-nav-close").click(function() {
+//         $("#MenuNavbar").removeClass("menushowing");
+//     });
+// });
 
 // document.addEventListener("DOMContentLoaded", function(){
 // document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){

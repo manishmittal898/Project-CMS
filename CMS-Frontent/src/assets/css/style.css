@@ -2098,7 +2098,7 @@ table tr td {
 .product-list-qty-btn {
   border: solid 1px #ccc;
   background: #fff;
-  font-size: 13px;
+  font-size: 15px;
   height: 30px;
   width: 30px;
   display: flex;
@@ -2109,6 +2109,7 @@ table tr td {
   flex-shrink: 0;
   cursor: pointer;
   color: #000;
+  padding: 0px;
 }
 
 button:disabled
@@ -2129,7 +2130,7 @@ opacity: 0.5;
 .cart-list-items-description .product-list-qty-btn {
   height: 24px;
   width: 24px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .cart-list-items-description .product-list-select-control .ng-select.ng-select-single .ng-select-container {
   height: 25px;
@@ -2245,7 +2246,7 @@ opacity: 0.5;
   background-image: none;
   color: #fff;
   position: absolute;
-  top: -5px;
+  top: -4px;
   font-size: 22px;
   left: 0px;
 }
@@ -3317,7 +3318,12 @@ body .toast-close-button {
   max-width: 260px;
 }
 .product-sortby-filter select {
-  background: transparent;
-  color: #000;
+    color: #000;
+    -webkit-appearance: none;
+    background: url(../images//arrow_down.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 22px;
+    background-size: 15px;
 }
 /* CUSTOM CSS END */

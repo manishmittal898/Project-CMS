@@ -16,12 +16,12 @@
                 <ng-container *ngIf="!address.IsPrimary; else primaryAddress">
                   <a href="javascript:void(0)" (click)="setPrimaryeAddress(address)" class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set primary address"
-                      class="bi bi-star"></i> </a>
+                      class="fa-light fa-star"></i> </a>
                 </ng-container>
                 <ng-template #primaryAddress>
                   <a href="javascript:void(0)"  class="text-theme-primary ms-2"> <i
                       data-bs-toggle="tooltip" data-bs-placement="bottom" title="Primary address"
-                      class="bi bi-star-fill"></i> </a>
+                      class="fa-sharp fa-solid fa-star"></i> </a>
                 </ng-template>
                 <a href="javascript:void(0)" (click)="editAddress(address)" class="text-success ms-2"
                   data-bs-toggle="modal" data-bs-target="#addressPopup"> <i data-bs-toggle="tooltip"
@@ -33,7 +33,7 @@
             <div class="custom-card-address-list-items form-check">
               <input class="form-check-input" readonly [checked]="address.IsPrimary" value="address.IsPrimary"
                 type="radio" name="PrimaryAddress" id="PrimaryAddress">
-              <label class="form-check-label" for="SaveAdd1">
+              <label class="form-check-label" for="PrimaryAddress">
                 {{address.BuildingNumber }} {{address.Address}}
                 {{address.City }}, {{address.State }}, {{address.PinCode}}
                 <ng-container *ngIf="address.Landmark"> Landmark: {{address.Landmark }} </ng-container>
