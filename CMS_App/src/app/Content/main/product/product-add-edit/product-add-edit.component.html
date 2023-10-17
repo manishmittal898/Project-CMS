@@ -52,7 +52,7 @@
 
       </div>
       <div class="col-md-2 mb-3">
-        <label>SellingPrice<span class="text-danger">*</span></label>
+        <label>Selling Price<span class="text-danger">*</span></label>
         <input type="text" [(ngModel)]="model.SellingPrice" (blur)="checkSellingPrice();"
           (keypress)="_commonService.NumberOnly($event);" [minlength]="1" [maxLength]="10" [min]="model.Price"
           formControlName="SellingPrice" [ngClass]="{ 'is-invalid': f.SellingPrice.errors && f.SellingPrice.touched}"
@@ -419,7 +419,7 @@
       <div class="modal-body">
         <form [formGroup]="stockFormGroup" (ngSubmit)="onSaveStock()">
           <div class="row">
-            <div class="col-lg-4 mb-3 mb-lg-0">
+            <div class="col-lg-3 mb-3 mb-lg-0">
               <label>Select Size<span class="text-danger">*</span></label>
               <ng-select [items]="ddlAvailableProductSize" formControlName="SizeId" [searchable]="true" bindLabel="Text"
                 bindValue="Value" placeholder="Select Size"
@@ -430,12 +430,12 @@
                 Please select <strong>Size</strong>...!
               </div>
             </div>
-            <div class="col-lg-4 mb-3 mb-lg-0 unit-pro-price">
+            <div class="col-lg-3 mb-3 mb-lg-0 unit-pro-price">
               <label class="d-flex justify-content-between">
                 <div> Unit Price<span class="text-danger">*</span> </div>
-                <a href="javascript:void(0)" class="text-muted font-w-200" *ngIf="this.model?.Price"
-                  title="Add Product Price" (click)="applyMainPrice()">₹
-                  Product Price <i class="bi bi-chevron-right"></i></a>
+                <a href="javascript:void(0)" class="text-primary font-w-200" *ngIf="this.model?.Price" data-title="₹ Product Price" (click)="applyMainPrice()"> 
+                  <i class="fa-light fa-retweet"></i>
+                </a>
               </label>
               <input type="number" readOnly [(ngModel)]="stockModel.UnitPrice" (blur)="checkStockSellingPrice()"
                 (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
@@ -455,12 +455,11 @@
                 Selling price must be equals or less then {{stockModel.SellingPrice??0}}
               </div>
             </div>
-            <div class="col-lg-4 mb-3 mb-lg-0 unit-pro-price">
+            <div class="col-lg-3 mb-3 mb-lg-0 unit-pro-price">
               <label class="d-flex justify-content-between">
                 <div> Selling Price<span class="text-danger">*</span> </div>
-                <a href="javascript:void(0)" class="text-muted font-w-200" *ngIf="this.model?.Price"
-                  title="Add Product Price" (click)="applySellingPrice()">₹
-                  selling Product Price <i class="bi bi-chevron-right"></i></a>
+                <a href="javascript:void(0)" class="text-primary font-w-200" *ngIf="this.model?.Price"
+                data-title="₹ Selling Price" (click)="applySellingPrice()"><i class="fa-light fa-retweet"></i></a>
               </label>
               <input type="number" readOnly [(ngModel)]="stockModel.SellingPrice" (blur)="checkStockSellingPrice()"
                 (keypress)="_commonService.NumberOnly($event)" [minlength]="1" [maxLength]="10"
@@ -481,7 +480,7 @@
                 Selling price must be equals or less then {{stockModel.UnitPrice??0}}
               </div>
             </div>
-            <div class="col-lg-4 mb-3 mb-lg-0">
+            <div class="col-lg-3 mb-3 mb-lg-0">
               <label>Quantity<span class="text-danger">*</span></label>
               <input type="number" [(ngModel)]="stockModel.Quantity" (keypress)="_commonService.NumberOnly($event)"
                 [minlength]="1" [maxLength]="10" formControlName="Quantity"

@@ -173,9 +173,8 @@
   }
 
   ul.dropdown-menu>li a.dropdown-item {
-    padding: 5px 20px;
-    font-size: 15px;
-
+    padding: 6px 15px;
+    font-size: 17px;
   }
 
   .navbar-nav li:last-child a {
@@ -485,7 +484,7 @@
   }
 
   .section-related {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 
   .home-category-slider {
@@ -532,8 +531,15 @@
     text-overflow: ellipsis;
 }
 .navbar-user-icons .dropdown-menu[data-bs-popper] {
-  left: 50%;
-  transform: translateX(-50%) !important;
+  position: fixed;
+  right: 0;
+  height: 100%;
+  top: 0;
+  width: 200px;
+  left: auto;
+  border: none;
+  padding: 15px 0px;
+  box-shadow: 0 0 20px #e2e2e2;
 }
 }
 

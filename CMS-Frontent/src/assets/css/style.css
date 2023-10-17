@@ -1149,10 +1149,6 @@ ul.dropdown-menu {
   padding: 0px;
 }
 
-.navbar-user-icons ul.dropdown-menu {
-  border: solid 1px #e7e7e7;
-}
-
 @keyframes dropdown-menu {
   0% {
     transform: translateY(1rem);
