@@ -358,6 +358,9 @@ export class ProductAddEditComponent implements OnInit {
     this.tempStock = Object.assign({}, this.stockModel);
     this.model.Stocks.splice(idx, 1);
   }
+  onRemoveStock(idx: number) {
+    this.model.Stocks.splice(idx, 1);
+  }
   onCancelEdit() {
     if (this.tempStock) {
       this.model.Stocks.push(this.tempStock)
