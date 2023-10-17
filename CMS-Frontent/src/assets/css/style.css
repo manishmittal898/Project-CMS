@@ -2649,7 +2649,7 @@ section.deals-opt-d-1 {
   padding: 2px;
   border: solid 2px #909090;
   display: inline-block;
-  font-family: bootstrap-icons !important;
+  font-family: "Font Awesome 6 Pro";
 }
 
 .checkout-wizard #progressbar li:after {
@@ -2677,15 +2677,15 @@ section.deals-opt-d-1 {
 }
 
 .checkout-wizard #progressbar #Address:before {
-  content: "\f3e8";
+  content: "";
 }
 
 .checkout-wizard #progressbar #Payment:before {
-  content: "\f2da";
+  content: "";
 }
 
 .checkout-wizard #progressbar #OrderSummary:before {
-  content: "\f633";
+  content: "";
 }
 
 .custom-card {
