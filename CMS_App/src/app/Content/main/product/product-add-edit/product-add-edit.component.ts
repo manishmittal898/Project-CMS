@@ -321,7 +321,24 @@ export class ProductAddEditComponent implements OnInit {
     var ddValue = ((price - sellingPrice) / price) * 100;
     return Math.floor(ddValue);
   }
+  updateStockPrice(isUnitPriceUpdate = false) {
+    if (this.model?.Stocks?.length > 0) {
+      this._commonService.Question(Message.AllowAutoUpdate.replace("#Text", isUnitPriceUpdate ? "Stock unit price" : "stock selling price") as string).then(result => {
+        if (result) {
+          this.model.Stocks.forEach(x => {
+            if (isUnitPriceUpdate) {
+              x.UnitPrice = this.model.Price as number
+            } else {
+              x.SellingPrice = this.model.SellingPrice as number
 
+            }
+          });
+        }
+      })
+
+    }
+
+  }
 
   onAddStock() {
     this.stockModel = {} as ProductStockModel;
