@@ -237,11 +237,7 @@ namespace CMS.Service.Services.Common
                         data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId.HasValue && y.ViewSectionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
-                    else if (lktype == LookupTypeEnum.Product_Discount.GetStringValue())
-                    {
-                        data = data.Where(x => x.IsActive.Value && x.IsDelete == false && x.TblProductMasterDiscounts.Any(s => s.DiscountId.Value == x.Id));
-
-                    }
+                 
                     else if (lktype == LookupTypeEnum.Product_Occasion.GetStringValue())
                     {
                         data = data.Where(x => x.TblProductMasterOccasions.Any(y => y.OccasionId.HasValue && y.OccasionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));

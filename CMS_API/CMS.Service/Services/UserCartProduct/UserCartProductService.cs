@@ -186,8 +186,6 @@ namespace CMS.Service.Services.UserCartProduct
                                                 CaptionTag = x.Product.CaptionTag.Name,
                                                 ViewSectionId = x.Product.ViewSectionId.HasValue ? _security.EncryptData(x.Product.ViewSectionId.ToString()) : null,
                                                 ViewSection = x.Product.ViewSection.Name,
-                                                DiscountId = x.Product.DiscountId.HasValue ? _security.EncryptData(x.Product.DiscountId.Value) : null,
-                                                Discount = x.Product.Discount.Name,
                                                 OccasionId = x.Product.OccasionId.HasValue ? _security.EncryptData(x.Product.OccasionId.Value) : null,
                                                 Occasion = x.Product.Occasion.Name,
                                                 FabricId = x.Product.FabricId.HasValue ? _security.EncryptData(x.Product.FabricId.Value) : null,
@@ -202,7 +200,8 @@ namespace CMS.Service.Services.UserCartProduct
                                                 Desc = x.Product.Desc,
                                                 Summary = x.Product.Desc,
                                                 Price = x.Product.Price,
-                                                SellingPrice = x.Product.DiscountId.HasValue ? Math.Round(x.Product.Price.Value - (x.Product.Price.Value * decimal.Parse(x.Product.Discount.Value)) / 100) : x.Product.Price,
+                                                SellingPrice = x.Product.SellingPrice != null && x.Product.SellingPrice.HasValue ? x.Product.SellingPrice : x.Product.Price,
+                                                Discount = x.Product.Discount != null && x.Product.Discount.HasValue ? x.Product.Discount.Value : 0,
 
                                                 Stocks = x.Product.TblProductStocks.Count > 0 ? x.Product.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
                                                 {
@@ -211,7 +210,8 @@ namespace CMS.Service.Services.UserCartProduct
                                                     SizeId = _security.EncryptData(st.SizeId),
                                                     Size = st.Size.Name,
                                                     UnitPrice = st.UnitPrice,
-                                                    SellingPrice = st.Product.DiscountId.HasValue ? Math.Floor(st.UnitPrice.Value - (st.UnitPrice.Value * decimal.Parse(st.Product.Discount.Value)) / 100) : st.UnitPrice,
+                                                    SellingPrice = st.SellingPrice != null && st.SellingPrice.HasValue ? st.SellingPrice : st.UnitPrice,
+                                                    Discount = st.Discount != null && st.Discount.HasValue ? st.Discount.Value : 0,
                                                     Quantity = st.Quantity
 
                                                 }).ToList() : null

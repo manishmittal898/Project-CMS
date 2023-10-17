@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -40,7 +42,7 @@ namespace CMS.Data.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=Sandy-PC;Database=DB_CMS;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=SANDY-PC\\SQLEXPRESS;Database=DB_CMS;Trusted_Connection=True;");
             }
         }
 
@@ -325,6 +327,8 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Desc).HasColumnType("ntext");
 
+                entity.Property(e => e.Discount).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.ImagePath).HasMaxLength(1000);
 
                 entity.Property(e => e.IsActive)
@@ -348,6 +352,8 @@ namespace CMS.Data.Models
                 entity.Property(e => e.PatternId).HasColumnName("PatternID");
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.SellingPrice).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Summary).HasColumnType("ntext");
 
@@ -376,11 +382,6 @@ namespace CMS.Data.Models
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tblProductMaster_CreatedBy");
-
-                entity.HasOne(d => d.Discount)
-                    .WithMany(p => p.TblProductMasterDiscounts)
-                    .HasForeignKey(d => d.DiscountId)
-                    .HasConstraintName("FK_tblProductMaster_DiscountId");
 
                 entity.HasOne(d => d.Fabric)
                     .WithMany(p => p.TblProductMasterFabrics)
@@ -456,6 +457,10 @@ namespace CMS.Data.Models
             modelBuilder.Entity<TblProductStock>(entity =>
             {
                 entity.ToTable("tblProductStocks");
+
+                entity.Property(e => e.Discount).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.SellingPrice).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 0)");
 
@@ -761,6 +766,8 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Desc).HasColumnType("ntext");
 
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.ImagePath).HasMaxLength(1000);
 
                 entity.Property(e => e.Keyword).HasMaxLength(4000);
@@ -779,7 +786,7 @@ namespace CMS.Data.Models
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.SellingPrice).HasColumnType("decimal(38, 0)");
+                entity.Property(e => e.SellingPrice).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Summary).HasColumnType("ntext");
 

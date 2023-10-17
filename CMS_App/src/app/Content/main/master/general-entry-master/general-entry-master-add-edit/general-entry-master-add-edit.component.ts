@@ -56,8 +56,8 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
     }
   }
 
-  @Output() OnSave = new EventEmitter<boolean>();
 
+  @Output() OnSave = new EventEmitter<{ status: boolean, recordId: string }>();
   ngOnInit(): void {
     this.GetDropDown();
     this._activatedRoute.params.subscribe(x => {
@@ -145,8 +145,10 @@ export class GeneralEntryMasterAddEditComponent implements OnInit {
         if (x.IsSuccess) {
           this.toast.success("General Entry added sucessfully...", "Saved");
           this._route.navigate(['./admin/master/general-entry']);
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
         } else {
-          this.toast.error(x.Message as string, "Faild");
+          this.OnSave.emit({ status: true, recordId: x.Data as string });
+          this.toast.error(x.Message as string, "Failed");
         }
       })
     }

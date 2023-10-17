@@ -22,9 +22,10 @@ namespace CMS.Data.Models
         public long? SubCategoryId { get; set; }
         public string Desc { get; set; }
         public decimal? Price { get; set; }
+        public decimal? SellingPrice { get; set; }
         public long? CaptionTagId { get; set; }
         public long? ViewSectionId { get; set; }
-        public long? DiscountId { get; set; }
+        public long? Discount { get; set; }
         public long? OccasionId { get; set; }
         public long? FabricId { get; set; }
         public long? LengthId { get; set; }
@@ -46,7 +47,6 @@ namespace CMS.Data.Models
         public virtual TblLookupMaster Category { get; set; }
         public virtual TblLookupMaster Color { get; set; }
         public virtual TblUserMaster CreatedByNavigation { get; set; }
-        public virtual TblLookupMaster Discount { get; set; }
         public virtual TblLookupMaster Fabric { get; set; }
         public virtual TblLookupMaster Length { get; set; }
         public virtual TblUserMaster ModifiedByNavigation { get; set; }

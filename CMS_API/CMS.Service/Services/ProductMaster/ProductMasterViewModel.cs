@@ -17,6 +17,8 @@ namespace CMS.Service.Services.ProductMaster
         public string Desc { get; set; }
         [Range(0, 9999999999999)]
         public decimal? Price { get; set; }
+        [Range(0, 9999999999999)]
+        public decimal? SellingPrice { get; set; }
 
         [Required]
         public string CategoryId { get; set; }
@@ -51,8 +53,8 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? SellingPrice { get; set; }
         public string CaptionTagId { get; set; }
         public string ViewSectionId { get; set; }
-        public string DiscountId { get; set; }
-        public string Discount { get; set; }
+        
+        public long Discount { get; set; }
         public string OccasionId { get; set; }
         public string Occasion { get; set; }
         public string FabricId { get; set; }
@@ -107,6 +109,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Size { get; set; }
         public decimal? UnitPrice { get; set; }
         public decimal? SellingPrice { get; set; }
+        public long Discount { get; set; }
         public int? Quantity { get; set; }
 
     }
@@ -123,7 +126,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Keyword { get; set; }
         public List<string> Ids { get; set; }
         public List<string> CaptionTagId { get; set; }
-        public List<string> DiscountId { get; set; }
+        public long? Discount { get; set; }
         public List<string> OccasionId { get; set; }
         public List<string> FabricId { get; set; }
         public List<string> LengthId { get; set; }
