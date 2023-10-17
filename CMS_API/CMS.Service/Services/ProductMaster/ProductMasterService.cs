@@ -407,7 +407,7 @@ namespace CMS.Service.Services.ProductMaster
                         await _db.TblProductStocks.AddRangeAsync(productStock);
                         _db.SaveChanges();
                     }
-                   
+
                     objProduct.TblProductStocks = null;
 
                     return CreateResponse((object)_security.EncryptData(product.Entity.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
@@ -712,6 +712,22 @@ namespace CMS.Service.Services.ProductMaster
             }
 
 
+        }
+
+        public async Task<ServiceResponse<object>> IsSKUExist(string SKU, string id = null)
+        {
+            try
+            {
+                bool isExist = false;
+                var result = await _db.TblProductMasters.FirstOrDefaultAsync(x => x.UniqueId.ToLower() == SKU.ToLower() && (string.IsNullOrWhiteSpace(id) || x.Id == long.Parse(_security.DecryptData(id))));
+                return CreateResponse<object>(result != null, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+
+            }
+            catch (Exception)
+            {
+                return CreateResponse<object>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+
+            }
         }
     }
 }
