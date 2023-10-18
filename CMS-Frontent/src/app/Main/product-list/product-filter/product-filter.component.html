@@ -23,8 +23,6 @@
         <h6 class="m-0 text-uppercase">Categories </h6>
       </div>
       <div class="product-filterItems-body">
-
-
         <ng-select (change)="updateSubCategoryData();applyFilter()" [isOpen]="true" class="ng-select-open"
           [items]="this.dropDown.ddlCategory" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
           bindValue="Value" [(ngModel)]="this.filterModel.CategoryId" placeholder="Find Categoory">
@@ -114,6 +112,47 @@
       </div>
     </div>
     <!-- Filter Size End -->
+
+
+    <!-- Radio Discount Start-->
+    <div class="product-filterItems product-filterItems-w-checkbox mb-3">
+      <div class="product-filterItems-header mb-2">
+        <h6 class="m-0 text-uppercase">Radio Discount</h6>
+      </div>
+      <div class="product-filterItems-body sm-radio-btn">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio1">
+          <label class="form-check-label ps-1" for="Radio1">
+            Radio Discount 1
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio2" checked>
+          <label class="form-check-label ps-1" for="Radio2">
+            Radio Discount 2
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio3">
+          <label class="form-check-label ps-1" for="Radio3">
+            Radio Discount 3
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio4">
+          <label class="form-check-label ps-1" for="Radio4">
+            Radio Discount 4
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio5">
+          <label class="form-check-label ps-1" for="Radio5">
+            Radio Discount 5
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- Radio Discount End -->
 
     <!-- Filter Discount Start -->
     <div *ngIf="this.dropDown?.ddlProductDiscount?.length>0"
