@@ -60,5 +60,9 @@ namespace CMS.API.Areas.Admin.Controllers
         [HttpGet("{id}")]
         public async Task<object> DeleteProductFile(string id) => await _productmstr.DeleteProductFile(id);
 
+        [HttpGet("{skuNumber}/{id}")]
+        public async Task<object> IsSKUExist(string skuNumber,string id=null) => await _productmstr.IsSKUExist(skuNumber,id);
+        
+
     }
 }
