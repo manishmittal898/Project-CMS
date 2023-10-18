@@ -723,7 +723,7 @@ namespace CMS.Service.Services.ProductMaster
                 return CreateResponse<object>(result != null, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return CreateResponse<object>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
 
