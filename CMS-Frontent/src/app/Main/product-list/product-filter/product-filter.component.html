@@ -113,13 +113,29 @@
     </div>
     <!-- Filter Size End -->
 
-
-    <!-- Radio Discount Start-->
-    <div class="product-filterItems product-filterItems-w-checkbox mb-3">
+    <!-- Filter Discount Start -->
+    <div *ngIf="this.dropDown?.ddlProductDiscount?.length>0"
+      class="product-filterItems product-filterItems-w-checkbox mb-3">
       <div class="product-filterItems-header mb-2">
-        <h6 class="m-0 text-uppercase">Radio Discount</h6>
+        <h6 class="m-0 text-uppercase">Discount</h6>
       </div>
       <div class="product-filterItems-body sm-radio-btn">
+        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
+          [items]="this.dropDown.ddlProductDiscount" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
+          bindValue="Value" [(ngModel)]="this.filterModel.DiscountId" placeholder="Find Discount">
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
+            {{item.Text}}
+          </ng-template>
+          <ng-template ng-multi-label-tmp let-items="items">
+            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
+              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
+            </div>
+            <div class="ng-value" *ngIf="items.length > 2">
+              <span class="ng-value-label">{{items.length - 2}} more...</span>
+            </div>
+          </ng-template>
+        </ng-select>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio1">
           <label class="form-check-label ps-1" for="Radio1">
@@ -150,34 +166,6 @@
             Radio Discount 5
           </label>
         </div>
-      </div>
-    </div>
-    <!-- Radio Discount End -->
-
-    <!-- Filter Discount Start -->
-    <div *ngIf="this.dropDown?.ddlProductDiscount?.length>0"
-      class="product-filterItems product-filterItems-w-checkbox mb-3">
-      <div class="product-filterItems-header mb-2">
-        <h6 class="m-0 text-uppercase">Discount</h6>
-      </div>
-      <div class="product-filterItems-body">
-        <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-          [items]="this.dropDown.ddlProductDiscount" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.DiscountId" placeholder="Find Discount">
-          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
-            {{item.Text}}
-          </ng-template>
-          <ng-template ng-multi-label-tmp let-items="items">
-            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-            </div>
-            <div class="ng-value" *ngIf="items.length > 2">
-              <span class="ng-value-label">{{items.length - 2}} more...</span>
-            </div>
-          </ng-template>
-        </ng-select>
-
       </div>
     </div>
     <!-- Filter Discount End -->
