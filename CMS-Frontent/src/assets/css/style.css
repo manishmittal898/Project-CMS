@@ -2944,8 +2944,9 @@ ul.footer-benefits li p {
 }
 
 .sm-radio-btn .form-check-input:checked[type=radio]:before {
-  top: -3px;
+  top: -2px;
   font-size: 14px;
+  left: 1px;
 }
 
 .p-calendar .p-datepicker {
