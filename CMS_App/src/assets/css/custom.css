@@ -786,9 +786,18 @@ element.style {
 }
 
 .swal2-styled.swal2-confirm {
-  background: #009688 !important;
+  background: #198754 !important;
 }
 
+.swal2-actions button {
+  padding: 6px 15px;
+}
+.swal2-actions .swal2-styled.swal2-cancel {
+  background: #fff;
+  color: #dc3545;
+  outline: solid 1px #dc3545;
+  outline-offset: -1px;
+}
 .swal2-html-container {
   margin-top: 0px !important;
 }
@@ -1688,6 +1697,10 @@ fieldset legend {
 }
 .prolist-price {
   line-height: 16px;
+}
+.prolist-price .d-flex {
+  font-weight: 700;
+  color: #000;
 }
 .dashboard-card-items:hover {
   color: #3936a9;
