@@ -35,6 +35,10 @@ export class ProductService {
     let url = `${this._baseService.API_Url.ProductFile_Delete_Api}${id}`;
     return this._baseService.get(url);
   }
+  checkSKUExist(sku: string, id: string): Observable<ApiResponse<boolean>> {
+    let url = `${this._baseService.API_Url.ProductIsSKUExist_Api}${sku}/${id}`;
+    return this._baseService.get(url);
+  }
 }
 
 export interface ProductMasterViewModel {

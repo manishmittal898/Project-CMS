@@ -10,7 +10,9 @@ import { CommonService } from 'src/app/Shared/Services/common.service';
 import { ProductImageViewModel, ProductMasterPostModel, ProductMasterViewModel, ProductStockModel } from 'src/app/Shared/Services/product.service';
 import { ProductService } from '../../../../Shared/Services/product.service';
 import { DropDownItem } from '../../../../Shared/Helper/common-model';
+import { map, catchError } from 'rxjs/operators';
 
+import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-product-add-edit',
   templateUrl: './product-add-edit.component.html',
@@ -22,7 +24,9 @@ export class ProductAddEditComponent implements OnInit {
   model = {} as ProductMasterPostModel;
   isFileAttached = false;
   formgrp = this.fb.group({
-    UniqueID: [undefined, Validators.required],
+    UniqueID: [undefined, {
+      validators: [Validators.required,], asyncValidators: [this.checkSKUValidator.bind(this)], updateOn: 'blur'
+    }],
     Name: [undefined, Validators.required],
     Price: [undefined, [Validators.required, this.minValueValidator.bind(this)]],
     SellingPrice: [undefined, this.minValueValidator.bind(this)],
@@ -119,6 +123,25 @@ export class ProductAddEditComponent implements OnInit {
     }
     return null;
   }
+
+  checkSKUValidator(ctrl: AbstractControl): Observable<ValidationErrors | null> {
+    if (!ctrl.value) {
+      return of(null);
+    }
+
+    return this._productService.checkSKUExist(ctrl.value, this.model.Id).pipe(
+      map((response) => {
+        return response.IsSuccess && response.Data ? { duplicateSKU: true } : null;
+      }),
+      catchError((error) => {
+        return of(null);
+      })
+    );
+
+
+    //  }
+  }
+
   checkStockSellingPrice() {
     const val = this?.sf != null && this?.sf.SellingPrice?.value != undefined ? Number(this?.sf?.SellingPrice?.value) : 0;
     const price = this?.sf != null && this?.sf.UnitPrice?.value != undefined ? Number(this?.sf?.UnitPrice?.value) : 0;

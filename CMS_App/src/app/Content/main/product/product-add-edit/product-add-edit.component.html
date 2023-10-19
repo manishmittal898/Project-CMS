@@ -21,6 +21,11 @@
           *ngIf="(formgrp.get('UniqueID')?.hasError('required') && formgrp.get('UniqueID')?.touched)">
           Please enter <strong>SKU ID</strong>...!
         </div>
+        <div class="invalid-feedback"
+          *ngIf="(!formgrp.get('UniqueID')?.hasError('required') && formgrp.get('UniqueID')?.touched) &&formgrp.get('UniqueID')?.hasError('duplicateSKU')">
+          SKU number already taken ..!
+        </div>
+
       </div>
       <div class="col-md-4 mb-3">
         <label>Name<span class="text-danger">*</span></label>

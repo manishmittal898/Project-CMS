@@ -147,8 +147,7 @@ export class CMSPageMasterComponent implements OnInit {
   }
 
   setSelectedRecord(item: CMSPageListViewModel) {
-    debugger
-    this.selectedRecord = {
+        this.selectedRecord = {
       Id: item.PageId,
       PageName: item?.Name
     }

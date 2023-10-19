@@ -26,7 +26,7 @@ export class CMSPageAddUpdateComponent implements OnInit {
   });
   get f() { return this.formgrp.controls; }
   @Input() set selectedRecord(value: any) {
-    debugger
+
     if (Object.keys(value)?.length > 0) {
       this.id = value.Id;
       this.pageName = value.PageName;
