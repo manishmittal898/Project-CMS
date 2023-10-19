@@ -1,5 +1,5 @@
 <div class="product-list-items">
-  <span *ngIf="Product.SellingPrice!=Product.Price" class="product-discount-label d-none d-md-block">{{Product.Discount}}% Off</span>
+  <span *ngIf="Product.Discount>0" class="product-discount-label d-none d-md-block">{{Product.Discount}}% Off</span>
    <div class="product-list-items-tag" *ngIf="Product.CaptionTag">{{Product.CaptionTag}}</div>
   <div class="product-list-items-img d-flex align-items-center justify-content-center flex-column position-relative">
     <a href="javascript:void(0)" routerLink="{{getUrl()}}">

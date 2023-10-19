@@ -612,7 +612,7 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
                                  && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
                                  && (model.CaptionTagId == null || model.CaptionTagId.Count == 0 || CaptionTagIds.Contains(prd.CaptionTagId.Value))
-                                 && (model.DiscountId == null || Discount == 0 || prd.Discount > Discount)
+                                 && (model.DiscountId == null || Discount == 0 || prd.Discount >= Discount)
                                  && (model.OccasionId == null || model.OccasionId.Count == 0 || OccasionIds.Contains(prd.OccasionId.Value))
                                  && (model.FabricId == null || model.FabricId.Count == 0 || FabricIds.Contains(prd.FabricId.Value))
                                  && (model.LengthId == null || model.LengthId.Count == 0 || LengthIds.Contains(prd.LengthId.Value))
