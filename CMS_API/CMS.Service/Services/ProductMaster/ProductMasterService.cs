@@ -728,7 +728,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
                 bool isExist = false;
-                var result = await _db.TblProductMasters.FirstOrDefaultAsync(x => x.UniqueId.ToLower() == SKU.ToLower() && (string.IsNullOrEmpty(id) || x.Id != long.Parse(_security.DecryptData(id))));
+                var result = await _db.TblProductMasters.FirstOrDefaultAsync(x => x.UniqueId.Trim().ToLower() == SKU.Trim().ToLower() && (string.IsNullOrEmpty(id) || x.Id != long.Parse(_security.DecryptData(id))));
                 return CreateResponse<object>(result != null, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
 
             }
