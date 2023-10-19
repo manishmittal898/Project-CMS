@@ -154,32 +154,79 @@ export class ProductAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
-      if (this.model?.Stocks == undefined || this.model?.Stocks?.length === 0) {
-        this.toast.warning("Please add atleast 1 stock item...", "Opps");
-        return;
+      let isSellingPriceUpdate = false;
+      let isUnitPriceUpdate = false;
+      if (this.model?.Stocks?.length > 0) {
+        this.model?.Stocks.forEach(element => {
+          if (Number(element.UnitPrice) != Number(this.model.Price)) {
+            isUnitPriceUpdate = true;
+          }
+          if (Number(element.SellingPrice) != Number(this.model.SellingPrice)) {
+            isSellingPriceUpdate = true;
+          }
+        });
+
+
       }
-      this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
-      this.model.SellingPrice = this.model.SellingPrice && this.model.SellingPrice > 0 ? Number(this.model.SellingPrice) : 0;
 
-      this.model.Stocks.forEach(x => {
-        x.Discount = x.Discount && x.Discount > 0 ? Number(x.Discount) : 0;
-        x.UnitPrice = x.UnitPrice && x.UnitPrice > 0 ? Number(x.UnitPrice) : 0;
-        x.SellingPrice = x.SellingPrice && x.SellingPrice > 0 ? Number(x.SellingPrice) : 0;
-      })
-      // this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
+      if (isSellingPriceUpdate || isUnitPriceUpdate) {
+        let strText = ' ' + isSellingPriceUpdate && isUnitPriceUpdate ? 'Selling Price and Unit Price in Stock detail?' : (isSellingPriceUpdate ? 'Selling Price?' : 'Unit Price');
+        this._commonService.Question(Message.AllowAutoUpdate.replace("#Text", strText) as string).then(result => {
+          if (result) {
+            this.model.Stocks.forEach(x => {
+              if (isUnitPriceUpdate) {
+                x.UnitPrice = this.model.Price as number
+              }
+              if (isSellingPriceUpdate) {
+                x.SellingPrice = this.model.SellingPrice as number
 
-      this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
-        if (x.IsSuccess) {
-          this.toast.success("Product added successfully...", "Saved");
-          this._route.navigate(['./admin/product']);
-          this.OnSave.emit({ status: true, recordId: x.Data as string });
-        } else {
-          this.OnSave.emit({ status: true, recordId: x.Data as string });
-          this.toast.error(x.Message as string, "Failed");
-        }
-      })
+              }
+            });
+          }
+          setTimeout(() => {
+            this.onSave();
+          }, 100);
 
+        })
+
+      } else {
+        this.onSave();
+      }
     }
+
+
+  }
+
+
+  private onSave() {
+
+
+    if (this.model?.Stocks == undefined || this.model?.Stocks?.length === 0) {
+      this.toast.warning("Please add atleast 1 stock item...", "Opps");
+      return;
+    }
+    this.model.Price = this.model.Price && this.model.Price > 0 ? Number(this.model.Price) : 0;
+    this.model.SellingPrice = this.model.SellingPrice && this.model.SellingPrice > 0 ? Number(this.model.SellingPrice) : 0;
+
+    this.model.Stocks.forEach(x => {
+      x.Discount = x.Discount && x.Discount > 0 ? Number(x.Discount) : 0;
+      x.UnitPrice = x.UnitPrice && x.UnitPrice > 0 ? Number(x.UnitPrice) : 0;
+      x.SellingPrice = x.SellingPrice && x.SellingPrice > 0 ? Number(x.SellingPrice) : 0;
+    })
+    // this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
+
+    this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
+      if (x.IsSuccess) {
+        this.toast.success("Product added successfully...", "Saved");
+        this._route.navigate(['./admin/product']);
+        this.OnSave.emit({ status: true, recordId: x.Data as string });
+      } else {
+        this.OnSave.emit({ status: true, recordId: x.Data as string });
+        this.toast.error(x.Message as string, "Failed");
+      }
+    })
+
+
   }
   onGetDetail() {
     this._productService.GetProductMaster(this.model.Id).subscribe(response => {
@@ -321,24 +368,7 @@ export class ProductAddEditComponent implements OnInit {
     var ddValue = ((price - sellingPrice) / price) * 100;
     return Math.floor(ddValue);
   }
-  updateStockPrice(isUnitPriceUpdate = false) {
-    if (this.model?.Stocks?.length > 0) {
-      this._commonService.Question(Message.AllowAutoUpdate.replace("#Text", isUnitPriceUpdate ? "Stock unit price" : "stock selling price") as string).then(result => {
-        if (result) {
-          this.model.Stocks.forEach(x => {
-            if (isUnitPriceUpdate) {
-              x.UnitPrice = this.model.Price as number
-            } else {
-              x.SellingPrice = this.model.SellingPrice as number
 
-            }
-          });
-        }
-      })
-
-    }
-
-  }
 
   onAddStock() {
     this.stockModel = {} as ProductStockModel;

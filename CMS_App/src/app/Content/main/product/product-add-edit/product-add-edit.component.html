@@ -33,7 +33,7 @@
       </div>
       <div class="col-md-2 mb-3">
         <label>Price<span class="text-danger">*</span></label>
-        <input type="text" [(ngModel)]="model.Price" (blur)="checkSellingPrice();updateStockPrice(true)"
+        <input type="text" [(ngModel)]="model.Price" (blur)="checkSellingPrice()"
           (keypress)="_commonService.NumberOnly($event);" [minlength]="1" [maxLength]="10" formControlName="Price"
           [ngClass]="{ 'is-invalid': f.Price.errors && f.Price.touched}" class="form-control" id="input4"
           placeholder="Price">
@@ -53,7 +53,7 @@
       </div>
       <div class="col-md-2 mb-3">
         <label>SellingPrice<span class="text-danger">*</span></label>
-        <input type="text" [(ngModel)]="model.SellingPrice" (blur)="checkSellingPrice();updateStockPrice(false)"
+        <input type="text" [(ngModel)]="model.SellingPrice" (blur)="checkSellingPrice()"
           (keypress)="_commonService.NumberOnly($event);" [minlength]="1" [maxLength]="10" [min]="model.Price"
           formControlName="SellingPrice" [ngClass]="{ 'is-invalid': f.SellingPrice.errors && f.SellingPrice.touched}"
           class="form-control" id="input4" placeholder="SellingPrice">
