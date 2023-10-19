@@ -120,52 +120,23 @@
         <h6 class="m-0 text-uppercase">Discount</h6>
       </div>
       <div class="product-filterItems-body sm-radio-btn">
+
+
         <ng-select (change)="applyFilter()" [isOpen]="true" class="ng-select-open"
-          [items]="this.dropDown.ddlProductDiscount" [multiple]="true" bindLabel="Text" [closeOnSelect]="false"
-          bindValue="Value" [(ngModel)]="this.filterModel.DiscountId" placeholder="Find Discount">
-          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-            <input id="item-{{index}}" type="checkbox" class="form-check-input" [ngModel]="item$.selected" />
-            {{item.Text}}
-          </ng-template>
-          <ng-template ng-multi-label-tmp let-items="items">
-            <div class="ng-value" *ngFor="let index=index;let item of items | slice:0:2">
-              {{item['Text']}}{{ (items.length-2) >= index ?',':''}}
-            </div>
-            <div class="ng-value" *ngIf="items.length > 2">
-              <span class="ng-value-label">{{items.length - 2}} more...</span>
+          [items]="this.dropDown.ddlProductDiscount" bindLabel="Text" [closeOnSelect]="false" bindValue="Value"
+          placeholder="Discount" [(ngModel)]="this.filterModel.DiscountId">
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+
+            <div class="form-check">
+              <input class="form-check-input" [id]="'disItem-'+index"
+                [checked]="item.Value==this.filterModel.DiscountId" name="Discount" type="radio" [value]="item.Value">
+              <label class="form-check-label ps-1" [for]="'disItem-'+index">
+                {{item.Text}} or more
+              </label>
             </div>
           </ng-template>
+
         </ng-select>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio1">
-          <label class="form-check-label ps-1" for="Radio1">
-            Radio Discount 1
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio2" checked>
-          <label class="form-check-label ps-1" for="Radio2">
-            Radio Discount 2
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio3">
-          <label class="form-check-label ps-1" for="Radio3">
-            Radio Discount 3
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio4">
-          <label class="form-check-label ps-1" for="Radio4">
-            Radio Discount 4
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="DiscountRadio" id="Radio5">
-          <label class="form-check-label ps-1" for="Radio5">
-            Radio Discount 5
-          </label>
-        </div>
       </div>
     </div>
     <!-- Filter Discount End -->

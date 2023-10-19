@@ -47,7 +47,7 @@ export class ProductFilterModel extends IndexModel {
   Keyword!: string;
   ViewSectionId!: string[];
   Ids!: string[]
-  DiscountId!: string[]
+  DiscountId!: string;
   OccasionId!: string[]
   FabricId!: string[]
   LengthId!: string[]

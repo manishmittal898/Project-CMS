@@ -126,7 +126,7 @@ namespace CMS.Service.Services.ProductMaster
         public string Keyword { get; set; }
         public List<string> Ids { get; set; }
         public List<string> CaptionTagId { get; set; }
-        public long? Discount { get; set; }
+        public string DiscountId { get; set; }
         public List<string> OccasionId { get; set; }
         public List<string> FabricId { get; set; }
         public List<string> LengthId { get; set; }

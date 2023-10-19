@@ -589,12 +589,21 @@ namespace CMS.Service.Services.ProductMaster
                 List<long> SizeIds = model.SizeId != null && model.SizeId.Count > 0 ? model.SizeId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> ViewSectionIds = model.ViewSectionId != null && model.ViewSectionId.Count > 0 ? model.ViewSectionId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> CaptionTagIds = model.CaptionTagId != null && model.CaptionTagId.Count > 0 ? model.CaptionTagId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
-                //  List<long> DiscountIds = model.DiscountId != null && model.DiscountId.Count > 0 ? model.DiscountId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> OccasionIds = model.OccasionId != null && model.OccasionId.Count > 0 ? model.OccasionId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> FabricIds = model.FabricId != null && model.FabricId.Count > 0 ? model.FabricId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> LengthIds = model.LengthId != null && model.LengthId.Count > 0 ? model.LengthId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> ColorIds = model.ColorId != null && model.ColorId.Count > 0 ? model.ColorId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
                 List<long> PatternIds = model.PatternId != null && model.PatternId.Count > 0 ? model.PatternId.Select(p => long.Parse(_security.DecryptData(p))).ToList() : null;
+                long Discount = 0;
+                if (!string.IsNullOrEmpty(model.DiscountId) && model.DiscountId.Length > 0)
+                {
+                    TblLookupMaster lk = _db.TblLookupMasters.Where(x => x.Id == long.Parse(_security.DecryptData(model.DiscountId))).FirstOrDefault();
+                    if (lk != null)
+                    {
+                        Discount = long.Parse(lk.Value);
+                    }
+
+                }
                 var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
                               where !prd.IsDelete && prd.IsActive.Value && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
                               && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
@@ -603,7 +612,7 @@ namespace CMS.Service.Services.ProductMaster
                                  && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
                                  && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
                                  && (model.CaptionTagId == null || model.CaptionTagId.Count == 0 || CaptionTagIds.Contains(prd.CaptionTagId.Value))
-                                 && (model.Discount == null || model.Discount == 0 || prd.Discount > model.Discount)
+                                 && (model.DiscountId == null || Discount == 0 || prd.Discount > Discount)
                                  && (model.OccasionId == null || model.OccasionId.Count == 0 || OccasionIds.Contains(prd.OccasionId.Value))
                                  && (model.FabricId == null || model.FabricId.Count == 0 || FabricIds.Contains(prd.FabricId.Value))
                                  && (model.LengthId == null || model.LengthId.Count == 0 || LengthIds.Contains(prd.LengthId.Value))

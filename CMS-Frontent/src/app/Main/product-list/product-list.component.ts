@@ -20,8 +20,8 @@ export class ProductListComponent implements OnInit {
   isGrid4 = true;
   constructor(private readonly _productService: ProductService,
     private readonly _router: ActivatedRoute, private _route: Router, private readonly _sainitizer: DomSanitizer,
-     private readonly _securityService: SecurityService) {
- }
+    private readonly _securityService: SecurityService) {
+  }
 
   ngOnInit(): void {
     this._router.queryParams.subscribe(p => {
@@ -39,7 +39,7 @@ export class ProductListComponent implements OnInit {
         this.indexModel.ColorId = p.clr.split(',');
       }
       if (p.dscnt) {
-        this.indexModel.DiscountId = p.dscnt.split(',');
+        this.indexModel.DiscountId = p.dscnt;//.split(',');
       }
       if (p.ocsn) {
         this.indexModel.OccasionId = p.ocsn.split(',');
@@ -84,7 +84,7 @@ export class ProductListComponent implements OnInit {
     }
     if (this.indexModel?.DiscountId?.length > 0) {
 
-      query['dscnt'] = this.indexModel.DiscountId.join(',');
+      query['dscnt'] = this.indexModel.DiscountId;//join(',');
     }
     if (this.indexModel?.OccasionId?.length > 0) {
 
