@@ -432,8 +432,8 @@ section.home-banner:before {
     color: #fff;
 }
 .navbar-brand img {
-    max-width: 175px;
-    max-height: 65px;
+    max-width: 110px;
+    max-height: 75px;
 }
 .navbar
 {
@@ -723,8 +723,17 @@ section.our-product {
 section.footer-cta-btn {
     text-align: center;
     padding: 60px 0px;
-    background: #ffd413;
+    background: url(../images/slider2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
+section.footer-cta-btn::before
+{
+    background: #ffd413;
+
+}
+
 section.footer-cta-btn h1 {
     margin: auto auto 30px auto;
     font-size: 2.5rem;
