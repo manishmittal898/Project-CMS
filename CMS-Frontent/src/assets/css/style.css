@@ -973,9 +973,16 @@ input:focus-visible {
   color: #000;
 }
 
-.product-filter-btn {
+.mobile-sidebar-open-btn {
   font-size: 18px;
   color: var(--black);
+  border: solid 1px #dfdfdf;
+  width: 100%;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #e1e1e1;
+  display: block;
 }
 
 .my-account-sidebar-btn {
@@ -3322,5 +3329,8 @@ body .toast-close-button {
     background-position: right;
     padding-right: 22px;
     background-size: 15px;
+}
+.product-filterItems .sm-radio-btn .ng-dropdown-panel .ng-dropdown-panel-items .ng-option input {
+  margin-top: 3px;
 }
 /* CUSTOM CSS END */
