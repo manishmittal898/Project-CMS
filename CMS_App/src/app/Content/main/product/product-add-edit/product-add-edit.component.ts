@@ -57,7 +57,7 @@ export class ProductAddEditComponent implements OnInit {
   stockModel = {} as ProductStockModel;
   stockFormGroup = this.fb.group({
     SizeId: [undefined, Validators.required],
-    UnitPrice: [undefined, [Validators.required, this.minStockValueValidator.bind(this)]],
+    UnitPrice: [undefined, [Validators.required, this.minStockValueValidator.bind(this,)]],
     SellingPrice: [undefined, [Validators.required, this.minStockValueValidator.bind(this)]],
     Quantity: [undefined, Validators.required],
   });
@@ -86,7 +86,7 @@ export class ProductAddEditComponent implements OnInit {
     });
 
   }
-
+  data: any;
   minValueValidator(ctrl: AbstractControl): ValidationErrors | null {
     const val = this?.f != null && this?.f.SellingPrice?.value != undefined ? Number(this?.f?.SellingPrice?.value) : 0;
     const price = this?.f != null && this?.f.Price?.value != undefined ? Number(this?.f?.Price?.value) : 0;
@@ -96,6 +96,11 @@ export class ProductAddEditComponent implements OnInit {
         minValue: true
       }
     }
+
+    else if (Number(price) >= Number(val) && this.f?.Price?.invalid && this.f?.Price?.hasError("minValue")) {
+      this.f?.Price.patchValue(price)
+    }
+
     return null;
   }
   checkSellingPrice() {
