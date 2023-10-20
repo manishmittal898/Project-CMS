@@ -177,6 +177,7 @@ export class ProductAddEditComponent implements OnInit {
   onSubmit() {
     this.formgrp.markAllAsTouched();
     if (this.formgrp.valid) {
+      debugger
       let isSellingPriceUpdate = false;
       let isUnitPriceUpdate = false;
       if (this.model?.Stocks?.length > 0) {
@@ -195,6 +196,7 @@ export class ProductAddEditComponent implements OnInit {
       if (isSellingPriceUpdate || isUnitPriceUpdate) {
         let strText = ' ' + isSellingPriceUpdate && isUnitPriceUpdate ? 'Selling Price and Unit Price in Stock detail?' : (isSellingPriceUpdate ? 'Selling Price?' : 'Unit Price');
         this._commonService.Question(Message.AllowAutoUpdate.replace("#Text", strText) as string).then(result => {
+          debugger
           if (result) {
             this.model.Stocks.forEach(x => {
               if (isUnitPriceUpdate) {
@@ -237,7 +239,7 @@ export class ProductAddEditComponent implements OnInit {
       x.SellingPrice = x.SellingPrice && x.SellingPrice > 0 ? Number(x.SellingPrice) : 0;
     })
     // this.model.ShippingCharge = this.model.ShippingCharge && this.model.ShippingCharge > 0 ? Number(this.model.ShippingCharge) : 0
-
+    debugger
     this._productService.AddUpdateProductMaster(this.model).subscribe(x => {
       if (x.IsSuccess) {
         this.toast.success("Product added successfully...", "Saved");
@@ -259,7 +261,7 @@ export class ProductAddEditComponent implements OnInit {
         this.model.ImagePath = data.ImagePath;
         this.model.Desc = data.Desc;
         this.model.Price = data.Price ? Number(data.Price) : undefined;
-        this.model.SellingPrice = Object.assign((data.SellingPrice ? Number(data.SellingPrice) : data.Price), 0);
+        this.model.SellingPrice = Number(Object.assign((data.SellingPrice ? data.SellingPrice : data.Price), 0));
         this.model.CategoryId = data.CategoryId ? data.CategoryId : undefined;
         this.model.SubCategoryId = data.SubCategoryId ? data.SubCategoryId : undefined;
         this.model.CaptionTagId = data.CaptionTagId ? data.CaptionTagId : undefined;
