@@ -287,7 +287,7 @@ namespace CMS.Service.Services.ProductMaster
                             {
                                 prStock.SizeId = long.Parse(_security.DecryptData(xs.SizeId));
                                 prStock.UnitPrice = xs.UnitPrice;
-                                prStock.SellingPrice = model.SellingPrice != null && model.SellingPrice.HasValue ? model.SellingPrice : model.Price;
+                                prStock.SellingPrice = xs.SellingPrice != null && xs.SellingPrice.HasValue ? xs.SellingPrice : model.SellingPrice;
                                 prStock.Discount = getDiscount(prStock.UnitPrice.Value, prStock.SellingPrice.Value);
                                 prStock.Quantity = xs.Quantity;
                                 prStocks.Add(prStock);
