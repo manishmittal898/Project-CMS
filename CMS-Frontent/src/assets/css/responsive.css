@@ -192,7 +192,10 @@
     overflow: auto;
     z-index: 9999999;
     padding: 0px;
-    background: #fff;
+    transition: all 0.3ms ease-in-out;
+    -webkit-backdrop-filter: saturate(180%) blur(40px);
+    backdrop-filter: saturate(180%) blur(40px);
+    background-color: rgba(255, 255, 255, .9);
     box-shadow: 0 0 20px #7b7b7b;
   }
 
@@ -397,7 +400,7 @@
   }
 
   section.inner-page-space {
-    padding: 25px 0px;
+    padding: 15px 0px;
   }
 
   .cart-list-items-img {
