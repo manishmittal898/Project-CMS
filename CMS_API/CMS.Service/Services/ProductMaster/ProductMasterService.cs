@@ -33,7 +33,7 @@ namespace CMS.Service.Services.ProductMaster
 
                 var result = (from pdct in _db.TblProductMasters
 
-                              where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search))
+                              where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search) || pdct.UniqueId.Contains(model.Search))
                               select pdct);
                 switch (model.OrderBy)
                 {
