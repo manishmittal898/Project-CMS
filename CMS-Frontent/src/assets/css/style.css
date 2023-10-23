@@ -3121,7 +3121,7 @@ ul.footer-benefits li p {
 .pro-detail-btn-wishlist {
   border: none;
   position: absolute;
-  right: 50px;
+  right: 15px;
   top: 10px;
   z-index: 9;
   background: rgba(255, 255, 255, 0.8);
