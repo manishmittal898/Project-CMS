@@ -454,6 +454,9 @@
   .offcanvas-title {
     font-size: 20px;
     font-weight: 400;
+    line-height: 0;
+    display: flex;
+    align-items: center;
   }
 
   .offcanvas-header .btn-close {

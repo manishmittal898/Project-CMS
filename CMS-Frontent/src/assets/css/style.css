@@ -976,8 +976,13 @@ input:focus-visible {
 .mobile-filter-btn {
   font-size: 18px;
   color: var(--black);
+  display: flex;
+  align-items: center;
 }
-
+.mobile-filter-btn img {
+  max-width: 18px;
+  margin-right: 5px;
+}
 .my-account-sidebar-btn {
   font-size: 20px;
   color: #000;
@@ -3260,7 +3265,7 @@ body .toast-close-button {
   bottom: 0px;
   left: 0px;
   background: #fff;
-  /* z-index: 97; */
+  z-index: 9;
   box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.14);
   display: flex;
 }
