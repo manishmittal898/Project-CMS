@@ -20,10 +20,11 @@
 <Section class="product-details pt-3 pt-md-4">
   <div class="container">
     <div class="row" *ngIf="!isLoading">
-      <div class="col-md-6">
+      <div class="col-md-6 col-xl-5">
         <!-- Product Detail Slider Start -->
-        <div class="position-relative">
+        <div class="position-relative overflow-hidden product-details-product-slider">
           <!-- <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div> -->
+          <span class="product-discount-label" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}% Off</span>
           <button type="button" [disabled]="this.loading.WishList" (click)="updateWishlist()"
             class="pro-detail-btn-wishlist" title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i
               class="bi "
@@ -50,19 +51,17 @@
             </div>
           </div>
         </div>
-
-
         <!-- Product Detail Slider End -->
+
       </div>
-      <div class="col-md-6 mt-4 mt-lg-0 ps-3 ps-lg-4">
+      <div class="col-md-6 col-xl-7 mt-3 mt-lg-0">
         <div class="product-details-info">
           <h2>{{model.Name}}</h2>
           <div class="product-details-price"> ₹ {{this.SelectedSizeModel?.SellingPrice
             ?this.SelectedSizeModel?.SellingPrice: model.SellingPrice}}
             <span class="product-details-cutting-price" *ngIf="SelectedSizeModel.Discount">₹
               {{SelectedSizeModel.UnitPrice}}</span>
-            <span class="product-details-price-off" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}%
-              Off</span>
+            <!-- <span class="product-details-price-off" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}% Off</span> -->
           </div>
 
           <div class="product-detail-total-stock mb-3" *ngIf="totalStock">

@@ -973,23 +973,37 @@ input:focus-visible {
   color: #000;
 }
 
-.mobile-sidebar-open-btn {
+.mobile-filter-btn {
   font-size: 18px;
   color: var(--black);
-  border: solid 1px #dfdfdf;
-  width: 100%;
-  justify-content: center;
-  padding: 5px 10px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px #e1e1e1;
-  display: block;
 }
 
 .my-account-sidebar-btn {
-  font-size: 18px;
+  font-size: 20px;
   color: #000;
+  display: inline-flex;
+  align-items: center;
+  z-index: 999;
+  position: relative;
 }
 
+.my-account-sidebar-btn i {
+  font-size: 23px;
+}
+
+.my-account-orders-filter-btn {
+  color: #000;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: -40px;
+  z-index: 0;
+  margin-bottom: 15px;
+}
+.my-account-orders-filter-btn i {
+  font-size: 22px;
+}
 .page-item.active .page-link {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
@@ -1524,7 +1538,7 @@ ul.megamenu-sub-list {
 
 .product-d-main-slider-nav .slick-slide.slick-current {
   opacity: 10 !important;
-  border-color: var(--black);
+  border-color: var(--primary-color);
 }
 
 .product-d-main-slider-nav .slick-track {
@@ -1672,7 +1686,7 @@ ul.megamenu-sub-list {
 .product-details-price .product-details-cutting-price {
   font-size: 15px;
   text-decoration: line-through;
-  margin-left: 6px;
+  margin-left: 0px;
   font-weight: 500;
 }
 
@@ -2830,7 +2844,7 @@ app-product-section .home-product:nth-child(3) .product-list-items
 
 app-product-section .home-product:nth-child(3) {
   background: url(../images//pattern3.webp);
-  padding: 25px 0px;
+  padding: 25px 0px 20px 0px;
   background-attachment: fixed;
 }
 

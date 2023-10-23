@@ -17,16 +17,16 @@
   <div class="container">
     <div class="row">
       <!-- Mobile Drawer Buttons Start -->
-      <div class="mobile-drawer-btn-grp-card d-lg-none justify-content-between mb-3">
-        <a class="my-account-sidebar-btn mobile-sidebar-open-btn d-flex align-items-center" data-bs-toggle="offcanvas" href="#OrderMenu">
-          <i class="fa-light fa-user"></i>
+      <div class="mobile-drawer-btn-grp-card d-lg-none mb-3">
+        <a class="my-account-sidebar-btn" data-bs-toggle="offcanvas" href="#OrderMenu">
+          <i class="fa-regular fa-bars-sort me-1"></i> Menu
         </a>
       </div>
       <!-- Mobile Drawer Buttons End -->
       <div *ngIf="isAuth" class="col-md-12 col-lg-4 col-xl-3 pe-4">
         <div class="my-account-sidebar offcanvas offcanvas-start" tabindex="-1" id="OrderMenu">
-          <div class="offcanvas-header d-flex d-lg-none pt-0 px-0">
-            <h6 class="offcanvas-title"><i class="fa-light fa-user me-1"></i>My Account</h6>
+          <div class="offcanvas-header d-flex d-lg-none pt-0 px-0 pb-2">
+            <h6 class="offcanvas-title"><i class="fa-regular fa-bars-sort me-2"></i>My Account</h6>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <ul>

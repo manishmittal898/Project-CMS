@@ -69,6 +69,15 @@ $(window).scroll(function() {
   }
 });
 
+$(window).scroll(function() {
+  var scroll = $(window).scrollTop();
+
+  if (scroll >= 500) {
+      $(".product-collection-header-filter").addClass("mobile-filter-fixed");
+  } else {
+      $(".product-collection-header-filter").removeClass("mobile-filter-fixed");
+  }
+});
 
 // $(function() {
 //     $("#ChangeToggle").click(function() {
