@@ -1646,7 +1646,6 @@ color: var(--primary-color);
 .page-login-register-right-form .form-control {
   padding-left: 38px;
   font-size: 16px;
-  border-color: #dbdbdb;
 }
 .pas-eye {
   position: absolute;
