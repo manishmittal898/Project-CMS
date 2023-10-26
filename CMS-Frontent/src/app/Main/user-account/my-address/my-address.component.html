@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h4 class="mb-0"> Addresses</h4>
     <a class="btn-add-new-address" *ngIf="data?.length>0" href="javascript:void(0)" (click)="addAddress()"><i
-        class="bi bi-plus-circle me-2"></i> Add new address</a>
+        class="fa-regular fa-plus me-1"></i> Add new address</a>
   </div>
   <ng-container *ngIf="data.length>0; else ShowAddForm">
     <ng-container *ngFor="let address of data">
@@ -61,7 +61,7 @@
             <i class="fa-sharp fa-light fa-xmark"></i>
           </button>
         </div>
-        <div class="modal-body px-4 pb-1 modal-form-update">
+        <div class="modal-body px-3 pb-1 modal-form-update">
           <app-save-address [(model)]="selectedData" *ngIf="this.showSavePopup" (onCancel)="closePopup()"
             (onSave)="selectedData=$event;onSave($event)"></app-save-address>
         </div>
