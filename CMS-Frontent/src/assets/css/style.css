@@ -2717,6 +2717,9 @@ section.deals-opt-d-1 {
   background: #fff;
   margin-bottom: 25px;
 }
+.custom-card-address-list-header h5 {
+  font-size: 18px;
+}
 
 .custom-card-address-list label {
   max-width: 310px;
