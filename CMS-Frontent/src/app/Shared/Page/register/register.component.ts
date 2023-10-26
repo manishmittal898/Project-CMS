@@ -104,5 +104,12 @@ export class RegisterComponent implements OnInit {
         })
     } else { return null; }
   }
+  redirectToLogin(url) {
+    if (this._activatedRoute.snapshot.queryParams.returnURL) {
+      this._route.navigate([url], { queryParams: { returnURL: this._activatedRoute.snapshot.queryParams.returnURL }, });
+    } else {
+      this._route.navigate([url]);
+    }
+  }
 
 }
