@@ -11,19 +11,19 @@
           class="col-md-6 page-login-register-right h-100 d-flex flex-column align-items-center justify-content-center">
           <div class="page-login-register-right-form">
             <h2>Login to <span> Seller Portal </span></h2>
-            <div class="mb-4 position-relative">
-              <i class="fa-light fa-user icon-login-form"></i>
+            <div class="form-floating position-relative mb-4">
               <input id="username" name="username" type="text" [(ngModel)]="model.Email" class="form-control"
               placeholder="Email-Id ">
+              <label for="username"> <i class="fa-light fa-user icon-login-form me-1"></i>User name or email address</label>
             </div>
-            <div class="mb-4 position-relative">
-              <i class="fa-light fa-lock icon-login-form"></i>
+            <div class="form-floating position-relative mb-4">
               <input id="password" name="password" type="{{isShowPass ? 'text':'password'}}"
               [(ngModel)]="model.Password" class="form-control" placeholder="Password">
               <div class="pas-eye">
-            <i (click)="isShowPass=!isShowPass" class="fa-regular"
-              [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i>
-            </div>
+                <i (click)="isShowPass=!isShowPass" class="fa-regular"
+                  [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i>
+                </div>
+              <label for="password"> <i class="fa-light fa-lock icon-login-form me-1"></i>Password</label>
             </div>
             <div class="mt-2">
               <button type="submit" class="btn theme-btn text-uppercase w-100">Login</button>

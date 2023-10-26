@@ -1637,14 +1637,13 @@ section.page-login-register {
 .page-login-register-right-form h2 span {
 color: var(--primary-color);
 }
-.page-login-register-right-form .icon-login-form {
-  position: absolute;
-  font-size: 20px;
-  top: 12px;
-  left: 10px;
+
+.form-floating>.form-control, .form-floating>.form-select {
+  height: calc(3rem + 2px);
+  line-height: normal;
 }
-.page-login-register-right-form .form-control {
-  padding-left: 38px;
+.form-floating>label {
+  padding: 0.7rem 0.75rem;
   font-size: 16px;
 }
 .pas-eye {
@@ -1652,6 +1651,13 @@ color: var(--primary-color);
   right: 12px;
   top: 13px;
   opacity: 0.5;
+}
+
+.page-login-register-right-form .icon-login-form {
+  font-size: 18px;
+}
+.form-floating>.form-control:not(:placeholder-shown)~label i {
+  font-size: 16px;
 }
 
 /* LOGIN END */
