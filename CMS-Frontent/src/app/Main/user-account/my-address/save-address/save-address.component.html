@@ -2,7 +2,7 @@
 
 
   <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="FullName" placeholder="Enter full name*"
           [(ngModel)]="model.FullName" formControlName="FullName"
@@ -13,7 +13,7 @@
           Please enter <strong>Full Name</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" (keypress)="_commonService.NumberOnly($event)" maxlength="10" minlength="10"
           class="form-control" id="Mobile" placeholder="Mobile number*" [(ngModel)]="model.Mobile"
@@ -24,7 +24,7 @@
           Please enter <strong>Mobile</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" (blur)="getAddress(model?.PinCode)" id="Postal-code"
           placeholder="Postal code*" [(ngModel)]="model.PinCode" formControlName="PinCode"
@@ -35,7 +35,7 @@
           Please enter <strong>Postal code</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Building" [(ngModel)]="model.BuildingNumber"
           formControlName="BuildingNumber"
@@ -47,7 +47,7 @@
           Please enter <strong>House No. /Apartment, suite, etc.</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Address1" placeholder="Address*" [(ngModel)]="model.Address"
           formControlName="Address" [ngClass]="{ 'is-invalid': f.Address.errors && f.Address.touched}">
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="col-xl-12">
+    <div class="col-xl-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Landmark" placeholder="Landmark[optional]"
           [(ngModel)]="model.Landmark" formControlName="Landmark"
