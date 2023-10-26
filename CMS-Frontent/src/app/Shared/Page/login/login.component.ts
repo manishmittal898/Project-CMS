@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   get routing_Url() { return Routing_Url };
 
   constructor(private readonly _accountService: AccountService, private readonly _wishList: WishListService,
-    private readonly _authService: AuthService, private readonly _security: SecurityService,private readonly _cartService : CartProductService,
+    private readonly _authService: AuthService, private readonly _security: SecurityService, private readonly _cartService: CartProductService,
     private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -74,12 +74,14 @@ export class LoginComponent implements OnInit {
       this._route.navigate(['']);
     }
   }
-  redirectURL(url){
+  redirectURL(url) {
     if (this._activatedRoute.snapshot.queryParams.returnURL) {
-      this._route.navigate([`/register?returnURL=${this._activatedRoute.snapshot.queryParams.returnURL}`]);
+
+      this._route.navigate([url], { queryParams: { returnURL: this._activatedRoute.snapshot.queryParams.returnURL }, });
+
 
     } else {
-      this._route.navigate(['/register']);
+      this._route.navigate([url]);
     }
 
   }
