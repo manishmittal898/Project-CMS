@@ -12,7 +12,7 @@ declare var $: any;
 export class CheckoutComponent implements OnInit, AfterViewInit {
   userAddress = [] as UserAddressViewModel[];
 
-  selectedAddress = {} as UserAddressViewModel;
+  selectedAddress : UserAddressViewModel;
   isAdd = true;
   addressConfig: { isDeleteButton: false }
   constructor(private readonly _authService: AuthService, private readonly _route: Router,
