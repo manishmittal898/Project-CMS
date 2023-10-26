@@ -14,13 +14,20 @@ import { SliderModule } from 'primeng/slider';
 import { CalendarModule } from 'primeng/calendar';
 import { ProductCardComponent } from '../../../Main/product-list/product-card/product-card.component';
 import { CartSidebarComponent } from '../../Page/nav-bar/cart-sidebar/cart-sidebar.component';
+import { SaveAddressComponent } from 'src/app/Main/user-account/my-address/save-address/save-address.component';
+import { MyAccountComponent } from 'src/app/Main/user-account/my-account/my-account.component';
+import { MyOrdersComponent } from 'src/app/Main/user-account/my-orders/my-orders.component';
+import { MyWishlistComponent } from 'src/app/Main/user-account/my-wishlist/my-wishlist.component';
+import { UserAccountComponent } from 'src/app/Main/user-account/user-account.component';
+import { MyAddressComponent } from 'src/app/Main/user-account/my-address/my-address.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
-  FormsModule,
+  FormsModule,CommonModule ,
   RouterModule
 ]
 
@@ -29,7 +36,10 @@ const component = [
   FooterComponent,
   NavBarComponent,
   CartSidebarComponent,
-  ProductCardComponent
+  ProductCardComponent,
+  MyAddressComponent,
+  SaveAddressComponent,
+
 ];
 
 const installedModule = [

@@ -24,127 +24,8 @@
         </ul>
         <!-- Shipping Address Start -->
         <fieldset class="checkout-address">
-          <h5 class="mb-4">Welcome Manish !</h5>
-          <div class="custom-card">
-            <div class="row">
-              <div class="col-sm-6 col-xl-12">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="First-name" placeholder="Enter full name*">
-                  <label for="First-name">Enter full name*</label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Phone-number" placeholder="Phone number*">
-                  <label for="Phone-number">Phone number*</label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Address1" placeholder="Address*">
-                  <label for="Address1">Address*</label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-12">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Address2" placeholder="Apartment, suite, etc. (optional)">
-                  <label for="Address2">Apartment, suite, etc. (optional)</label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-6">
-                <div class="mb-4">
-                  <select class="form-select">
-                    <option>--State--</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="City" placeholder="City*">
-                  <label for="City">City*</label>
-                </div>
-              </div>
-
-              <div class="col-sm-6 col-xl-6">
-                <div class="form-floating mb-4">
-                  <input type="text" class="form-control" id="Postal-code" placeholder="Postal code*">
-                  <label for="Postal-code">Postal code*</label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-6">
-                <div class="mb-4">
-                  <select class="form-select">
-                    <option>--Address Type--</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <a href="javascript:void(0)" class="btn btn-default px-4 btn-border"><i
-                    class="fa-regular fa-check me-1"></i> Submit</a>
-              </div>
-            </div>
-          </div>
-          <div class="custom-card">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="custom-card-address-list">
-                  <div class="custom-card-address-list-header mb-2 d-flex align-items-center justify-content-between">
-                    <h5 class="mb-1">Rahul sharma</h5>
-                    <div class="custom-card-address-list-action d-flex align-items-center">
-                      <span class="me-3">Default Address</span>
-                      <a href="javascript:void(0)" class="text-success ms-2" data-bs-toggle="modal"
-                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                          title="Edit" class="fa-light fa-pen"></i> </a>
-                      <a href="javascript:void(0)" class="text-danger ms-2" data-bs-toggle="modal"
-                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                          title="Delete" class="fa-regular fa-trash"></i> </a>
-                    </div>
-                  </div>
-                  <div class="custom-card-address-list-items form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      4-RA-5 Monilek Marg, Near Monilek Hospital
-                      Jawahar Nagar
-                      Jaipur, Raj, 302013
-                      Mobile : 8952098741
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="custom-card">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="custom-card-address-list">
-                  <div class="custom-card-address-list-header mb-2 d-flex align-items-center justify-content-between">
-                    <h5 class="mb-1">Nitesh mathur</h5>
-                    <div class="custom-card-address-list-action d-flex align-items-center">
-                      <a href="javascript:void(0)" class="text-success ms-2" data-bs-toggle="modal"
-                        data-bs-target="#Add-Update-Address"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                          title="Edit" class="fa-light fa-pen"></i> </a>
-                      <a href="javascript:void(0)" class="text-danger ms-2" data-bs-toggle="modal"
-                        data-bs-target="#DeleteAddress"> <i data-bs-toggle="tooltip" data-bs-placement="bottom"
-                          title="Delete" class="fa-regular fa-trash"></i> </a>
-                    </div>
-                  </div>
-                  <div class="custom-card-address-list-items form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      4-RA-5 Monilek Marg, Near Monilek Hospital
-                      Jawahar Nagar
-                      Jaipur, Raj, 302013
-                      Mobile : 8952098741
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <a class="btn-add-new-address" href="javascript:void(0)" data-bs-toggle="modal"
-            data-bs-target="#Add-Update-Address"><i class="bi bi-plus-circle me-2"></i> Add new address</a>
-          <button type="button" name="next" class="next btn btn-default px-4 float-end">Save & Continue</button>
+          <app-my-address [(config)]="addressConfig" (onSelect)="selectedAddress=$event"></app-my-address>
+          <!-- </ng-template> -->
         </fieldset>
         <!-- Shipping Address End -->
         <!-- Payment Start -->
@@ -209,7 +90,8 @@
                       <div class="d-flex mt-2">
                         <p class="mb-0 me-2 me-sm-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
                         <p class="mb-0 me-2 me-sm-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
-                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹
+                            2,897</strong></p>
                       </div>
                     </div>
                   </div>
@@ -228,7 +110,8 @@
                       <div class="d-flex mt-2">
                         <p class="mb-0 me-2 me-sm-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
                         <p class="mb-0 me-2 me-sm-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
-                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹
+                            2,897</strong></p>
                       </div>
                     </div>
                   </div>
@@ -247,7 +130,8 @@
                       <div class="d-flex mt-2">
                         <p class="mb-0 me-2 me-sm-3">Qty: <strong class="d-block d-sm-inline">05</strong></p>
                         <p class="mb-0 me-2 me-sm-3">Size: <strong class="d-block d-sm-inline">XXL</strong></p>
-                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹ 2,897</strong></p>
+                        <p class="mb-0 me-2 me-sm-3">Total Item Price: <strong class="d-block d-sm-inline">₹
+                            2,897</strong></p>
                       </div>
                     </div>
                   </div>
@@ -303,7 +187,7 @@
               <h5 class="m-0">Add or update address</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 <i class="fa-sharp fa-light fa-xmark"></i>
-                </button>
+              </button>
             </div>
             <div class="modal-body p-4 modal-form-update">
               <div class="row">

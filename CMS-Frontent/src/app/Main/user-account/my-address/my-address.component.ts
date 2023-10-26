@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UserAddressService, UserAddressViewModel, UserAddressPostModel } from '../../../Shared/Services/UserService/user-address.service';
 import { IndexModel } from 'src/app/Shared/Helper/Common';
 import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
@@ -14,10 +14,13 @@ import { CommonService } from 'src/app/Shared/Services/Core/common.service';
 export class MyAddressComponent implements OnInit {
   @ViewChild('btnShow') btnShow: ElementRef;
   @ViewChild('btnClose') btnClose: ElementRef;
+  @Output() onSelect = new EventEmitter<UserAddressViewModel>();
   data = [] as UserAddressViewModel[];
   selectedData = {} as UserAddressPostModel;
+  selectedAddress = {} as UserAddressViewModel;
   showSavePopup = false;
   isAdd = true;
+  @Input() config = new Config()
   constructor(private _userAddressService: UserAddressService,
     private _securityService: SecurityService, private _toasterService: ToastrService,
     private _commonService: CommonService) { }
@@ -33,6 +36,7 @@ export class MyAddressComponent implements OnInit {
     this._userAddressService.GetList(model).subscribe(res => {
       if (res.IsSuccess) {
         this.data = res.Data;//.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } })
+        this.onSelected(this.data.find(x => x.IsPrimary));
       }
     })
   }
@@ -102,7 +106,7 @@ export class MyAddressComponent implements OnInit {
 
   closePopup() {
     this.selectedData = {} as UserAddressPostModel;
-    this.btnClose.nativeElement.click();
+    this.btnClose?.nativeElement?.click();
     this.showSavePopup = false;
   }
 
@@ -119,7 +123,16 @@ export class MyAddressComponent implements OnInit {
       let ind = this.data.findIndex(res => res.Id == data.Id);
       this.data[ind] = data;
     }
+    this.onSelected(this.data.find(x => x.IsPrimary));
     this.closePopup();
   }
+  onSelected(address) {
+    this.selectedAddress = address;
+    this.onSelect.emit(this.selectedAddress)
+  }
+
+}
+export class Config {
+  isDeleteButton = true;
 
 }

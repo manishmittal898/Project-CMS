@@ -74,6 +74,14 @@ export class LoginComponent implements OnInit {
       this._route.navigate(['']);
     }
   }
+  redirectURL(url){
+    if (this._activatedRoute.snapshot.queryParams.returnURL) {
+      this._route.navigate([`/register?returnURL=${this._activatedRoute.snapshot.queryParams.returnURL}`]);
 
+    } else {
+      this._route.navigate(['/register']);
+    }
+
+  }
   forgetPassword() { }
 }

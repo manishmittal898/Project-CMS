@@ -34,7 +34,7 @@ export class UserAddressService {
     return this._baseService.get(`${url + Id}`);
   }
 
-  getAddressDetailByPinCode(pinCode: number) {
+  getAddressDetailByPinCode(pinCode: string) {
     let url = `https://api.postalpincode.in/pincode/${pinCode}`;
     return this._httpClient.get<any>(`${url}`);
   }

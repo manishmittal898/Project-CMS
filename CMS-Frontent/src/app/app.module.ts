@@ -24,7 +24,7 @@ import { CartSidebarComponent } from './Shared/Page/nav-bar/cart-sidebar/cart-si
   ],
   imports: [
     CommonModule,
-    BrowserModule,
+   // BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FeatureModule,

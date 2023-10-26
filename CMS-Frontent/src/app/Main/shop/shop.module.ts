@@ -9,7 +9,9 @@ import { FeatureModule } from '../../Shared/Module/feature/feature.module';
 
 
 @NgModule({
-  declarations: [ShopComponent,CheckoutComponent,CartComponent],
+  declarations: [ShopComponent,
+    CheckoutComponent,
+    CartComponent],
   imports: [
     CommonModule,
     FeatureModule,

@@ -61,12 +61,12 @@ export class CartComponent implements OnInit {
     return this.sizeModel?.filter(x => x.Value == itm && prdSize?.includes(x.Value) && (x.Value == sizeId || !allSize?.includes(x.Value))).length > 0;
   }
   getSellingPrice(SizeId, ProductId) {
-    let product = this.cartModel.find(x => x.ProductId == ProductId)
-    return product.Product.Stocks.find(x => x.SizeId == SizeId).SellingPrice;
+    let product = this.cartModel?.find(x => x.ProductId == ProductId)
+    return product?.Product?.Stocks.find(x => x.SizeId == SizeId)?.SellingPrice;
   }
   getMRPrice(SizeId, ProductId) {
-    let product = this.cartModel.find(x => x.ProductId == ProductId)
-    return product.Product.Stocks.find(x => x.SizeId == SizeId).UnitPrice;
+    let product = this.cartModel?.find(x => x.ProductId == ProductId)
+    return product?.Product?.Stocks?.find(x => x.SizeId == SizeId)?.UnitPrice;
   }
 
   isAvailableInStock(SizeId, ProductId) {

@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./save-address.component.css']
 })
 export class SaveAddressComponent implements OnInit, OnChanges {
-  @Input() model = {} as UserAddressPostModel;
+  @Input() model?= {} as UserAddressPostModel;
   @Output() onSave = new EventEmitter<UserAddressViewModel>();
   @Output() onCancel = new EventEmitter();
 
@@ -38,7 +38,7 @@ export class SaveAddressComponent implements OnInit, OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    
+
 
     if (changes && changes['model']) {
       this.getAddress(this.model?.PinCode);
@@ -94,33 +94,40 @@ export class SaveAddressComponent implements OnInit, OnChanges {
 
     }
   }
-
-  getAddress(pinCode) {
+  onCancelClick() {
+    this.model = {} as UserAddressPostModel;
+    this.formgrp.reset();
+    this.onCancel.emit()
+  }
+  getAddress(pinCode:string) {
     this.dropDown.ddlDistrict = [];
-    this._userAddressService.getAddressDetailByPinCode(pinCode).subscribe(res => {
-      if (res && res[0]?.Status == "Success") {
-        const city = res[0]['PostOffice'].map(r => r.District);
+    if (pinCode?.length>0) {
+      this._userAddressService.getAddressDetailByPinCode(pinCode).subscribe(res => {
+        if (res && res[0]?.Status == "Success") {
+          const city = res[0]['PostOffice'].map(r => r.District);
 
-        this.dropDown.ddlDistrict = [
-          ...city.filter((ele, index, items) =>
-            items?.indexOf(ele) === index)?.map(dist => { return { Text: dist, Value: dist } })
-        ] ?? [];
-        const state = this.dropDown.ddlState.find(st => st.Text == res[0]['PostOffice'][0].State);
-        if (state) {
-          this.f['StateId'].enable();
-          this.model.StateId = state.Value;
-          this.f['StateId'].disable();
+          this.dropDown.ddlDistrict = [
+            ...city.filter((ele, index, items) =>
+              items?.indexOf(ele) === index)?.map(dist => { return { Text: dist, Value: dist } })
+          ] ?? [];
+          const state = this.dropDown.ddlState.find(st => st.Text == res[0]['PostOffice'][0].State);
+          if (state) {
+            this.f['StateId'].enable();
+            this.model.StateId = state.Value;
+            this.f['StateId'].disable();
+          }
+          if (this.dropDown.ddlDistrict.length == 1) {
+            this.f['City'].enable();
+            this.model.City = this.dropDown.ddlDistrict[0].Value;
+            this.f['City'].disable();
+          }
         }
-        if (this.dropDown.ddlDistrict.length == 1) {
-          this.f['City'].enable();
-          this.model.City = this.dropDown.ddlDistrict[0].Value;
-          this.f['City'].disable();
-        }
-      }
-    }, err => {
-      this.dropDown.ddlDistrict = [];
+      }, err => {
+        this.dropDown.ddlDistrict = [];
 
-    })
+      })
+    }
+
   }
 
 }

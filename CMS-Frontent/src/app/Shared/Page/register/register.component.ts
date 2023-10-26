@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Routing_Url } from '../../Constant';
 import { AccountService } from '../../Services/UserService/account.service';
@@ -17,8 +17,9 @@ export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;
   get f() { return this.registrationForm.controls; }
 
-  constructor(private readonly _accountService: AccountService, private readonly _security: SecurityService,
-    private readonly _route: Router, private readonly toast: ToastrService, private fb: FormBuilder) { }
+  constructor(private readonly _accountService: AccountService,
+    private readonly _route: Router, private readonly toast: ToastrService, private fb: FormBuilder,
+    private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -60,7 +61,14 @@ export class RegisterComponent implements OnInit {
         if (res.IsSuccess) {
           let data = res.Data as any;
           this.toast.success(res.Message?.toString(), 'Registeration');
-          this._route.navigate(['/login']);
+          if (this._activatedRoute.snapshot.queryParams.returnURL) {
+            this._route.navigate([`/login?returnURL=${this._activatedRoute.snapshot.queryParams.returnURL}`]);
+
+          } else {
+            this._route.navigate(['/login']);
+          }
+
+
         } else {
           this.toast.info(res.Message?.toString(), 'Registeration');
         }
