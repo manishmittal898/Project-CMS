@@ -45,8 +45,8 @@ export class AuthService {
   }
 
 
-  IsAuthenticate() {
-    setTimeout(() => {
+  async IsAuthenticate() {
+   // setTimeout(() => {
       let token = this._securityService.getStorage('authToken');
       let sessionTime = this._securityService.getStorage('sessionTime');
       let currentSessionTime = Number(new Date().getTime());
@@ -55,7 +55,8 @@ export class AuthService {
       } else {
         this.IsAuthentication.next(false);
       }
-    }, 10);
+      return
+ //   }, 0);
   }
 
 

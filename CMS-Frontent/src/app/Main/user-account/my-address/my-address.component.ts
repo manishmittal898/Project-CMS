@@ -20,21 +20,26 @@ export class MyAddressComponent implements OnInit {
   selectedAddress = {} as UserAddressViewModel;
   showSavePopup = false;
   isAdd = true;
+  isLoading=true;
   @Input() config = new Config()
   constructor(private _userAddressService: UserAddressService,
     private _securityService: SecurityService, private _toasterService: ToastrService,
-    private _commonService: CommonService) { }
+    private _commonService: CommonService) {
+      this.getData();
+    }
 
   ngOnInit(): void {
-    this.getData();
+
+
   }
 
   getData() {
-
+    this.isLoading=true;
     const model = new IndexModel();
     model.PageSize = 101;
     this._userAddressService.GetList(model).subscribe(res => {
       if (res.IsSuccess) {
+        this.isLoading=false;
         this.data = res.Data;//.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } })
         this.onSelected(this.data.find(x => x.IsPrimary));
       }

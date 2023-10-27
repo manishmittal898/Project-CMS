@@ -1,10 +1,11 @@
 <div class="my-account-content my-account-address ">
   <div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0"> Addresses</h4>
+    <h4 class="mb-0">My Address</h4>
     <a class="btn-add-new-address" *ngIf="data?.length>0" href="javascript:void(0)" (click)="addAddress()"><i
         class="fa-regular fa-plus me-1"></i> Add new address</a>
   </div>
-  <ng-container *ngIf="data.length>0; else ShowAddForm">
+  <div [hidden]="isLoading">
+  <ng-container *ngIf="data?.length>0; else ShowAddForm">
     <ng-container *ngFor="let address of data;let indx=index">
       <div class="custom-card">
         <div class="row">
@@ -51,6 +52,7 @@
     <app-save-address [(model)]="selectedData" (onCancel)="closePopup()"
       (onSave)="selectedData=$event;onSave($event)"></app-save-address>
   </ng-template>
+</div>
   <!-- Add or Update Address Modal Start -->
   <div class="modal fade modal-custom-design" #addressPopup id="addressPopup" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">

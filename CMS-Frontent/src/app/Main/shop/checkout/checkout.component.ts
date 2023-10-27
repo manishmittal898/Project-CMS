@@ -83,11 +83,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   }
 
   checkPrerequisite() {
-    if (!this._authService.IsAuthentication.value) {
-      this._route.navigate([`/login`], { queryParams: { returnURL: this._route.url }, });
-    } else {
-      this.getAddress();
-    }
+    this._authService.IsAuthenticate().then(x => {
+      if (!this._authService.IsAuthentication.value) {
+        this._route.navigate([`/login`], { queryParams: { returnURL: this._route.url }, });
+      } else {
+        this.getAddress();
+      }
+    });
   }
 
   getAddress() {
