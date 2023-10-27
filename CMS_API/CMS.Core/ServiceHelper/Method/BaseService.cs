@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +11,7 @@ namespace CMS.Core.ServiceHelper.Method
     {
         public readonly LoginUserViewModel _loginUserDetail;
         public readonly Security _security;
-         public readonly EmailHelper _emailHelper;
+        public readonly EmailHelper _emailHelper;
 
         public BaseService(IConfiguration _configuration)
         {
@@ -23,13 +22,15 @@ namespace CMS.Core.ServiceHelper.Method
 
         public virtual ServiceResponse<T> CreateResponse<T>(T objData, string Message, bool IsSuccess, int statusCode = (int)ApiStatusCode.Ok, string exception = "", string validationMessage = "", long? TotalRecord = null) where T : class
         {
-            ServiceResponse<T> objReturn = new ServiceResponse<T>();
-            objReturn.Message = Message;
-            objReturn.IsSuccess = IsSuccess;
-            objReturn.Data = objData;
-            objReturn.Exception = exception;
-            objReturn.StatusCode = statusCode;
-            objReturn.TotalRecord = TotalRecord > 0 ? TotalRecord : null;
+            ServiceResponse<T> objReturn = new ServiceResponse<T>
+            {
+                Message = Message,
+                IsSuccess = IsSuccess,
+                Data = objData,
+                Exception = exception,
+                StatusCode = statusCode,
+                TotalRecord = TotalRecord > 0 ? TotalRecord : null
+            };
             return objReturn;
         }
 
@@ -49,7 +50,7 @@ namespace CMS.Core.ServiceHelper.Method
         {
             try
             {
-                var user = new HttpContextAccessor()?.HttpContext?.User;
+                System.Security.Claims.ClaimsPrincipal user = new HttpContextAccessor()?.HttpContext?.User;
                 LoginUserViewModel objUser = new LoginUserViewModel();
                 if (user != null && user.Claims.Count() > 0)
                 {
@@ -58,7 +59,7 @@ namespace CMS.Core.ServiceHelper.Method
 
                     objUser.UserName = user.HasClaim(x => x.Type == TokenClaimsConstant.UserName) ? user.FindFirst(TokenClaimsConstant.UserName).Value : null;
 
-                    objUser.RoleId = user.HasClaim(x => x.Type == TokenClaimsConstant.RoleId) ? (int?)Convert.ToInt32(user.FindFirst(TokenClaimsConstant.RoleId).Value) : 0;
+                    objUser.RoleId = user.HasClaim(x => x.Type == TokenClaimsConstant.RoleId) ? Convert.ToInt32(user.FindFirst(TokenClaimsConstant.RoleId).Value) : 0;
 
                     objUser.RoleName = user.HasClaim(x => x.Type == TokenClaimsConstant.RoleName) ? user.FindFirst(TokenClaimsConstant.RoleName).Value : null;
 

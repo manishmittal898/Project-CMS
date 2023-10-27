@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CMS.Service.Services.User
+namespace CMS.Service.Services.UserMaster
 {
     public class UserMasterViewModel
     {
@@ -26,7 +26,7 @@ namespace CMS.Service.Services.User
         public long? ModifiedBy { get; set; }
         public bool? IsActive { get; set; }
         public bool IsDeleted { get; set; }
-        public List<UserAddressMasterViewModel>? CustomerAddresses { get; set; }
+        public List<UserAddressMasterViewModel> CustomerAddresses { get; set; }
 
     }
 

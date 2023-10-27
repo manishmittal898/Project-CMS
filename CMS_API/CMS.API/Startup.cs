@@ -15,8 +15,8 @@ using CMS.Service.Services.ProductMaster;
 using CMS.Service.Services.ProductReview;
 using CMS.Service.Services.RoleType;
 using CMS.Service.Services.SubLookupMaster;
-using CMS.Service.Services.User;
 using CMS.Service.Services.UserCartProduct;
+using CMS.Service.Services.UserMaster;
 using CMS.Service.Services.WishList;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -38,9 +38,10 @@ namespace CMS.API
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        const string JWT_Key = Constants.JWT_Key;
-        const string JWT_ISSUER = Constants.JWT_ISSUER;
-        const string CONNECTION_STRING = Constants.CONNECTION_STRING;
+
+        private const string JWT_Key = Constants.JWT_Key;
+        private const string JWT_ISSUER = Constants.JWT_ISSUER;
+        private const string CONNECTION_STRING = Constants.CONNECTION_STRING;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -50,9 +51,9 @@ namespace CMS.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddDirectoryBrowser();
-            services.AddSwaggerGen(c =>
+            _ = services.AddControllers();
+            _ = services.AddDirectoryBrowser();
+            _ = services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CMS", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -82,8 +83,8 @@ namespace CMS.API
                 });
 
             });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            _ = services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            _ = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -96,15 +97,15 @@ namespace CMS.API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[JWT_Key]))
                 };
             });
-            services.AddDbContext<DB_CMSContext>(options => options.UseSqlServer(Configuration[CONNECTION_STRING]));
-            services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
+            _ = services.AddDbContext<DB_CMSContext>(options => options.UseSqlServer(Configuration[CONNECTION_STRING]));
+            _ = services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
                      builder =>
                      {
-                         builder.AllowAnyOrigin()
+                         _ = builder.AllowAnyOrigin()
                                  .AllowAnyMethod()
                                  .AllowAnyHeader();
                      }));
-            services.AddMvc()
+            _ = services.AddMvc()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -118,9 +119,9 @@ namespace CMS.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
+                _ = app.UseDeveloperExceptionPage();
+                _ = app.UseSwagger();
+                _ = app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS (v1)");
                     c.RoutePrefix = "swagger";
@@ -128,60 +129,60 @@ namespace CMS.API
             }
             else
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
+                _ = app.UseDeveloperExceptionPage();
+                _ = app.UseSwagger();
+                _ = app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS (v1)");
                     c.RoutePrefix = "swagger";
                 });
             }
 
-            app.UseRouting();
-            app.UseStaticFiles();
-            app.UseFileServer(new FileServerOptions
+            _ = app.UseRouting();
+            _ = app.UseStaticFiles();
+            _ = app.UseFileServer(new FileServerOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
                 RequestPath = "/StaticFiles",
                 EnableDirectoryBrowsing = true
             });
-            app.UseFileServer(new FileServerOptions
+            _ = app.UseFileServer(new FileServerOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
                 RequestPath = "/Content",
                 EnableDirectoryBrowsing = true
             });
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
+            _ = app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            _ = app.UseHttpsRedirection();
+            _ = app.UseAuthentication();
+            _ = app.UseAuthorization();
+            _ = app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                _ = endpoints.MapControllers();
             });
-            app.UseDeveloperExceptionPage();
+            _ = app.UseDeveloperExceptionPage();
         }
 
         private void Registerservice(IServiceCollection services)
         {
-            services.AddSingleton<BaseService>();
-            services.AddScoped<ICommonService, CommonService>();
-            services.AddScoped<IRoleTypeService, RoleTypeService>();
-            services.AddScoped<ILookupMasterService, LookupMasterService>();
-            services.AddScoped<ILookupTypeMasterService, LookupTypeMasterService>();
+            _ = services.AddSingleton<BaseService>();
+            _ = services.AddScoped<ICommonService, CommonService>();
+            _ = services.AddScoped<IRoleTypeService, RoleTypeService>();
+            _ = services.AddScoped<ILookupMasterService, LookupMasterService>();
+            _ = services.AddScoped<ILookupTypeMasterService, LookupTypeMasterService>();
             services.AddScoped<IProductMasterService, ProductMasterService>();
-            services.AddScoped<IProductReviewService, ProductReviewService>();
-            services.AddScoped<ISubLookupMasterService, SubLookupMasterService>();
-            services.AddScoped<IUserMasterService, UserMasterService>();
-            services.AddScoped<ICMSPageService, CMSPageService>();
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IGECategoryService, GECategoryService>();
-            services.AddScoped<IGeneralEntryService, GeneralEntryService>();
-            services.AddScoped<ICustomerAddressService, CustomerAddressService>();
-            services.AddScoped<IWishListService, WishListService>();
-            services.AddScoped<IUserCartProductService, UserCartProductService>();
-            services.AddScoped<IOTPService, OTPService>();
-            services.AddScoped<ICacheService, CacheService>();
+            _ = services.AddScoped<IProductReviewService, ProductReviewService>();
+            _ = services.AddScoped<ISubLookupMasterService, SubLookupMasterService>();
+            _ = services.AddScoped<IUserMasterService, UserMasterService>();
+            _ = services.AddScoped<ICMSPageService, CMSPageService>();
+            _ = services.AddScoped<IAccountService, AccountService>();
+            _ = services.AddScoped<IGECategoryService, GECategoryService>();
+            _ = services.AddScoped<IGeneralEntryService, GeneralEntryService>();
+            _ = services.AddScoped<ICustomerAddressService, CustomerAddressService>();
+            _ = services.AddScoped<IWishListService, WishListService>();
+            _ = services.AddScoped<IUserCartProductService, UserCartProductService>();
+            _ = services.AddScoped<IOTPService, OTPService>();
+            _ = services.AddScoped<ICacheService, CacheService>();
 
         }
     }

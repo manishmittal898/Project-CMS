@@ -14,16 +14,24 @@ namespace CMS.API.Areas.Admin.Controllers
     {
         // GET: api/<LookupTypeMasterController>
         private readonly ILookupTypeMasterService _lookuptypemstr;
-        public LookupTypeMasterController(ILookupTypeMasterService lookuptypemstr) => _lookuptypemstr = lookuptypemstr;
+        public LookupTypeMasterController(ILookupTypeMasterService lookuptypemstr)
+        {
+            _lookuptypemstr = lookuptypemstr;
+        }
 
         // GET: api/<LookupTypeMasterController>
         [HttpPost]
-        public async Task<object> Get(IndexModel model) => await _lookuptypemstr.GetListAsync(model);
+        public async Task<object> Get(IndexModel model)
+        {
+            return await _lookuptypemstr.GetListAsync(model);
+        }
 
         // GET api/<LookupTypeMasterController>/5
         [HttpGet("{id}")]
         public object Get(string id)
-        => _lookuptypemstr.GetById(id);
+        {
+            return _lookuptypemstr.GetById(id);
+        }
 
 
         // POST api/<LookupTypeMasterController>
@@ -37,10 +45,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -57,10 +67,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -69,6 +81,9 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<LookupTypeMasterController>/5
         [HttpGet("{id}")]
-        public void Delete(string id) =>            _lookuptypemstr.Delete(id);
-            }
+        public void Delete(string id)
+        {
+            _ = _lookuptypemstr.Delete(id);
+        }
+    }
 }

@@ -19,7 +19,7 @@ namespace CMS.Service.Services.ProductMaster
 
         Task<ServiceResponse<IEnumerable<ProductCategoryViewModel>>> GetProductCategory(IndexModel model);
         Task<ServiceResponse<IEnumerable<ProductMasterViewModel>>> GetFilterList(ProductFilterModel model);
-        Task<ServiceResponse<object>> IsSKUExist(string SKU,string id);
+        Task<ServiceResponse<object>> IsSKUExist(string SKU, string id);
 
     }
 }

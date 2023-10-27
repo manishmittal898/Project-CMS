@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -28,7 +27,7 @@ namespace CMS.Service.Services.Common
             Dictionary<string, object> objData = new Dictionary<string, object>();
             try
             {
-                foreach (var item in key)
+                foreach (string item in key)
                 {
 
                     switch (item.ToLower())
@@ -140,19 +139,19 @@ namespace CMS.Service.Services.Common
                             objData.Add(item, await GetGeneralEntryCategory(isTransactionData));
 
 
-                            break; 
+                            break;
 
                         default:
                             break;
                     }
                 }
 
-                return CreateResponse(objData, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objData, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<Dictionary<string, object>>(null, ResponseMessage.Success, true, ((int)ApiStatusCode.ServerException), ex.Message.ToString());
+                return CreateResponse<Dictionary<string, object>>(null, ResponseMessage.Success, true, (int)ApiStatusCode.ServerException, ex.Message.ToString());
 
             }
 
@@ -163,7 +162,7 @@ namespace CMS.Service.Services.Common
             Dictionary<string, object> objData = new Dictionary<string, object>();
             try
             {
-                foreach (var item in model)
+                foreach (FilterDropDownPostModel item in model)
                 {
 
                     switch (item.Key.ToLower())
@@ -188,12 +187,12 @@ namespace CMS.Service.Services.Common
 
                 }
 
-                return CreateResponse(objData, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objData, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<Dictionary<string, object>>(null, ResponseMessage.Success, true, ((int)ApiStatusCode.ServerException), ex.Message.ToString());
+                return CreateResponse<Dictionary<string, object>>(null, ResponseMessage.Success, true, (int)ApiStatusCode.ServerException, ex.Message.ToString());
 
             }
 
@@ -218,14 +217,14 @@ namespace CMS.Service.Services.Common
         {
             try
             {
-                var data = (from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type);
+                IQueryable<TblLookupMaster> data = from type in _db.TblLookupMasters where (string.IsNullOrEmpty(lktype) || type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower()) && type.IsActive.Value == true && !type.IsDelete select type;
 
                 if (isTransactionData)
                 {
 
                     if (lktype == LookupTypeEnum.Product_Category.GetStringValue())
                     {
-                        data = data.Where(x => (x.TblProductMasterCategories.Any(y => y.CategoryId == x.Id)));
+                        data = data.Where(x => x.TblProductMasterCategories.Any(y => y.CategoryId == x.Id));
                     }
                     else if (lktype == LookupTypeEnum.CMS_Page.GetStringValue())
                     {
@@ -237,7 +236,7 @@ namespace CMS.Service.Services.Common
                         data = data.Where(x => x.TblProductMasterViewSections.Any(y => y.ViewSectionId.HasValue && y.ViewSectionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
 
                     }
-                 
+
                     else if (lktype == LookupTypeEnum.Product_Occasion.GetStringValue())
                     {
                         data = data.Where(x => x.TblProductMasterOccasions.Any(y => y.OccasionId.HasValue && y.OccasionId.Value == x.Id && y.IsDelete == false && y.IsActive.Value == true));
@@ -291,8 +290,8 @@ namespace CMS.Service.Services.Common
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
                 long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
-                var data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.Id)) &&
-  (!isTransactionData || (type.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))
+                List<TblLookupMaster> data = _db.TblLookupMasters.Include(I => I.TblSubLookupMasters).ThenInclude(x => x.TblProductMasters).Include(x => x.TblProductMasterCategories).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUpTypeNavigation.EnumValue) && type.IsActive == true && type.IsDelete == false && type.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.Id)) &&
+  (!isTransactionData || type.LookUpTypeNavigation.EnumValue.ToLower() != enumValue || (isTransactionData && type.TblProductMasterCategories.Count(x => x.CategoryId == type.Id && x.IsDelete == false && x.IsActive.Value == true) > 0))
 
 ).ToList();
 
@@ -301,7 +300,7 @@ namespace CMS.Service.Services.Common
                       {
                           CategoryId = _security.EncryptData(y.Key.ToString()),
                           Category = y.FirstOrDefault().Name,
-                          Data = y.FirstOrDefault().TblSubLookupMasters.Where(x => x.IsActive == true && !x.IsDeleted && (!isTransactionData || (x.TblProductMasters.Any(yz => !yz.IsDelete && yz.IsActive == true && x.Id == yz.SubCategoryId))))
+                          Data = y.FirstOrDefault().TblSubLookupMasters.Where(x => x.IsActive == true && !x.IsDeleted && (!isTransactionData || x.TblProductMasters.Any(yz => !yz.IsDelete && yz.IsActive == true && x.Id == yz.SubCategoryId)))
                           .Select(x => new { Text = x.Name, Value = _security.EncryptData(x.Id) }).ToList()
                       }).ToList();
             }
@@ -318,8 +317,8 @@ namespace CMS.Service.Services.Common
             {
                 string enumValue = LookupTypeEnum.Product_Category.GetStringValue().ToLower();
                 long[] ids = lookupId != null && lookupId.Length > 0 ? lookupId.Select(s => long.Parse(_security.DecryptData(s))).ToArray() : null;
-                var data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
- (!isTransactionData || (type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == enumValue ? (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0) : true))).ToList();
+                List<TblSubLookupMaster> data = _db.TblSubLookupMasters.Include(I => I.LookUp).Include(x => x.TblProductMasters).Where(type => (string.IsNullOrEmpty(lktype) || (!string.IsNullOrEmpty(type.LookUp.LookUpTypeNavigation.EnumValue) && type.LookUp.IsActive == true && type.LookUp.IsDelete == false && type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() == lktype.ToLower())) && (ids == null || ids.Contains(type.LookUpId)) && type.IsActive.Value == true && !type.IsDeleted &&
+ (!isTransactionData || type.LookUp.LookUpTypeNavigation.EnumValue.ToLower() != enumValue || (isTransactionData && type.TblProductMasters.Count(x => x.SubCategoryId == type.Id && x.CategoryId == type.LookUpId && x.IsDelete == false && x.IsActive.Value == true) > 0))).ToList();
 
                 return data.GroupBy(x => x.LookUpId)
                       .Select(y => new
@@ -372,9 +371,9 @@ namespace CMS.Service.Services.Common
             {
                 return await (from type in _db.TblGecategoryMaters
                               where type.IsActive == true && !type.IsDelete
-                              && (isTransactionData ? type.TblGeneralEntries.Any(g => g.CategoryId == type.Id) : true)
+                              && (!isTransactionData || type.TblGeneralEntries.Any(g => g.CategoryId == type.Id))
                               select type).OrderBy(x => x.Name)
-                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), ContentType = _security.EncryptData(r.ContentType), IsShowThumbnail = r.IsShowThumbnail, IsShowUrl = r.IsShowUrl })
+                     .Select(r => new { Text = r.Name, Value = _security.EncryptData(r.Id), ContentType = _security.EncryptData(r.ContentType), r.IsShowThumbnail, r.IsShowUrl })
                      .ToListAsync();
             }
             catch

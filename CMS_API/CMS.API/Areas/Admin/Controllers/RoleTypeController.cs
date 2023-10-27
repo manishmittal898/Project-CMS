@@ -15,15 +15,24 @@ namespace CMS.API.Areas.Admin.Controllers
     public class RoleTypeController : ControllerBase
     {
         private readonly IRoleTypeService _roleType;
-        public RoleTypeController(IRoleTypeService roleType) => _roleType = roleType;
+        public RoleTypeController(IRoleTypeService roleType)
+        {
+            _roleType = roleType;
+        }
 
         // GET: api/<RoleTypeController>
         [HttpGet]
-        public object Get() => _roleType.GetList();
+        public object Get()
+        {
+            return _roleType.GetList();
+        }
 
         // GET api/<RoleTypeController>/5
         [HttpGet("{id}")]
-        public object Get(int id) => _roleType.GetById(id);
+        public object Get(int id)
+        {
+            return _roleType.GetById(id);
+        }
 
         // POST api/<RoleTypeController>
         [HttpPost]
@@ -36,10 +45,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -57,10 +68,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
                 return objReturn;
             }
 
@@ -68,6 +81,9 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<RoleTypeController>/5
         [HttpGet("{id}")]
-        public void Delete(int id) => _roleType.Delete(id);
+        public void Delete(int id)
+        {
+            _ = _roleType.Delete(id);
+        }
     }
 }

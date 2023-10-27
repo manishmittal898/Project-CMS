@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -15,7 +14,7 @@ namespace CMS.Service.Services.CustomerAddress
 {
     public class CustomerAddressService : BaseService, ICustomerAddressService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
 
         public CustomerAddressService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
@@ -30,25 +29,19 @@ namespace CMS.Service.Services.CustomerAddress
                 long userId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : 0;
                 if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId") && userId == 0)
                 {
-                    model.AdvanceSearchModel.TryGetValue("userId", out object CustomerId);
+                    _ = model.AdvanceSearchModel.TryGetValue("userId", out object CustomerId);
                     userId = Convert.ToInt64(CustomerId.ToString());
 
                 }
-                var result = (from addrs in _db.TblUserAddressMasters
-                              where (userId == 0 || addrs.UserId == userId) && !addrs.IsDelete && (string.IsNullOrEmpty(model.Search) || addrs.Address.Contains(model.Search))
-                              select addrs);
-                switch (model.OrderBy)
+                IQueryable<TblUserAddressMaster> result = from addrs in _db.TblUserAddressMasters
+                                                          where (userId == 0 || addrs.UserId == userId) && !addrs.IsDelete && (string.IsNullOrEmpty(model.Search) || addrs.Address.Contains(model.Search))
+                                                          select addrs;
+                result = model.OrderBy switch
                 {
-                    case "Address":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Address ascending select orderData) : (from orderData in result orderby orderData.Address descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.PinCode ascending select orderData) : (from orderData in result orderby orderData.PinCode descending select orderData);
-                        break;
-                }
+                    "Address" => model.OrderByAsc ? (from orderData in result orderby orderData.Address ascending select orderData) : (from orderData in result orderby orderData.Address descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.PinCode ascending select orderData) : (from orderData in result orderby orderData.PinCode descending select orderData),
+                };
                 ObjResponse.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -74,11 +67,11 @@ namespace CMS.Service.Services.CustomerAddress
                                                   UserId = x.UserId,
                                               }).ToListAsync();
 
-                    return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: ObjResponse.TotalRecord);
+                    return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: ObjResponse.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<IEnumerable<CustomerAddressViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<IEnumerable<CustomerAddressViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
                 }
             }
 
@@ -94,7 +87,7 @@ namespace CMS.Service.Services.CustomerAddress
             try
             {
 
-                var result = _db.TblUserAddressMasters.FirstOrDefault(x => x.Id == _security.DecryptData(id).ToLongValue() && x.IsActive.Value && x.IsDelete == false);
+                TblUserAddressMaster result = _db.TblUserAddressMasters.FirstOrDefault(x => x.Id == _security.DecryptData(id).ToLongValue() && x.IsActive.Value && x.IsDelete == false);
                 if (result != null)
                 {
                     ObjResponse.Data = new CustomerAddressViewModel()
@@ -114,11 +107,11 @@ namespace CMS.Service.Services.CustomerAddress
                         StateId = result.StateId.HasValue ? _security.EncryptData(result.StateId.Value) : null,
                         UserId = result.UserId,
                     };
-                    return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                    return CreateResponse(ObjResponse.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
-                    return CreateResponse<CustomerAddressViewModel>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+                    return CreateResponse<CustomerAddressViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
                 }
 
             }
@@ -154,8 +147,8 @@ namespace CMS.Service.Services.CustomerAddress
                     objData.Mobile = model.Mobile;
                     objData.PinCode = model.PinCode;
                     objData.StateId = !string.IsNullOrEmpty(model.StateId) ? long.Parse(_security.DecryptData(model.StateId)) : null as Nullable<long>; ;
-                    var data = _db.TblUserAddressMasters.Update(objData);
-                    await _db.SaveChangesAsync();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserAddressMaster> data = _db.TblUserAddressMasters.Update(objData);
+                    _ = await _db.SaveChangesAsync();
                     isAdd = false;
                 }
                 else
@@ -181,8 +174,8 @@ namespace CMS.Service.Services.CustomerAddress
                         UserId = _loginUserDetail.RoleId.Value == (int)RoleEnum.Customer ? _loginUserDetail.UserId.Value : model.UserId
 
                     };
-                    var resultData = await _db.TblUserAddressMasters.AddAsync(objData);
-                    await _db.SaveChangesAsync();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserAddressMaster> resultData = await _db.TblUserAddressMasters.AddAsync(objData);
+                    _ = await _db.SaveChangesAsync();
                     objData = resultData.Entity;
                     model.Id = _security.EncryptData(objData.Id);
                 }
@@ -190,13 +183,13 @@ namespace CMS.Service.Services.CustomerAddress
                 //if set primary then remove primary for old record
                 if (model.IsPrimary)
                 {
-                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != objData.Id).ToList();
-                    foreach (var item in address)
+                    List<TblUserAddressMaster> address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != objData.Id).ToList();
+                    foreach (TblUserAddressMaster item in address)
                     {
                         item.IsPrimary = false;
                     }
                     _db.UpdateRange(address);
-                    await _db.SaveChangesAsync();
+                    _ = await _db.SaveChangesAsync();
                 }
                 return CreateResponse(model, isAdd ? ResponseMessage.Save : ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
             }
@@ -215,19 +208,19 @@ namespace CMS.Service.Services.CustomerAddress
                 objAddress.IsPrimary = !objAddress.IsPrimary;
 
 
-                _db.TblUserAddressMasters.Update(objAddress);
-                await _db.SaveChangesAsync();
+                _ = _db.TblUserAddressMasters.Update(objAddress);
+                _ = await _db.SaveChangesAsync();
                 if (objAddress.IsPrimary)
                 {
-                    var address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != _security.DecryptData(id).ToLongValue()).ToList();
-                    foreach (var item in address)
+                    List<TblUserAddressMaster> address = _db.TblUserAddressMasters.Where(r => r.IsPrimary && r.Id != _security.DecryptData(id).ToLongValue()).ToList();
+                    foreach (TblUserAddressMaster item in address)
                     {
                         item.IsPrimary = false;
                     }
                     _db.UpdateRange(address);
                 }
 
-                await _db.SaveChangesAsync();
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse(objAddress, ResponseMessage.Update, true);
             }
             catch (Exception ex)
@@ -243,8 +236,8 @@ namespace CMS.Service.Services.CustomerAddress
                 TblUserAddressMaster objAddress = new TblUserAddressMaster();
                 objAddress = _db.TblUserAddressMasters.FirstOrDefault(r => r.Id == _security.DecryptData(id).ToLongValue());
                 objAddress.IsActive = !objAddress.IsActive;
-                var roletype = _db.TblUserAddressMasters.Update(objAddress);
-                await _db.SaveChangesAsync();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserAddressMaster> roletype = _db.TblUserAddressMasters.Update(objAddress);
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse(objAddress, ResponseMessage.Update, true);
             }
             catch (Exception ex)
@@ -262,17 +255,15 @@ namespace CMS.Service.Services.CustomerAddress
                 if (objAddress != null && !objAddress.IsPrimary)
                 {
                     objAddress.IsDelete = !objAddress.IsDelete;
-                    var roletype = _db.TblUserAddressMasters.Update(objAddress);
-                    await _db.SaveChangesAsync();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserAddressMaster> roletype = _db.TblUserAddressMasters.Update(objAddress);
+                    _ = await _db.SaveChangesAsync();
                     return CreateResponse(objAddress, ResponseMessage.Delete, true);
-                }
-                else if (objAddress != null && objAddress.IsPrimary)
-                {
-                    return CreateResponse(objAddress, ResponseMessage.DeleteDenied, false);
                 }
                 else
                 {
-                    return CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, false);
+                    return objAddress != null && objAddress.IsPrimary
+                        ? CreateResponse(objAddress, ResponseMessage.DeleteDenied, false)
+                        : CreateResponse<TblUserAddressMaster>(null, ResponseMessage.NotFound, false);
                 }
             }
             catch (Exception ex)

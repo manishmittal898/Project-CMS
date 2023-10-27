@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -16,7 +15,7 @@ namespace CMS.Service.Services.ProductMaster
 {
     public class ProductMasterService : BaseService, IProductMasterService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
         public ProductMasterService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
         {
@@ -29,25 +28,15 @@ namespace CMS.Service.Services.ProductMaster
             ServiceResponse<IEnumerable<ProductMasterViewModel>> objResult = new ServiceResponse<IEnumerable<ProductMasterViewModel>>();
             try
             {
-
-
-                var result = (from pdct in _db.TblProductMasters
-
-                              where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search) || pdct.UniqueId.Contains(model.Search))
-                              select pdct);
-                switch (model.OrderBy)
+                IQueryable<TblProductMaster> result = from pdct in _db.TblProductMasters
+                                                      where !pdct.IsDelete && (string.IsNullOrEmpty(model.Search) || pdct.Name.Contains(model.Search) || pdct.Category.Name.Contains(model.Search) || pdct.SubCategory.Name.Contains(model.Search) || pdct.CaptionTag.Name.Contains(model.Search) || pdct.UniqueId.Contains(model.Search))
+                                                      select pdct;
+                result = (object)model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
@@ -90,19 +79,13 @@ namespace CMS.Service.Services.ProductMaster
                                             IsActive = x.IsActive.Value,
                                             IsDelete = x.IsDelete,
                                             Keyword = x.Keyword,
-                                            IsWhishList = (_loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0) ? true : false,
+                                            IsWhishList = _loginUserDetail != null && x.TblUserWishLists.Count(x => x.UserId == _loginUserDetail.UserId && x.ProductId == x.Id) > 0,
 
                                         }).ToListAsync();
 
-                if (result != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                        ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                        : CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception)
             {
@@ -119,7 +102,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductMasters.Include(x => x.TblProductStocks).Where(x => x.Id == long.Parse(_security.DecryptData(id)) && !x.IsDelete).Select(x => new ProductMasterViewModel
+                ProductMasterViewModel detail = _db.TblProductMasters.Include(x => x.TblProductStocks).Where(x => x.Id == long.Parse(_security.DecryptData(id)) && !x.IsDelete).Select(x => new ProductMasterViewModel
                 {
                     Id = _security.EncryptData(x.Id.ToString()),
                     Name = x.Name,
@@ -157,7 +140,7 @@ namespace CMS.Service.Services.ProductMaster
                     IsActive = x.IsActive.Value,
                     IsDelete = x.IsDelete,
                     Keyword = x.Keyword,
-                    IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
+                    IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null && x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId),
 
                     Stocks = x.TblProductStocks.Count > 0 ? x.TblProductStocks.OrderBy(x => x.Size.SortedOrder).Select(st => new ProductStockModel
                     {
@@ -174,7 +157,7 @@ namespace CMS.Service.Services.ProductMaster
                 }).FirstOrDefault();
                 if (detail != null)
                 {
-                    var productFiles = GetProductFile(id).Result;
+                    ServiceResponse<List<ProductImageViewModel>> productFiles = GetProductFile(id).Result;
                     if (productFiles.IsSuccess)
                     {
                         detail.Files = productFiles.Data;
@@ -199,7 +182,7 @@ namespace CMS.Service.Services.ProductMaster
             try
             {
 
-                var detail = _db.TblProductStocks.Where(x => x.ProductId == long.Parse(_security.DecryptData(productId)) && x.SizeId == long.Parse(_security.DecryptData(sizeId))).Select(st => new ProductStockModel
+                ProductStockModel detail = _db.TblProductStocks.Where(x => x.ProductId == long.Parse(_security.DecryptData(productId)) && x.SizeId == long.Parse(_security.DecryptData(sizeId))).Select(st => new ProductStockModel
                 {
                     Id = _security.EncryptData(st.Id),
                     ProductId = _security.EncryptData(st.ProductId),
@@ -231,7 +214,6 @@ namespace CMS.Service.Services.ProductMaster
                 if (!string.IsNullOrEmpty(model.Id))
                 {
                     objProduct = _db.TblProductMasters.Include(x => x.TblProductStocks).FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
-
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = long.Parse(_security.DecryptData(model.CategoryId));
                     objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
@@ -251,12 +233,11 @@ namespace CMS.Service.Services.ProductMaster
 
                     if (!string.IsNullOrEmpty(model.ImagePath))
                     {
-
                         objProduct.ImagePath = !string.IsNullOrEmpty(objProduct.ImagePath) && model.ImagePath.Contains(objProduct.ImagePath.Replace("\\", "/")) ? objProduct.ImagePath : await _fileHelper.Save(model.ImagePath, FilePaths.ProductImages_Main, isThumbnail: true);
                     }
                     else
                     {
-                        _fileHelper.Delete(objProduct.ImagePath);
+                        _ = _fileHelper.Delete(objProduct.ImagePath);
                         objProduct.ImagePath = null;
                     }
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
@@ -265,17 +246,17 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.MetaDesc = model.MetaDesc;
                     objProduct.ModifiedOn = DateTime.Now;
 
-                    var product = _db.TblProductMasters.Update(objProduct);
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblProductMaster> product = _db.TblProductMasters.Update(objProduct);
 
                     if (model.Stocks != null && model.Stocks.Count > 0)
                     {
-                        var exIds = model.Stocks.Where(x => !string.IsNullOrEmpty(x.Id)).Select(x => long.Parse(_security.DecryptData(x.Id))).ToArray();
+                        long[] exIds = model.Stocks.Where(x => !string.IsNullOrEmpty(x.Id)).Select(x => long.Parse(_security.DecryptData(x.Id))).ToArray();
 
-                        var deleteStock = objProduct.TblProductStocks.Where(x => !exIds.Contains(x.Id)).ToList();
+                        List<TblProductStock> deleteStock = objProduct.TblProductStocks.Where(x => !exIds.Contains(x.Id)).ToList();
                         if (deleteStock.Count > 0)
                         {
                             _db.TblProductStocks.RemoveRange(deleteStock);
-                            _db.SaveChanges();
+                            _ = _db.SaveChanges();
                         }
 
 
@@ -292,13 +273,11 @@ namespace CMS.Service.Services.ProductMaster
                                 prStock.Quantity = xs.Quantity;
                                 prStocks.Add(prStock);
                             }
-
-
                         });
                         if (prStocks.Count > 0)
                         {
                             _db.TblProductStocks.UpdateRange(prStocks);
-                            _db.SaveChanges();
+                            _ = _db.SaveChanges();
                         }
 
 
@@ -309,20 +288,20 @@ namespace CMS.Service.Services.ProductMaster
                             SizeId = long.Parse(_security.DecryptData(x.SizeId)),
                             UnitPrice = x.UnitPrice,
                             SellingPrice = x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice : x.UnitPrice,
-                            Discount = getDiscount(x.UnitPrice.Value, (x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice.Value : x.UnitPrice.Value)),
+                            Discount = getDiscount(x.UnitPrice.Value, x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice.Value : x.UnitPrice.Value),
                             Quantity = x.Quantity
 
                         }).ToList();
                         if (productStock.Count > 0)
                         {
                             await _db.TblProductStocks.AddRangeAsync(productStock);
-                            _db.SaveChanges();
+                            _ = _db.SaveChanges();
                         }
 
 
                     }
 
-                    _db.SaveChanges();
+                    _ = _db.SaveChanges();
                     if (model.Files != null && model.Files.Count > 0)
                     {
                         string[] existingfilePaths = _db.TblProductImages.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.Id))).Select(x => x.FilePath).ToArray();
@@ -339,7 +318,7 @@ namespace CMS.Service.Services.ProductMaster
                             IsDeleted = false
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
-                        _db.SaveChanges();
+                        _ = _db.SaveChanges();
                     }
                     objProduct.TblProductStocks = null;
 
@@ -347,8 +326,6 @@ namespace CMS.Service.Services.ProductMaster
                 }
                 else
                 {
-
-
                     objProduct.Name = model.Name;
                     objProduct.CategoryId = long.Parse(_security.DecryptData(model.CategoryId));
                     objProduct.SubCategoryId = !string.IsNullOrEmpty(model.SubCategoryId) ? long.Parse(_security.DecryptData(model.SubCategoryId)) : null as Nullable<long>;
@@ -372,8 +349,8 @@ namespace CMS.Service.Services.ProductMaster
                     objProduct.ModifiedBy = _loginUserDetail.UserId.Value;
                     objProduct.MetaTitle = model.MetaTitle;
                     objProduct.MetaDesc = model.MetaDesc;
-                    var product = await _db.TblProductMasters.AddAsync(objProduct);
-                    _db.SaveChanges();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblProductMaster> product = await _db.TblProductMasters.AddAsync(objProduct);
+                    _ = _db.SaveChanges();
 
                     if (model.Files != null && model.Files.Count > 0)
                     {
@@ -387,7 +364,7 @@ namespace CMS.Service.Services.ProductMaster
                             IsDeleted = false
                         }).ToList();
                         await _db.TblProductImages.AddRangeAsync(productImages);
-                        _db.SaveChanges();
+                        _ = _db.SaveChanges();
 
                     }
 
@@ -400,12 +377,12 @@ namespace CMS.Service.Services.ProductMaster
                             SizeId = long.Parse(_security.DecryptData(x.SizeId)),
                             UnitPrice = x.UnitPrice,
                             SellingPrice = x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice : x.UnitPrice,
-                            Discount = getDiscount(x.UnitPrice.Value, (x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice.Value : x.UnitPrice.Value)),
+                            Discount = getDiscount(x.UnitPrice.Value, x.SellingPrice != null && x.SellingPrice.HasValue ? x.SellingPrice.Value : x.UnitPrice.Value),
                             Quantity = x.Quantity
 
                         }).ToList();
                         await _db.TblProductStocks.AddRangeAsync(productStock);
-                        _db.SaveChanges();
+                        _ = _db.SaveChanges();
                     }
 
                     objProduct.TblProductStocks = null;
@@ -433,13 +410,13 @@ namespace CMS.Service.Services.ProductMaster
                 objProduct.IsActive = !objProduct.IsActive;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -450,16 +427,16 @@ namespace CMS.Service.Services.ProductMaster
                 TblProductMaster objProduct = new TblProductMaster();
                 objProduct = await _db.TblProductMasters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(id)));
 
-                objProduct.IsDelete = (bool)true;
+                objProduct.IsDelete = true;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objProduct as TblProductMaster, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objProduct, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)
             {
-                return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse<TblProductMaster>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -472,7 +449,7 @@ namespace CMS.Service.Services.ProductMaster
 
                 objProductFile.ForEach(x =>
                 {
-                    _fileHelper.Delete(x.FilePath);
+                    _ = _fileHelper.Delete(x.FilePath);
                 });
                 if (objProductFile != null)
                 {
@@ -480,12 +457,12 @@ namespace CMS.Service.Services.ProductMaster
                     _db.TblProductImages.RemoveRange(objProductFile);
 
                     //add for thumbnail
-                    await _db.SaveChangesAsync();
-                    return CreateResponse(true as object, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                    _ = await _db.SaveChangesAsync();
+                    return CreateResponse(true as object, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
-                    return CreateResponse(null as object, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+                    return CreateResponse(null as object, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
 
                 }
 
@@ -493,7 +470,7 @@ namespace CMS.Service.Services.ProductMaster
             }
             catch (Exception ex)
             {
-                return CreateResponse(null as object, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse(null as object, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -529,21 +506,15 @@ namespace CMS.Service.Services.ProductMaster
             {
 
 
-                var result = (from lkType in _db.TblProductMasters
-                              where !lkType.IsDelete && lkType.IsActive.Value && !lkType.Category.IsDelete && lkType.Category.IsActive == true && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
-                              select lkType.Category).Distinct();
-                switch (model.OrderBy)
+                IQueryable<TblLookupMaster> result = (from lkType in _db.TblProductMasters
+                                                      where !lkType.IsDelete && lkType.IsActive.Value && !lkType.Category.IsDelete && lkType.Category.IsActive == true && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search) || lkType.Category.Name.Contains(model.Search) || lkType.SubCategory.Name.Contains(model.Search) || lkType.CaptionTag.Name.Contains(model.Search))
+                                                      select lkType.Category).Distinct();
+                result = (object)model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -558,15 +529,9 @@ namespace CMS.Service.Services.ProductMaster
 
                                         }).ToListAsync();
 
-                if (objResult.Data != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<ProductCategoryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<ProductCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return objResult.Data != null
+                        ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                        : CreateResponse<IEnumerable<ProductCategoryViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception)
             {
@@ -604,42 +569,32 @@ namespace CMS.Service.Services.ProductMaster
                     }
 
                 }
-                var result = (from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
-                              where !prd.IsDelete && prd.IsActive.Value && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
-                              && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
-                                && (model.CategoryId == null || model.CategoryId.Count == 0 || CategoryIds.Contains(prd.CategoryId))
-                                 && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || SubCategoryIds.Contains(prd.SubCategoryId.Value))
-                                 && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
-                                 && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
-                                 && (model.CaptionTagId == null || model.CaptionTagId.Count == 0 || CaptionTagIds.Contains(prd.CaptionTagId.Value))
-                                 && (model.DiscountId == null || Discount == 0 || prd.Discount >= Discount)
-                                 && (model.OccasionId == null || model.OccasionId.Count == 0 || OccasionIds.Contains(prd.OccasionId.Value))
-                                 && (model.FabricId == null || model.FabricId.Count == 0 || FabricIds.Contains(prd.FabricId.Value))
-                                 && (model.LengthId == null || model.LengthId.Count == 0 || LengthIds.Contains(prd.LengthId.Value))
-                                 && (model.ColorId == null || model.ColorId.Count == 0 || ColorIds.Contains(prd.ColorId.Value))
-                                 && (model.PatternId == null || model.PatternId.Count == 0 || PatternIds.Contains(prd.PatternId.Value))
-                                 && (string.IsNullOrEmpty(model.UniqueId) || prd.UniqueId.Contains(model.UniqueId))
-                                 && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
-                                && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
-                              select prd);
-                switch (model.OrderBy)
+                IQueryable<TblProductMaster> result = from prd in _db.TblProductMasters.Include(x => x.TblUserWishLists)
+                                                      where !prd.IsDelete && prd.IsActive.Value && (string.IsNullOrEmpty(model.Search) || prd.Name.Contains(model.Search) || prd.Category.Name.Contains(model.Search) || prd.SubCategory.Name.Contains(model.Search) || prd.CaptionTag.Name.Contains(model.Search))
+                                                      && (string.IsNullOrEmpty(model.Keyword) || model.Keyword.Contains(prd.Keyword) || string.IsNullOrEmpty(model.Keyword) || prd.Name.Contains(model.Keyword) || prd.Category.Name.Contains(model.Keyword) || prd.SubCategory.Name.Contains(model.Keyword) || prd.CaptionTag.Name.Contains(model.Keyword))
+                                                        && (model.CategoryId == null || model.CategoryId.Count == 0 || CategoryIds.Contains(prd.CategoryId))
+                                                         && (model.SubCategoryId == null || model.SubCategoryId.Count == 0 || SubCategoryIds.Contains(prd.SubCategoryId.Value))
+                                                         && (model.SizeId == null || model.SizeId.Count == 0 || prd.TblProductStocks.Any(x => SizeIds.Contains(x.SizeId)))
+                                                         && (model.ViewSectionId == null || model.ViewSectionId.Count == 0 || ViewSectionIds.Contains(prd.ViewSectionId.Value))
+                                                         && (model.CaptionTagId == null || model.CaptionTagId.Count == 0 || CaptionTagIds.Contains(prd.CaptionTagId.Value))
+                                                         && (model.DiscountId == null || Discount == 0 || prd.Discount >= Discount)
+                                                         && (model.OccasionId == null || model.OccasionId.Count == 0 || OccasionIds.Contains(prd.OccasionId.Value))
+                                                         && (model.FabricId == null || model.FabricId.Count == 0 || FabricIds.Contains(prd.FabricId.Value))
+                                                         && (model.LengthId == null || model.LengthId.Count == 0 || LengthIds.Contains(prd.LengthId.Value))
+                                                         && (model.ColorId == null || model.ColorId.Count == 0 || ColorIds.Contains(prd.ColorId.Value))
+                                                         && (model.PatternId == null || model.PatternId.Count == 0 || PatternIds.Contains(prd.PatternId.Value))
+                                                         && (string.IsNullOrEmpty(model.UniqueId) || prd.UniqueId.Contains(model.UniqueId))
+                                                         && (Ids == null || Ids.Count == 0 || Ids.Contains(prd.Id))
+                                                        && (model.Price == null || model.Price.Count == 0 || (model.Price[0] <= prd.Price && model.Price[1] >= prd.Price))
+                                                      select prd;
+                result = (object)model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-                    case "Price":
-                        result = model.OrderByAsc ? (from orderData in result orderby (orderData.SellingPrice) ascending select orderData) : (from orderData in result orderby orderData.SellingPrice descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    case "Discount":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Discount.Value ascending select orderData) : (from orderData in result orderby orderData.Discount.Value descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "Price" => model.OrderByAsc ? (from orderData in result orderby orderData.SellingPrice ascending select orderData) : (from orderData in result orderby orderData.SellingPrice descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    "Discount" => model.OrderByAsc ? (from orderData in result orderby orderData.Discount.Value ascending select orderData) : (from orderData in result orderby orderData.Discount.Value descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.ModifiedOn ascending select orderData) : (from orderData in result orderby orderData.ModifiedOn descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
@@ -682,19 +637,14 @@ namespace CMS.Service.Services.ProductMaster
                                             MetaDesc = x.MetaDesc,
                                             ViewSectionId = x.ViewSectionId.HasValue ? _security.EncryptData(x.ViewSectionId.Value) : null,
                                             ViewSection = x.ViewSection.Name,
-                                            IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null ? x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId) : false,
+                                            IsWhishList = x.TblUserWishLists.Count > 0 && _loginUserDetail != null && x.TblUserWishLists.Any(y => y.ProductId == x.Id && y.UserId == _loginUserDetail.UserId),
 
 
                                         }).ToListAsync();
 
-                if (result != null)
-                {
-                    return CreateResponse(objResult.Data as IEnumerable<ProductMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                        ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                        : CreateResponse<IEnumerable<ProductMasterViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception ex)
             {
@@ -702,7 +652,7 @@ namespace CMS.Service.Services.ProductMaster
                 objResult.IsSuccess = false;
                 objResult.Message = ex.Message;
                 objResult.TotalRecord = 0;
-                objResult.StatusCode = ((int)ApiStatusCode.InternalServerError);
+                objResult.StatusCode = (int)ApiStatusCode.InternalServerError;
             }
             return objResult;
         }
@@ -711,7 +661,7 @@ namespace CMS.Service.Services.ProductMaster
         {
             try
             {
-                decimal ddValue = ((Price - SellingPrice) / Price) * 100;
+                decimal ddValue = (Price - SellingPrice) / Price * 100;
                 return (long)Math.Floor(ddValue);
             }
             catch (Exception)
@@ -727,14 +677,13 @@ namespace CMS.Service.Services.ProductMaster
         {
             try
             {
-                bool isExist = false;
-                var result = await _db.TblProductMasters.FirstOrDefaultAsync(x => x.UniqueId.Trim().ToLower() == SKU.Trim().ToLower() && (string.IsNullOrEmpty(id) || x.Id != long.Parse(_security.DecryptData(id))));
-                return CreateResponse<object>(result != null, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                TblProductMaster result = await _db.TblProductMasters.FirstOrDefaultAsync(x => x.UniqueId.Trim().ToLower() == SKU.Trim().ToLower() && (string.IsNullOrEmpty(id) || x.Id != long.Parse(_security.DecryptData(id))));
+                return CreateResponse<object>(result != null, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)
             {
-                return CreateResponse<object>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse<object>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }

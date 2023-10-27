@@ -1,9 +1,8 @@
-﻿
-using CMS.Core.Attribute;
+﻿using CMS.Core.Attribute;
 using System;
 using System.Reflection;
 
-namespace CMS.Core.ServiceHelper.ExtensionMethod
+namespace CMS.Core.ServiceHelper.Method
 {
     public static class CommonExtension
     {
@@ -20,14 +19,7 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
         {
             try
             {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    return TimeSpan.Parse(value);
-                }
-                else
-                {
-                    return null;
-                }
+                return !string.IsNullOrEmpty(value) ? TimeSpan.Parse(value) : (dynamic)null;
             }
             catch (Exception)
             {

@@ -15,7 +15,7 @@ export class MyAddressComponent implements OnInit {
   @ViewChild('btnShow') btnShow: ElementRef;
   @ViewChild('btnClose') btnClose: ElementRef;
   @Output() onSelect = new EventEmitter<UserAddressViewModel>();
-  data = [] as UserAddressViewModel[];
+  data : UserAddressViewModel[];
   selectedData = {} as UserAddressPostModel;
   selectedAddress = {} as UserAddressViewModel;
   showSavePopup = false;

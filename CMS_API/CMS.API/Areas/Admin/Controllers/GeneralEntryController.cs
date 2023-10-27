@@ -13,15 +13,25 @@ namespace CMS.API.Areas.Admin.Controllers
     public class GeneralEntryController : ControllerBase
     {
         private readonly IGeneralEntryService _service;
-        public GeneralEntryController(IGeneralEntryService Iservice) => _service = Iservice;
+        public GeneralEntryController(IGeneralEntryService Iservice)
+        {
+            _service = Iservice;
+        }
+
         // GET: api/<GeneralEntryCategory>
         [HttpPost]
-        public async Task<object> GetAsync(IndexModel model) => await _service.GetList(model);
+        public async Task<object> GetAsync(IndexModel model)
+        {
+            return await _service.GetList(model);
+        }
 
 
         // GET api/<GeneralEntryCategory>/5
         [HttpGet("{id}/{isEdit}")]
-        public async Task<object> Get(string id, bool isEdit = false) => await _service.GetById(id, isEdit);
+        public async Task<object> Get(string id, bool isEdit = false)
+        {
+            return await _service.GetById(id, isEdit);
+        }
 
         // POST api/<GeneralEntryCategory>
         [HttpPost]
@@ -42,13 +52,22 @@ namespace CMS.API.Areas.Admin.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id) => await _service.ActiveStatusUpdate(id);
+        public async Task<object> ChangeActiveStatus(string id)
+        {
+            return await _service.ActiveStatusUpdate(id);
+        }
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id) => await _service.Delete(id);
+        public async Task<object> Delete(string id)
+        {
+            return await _service.Delete(id);
+        }
 
         [HttpGet("{id}")]
-        public async Task<object> DeleteGeneralEntryItems(string id) => await _service.DeleteGeneralEntryItems(id);
+        public async Task<object> DeleteGeneralEntryItems(string id)
+        {
+            return await _service.DeleteGeneralEntryItems(id);
+        }
     }
 }

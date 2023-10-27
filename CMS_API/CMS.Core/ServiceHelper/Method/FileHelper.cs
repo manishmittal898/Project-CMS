@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using HeyRed.Mime;
 using ImageProcessor;
 using ImageProcessor.Plugins.WebP.Imaging.Formats;
@@ -17,7 +16,7 @@ namespace CMS.Core.ServiceHelper.Method
 {
     public class FileHelper
     {
-        static IHostingEnvironment _env;
+        private static IHostingEnvironment _env;
         public FileHelper(IHostingEnvironment environment)
         {
             _env = environment;
@@ -42,7 +41,7 @@ namespace CMS.Core.ServiceHelper.Method
                     string path = GetPhysicalPath(filePath);
                     if (!Directory.Exists(path))
                     {
-                        Directory.CreateDirectory(path);
+                        _ = Directory.CreateDirectory(path);
                     }
 
                     if (IsBase64(base64str) && !string.IsNullOrEmpty(filePath))
@@ -52,7 +51,7 @@ namespace CMS.Core.ServiceHelper.Method
                         if (base64str.Split(';').Length > 0)
                         {
                             string[] Fileinfo = base64str.Split(';');
-                            byteArr = Convert.FromBase64String(Fileinfo[1].Substring(Fileinfo[1].IndexOf(',') + 1));
+                            byteArr = Convert.FromBase64String(Fileinfo[1][(Fileinfo[1].IndexOf(',') + 1)..]);
                         }
                         else
                         {
@@ -63,7 +62,7 @@ namespace CMS.Core.ServiceHelper.Method
                         {
                             fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + ".webp" : fileName.Split(".").Length > 1 ? fileName.Replace(" ", "_") : fileName.Replace(" ", "_") + ".webp";
 
-                            var webPBytArr = ConvertImageToWebP(byteArr);
+                            byte[] webPBytArr = ConvertImageToWebP(byteArr);
                             File.WriteAllBytes(Path.Combine(path, fileName), webPBytArr);
 
                             if (isThumbnail)
@@ -75,10 +74,10 @@ namespace CMS.Core.ServiceHelper.Method
                                     string thumbnailPath = string.Concat(path, "\\", ServiceExtension.getSizePath(sizes[i]));
                                     if (!Directory.Exists(thumbnailPath))
                                     {
-                                        Directory.CreateDirectory(thumbnailPath);
+                                        _ = Directory.CreateDirectory(thumbnailPath);
                                     }
 
-                                    var webPThumbnailBytArr = ConvertImageToWebP(byteArr, sizes[i].Width, sizes[i].Height);
+                                    byte[] webPThumbnailBytArr = ConvertImageToWebP(byteArr, sizes[i].Width, sizes[i].Height);
                                     File.WriteAllBytes(Path.Combine(thumbnailPath, fileName), webPThumbnailBytArr);
                                 }
 
@@ -98,8 +97,7 @@ namespace CMS.Core.ServiceHelper.Method
                     }
                     else
                     {
-                        Uri uriResult;
-                        bool result = Uri.TryCreate(base64str, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                        bool result = Uri.TryCreate(base64str, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                         if (result)
                         {
                             return uriResult.AbsolutePath.Replace("/", "\\");
@@ -128,7 +126,7 @@ namespace CMS.Core.ServiceHelper.Method
 
                     if (!Directory.Exists(path))
                     {
-                        Directory.CreateDirectory(path);
+                        _ = Directory.CreateDirectory(path);
                     }
 
                     using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
@@ -195,11 +193,11 @@ namespace CMS.Core.ServiceHelper.Method
 
         private string GetFileExtension(string base64String)
         {
-            string ext = string.Empty;
+            string ext;
             try
             {
 
-                string mime = (base64String.Split(';')[0]).Split(':')[1];
+                string mime = base64String.Split(';')[0].Split(':')[1];
                 ext = MimeTypesMap.GetExtension(mime);
 
                 if (ext == "bin")
@@ -236,7 +234,7 @@ namespace CMS.Core.ServiceHelper.Method
             try
             {
                 string[] Path = filePath.Split('\\');
-                return MimeTypesMap.GetMimeType(Path[Path.Length - 1]);
+                return MimeTypesMap.GetMimeType(Path[^1]);
             }
             catch (Exception)
             {
@@ -255,14 +253,14 @@ namespace CMS.Core.ServiceHelper.Method
                 if (base64String.Split(';').Length > 0)
                 {
                     string[] Fileinfo = base64String.Split(';');
-                    base64String = Fileinfo[1].Substring(Fileinfo[1].IndexOf(',') + 1);
+                    base64String = Fileinfo[1][(Fileinfo[1].IndexOf(',') + 1)..];
                 }
 
                 if (string.IsNullOrEmpty(base64String) || base64String.Contains(" ") || base64String.Contains("\t") || base64String.Contains("\r"))
                 { return false; }
 
 
-                Convert.FromBase64String(base64String);
+                _ = Convert.FromBase64String(base64String);
                 return true;
             }
             catch
@@ -275,28 +273,17 @@ namespace CMS.Core.ServiceHelper.Method
 
         private byte[] ConvertImageToWebP(byte[] imageData, int newWidth = 0, int newHeight = 0)
         {
-            using (var imageFactory = new ImageFactory(preserveExifData: true))
-            {
-                using (var inputStream = new MemoryStream(imageData))
-                {
-                    if (newWidth > 0 && newHeight > 0)
-                    {
-                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90).Resize(new Size(newWidth, newHeight));
-                    }
-                    else
-                    {
-                        imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90);
-                    }
+            using ImageFactory imageFactory = new ImageFactory(preserveExifData: true);
+            using MemoryStream inputStream = new MemoryStream(imageData);
+            _ = newWidth > 0 && newHeight > 0
+                ? imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90).Resize(new Size(newWidth, newHeight))
+                : imageFactory.Load(inputStream).Format(new WebPFormat()).Quality(90);
 
 
-                    using (var outputStream = new MemoryStream())
-                    {
-                        imageFactory.Save(outputStream);
-                        byte[] webpBytes = outputStream.ToArray();
-                        return webpBytes;
-                    }
-                }
-            }
+            using MemoryStream outputStream = new MemoryStream();
+            _ = imageFactory.Save(outputStream);
+            byte[] webpBytes = outputStream.ToArray();
+            return webpBytes;
         }
 
     }

@@ -1,15 +1,12 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.ProductMaster;
-using ImageProcessor.Processors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +16,7 @@ namespace CMS.Service.Services.UserCartProduct
 
     public class UserCartProductService : BaseService, IUserCartProductService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         public UserCartProductService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
@@ -34,25 +31,24 @@ namespace CMS.Service.Services.UserCartProduct
                 TblUserCartList objProducts = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.SizeId == long.Parse(_security.DecryptData(model.SizeId)) && x.UserId == _loginUserDetail.UserId).FirstOrDefaultAsync();
                 if (objProducts == null)
                 {
-                    TblUserCartList objProduct = new TblUserCartList();
-                    objProduct.ProductId = long.Parse(_security.DecryptData(model.ProductId));
-                    objProduct.SizeId = long.Parse(_security.DecryptData(model.SizeId));
-                    objProduct.Quantity = model.Quantity;
-                    objProduct.UserId = _loginUserDetail.UserId.Value;
-                    objProduct.AddedOn = DateTime.Now;
-                    var product = await _db.TblUserCartLists.AddAsync(objProduct);
-                    await _db.SaveChangesAsync();
-                    if (objProducts == null)
+                    TblUserCartList objProduct = new TblUserCartList
                     {
-                        objProducts = new TblUserCartList();
-                    }
+                        ProductId = long.Parse(_security.DecryptData(model.ProductId)),
+                        SizeId = long.Parse(_security.DecryptData(model.SizeId)),
+                        Quantity = model.Quantity,
+                        UserId = _loginUserDetail.UserId.Value,
+                        AddedOn = DateTime.Now
+                    };
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserCartList> product = await _db.TblUserCartLists.AddAsync(objProduct);
+                    _ = await _db.SaveChangesAsync();
+                    objProducts ??= new TblUserCartList();
                     objProducts = product.Entity;
                 }
                 else if (objProducts != null)
                 {
                     objProducts.Quantity += model.Quantity;
-                    _db.TblUserCartLists.Update(objProducts);
-                    await _db.SaveChangesAsync();
+                    _ = _db.TblUserCartLists.Update(objProducts);
+                    _ = await _db.SaveChangesAsync();
                 }
                 objResult.Data = new UserCartProductViewModel
                 {
@@ -84,8 +80,8 @@ namespace CMS.Service.Services.UserCartProduct
                 if (objProducts != null)
                 {
                     objProducts.Quantity = model.Quantity;
-                    _db.TblUserCartLists.Update(objProducts);
-                    await _db.SaveChangesAsync();
+                    _ = _db.TblUserCartLists.Update(objProducts);
+                    _ = await _db.SaveChangesAsync();
                     objResult.Data = new UserCartProductViewModel
                     {
                         Id = _security.EncryptData(objProducts.Id),
@@ -122,7 +118,7 @@ namespace CMS.Service.Services.UserCartProduct
 
                 List<TblUserCartList> objProduct = await _db.TblUserCartLists.Where(x => x.ProductId == long.Parse(_security.DecryptData(model.ProductId)) && x.UserId == _loginUserDetail.UserId && x.SizeId == long.Parse(_security.DecryptData(model.SizeId))).ToListAsync();
                 _db.TblUserCartLists.RemoveRange(objProduct);
-                await _db.SaveChangesAsync();
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse<UserCartProductViewModel>(null, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
@@ -141,26 +137,21 @@ namespace CMS.Service.Services.UserCartProduct
                 long userId = 0;
                 if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("userId"))
                 {
-                    model.AdvanceSearchModel.TryGetValue("userId", out object _userId);
+                    _ = model.AdvanceSearchModel.TryGetValue("userId", out object _userId);
                     userId = Convert.ToInt64(_userId.ToString());
 
                 }
 
 
-                var result = (from data in _db.TblUserCartLists.Include(x => x.Product).ThenInclude(x => x.TblProductStocks)
+                IQueryable<TblUserCartList> result = from data in _db.TblUserCartLists.Include(x => x.Product).ThenInclude(x => x.TblProductStocks)
 
-                              where ((userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId))
-                              select data);
-                switch (model.OrderBy)
+                                                     where (userId > 0 && data.UserId == userId) || (userId == 0 && data.UserId == _loginUserDetail.UserId)
+                                                     select data;
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Product.Name ascending select orderData) : (from orderData in result orderby orderData.Product.Name descending select orderData);
-                        break;
-
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.AddedOn ascending select orderData) : (from orderData in result orderby orderData.AddedOn descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Product.Name ascending select orderData) : (from orderData in result orderby orderData.Product.Name descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.AddedOn ascending select orderData) : (from orderData in result orderby orderData.AddedOn descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
 
@@ -221,15 +212,9 @@ namespace CMS.Service.Services.UserCartProduct
 
 
 
-                if (result != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<UserCartProductViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<UserCartProductViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                    ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                    : CreateResponse<IEnumerable<UserCartProductViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception)
             {

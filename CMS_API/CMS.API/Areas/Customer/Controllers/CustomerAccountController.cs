@@ -1,6 +1,6 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.CustomerAddress;
-using CMS.Service.Services.User;
+using CMS.Service.Services.UserMaster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,7 +27,10 @@ namespace CMS.API.Areas.Customer.Controllers
 
         // GET api/<CustomerAccount>/5
         [HttpGet]
-        public async Task<object> Get() => await _user.GetById();
+        public async Task<object> Get()
+        {
+            return await _user.GetById();
+        }
 
 
 
@@ -42,10 +45,12 @@ namespace CMS.API.Areas.Customer.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -62,10 +67,12 @@ namespace CMS.API.Areas.Customer.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
                 return objReturn;
             }
 

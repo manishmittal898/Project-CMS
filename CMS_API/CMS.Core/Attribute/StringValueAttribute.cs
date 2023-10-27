@@ -6,7 +6,7 @@
 
         public StringValueAttribute(string value)
         {
-            this.StringValue = value;
+            StringValue = value;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -16,7 +15,7 @@ namespace CMS.Service.Services.SubLookupMaster
 {
     public class SubLookupMasterService : BaseService, ISubLookupMasterService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
 
         public SubLookupMasterService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
@@ -33,27 +32,21 @@ namespace CMS.Service.Services.SubLookupMaster
                 long LookupId = 0;
                 if (model.AdvanceSearchModel != null && model.AdvanceSearchModel.Count > 0 && model.AdvanceSearchModel.ContainsKey("lookupId"))
                 {
-                    model.AdvanceSearchModel.TryGetValue("lookupId", out object lookupId);
+                    _ = model.AdvanceSearchModel.TryGetValue("lookupId", out object lookupId);
                     LookupId = Convert.ToInt64(_security.DecryptData(lookupId.ToString()));
 
                 }
 
 
-                var result = (from lkType in _db.TblSubLookupMasters
-                              where lkType.LookUpId.Equals(LookupId) && !lkType.IsDeleted && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
-                              select lkType);
-                switch (model.OrderBy)
+                IQueryable<TblSubLookupMaster> result = from lkType in _db.TblSubLookupMasters
+                                                        where lkType.LookUpId.Equals(LookupId) && !lkType.IsDeleted && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                                                        select lkType;
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -76,15 +69,9 @@ namespace CMS.Service.Services.SubLookupMaster
 
                                         }).ToListAsync();
 
-                if (result != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<SubLookupMasterViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<SubLookupMasterViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                    ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                    : CreateResponse<IEnumerable<SubLookupMasterViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception)
             {
@@ -100,7 +87,7 @@ namespace CMS.Service.Services.SubLookupMaster
             ServiceResponse<SubLookupMasterViewModel> ObjResponse = new ServiceResponse<SubLookupMasterViewModel>();
             try
             {
-                var detail = _db.TblSubLookupMasters.Where(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDeleted == false).Select(X => new SubLookupMasterViewModel
+                SubLookupMasterViewModel detail = _db.TblSubLookupMasters.Where(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDeleted == false).Select(X => new SubLookupMasterViewModel
                 {
                     Id = _security.EncryptData(X.Id),
                     Name = X.Name,
@@ -117,16 +104,9 @@ namespace CMS.Service.Services.SubLookupMaster
 
                 }).FirstOrDefault();
 
-                if (detail != null)
-                {
-                    ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
-
-                }
-                else
-                {
-                    ObjResponse = CreateResponse<SubLookupMasterViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
-
-                }
+                ObjResponse = detail != null
+                    ? CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok)
+                    : CreateResponse<SubLookupMasterViewModel>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
 
             }
             catch (Exception ex)
@@ -155,31 +135,32 @@ namespace CMS.Service.Services.SubLookupMaster
                     }
                     else
                     {
-                        _fileHelper.Delete(objData.ImagePath);
+                        _ = _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
                     }
 
 
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var roletype = _db.TblSubLookupMasters.Update(objData);
-                    _db.SaveChanges();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblSubLookupMaster> roletype = _db.TblSubLookupMasters.Update(objData);
+                    _ = _db.SaveChanges();
                     return CreateResponse<TblSubLookupMaster>(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
                 }
                 else
                 {
 
-                    TblSubLookupMaster objData = new TblSubLookupMaster();
-
-                    objData.Name = model.Name;
-                    objData.SortedOrder = model.SortedOrder;
-                    objData.LookUpId = long.Parse(_security.DecryptData(model.LookUpId));
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup);
-                    objData.IsActive = true;
-                    objData.CreatedBy = _loginUserDetail.UserId.Value;
-                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var roletype = await _db.TblSubLookupMasters.AddAsync(objData);
-                    _db.SaveChanges();
+                    TblSubLookupMaster objData = new TblSubLookupMaster
+                    {
+                        Name = model.Name,
+                        SortedOrder = model.SortedOrder,
+                        LookUpId = long.Parse(_security.DecryptData(model.LookUpId)),
+                        ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.Lookup),
+                        IsActive = true,
+                        CreatedBy = _loginUserDetail.UserId.Value,
+                        ModifiedBy = _loginUserDetail.UserId.Value
+                    };
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblSubLookupMaster> roletype = await _db.TblSubLookupMasters.AddAsync(objData);
+                    _ = _db.SaveChanges();
                     return CreateResponse<TblSubLookupMaster>(objData, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
@@ -205,13 +186,13 @@ namespace CMS.Service.Services.SubLookupMaster
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
                 objData.ModifiedOn = DateTime.Now;
                 //  _db.TblSubLookupMasters.Update(objData);
-                await _db.SaveChangesAsync();
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblSubLookupMaster>(null, ResponseMessage.Fail, false, ((int)ApiStatusCode.InternalServerError), ex.Message);
+                return CreateResponse<TblSubLookupMaster>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, ex.Message);
             }
 
 
@@ -225,8 +206,8 @@ namespace CMS.Service.Services.SubLookupMaster
                 objData = _db.TblSubLookupMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
                 objData.IsActive = !objData.IsActive;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objData as TblSubLookupMaster, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objData, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception)
             {

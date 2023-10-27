@@ -1,5 +1,5 @@
 ﻿using CMS.Core.ServiceHelper.Model;
-using CMS.Service.Services.User;
+using CMS.Service.Services.UserMaster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -17,22 +17,24 @@ namespace CMS.API.Areas.Admin.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IUserMasterService _user;
-        public CustomerController(IUserMasterService user) => _user = user;
-
+        public CustomerController(IUserMasterService user)
+        {
+            _user = user;
+        }
 
         [HttpPost]
         public async Task<object> Get(IndexModel model)
         {
-            if (model.AdvanceSearchModel == null)
-            {
-                model.AdvanceSearchModel = new Dictionary<string, object>();
-            }
+            model.AdvanceSearchModel ??= new Dictionary<string, object>();
             model.AdvanceSearchModel["roleId"] = (int)RoleEnum.Customer;
             return await _user.GetList(model);
         }
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(long id)        => await _user.GetById(id);
+        public async Task<object> Get(long id)
+        {
+            return await _user.GetById(id);
+        }
 
 
         // POST api/<CustomerAccount>
@@ -47,10 +49,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }

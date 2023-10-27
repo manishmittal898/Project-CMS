@@ -14,14 +14,24 @@ namespace CMS.API.Areas.Admin.Controllers
     public class GeneralEntryCategoryController : ControllerBase
     {
         private readonly IGECategoryService _service;
-        public GeneralEntryCategoryController(IGECategoryService Iservice) => _service = Iservice;
+        public GeneralEntryCategoryController(IGECategoryService Iservice)
+        {
+            _service = Iservice;
+        }
+
         // GET: api/<GeneralEntryCategory>
         [HttpPost]
-        public async Task<object> GetAsync(IndexModel model) => await _service.GetList(model);
+        public async Task<object> GetAsync(IndexModel model)
+        {
+            return await _service.GetList(model);
+        }
 
         // GET api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Get(string id) => await _service.GetById(id);
+        public async Task<object> Get(string id)
+        {
+            return await _service.GetById(id);
+        }
 
         // POST api/<GeneralEntryCategory>
         [HttpPost]
@@ -34,24 +44,35 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
         }
         [HttpGet("{id}")]
-        public async Task<object> ChangeActiveStatus(string id) => await _service.ActiveStatusUpdate(id);
+        public async Task<object> ChangeActiveStatus(string id)
+        {
+            return await _service.ActiveStatusUpdate(id);
+        }
 
         [HttpGet("{id}/{columnName}")]
-        public async Task<object> ChangeFlagStatusUpdate(string id, string columnName) => await _service.FlagStatusUpdate(id, columnName);
+        public async Task<object> ChangeFlagStatusUpdate(string id, string columnName)
+        {
+            return await _service.FlagStatusUpdate(id, columnName);
+        }
 
 
 
         // DELETE api/<GeneralEntryCategory>/5
         [HttpGet("{id}")]
-        public async Task<object> Delete(string id) => await _service.Delete(id);
+        public async Task<object> Delete(string id)
+        {
+            return await _service.Delete(id);
+        }
     }
 }

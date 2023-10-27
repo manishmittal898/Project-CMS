@@ -7,7 +7,7 @@ namespace CMS.Core.ServiceHelper.Method
 {
     public static class UtilityService
     {
-        private static HostingEnvironment _env = new HostingEnvironment();
+        private static readonly HostingEnvironment _env = new HostingEnvironment();
 
         /// <summary>
         /// Save File from base64 string
@@ -25,13 +25,13 @@ namespace CMS.Core.ServiceHelper.Method
                 if (!string.IsNullOrEmpty(base64str) && !string.IsNullOrEmpty(filePath))
                 {
                     string[] Fileinfo = base64str.Split(';');
-                    byte[] byteArr = Convert.FromBase64String(Fileinfo[1].Substring(Fileinfo[1].IndexOf(',') + 1));
+                    byte[] byteArr = Convert.FromBase64String(Fileinfo[1][(Fileinfo[1].IndexOf(',') + 1)..]);
 
                     saveFile = filePath;
                     filePath = filePath.GetPhysicalPath();
                     if (!Directory.Exists(filePath))
                     {
-                        Directory.CreateDirectory(filePath);
+                        _ = Directory.CreateDirectory(filePath);
                     }
                     fileName = string.IsNullOrEmpty(fileName) ? Guid.NewGuid().ToString() + base64str.GetFileExtension() : fileName;
                     File.WriteAllBytes(filePath + fileName, byteArr);
@@ -70,10 +70,10 @@ namespace CMS.Core.ServiceHelper.Method
 
         private static string GetFileExtension(this string base64String)
         {
-            string ext = string.Empty;
+            string ext;
             try
             {
-                string mime = (base64String.Split(';')[0]).Split(':')[1];
+                string mime = base64String.Split(';')[0].Split(':')[1];
                 ext = MimeTypesMap.GetExtension(mime);
 
             }
@@ -110,7 +110,7 @@ namespace CMS.Core.ServiceHelper.Method
             try
             {
                 string[] Path = filePath.Split('\\');
-                return MimeTypesMap.GetMimeType(Path[Path.Length - 1]);
+                return MimeTypesMap.GetMimeType(Path[^1]);
             }
             catch (Exception)
             {

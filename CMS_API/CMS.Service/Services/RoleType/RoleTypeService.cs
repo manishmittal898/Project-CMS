@@ -12,7 +12,7 @@ namespace CMS.Service.Services.RoleType
 {
     public class RoleTypeService : BaseService, IRoleTypeService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         public RoleTypeService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
@@ -24,7 +24,7 @@ namespace CMS.Service.Services.RoleType
             ServiceResponse<IEnumerable<Data.Models.TblRoleType>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblRoleType>>();
             try
             {
-                var objData = _db.TblRoleTypes.ToList();
+                List<TblRoleType> objData = _db.TblRoleTypes.ToList();
                 objResult = CreateResponse(objData as IEnumerable<Data.Models.TblRoleType>, "Success", true);
             }
             catch (Exception)
@@ -42,7 +42,7 @@ namespace CMS.Service.Services.RoleType
             try
             {
 
-                var detail = _db.TblRoleTypes.FirstOrDefault(x => x.RoleId == id && !x.IsDeleted && x.IsActive.Value);
+                TblRoleType detail = _db.TblRoleTypes.FirstOrDefault(x => x.RoleId == id && !x.IsDeleted && x.IsActive.Value);
                 ObjResponse = CreateResponse(detail, "Success", true);
             }
             catch (Exception ex)
@@ -58,16 +58,18 @@ namespace CMS.Service.Services.RoleType
         {
             try
             {
-                TblRoleType objRole = new TblRoleType();
-                // objRole.RoleId = model.RoleId;
-                objRole.ParentRoleId = model.ParentRoleId ?? null;
-                objRole.RoleName = model.RoleName;
-                objRole.RoleLevel = model.RoleLevel;
-                objRole.IsDeleted = false;
-                objRole.IsActive = true;
-                objRole.CreatedBy = model.CreatedBy;
-                await _db.TblRoleTypes.AddAsync(objRole);
-                _db.SaveChanges();
+                TblRoleType objRole = new TblRoleType
+                {
+                    // objRole.RoleId = model.RoleId;
+                    ParentRoleId = model.ParentRoleId ?? null,
+                    RoleName = model.RoleName,
+                    RoleLevel = model.RoleLevel,
+                    IsDeleted = false,
+                    IsActive = true,
+                    CreatedBy = model.CreatedBy
+                };
+                _ = await _db.TblRoleTypes.AddAsync(objRole);
+                _ = _db.SaveChanges();
                 return CreateResponse(objRole, "Added", true);
 
 
@@ -92,8 +94,8 @@ namespace CMS.Service.Services.RoleType
                 objRole.RoleLevel = model.RoleLevel;
 
                 objRole.ModifiedBy = model.ModifiedBy;
-                var roletype = _db.TblRoleTypes.Update(objRole);
-                await _db.SaveChangesAsync();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblRoleType> roletype = _db.TblRoleTypes.Update(objRole);
+                _ = await _db.SaveChangesAsync();
 
 
                 return CreateResponse(objRole, "Updated", true);
@@ -115,8 +117,8 @@ namespace CMS.Service.Services.RoleType
             {
                 TblRoleType objRole = new TblRoleType();
                 objRole = _db.TblRoleTypes.FirstOrDefault(r => r.RoleId == id);
-                var roletype = _db.TblRoleTypes.Remove(objRole);
-                await _db.SaveChangesAsync();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblRoleType> roletype = _db.TblRoleTypes.Remove(objRole);
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse(objRole, "Deleted", true);
             }
             catch (Exception)

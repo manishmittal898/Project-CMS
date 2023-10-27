@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -17,7 +16,7 @@ namespace CMS.Service.Services.GeneralEntry
 {
     public class GECategoryService : BaseService, IGECategoryService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
         public GECategoryService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
         {
@@ -26,27 +25,21 @@ namespace CMS.Service.Services.GeneralEntry
         }
 
 
-        public async Task<ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>>> GetList(IndexModel model)
+        public ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>> GetList(IndexModel model)
         {
             ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>> objResult = new ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>>();
             try
             {
 
-                var result = (from data in _db.TblGecategoryMaters
-                              where !data.IsDelete && (string.IsNullOrEmpty(model.Search) || data.Name.Contains(model.Search))
-                              select data);
-                switch (model.OrderBy)
+                IQueryable<TblGecategoryMater> result = from data in _db.TblGecategoryMaters
+                                                        where !data.IsDelete && (string.IsNullOrEmpty(model.Search) || data.Name.Contains(model.Search))
+                                                        select data;
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -76,11 +69,11 @@ namespace CMS.Service.Services.GeneralEntry
                         ContentTypeText = Enum.GetValues(typeof(ContentTypeEnum)).Cast<ContentTypeEnum>().Where(en => x.ContentType == (int)en).Select(r => r.GetStringValue()).FirstOrDefault()
                     });
 
-                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<IEnumerable<GeneralEntryCategoryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<IEnumerable<GeneralEntryCategoryViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
                 }
             }
             catch (Exception)
@@ -173,38 +166,39 @@ namespace CMS.Service.Services.GeneralEntry
                     }
                     else if (!string.IsNullOrEmpty(objData.ImagePath))
                     {
-                        _fileHelper.Delete(objData.ImagePath);
+                        _ = _fileHelper.Delete(objData.ImagePath);
                         objData.ImagePath = null;
 
                     }
-                    var roletype = _db.TblGecategoryMaters.Update(objData);
-                    _db.SaveChanges();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblGecategoryMater> roletype = _db.TblGecategoryMaters.Update(objData);
+                    _ = _db.SaveChanges();
                     return CreateResponse((object)_security.EncryptData(objData.Id), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
                 }
                 else
                 {
 
-                    TblGecategoryMater objData = new TblGecategoryMater();
+                    TblGecategoryMater objData = new TblGecategoryMater
+                    {
+                        Name = model.Name,
+                        SortedOrder = model.SortedOrder,
+                        ContentType = int.Parse(_security.DecryptData(model.ContentType)),
+                        EnumValue = model.Name.Replace(' ', '_'),
+                        IsSingleEntry = model.IsSingleEntry,
+                        IsShowInMain = model.IsShowInMain,
+                        IsShowDataInMain = model.IsShowDataInMain,
+                        IsShowThumbnail = model.IsShowThumbnail,
+                        IsSystemEntry = false,
+                        IsShowUrl = model.IsShowUrl,
 
-                    objData.Name = model.Name;
-                    objData.SortedOrder = model.SortedOrder;
-                    objData.ContentType = int.Parse(_security.DecryptData(model.ContentType));
-                    objData.EnumValue = model.Name.Replace(' ', '_');
-                    objData.IsSingleEntry = model.IsSingleEntry;
-                    objData.IsShowInMain = model.IsShowInMain;
-                    objData.IsShowDataInMain = model.IsShowDataInMain;
-                    objData.IsShowThumbnail = model.IsShowThumbnail;
-                    objData.IsSystemEntry = false;
-                    objData.IsShowUrl = model.IsShowUrl;
+                        ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory),
 
-                    objData.ImagePath = string.IsNullOrEmpty(model.ImagePath) ? null : await _fileHelper.Save(model.ImagePath, FilePaths.GeneralEntryCategory);
-
-                    objData.IsActive = true;
-                    objData.CreatedBy = _loginUserDetail.UserId.Value;
-                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var objCateGoryData = await _db.TblGecategoryMaters.AddAsync(objData);
-                    _db.SaveChanges();
+                        IsActive = true,
+                        CreatedBy = _loginUserDetail.UserId.Value,
+                        ModifiedBy = _loginUserDetail.UserId.Value
+                    };
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblGecategoryMater> objCateGoryData = await _db.TblGecategoryMaters.AddAsync(objData);
+                    _ = _db.SaveChanges();
                     return CreateResponse((object)_security.EncryptData(objCateGoryData.Entity.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
@@ -236,14 +230,14 @@ namespace CMS.Service.Services.GeneralEntry
                     objData.IsDelete = true;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
                     objData.ModifiedOn = DateTime.Now;
-                    await _db.SaveChangesAsync();
+                    _ = await _db.SaveChangesAsync();
                     return CreateResponse(objData, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
                 }
             }
             catch (Exception)
             {
 
-                return CreateResponse<TblGecategoryMater>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError));
+                return CreateResponse<TblGecategoryMater>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError);
             }
 
 
@@ -261,8 +255,8 @@ namespace CMS.Service.Services.GeneralEntry
                 else
                 {
                     objData.IsActive = !objData.IsActive;
-                    await _db.SaveChangesAsync();
-                    return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+                    _ = await _db.SaveChangesAsync();
+                    return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -308,8 +302,8 @@ namespace CMS.Service.Services.GeneralEntry
                         break;
                 }
 
-                await _db.SaveChangesAsync();
-                return CreateResponse(objData as TblGecategoryMater, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objData, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception)
             {
@@ -317,6 +311,11 @@ namespace CMS.Service.Services.GeneralEntry
                 return null;
 
             }
+        }
+
+        Task<ServiceResponse<IEnumerable<GeneralEntryCategoryViewModel>>> IGECategoryService.GetList(IndexModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

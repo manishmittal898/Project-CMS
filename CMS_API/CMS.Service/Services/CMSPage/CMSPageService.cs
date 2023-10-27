@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -16,7 +15,7 @@ namespace CMS.Service.Services.CMSPage
 {
     public class CMSPageService : BaseService, ICMSPageService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
         public CMSPageService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
         {
@@ -32,24 +31,18 @@ namespace CMS.Service.Services.CMSPage
                 string enumValue = LookupTypeEnum.CMS_Page.GetStringValue();
 
 
-                var result = (from lkType in _db.TblLookupMasters
-                              where lkType.LookUpTypeNavigation.EnumValue.Equals(enumValue) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
-                              select lkType);
+                IQueryable<TblLookupMaster> result = from lkType in _db.TblLookupMasters
+                                                     where lkType.LookUpTypeNavigation.EnumValue.Equals(enumValue) && !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                                                     select lkType;
 
 
 
-                switch (model.OrderBy)
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Name ascending select orderData) : (from orderData in result orderby orderData.Name descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -65,15 +58,9 @@ namespace CMS.Service.Services.CMSPage
 
                                         }).ToListAsync();
 
-                if (result != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<CMSPageListViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<CMSPageListViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                    ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                    : CreateResponse<IEnumerable<CMSPageListViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
             }
             catch (Exception)
             {
@@ -92,7 +79,7 @@ namespace CMS.Service.Services.CMSPage
             ServiceResponse<List<CMSPageViewModel>> ObjResponse = new ServiceResponse<List<CMSPageViewModel>>();
             try
             {
-                var detail = await _db.TblCmspageContentMasters.Where(x => x.PageId == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDeleted == false).Select(X => new CMSPageViewModel
+                List<CMSPageViewModel> detail = await _db.TblCmspageContentMasters.Where(x => x.PageId == long.Parse(_security.DecryptData(id)) && x.IsActive.Value && x.IsDeleted == false).Select(X => new CMSPageViewModel
                 {
                     Id = _security.EncryptData(X.Id),
                     PageId = _security.EncryptData(X.PageId),
@@ -105,16 +92,9 @@ namespace CMS.Service.Services.CMSPage
 
                 }).ToListAsync();
 
-                if (detail != null && detail.Count > 0)
-                {
-                    ObjResponse = CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok);
-
-                }
-                else
-                {
-                    ObjResponse = CreateResponse<List<CMSPageViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
-
-                }
+                ObjResponse = detail != null && detail.Count > 0
+                    ? CreateResponse(detail, ResponseMessage.Success, true, (int)ApiStatusCode.Ok)
+                    : CreateResponse<List<CMSPageViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
 
             }
             catch (Exception ex)
@@ -139,23 +119,25 @@ namespace CMS.Service.Services.CMSPage
                     objData.Heading = model.Heading;
                     objData.ModifiedOn = DateTime.Now;
                     objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var dataResult = _db.TblCmspageContentMasters.Update(objData);
-                    _db.SaveChanges();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblCmspageContentMaster> dataResult = _db.TblCmspageContentMasters.Update(objData);
+                    _ = _db.SaveChanges();
 
                 }
                 else
                 {
-                    TblCmspageContentMaster objData = new TblCmspageContentMaster();
-                    objData.PageId = long.Parse(_security.DecryptData(model.PageId.ToString()));
-                    objData.Content = model.Content;
-                    objData.SortedOrder = model.SortedOrder;
-                    objData.Heading = model.Heading;
-                    objData.IsDeleted = false;
-                    objData.IsActive = true;
-                    objData.CreatedBy = _loginUserDetail.UserId.Value;
-                    objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                    var dataResult = await _db.TblCmspageContentMasters.AddAsync(objData);
-                    _db.SaveChanges();
+                    TblCmspageContentMaster objData = new TblCmspageContentMaster
+                    {
+                        PageId = long.Parse(_security.DecryptData(model.PageId.ToString())),
+                        Content = model.Content,
+                        SortedOrder = model.SortedOrder,
+                        Heading = model.Heading,
+                        IsDeleted = false,
+                        IsActive = true,
+                        CreatedBy = _loginUserDetail.UserId.Value,
+                        ModifiedBy = _loginUserDetail.UserId.Value
+                    };
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblCmspageContentMaster> dataResult = await _db.TblCmspageContentMasters.AddAsync(objData);
+                    _ = _db.SaveChanges();
 
                     model.Id = _security.EncryptData(dataResult.Entity.Id.ToString());
 
@@ -181,8 +163,8 @@ namespace CMS.Service.Services.CMSPage
                 objData.IsActive = !objData.IsActive;
                 objData.ModifiedOn = DateTime.Now;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                var dataResult = _db.TblCmspageContentMasters.Update(objData);
-                _db.SaveChanges();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblCmspageContentMaster> dataResult = _db.TblCmspageContentMasters.Update(objData);
+                _ = _db.SaveChanges();
                 return CreateResponse(id.ToString(), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
             }
@@ -201,8 +183,8 @@ namespace CMS.Service.Services.CMSPage
                 objData.IsDeleted = !objData.IsDeleted;
                 objData.ModifiedOn = DateTime.Now;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                var dataResult = _db.TblCmspageContentMasters.Update(objData);
-                _db.SaveChanges();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblCmspageContentMaster> dataResult = _db.TblCmspageContentMasters.Update(objData);
+                _ = _db.SaveChanges();
                 return CreateResponse(id.ToString(), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
 
             }

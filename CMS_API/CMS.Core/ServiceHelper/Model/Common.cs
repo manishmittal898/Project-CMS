@@ -2,7 +2,7 @@
 
 namespace CMS.Core.ServiceHelper.Model
 {
-    class Common
+    internal class Common
     {
 
     }

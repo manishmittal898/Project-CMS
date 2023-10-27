@@ -11,8 +11,8 @@ namespace CMS.Core.ServiceHelper.Method
     public class EmailHelper
     {
         // static IHostingEnvironment _env;
-        private MailSettings _mailSettings;
-        IConfiguration _configuration;
+        private readonly MailSettings _mailSettings;
+        private readonly IConfiguration _configuration;
 
         public EmailHelper(IConfiguration configuration)
         {
@@ -32,8 +32,10 @@ namespace CMS.Core.ServiceHelper.Method
                 MailboxAddress emailTo = new MailboxAddress(mailRequest.ToEmail, mailRequest.ToEmail);
                 emailMessage.To.Add(emailTo);
                 emailMessage.Subject = mailRequest.Subject;
-                BodyBuilder emailBodyBuilder = new BodyBuilder();
-                emailBodyBuilder.TextBody = mailRequest.Body;
+                BodyBuilder emailBodyBuilder = new BodyBuilder
+                {
+                    TextBody = mailRequest.Body
+                };
                 emailMessage.Body = emailBodyBuilder.ToMessageBody();
 
                 if (mailRequest.Attachments != null)
@@ -48,7 +50,7 @@ namespace CMS.Core.ServiceHelper.Method
                                 attachmentFile.CopyTo(memoryStream);
                                 attachmentFileByteArray = memoryStream.ToArray();
                             }
-                            emailBodyBuilder.Attachments.Add(attachmentFile.FileName, attachmentFileByteArray, MimeKit.ContentType.Parse(attachmentFile.ContentType));
+                            _ = emailBodyBuilder.Attachments.Add(attachmentFile.FileName, attachmentFileByteArray, MimeKit.ContentType.Parse(attachmentFile.ContentType));
                         }
                     }
                 }
@@ -57,7 +59,7 @@ namespace CMS.Core.ServiceHelper.Method
 
                 emailClient.Connect(_mailSettings.Host, _mailSettings.Port, true);
                 emailClient.Authenticate(_mailSettings.UserName, _mailSettings.Password);
-                var str = await emailClient.SendAsync(emailMessage);
+                string str = await emailClient.SendAsync(emailMessage);
                 emailClient.Disconnect(true);
                 emailClient.Dispose();
             }
@@ -78,7 +80,7 @@ namespace CMS.Core.ServiceHelper.Method
         //            From = new MailAddress(_mailSettings.UserName, _mailSettings.DisplayName),
         //            Subject = mailRequest.Subject,
         //            Body = mailRequest.Body,
-                    
+
         //        };
         //        message.IsBodyHtml = false;
         //        // Add recipients
@@ -112,7 +114,7 @@ namespace CMS.Core.ServiceHelper.Method
         //            client.Port = 25;
         //            client.Credentials = new NetworkCredential(_mailSettings.UserName, _mailSettings.Password);
         //            //  client.UseDefaultCredentials = true;
-                
+
 
         //            client.Send(message);
 

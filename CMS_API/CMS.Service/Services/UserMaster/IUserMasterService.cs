@@ -3,7 +3,7 @@ using CMS.Data.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CMS.Service.Services.User
+namespace CMS.Service.Services.UserMaster
 {
     public interface IUserMasterService
     {

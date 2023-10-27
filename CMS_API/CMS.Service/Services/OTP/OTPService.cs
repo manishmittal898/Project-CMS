@@ -11,7 +11,7 @@ namespace CMS.Service.Services.OTP
 {
     public class OTPService : BaseService, IOTPService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         public OTPService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
@@ -21,14 +21,16 @@ namespace CMS.Service.Services.OTP
             try
             {
                 Random generator = new Random();
-                String r = generator.Next(0, 1000000).ToString("D6");
-                TblUserOtpdatum otpdatum = new TblUserOtpdatum();
-                otpdatum.SendOn = SendOn;
-                otpdatum.Otp = _security.EncryptData(r);
-                otpdatum.Attempt = 1;
+                string r = generator.Next(0, 1000000).ToString("D6");
+                TblUserOtpdatum otpdatum = new TblUserOtpdatum
+                {
+                    SendOn = SendOn,
+                    Otp = _security.EncryptData(r),
+                    Attempt = 1
+                };
 
-                var result = _db.TblUserOtpdata.Add(otpdatum);
-                _db.SaveChanges();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserOtpdatum> result = _db.TblUserOtpdata.Add(otpdatum);
+                _ = _db.SaveChanges();
                 await _emailHelper.SendEmailAsync(new MailRequest { ToEmail = SendOn, Body = $"your OTP is {r}", Subject = "OTP Verification" });
 
                 return CreateResponse(result.Entity.SessionId.ToString(), ResponseMessage.OTPSent, true, (int)ApiStatusCode.Ok);
@@ -36,7 +38,7 @@ namespace CMS.Service.Services.OTP
             catch (Exception ex)
             {
 
-                return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, exception : ex.InnerException!=null ? ex.InnerException.Message : ex.Message);
+                return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, exception: ex.InnerException != null ? ex.InnerException.Message : ex.Message);
 
             }
         }
@@ -47,18 +49,18 @@ namespace CMS.Service.Services.OTP
             TblUserOtpdatum otpdatum = _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId && !x.IsVerified).FirstOrDefault();
             if (otpdatum != null && model.OTP == _security.DecryptData(otpdatum.Otp))
             {
-                otpdatum.Attempt = otpdatum.Attempt + 1;
+                otpdatum.Attempt++;
                 otpdatum.IsVerified = true;
                 IsSuccess = true;
             }
             else if (otpdatum != null && model.OTP != _security.DecryptData(otpdatum.Otp))
             {
-                otpdatum.Attempt = otpdatum.Attempt + 1;
+                otpdatum.Attempt++;
 
             }
-            _db.TblUserOtpdata.Update(otpdatum);
-            _db.SaveChanges();
-            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, true, (IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid));
+            _ = _db.TblUserOtpdata.Update(otpdatum);
+            _ = _db.SaveChanges();
+            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, true, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
 
         }
     }

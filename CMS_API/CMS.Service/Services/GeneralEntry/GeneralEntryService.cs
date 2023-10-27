@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -17,7 +16,7 @@ namespace CMS.Service.Services.GeneralEntry
 {
     public class GeneralEntryService : BaseService, IGeneralEntryService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         private readonly FileHelper _fileHelper;
         public GeneralEntryService(DB_CMSContext db, IHostingEnvironment environment, IConfiguration _configuration) : base(_configuration)
         {
@@ -35,8 +34,8 @@ namespace CMS.Service.Services.GeneralEntry
                 objProduct.IsActive = !objProduct.IsActive;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objProduct as TblGeneralEntry, ResponseMessage.Update, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objProduct, ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
             }
             catch (Exception)
             {
@@ -53,16 +52,16 @@ namespace CMS.Service.Services.GeneralEntry
                 TblGeneralEntry objProduct = new TblGeneralEntry();
                 objProduct = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
-                objProduct.IsDeleted = (bool)true;
+                objProduct.IsDeleted = true;
                 objProduct.ModifiedBy = _loginUserDetail.UserId ?? objProduct.ModifiedBy;
                 objProduct.ModifiedOn = DateTime.Now;
-                await _db.SaveChangesAsync();
-                return CreateResponse(objProduct as TblGeneralEntry, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                _ = await _db.SaveChangesAsync();
+                return CreateResponse(objProduct, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)
             {
-                return CreateResponse<TblGeneralEntry>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse<TblGeneralEntry>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
         }
@@ -72,25 +71,25 @@ namespace CMS.Service.Services.GeneralEntry
             ServiceResponse<GeneralEntryViewModel> ObjResponse = new ServiceResponse<GeneralEntryViewModel>();
             try
             {
-                var result = await (from gen in _db.TblGeneralEntries
-                                    where gen.Id == long.Parse(_security.DecryptData(id))
+                GeneralEntryViewModel result = await (from gen in _db.TblGeneralEntries
+                                                      where gen.Id == long.Parse(_security.DecryptData(id))
 
-                                    select new GeneralEntryViewModel
-                                    {
-                                        Id = _security.EncryptData(gen.Id),
-                                        Title = gen.Title,
-                                        CategoryId = _security.EncryptData(gen.CategoryId),
-                                        Category = gen.Category.Name,
-                                        Description = gen.Description,
-                                        DataId = gen.DataId,
-                                        SortedOrder = gen.SortedOrder,
-                                        ImagePath = !string.IsNullOrEmpty(gen.ImagePath) && (gen.Category.IsShowThumbnail || isEdit) ? gen.ImagePath.ToAbsolutePath() : null,
-                                        Url = !string.IsNullOrEmpty(gen.Url) && (gen.Category.IsShowUrl || isEdit) ? gen.Url : null,
-                                        Keyword = gen.Keyword,
-                                        IsActive = gen.IsActive,
-                                        IsDeleted = gen.IsDeleted
+                                                      select new GeneralEntryViewModel
+                                                      {
+                                                          Id = _security.EncryptData(gen.Id),
+                                                          Title = gen.Title,
+                                                          CategoryId = _security.EncryptData(gen.CategoryId),
+                                                          Category = gen.Category.Name,
+                                                          Description = gen.Description,
+                                                          DataId = gen.DataId,
+                                                          SortedOrder = gen.SortedOrder,
+                                                          ImagePath = !string.IsNullOrEmpty(gen.ImagePath) && (gen.Category.IsShowThumbnail || isEdit) ? gen.ImagePath.ToAbsolutePath() : null,
+                                                          Url = !string.IsNullOrEmpty(gen.Url) && (gen.Category.IsShowUrl || isEdit) ? gen.Url : null,
+                                                          Keyword = gen.Keyword,
+                                                          IsActive = gen.IsActive,
+                                                          IsDeleted = gen.IsDeleted
 
-                                    }).FirstOrDefaultAsync();
+                                                      }).FirstOrDefaultAsync();
 
                 result.Data = await (from data in _db.TblFileDataMasters
                                      join mData in _db.TblGeneralEntries.DefaultIfEmpty() on data.DataId equals mData.DataId
@@ -111,7 +110,7 @@ namespace CMS.Service.Services.GeneralEntry
             return ObjResponse;
         }
 
-        public async Task<ServiceResponse<List<GeneralEntryViewModel>>> GetList(IndexModel model)
+        public ServiceResponse<List<GeneralEntryViewModel>> GetList(IndexModel model)
         {
 
             ServiceResponse<List<GeneralEntryViewModel>> objResult = new ServiceResponse<List<GeneralEntryViewModel>>();
@@ -122,18 +121,12 @@ namespace CMS.Service.Services.GeneralEntry
                              where b.IsDeleted == false
                              select new { m = b };
 
-                switch (model.OrderBy)
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.m.Title ascending select orderData) : (from orderData in result orderby orderData.m.Title descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.m.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.m.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.m.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.m.SortedOrder descending select orderData);
-                        break;
-                }
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.m.Title ascending select orderData) : (from orderData in result orderby orderData.m.Title descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.m.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.m.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.m.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.m.SortedOrder descending select orderData),
+                };
                 objResult.TotalRecord = result.Count();
 
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
@@ -158,11 +151,11 @@ namespace CMS.Service.Services.GeneralEntry
                                           IsActive = x.m.IsActive,
                                           IsDeleted = x.m.IsDeleted
                                       }).ToList();
-                    return CreateResponse(objResult.Data as List<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
                 }
             }
             catch (Exception)
@@ -186,7 +179,7 @@ namespace CMS.Service.Services.GeneralEntry
                 {
                     objGeneralEntry = await _db.TblGeneralEntries.Include(x => x.Category).FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(model.Id)));
 
-                    var currentCat = long.Parse(_security.DecryptData(model.CategoryId)) == objGeneralEntry.CategoryId ? objGeneralEntry.Category : await _db.TblGecategoryMaters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(model.CategoryId)));
+                    TblGecategoryMater currentCat = long.Parse(_security.DecryptData(model.CategoryId)) == objGeneralEntry.CategoryId ? objGeneralEntry.Category : await _db.TblGecategoryMaters.FirstOrDefaultAsync(r => r.Id == long.Parse(_security.DecryptData(model.CategoryId)));
 
                     objGeneralEntry.Id = long.Parse(_security.DecryptData(model.Id));
                     objGeneralEntry.Title = model.Title;
@@ -205,12 +198,12 @@ namespace CMS.Service.Services.GeneralEntry
                     }
                     else
                     {
-                        _fileHelper.Delete(objGeneralEntry.ImagePath);
+                        _ = _fileHelper.Delete(objGeneralEntry.ImagePath);
                         objGeneralEntry.ImagePath = null;
                     }
 
-                    _db.TblGeneralEntries.Update(objGeneralEntry);
-                    await _db.SaveChangesAsync();
+                    _ = _db.TblGeneralEntries.Update(objGeneralEntry);
+                    _ = await _db.SaveChangesAsync();
                     if (model.Data != null && model.Data.Count > 0)
                     {
                         string[] existingFilePaths = _db.TblFileDataMasters.Where(x => x.DataId == objGeneralEntry.DataId).Select(x => x.Value).ToArray();
@@ -227,10 +220,10 @@ namespace CMS.Service.Services.GeneralEntry
                         if ((objGeneralEntry.Category.ContentType == (int)ContentTypeEnum.Photo || objGeneralEntry.Category.ContentType == (int)ContentTypeEnum.MultipleImages) && dataItems.Count > 0 && !objGeneralEntry.Category.IsShowThumbnail)
                         {
                             objGeneralEntry.ImagePath = dataItems[0].Value;
-                            _db.TblGeneralEntries.Update(objGeneralEntry);
+                            _ = _db.TblGeneralEntries.Update(objGeneralEntry);
 
                         }
-                        await _db.SaveChangesAsync();
+                        _ = await _db.SaveChangesAsync();
                     }
 
                     return CreateResponse((object)_security.EncryptData(objGeneralEntry.Id), ResponseMessage.Update, true, (int)ApiStatusCode.Ok);
@@ -249,8 +242,8 @@ namespace CMS.Service.Services.GeneralEntry
                     objGeneralEntry.ModifiedBy = _loginUserDetail.UserId.Value;
                     objGeneralEntry.Url = model.Url;
 
-                    var product = await _db.TblGeneralEntries.AddAsync(objGeneralEntry);
-                    await _db.SaveChangesAsync();
+                    Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblGeneralEntry> product = await _db.TblGeneralEntries.AddAsync(objGeneralEntry);
+                    _ = await _db.SaveChangesAsync();
 
                     if (model.Data != null && model.Data.Count > 0)
                     {
@@ -270,13 +263,13 @@ namespace CMS.Service.Services.GeneralEntry
                         {
 
                             objGeneralEntry.ImagePath = dataItems[0].Value;
-                            _db.TblGeneralEntries.Update(objGeneralEntry);
+                            _ = _db.TblGeneralEntries.Update(objGeneralEntry);
 
                         }
-                        await _db.SaveChangesAsync();
+                        _ = await _db.SaveChangesAsync();
 
                     }
-                    return CreateResponse((object)_security.EncryptData( objGeneralEntry.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
+                    return CreateResponse((object)_security.EncryptData(objGeneralEntry.Id), ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
                 }
 
@@ -318,29 +311,22 @@ namespace CMS.Service.Services.GeneralEntry
 
             try
             {
-                var result = (from g in _db.TblGeneralEntries.Include(x => x.Category)
-                              where g.IsDeleted == false && g.IsActive == true && (string.IsNullOrEmpty(model.Title) || g.Title.Contains(model.Title)) && (string.IsNullOrEmpty(model.CategoryId) || (model.CategoryId != null && long.Parse(_security.DecryptData(model.CategoryId)) == g.CategoryId)) && (string.IsNullOrEmpty(model.EnumValue) ? true : model.EnumValue == g.Category.EnumValue)
-                              select g);
+                IQueryable<TblGeneralEntry> result = from g in _db.TblGeneralEntries.Include(x => x.Category)
+                                                     where g.IsDeleted == false && g.IsActive == true && (string.IsNullOrEmpty(model.Title) || g.Title.Contains(model.Title)) && (string.IsNullOrEmpty(model.CategoryId) || (model.CategoryId != null && long.Parse(_security.DecryptData(model.CategoryId)) == g.CategoryId)) && (string.IsNullOrEmpty(model.EnumValue) || model.EnumValue == g.Category.EnumValue)
+                                                     select g;
 
-                switch (model.OrderBy)
+                result = model.OrderBy switch
                 {
-                    case "Name":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.Title ascending select orderData) : (from orderData in result orderby orderData.Title descending select orderData);
-                        break;
-                    case "CreatedOn":
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData);
-                        break;
-                    default:
-                        result = model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData);
-                        break;
-                }
-
+                    "Name" => model.OrderByAsc ? (from orderData in result orderby orderData.Title ascending select orderData) : (from orderData in result orderby orderData.Title descending select orderData),
+                    "CreatedOn" => model.OrderByAsc ? (from orderData in result orderby orderData.CreatedOn ascending select orderData) : (from orderData in result orderby orderData.CreatedOn descending select orderData),
+                    _ => model.OrderByAsc ? (from orderData in result orderby orderData.SortedOrder ascending select orderData) : (from orderData in result orderby orderData.SortedOrder descending select orderData),
+                };
                 result = result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue);
                 objResult.TotalRecord = result.Count();
 
                 if (result.Count() > 0)
                 {
-                    var imgData = (from d in _db.TblFileDataMasters where result.Any(y => y.DataId == d.DataId) select d).ToList();
+                    List<TblFileDataMaster> imgData = (from d in _db.TblFileDataMasters where result.Any(y => y.DataId == d.DataId) select d).ToList();
 
                     objResult.Data = await result.Select(x => new GeneralEntryViewModel
                     {
@@ -375,11 +361,11 @@ namespace CMS.Service.Services.GeneralEntry
                     }
 
 
-                    return CreateResponse(objResult.Data as List<GeneralEntryViewModel>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
+                    return CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord);
                 }
                 else
                 {
-                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
+                    return CreateResponse<List<GeneralEntryViewModel>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
                 }
             }
             catch (Exception ex)
@@ -403,20 +389,20 @@ namespace CMS.Service.Services.GeneralEntry
                     TblGeneralEntry mainData = _db.TblGeneralEntries.FirstOrDefault(r => r.Id == dataItem.Id);
                     if (mainData != null)
                     {
-                        _fileHelper.Delete(dataItem.Value);
+                        _ = _fileHelper.Delete(dataItem.Value);
 
 
                     }
                     dataItem.ModifiedBy = _loginUserDetail.UserId ?? dataItem.ModifiedBy;
                     dataItem.ModifiedOn = DateTime.Now;
-                    _db.TblFileDataMasters.Remove(dataItem);
+                    _ = _db.TblFileDataMasters.Remove(dataItem);
 
-                    await _db.SaveChangesAsync();
-                    return CreateResponse(dataItem, ResponseMessage.Delete, true, ((int)ApiStatusCode.Ok));
+                    _ = await _db.SaveChangesAsync();
+                    return CreateResponse(dataItem, ResponseMessage.Delete, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
-                    return CreateResponse<TblProductImage>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
+                    return CreateResponse<TblProductImage>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
 
                 }
 
@@ -424,9 +410,14 @@ namespace CMS.Service.Services.GeneralEntry
             }
             catch (Exception ex)
             {
-                return CreateResponse<TblProductImage>(null, ResponseMessage.Fail, true, ((int)ApiStatusCode.InternalServerError), ex.Message.ToString());
+                return CreateResponse<TblProductImage>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, ex.Message.ToString());
 
             }
+        }
+
+        Task<ServiceResponse<List<GeneralEntryViewModel>>> IGeneralEntryService.GetList(IndexModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

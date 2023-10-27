@@ -12,8 +12,5 @@
         public const string SubLookup = "\\Content\\SubLookup\\";
         public const string GeneralEntryCategory = "\\Content\\GeneralEntryCategory\\";
         public const string GeneralEntry = "\\Content\\GeneralEntry\\";
-
-
-
     }
 }

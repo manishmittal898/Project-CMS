@@ -53,7 +53,7 @@ namespace CMS.Service.Services.ProductMaster
         public decimal? SellingPrice { get; set; }
         public string CaptionTagId { get; set; }
         public string ViewSectionId { get; set; }
-        
+
         public long Discount { get; set; }
         public string OccasionId { get; set; }
         public string Occasion { get; set; }

@@ -1,5 +1,4 @@
 ﻿using CMS.Core.FixedValue;
-using CMS.Core.ServiceHelper.ExtensionMethod;
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
@@ -17,9 +16,8 @@ namespace CMS.Service.Services.Account
 {
     public class AccountService : BaseService, IAccountService
     {
-
-        DB_CMSContext _db;
-        IOTPService _otpService;
+        private readonly DB_CMSContext _db;
+        private readonly IOTPService _otpService;
         public AccountService(DB_CMSContext db, IConfiguration _configuration, IOTPService otpService) : base(_configuration)
         {
             _db = db;
@@ -32,12 +30,12 @@ namespace CMS.Service.Services.Account
             try
             {
 
-                var user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email.Trim()) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                TblUserMaster user = await _db.TblUserMasters.Where(x => x.Email.ToLower().Equals(model.Email.Trim()) && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
 
                 if (user != null && user.Password.Equals(model.Password) && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
                 {
 
-                    var fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
+                    string fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
                     response.UserId = user.UserId;
                     response.Token = fresh_token;
                     response.RoleId = user.RoleId;
@@ -47,27 +45,22 @@ namespace CMS.Service.Services.Account
                     response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
                     response.FullName = user.FirstName + ' ' + user.LastName;
 
-                    await SaveUserLog(user.UserId, response);
-                }
-                else if (user != null && !user.Password.Equals(model.Password))
-                {
-                    return CreateResponse<LoginResponseModel>(null, "Incorrect Username or Password...", false, ((int)ApiStatusCode.RecordNotFound));
-
-                }
-                else if (user != null)
-                {
-                    return CreateResponse<LoginResponseModel>(null, "You are not authorised to access " + model.Plateform + " Portal.", false, ((int)ApiStatusCode.RecordNotFound));
-
+                    _ = await SaveUserLog(user.UserId, response);
                 }
                 else
                 {
-                    return CreateResponse<LoginResponseModel>(null, "You have not register with us,Please Signup", false, ((int)ApiStatusCode.RecordNotFound));
+                    return user != null && !user.Password.Equals(model.Password)
+                        ? CreateResponse<LoginResponseModel>(null, "Incorrect Username or Password...", false, (int)ApiStatusCode.RecordNotFound)
+                        : user != null
+                                            ? CreateResponse<LoginResponseModel>(null, "You are not authorised to access " + model.Plateform + " Portal.", false, (int)ApiStatusCode.RecordNotFound)
+                                            : CreateResponse<LoginResponseModel>(null, "You have not register with us,Please Signup", false, (int)ApiStatusCode.RecordNotFound);
+
                 }
-                return CreateResponse<LoginResponseModel>(response, "Login Successful", true, ((int)ApiStatusCode.Ok));
+                return CreateResponse<LoginResponseModel>(response, "Login Successful", true, (int)ApiStatusCode.Ok);
             }
             catch (Exception ex)
             {
-                return CreateResponse<LoginResponseModel>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
+                return CreateResponse<LoginResponseModel>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.ServerException, ex.Message ?? ex.InnerException.ToString());
             }
         }
         public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long id = 0)
@@ -76,18 +69,16 @@ namespace CMS.Service.Services.Account
             {
                 if (!string.IsNullOrWhiteSpace(loginId))
                 {
-                    var user = await _db.TblUserMasters.Where(x => (isMobile ? x.Mobile == loginId : x.Email == loginId) && (id == 0 || x.UserId != id) && !x.IsDeleted).FirstOrDefaultAsync();
-                    if (user != null)
-                    {
-                        return CreateResponse<string>(null, "User already exist", true, ((int)ApiStatusCode.AlreadyExist));
-                    }
-                    return CreateResponse<string>(null, "User not exist with system", true, ((int)ApiStatusCode.Ok));
+                    TblUserMaster user = await _db.TblUserMasters.Where(x => (isMobile ? x.Mobile == loginId : x.Email == loginId) && (id == 0 || x.UserId != id) && !x.IsDeleted).FirstOrDefaultAsync();
+                    return user != null
+                        ? CreateResponse<string>(null, "User already exist", true, (int)ApiStatusCode.AlreadyExist)
+                        : CreateResponse<string>(null, "User not exist with system", true, (int)ApiStatusCode.Ok);
                 }
-                return CreateResponse<string>(null, "User not exist with system", true, ((int)ApiStatusCode.BadRequest));
+                return CreateResponse<string>(null, "User not exist with system", true, (int)ApiStatusCode.BadRequest);
             }
             catch (Exception ex)
             {
-                return CreateResponse<string>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
+                return CreateResponse<string>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.ServerException, ex.Message ?? ex.InnerException.ToString());
             }
         }
 
@@ -95,49 +86,49 @@ namespace CMS.Service.Services.Account
         {
             try
             {
-                var encrptPassword = _security.EncryptData(model.Password);
-                var user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
-                var otp = _otpService.VerifyOTP(new OTPVerifyModel { SessionId = model.SessionID, OTP = model.OTP });
+                string encrptPassword = _security.EncryptData(model.Password);
+                TblUserMaster user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
+                ServiceResponse<object> otp = _otpService.VerifyOTP(new OTPVerifyModel { SessionId = model.SessionID, OTP = model.OTP });
                 if (otp.IsSuccess && !(bool)otp.Data)
                 {
-                    return CreateResponse<string>(null, ResponseMessage.OTPMissMatch, false, ((int)ApiStatusCode.OTPVarificationFailed));
+                    return CreateResponse<string>(null, ResponseMessage.OTPMissMatch, false, (int)ApiStatusCode.OTPVarificationFailed);
 
                 }
                 else if (user != null)
                 {
                     user.Password = encrptPassword;
-                    await _db.SaveChangesAsync();
-                    return CreateResponse<string>(model.Email, "Password update successful", true, ((int)ApiStatusCode.Ok));
+                    _ = await _db.SaveChangesAsync();
+                    return CreateResponse<string>(model.Email, "Password update successful", true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
-                    return CreateResponse<string>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.RecordNotFound));
+                    return CreateResponse<string>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.RecordNotFound);
                 }
             }
             catch (Exception ex)
             {
-                return CreateResponse<string>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
+                return CreateResponse<string>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.ServerException, ex.Message ?? ex.InnerException.ToString());
             }
         }
         public async Task<ServiceResponse<object>> LogoutUser(long id)
         {
             try
             {
-                var isExist = await _db.TblUserMasters.Where(x => x.UserId == id).FirstOrDefaultAsync();
+                TblUserMaster isExist = await _db.TblUserMasters.Where(x => x.UserId == id).FirstOrDefaultAsync();
                 if (isExist != null)
                 {
 
-                    await SaveUserLog(isExist.UserId);
-                    return CreateResponse<object>(true, ResponseMessage.Logout, true, ((int)ApiStatusCode.Ok));
+                    _ = await SaveUserLog(isExist.UserId);
+                    return CreateResponse<object>(true, ResponseMessage.Logout, true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
-                    return CreateResponse<object>(false, ResponseMessage.NotFound, false, ((int)ApiStatusCode.NotFound));
+                    return CreateResponse<object>(false, ResponseMessage.NotFound, false, (int)ApiStatusCode.NotFound);
                 }
             }
             catch (Exception ex)
             {
-                return CreateResponse<object>(false, ex.Message ?? ex.InnerException.ToString(), false, ((int)ApiStatusCode.ServerException));
+                return CreateResponse<object>(false, ex.Message ?? ex.InnerException.ToString(), false, (int)ApiStatusCode.ServerException);
             }
         }
         public ServiceResponse<string> GetEncryptedPassword(string value)
@@ -145,7 +136,7 @@ namespace CMS.Service.Services.Account
             ServiceResponse<string> objModel = new ServiceResponse<string>();
             try
             {
-                var encrptPassword = _security.EncryptData(value);
+                string encrptPassword = _security.EncryptData(value);
                 objModel.Data = encrptPassword;
                 objModel.IsSuccess = true;
                 return objModel;
@@ -168,32 +159,32 @@ namespace CMS.Service.Services.Account
         {
             try
             {
-                var OldActiveSession = await _db.TblUserMasterLogs.Where(x => x.UserId == userId && x.SessionEndTime == null).ToListAsync();
+                System.Collections.Generic.List<TblUserMasterLog> OldActiveSession = await _db.TblUserMasterLogs.Where(x => x.UserId == userId && x.SessionEndTime == null).ToListAsync();
                 if (OldActiveSession.Count > 0)
                 {
-                    foreach (var item in OldActiveSession)
+                    foreach (TblUserMasterLog item in OldActiveSession)
                     {
                         item.SessionEndTime = DateTime.Now;
                     }
                     _db.TblUserMasterLogs.UpdateRange(OldActiveSession);
-                    await _db.SaveChangesAsync();
+                    _ = await _db.SaveChangesAsync();
                 }
                 TblUserMasterLog objLog = new TblUserMasterLog();
                 if (model != null)
                 {
                     objLog.UserId = model.UserId;
                     objLog.Token = model.Token;
-                    await _db.TblUserMasterLogs.AddAsync(objLog);
-                    await _db.SaveChangesAsync();
+                    _ = await _db.TblUserMasterLogs.AddAsync(objLog);
+                    _ = await _db.SaveChangesAsync();
 
                 }
-                return CreateResponse(objLog, ResponseMessage.Save, true, ((int)ApiStatusCode.Ok));
+                return CreateResponse(objLog, ResponseMessage.Save, true, (int)ApiStatusCode.Ok);
 
             }
             catch (Exception ex)
             {
 
-                return CreateResponse<TblUserMasterLog>(null, ResponseMessage.NotFound, false, ((int)ApiStatusCode.ServerException), ex.Message ?? ex.InnerException.ToString());
+                return CreateResponse<TblUserMasterLog>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.ServerException, ex.Message ?? ex.InnerException.ToString());
 
             }
         }

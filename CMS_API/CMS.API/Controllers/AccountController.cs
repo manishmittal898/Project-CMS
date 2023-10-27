@@ -1,7 +1,7 @@
 ﻿using CMS.Core.ServiceHelper.Model;
 using CMS.Service.Services.Account;
 using CMS.Service.Services.OTP;
-using CMS.Service.Services.User;
+using CMS.Service.Services.UserMaster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,10 +15,10 @@ namespace CMS.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private IConfiguration _config;
-        private IAccountService _accountService;
+        private readonly IConfiguration _config;
+        private readonly IAccountService _accountService;
         private readonly IUserMasterService _user;
-        private IOTPService _oTPService;
+        private readonly IOTPService _oTPService;
 
         public AccountController(IConfiguration config, IAccountService
         accountService, IUserMasterService user, IOTPService oTPService)
@@ -32,7 +32,9 @@ namespace CMS.API.Controllers
         [HttpPost]
         [AllowAnonymous]
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
-        => await _accountService.Login(model);
+        {
+            return await _accountService.Login(model);
+        }
 
 
         // POST api/<UserController>
@@ -47,10 +49,12 @@ namespace CMS.API.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -62,27 +66,37 @@ namespace CMS.API.Controllers
         //Post api/Account/WebChangePassword
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ServiceResponse<string>> ChangePassword(ChangePasswordModel model) => await _accountService.WebChangePassword(model);
-
-
+        public async Task<ServiceResponse<string>> ChangePassword(ChangePasswordModel model)
+        {
+            return await _accountService.WebChangePassword(model);
+        }
 
         [HttpGet]
         [AllowAnonymous]
         //Get api/Account/ValidateUserWithMobileNumber
-        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long userId) => await _accountService.CheckUserExist(loginId, isMobile, userId);
-
+        public async Task<ServiceResponse<string>> CheckUserExist(string loginId, bool isMobile, long userId)
+        {
+            return await _accountService.CheckUserExist(loginId, isMobile, userId);
+        }
 
         [HttpGet]
         [AllowAnonymous]
-        public ServiceResponse<string> GetEncryptedText(string value) => _accountService.GetEncryptedPassword(value);
+        public ServiceResponse<string> GetEncryptedText(string value)
+        {
+            return _accountService.GetEncryptedPassword(value);
+        }
 
         //Get api/Account/Logout
         [HttpGet]
-        public async Task<ServiceResponse<object>> Logout(long id) => await _accountService.LogoutUser(id);
-
+        public async Task<ServiceResponse<object>> Logout(long id)
+        {
+            return await _accountService.LogoutUser(id);
+        }
 
         [HttpGet]
-        public async Task<ServiceResponse<string>> RequestOTP(string emailId) => await _oTPService.GenerateOTP(emailId);
-
+        public async Task<ServiceResponse<string>> RequestOTP(string emailId)
+        {
+            return await _oTPService.GenerateOTP(emailId);
+        }
     }
 }

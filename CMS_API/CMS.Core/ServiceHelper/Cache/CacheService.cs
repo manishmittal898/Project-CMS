@@ -5,7 +5,7 @@ namespace CMS.Core.ServiceHelper.Cache
 {
     public class CacheService : ICacheService
     {
-        ObjectCache _memoryCache = MemoryCache.Default;
+        private readonly ObjectCache _memoryCache = MemoryCache.Default;
         public T GetData<T>(string key)
         {
             try

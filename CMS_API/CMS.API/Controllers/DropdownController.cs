@@ -30,15 +30,15 @@ namespace CMS.API.Controllers
         public async Task<ServiceResponse<Dictionary<string, object>>> GetDropDown(string[] key, bool isTransactionData = false)
         {
             string keyData = "GetDropDown" + string.Join("-", key);
-            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>(keyData);
+            ServiceResponse<Dictionary<string, object>> cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>(keyData);
             if (cacheData != null)
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
+            DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetDropDown(key, isTransactionData);
 
-            _cacheService.SetData(keyData, cacheData, expirationTime);
+            _ = _cacheService.SetData(keyData, cacheData, expirationTime);
             return cacheData;
 
             // return await _common.GetDropDown(key, isTransactionData);
@@ -48,15 +48,15 @@ namespace CMS.API.Controllers
         public async Task<ServiceResponse<Dictionary<string, object>>> GetMultipleFilterDropDown(FilterDropDownPostModel[] model)
         {
 
-            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetMultipleFilterDropDown");
+            ServiceResponse<Dictionary<string, object>> cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetMultipleFilterDropDown");
             if (cacheData != null)
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
+            DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetFilterDropDown(model);
 
-            _cacheService.SetData("GetMultipleFilterDropDown", cacheData, expirationTime);
+            _ = _cacheService.SetData("GetMultipleFilterDropDown", cacheData, expirationTime);
             return cacheData;
 
         }
@@ -64,18 +64,16 @@ namespace CMS.API.Controllers
         [HttpPost]
         public async Task<ServiceResponse<Dictionary<string, object>>> GetFilterDropDown(FilterDropDownPostModel model)
         {
-            FilterDropDownPostModel[] obj = { model != null ? model : new FilterDropDownPostModel() };
-
-
-            var cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetFilterDropDown");
+            FilterDropDownPostModel[] obj = { model ?? new FilterDropDownPostModel() };
+            ServiceResponse<Dictionary<string, object>> cacheData = _cacheService.GetData<ServiceResponse<Dictionary<string, object>>>("GetFilterDropDown");
             if (cacheData != null)
             {
                 return cacheData;
             }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
+            DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(1.0);
             cacheData = await _common.GetFilterDropDown(obj);
 
-            _cacheService.SetData("GetFilterDropDown", cacheData, expirationTime);
+            _ = _cacheService.SetData("GetFilterDropDown", cacheData, expirationTime);
             return cacheData;
         }
     }

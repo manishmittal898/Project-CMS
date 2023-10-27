@@ -13,7 +13,7 @@ namespace CMS.Service.Services.LookupTypeMaster
 {
     public class LookupTypeMasterService : BaseService, ILookupTypeMasterService
     {
-        DB_CMSContext _db;
+        private readonly DB_CMSContext _db;
         public LookupTypeMasterService(DB_CMSContext db, IConfiguration _configuration) : base(_configuration)
         {
             _db = db;
@@ -24,24 +24,18 @@ namespace CMS.Service.Services.LookupTypeMaster
             ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>> objResult = new ServiceResponse<IEnumerable<Data.Models.TblLookupTypeMaster>>();
             try
             {
-                var result = (from lkType in _db.TblLookupTypeMasters
-                              where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
-                              orderby (model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") ascending
-                              orderby (!model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") descending
-                              select lkType);
+                IOrderedQueryable<TblLookupTypeMaster> result = from lkType in _db.TblLookupTypeMasters
+                                                                where !lkType.IsDelete && (string.IsNullOrEmpty(model.Search) || lkType.Name.Contains(model.Search))
+                                                                orderby (model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") ascending
+                                                                orderby (!model.OrderByAsc && model.OrderBy == "Name" ? lkType.Name : "") descending
+                                                                select lkType;
                 objResult.TotalRecord = result.Count();
 
                 objResult.Data = await result.Skip(((model.Page == 0 ? 1 : model.Page) - 1) * (model.PageSize != 0 ? model.PageSize : int.MaxValue)).Take(model.PageSize != 0 ? model.PageSize : int.MaxValue).ToListAsync();
 
-                if (result != null)
-                {
-
-                    return CreateResponse(objResult.Data as IEnumerable<Data.Models.TblLookupTypeMaster>, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok), TotalRecord: objResult.TotalRecord);
-                }
-                else
-                {
-                    return CreateResponse<IEnumerable<TblLookupTypeMaster>>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound), TotalRecord: 0);
-                }
+                return result != null
+                    ? CreateResponse(objResult.Data, ResponseMessage.Success, true, (int)ApiStatusCode.Ok, TotalRecord: objResult.TotalRecord)
+                    : CreateResponse<IEnumerable<TblLookupTypeMaster>>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound, TotalRecord: 0);
 
             }
             catch (Exception)
@@ -59,16 +53,10 @@ namespace CMS.Service.Services.LookupTypeMaster
             try
             {
 
-                var result = _db.TblLookupTypeMasters.FirstOrDefault(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value);
-                if (result != null)
-                {
-
-                    return CreateResponse(result, ResponseMessage.Success, true, ((int)ApiStatusCode.Ok));
-                }
-                else
-                {
-                    return CreateResponse<TblLookupTypeMaster>(null, ResponseMessage.NotFound, true, ((int)ApiStatusCode.RecordNotFound));
-                }
+                TblLookupTypeMaster result = _db.TblLookupTypeMasters.FirstOrDefault(x => x.Id == long.Parse(_security.DecryptData(id)) && x.IsActive.Value);
+                return result != null
+                    ? CreateResponse(result, ResponseMessage.Success, true, (int)ApiStatusCode.Ok)
+                    : CreateResponse<TblLookupTypeMaster>(null, ResponseMessage.NotFound, true, (int)ApiStatusCode.RecordNotFound);
 
             }
             catch (Exception ex)
@@ -82,13 +70,15 @@ namespace CMS.Service.Services.LookupTypeMaster
         {
             try
             {
-                TblLookupTypeMaster objData = new TblLookupTypeMaster();
-                objData.Name = model.Name;
-                objData.SortOrder = model.SortOrder;
-                objData.IsActive = true;
-                objData.CreatedBy = _loginUserDetail.UserId.Value;
-                var roletype = await _db.TblLookupTypeMasters.AddAsync(objData);
-                _db.SaveChanges();
+                TblLookupTypeMaster objData = new TblLookupTypeMaster
+                {
+                    Name = model.Name,
+                    SortOrder = model.SortOrder,
+                    IsActive = true,
+                    CreatedBy = _loginUserDetail.UserId.Value
+                };
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblLookupTypeMaster> roletype = await _db.TblLookupTypeMasters.AddAsync(objData);
+                _ = _db.SaveChanges();
                 return CreateResponse(objData, "Added", true);
 
             }
@@ -100,7 +90,7 @@ namespace CMS.Service.Services.LookupTypeMaster
             }
         }
 
-        public async Task<ServiceResponse<TblLookupTypeMaster>> Edit(string id, LookupTypeMasterViewModel model)
+        public ServiceResponse<TblLookupTypeMaster> Edit(string id, LookupTypeMasterViewModel model)
         {
             try
             {
@@ -110,8 +100,8 @@ namespace CMS.Service.Services.LookupTypeMaster
                 objData.Name = model.Name;
                 objData.SortOrder = model.SortOrder;
                 objData.ModifiedBy = _loginUserDetail.UserId.Value;
-                var roletype = _db.TblLookupTypeMasters.Update(objData);
-                _db.SaveChanges();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblLookupTypeMaster> roletype = _db.TblLookupTypeMasters.Update(objData);
+                _ = _db.SaveChanges();
                 return CreateResponse(objData, "Updated", true);
 
             }
@@ -129,14 +119,19 @@ namespace CMS.Service.Services.LookupTypeMaster
                 TblLookupTypeMaster objData = new TblLookupTypeMaster();
                 objData = _db.TblLookupTypeMasters.FirstOrDefault(r => r.Id == long.Parse(_security.DecryptData(id)));
 
-                var roletype = _db.TblLookupTypeMasters.Remove(objData);
-                await _db.SaveChangesAsync();
+                Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblLookupTypeMaster> roletype = _db.TblLookupTypeMasters.Remove(objData);
+                _ = await _db.SaveChangesAsync();
                 return CreateResponse(objData, "Deleted", true);
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        Task<ServiceResponse<TblLookupTypeMaster>> ILookupTypeMasterService.Edit(string id, LookupTypeMasterViewModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

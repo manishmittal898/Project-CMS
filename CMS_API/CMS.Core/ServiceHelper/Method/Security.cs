@@ -9,13 +9,13 @@ using System.Security.Cryptography;
 using System.Text;
 using static CMS.Core.FixedValue.Enums;
 
-namespace CMS.Core.ServiceHelper.ExtensionMethod
+namespace CMS.Core.ServiceHelper.Method
 {
     public class Security
     {
-        IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         // private byte[] IV = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-        private int BlockSize = 128;
+        private readonly int BlockSize = 128;
         public Security(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -85,20 +85,16 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
             try
             {
-                using (AesManaged aes = new AesManaged())
-                {
-                    aes.Key = key;
-                    aes.Mode = CipherMode.ECB;
-                    //  aes.Padding = PaddingMode.PKCS7;
-                    using (ICryptoTransform encryptor = aes.CreateEncryptor())
-                    {
-                        byte[] plaintextBytes = Encoding.UTF8.GetBytes(strValue);
-                        byte[] encryptedData = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
-                        return Base64UrlEncoder.Encode(encryptedData);
-                        //  return Convert.ToBase64String(encryptedData);
+                using AesManaged aes = new AesManaged();
+                aes.Key = key;
+                aes.Mode = CipherMode.ECB;
+                //  aes.Padding = PaddingMode.PKCS7;
+                using ICryptoTransform encryptor = aes.CreateEncryptor();
+                byte[] plaintextBytes = Encoding.UTF8.GetBytes(strValue);
+                byte[] encryptedData = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
+                return Base64UrlEncoder.Encode(encryptedData);
+                //  return Convert.ToBase64String(encryptedData);
 
-                    }
-                }
             }
             catch (Exception)
             {
@@ -116,18 +112,13 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
             try
             {
-                using (AesManaged aes = new AesManaged())
-                {
-                    aes.Key = key;
-                    aes.Mode = CipherMode.ECB;
-                    // aes.Padding = PaddingMode.PKCS7;
-                    using (ICryptoTransform decryptor = aes.CreateDecryptor())
-                    {
-                        byte[] decryptedData = decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
-                        return Encoding.UTF8.GetString(decryptedData);
-
-                    }
-                }
+                using AesManaged aes = new AesManaged();
+                aes.Key = key;
+                aes.Mode = CipherMode.ECB;
+                // aes.Padding = PaddingMode.PKCS7;
+                using ICryptoTransform decryptor = aes.CreateDecryptor();
+                byte[] decryptedData = decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+                return Encoding.UTF8.GetString(decryptedData);
 
             }
             catch (Exception)
@@ -176,21 +167,21 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
         public string Base64Decode(string base64EncodedData)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            byte[] base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
         }
         public string Base64Encode(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
         }
 
         public string UniqueId()
         {
             string result;
             string prefix = "AUR";
-            var month = DateTime.Now.Month;
-            var year = DateTime.Now.ToString("yy");
+            int month = DateTime.Now.Month;
+            string year = DateTime.Now.ToString("yy");
             Random random = new Random();
             result = prefix + "/" + month.ToString() + "/" + year + "/" + random.Next(10000, 199999).ToString();
             return result;
@@ -198,13 +189,13 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
         public string CreateToken(long UserId, string UserName, string RoleType, int RoleId, bool isWeb = true)
         {
 
-            var key = _configuration.GetValue<string>("Jwt:Key");
-            var issuer = _configuration.GetValue<string>("Jwt:Issuer");
+            string key = _configuration.GetValue<string>("Jwt:Key");
+            string issuer = _configuration.GetValue<string>("Jwt:Issuer");
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[]  { new Claim(TokenClaimsConstant.UserId, UserId.ToString()),
+            Claim[] claims = new[]  { new Claim(TokenClaimsConstant.UserId, UserId.ToString()),
                 new Claim(TokenClaimsConstant.UserName, UserName),
                 new Claim(TokenClaimsConstant.RoleName, RoleType),
                 new Claim(TokenClaimsConstant.RoleId, RoleId.ToString()),
@@ -214,14 +205,14 @@ namespace CMS.Core.ServiceHelper.ExtensionMethod
 
             };
 
-            var data = Enum.GetNames(typeof(RoleEnum)).ToList();
+            System.Collections.Generic.List<string> data = Enum.GetNames(typeof(RoleEnum)).ToList();
 
             // Add roles as multiple claims
-            foreach (var role in data)
+            foreach (string role in data)
             {
-                claims.Append(new Claim(ClaimTypes.Role, role));
+                _ = claims.Append(new Claim(ClaimTypes.Role, role));
             }
-            var token = new JwtSecurityToken(issuer, issuer, claims, expires: isWeb ? DateTime.Now.AddHours(10) : DateTime.Now.AddDays(90),
+            JwtSecurityToken token = new JwtSecurityToken(issuer, issuer, claims, expires: isWeb ? DateTime.Now.AddHours(10) : DateTime.Now.AddDays(90),
                   signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

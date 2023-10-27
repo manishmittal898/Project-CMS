@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-#nullable disable
-
-namespace CMS.Data.Models
+﻿namespace CMS.Data.Models
 {
     public partial class TblProductStock
     {

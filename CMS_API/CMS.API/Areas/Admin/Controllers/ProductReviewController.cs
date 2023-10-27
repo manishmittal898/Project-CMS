@@ -14,16 +14,25 @@ namespace CMS.API.Areas.Admin.Controllers
     {
         // GET: api/<ProductReviewController>
         private readonly IProductReviewService _productrw;
-        public ProductReviewController(IProductReviewService productrw) => _productrw = productrw;
+        public ProductReviewController(IProductReviewService productrw)
+        {
+            _productrw = productrw;
+        }
 
         // GET: api/<ProductReviewController>
         [HttpGet]
-        public object Get() => _productrw.GetList(null);
+        public object Get()
+        {
+            return _productrw.GetList(null);
+        }
 
 
         // GET api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public object Get(string id) => _productrw.GetById(id);
+        public object Get(string id)
+        {
+            return _productrw.GetById(id);
+        }
 
 
         // POST api/<ProductReviewController>
@@ -37,10 +46,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -57,10 +68,12 @@ namespace CMS.API.Areas.Admin.Controllers
             }
             else
             {
-                ServiceResponse<object> objReturn = new ServiceResponse<object>();
-                objReturn.Message = "Invalid";
-                objReturn.IsSuccess = false;
-                objReturn.Data = null;
+                ServiceResponse<object> objReturn = new ServiceResponse<object>
+                {
+                    Message = "Invalid",
+                    IsSuccess = false,
+                    Data = null
+                };
 
                 return objReturn;
             }
@@ -68,7 +81,9 @@ namespace CMS.API.Areas.Admin.Controllers
 
         // DELETE api/<ProductReviewController>/5
         [HttpGet("{id}")]
-        public void Delete(string id) => _productrw.Delete(id);
-
+        public void Delete(string id)
+        {
+            _ = _productrw.Delete(id);
+        }
     }
 }
