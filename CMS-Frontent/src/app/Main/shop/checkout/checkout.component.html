@@ -24,7 +24,7 @@
         </ul>
         <!-- Shipping Address Start -->
         <fieldset class="checkout-address">
-          <app-my-address [(config)]="addressConfig" (onSelect)="selectedAddress=$event"></app-my-address>
+          <app-my-address  [(config)]="addressConfig" (onSelect)="selectedAddress=$event"></app-my-address>
           <!-- </ng-template> -->
 
           <button type="button" name="next" [hidden]="!selectedAddress" class="next btn btn-default px-4 float-end">Save

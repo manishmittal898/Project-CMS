@@ -12,7 +12,7 @@ declare var $: any;
 export class CheckoutComponent implements OnInit, AfterViewInit {
   userAddress = [] as UserAddressViewModel[];
 
-  selectedAddress : UserAddressViewModel;
+  selectedAddress: UserAddressViewModel;
   isAdd = true;
   addressConfig: { isDeleteButton: false }
   constructor(private readonly _authService: AuthService, private readonly _route: Router,
@@ -83,14 +83,11 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   }
 
   checkPrerequisite() {
-    setTimeout(() => {
-      if (!this._authService.IsAuthentication.value) {
-        this._route.navigate([`/login`], { queryParams: { returnURL: this._route.url }, });
-      } else {
-        this.getAddress();
-      }
-    }, 100);
-
+    if (!this._authService.IsAuthentication.value) {
+      this._route.navigate([`/login`], { queryParams: { returnURL: this._route.url }, });
+    } else {
+      this.getAddress();
+    }
   }
 
   getAddress() {
