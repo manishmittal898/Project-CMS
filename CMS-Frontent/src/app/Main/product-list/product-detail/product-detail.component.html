@@ -63,10 +63,6 @@
               {{SelectedSizeModel.UnitPrice}}</span>
             <!-- <span class="product-details-price-off" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}% Off</span> -->
           </div>
-
-          <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
-            Avail in stock : <strong class="text-theme-primary"> {{totalStock}} </strong>
-          </div>
           <div class="accordion product-details-accordion" id="accordionExample">
             <div class="accordion-item mb-2" *ngIf="model?.Desc">
               <h2 class="accordion-header">
@@ -98,8 +94,11 @@
 
           </div>
           <div class="product-detail-size my-4">
-            <p class="mb-2" *ngIf="SelectedSizeModel"> Size: <strong>{{SelectedSizeModel.Size}}</strong> </p>
-            <ul class="d-flex flex-wrap">
+            <div class="product-detail-total-stock mb-3" *ngIf="totalStock">
+              Avail in stock : <strong class="text-theme-primary ms-1"> {{totalStock}} </strong>
+            </div>
+            <!-- <p class="mb-2" *ngIf="SelectedSizeModel"> Size: <strong>{{SelectedSizeModel.Size}}</strong> </p> -->
+            <ul class="d-flex align-items-center flex-wrap">
               <ng-container *ngFor="let item of model.Stocks">
                 <li><a class="product-detail-size-btn" (click)="this.SelectedSizeModel = item;Quantity = 1;"
                     [ngClass]="[item.Quantity===0|| !item.Quantity ? 'pds-stock-0' : '',item.SizeId==SelectedSizeModel?.SizeId?'active':'']"

@@ -1686,6 +1686,7 @@ ul.megamenu-sub-list {
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 10px;
+  color: var(--primary-color);
 }
 
 .product-details-price .product-details-cutting-price {
@@ -1693,6 +1694,7 @@ ul.megamenu-sub-list {
   text-decoration: line-through;
   margin-left: 0px;
   font-weight: 500;
+  color: #000;
 }
 
 .product-details-price .product-details-price-off {
@@ -2712,7 +2714,7 @@ section.deals-opt-d-1 {
 
 .custom-card {
   box-shadow: 0 0 30px #e7e9f5;
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 15px 20px;
   background: #fff;
   margin-bottom: 25px;
@@ -2747,6 +2749,7 @@ section.deals-opt-d-1 {
   font-weight: 500;
   display: inline-flex;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .btn-add-new-address i {
