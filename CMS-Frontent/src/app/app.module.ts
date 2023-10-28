@@ -14,25 +14,48 @@ import { BaseAPIService } from './Shared/Services/Core/base-api.service';
 import { MainModule } from './Main/main.module';
 import { CookieService } from 'ngx-cookie-service';
 import { CartSidebarComponent } from './Shared/Page/nav-bar/cart-sidebar/cart-sidebar.component';
+import { SocialLoginComponent } from './Shared/Page/login/social-login/social-login.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HtmlComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SocialLoginComponent
   ],
   imports: [
     CommonModule,
-   // BrowserModule,
+    // BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FeatureModule,
-    MainModule
+    MainModule,
+    SocialLoginModule
   ],
   providers: [BaseAPIService, CookieService,
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: PathLocationStrategy }],
+    { provide: LocationStrategy, useClass: PathLocationStrategy }, {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.GoogleClientId, {
+              // scopes : environment.auth.scopes,
+              //prompt: 'consent'   // '' | 'none' | 'consent' |  'select_account'
+            }),
+          },
+          { id: FacebookLoginProvider.PROVIDER_ID, provider: new FacebookLoginProvider(environment.facebookId) }
+        ],
+     
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

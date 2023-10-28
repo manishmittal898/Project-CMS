@@ -9,8 +9,10 @@ export const environment = {
   apiEndPoint: "https://api.storeone.co.in/api/",
   sitePath: 'https://demo.storeone.co.in/',
   IsAutoLogin: false,
-  GoogleClientId: "585225620513-vcqtov90e3d8eq47on9e8o8smkagifdp.apps.googleusercontent.com",
-  GoogleClientSecret: "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"
+  GoogleClientId: "197417680229-fhodr45qv559hpafdgj5rif0eouvhai6.apps.googleusercontent.com",
+  GoogleClientSecret: "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",
+  facebookId: "585225620513-vcqtov90e3d8eq47on9e8o8smkagifdp.apps.googleusercontent.com",
+
 };
 
 /*

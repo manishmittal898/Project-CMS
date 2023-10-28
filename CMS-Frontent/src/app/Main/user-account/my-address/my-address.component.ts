@@ -28,10 +28,7 @@ export class MyAddressComponent implements OnInit {
       this.getData();
     }
 
-  ngOnInit(): void {
-
-
-  }
+  ngOnInit(): void { }
 
   getData() {
     this.isLoading=true;

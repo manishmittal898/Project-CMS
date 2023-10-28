@@ -27,9 +27,10 @@
             <label for="EmailAddress">Email address</label>
           </div>
           <div class="form-floating mb-3 position-relative">
-            <input class="form-control" id="Password" placeholder="Password" name="Password" type="{{isShowPass ? 'text':'password'}}"
-              [(ngModel)]="model.Password">
-              <a href="javascript:void" class="pas-check-icon" (click)="isShowPass=!isShowPass"> <i class="fa-regular " [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i></a>
+            <input class="form-control" id="Password" placeholder="Password" name="Password"
+              type="{{isShowPass ? 'text':'password'}}" [(ngModel)]="model.Password">
+            <a href="javascript:void" class="pas-check-icon" (click)="isShowPass=!isShowPass"> <i class="fa-regular "
+                [ngClass]="{'fa-eye-slash' : isShowPass, 'fa-eye' : !isShowPass}"></i></a>
             <label for="Password">Password</label>
           </div>
 
@@ -45,16 +46,10 @@
           </div>
 
           <button type="submit" class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign in</button>
-
-          <div class="login-with-social-acc">
-            <button type="button" class="login-with-social-acc-btn login-with-facebook-btn me-2"><i
-                class="bi bi-facebook me-1"></i>Facebook</button>
-            <button type="button" class="login-with-social-acc-btn login-with-google-btn ms-2"><i
-                class="bi bi-google me-1"></i>Google</button>
-          </div>
-
-          <div class="text-center mt-3">Not register yet? <a href="javascript:void(0)" (click)="redirectURL('/register')"
-              href="javascript:void(0)" class="text-dark font-w-500">Create an Account</a> </div>
+          <app-social-login></app-social-login>
+          <div class="text-center mt-3">Not register yet? <a href="javascript:void(0)"
+              (click)="redirectURL('/register')" href="javascript:void(0)" class="text-dark font-w-500">Create an
+              Account</a> </div>
 
         </form>
       </div>
