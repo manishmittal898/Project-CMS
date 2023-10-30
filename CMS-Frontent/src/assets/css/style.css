@@ -2237,7 +2237,7 @@ opacity: 0.5;
 
 .form-floating>.form-control,
 .form-floating>.form-select {
-  height: 43px;
+  height: 46px;
 }
 
 .form-floating>label {
@@ -3357,5 +3357,23 @@ body .toast-close-button {
 }
 .product-filterItems .sm-radio-btn .ng-dropdown-panel .ng-dropdown-panel-items .ng-option input {
   margin-top: 3px;
+}
+.forget-pas-otp input {
+  flex: 1;
+  padding: 5px;
+  text-align: center;
+  font-size: 25px;
+  margin: 0px 6px;
+  border-radius: 10px;
+  border: solid 1px #cccc;
+}
+.forget-pas-otp input:focus {
+  border-color: #000;
+}
+.forget-pas-otp input:first-child {
+  margin-left: 0px;
+}
+.forget-pas-otp input:last-child {
+  margin-right: 0px;
 }
 /* CUSTOM CSS END */

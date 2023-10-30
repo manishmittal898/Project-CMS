@@ -61,7 +61,7 @@
   </div>
 
   <div class="cmis-page-preview" *ngIf="postModel?.length">
-    <div class="cmis-page-preview-header"> <i class="bi bi-eye"></i> Preview </div>
+    <div class="cmis-page-preview-header"> <i class="fa-light fa-eye"></i> Preview </div>
     <div class="cmis-page-preview-body">
       <ng-container *ngFor="let item of getList">
         <div class="cmis-page-preview-items">
@@ -72,9 +72,9 @@
             </div>
             <div class="cmis-page-preview-items-action mt-3">
               <a href="javascript:void()" class="cmis-page-preview-items-action-btn text-dark" (click)="editItem(item)"
-                data-title="Edit"><i class="bi bi-pencil"></i></a>
+                data-title="Edit"><i class="fa-light fa-pen"></i></a>
               <a href="javascript:void()" class="cmis-page-preview-items-action-btn text-danger"
-                (click)="deleteItem(item)" data-title="Delete"><i class="bi bi-trash"></i></a>
+                (click)="deleteItem(item)" data-title="Delete"><i class="fa-light fa-trash"></i></a>
             </div>
           </ng-container>
         </div>
