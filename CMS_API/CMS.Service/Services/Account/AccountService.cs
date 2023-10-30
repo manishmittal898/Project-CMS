@@ -3,6 +3,7 @@ using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
 using CMS.Service.Services.OTP;
+using CMS.Service.Services.UserMaster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -18,10 +19,12 @@ namespace CMS.Service.Services.Account
     {
         private readonly DB_CMSContext _db;
         private readonly IOTPService _otpService;
-        public AccountService(DB_CMSContext db, IConfiguration _configuration, IOTPService otpService) : base(_configuration)
+        private readonly IUserMasterService _userMasterService;
+        public AccountService(DB_CMSContext db, IConfiguration _configuration, IOTPService otpService, IUserMasterService userMasterService) : base(_configuration)
         {
             _db = db;
             _otpService = otpService;
+            _userMasterService = userMasterService;
         }
         public async Task<ServiceResponse<LoginResponseModel>> Login(LoginModel model)
         {
@@ -46,6 +49,11 @@ namespace CMS.Service.Services.Account
                     response.FullName = user.FirstName + ' ' + user.LastName;
 
                     _ = await SaveUserLog(user.UserId, response);
+                }
+                else if (user != null && !user.IsActive.Value)
+                {
+                    return CreateResponse<LoginResponseModel>(null, "Please contact to Admin", true, (int)ApiStatusCode.UnAuthorized);
+
                 }
                 else
                 {
@@ -189,6 +197,78 @@ namespace CMS.Service.Services.Account
             }
         }
 
+        public async Task<ServiceResponse<LoginResponseModel>> Login(SocialLoginModel model)
+        {
+            ServiceResponse<LoginResponseModel> ResponseObject = new ServiceResponse<LoginResponseModel>();
+            LoginResponseModel response = new LoginResponseModel();
+            try
+            {
+
+                TblUserMaster user = await _db.TblUserMasters.Where(x => x.Email.Trim() == model.Email.Trim() && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+
+                if (user != null && ((model.Plateform == PlatformEnum.Customer.GetStringValue() && user.RoleId == (int)RoleEnum.Customer) || (model.Plateform == PlatformEnum.Admin.GetStringValue() && user.RoleId < (int)RoleEnum.Customer)))
+                {
+
+                    string fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
+                    response.UserId = user.UserId;
+                    response.Token = fresh_token;
+                    response.RoleId = user.RoleId;
+                    response.UserName = user.Email;
+                    response.RoleName = user.Role.RoleName;
+                    response.RoleLevel = user.Role.RoleLevel;
+                    response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
+                    response.FullName = user.FirstName + ' ' + user.LastName;
+
+                    await SaveUserLog(user.UserId, response);
+                }
+                else if (user == null && model.Plateform == PlatformEnum.Customer.GetStringValue())
+                {
+                    UserMasterPostModel userModel = new UserMasterPostModel()
+                    {
+                        Email = model.Email,
+                        FirstName = model.FirstName ?? null,
+                        LastName = model.LastName ?? null,
+                        ProfilePhoto = model.ProfilePhoto,
+                        RoleId = (int)RoleEnum.Customer,
+                        Password = RoleWisePassword.Customer
+                    };
+
+                    var data = await _userMasterService.Save(userModel);
+                    if (data.IsSuccess)
+                    {
+                        user = await _db.TblUserMasters.Where(x => x.Email.Trim() == model.Email.Trim() && x.IsActive.Value && !x.IsDeleted).Include(x => x.Role).FirstOrDefaultAsync();
+                        string fresh_token = _security.CreateToken(user.UserId, model.Email, user.Role.RoleName, user.RoleId, false);
+                        response.UserId = user.UserId;
+                        response.Token = fresh_token;
+                        response.RoleId = user.RoleId;
+                        response.UserName = user.Email;
+                        response.RoleName = user.Role.RoleName;
+                        response.RoleLevel = user.Role.RoleLevel;
+                        response.ProfilePhoto = !string.IsNullOrEmpty(user.ProfilePhoto) ? user.ProfilePhoto.ToAbsolutePath() : null;
+                        response.FullName = user.FirstName + ' ' + user.LastName;
+
+                        _ = await SaveUserLog(user.UserId, response);
+                    }
+                    else
+                    {
+                        return CreateResponse<LoginResponseModel>(null, "Please contact to Admin", true, (int)ApiStatusCode.InternalServerError);
+
+                    }
+
+
+                }
+                else if (user != null && !user.IsActive.Value)
+                {
+                    return CreateResponse<LoginResponseModel>(null, "Please contact to Admin", true, (int)ApiStatusCode.UnAuthorized);
+
+                }
+                return CreateResponse<LoginResponseModel>(response, "Login Successful", true, (int)ApiStatusCode.Ok);
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse<LoginResponseModel>(null, ResponseMessage.NotFound, false, (int)ApiStatusCode.ServerException, ex.Message ?? ex.InnerException.ToString());
+            }
+        }
 
 
     }

@@ -1,6 +1,13 @@
 <div class="login-with-social-acc">
   <button type="button" (click)="signInWithFB()" class="login-with-social-acc-btn login-with-facebook-btn me-2"><i
       class="bi bi-facebook me-1"></i>Facebook</button>
-  <button type="button" (click)="signWithGoogle()" class="login-with-social-acc-btn login-with-google-btn ms-2"><i
-      class="bi bi-google me-1"></i>Google</button>
+
+  <div id="g_id_onload" data-client_id="197417680229-4lmd78kkcp6v4osv3c0n52eikvcurhv1.apps.googleusercontent.com"
+    data-context="signin" data-ux_mode="popup" data-callback="handleGoogleLoginResponse" data-nonce=""
+    data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="signin_with"
+    data-size="large" data-logo_alignment="left">
+  </div>
 </div>

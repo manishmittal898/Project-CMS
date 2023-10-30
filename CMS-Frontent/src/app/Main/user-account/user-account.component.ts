@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
   isAuth = false;
-  constructor(private readonly _authService: AuthService, private readonly _route: Router) {
+  constructor(private readonly _authService: AuthService, private readonly _route: Router,) {
 
     if (_route.url.includes('wishlist')) {
       this.pageName = "Wishlist"
@@ -26,7 +26,7 @@ export class UserAccountComponent implements OnInit {
 
     this._authService.IsAuthentication.subscribe(x => {
       if (x == false) {
-        //  this.logout();
+        this._route.navigate(['/store'])
       }
       this.isAuth = x;
     });

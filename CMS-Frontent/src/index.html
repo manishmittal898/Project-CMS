@@ -2,27 +2,51 @@
 <html lang="en">
 
 <head>
-  <title>Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory, we are selling our products on online portals like Amazon, Flipkart.</title>
+  <title>Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory,
+    we are selling our products on online portals like Amazon, Flipkart.</title>
   <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <!-- Meta tag start -->
   <meta property="og:title" content=Jaipurclothing>
   <meta property="og:site_name" content=Jaipurclothing>
-  <meta property="og:url" content=https://Jaipurclothing.com/>
-  <meta property="og:description" content="Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory, we are selling our products on online portals like Amazon, Flipkart.">
+  <meta property="og:url" content=https://Jaipurclothing.com />
+  <meta property="og:description"
+    content="Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory, we are selling our products on online portals like Amazon, Flipkart.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="">
-  <meta name="description"content="Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory, we are selling our products on online portals like Amazon, Flipkart.">
+  <meta name="description"
+    content="Jaipur Clothing Private Limited We are manufacturing Women's garments, we have our own showroom at our factory, we are selling our products on online portals like Amazon, Flipkart.">
   <meta name="author" content="">
   <!-- Meta tag End -->
-    <!-- Favicons -->
-    <link rel="icon" href="assets/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
-    <!-- Font CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Favicons -->
+  <link rel="icon" href="assets/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+  <!-- Font CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    function decodeJWTToken(token) {
+      return JSON.parse(atob(token.split(".")[1]));
+    }
+    function handleGoogleLoginResponse(response) {
+
+      // to decode the credential response.
+      const responsePayload = decodeJWTToken(response.credential);
+      sessionStorage.setItem("googleLoginUser", JSON.stringify(response.credential));
+      window.location.href = "callback?client=google&status=success";
+    }
+    function handleGoogleSignOut() {
+         
+      //   google.accounts.id.disableAutoSelect();
+      //  return;
+
+    }
+  </script>
 </head>
+
 <body>
-    <app-root></app-root>
+  <app-root></app-root>
 </body>
 
 </html>

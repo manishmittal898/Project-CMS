@@ -74,6 +74,8 @@ export class API_Url {
   public static Register_Api = `${environment.apiEndPoint}account/Register`;
   public static CheckUserExist_Api = `${environment.apiEndPoint}account/CheckUserExist`;
   public static Logout_Api = `${environment.apiEndPoint}account/Logout`;
+  public static SocialLogin_Api = `${environment.apiEndPoint}account/SocialLogin`;
+
   //#endregion
 
   //#region  << User Address  >>

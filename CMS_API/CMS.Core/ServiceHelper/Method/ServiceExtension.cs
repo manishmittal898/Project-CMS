@@ -35,22 +35,29 @@ namespace CMS.Core.ServiceHelper.Method
             {
                 if (!string.IsNullOrEmpty(filePath))
                 {
-                    HttpRequest request = _httpContext.HttpContext.Request;
-
-                    if (!string.IsNullOrEmpty(thumnailPath) && filePath.Contains(".webp"))
+                    if (filePath.Contains("http"))
                     {
-                        System.Collections.Generic.List<string> k = filePath.Split("\\").ToList();
-                        k.Insert(k.Count - 1, thumnailPath);
-                        string checkPath = Path.Join(k.ToArray());
-                        if (File.Exists(checkPath))
+                        return filePath;
+                    }
+                    else
+                    {
+
+                        HttpRequest request = _httpContext.HttpContext.Request;
+
+                        if (!string.IsNullOrEmpty(thumnailPath) && filePath.Contains(".webp"))
                         {
-                            filePath = Path.Combine("\\", checkPath);
+                            System.Collections.Generic.List<string> k = filePath.Split("\\").ToList();
+                            k.Insert(k.Count - 1, thumnailPath);
+                            string checkPath = Path.Join(k.ToArray());
+                            if (File.Exists(checkPath))
+                            {
+                                filePath = Path.Combine("\\", checkPath);
+                            }
+
                         }
 
+                        return string.Concat(request.IsHttps ? "https://" : "http://", request.HttpContext.Request.Host.Value, filePath.Replace("~", "").Replace(@"\", @"/").Replace(@"//", @"/"));
                     }
-
-                    return string.Concat(request.IsHttps ? "https://" : "http://", request.HttpContext.Request.Host.Value, filePath.Replace("~", "").Replace(@"\", @"/").Replace(@"//", @"/"));
-
                 }
                 return null;
             }

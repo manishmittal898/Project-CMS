@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { BaseAPIService } from "../Core/base-api.service";
 import { SecurityService } from '../Core/security.service';
 
+declare var handleGoogleSignOut: any;
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class AuthService {
   public IsAuthentication = new BehaviorSubject<boolean>(null);
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
-     this.IsAuthenticate();
+   // this.IsAuthenticate();
   }
 
   IsAccessibleUrl(requestedUrl: string): boolean {
@@ -21,9 +22,10 @@ export class AuthService {
 
 
 
-  SaveUserToken(token: string) {
+  SaveUserToken(token: string, isSocial: boolean = false) {
     this._securityService.setStorage('authToken', token)
     this._securityService.setStorage('sessionTime', String(new Date().setHours(24)));
+    this._securityService.setStorage('socialLogin', String(isSocial));
     this.IsAuthentication.next(true);
 
   }
@@ -46,50 +48,56 @@ export class AuthService {
 
 
   async IsAuthenticate() {
-   // setTimeout(() => {
-      let token = this._securityService.getStorage('authToken');
-      let sessionTime = this._securityService.getStorage('sessionTime');
-      let currentSessionTime = Number(new Date().getTime());
-      if (token != null && Number(sessionTime) > currentSessionTime) {
-        this.IsAuthentication.next(true);
-      } else {
-        this.IsAuthentication.next(false);
-      }
-      return
- //   }, 0);
+    // setTimeout(() => {
+    let token = this._securityService.getStorage('authToken');
+    let sessionTime = this._securityService.getStorage('sessionTime');
+    let currentSessionTime = Number(new Date().getTime());
+    if (token != null && Number(sessionTime) > currentSessionTime) {
+      this.IsAuthentication.next(true);
+    } else {
+      this.IsAuthentication.next(false);
+    }
+    return
+    //   }, 0);
   }
 
 
 
   LogOut() {
-    if (this.GetUserDetail()?.UserId) {
-      let url = `${this._baseService.API_Url.Logout_Api}?id=${this.GetUserDetail()?.UserId}`;
+    const userId = this.GetUserDetail()?.UserId;
+
+    if (this._securityService.getStorage("socialLogin") == "true") {
+      //  handleGoogleSignOut();
+      debugger
+      const d = new Date(-1);
+      d.setTime(d.getTime());
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = 'g_state' + "=" + '' + ";" + expires + "";
+    }
+    this.removeLocalData();
+    if (userId) {
+      let url = `${this._baseService.API_Url.Logout_Api}?id=${userId}`;
       this._baseService.get(url).subscribe(x => {
-        this.removeLocalData();
       }, err => {
-        this.removeLocalData();
+
       });
     }
 
 
   }
   private removeLocalData() {
-    this.IsAuthentication.next(false);
+   // this.IsAuthentication.next(false);
     this._securityService.removeStorage('authToken');
     this._securityService.removeStorage('sessionTime');
     this._securityService.removeStorage('userDetail');
-   // this._securityService.removeStorage('userDetail');
+    this._securityService.removeStorage('socialLogin');
+
+
+    // this._securityService.removeStorage('userDetail');
 
     this._securityService.removeStorage('cart-product');
 
-    setTimeout(() => {
-      if (this._router.url.includes('/user')) {
-        this._router.navigate([this._baseService.Routing_Url.storeUrl]);
-      }
-      else if (this._router.url !== this._baseService.Routing_Url.LoginUrl && !this._router.url.includes(this._baseService.Routing_Url.storeUrl)) {
-        this._router.navigate([this._baseService.Routing_Url.LoginUrl]);
-      }
-    }, 10);
+
   }
 }
 export interface LoginUserDetailModel {

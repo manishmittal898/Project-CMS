@@ -13,5 +13,7 @@ namespace CMS.Service.Services.Account
         Task<ServiceResponse<string>> WebChangePassword(ChangePasswordModel model);
         Task<ServiceResponse<object>> LogoutUser(long id);
         ServiceResponse<string> GetEncryptedPassword(string value);
+
+        Task<ServiceResponse<LoginResponseModel>> Login(SocialLoginModel model);
     }
 }

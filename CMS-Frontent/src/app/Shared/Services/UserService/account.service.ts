@@ -19,6 +19,10 @@ export class AccountService {
     return this._baseService.post(url, model);
   }
 
+  SocialLogin(model: any): Observable<ApiResponse<any>> {
+    let url = `${this._baseService.API_Url.SocialLogin_Api}`;
+    return this._baseService.post(url, model);
+  }
   // CheckUserExist(loginId: string, isMobile: boolean, userId: number): Promise<ApiResponse<any>> {
   //   let url = `${this._baseService.API_Url.CheckUserExist_Api}`;
   //   let parms= new Dictionary<any>();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AuthService, LoginUserDetailModel } from '../../Services/UserService/auth.service';
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
   }
 
   onSubmit() {
@@ -85,5 +86,9 @@ export class LoginComponent implements OnInit {
     }
 
   }
-  forgetPassword() { }
+  forgetPassword() {
+
+  }
+
+
 }
