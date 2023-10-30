@@ -157,14 +157,14 @@
           <th mat-header-cell *matHeaderCellDef style="width: 120px;"> Action </th>
           <td mat-cell *matCellDef="let row" class="table-action-btn">
             <a href="javascript:void(0)" class="table-action-btn-view" (click)="selectedRecord=row.Id;ViewMode='Detail'"
-              data-bs-toggle="offcanvas" href="#PageSidebar" data-title="View Detail"><i class="bi bi-eye"></i>
+              data-bs-toggle="offcanvas" href="#PageSidebar" data-title="View Detail"><i class="fa-light fa-eye"></i>
             </a>
             <a *ngIf="!row.IsSystemEntry" (click)="selectedRecord=row.Id; ViewMode='Edit'" data-title="Edit"
-              data-bs-toggle="offcanvas" href="#PageSidebar" class="table-action-btn-edit"><i class="bi bi-pencil"></i>
+              data-bs-toggle="offcanvas" href="#PageSidebar" class="table-action-btn-edit"><i class="fa-light fa-pen"></i>
             </a>
 
             <a *ngIf="!row.IsSystemEntry" class="table-action-btn-delete" (click)="updateDeleteStatus(row.Id)"
-              data-title="Delete"> <i class="bi bi-trash"></i> </a>
+              data-title="Delete"> <i class="fa-light fa-trash"></i> </a>
           </td>
         </ng-container>
 
@@ -202,7 +202,7 @@
       <div class="d-flex align-items-center">
         <button *ngIf="!IsSystemEntry && ViewMode!='Add'" (click)="changeViewMode()"
           class="page-new-header-action-items ms-0 me-2" data-title="{{ViewMode}}"> <i class=""
-            [ngClass]="{'bi bi-eye':ViewMode=='Edit' ,'bi bi-pencil':ViewMode=='Detail' }"></i></button>
+            [ngClass]="{'fa-light fa-eye':ViewMode=='Edit' ,'fa-light fa-pen':ViewMode=='Detail' }"></i></button>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
     </div>

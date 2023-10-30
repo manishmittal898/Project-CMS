@@ -1750,7 +1750,7 @@ fieldset legend {
 }
 .pagesidebar-content .offcanvas-title, .pagesidebar-content .offcanvas-title p {
   font-size: 25px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000;
 }
 
@@ -1777,4 +1777,17 @@ body.modal-open .pagesidebar-content:before {
   z-index: 999999;
   bottom: 0;
   margin-left: -1px;
+}
+.fa-eye:before {
+  content: "";
+  font-weight: 300;
+  font-family: "Font Awesome 6 Pro";
+  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display,inline-block);
+    font-feature-settings: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-style: normal;
+    line-height: 1;
 }

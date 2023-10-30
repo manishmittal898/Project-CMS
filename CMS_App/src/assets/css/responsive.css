@@ -43,7 +43,7 @@
     transform: none;
   }
   body.sidebar-open .container-with-sidebar, body.sidebar-open footer {
-    margin-left: 250px;
+    margin-left: 0px;
 }
 footer {
   margin-left: 0px;
