@@ -64,6 +64,7 @@ export class SocialLoginCallbackComponent implements OnInit {
         if (this._cartService.CartProductModel.length > 0) {
           this._cartService.syncCartProduct();
         }
+
         if (this._activatedRoute.snapshot.queryParams.returnURL) {
           this._route.navigate([this._activatedRoute.snapshot.queryParams.returnURL]);
 

@@ -7,7 +7,7 @@ import { MainComponent } from './main.component';
 import { CMSPageContentComponent } from './cmspage-content/cmspage-content.component';
 import { UserAccountModule } from './user-account/user-account.module';
 import { ShopModule } from './shop/shop.module';
-
+import { AuthGuard } from '../Shared/Services/Core/auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -38,7 +38,8 @@ const routes: Routes = [
     },
     {
       path: "user",
-      loadChildren: () => import("./user-account/user-account.module").then(m => m.UserAccountModule)
+      loadChildren: () => import("./user-account/user-account.module").then(m => m.UserAccountModule),
+
     },
     {
       path: "shop",
