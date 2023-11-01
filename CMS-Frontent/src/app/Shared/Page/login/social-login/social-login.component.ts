@@ -17,7 +17,7 @@ export class SocialLoginComponent implements OnInit {
   googleClientId = environment.GoogleClientId;
   constructor(private router: Router, private Auth: AuthService, private ssoAuthService: SocialAuthService) { }
   // npm install angularx-social-login
-  
+
   ngOnInit(): void {
     this.ssoAuthService.authState.subscribe((user) => {
       if (user) {
@@ -25,7 +25,7 @@ export class SocialLoginComponent implements OnInit {
         this.user = user;
         this.loggedIn = (user != null);
         this.isLoggedin = user != null;
-        console.log("Login User = " + this.user.name + this.user.email);
+       // console.log("Login User = " + this.user.name + this.user.email);
       }
 
 
