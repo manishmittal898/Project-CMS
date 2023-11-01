@@ -34,10 +34,16 @@
       // to decode the credential response.
       const responsePayload = decodeJWTToken(response.credential);
       sessionStorage.setItem("googleLoginUser", JSON.stringify(response.credential));
-      window.location.href = "callback?client=google&status=success";
+      if (window.location.search.length>0) {
+        window.location.href = `callback${window.location.search}&client=google&status=success`;
+
+      }else{
+
+        window.location.href = "callback?client=google&status=success";
+      }
     }
     function handleGoogleSignOut() {
-         
+
       //   google.accounts.id.disableAutoSelect();
       //  return;
 

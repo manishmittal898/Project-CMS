@@ -68,7 +68,7 @@ export class AuthService {
 
     if (this._securityService.getStorage("socialLogin") == "true") {
       //  handleGoogleSignOut();
-      debugger
+      
       const d = new Date(-1);
       d.setTime(d.getTime());
       let expires = "expires=" + d.toUTCString();

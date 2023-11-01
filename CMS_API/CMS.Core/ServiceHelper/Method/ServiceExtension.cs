@@ -35,7 +35,7 @@ namespace CMS.Core.ServiceHelper.Method
             {
                 if (!string.IsNullOrEmpty(filePath))
                 {
-                    if (filePath.Contains("http"))
+                    if (filePath.Contains("http://")|| filePath.Contains("https://"))
                     {
                         return filePath;
                     }

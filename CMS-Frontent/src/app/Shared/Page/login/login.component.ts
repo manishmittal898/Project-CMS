@@ -21,7 +21,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly _accountService: AccountService, private readonly _wishList: WishListService,
     private readonly _authService: AuthService, private readonly _security: SecurityService, private readonly _cartService: CartProductService,
-    private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
+    private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) {
+
+      if(sessionStorage.getItem("isReload")==undefined){
+        location.reload();
+        sessionStorage.setItem("isReload","true");
+
+      }else{
+        sessionStorage.removeItem("isReload")
+      }
+     }
 
   ngOnInit(): void {
 

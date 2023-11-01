@@ -19,6 +19,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { SocialLoginCallbackComponent } from './Shared/Page/login/social-login-callback/social-login-callback.component';
+import { UserPasswordComponent } from './Shared/Page/login/user-password/user-password.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SocialLoginCallbackComponent } from './Shared/Page/login/social-login-c
     LoginComponent,
     RegisterComponent,
     SocialLoginComponent,
-    SocialLoginCallbackComponent
+    SocialLoginCallbackComponent,
+    UserPasswordComponent
   ],
   imports: [
     CommonModule,
