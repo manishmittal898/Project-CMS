@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
-
-
+import { environment } from 'src/environments/environment';
+declare var google: any
+declare var handleGoogleLoginResponse: any;
 @Component({
   selector: 'app-social-login',
   templateUrl: './social-login.component.html',
@@ -13,33 +14,48 @@ export class SocialLoginComponent implements OnInit {
   user: SocialUser | undefined;
   loggedIn: boolean | undefined;
   isLoggedin?: boolean = undefined;
-
-  constructor(private router: Router, private Auth: AuthService, private ssoauthService: SocialAuthService) { }
+  googleClientId = environment.GoogleClientId;
+  constructor(private router: Router, private Auth: AuthService, private ssoAuthService: SocialAuthService) { }
   // npm install angularx-social-login
+
   ngOnInit(): void {
-    this.ssoauthService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      this.isLoggedin = user != null;
-      console.log("Login User = " + this.user.name + this.user.email);
+    this.ssoAuthService.authState.subscribe((user) => {
+      if (user) {
+
+        this.user = user;
+        this.loggedIn = (user != null);
+        this.isLoggedin = user != null;
+       // console.log("Login User = " + this.user.name + this.user.email);
+      }
 
 
     });
+
   }
-  signInWithFB(): void { //Facebook Login
-    this.ssoauthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  ngAfterViewInit(): void {
+    this.googleLoginInit();
   }
 
-  signWithGoogle(): void {
-    console.log("googlesignin"); //for google sign in
-    this.ssoauthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    console.log("googlesignin1");
+  googleLoginInit() {
+    google.accounts.id.initialize({
+      client_id: environment.GoogleClientId,
+      callback: handleGoogleLoginResponse
+    });
+    setTimeout(() => {
+      google.accounts.id.renderButton(
+        document.getElementById("btnGoogleLogin"),
+        { theme: "outline", size: "large" }  // customization attributes
+      );
+      google.accounts.id.prompt(); // also display the One Tap dialog
+    }, 100);
+
   }
-  
-  signOut():any{ //for google out
-    this.ssoauthService.signOut();
+
+  signInWithFB(): void { //Facebook Login
+    this.ssoAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
+
   refreshToken(): void {
-    this.ssoauthService.refreshAuthToken(FacebookLoginProvider.PROVIDER_ID);
+    this.ssoAuthService.refreshAuthToken(FacebookLoginProvider.PROVIDER_ID);
   }
 }

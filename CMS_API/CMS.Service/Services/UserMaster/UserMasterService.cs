@@ -167,7 +167,7 @@ namespace CMS.Service.Services.UserMaster
                     {
                         TblUserMaster objUser = _db.TblUserMasters.FirstOrDefault(r => r.UserId == model.UserId);
                         objUser.FirstName = model.FirstName ?? null;
-                        objUser.LastName = model.LastName;
+                        objUser.LastName = model.LastName??null;
                         objUser.Email = model.Email;
                         objUser.Dob = model.Dob;
                         objUser.Mobile = model.Mobile;
@@ -194,7 +194,7 @@ namespace CMS.Service.Services.UserMaster
                 else
                 {
 
-                    TblUserMaster user = await _db.TblUserMasters.Where(x => (x.Mobile == model.Mobile || x.Email == model.Email) && !x.IsDeleted).FirstOrDefaultAsync();
+                    TblUserMaster user = await _db.TblUserMasters.Where(x => ((model.Mobile !=null && x.Mobile == model.Mobile )|| x.Email == model.Email) && !x.IsDeleted).FirstOrDefaultAsync();
 
                     if (user == null)
                     {
@@ -212,7 +212,7 @@ namespace CMS.Service.Services.UserMaster
                             RoleId = model.RoleId,
                             IsDeleted = false,
                             IsActive = true,
-                            CreatedBy = model.CreatedBy
+                            CreatedBy = model.CreatedBy ?? 1
                         };
                         Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TblUserMaster> roletype = await _db.TblUserMasters.AddAsync(objUser);
                         _ = _db.SaveChanges();

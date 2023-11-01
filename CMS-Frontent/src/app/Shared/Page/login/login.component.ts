@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AuthService, LoginUserDetailModel } from '../../Services/UserService/auth.service';
@@ -8,7 +8,8 @@ import { AccountService } from '../../Services/UserService/account.service';
 import { SecurityService } from '../../Services/Core/security.service';
 import { WishListService } from '../../Services/ProductService/wish-list.service';
 import { CartProductService } from '../../Services/ProductService/cart-product.service';
-
+declare var googleLoginInit: any;
+declare var google: any
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly _accountService: AccountService, private readonly _wishList: WishListService,
     private readonly _authService: AuthService, private readonly _security: SecurityService, private readonly _cartService: CartProductService,
-    private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) { }
+    private readonly _route: Router, private readonly toast: ToastrService, private readonly _activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
   }
@@ -76,14 +78,15 @@ export class LoginComponent implements OnInit {
   }
   redirectURL(url) {
     if (this._activatedRoute.snapshot.queryParams.returnURL) {
-
       this._route.navigate([url], { queryParams: { returnURL: this._activatedRoute.snapshot.queryParams.returnURL }, });
-
-
     } else {
       this._route.navigate([url]);
     }
 
   }
-  forgetPassword() { }
+  forgetPassword() {
+
+  }
+
+
 }

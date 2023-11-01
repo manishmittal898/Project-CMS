@@ -18,6 +18,8 @@ import { SocialLoginComponent } from './Shared/Page/login/social-login/social-lo
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { SocialLoginCallbackComponent } from './Shared/Page/login/social-login-callback/social-login-callback.component';
+import { UserPasswordComponent } from './Shared/Page/login/user-password/user-password.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { environment } from 'src/environments/environment';
     HtmlComponent,
     LoginComponent,
     RegisterComponent,
-    SocialLoginComponent
+    SocialLoginComponent,
+    SocialLoginCallbackComponent,
+    UserPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -42,18 +46,11 @@ import { environment } from 'src/environments/environment';
     { provide: LocationStrategy, useClass: PathLocationStrategy }, {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: true,
+        autoLogin: false,
         providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(environment.GoogleClientId, {
-              // scopes : environment.auth.scopes,
-              //prompt: 'consent'   // '' | 'none' | 'consent' |  'select_account'
-            }),
-          },
           { id: FacebookLoginProvider.PROVIDER_ID, provider: new FacebookLoginProvider(environment.facebookId) }
         ],
-     
+
       } as SocialAuthServiceConfig,
     }],
   bootstrap: [AppComponent],

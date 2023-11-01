@@ -6,6 +6,8 @@ import { AuthService } from '../../Services/UserService/auth.service';
 import { SecurityService } from '../../Services/Core/security.service';
 import { DropDown_key } from '../../Constant';
 import { CartProductService } from '../../Services/ProductService/cart-product.service';
+import { Router } from '@angular/router';
+import { BaseAPIService } from '../../Services/Core/base-api.service';
 declare var $: any;
 @Component({
   selector: 'app-nav-bar',
@@ -23,8 +25,8 @@ export class NavBarComponent implements OnInit {
   // get wishListCount() {
   //   return this._cartService?.CartProductModel?.length > 0 ? this._cartService?.CartProductModel?.length : 0;
   // }
-  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService,
-    private readonly _authService: AuthService, private readonly _cartService: CartProductService) {
+  constructor(private readonly _commonService: CommonService, private readonly _securityService: SecurityService, private readonly _baseService: BaseAPIService,
+    private readonly _authService: AuthService, private readonly _cartService: CartProductService, private _router: Router) {
     if (this._securityService.getStorage('nav-collections-menu')) {
       this.menuModel = JSON.parse(this._securityService.getStorage('nav-collections-menu'));
     }
@@ -79,16 +81,31 @@ export class NavBarComponent implements OnInit {
 
 
   logout() {
+
     this._authService.LogOut();
+    //  setTimeout(() => {
+    if (this._router.url.includes('/user')) {
+      this._router.navigate([this._baseService.Routing_Url.storeUrl]).then(() => {
+        window.location.reload();
+      });
+    }
+    else if (this._router.url !== this._baseService.Routing_Url.LoginUrl && !this._router.url.includes(this._baseService.Routing_Url.storeUrl)) {
+      this._router.navigate([this._baseService.Routing_Url.LoginUrl]).then(() => {
+        window.location.reload();
+      });
+    } else {
+      window.location.reload();
+
+    }
+    // }, 10);
   }
 
-  MobileMenuToogle()
-  {
-    $("#ChangeToggle").click(function() {
+  MobileMenuToogle() {
+    $("#ChangeToggle").click(function () {
       $("#MenuNavbar").addClass("menushowing");
-  });
-  $(".mobile-nav-close").click(function() {
+    });
+    $(".mobile-nav-close").click(function () {
       $("#MenuNavbar").removeClass("menushowing");
-  });
+    });
   }
 }

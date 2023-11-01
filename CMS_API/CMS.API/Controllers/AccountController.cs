@@ -98,5 +98,13 @@ namespace CMS.API.Controllers
         {
             return await _oTPService.GenerateOTP(emailId);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ServiceResponse<LoginResponseModel>> SocialLogin(SocialLoginModel model)
+        {
+            return await _accountService.Login(model);
+        }
+
     }
 }

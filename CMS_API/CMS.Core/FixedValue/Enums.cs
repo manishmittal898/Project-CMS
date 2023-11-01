@@ -67,5 +67,7 @@ namespace CMS.Core.FixedValue
             [StringValue("Customer")]
             Customer
         }
+
+     
     }
 }

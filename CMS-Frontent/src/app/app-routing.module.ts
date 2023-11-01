@@ -4,6 +4,7 @@ import { HtmlComponent } from './Shared/Page/html/html.component';
 import { LoginComponent } from './Shared/Page/login/login.component';
 import { RegisterComponent } from './Shared/Page/register/register.component';
 import { UIDesignModule } from './uidesign/uidesign.module';
+import { SocialLoginCallbackComponent } from './Shared/Page/login/social-login-callback/social-login-callback.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,9 @@ const routes: Routes = [
   {
     component: RegisterComponent, path: 'register',
   },
-
+  {
+    component: SocialLoginCallbackComponent, path: 'callback',
+  },
   { path: 'html-page', component: HtmlComponent },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: 'index' },

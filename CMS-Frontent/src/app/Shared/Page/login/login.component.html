@@ -62,57 +62,9 @@
 
 <!-- Reset Password Modal Start -->
 <div class="modal fade modal-custom-design" id="ForgotPas" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header pb-0">
-                <h5 class="modal-title">Reset your password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa-sharp fa-light fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body p-4">
-                <form>
-                    <div class="forget-pas-step1">
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="EnterNewPas"
-                                placeholder="Enter Email Address">
-                            <label for="EnterNewPas">Enter Email Address</label>
-                        </div>
-                        <button type="button" class="btn btn-default px-3 py-2 w-100 text-uppercase">Submit</button>
-                    </div>
-                    <div class="forget-pas-step2 d-none">
-                        <label class="d-block text-center">We have sent you <strong> OTP </strong> to your email</label>
-                        <label class="d-block text-center mt-1 font-13">Please Enter OTP <strong
-                                class="text-theme-primary">1:52</strong></label>
-                        <div class="forget-pas-otp d-flex my-3">
-                            <input type="text" placeholder="0" />
-                            <input type="text" placeholder="0" />
-                            <input type="text" placeholder="0" />
-                            <input type="text" placeholder="0" />
-                            <input type="text" placeholder="0" />
-                            <input type="text" placeholder="0" />
-                        </div>
-                        <label class="d-block text-center mb-3 font-13">Didn"t Recieve OTP ? <a
-                                href="javascript:void(0)" class="text-theme-primary"> <strong> <i
-                                        class="fa-regular fa-arrow-rotate-right"></i> RESEND OTP </strong> </a></label>
-                        <button type="button" class="btn btn-default px-3 py-2 w-100 text-uppercase">Verify OTP</button>
-                    </div>
-                    <div class="forget-pas-step3 d-none">
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="EnterNewPas"
-                                placeholder="Enter new password">
-                            <label for="EnterNewPas">Enter new password</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="ConfirmrNewPas"
-                                placeholder="Confirm new password">
-                            <label for="ConfirmrNewPas">Confirm new password</label>
-                        </div>
-                        <button type="button" class="btn btn-default px-3 py-2 w-100 text-uppercase">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <app-user-password></app-user-password>
     </div>
 </div>
 

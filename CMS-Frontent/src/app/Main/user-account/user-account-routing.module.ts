@@ -5,6 +5,7 @@ import { MyAddressComponent } from "./my-address/my-address.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { MyWishlistComponent } from "./my-wishlist/my-wishlist.component";
 import { UserAccountComponent } from "./user-account.component";
+import { AuthGuard } from "src/app/Shared/Services/Core/auth.guard";
 
 const routes: Routes = [
   {
@@ -12,9 +13,9 @@ const routes: Routes = [
     component: UserAccountComponent,
     children: [
       { component: MyAccountComponent, path: '' },
-      { component: MyAccountComponent, path: 'profile' },
-      { component: MyOrdersComponent, path: 'orders' },
-      { component: MyAddressComponent, path: 'address' },
+      { component: MyAccountComponent, path: 'profile',canActivate:[AuthGuard] },
+      { component: MyOrdersComponent, path: 'orders', canActivate:[AuthGuard]},
+      { component: MyAddressComponent, path: 'address',canActivate:[AuthGuard] },
       { component: MyWishlistComponent, path: 'wishlist' }
     ]
 

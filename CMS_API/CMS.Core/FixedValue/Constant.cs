@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using CMS.Core.Attribute;
+using System.Drawing;
 
 namespace CMS.Core.FixedValue
 {
@@ -64,5 +65,14 @@ namespace CMS.Core.FixedValue
         public static Size Large { get; } = new Size(1080, 1440);
 
 
+    }
+
+    public class RoleWisePassword
+    {
+        public const string Admin = "$2022@Admin@$2022";
+        public const string Customer = "$2022@Customer@$2022";
+
+ 
+      
     }
 }

@@ -30,5 +30,15 @@
             public string SessionID { get; set; }
             public string OTP { get; set; }
         }
+
+        public class SocialLoginModel
+        {
+            public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            public string ProfilePhoto { get; set; }
+            public string Plateform { get; set; }
+        }
     }
 }
