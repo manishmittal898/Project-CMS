@@ -30,24 +30,19 @@
       return JSON.parse(atob(token.split(".")[1]));
     }
     function handleGoogleLoginResponse(response) {
-
       // to decode the credential response.
       const responsePayload = decodeJWTToken(response.credential);
       sessionStorage.setItem("googleLoginUser", JSON.stringify(response.credential));
-      if (window.location.search.length>0) {
+      if (window.location.search.length > 0) {
         window.location.href = `callback${window.location.search}&client=google&status=success`;
-
-      }else{
-
+      } else {
         window.location.href = "callback?client=google&status=success";
       }
     }
     function handleGoogleSignOut() {
-
-      //   google.accounts.id.disableAutoSelect();
-      //  return;
-
+      google.accounts.id.disableAutoSelect();
     }
+
   </script>
 </head>
 

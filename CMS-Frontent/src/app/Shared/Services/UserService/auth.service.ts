@@ -6,6 +6,7 @@ import { BaseAPIService } from "../Core/base-api.service";
 import { SecurityService } from '../Core/security.service';
 
 declare var handleGoogleSignOut: any;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +14,16 @@ export class AuthService {
   public IsAuthentication = new BehaviorSubject<boolean>(null);
 
   constructor(private readonly _baseService: BaseAPIService, private _router: Router, private readonly _securityService: SecurityService) {
-   // this.IsAuthenticate();
+    // this.IsAuthenticate();
   }
 
   IsAccessibleUrl(requestedUrl: string): boolean {
     return true;
   }
 
+  googleSignOut() {
 
+  }
 
   SaveUserToken(token: string, isSocial: boolean = false) {
     this._securityService.setStorage('authToken', token)
@@ -67,12 +70,12 @@ export class AuthService {
     const userId = this.GetUserDetail()?.UserId;
 
     if (this._securityService.getStorage("socialLogin") == "true") {
-      //  handleGoogleSignOut();
-      
+
       const d = new Date(-1);
       d.setTime(d.getTime());
       let expires = "expires=" + d.toUTCString();
       document.cookie = 'g_state' + "=" + '' + ";" + expires + "";
+      handleGoogleSignOut();
     }
     this.removeLocalData();
     if (userId) {
@@ -86,7 +89,7 @@ export class AuthService {
 
   }
   private removeLocalData() {
-   // this.IsAuthentication.next(false);
+    // this.IsAuthentication.next(false);
     this._securityService.removeStorage('authToken');
     this._securityService.removeStorage('sessionTime');
     this._securityService.removeStorage('userDetail');
