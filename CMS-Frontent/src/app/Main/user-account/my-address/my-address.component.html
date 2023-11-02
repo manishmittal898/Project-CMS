@@ -57,13 +57,13 @@
   <div class="modal fade modal-custom-design" #addressPopup id="addressPopup" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header pb-0">
+        <div class="modal-header px-3 py-2 py-lg-3">
           <h5 class="m-0">{{selectedData.Id?.length>0? 'Update':'Add new'}} address</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <i class="fa-sharp fa-light fa-xmark"></i>
           </button>
         </div>
-        <div class="modal-body px-4 pb-1 modal-form-update">
+        <div class="modal-body px-3 pt-1 pb-1 modal-form-update">
           <app-save-address [(model)]="selectedData" *ngIf="this.showSavePopup" (onCancel)="closePopup()"
             (onSave)="selectedData=$event;onSave($event)"></app-save-address>
         </div>

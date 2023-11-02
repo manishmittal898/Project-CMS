@@ -1888,6 +1888,7 @@ body .ui-slider .ui-slider-range {
   height: auto;
   width: auto;
   line-height: 0;
+  margin: 0px;
 }
 
 .modal-footer {

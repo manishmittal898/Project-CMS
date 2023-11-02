@@ -23,7 +23,7 @@
       <div class="col-lg-9">
         <div class="row">
           <div class="col-lg-12">
-            <h4 class="mb-3 text-center font-w-500 d-lg-none">{{this.pageName }}</h4>
+            <!-- <h4 class="mb-3 text-center font-w-500 d-lg-none">{{this.pageName }}</h4> -->
             <div
               class="product-collection-header-filter d-flex flex-wrap align-items-center justify-content-between mb-3 font-13">
               <!-- <div class="d-none d-md-block">Showing {{indexModel.Page==1?1 : indexModel.Page*indexModel.PageSize}}–{{
@@ -61,12 +61,14 @@
             </div>
           </div>
           <!-- Product Start -->
-          <div class=" col-lg-4 col-md-4 col-sm-4 col-6 mb-4" [ngClass]="{'col-xl-3':isGrid4 ,'col-xl-4':!isGrid4 }"
+          <div class="product-page-list row m-0 p-0">
+          <div class=" col-lg-4 col-md-4 col-sm-4 col-6 mb-3 mb-sm-4" [ngClass]="{'col-xl-3':isGrid4 ,'col-xl-4':!isGrid4 }"
             *ngFor="let item of model  | paginate: { itemsPerPage: indexModel.PageSize , currentPage: indexModel.Page,totalItems: totalRecords };let index=index">
             <div class="position-relative product-list-hover-items-outside">
               <app-product-card [(Product)]="model[index]"></app-product-card>
             </div>
           </div>
+        </div>
           <!-- Product End -->
           <div class="col-lg-12 mt-4" *ngIf="indexModel.PageSize<totalRecords">
             <nav>

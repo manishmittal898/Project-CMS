@@ -246,7 +246,7 @@
   .navbar-toggler {
     padding: 0px;
     border: none;
-    margin-left: 18px;
+    margin-left: 25px;
   }
 
   .navbar-toggler:focus {
@@ -260,7 +260,7 @@
   }
 
   .navbar-toggler-icon i {
-    font-size: 24px;
+    font-size: 28px;
     color: #000;
   }
 
@@ -779,6 +779,12 @@ font-size: 16px;
 {
   height: 95px;
   width: 95px;
+}
+.product-page-list [class*="col-"]:nth-child(odd) {
+  padding-right: 5px;
+}
+.product-page-list [class*="col-"]:nth-child(even) {
+  padding-left: 5px;
 }
 }
 
