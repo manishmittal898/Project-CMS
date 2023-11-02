@@ -46,7 +46,7 @@ export class SocialLoginComponent implements OnInit {
         document.getElementById("btnGoogleLogin"),
         { theme: "outline", size: "large" }  // customization attributes
       );
-      google.accounts.id.prompt(); // also display the One Tap dialog
+
     }, 100);
 
   }
