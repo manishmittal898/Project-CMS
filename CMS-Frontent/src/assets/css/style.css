@@ -35,16 +35,6 @@ Text Domain:  StoreOne
   --font-size-18: 18px;
   --font-size-22: 22px;
   --font-size-40: 40px;
-  --character-spacing-0: 0px;
-  --line-spacing-28: 28px;
-  --line-spacing-35: 35px;
-  --line-spacing-100: 100px;
-  --bs-body-bg-rgb: 255, 255, 255;
-  --bs-body-bg-rgb: 255, 255, 255;
-  --bs-primary-rgb: 13, 110, 253;
-  --bd-accent-rgb: 255, 228, 132;
-  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-  --bd-pink-rgb: 214, 51, 132;
 }
 
 .text-theme-primary {
@@ -805,6 +795,7 @@ font-weight: 600;
   color: var(--black);
   position: relative;
   overflow: hidden;
+  background: #fff;
 }
 
 .product-list-items:hover {
@@ -1002,10 +993,14 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: end;
-  margin-top: -40px;
+  margin-top: -46px;
   z-index: 0;
   margin-bottom: 15px;
+  width: 90px;
+  margin-left: auto;
 }
+
+
 .my-account-orders-filter-btn i {
   font-size: 22px;
 }
