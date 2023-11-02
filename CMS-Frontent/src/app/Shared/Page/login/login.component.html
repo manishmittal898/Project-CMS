@@ -42,7 +42,7 @@
                             <input type="checkbox" class="form-check-input" id="check1">
                             <label class="form-check-label ms-2" for="check1">Remember me?</label>
                         </div>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ForgotPas"
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ForgotPass"
                             class="font-13 text-dark">Forgot password ?</a>
                     </div>
 
@@ -58,10 +58,11 @@
         </div>
     </div>
 </Section>
+<app-footer></app-footer>
 
 
 <!-- Reset Password Modal Start -->
-<div class="modal fade modal-custom-design" id="ForgotPas" aria-hidden="true">
+<div class="modal fade modal-custom-design" data-bs-backdrop="static" id="ForgotPass"  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <app-user-password></app-user-password>
@@ -69,4 +70,3 @@
 </div>
 
 <!-- Reset Password Modal End -->
-<app-footer></app-footer>

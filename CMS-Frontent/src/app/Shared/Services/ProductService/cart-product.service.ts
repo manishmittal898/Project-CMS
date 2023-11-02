@@ -94,19 +94,17 @@ debugger
         this.cartProductItem.push(product);
       } else {
         const tempProduct = this.CartProductModel?.find(x => x.ProductId == product.ProductId);
-        const tempSize = tempProduct?.Product?.Stocks?.find(s => s.SizeId == product.SizeId)
-        if (tempSize.Quantity < (this.cartProductItem[indx].Quantity + product.Quantity)) {
-          this.cartProductItem[indx].Quantity = tempSize.Quantity;
+        const stockSize = tempProduct?.Product?.Stocks?.find(s => s.SizeId == product.SizeId)
+        if (stockSize.Quantity < (this.cartProductItem[indx]?.Quantity + product.Quantity)) {
+          this.cartProductItem[indx].Quantity = stockSize.Quantity;
           this._toasterService.warning("Maximum cart limit exceeded!" as string, 'info');
           showAddMessage = false;
         }
         else {
           this.cartProductItem[indx].Quantity += product.Quantity;
-
         }
       }
       if (showAddMessage) {
-
         this._toasterService.success("Added Successfully" as string, 'Success');
       }
       let data = JSON.stringify(this.cartProductItem);

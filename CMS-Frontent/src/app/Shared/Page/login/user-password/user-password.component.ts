@@ -11,6 +11,13 @@ export class UserPasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  ngOnDestroy(): void {
+    this.reset();
+  }
+  reset(): void {
+    this.step = "step1"
+
+  }
   sendOTP() {
     this.step = 'step2'
   }
