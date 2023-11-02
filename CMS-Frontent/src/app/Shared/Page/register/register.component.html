@@ -22,7 +22,7 @@
         <h3 class="text-center section-title">Register</h3>
         <form class="mx-400 m-auto" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="FirstName" name="FirstName" formControlName="FirstName"
+            <input type="email"  class="form-control" id="FirstName" name="FirstName" formControlName="FirstName"
               placeholder="First Name">
             <label for="FirstName">First Name</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
@@ -48,7 +48,7 @@
             <div class="text-danger font-13 mt-1" *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
               <div *ngIf="f.Email.errors.required">Email is required.</div>
               <div *ngIf="f.Email.errors.email">Email must be a valid email address.</div>
-              <div *ngIf="f.Email.errors.maxlength">Email cannot be more than 20 characters long..</div>
+              <div *ngIf="f.Email.errors.maxlength">Email cannot be more than 10 characters long..</div>
               <div *ngIf="f.Email.errors.existsEmail">User already register with this mail.</div>
 
             </div>
@@ -88,7 +88,7 @@
 
           <button type="submit" [disabled]="!registrationForm.valid"
             class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign up</button>
-          <div class="text-center mt-3">Allready account ? <a href="javascript:void(0)" (click)="redirectToLogin('/login')"  
+          <div class="text-center mt-3">Allready account ? <a href="javascript:void(0)" (click)="redirectToLogin('/login')"
               class="text-dark font-w-500">Login</a> </div>
         </form>
       </div>
