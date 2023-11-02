@@ -70,9 +70,6 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
 
   }
   AddSlider() {
-    this.isLoading = false;
-
-    setTimeout(() => {
       $('.slider-items-5')?.slick({
         dots: false,
         infinite: true,
@@ -113,8 +110,6 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         }
         ]
       });
-
-    }, 100);
 
   }
 

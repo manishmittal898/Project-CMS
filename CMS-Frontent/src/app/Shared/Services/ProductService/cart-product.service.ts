@@ -65,6 +65,7 @@ export class CartProductService {
     return this._baseService.post(url, model);
   }
   public async SetCartProduct(product: CartProductPostModel) {
+debugger
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
 
     if (this._auth.IsAuthentication.value) {
@@ -78,7 +79,7 @@ export class CartProductService {
         else {
           this._toasterService.error(x.Message as string, 'Faild');
         }
-        let data = JSON.stringify(this.cartProductItem);
+        const data = JSON.stringify(this.cartProductItem);
         this._securityService.setStorage('cart-product', data);
         this.GetCartList();
         return x;
@@ -92,8 +93,8 @@ export class CartProductService {
       if (indx == -1) {
         this.cartProductItem.push(product);
       } else {
-        let tempProduct = this.CartProductModel.find(x => x.ProductId == product.ProductId);
-        let tempSize = tempProduct.Product.Stocks.find(s => s.SizeId == product.SizeId)
+        const tempProduct = this.CartProductModel?.find(x => x.ProductId == product.ProductId);
+        const tempSize = tempProduct?.Product?.Stocks?.find(s => s.SizeId == product.SizeId)
         if (tempSize.Quantity < (this.cartProductItem[indx].Quantity + product.Quantity)) {
           this.cartProductItem[indx].Quantity = tempSize.Quantity;
           this._toasterService.warning("Maximum cart limit exceeded!" as string, 'info');
