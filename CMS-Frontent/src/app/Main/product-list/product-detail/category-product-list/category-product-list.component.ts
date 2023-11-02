@@ -38,7 +38,6 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
       this.isLoading = true;
       setTimeout(() => {
         this.bindRelatedList();
-
       }, 100);
     }
   }
@@ -57,7 +56,6 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
           this.model = this.model; //.map(x => { return { ...x, Id: this._securityService.encrypt(String(x.Id)) as any } });
           this.totalRecords = (Number(response.TotalRecord) > 0 ? response.TotalRecord - (this.ExcludeId.length > 0 ? 1 : 0) : 0) as number;
           this.bindRelatedList();
-
         }
       });
     }
@@ -110,7 +108,6 @@ export class CategoryProductListComponent implements OnInit, OnChanges {
         }
         ]
       });
-
   }
 
 }
