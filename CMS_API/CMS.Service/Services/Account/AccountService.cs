@@ -106,7 +106,7 @@ namespace CMS.Service.Services.Account
                 {
                     user.Password = encrptPassword;
                     _ = await _db.SaveChangesAsync();
-                    return CreateResponse<string>(model.Email, "Password update successful", true, (int)ApiStatusCode.Ok);
+                    return CreateResponse<string>(model.Email, "Password update successfully", true, (int)ApiStatusCode.Ok);
                 }
                 else
                 {
