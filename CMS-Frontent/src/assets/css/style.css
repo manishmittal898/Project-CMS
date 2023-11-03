@@ -284,7 +284,7 @@ img {
   border: none;
   outline: solid 1px var(--primary-color);
   background: #fff;
-  color: var(--black);
+  color: var(--primary-color);
   outline-offset: -1px;
 }
 
@@ -3371,5 +3371,28 @@ body .toast-close-button {
 }
 .forget-pas-otp input:last-child {
   margin-right: 0px;
+}
+.customer-review-default-box {
+  box-shadow: 0px 4px 16px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  margin-top: 30px;
+  text-align: center;
+  padding: 30px 10px;
+}
+.customer-review-default-box h2 {
+  font-size: 25px;
+  margin: 0px;
+}
+.customer-review-default-box .customer-review-default-box-star {
+  margin: 16px 0px 8px 0px;
+}
+.customer-review-default-box .customer-review-default-box-star i {
+  color: #ffa900;
+  margin: 0px 2px;
+  font-size: 16px;
+}
+.customer-review-default-box .btn {
+  min-width: 260px;
+  font-size: 18px;
 }
 /* CUSTOM CSS END */
