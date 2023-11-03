@@ -2,6 +2,7 @@
 using CMS.Core.ServiceHelper.Method;
 using CMS.Core.ServiceHelper.Model;
 using CMS.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -38,15 +39,29 @@ namespace CMS.Service.Services.OTP
             catch (Exception ex)
             {
 
-                return CreateResponse<string>(null, ResponseMessage.Fail, true, (int)ApiStatusCode.InternalServerError, exception: ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                return CreateResponse<string>(null, ResponseMessage.Fail, false, (int)ApiStatusCode.InternalServerError, exception: ex.InnerException != null ? ex.InnerException.Message : ex.Message);
 
             }
         }
 
-        public ServiceResponse<object> VerifyOTP(OTPVerifyModel model)
+        public ServiceResponse<object> VerifySessionOTP(OTPVerifyModel model)
         {
             bool IsSuccess = false;
-            TblUserOtpdatum otpdatum = _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId && !x.IsVerified).FirstOrDefault();
+            TblUserOtpdatum otpdatum = _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId && x.IsVerified).FirstOrDefault();
+            if (otpdatum != null && model.OTP == _security.DecryptData(otpdatum.Otp))
+            {
+
+                IsSuccess = true;
+            }
+
+            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, IsSuccess, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
+
+        }
+
+        public async Task<ServiceResponse<object>> VerifyOTP(OTPVerifyModel model)
+        {
+            bool IsSuccess = false;
+            TblUserOtpdatum otpdatum = await _db.TblUserOtpdata.Where(x => x.SessionId.ToString() == model.SessionId && !x.IsVerified).FirstOrDefaultAsync();
             if (otpdatum != null && model.OTP == _security.DecryptData(otpdatum.Otp))
             {
                 otpdatum.Attempt++;
@@ -59,10 +74,12 @@ namespace CMS.Service.Services.OTP
 
             }
             _ = _db.TblUserOtpdata.Update(otpdatum);
-            _ = _db.SaveChanges();
+            _ = await _db.SaveChangesAsync();
             return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, true, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
 
         }
+
+
     }
     public class OTPVerifyModel
     {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { API_Url, Routing_Url } from '../../Constant';
-import { IDictionary, ApiResponse } from '../../Helper/Common';
+import { IDictionary, ApiResponse, Dictionary } from '../../Helper/Common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { IDictionary, ApiResponse } from '../../Helper/Common';
 export class BaseAPIService {
   API_Url= API_Url;
   readonly Routing_Url = Routing_Url;
-
+queryParam = new Dictionary<any>()
   constructor(private readonly _httpClient: HttpClient) { }
 
   get(endPoint: string, params?: IDictionary<string>): Observable<ApiResponse<any>> {
