@@ -1,6 +1,6 @@
 <form [formGroup]="formgrp" (ngSubmit)="onSubmit()">
   <div class="row align-items-center">
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="FullName" placeholder="Enter full name*"
           [(ngModel)]="model.FullName" formControlName="FullName"
@@ -11,7 +11,7 @@
           Please enter <strong>Full Name</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" (keypress)="_commonService.NumberOnly($event)" maxlength="10" minlength="10"
           class="form-control" id="Mobile" placeholder="Mobile number*" [(ngModel)]="model.Mobile"
@@ -22,7 +22,7 @@
           Please enter <strong>Mobile</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" (blur)="getAddress(model?.PinCode)" id="Postal-code"
           placeholder="Postal code*" [(ngModel)]="model.PinCode" formControlName="PinCode"
@@ -33,7 +33,7 @@
           Please enter <strong>Postal code</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Building" [(ngModel)]="model.BuildingNumber"
           formControlName="BuildingNumber"
@@ -45,7 +45,7 @@
           Please enter <strong>House No. /Apartment, suite, etc.</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Address1" placeholder="Address*" [(ngModel)]="model.Address"
           formControlName="Address" [ngClass]="{ 'is-invalid': f.Address.errors && f.Address.touched}">
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Landmark" placeholder="Landmark[optional]"
           [(ngModel)]="model.Landmark" formControlName="Landmark"
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating form-floating-ngx-dropdown mb-3">
         <div class="form-floating-title">City*</div>
         <ng-select [items]="this.dropDown!.ddlDistrict" formControlName="City" [searchable]="true" bindLabel="Text"
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating form-floating-ngx-dropdown mb-3">
         <div class="form-floating-title">State*</div>
         <ng-select [items]="this.dropDown!.ddlState" formControlName="StateId" [searchable]="true" bindLabel="Text"
@@ -96,7 +96,7 @@
       </div>
     </div>
 
-    <div class="col-xl-6">
+    <div class="col-lg-6">
       <div class="form-floating form-floating-ngx-dropdown mb-0">
         <div class="form-floating-title">Address Type*</div>
         <ng-select [items]="this.dropDown!.ddlAddressType" formControlName="AddressType" [searchable]="true"
@@ -108,7 +108,7 @@
           Please select <strong>Address Type</strong>...!</div>
       </div>
     </div>
-    <div class="col-xl-6 mt-4">
+    <div class="col-lg-6 mt-4">
       <div class="form-check d-flex align-items-center">
         <input type="checkbox" class="form-check-input" id="IsPrimary" [(ngModel)]="model.IsPrimary"
           formControlName="IsPrimary" id="IsPrimary">
@@ -118,9 +118,9 @@
   </div>
   <div class="row">
     <div class="col-xl-12 pt-2 text-end">
-      <button type="submit" class="btn btn-default px-3 py-1 me-2"><i class="bi bi-check2"></i> Save</button>
+      <button type="submit" class="btn btn-default px-3 py-1 me-2"><i class="fa-regular fa-check me-1"></i>Save</button>
       <button type="button" (click)="onCancelClick()"
-        class="btn btn-default btn-border px-3 py-1 btn-cancel">Cancel</button>
+        class="btn btn-default btn-border px-3 py-1 btn-cancel"><i class="fa-regular fa-xmark me-1"></i>Cancel</button>
     </div>
   </div>
 
