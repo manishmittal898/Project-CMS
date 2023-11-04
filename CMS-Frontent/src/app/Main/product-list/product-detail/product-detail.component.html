@@ -148,7 +148,7 @@
               <i class="fa-regular fa-star"></i>
             </div>
             <p>Be the first to write a review</p>
-            <a href="javascript:void(0)" class="btn btn-default btn-border"><i class="fa-light fa-feather me-1"></i> Write a Review</a>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ReviewFromModal" class="btn btn-default btn-border"><i class="fa-light fa-feather me-1"></i> Write a Review</a>
           </div>
         </div>
       </div>
@@ -160,3 +160,28 @@
   </div>
 </Section>
 <!-- Product Details End -->
+
+<!-- Write Review Modal Start` -->
+  <div class="modal fade modal-custom-design" id="ReviewFromModal" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+      <div class="modal-content">
+        <div class="modal-header px-3 py-2 py-lg-3">
+          <h5 class="m-0">Write a Review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fa-sharp fa-light fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body px-3 pt-1 pb-3">
+          <div class="form-floating mb-3">
+            <input type="text"  class="form-control" id="ReviewTitle" placeholder="Give your review a title">
+            <label for="ReviewTitle">Review Title *</label>
+          </div>
+        </div>
+        <div class="modal-footer pt-0">
+          <button type="submit" class="btn btn-default px-3 py-1 me-2"><i class="fa-regular fa-check me-1"></i>Submit Review </button>
+          <button type="button" class="btn btn-default btn-border px-3 py-1 btn-cancel"><i class="fa-regular fa-xmark me-1"></i>Cancel Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Write Review Modal End` -->

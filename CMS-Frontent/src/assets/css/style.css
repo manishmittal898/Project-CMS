@@ -1327,8 +1327,8 @@ select:focus-visible {
 
 .form-control:focus,
 .form-select:focus {
-  box-shadow: none;
-  border-color: #787878;
+  box-shadow: none !important;
+  border-color: #000;
 }
 
 .global-search-bar button {
@@ -3394,5 +3394,12 @@ body .toast-close-button {
 .customer-review-default-box .btn {
   min-width: 260px;
   font-size: 18px;
+}
+.forget-pas-otp .form-control.is-invalid, .was-validated .form-control:invalid {
+  background: transparent;
+  padding: 5px;
+}
+.forget-pas-step3 .form-control.is-invalid, .was-validated .form-control:invalid {
+  background-position: right calc(2.375em + 0.1875rem) center;
 }
 /* CUSTOM CSS END */
