@@ -54,7 +54,7 @@ namespace CMS.Service.Services.OTP
                 IsSuccess = true;
             }
 
-            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, IsSuccess, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
+            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.OTPVerificatoinSuccess : ResponseMessage.OTPMissMatched, IsSuccess, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
 
         }
 
@@ -75,7 +75,7 @@ namespace CMS.Service.Services.OTP
             }
             _ = _db.TblUserOtpdata.Update(otpdatum);
             _ = await _db.SaveChangesAsync();
-            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.Success : ResponseMessage.InvalidData, true, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
+            return CreateResponse<object>(IsSuccess, IsSuccess ? ResponseMessage.OTPVerificatoinSuccess : ResponseMessage.OTPMissMatched, true, IsSuccess ? (int)ApiStatusCode.Ok : (int)ApiStatusCode.OtpInvalid);
 
         }
 

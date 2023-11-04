@@ -106,6 +106,7 @@ namespace CMS.Service.Services.Account
                 else if (otp.IsSuccess && user != null)
                 {
                     user.Password = encrptPassword;
+                    _db.TblUserMasters.Update(user);
                     _ = await _db.SaveChangesAsync();
                     return CreateResponse<string>(model.Email, "Password update successfully", true, (int)ApiStatusCode.Ok);
                 }
