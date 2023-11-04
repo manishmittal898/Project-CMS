@@ -32,6 +32,9 @@
         public const string RestrictedRecord = "Operation Faild due to Restricted Record.";
         public const string OTPMissMatch = "OTP not matched.";
         public const string OTPSent = "OTP Sent Successfully.";
+        public const string OTPVerificatoinSuccess = "OTP Verification Successfully.";
+        public const string OTPMissMatched = "Wrong OTP submitted.";
+
 
         public const string RecordAlreadyExist = "Record already exist, Please try with other !";
         public const string FileUpdated = "File sucessfully uploaded.";
