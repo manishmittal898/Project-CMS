@@ -3402,4 +3402,28 @@ body .toast-close-button {
 .forget-pas-step3 .form-control.is-invalid, .was-validated .form-control:invalid {
   background-position: right calc(2.375em + 0.1875rem) center;
 }
+.review-raiting-star a {
+  color: #ffa900;
+  margin-right: 4px;
+}
+.review-raiting-star a:hover {
+  color: #ffa900;
+}
+.btn-custom-upload {
+  border: dashed 2px #cccccc;
+  display: inline-flex;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  font-size: 18px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+}
+.btn-custom-upload i {
+  font-size: 25px;
+  margin-right: 5px;
+}
 /* CUSTOM CSS END */
