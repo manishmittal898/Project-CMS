@@ -50,7 +50,7 @@
     </div>
     <div class="col-lg-6">
       <div class="form-floating mb-3">
-        <input [(ngModel)]="model.Mobile" formControlName="Mobile"
+        <input [(ngModel)]="model.Mobile" formControlName="Mobile" maxlength="10" (keypress)="_commonService.NumberOnly($event)"
           [ngClass]="{ 'is-invalid': f.Mobile.errors && f.Mobile.touched}" class="form-control" id="Mobile"
           placeholder="Mobile number">
         <label for="Mobile">Mobile number</label>
