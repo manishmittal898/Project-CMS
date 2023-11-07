@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IndexModel } from 'src/app/Shared/Helper/Common';
 import { SecurityService } from 'src/app/Shared/Services/Core/security.service';
 import { ProductFilterModel, ProductMasterViewModel, ProductService } from 'src/app/Shared/Services/ProductService/product.service';
@@ -18,7 +19,7 @@ export class MyWishlistComponent implements OnInit {
   get IsAuthentication() {
     return this._auth.IsAuthentication.value;
   }
-  constructor(private readonly _productService: ProductService,
+  constructor(private readonly _productService: ProductService, private _route: Router,
     private readonly _auth: AuthService, private _securityService: SecurityService,
     private readonly _wishListService: WishListService) {
 
@@ -28,7 +29,7 @@ export class MyWishlistComponent implements OnInit {
     this.getList();
   }
   getList() {
-    if (!this.IsAuthentication) {
+    if (!this.IsAuthentication && this._securityService.checkStorage('wishlist')) {
       let data = JSON.parse(this._securityService.getStorage('wishlist')) as any[];
       this.unIndexModel.Ids = data
       if (data?.length > 0) {
@@ -40,7 +41,7 @@ export class MyWishlistComponent implements OnInit {
         })
       };
 
-    } else {
+    } else if (!this.IsAuthentication) {
       this._wishListService.GetList(this.authIndexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.model = response.Data;
@@ -54,6 +55,11 @@ export class MyWishlistComponent implements OnInit {
     if (!product.IsWhishList) {
       this.model.splice(this.model.findIndex(x => x.Id == product.Id), 1);
       this.totalRecords--;
+    }
+  }
+  redirectToPage() {
+    if (this._route.url.includes('/shop/cart')) {
+      history.back();
     }
   }
 }

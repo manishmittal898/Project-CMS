@@ -22,8 +22,6 @@ import { MyAddressComponent } from './my-address/my-address.component';
     CommonModule,
     UserAccountRoutingModule,
     FeatureModule
-  ], exports: [
-
-  ]
+  ],
 })
 export class UserAccountModule { }

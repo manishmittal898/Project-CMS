@@ -29,7 +29,7 @@ export class SecurityService {
     return decValue ? this.decrypt(decValue) : undefined;
   }
   checkStorage(key, storeInSession = false) {
-    return this.getKey(key, storeInSession);
+    return this.getKey(key, storeInSession)?.length > 0;
   }
 
   removeStorage(key: string, storeInSession = false) {

@@ -27,7 +27,8 @@ import { BrowserModule } from '@angular/platform-browser';
 const commonModules = [
   HttpClientModule,
   ReactiveFormsModule,
-  FormsModule,CommonModule ,
+  FormsModule,
+  CommonModule,
   RouterModule
 ]
 

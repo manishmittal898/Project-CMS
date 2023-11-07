@@ -1,39 +1,50 @@
 <Section class="page-wishlist">
 
-    <div class="row">
-      <ng-container *ngIf="!IsAuthentication;else authRecords">
-        <!-- Product Start -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
-          *ngFor="let item of model  | paginate: { itemsPerPage: unIndexModel.PageSize , currentPage: unIndexModel.Page,totalItems: totalRecords };let index=index">
-          <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
-        </div>
+  <div class="row" *ngIf="totalRecords>0;else NoRecord">
+    <ng-container *ngIf="!IsAuthentication;else authRecords">
+      <!-- Product Start -->
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
+        *ngFor="let item of model  | paginate: { itemsPerPage: unIndexModel.PageSize , currentPage: unIndexModel.Page,totalItems: totalRecords };let index=index">
+        <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
+      </div>
 
-        <div class="col-lg-12 mt-4" *ngIf="unIndexModel.PageSize<totalRecords">
-          <nav>
-            <pagination-controls class="pagination justify-content-center"
-              (pageChange)="unIndexModel.Page= $event;getList()">
-            </pagination-controls>
-          </nav>
-        </div>
+      <div class="col-lg-12 mt-4" *ngIf="unIndexModel.PageSize<totalRecords">
+        <nav>
+          <pagination-controls class="pagination justify-content-center"
+            (pageChange)="unIndexModel.Page= $event;getList()">
+          </pagination-controls>
+        </nav>
+      </div>
 
-      </ng-container>
-      <ng-template #authRecords>
+    </ng-container>
+    <ng-template #authRecords>
 
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
-          *ngFor="let item of model  | paginate: { itemsPerPage: authIndexModel.PageSize , currentPage: authIndexModel.Page,totalItems: totalRecords };let index=index">
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mb-4"
+        *ngFor="let item of model  | paginate: { itemsPerPage: authIndexModel.PageSize , currentPage: authIndexModel.Page,totalItems: totalRecords };let index=index">
 
-          <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
-        </div>
+        <app-product-card (productChange)="removeProduct($event,index)" [(Product)]="model[index]"></app-product-card>
+      </div>
 
-        <div class="col-lg-12 mt-4" *ngIf="authIndexModel.PageSize<totalRecords">
-          <nav>
-            <pagination-controls class="pagination justify-content-center"
-              (pageChange)="authIndexModel.Page=$event;getList()">
-            </pagination-controls>
-          </nav>
-        </div>
-      </ng-template>
+      <div class="col-lg-12 mt-4" *ngIf="authIndexModel.PageSize<totalRecords">
+        <nav>
+          <pagination-controls class="pagination justify-content-center"
+            (pageChange)="authIndexModel.Page=$event;getList()">
+          </pagination-controls>
+        </nav>
+      </div>
+    </ng-template>
 
+  </div>
+ 
+  <ng-template #NoRecord>
+    <div class="cart-sidebar-empty text-center ">
+      <div class="cart-sidebar-empty-icon">
+        <img src="assets/images/empty-cart.png" alt="" />
+      </div>
+      <p class="mt-0 mb-4">Your Wishlist is currently empty.</p>
+      <a href="javascript:void(0)" (click)="redirectToPage()" class="btn btn-default px-4 text-uppercase btn-border"
+        data-bs-dismiss="offcanvas" aria-label="Close">Continue
+        Shopping <i class="fa-light fa-arrow-right ms-1"></i></a>
     </div>
-
+  </ng-template>
 </Section>
