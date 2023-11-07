@@ -28,7 +28,7 @@ export class UserAccountComponent implements OnInit {
     this._authService.IsAuthentication.subscribe(x => {
       if (x == false) {
         debugger
-       // this._route.navigate(['/store'])
+       // this._route.navigate([this._baseService.Routing_Url.storeUrl])
       }
       this.isAuth = x;
     });
