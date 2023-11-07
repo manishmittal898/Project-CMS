@@ -153,6 +153,8 @@
     <Build Include="dbo\View\vw_ProductMaster.sql" />
     <Build Include="dbo\Tables\tblUserCartList.sql" />
     <Build Include="dbo\Tables\tblUserOTPData.sql" />
+    <Build Include="dbo\Tables\tblUserOrders.sql" />
+    <Build Include="dbo\Tables\tblStatusMaster.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Storeone_DB_CMS.Database.publish.xml" />

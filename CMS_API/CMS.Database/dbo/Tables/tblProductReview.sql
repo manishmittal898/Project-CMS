@@ -5,6 +5,7 @@
     [Description]      NVARCHAR (4000) NULL,
     [Rating]           INT             NULL,
     [ProductId]        BIGINT             NOT NULL,
+    [DataId] VARCHAR(50) NULL, 
     [CreatedOn]        DATETIME        DEFAULT (getdate()) NOT NULL,
     [CreatedBy]        BIGINT          NULL,
     [ModifiedOn]       DATETIME        NOT NULL DEFAULT getdate(),
