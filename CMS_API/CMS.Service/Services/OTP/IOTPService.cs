@@ -5,9 +5,9 @@ namespace CMS.Service.Services.OTP
 {
     public interface IOTPService
     {
-        public Task<ServiceResponse<string>> GenerateOTP(string SendOn);
-        public ServiceResponse<object> VerifyOTP(OTPVerifyModel model);
+         Task<ServiceResponse<string>> GenerateOTP(string SendOn);
+         Task<ServiceResponse<object>> VerifyOTP(OTPVerifyModel model);
 
-
+         ServiceResponse<object> VerifySessionOTP(OTPVerifyModel model);
     }
 }

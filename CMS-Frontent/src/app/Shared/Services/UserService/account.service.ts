@@ -59,6 +59,13 @@ export class AccountService {
     return this._baseService.get(url);
   }
 
+  ChangePassword(model: ChangePasswordModel): Observable<ApiResponse<any>> {
+    let url = `${this._baseService.API_Url.ChangePassword_Api}`;
+    return this._baseService.post(url, model);
+  }
+
+
+
 }
 
 export interface UserPostModel {
@@ -69,4 +76,10 @@ export interface UserPostModel {
   Mobile: string;
   ProfilePhoto: string;
   GenderId: string;
+}
+export interface ChangePasswordModel {
+  Email: string;
+  Password: string;
+  SessionID: string;
+  OTP: string;
 }

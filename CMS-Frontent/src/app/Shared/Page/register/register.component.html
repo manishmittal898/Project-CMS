@@ -22,7 +22,7 @@
         <h3 class="text-center section-title">Register</h3>
         <form class="mx-400 m-auto" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
-            <input type="email"  class="form-control" id="FirstName" name="FirstName" formControlName="FirstName"
+            <input type="email"  [ngClass]="{ 'is-invalid': f.FirstName.errors && f.FirstName.touched}" class="form-control" id="FirstName" name="FirstName" formControlName="FirstName"
               placeholder="First Name">
             <label for="FirstName">First Name</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched)">
@@ -33,7 +33,7 @@
           </div>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="LastName" name="LastName" formControlName="LastName"
-              placeholder="Last Name">
+              placeholder="Last Name" [ngClass]="{ 'is-invalid': f.LastName.errors && f.LastName.touched}">
             <label for="LastName">Last Name</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched)">
               <div *ngIf="f.LastName.errors.required">Last Name is required.</div>
@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="form-floating mb-3">
-            <input class="form-control" id="Email" type="email" id="email" formControlName="Email" placeholder="Email">
+            <input class="form-control" id="Email" [ngClass]="{ 'is-invalid': f.Email.errors && f.Email.touched}" type="email" id="email" formControlName="Email" placeholder="Email">
             <label for="Email">Email</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
               <div *ngIf="f.Email.errors.required">Email is required.</div>
@@ -55,7 +55,7 @@
 
           </div>
           <div class="form-floating mb-3">
-            <input type="tel" class="form-control" id="Mobile" name="Mobile" formControlName="Mobile"
+            <input type="tel" [ngClass]="{ 'is-invalid': f.Mobile.errors && f.Mobile.touched}"  class="form-control" id="Mobile" name="Mobile" formControlName="Mobile"
               placeholder="Mobile" [maxlength]="10">
             <label for="Mobile">Mobile</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.Mobile.invalid && (f.Mobile.dirty || f.Mobile.touched)">
@@ -68,7 +68,7 @@
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="Password" name="Password" formControlName="Password"
-              placeholder="Password">
+              placeholder="Password" [ngClass]="{ 'is-invalid': f.Password.errors && f.Password.touched}" >
             <label for="Password2">Password</label>
             <div class="text-danger font-13 mt-1" *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched)">
               <div *ngIf="f.Password.errors.required">Password is required.</div>
@@ -77,10 +77,10 @@
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword"
-              formControlName="ConfirmPassword" placeholder="Confirm password">
+              formControlName="ConfirmPassword" placeholder="Confirm password" [ngClass]="{ 'is-invalid': f.ConfirmPassword.errors && f.ConfirmPassword.touched}">
             <label for="ConfirmPassword">Confirm password</label>
             <div class="text-danger font-13 mt-1"
-              *ngIf="f.Password.valid && f.ConfirmPassword.invalid && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)">
+              *ngIf="f.ConfirmPassword.invalid && (f.ConfirmPassword.dirty || f.ConfirmPassword.touched)">
               <div *ngIf="f.ConfirmPassword.errors.required">Confirm Password is required.</div>
               <div *ngIf="f.ConfirmPassword.errors.notMatched">Passwords must match.</div>
             </div>
@@ -88,7 +88,7 @@
 
           <button type="submit" [disabled]="!registrationForm.valid"
             class="mt-4 btn btn-default p-2 text-uppercase d-block w-100">Sign up</button>
-          <div class="text-center mt-3">Allready account ? <a href="javascript:void(0)" (click)="redirectToLogin('/login')"
+          <div class="text-center mt-3">Already account ? <a href="javascript:void(0)" (click)="redirectToLogin('/login')"
               class="text-dark font-w-500">Login</a> </div>
         </form>
       </div>

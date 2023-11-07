@@ -36,6 +36,11 @@ namespace CMS.Core.ServiceHelper.Method
             {
                 if (!string.IsNullOrEmpty(base64str))
                 {
+                    if (base64str.Contains("http://") || base64str.Contains("https://"))
+                    {
+                        return filePath;
+                    }
+
                     base64str = base64str.Replace(" ", "");
                     base64str = Regex.Replace(base64str, @"^\s*$\n", string.Empty, RegexOptions.Multiline).TrimEnd();
                     string path = GetPhysicalPath(filePath);

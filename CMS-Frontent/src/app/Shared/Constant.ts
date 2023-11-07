@@ -64,8 +64,6 @@ export class API_Url {
 
   //#region  << CMS Page  >>
   public static CMSPageDetail_Api = `${environment.apiEndPoint}public/CMSPage/Get/`;
-
-
   //#endregion
 
   //#region <<Login>>
@@ -75,6 +73,8 @@ export class API_Url {
   public static CheckUserExist_Api = `${environment.apiEndPoint}account/CheckUserExist`;
   public static Logout_Api = `${environment.apiEndPoint}account/Logout`;
   public static SocialLogin_Api = `${environment.apiEndPoint}account/SocialLogin`;
+  public static ChangePassword_Api = `${environment.apiEndPoint}account/ChangePassword`;
+
 
   //#endregion
 
@@ -93,6 +93,11 @@ export class API_Url {
 
   //#region  << User Account  >>
   public static GeneralEntry_List_Api = `${environment.apiEndPoint}public/GeneralEntryData/GetList`;
+  //#endregion
+
+  //#region  << CMS Page  >>
+  public static GetOTP_Api = `${environment.apiEndPoint}OTP/GetOTP`;
+  public static VerifyOTP_Api = `${environment.apiEndPoint}OTP/VerifyOTP`;
   //#endregion
 
 }

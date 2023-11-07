@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { BaseAPIService } from 'src/app/Shared/Services/Core/base-api.service';
 import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/Shared/Services/UserService/auth.service';
 export class UserAccountComponent implements OnInit {
   pageName = 'My Profile';
   isAuth = false;
-  constructor(private readonly _authService: AuthService, private readonly _route: Router,) {
+  constructor(private readonly _authService: AuthService, private readonly _baseService: BaseAPIService, private readonly _route: Router,) {
 
     if (_route.url.includes('wishlist')) {
       this.pageName = "Wishlist"
@@ -34,5 +35,11 @@ export class UserAccountComponent implements OnInit {
 
   logout() {
     this._authService.LogOut();
+    setTimeout(() => {
+
+      this._route.navigate([this._baseService.Routing_Url.storeUrl]).then(() => {
+        window.location.reload();
+      });
+    }, 100);
   }
 }

@@ -96,15 +96,17 @@ namespace CMS.Service.Services.Account
             {
                 string encrptPassword = _security.EncryptData(model.Password);
                 TblUserMaster user = await _db.TblUserMasters.Where(x => x.Email == model.Email).FirstOrDefaultAsync();
-                ServiceResponse<object> otp = _otpService.VerifyOTP(new OTPVerifyModel { SessionId = model.SessionID, OTP = model.OTP });
-                if (otp.IsSuccess && !(bool)otp.Data)
+               
+                ServiceResponse<object> otp = _otpService.VerifySessionOTP(new OTPVerifyModel { SessionId = model.SessionID, OTP = model.OTP });
+                if (!otp.IsSuccess)
                 {
                     return CreateResponse<string>(null, ResponseMessage.OTPMissMatch, false, (int)ApiStatusCode.OTPVarificationFailed);
 
                 }
-                else if (user != null)
+                else if (otp.IsSuccess && user != null)
                 {
                     user.Password = encrptPassword;
+                    _db.TblUserMasters.Update(user);
                     _ = await _db.SaveChangesAsync();
                     return CreateResponse<string>(model.Email, "Password update successfully", true, (int)ApiStatusCode.Ok);
                 }

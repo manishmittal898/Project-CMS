@@ -25,7 +25,7 @@ export class SocialLoginComponent implements OnInit {
         this.user = user;
         this.loggedIn = (user != null);
         this.isLoggedin = user != null;
-       // console.log("Login User = " + this.user.name + this.user.email);
+        // console.log("Login User = " + this.user.name + this.user.email);
       }
 
 
@@ -34,6 +34,7 @@ export class SocialLoginComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     this.googleLoginInit();
+
   }
 
   googleLoginInit() {
@@ -46,7 +47,10 @@ export class SocialLoginComponent implements OnInit {
         document.getElementById("btnGoogleLogin"),
         { theme: "outline", size: "large" }  // customization attributes
       );
-
+      setTimeout(() => {
+        debugger
+        google?.accounts?.id?.prompt(); // also display the One Tap dialog
+      }, 150);
     }, 100);
 
   }
