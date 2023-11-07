@@ -3469,4 +3469,10 @@ body .toast-close-button {
   color: #c22200;
   border: solid 1px #c22200;
 }
+.customer-page-review-items-img {
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  border-radius: 100%;
+}
 /* CUSTOM CSS END */
