@@ -65,9 +65,7 @@ export class CartProductService {
     return this._baseService.post(url, model);
   }
   public async SetCartProduct(product: CartProductPostModel) {
-debugger
     var indx = this.cartProductItem.findIndex(x => x.ProductId == product.ProductId && x.SizeId == product.SizeId);
-
     if (this._auth.IsAuthentication.value) {
       this.AddProduct(product).subscribe(x => {
         if (x.IsSuccess) {
@@ -138,7 +136,7 @@ debugger
       if (data?.length > 0) {
         let calls: any = {};
         this.cartProductItem.forEach(x => {
-          calls[x.ProductId] = this._productService.GetDetail(x.ProductId,true);
+          calls[x.ProductId] = this._productService.GetDetail(x.ProductId, true);
         })
         forkJoin(calls).subscribe(res => {
           this.CartProductModel = [];

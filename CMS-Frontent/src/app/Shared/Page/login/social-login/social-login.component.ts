@@ -48,7 +48,7 @@ export class SocialLoginComponent implements OnInit {
         { theme: "outline", size: "large" }  // customization attributes
       );
       setTimeout(() => {
-        debugger
+    
         google?.accounts?.id?.prompt(); // also display the One Tap dialog
       }, 150);
     }, 100);
