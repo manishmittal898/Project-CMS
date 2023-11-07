@@ -24,7 +24,8 @@
         <!-- Product Detail Slider Start -->
         <div class="position-relative overflow-hidden product-details-product-slider">
           <!-- <div class="product-list-items-tag" *ngIf="model?.CaptionTag">{{model?.CaptionTag}}</div> -->
-          <span class="product-discount-label" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}% Off</span>
+          <span class="product-discount-label" *ngIf="SelectedSizeModel.Discount>0">{{SelectedSizeModel.Discount}}%
+            Off</span>
           <button type="button" [disabled]="this.loading.WishList" (click)="updateWishlist()"
             class="pro-detail-btn-wishlist" title="{{!model?.IsWhishList? 'Add to Wishlist':'Remove from Wishlist'}}"><i
               class="bi "
@@ -148,7 +149,32 @@
               <i class="fa-regular fa-star"></i>
             </div>
             <p>Be the first to write a review</p>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ReviewFromModal" class="btn btn-default btn-border"><i class="fa-light fa-feather me-1"></i> Write a Review</a>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ReviewFromModal" class="btn btn-default btn-border">
+              <!-- <img src="assets/images/review.gif" alt="" style="max-width: 25px;"/> -->
+               <i class="fa-light fa-feather me-1"></i>
+              Write a Review
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 mt-5">
+        <div class="customer-page-review">
+          <div>
+            <div class="customer-page-review-items d-flex align-items-start">
+              <div class="customer-page-review-items-img d-flex align-items-center justify-content-center"> <img src="assets/images/user-default.jpg" alt="" /></div>
+              <div class="customer-page-review-items-info">
+                <h3>Indrani Goswami</h3>
+                <div class="customer-page-review-star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <h4>Amazing product</h4>
+                <p>Fabric is pure cotton, stitching is wonderful, color is slightly different from the shown pictures. Bit over priced, dupatta is ok ok... overall thik thak..</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -162,26 +188,107 @@
 <!-- Product Details End -->
 
 <!-- Write Review Modal Start` -->
-  <div class="modal fade modal-custom-design" id="ReviewFromModal" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
-      <div class="modal-content">
-        <div class="modal-header px-3 py-2 py-lg-3">
-          <h5 class="m-0">Write a Review</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <i class="fa-sharp fa-light fa-xmark"></i>
-          </button>
-        </div>
-        <div class="modal-body px-3 pt-1 pb-3">
-          <div class="form-floating mb-3">
-            <input type="text"  class="form-control" id="ReviewTitle" placeholder="Give your review a title">
-            <label for="ReviewTitle">Review Title *</label>
+<div class="modal fade modal-custom-design review-form-modal" id="ReviewFromModal" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+    <div class="modal-content">
+      <div class="modal-header px-3 py-2 py-lg-3">
+        <h5 class="m-0">Write a Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa-sharp fa-light fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body px-3 pt-1 pb-3">
+        <div class="mb-3">
+          <label class="d-block mb-1 font-w-500">Raiting</label>
+          <div class="review-raiting-star">
+            <a href="javascript:void(0)"><i class="fa-solid fa-star"></i></a>
+            <a href="javascript:void(0)"><i class="fa-solid fa-star"></i></a>
+            <a href="javascript:void(0)"><i class="fa-light fa-star"></i></a>
+            <a href="javascript:void(0)"><i class="fa-light fa-star"></i></a>
+            <a href="javascript:void(0)"><i class="fa-light fa-star"></i></a>
           </div>
         </div>
-        <div class="modal-footer pt-0">
-          <button type="submit" class="btn btn-default px-3 py-1 me-2"><i class="fa-regular fa-check me-1"></i>Submit Review </button>
-          <button type="button" class="btn btn-default btn-border px-3 py-1 btn-cancel"><i class="fa-regular fa-xmark me-1"></i>Cancel Review</button>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="ReviewTitle" placeholder="Give your review a title">
+          <label for="ReviewTitle">Review Title *</label>
         </div>
+        <div class="form-floating mb-3">
+          <textarea class="form-control" placeholder="Write your comments here" id="ReviewComment" rows="4"
+            style="height: auto;"></textarea>
+          <label for="ReviewComment">Write your comments here *</label>
+        </div>
+        <div class="mb-3">
+          <label class="btn-custom-upload">
+            <i class="fa-light fa-image"></i> Upload Pictures
+            <input type="file" style="display: none;" />
+          </label>
+          <div class="upload-file-list mt-4 d-flex flex-wrap">
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+            <div class="upload-file-list-col">
+              <div class="upload-file-list-items">
+                <img src="assets/images/client/logo.png" alt="Gulmohar jaipur" />
+                <a class="upload-file-list-items-action" href="javascript:void(0)"><i class="fa-light fa-trash"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer pt-0">
+        <button type="submit" class="btn btn-default px-2 px-sm-3 py-1 me-2"><i
+            class="fa-regular fa-check me-1"></i>Submit Review </button>
+        <button type="button" class="btn btn-default btn-border px-2 px-sm-3 py-1 btn-cancel"><i
+            class="fa-regular fa-xmark me-1"></i>Cancel Review</button>
       </div>
     </div>
   </div>
+</div>
 <!-- Write Review Modal End` -->

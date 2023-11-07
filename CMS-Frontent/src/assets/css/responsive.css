@@ -788,6 +788,12 @@ font-size: 16px;
 .product-page-list [class*="col-"]:nth-child(even) {
   padding-left: 5px;
 }
+.upload-file-list .upload-file-list-col {
+  flex: 0 0 33%;
+}
+.upload-file-list .upload-file-list-items {
+  width: 100%;
+}
 }
 
 /* RESPONSIVE END */

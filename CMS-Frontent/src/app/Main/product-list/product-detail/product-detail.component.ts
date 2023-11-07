@@ -46,6 +46,7 @@ export class ProductDetailComponent implements OnInit {
     this._route.params.subscribe(x => {
       this.recordId = x.id as string;
       this.getDetailData();
+      this.CustomerReview();
     });
 
 
@@ -151,6 +152,51 @@ export class ProductDetailComponent implements OnInit {
     });
 
   }
+
+ CustomerReview() {
+  setTimeout(() => {
+  $('.customer-page-review')?.slick({
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [{
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 595,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    ]
+  });
+}, 500);
+}
 
 }
 export class Loading {
