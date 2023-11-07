@@ -13,9 +13,9 @@ const routes: Routes = [
     component: UserAccountComponent,
     children: [
       { component: MyAccountComponent, path: '' },
-      { component: MyAccountComponent, path: 'profile',canActivate:[AuthGuard] },
-      { component: MyOrdersComponent, path: 'orders', canActivate:[AuthGuard]},
-      { component: MyAddressComponent, path: 'address',canActivate:[AuthGuard] },
+      { component: MyAccountComponent, path: 'profile', canActivate: [AuthGuard] },
+      { component: MyOrdersComponent, path: 'orders', canActivate: [AuthGuard] },
+      { component: MyAddressComponent, path: 'address', canActivate: [AuthGuard] },
       { component: MyWishlistComponent, path: 'wishlist' }
     ]
 

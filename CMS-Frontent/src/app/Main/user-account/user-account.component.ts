@@ -27,7 +27,8 @@ export class UserAccountComponent implements OnInit {
 
     this._authService.IsAuthentication.subscribe(x => {
       if (x == false) {
-        this._route.navigate(['/store'])
+        debugger
+       // this._route.navigate(['/store'])
       }
       this.isAuth = x;
     });
@@ -36,8 +37,7 @@ export class UserAccountComponent implements OnInit {
   logout() {
     this._authService.LogOut();
     setTimeout(() => {
-
-      this._route.navigate([this._baseService.Routing_Url.storeUrl]).then(() => {
+            this._route.navigate([this._baseService.Routing_Url.storeUrl]).then(() => {
         window.location.reload();
       });
     }, 100);
