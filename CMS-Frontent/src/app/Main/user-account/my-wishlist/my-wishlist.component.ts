@@ -41,7 +41,7 @@ export class MyWishlistComponent implements OnInit {
         })
       };
 
-    } else if (!this.IsAuthentication) {
+    } else if (this.IsAuthentication) {
       this._wishListService.GetList(this.authIndexModel).subscribe(response => {
         if (response.IsSuccess) {
           this.model = response.Data;
