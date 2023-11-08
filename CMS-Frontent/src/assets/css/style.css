@@ -2505,6 +2505,7 @@ section.deals-opt-d-1 {
 
 .my-account-sidebar {
   box-shadow: 0 0 30px #e7e9f5;
+  border: solid 1px var(--primary-color) !important;
   background: #fff;
   border-radius: 15px;
   padding: 15px;
@@ -2554,7 +2555,7 @@ section.deals-opt-d-1 {
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
-  border: solid 1px #e7e7e7;
+  border: dashed 2px #e7e7e7;
   margin-bottom: 20px;
 }
 
@@ -3317,20 +3318,20 @@ body .toast-close-button {
   text-transform: capitalize;
   display: none;
 }
-.cart-page-empty {
-  padding: 30px 0px 20px 0px;
+.page-empty-box {
+  padding:20px 0px;
   text-align: center;
 }
-.cart-page-empty img {
-  max-width: 375px;
+.page-empty-box img {
+  max-width: 300px;
 }
-.cart-page-empty > i {
+.page-empty-box > i {
   font-size: 120px;
 }
-.cart-page-empty p {
-  font-size: 22px;
-  margin: 30px 0px;
-  font-weight: 500;
+.page-empty-box p {
+  font-size: 20px;
+  margin: 25px 0px;
+  font-weight: 400;
 }
 .cart-sidebar-empty p {
   font-size: 16px;
