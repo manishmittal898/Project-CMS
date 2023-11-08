@@ -3540,4 +3540,7 @@ body .toast-close-button {
   max-height: 60px;
   max-width: 60px;
 }
+.lightbox .lb-image {
+  border: none !important;
+}
 /* CUSTOM CSS END */

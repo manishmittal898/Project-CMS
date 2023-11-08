@@ -33,6 +33,7 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/lightbox2/dist/css/lightbox.min.css",
               "src/assets/css/fontawesome.min.css"
             ],
             "scripts": [
@@ -43,7 +44,8 @@
               "node_modules/aos/dist/aos.js",
               "src/assets/js/custom.js",
               "src/assets/js/slider_custom.js",
-              "node_modules/bs5-lightbox/dist/index.bundle.min.js"
+              "node_modules/bs5-lightbox/dist/index.bundle.min.js",
+              "node_modules/lightbox2/dist/js/lightbox.min.js"
             ]
           },
           "configurations": {
@@ -114,7 +116,8 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/assets/css/fontawesome.min.css"
+              "src/assets/css/fontawesome.min.css",
+              "node_modules/lightbox2/dist/css/lightbox.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
@@ -124,7 +127,8 @@
               "node_modules/aos/dist/aos.js",
               "src/assets/js/custom.js",
               "src/assets/js/slider_custom.js",
-              "node_modules/bs5-lightbox/dist/index.bundle.min.js"
+              "node_modules/bs5-lightbox/dist/index.bundle.min.js",
+              "node_modules/lightbox2/dist/js/lightbox.min.js"
             ]
           }
         },
