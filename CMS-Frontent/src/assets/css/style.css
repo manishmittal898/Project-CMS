@@ -3092,7 +3092,7 @@ ul.footer-benefits li p {
 }
 
 .section-related {
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .profile-page-img {
@@ -3469,10 +3469,58 @@ body .toast-close-button {
   color: #c22200;
   border: solid 1px #c22200;
 }
-.customer-page-review-items-img {
-  height: 80px;
-  width: 80px;
+.customer-page-review .customer-page-review-items-img {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
   overflow: hidden;
   border-radius: 100%;
+  background: #ffeff9;
+  font-size: 20px;
+}
+.customer-page-review .customer-page-review-items-info {
+  border: solid 1px #f1f1f1;
+  padding: 10px;
+  border-radius: 15px;
+  margin-left: 10px;
+  position: relative;
+  flex: auto;
+}
+.customer-page-review .customer-page-review-items-info:before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  height: 14px;
+  width: 14px;
+  top: 22px;
+  left: -8px;
+  transform: rotate(45deg);
+  border: solid 1px #f1f1f1;
+  border-right: none;
+  border-top: none;
+}
+.customer-page-review .customer-page-review-items-info h3 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.customer-page-review .customer-page-review-items-info h4 {
+  font-size: 18px;
+  margin: 8px 0px 5px 0px;
+  font-weight: 600;
+  color:  var(--primary-color);
+}
+.customer-page-review .customer-page-review-items-info p {
+  margin: 0px;
+  font-size: 14px;
+  line-height: 22px;
+}
+.customer-page-review .customer-page-review-items-info .customer-page-review-star i {
+  color: #ffa900;
+  font-size: 14px;
+  margin-right: 3px;
+}
+.customer-page-review .slick-slide
+{
+  margin: 0px 10px;
 }
 /* CUSTOM CSS END */

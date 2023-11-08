@@ -157,40 +157,35 @@ export class ProductDetailComponent implements OnInit {
   setTimeout(() => {
   $('.customer-page-review')?.slick({
     dots: false,
+    arrows:false,
     infinite: true,
     speed: 1000,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     responsive: [{
       breakpoint: 1400,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
       }
     },
     {
       breakpoint: 900,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToShow: 2,
       }
     },
     {
       breakpoint: 767,
       settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToShow: 2,
       }
     },
     {
       breakpoint: 595,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1
       }
     }
     ]
