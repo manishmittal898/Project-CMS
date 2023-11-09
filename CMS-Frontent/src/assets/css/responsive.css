@@ -309,6 +309,7 @@
     box-shadow: none;
     border-radius: 0;
     width: 320px;
+    border: none !important;
   }
 
   .my-account-sidebar ul li a.active:after {
@@ -771,7 +772,7 @@ font-size: 16px;
     font-size: 10px;
     padding: 10px 0px 60px 0px;
   }
-  .cart-page-empty img {
+  .page-empty-box img {
     max-width: 80%;
 }
 .order-summary-list-items-status i {
