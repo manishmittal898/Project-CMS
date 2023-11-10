@@ -32,12 +32,11 @@
               [ngClass]="{'bi-heart-fill pro-detail-btn-wishlist-active':!this.loading.WishList&& model?.IsWhishList , 'bi-heart':!this.loading.WishList && !model?.IsWhishList,'bi-hourglass-split':this.loading.WishList}"></i>
           </button>
           <div id="main-p-slider" [ngClass]="'product-d-main-slider'">
-
             <div class="product-d-main-slider-items" *ngIf="model?.ImagePath">
-              <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'">
+             <a href="{{model?.ImagePath}}" data-lightbox="roadtrip"> <img [src]="model?.ImagePath" onerror="this.src='assets/images/no-img.png'"></a>
             </div>
             <div class="product-d-main-slider-items" *ngFor="let item of model?.Files; let i=index">
-              <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'">
+              <a href="{{item?.FilePath}}" data-lightbox="roadtrip">  <img [src]="item?.FilePath" onerror="this.src='assets/images/no-img.png'"></a>
             </div>
 
           </div>
