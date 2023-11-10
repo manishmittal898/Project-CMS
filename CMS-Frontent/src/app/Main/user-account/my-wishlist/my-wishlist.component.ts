@@ -58,7 +58,7 @@ export class MyWishlistComponent implements OnInit {
     }
   }
   redirectToPage() {
-    if (this._route.url.includes('/shop/cart')) {
+    if (this._route.url.includes('/user/wishlist')) {
       history.back();
     }
   }
